@@ -194,7 +194,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
           </div>
           <div className="rounded-2xl overflow-hidden border border-accent/10 h-[280px] sm:h-[450px]">
             <iframe
-              src="https://yandex.ru/map-widget/v1/?ll=43.9987,56.2486&z=16&l=map&pt=43.9987,56.2486,pm2rdl&text=Аренда+манипуляторов+от+компании+ФАВОРИТ"
+              src="https://yandex.ru/map-widget/v1/?ll=43.848988,56.270596&z=17&l=map&pt=43.848988,56.270596,pm2rdl&text=Аренда+манипуляторов+от+компании+ФАВОРИТ"
               width="100%"
               height="100%"
               frameBorder="0"
