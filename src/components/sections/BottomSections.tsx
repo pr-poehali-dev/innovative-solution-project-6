@@ -194,7 +194,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
           </div>
           <div className="rounded-2xl overflow-hidden border border-accent/10 h-[280px] sm:h-[450px]">
             <iframe
-              src="https://yandex.ru/map-widget/v1/?pt=43.998700,56.248600,pm2rdm~43.998700,56.248600,Парк+манипуляторов+Фаворит&text=Нижний+Новгород+Шуваловский+проезд+7&z=16&l=map"
+              src="https://yandex.ru/map-widget/v1/?pt=43.998700,56.248600,pm2rdm~43.998700,56.248600,Аренда+манипуляторов+от+компании+ФАВОРИТ&text=Аренда+манипуляторов+от+компании+ФАВОРИТ&z=16&l=map"
               width="100%"
               height="100%"
               frameBorder="0"
