@@ -107,7 +107,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
       <header className="fixed top-9 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5 flex justify-between items-center">
           <div className="flex items-center gap-2 font-display font-bold text-xl sm:text-2xl tracking-tighter bg-gradient-to-r from-white via-accent to-accent/80 bg-clip-text text-transparent">
-            <img src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/70f37e87-7308-44c5-ba56-e221771fff69.jpg" alt="Фаворит" className="w-16 h-16 flex-shrink-0 rounded-xl" />
+            <img src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/70f37e87-7308-44c5-ba56-e221771fff69.jpg" alt="Фаворит" className="w-20 h-20 flex-shrink-0 rounded-xl" />
             ООО Фаворит
           </div>
           <nav className="hidden md:flex gap-10 text-sm font-medium">
