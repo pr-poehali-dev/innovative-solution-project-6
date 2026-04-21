@@ -238,9 +238,9 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
                 .truck-2 { animation: truck2 22s linear infinite; animation-delay: 6s; }
                 .truck-3 { animation: truck1 26s linear infinite; animation-delay: 12s; }
               `}</style>
-              <div className="truck-1 absolute text-4xl drop-shadow-lg" style={{ top: "30%", fontSize: "40px" }}>🚛</div>
-              <div className="truck-2 absolute text-4xl drop-shadow-lg" style={{ top: "55%", fontSize: "36px" }}>🚚</div>
-              <div className="truck-3 absolute text-4xl drop-shadow-lg" style={{ top: "72%", fontSize: "32px" }}>🚛</div>
+              <div className="truck-1 absolute drop-shadow-lg" style={{ top: "28%", fontSize: "48px" }}>🏗️</div>
+              <div className="truck-2 absolute drop-shadow-lg" style={{ top: "52%", fontSize: "42px" }}>🏗️</div>
+              <div className="truck-3 absolute drop-shadow-lg" style={{ top: "70%", fontSize: "38px" }}>🏗️</div>
             </div>
 
             {/* Левый блок поверх карты */}
