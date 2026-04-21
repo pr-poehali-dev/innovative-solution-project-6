@@ -85,13 +85,12 @@ const FleetSection = () => {
                 </a>
               </div>
 
-              <div className="relative h-64 lg:h-auto">
+              <div className="relative h-72 lg:h-auto bg-black/40 flex items-center justify-center">
                 <img
                   src={truck.image}
                   alt={truck.alt}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain p-4"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-card/80 via-transparent to-transparent lg:block hidden" />
               </div>
             </div>
           </div>
