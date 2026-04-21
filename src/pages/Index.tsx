@@ -8,6 +8,7 @@ import GallerySection from "@/components/sections/GallerySection";
 import CalculatorSection from "@/components/sections/CalculatorSection";
 import ClientsSection from "@/components/sections/ClientsSection";
 import UseCasesSection from "@/components/sections/UseCasesSection";
+import StatsSection from "@/components/sections/StatsSection";
 
 const Index = () => {
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
@@ -43,6 +44,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <HeroSection visibleSections={visibleSections} />
       <FeaturesSection visibleSections={visibleSections} />
+      <StatsSection />
       <FleetSection />
       <UseCasesSection />
       <CalculatorSection />
