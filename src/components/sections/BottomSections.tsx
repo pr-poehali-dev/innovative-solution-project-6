@@ -213,22 +213,6 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
               className="absolute inset-0 w-full h-full"
             />
 
-            {/* Анимированная метка поверх карты */}
-            <div className="absolute z-10 pointer-events-none" style={{ left: "50%", top: "50%", transform: "translate(-50%, -100%)" }}>
-              <div className="relative flex flex-col items-center">
-                <div className="relative">
-                  <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-60" style={{ width: 40, height: 40 }} />
-                  <div className="relative w-10 h-10 rounded-full bg-accent border-4 border-white shadow-2xl flex items-center justify-center text-black font-black text-lg">
-                    🏗️
-                  </div>
-                </div>
-                <div className="mt-2 bg-black/80 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-accent/40 whitespace-nowrap shadow-xl">
-                  ООО Фаворит
-                </div>
-                <div className="w-0.5 h-3 bg-accent" />
-              </div>
-            </div>
-
             {/* Левый блок поверх карты */}
             <div className="absolute top-4 left-4 bottom-4 z-10 w-72 bg-card/90 backdrop-blur-md border border-accent/30 rounded-2xl p-6 flex flex-col justify-between shadow-2xl">
               <div>
