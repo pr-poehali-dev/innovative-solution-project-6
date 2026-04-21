@@ -92,8 +92,8 @@ const Index = () => {
                 <span className="text-white/70 text-4xl lg:text-5xl">в Нижнем Новгороде</span>
               </h1>
               <p className="text-xl text-white/80 leading-relaxed mb-10 max-w-xl font-light">
-                Грузоподъёмность от 3 до 25 тонн. Работаем на строительных площадках,
-                складах и производствах по всему городу. Подача техники от 2 часов.
+                Грузоподъёмность от 5 до 20 тонн. Работаем на строительных площадках,
+                складах и производствах по всему городу. Подача техники от 1 часа.
               </p>
               <div className="flex gap-4 mb-12 flex-col sm:flex-row">
                 <button className="group px-8 py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full hover:shadow-2xl hover:shadow-accent/50 transition-all font-semibold text-lg flex items-center gap-3 justify-center">
