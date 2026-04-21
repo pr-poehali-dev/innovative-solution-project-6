@@ -79,7 +79,7 @@ const Index = () => {
             >
               <div className="mb-8 inline-block">
                 <span className="text-xs font-medium tracking-widest text-accent/80 uppercase">
-                  Аренда спецтехники — быстро и надёжно
+                  Аренда и услуги манипуляторов в Нижнем Новгороде
                 </span>
               </div>
               <h1 className="text-6xl lg:text-7xl font-display font-black leading-tight mb-8 tracking-tighter">
@@ -92,8 +92,7 @@ const Index = () => {
                 <span className="text-white/70 text-4xl lg:text-5xl">в Нижнем Новгороде</span>
               </h1>
               <p className="text-xl text-white/80 leading-relaxed mb-10 max-w-xl font-light">
-                Грузоподъёмность от 5 до 20 тонн. Работаем на строительных площадках,
-                складах и производствах по всему городу. Подача техники от 1 часа.
+                Оставьте заявку или позвоните — мы подберём правильный манипулятор с платформой необходимых габаритов и нужной грузоподъёмностью под вашу задачу.
               </p>
               <div className="flex gap-4 mb-12 flex-col sm:flex-row">
                 <button className="group px-8 py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full hover:shadow-2xl hover:shadow-accent/50 transition-all font-semibold text-lg flex items-center gap-3 justify-center">
