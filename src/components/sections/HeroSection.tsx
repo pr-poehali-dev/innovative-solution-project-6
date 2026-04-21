@@ -107,7 +107,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
       <header className="fixed top-9 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5 flex justify-between items-center">
           <div className="flex items-center gap-2 font-display font-bold text-xl sm:text-2xl tracking-tighter bg-gradient-to-r from-white via-accent to-accent/80 bg-clip-text text-transparent">
-            <img src="/favicon.svg" alt="Фаворит" className="w-8 h-8 flex-shrink-0" />
+            <img src="/favicon.svg" alt="Фаворит" className="w-12 h-12 flex-shrink-0" />
             ООО Фаворит
           </div>
           <nav className="hidden md:flex gap-10 text-sm font-medium">
