@@ -43,6 +43,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
   const [current, setCurrent] = useState(0);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [cargo, setCargo] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -61,12 +62,13 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
       const res = await fetch(SUBMIT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone }),
+        body: JSON.stringify({ name, phone, cargo }),
       });
       if (res.ok) {
         setStatus("success");
         setName("");
         setPhone("");
+        setCargo("");
       } else {
         setStatus("error");
       }
@@ -200,22 +202,31 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row gap-3">
+              <form onSubmit={handleSubmit} className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-4 sm:p-6 flex flex-col gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <input
+                    type="text"
+                    placeholder="Ваше имя"
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    required
+                    className="flex-1 bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
+                  />
+                  <input
+                    type="tel"
+                    placeholder="+7 (___) ___-__-__"
+                    value={phone}
+                    onChange={e => setPhone(e.target.value)}
+                    required
+                    className="flex-1 bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
+                  />
+                </div>
                 <input
                   type="text"
-                  placeholder="Ваше имя"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  required
-                  className="flex-1 bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
-                />
-                <input
-                  type="tel"
-                  placeholder="+7 (___) ___-__-__"
-                  value={phone}
-                  onChange={e => setPhone(e.target.value)}
-                  required
-                  className="flex-1 bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
+                  placeholder="Что перевозим? (например: металлоконструкции, оборудование, стройматериалы)"
+                  value={cargo}
+                  onChange={e => setCargo(e.target.value)}
+                  className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
                 />
                 <button
                   type="submit"
