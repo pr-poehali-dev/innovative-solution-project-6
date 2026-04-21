@@ -112,7 +112,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
             ))}
           </nav>
           <div className="flex gap-2 sm:gap-3 items-center">
-            <a href="tel:+79601883084" className="hidden sm:flex px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-bold rounded-full transition-all items-center gap-2 border animate-pulse" style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", fontFamily: "'Cinzel', serif" }}>
+            <a href="tel:+79601883084" className="hidden sm:flex px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-bold rounded-full items-center gap-2 border" style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", fontFamily: "'Cinzel', serif", animation: "goldPulse 1.2s ease-in-out infinite" }}>
               <Icon name="Phone" size={14} />
               +7 960 188-30-84
             </a>
