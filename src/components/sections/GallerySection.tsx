@@ -46,6 +46,18 @@ const photos = [
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/56e40bf4-c213-4485-a5fc-cd80c85fb564.jpg",
     caption: "Погрузка бетонных изделий на склад",
   },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/ad03fa64-abbe-491a-85cc-f51f79cefc0a.jpg",
+    caption: "Перевозка торгового павильона «Хочу Есть» по городу",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/f96d4e3d-b06a-4cab-818e-ba49896791b5.jpg",
+    caption: "Работа автовышки на объектах РЖД зимой",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/e8b0e860-8ca1-40df-8600-4d28597aa247.jpg",
+    caption: "КамАЗ с манипулятором DY — готов к выезду на объект",
+  },
 ];
 
 
