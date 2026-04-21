@@ -32,6 +32,21 @@ const trucks = [
       { label: "Тип кузова", value: "Бортовой" },
     ],
   },
+  {
+    badge: "КМУ Kanglim",
+    title: "КАМАЗ 43118 + КМУ Kanglim",
+    price: "3 500 ₽/час с НДС",
+    image: "",
+    alt: "КАМАЗ 43118 КМУ Kanglim",
+    specs: [
+      { label: "Грузоподъёмность кузова", value: "до 10 т" },
+      { label: "Грузоподъёмность стрелы", value: "до 7 т" },
+      { label: "Ширина кузова", value: "до 2,45 м" },
+      { label: "Длина кузова", value: "до 6,20 м" },
+      { label: "Вылет стрелы", value: "до 23 м" },
+      { label: "Тип кузова", value: "Бортовой" },
+    ],
+  },
 ];
 
 const orderItems = [
@@ -62,7 +77,7 @@ const FleetSection = () => {
         {trucks.map((truck, idx) => (
           <div key={idx} className={`relative border border-accent/20 rounded-3xl bg-card/50 overflow-hidden ${idx < trucks.length - 1 ? "mb-8" : "mb-12"}`}>
             <div className="absolute inset-0 bg-gradient-to-r from-accent/10 via-transparent to-transparent" />
-            <div className="relative grid lg:grid-cols-2 gap-0">
+            <div className={`relative grid gap-0 ${truck.image ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
               <div className="p-10 lg:p-14">
                 <div className="inline-block px-3 py-1 bg-accent/20 rounded-full text-accent text-xs font-semibold tracking-widest uppercase mb-6">
                   {truck.badge}
@@ -85,13 +100,15 @@ const FleetSection = () => {
                 </a>
               </div>
 
-              <div className="relative h-72 lg:h-auto flex items-center justify-center">
-                <img
-                  src={truck.image}
-                  alt={truck.alt}
-                  className="w-full h-full object-contain p-4"
-                />
-              </div>
+              {truck.image && (
+                <div className="relative h-72 lg:h-auto flex items-center justify-center">
+                  <img
+                    src={truck.image}
+                    alt={truck.alt}
+                    className="w-full h-full object-contain p-4"
+                  />
+                </div>
+              )}
             </div>
           </div>
         ))}
