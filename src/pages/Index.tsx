@@ -54,9 +54,9 @@ const Index = () => {
             </a>
           </nav>
           <div className="flex gap-3">
-            <a href="tel:+78001234567" className="px-5 py-2.5 text-sm font-medium border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all flex items-center gap-2">
+            <a href="tel:+79601883084" className="px-5 py-2.5 text-sm font-medium border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all flex items-center gap-2">
               <Icon name="Phone" size={14} />
-              8-800-123-45-67
+              +7 960 188-30-84
             </a>
             <button className="px-5 py-2.5 text-sm font-medium bg-gradient-to-r from-accent via-accent to-accent/80 text-black rounded-full hover:shadow-lg hover:shadow-accent/40 transition-all font-semibold">
               Заказать
