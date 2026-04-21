@@ -185,7 +185,11 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
             <span className="text-red-600">+7 960 188-30-84</span>
           </a>
 
-          <p className="text-muted-foreground text-sm mt-5">Работаем без выходных · Подача от 1 часа</p>
+          <div className="inline-flex items-center gap-2 mt-6 px-5 py-3 bg-red-600/15 border border-red-500/40 rounded-2xl">
+            <span className="text-xl animate-pulse">🔥</span>
+            <p className="text-red-400 font-bold text-sm sm:text-base">Скидка 10% на первый заказ — при звонке прямо сейчас!</p>
+          </div>
+          <p className="text-muted-foreground text-sm mt-4">Работаем без выходных · Подача от 1 часа</p>
         </div>
       </section>
 
