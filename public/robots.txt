@@ -12,3 +12,8 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+User-agent: YandexAdditionalBot
+Disallow: /cats/mycat.html
+
+Sitemap: https://xn--e1afamdhf.xn--p1ai/sitemap.xml
