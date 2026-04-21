@@ -204,7 +204,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
           <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden" style={{ height: "520px" }}>
             {/* Карта во весь блок */}
             <iframe
-              src="https://yandex.ru/map-widget/v1/?ll=43.848988,56.270596&z=17&l=map&pt=43.848988,56.270596,pm2rdl"
+              src="https://yandex.ru/map-widget/v1/?ll=43.883321,56.289420&z=17&l=map&pt=43.883321,56.289420,pm2rdl"
               width="100%"
               height="100%"
               frameBorder="0"
@@ -237,7 +237,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
                   📞 +7 960 188-30-84
                 </a>
                 <a
-                  href="https://yandex.ru/maps/?pt=43.848988,56.270596&z=17&text=Аренда+манипуляторов+от+компании+ФАВОРИТ"
+                  href="https://yandex.ru/maps/?pt=43.883321,56.289420&z=17&text=Шуваловский+канал+7+Нижний+Новгород"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-accent/30 rounded-xl text-white font-medium hover:bg-accent/10 transition-all text-sm"
