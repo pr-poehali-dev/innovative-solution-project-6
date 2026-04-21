@@ -1,11 +1,44 @@
 import { ArrowRight } from "lucide-react";
 import Icon from "@/components/ui/icon";
+import { useEffect, useState } from "react";
 
 interface HeroSectionProps {
   visibleSections: Record<string, boolean>;
 }
 
+const slides = [
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/df8d23ad-2b19-4a5c-bfef-8403f404cab9.jpg",
+    alt: "FAW КМУ DongYang",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.jpg",
+    alt: "КАМАЗ 43118 вездеход КМУ Kanglim",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/b646729f-a106-46bf-b7e4-abf0fe1c4983.jpg",
+    alt: "КАМАЗ 65115 КМУ HANGIL",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/96f657e8-7741-4d2b-b428-ca560b0047fb.jpg",
+    alt: "Работа манипулятора на объекте",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/0c5ebbe2-cc38-4284-81fb-4721e3e53eaa.jpg",
+    alt: "Манипулятор на стройке",
+  },
+];
+
 const HeroSection = ({ visibleSections }: HeroSectionProps) => {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <>
       {/* Header */}
@@ -37,16 +70,36 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
 
       {/* Hero Section */}
       <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
-        <div className="absolute inset-0 w-full h-full">
-          <img
-            src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/df8d23ad-2b19-4a5c-bfef-8403f404cab9.jpg"
-            alt="Манипулятор FAW КМУ DongYang"
-            className="w-full h-full object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40" />
+
+        {/* Слайдер фото */}
+        {slides.map((slide, i) => (
+          <div
+            key={i}
+            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${i === current ? "opacity-100" : "opacity-0"}`}
+          >
+            <img
+              src={slide.url}
+              alt={slide.alt}
+              className="w-full h-full object-cover object-center"
+            />
+          </div>
+        ))}
+
+        {/* Затемнение */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40 z-10" />
+
+        {/* Точки-индикаторы */}
+        <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className={`rounded-full transition-all duration-300 ${i === current ? "w-6 h-2 bg-accent" : "w-2 h-2 bg-white/40 hover:bg-white/70"}`}
+            />
+          ))}
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-24 sm:pt-32 pb-16 sm:pb-32">
+        <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-24 sm:pt-32 pb-16 sm:pb-32">
           <div className={`max-w-2xl transition-all duration-1000 ${visibleSections["hero"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
             <div className="mb-4 sm:mb-8 inline-block">
               <span className="text-xs font-medium tracking-widest text-accent/80 uppercase">
