@@ -55,27 +55,27 @@ const GallerySection = () => {
   const next = () => setActive((p) => (p !== null ? (p + 1) % photos.length : 0));
 
   return (
-    <section className="py-32 px-6">
+    <section className="py-16 sm:py-32 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-20">
+        <div className="text-center mb-10 sm:mb-20">
           <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Портфолио</span>
-          <h2 className="text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4 mb-6">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4 mb-4 sm:mb-6">
             <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
               Выполненные работы
             </span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
             Реальные объекты — стройки, склады, промышленные предприятия Нижнего Новгорода и области
           </p>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
           {photos.map((photo, i) => (
             <div
               key={i}
-              className={`relative overflow-hidden rounded-2xl cursor-pointer group border border-accent/10 hover:border-accent/40 transition-all duration-300 ${i === 0 ? "col-span-2 lg:col-span-2 row-span-1" : ""}`}
-              style={{ aspectRatio: i === 0 ? "16/7" : "4/3" }}
+              className={`relative overflow-hidden rounded-xl sm:rounded-2xl cursor-pointer group border border-accent/10 hover:border-accent/40 transition-all duration-300 ${i === 0 ? "col-span-2 lg:col-span-2 row-span-1" : ""}`}
+              style={{ aspectRatio: i === 0 ? "4/3" : "4/3" }}
               onClick={() => setActive(i)}
             >
               <img
@@ -83,13 +83,10 @@ const GallerySection = () => {
                 alt={photo.caption}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-end p-5">
-                <p className="text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
+              <div className="absolute inset-0 bg-black/20 sm:bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-end p-3 sm:p-5">
+                <p className="text-white text-xs sm:text-sm font-medium sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300 sm:translate-y-2 group-hover:translate-y-0 line-clamp-2">
                   {photo.caption}
                 </p>
-              </div>
-              <div className="absolute top-3 right-3 w-8 h-8 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <Icon name="ZoomIn" size={14} className="text-white" />
               </div>
             </div>
           ))}

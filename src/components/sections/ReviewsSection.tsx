@@ -45,23 +45,23 @@ const reviews = [
 
 const ReviewsSection = () => {
   return (
-    <section className="py-32 px-6 bg-accent/5">
+    <section className="py-16 sm:py-32 px-4 sm:px-6 bg-accent/5">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-20">
+        <div className="text-center mb-10 sm:mb-20">
           <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Отзывы</span>
-          <h2 className="text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4 mb-6">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4 mb-4 sm:mb-6">
             <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
               Что говорят клиенты
             </span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
             Более 5 000 выполненных заказов — работаем с частными лицами, ИП и крупными предприятиями
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {reviews.map((review, i) => (
-            <div key={i} className="flex flex-col justify-between p-8 border border-accent/10 hover:border-accent/30 rounded-2xl bg-card/50 hover:bg-card/80 transition-all duration-300">
+            <div key={i} className="flex flex-col justify-between p-5 sm:p-8 border border-accent/10 hover:border-accent/30 rounded-2xl bg-card/50 hover:bg-card/80 transition-all duration-300">
               <div>
                 <div className="flex gap-1 mb-5">
                   {Array.from({ length: review.rating }).map((_, j) => (
