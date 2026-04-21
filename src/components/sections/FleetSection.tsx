@@ -85,7 +85,7 @@ const FleetSection = () => {
                 </a>
               </div>
 
-              <div className="relative h-72 lg:h-auto bg-black/40 flex items-center justify-center">
+              <div className="relative h-72 lg:h-auto flex items-center justify-center">
                 <img
                   src={truck.image}
                   alt={truck.alt}
