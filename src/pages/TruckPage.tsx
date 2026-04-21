@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import OrderModal from "@/components/ui/OrderModal";
 
 const trucks: Record<string, {
   title: string;
@@ -122,6 +124,7 @@ const trucks: Record<string, {
 
 export default function TruckPage() {
   const { slug } = useParams<{ slug: string }>();
+  const [modalOpen, setModalOpen] = useState(false);
   const truck = slug ? trucks[slug] : null;
 
   if (!truck) {
@@ -135,6 +138,7 @@ export default function TruckPage() {
 
   return (
     <>
+      <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} truckName={truck.title} />
       <title>{truck.seoTitle}</title>
 
       {/* Хедер */}
@@ -188,13 +192,13 @@ export default function TruckPage() {
               <p className="text-3xl font-black text-accent mb-6">{truck.price}</p>
               <p className="text-muted-foreground leading-relaxed mb-8">{truck.description}</p>
 
-              <a
-                href="tel:+79601883084"
+              <button
+                onClick={() => setModalOpen(true)}
                 className="inline-flex items-center gap-3 bg-gradient-to-r from-accent to-accent/80 text-black font-bold px-8 py-4 rounded-2xl hover:shadow-xl hover:shadow-accent/40 transition-all text-lg mb-8"
               >
                 <Icon name="Phone" size={20} />
                 Заказать — +7 960 188-30-84
-              </a>
+              </button>
 
               {/* Характеристики */}
               <div className="border border-accent/10 rounded-2xl overflow-hidden bg-card/30">

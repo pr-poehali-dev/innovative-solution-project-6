@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import OrderModal from "@/components/ui/OrderModal";
 
 const trucks = [
   {
@@ -79,8 +81,17 @@ const orderItems = [
 ];
 
 const FleetSection = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedTruck, setSelectedTruck] = useState("");
+
+  const openModal = (truckTitle: string) => {
+    setSelectedTruck(truckTitle);
+    setModalOpen(true);
+  };
+
   return (
     <section id="fleet" className="py-16 sm:py-32 px-4 sm:px-6">
+      <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} truckName={selectedTruck} />
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10 sm:mb-20">
           <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Наш парк</span>
@@ -133,10 +144,10 @@ const FleetSection = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-3">
-                  <a href="tel:+79601883084" className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full font-semibold text-sm sm:text-base hover:shadow-xl hover:shadow-accent/40 transition-all">
+                  <button onClick={() => openModal(truck.title)} className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full font-semibold text-sm sm:text-base hover:shadow-xl hover:shadow-accent/40 transition-all">
                     Заказать
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
-                  </a>
+                  </button>
                   <Link to={`/tehnika/${truck.slug}`} className="inline-flex items-center gap-2 px-6 py-3 border border-accent/30 rounded-full font-semibold text-sm hover:border-accent/60 hover:bg-accent/5 transition-all">
                     Подробнее
                   </Link>

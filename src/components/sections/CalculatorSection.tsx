@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import OrderModal from "@/components/ui/OrderModal";
 
 const trucks = [
   { name: "ISUZU 5т + КМУ", price: 2200 },
@@ -11,12 +12,14 @@ const trucks = [
 const CalculatorSection = () => {
   const [truckIdx, setTruckIdx] = useState(0);
   const [hours, setHours] = useState(4);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const truck = trucks[truckIdx];
   const total = truck.price * hours;
 
   return (
     <section className="py-16 sm:py-32 px-4 sm:px-6">
+      <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} truckName={`${truck.name} · ${total.toLocaleString("ru")} ₽`} />
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10 sm:mb-16">
           <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Калькулятор</span>
@@ -93,13 +96,13 @@ const CalculatorSection = () => {
                   {truck.price.toLocaleString("ru")} ₽/час × {hours} ч · с НДС
                 </p>
               </div>
-              <a
-                href="tel:+79601883084"
+              <button
+                onClick={() => setModalOpen(true)}
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full font-bold text-base hover:shadow-xl hover:shadow-accent/40 transition-all"
               >
                 Заказать за {total.toLocaleString("ru")} ₽
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
-              </a>
+              </button>
             </div>
 
           </div>

@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import Icon from "@/components/ui/icon";
+import OrderModal from "@/components/ui/OrderModal";
 
 interface BottomSectionsProps {
   visibleSections: Record<string, boolean>;
 }
 
 const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
+  const [modalOpen, setModalOpen] = useState(false);
   const steps = [
     {
       step: "01",
@@ -57,6 +60,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
 
   return (
     <>
+      <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} />
       {/* How it works */}
       <section id="how" className="py-16 sm:py-32 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
@@ -141,6 +145,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
                       </ul>
                     </div>
                     <button
+                      onClick={() => setModalOpen(true)}
                       className={`w-full px-6 py-3.5 sm:py-4 rounded-xl font-semibold transition-all text-sm sm:text-base ${
                         plan.highlight
                           ? "bg-gradient-to-r from-accent to-accent/80 text-black hover:shadow-xl hover:shadow-accent/40"
