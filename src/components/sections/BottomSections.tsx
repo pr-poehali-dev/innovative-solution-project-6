@@ -222,21 +222,21 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
                 </div>
               </div>
 
-              {/* Правая часть — визуальная карта */}
-              <div className="relative h-64 lg:h-auto bg-background/40 flex items-center justify-center min-h-[280px]">
-                <div className="absolute inset-0 bg-grid opacity-30" />
-                {/* Стилизованная метка */}
-                <div className="relative flex flex-col items-center">
-                  <div className="w-20 h-20 rounded-full bg-accent/20 border-2 border-accent/40 flex items-center justify-center mb-3 animate-pulse">
-                    <div className="w-12 h-12 rounded-full bg-accent/40 border-2 border-accent flex items-center justify-center">
-                      <span className="text-2xl">📍</span>
-                    </div>
-                  </div>
-                  <div className="bg-card border border-accent/30 rounded-xl px-4 py-3 text-center shadow-xl">
-                    <p className="text-white font-bold text-sm">Аренда манипуляторов</p>
-                    <p className="text-accent font-black text-base">ФАВОРИТ</p>
-                    <p className="text-muted-foreground text-xs mt-1">Шуваловский проезд, 7</p>
-                  </div>
+              {/* Правая часть — карта Яндекс */}
+              <div className="relative h-64 lg:h-auto min-h-[320px] overflow-hidden">
+                <iframe
+                  src="https://yandex.ru/map-widget/v1/?ll=43.848988,56.270596&z=17&l=map&pt=43.848988,56.270596,pm2rdl"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  allowFullScreen
+                  title="Карта — ООО Фаворит"
+                  className="absolute inset-0 w-full h-full"
+                />
+                {/* Плашка поверх карты */}
+                <div className="absolute bottom-4 left-4 right-4 z-10 bg-card/90 backdrop-blur-sm border border-accent/30 rounded-xl px-4 py-3 pointer-events-none">
+                  <p className="text-white font-bold text-sm">Аренда манипуляторов от компании ФАВОРИТ</p>
+                  <p className="text-accent text-xs mt-0.5">📍 Шуваловский проезд, 7 · Нижний Новгород</p>
                 </div>
               </div>
 
