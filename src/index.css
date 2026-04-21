@@ -5,13 +5,13 @@
 @layer base {
   :root {
     /* Dark theme with cyan/teal accent */
-    --background: 0 0% 0%;
+    --background: 220 15% 13%;
     --foreground: 0 0% 100%;
 
-    --card: 0 0% 4%;
+    --card: 220 15% 17%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 4%;
+    --popover: 220 15% 17%;
     --popover-foreground: 0 0% 100%;
 
     --primary: 174 100% 50%;
@@ -46,13 +46,13 @@
   }
 
   .dark {
-    --background: 0 0% 0%;
+    --background: 220 15% 13%;
     --foreground: 0 0% 100%;
 
-    --card: 0 0% 4%;
+    --card: 220 15% 17%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 4%;
+    --popover: 220 15% 17%;
     --popover-foreground: 0 0% 100%;
 
     --primary: 174 100% 50%;
