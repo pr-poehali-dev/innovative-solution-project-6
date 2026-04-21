@@ -176,6 +176,14 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
               </span>
             </h2>
             <p className="text-muted-foreground mt-4 text-lg">Нижний Новгород, Шуваловский проезд, 7</p>
+            <div className="mt-6 inline-flex flex-col sm:flex-row gap-4 items-center justify-center">
+              <div className="px-6 py-3 bg-accent/10 border border-accent/20 rounded-full text-white font-semibold text-lg">
+                Аренда манипуляторов
+              </div>
+              <a href="tel:+79601883084" className="px-6 py-3 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full font-bold text-lg hover:shadow-lg hover:shadow-accent/40 transition-all">
+                +7 960 188-30-84
+              </a>
+            </div>
           </div>
           <div className="rounded-2xl overflow-hidden border border-accent/10 h-[450px]">
             <iframe
