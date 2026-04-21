@@ -48,6 +48,25 @@ const photos = [
   },
 ];
 
+const VideoPlaceholder = () => (
+  <div className="relative overflow-hidden rounded-xl sm:rounded-2xl border border-accent/20 bg-white/5 flex flex-col items-center justify-center aspect-video group cursor-pointer hover:border-accent/50 transition-all duration-300">
+    <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-black/30" />
+    <div className="relative z-10 flex flex-col items-center gap-4 px-6 text-center">
+      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center group-hover:bg-accent/30 transition-colors duration-300">
+        <Icon name="Play" size={32} className="text-accent ml-1" />
+      </div>
+      <div>
+        <p className="text-white font-semibold text-base sm:text-lg">Видео работы манипулятора</p>
+        <p className="text-white/50 text-xs sm:text-sm mt-1">Скоро будет загружено</p>
+      </div>
+    </div>
+    <div className="absolute bottom-4 right-4 flex items-center gap-1.5 bg-black/40 rounded-full px-3 py-1">
+      <Icon name="Video" size={12} className="text-accent" />
+      <span className="text-white/60 text-xs">Видео</span>
+    </div>
+  </div>
+);
+
 const GallerySection = () => {
   const [active, setActive] = useState<number | null>(null);
 
@@ -67,6 +86,11 @@ const GallerySection = () => {
           <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
             Реальные объекты — стройки, склады, промышленные предприятия Нижнего Новгорода и области
           </p>
+        </div>
+
+        {/* Video placeholder */}
+        <div className="mb-4 sm:mb-6">
+          <VideoPlaceholder />
         </div>
 
         {/* Grid */}
