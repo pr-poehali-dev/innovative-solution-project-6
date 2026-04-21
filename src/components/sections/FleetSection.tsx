@@ -1,10 +1,12 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 
 const trucks = [
   {
     badge: "КМУ DongYang",
     title: "FAW + КМУ DongYang",
+    slug: "faw-kmu-dongyoung",
     price: "3 000 ₽/час с НДС",
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/df8d23ad-2b19-4a5c-bfef-8403f404cab9.jpg",
     alt: "FAW КМУ DongYang",
@@ -20,6 +22,7 @@ const trucks = [
   {
     badge: "КМУ HANGIL",
     title: "КАМАЗ 65115 + КМУ HANGIL",
+    slug: "kamaz-65115-hangil",
     price: "2 800 ₽/час с НДС",
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/b646729f-a106-46bf-b7e4-abf0fe1c4983.jpg",
     alt: "КАМАЗ 65115 КМУ HANGIL",
@@ -35,6 +38,7 @@ const trucks = [
   {
     badge: "КМУ Kanglim",
     title: "КАМАЗ 43118 + КМУ Kanglim",
+    slug: "kamaz-43118-kanglim",
     price: "3 500 ₽/час с НДС",
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.jpg",
     alt: "КАМАЗ 43118 КМУ Kanglim вездеход",
@@ -50,6 +54,7 @@ const trucks = [
   {
     badge: "КМУ 3т",
     title: "ISUZU 5т + КМУ",
+    slug: "isuzu-5t-kmu",
     price: "2 200 ₽/час с НДС",
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/4bb58aab-783b-43b6-8d89-ee519e570e09.jpg",
     alt: "ISUZU 5т КМУ",
@@ -127,10 +132,15 @@ const FleetSection = () => {
                   ))}
                 </div>
 
-                <a href="tel:+79601883084" className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full font-semibold text-sm sm:text-base hover:shadow-xl hover:shadow-accent/40 transition-all">
-                  Заказать этот манипулятор
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
-                </a>
+                <div className="flex flex-wrap gap-3">
+                  <a href="tel:+79601883084" className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full font-semibold text-sm sm:text-base hover:shadow-xl hover:shadow-accent/40 transition-all">
+                    Заказать
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+                  </a>
+                  <Link to={`/tehnika/${truck.slug}`} className="inline-flex items-center gap-2 px-6 py-3 border border-accent/30 rounded-full font-semibold text-sm hover:border-accent/60 hover:bg-accent/5 transition-all">
+                    Подробнее
+                  </Link>
+                </div>
               </div>
 
               {truck.image && (
