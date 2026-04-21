@@ -2,6 +2,8 @@ import { ArrowRight } from "lucide-react";
 import Icon from "@/components/ui/icon";
 import { useEffect, useState } from "react";
 
+const SUBMIT_URL = "https://functions.poehali.dev/dc327032-aa41-4632-b107-a026d92ef031";
+
 interface HeroSectionProps {
   visibleSections: Record<string, boolean>;
 }
@@ -31,6 +33,9 @@ const slides = [
 
 const HeroSection = ({ visibleSections }: HeroSectionProps) => {
   const [current, setCurrent] = useState(0);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -38,6 +43,28 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
     }, 4000);
     return () => clearInterval(timer);
   }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !phone.trim()) return;
+    setStatus("loading");
+    try {
+      const res = await fetch(SUBMIT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone }),
+      });
+      if (res.ok) {
+        setStatus("success");
+        setName("");
+        setPhone("");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
 
   return (
     <>
@@ -119,14 +146,52 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
               Оставьте заявку или позвоните — мы подберём правильный манипулятор с платформой необходимых габаритов и нужной грузоподъёмностью под вашу задачу.
             </p>
             <div className="flex gap-3 sm:gap-4 mb-8 sm:mb-12 flex-row flex-wrap">
-              <button className="group px-6 sm:px-8 py-3.5 sm:py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full hover:shadow-2xl hover:shadow-accent/50 transition-all font-semibold text-base sm:text-lg flex items-center gap-3 justify-center">
-                Оставить заявку
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition" />
-              </button>
               <a href="#fleet" className="px-6 sm:px-8 py-3.5 sm:py-4 border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all font-medium text-base sm:text-lg text-white text-center">
                 Посмотреть технику
               </a>
             </div>
+
+            {/* Форма заявки */}
+            {status === "success" ? (
+              <div className="bg-accent/10 border border-accent/30 rounded-2xl px-6 py-5 flex items-center gap-3">
+                <Icon name="CheckCircle" size={22} className="text-accent shrink-0" />
+                <div>
+                  <p className="font-semibold text-white">Заявка принята!</p>
+                  <p className="text-sm text-white/60">Мы перезвоним вам в ближайшее время.</p>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row gap-3">
+                <input
+                  type="text"
+                  placeholder="Ваше имя"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  required
+                  className="flex-1 bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
+                />
+                <input
+                  type="tel"
+                  placeholder="+7 (___) ___-__-__"
+                  value={phone}
+                  onChange={e => setPhone(e.target.value)}
+                  required
+                  className="flex-1 bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
+                />
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="group px-6 py-3 bg-gradient-to-r from-accent to-accent/90 text-black rounded-xl font-semibold text-sm flex items-center gap-2 justify-center hover:shadow-lg hover:shadow-accent/40 transition-all disabled:opacity-60 shrink-0"
+                >
+                  {status === "loading" ? "Отправка..." : (
+                    <>Оставить заявку <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition" /></>
+                  )}
+                </button>
+                {status === "error" && (
+                  <p className="text-red-400 text-xs mt-1 sm:col-span-3">Ошибка отправки, попробуйте ещё раз.</p>
+                )}
+              </form>
+            )}
             <div className="grid grid-cols-3 gap-4 sm:gap-8 pt-6 sm:pt-8 border-t border-white/10">
               <div>
                 <div className="text-xl sm:text-2xl font-bold text-accent mb-1 sm:mb-2">15+</div>
