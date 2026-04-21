@@ -1,0 +1,105 @@
+import Icon from "@/components/ui/icon";
+
+const useCases = [
+  {
+    icon: "Building2",
+    title: "Строительство",
+    desc: "Подъём и монтаж металлоконструкций, балок, плит перекрытий. Подача стройматериалов на этажи — кирпич, блоки, мешки с раствором. Установка колонн, ферм и кровельных элементов.",
+    examples: ["Монтаж каркасов зданий", "Подача материалов на высоту", "Установка лестничных маршей"],
+  },
+  {
+    icon: "Zap",
+    title: "Энергетика и связь",
+    desc: "Установка опор ЛЭП и освещения, монтаж трансформаторных подстанций. Подъём антенн и вышек сотовой связи. Замена кабельных барабанов.",
+    examples: ["Монтаж опор ЛЭП", "Установка трансформаторов", "Подъём антенных мачт"],
+  },
+  {
+    icon: "Droplets",
+    title: "ЖКХ и водоснабжение",
+    desc: "Монтаж трубопроводов большого диаметра, установка насосных станций и канализационных люков. Замена секций теплотрасс в траншеях.",
+    examples: ["Укладка труб в траншеи", "Монтаж насосных станций", "Замена тепловых сетей"],
+  },
+  {
+    icon: "Factory",
+    title: "Промышленность",
+    desc: "Перемещение тяжёлого оборудования внутри и снаружи цехов. Монтаж станков и производственных линий. Погрузка и разгрузка металлопроката, труб, листового металла.",
+    examples: ["Монтаж производственных линий", "Перемещение станков", "Разгрузка металлопроката"],
+  },
+  {
+    icon: "Warehouse",
+    title: "Логистика и склады",
+    desc: "Разгрузка фур и контейнеров с нестандартным грузом. Перемещение крупногабаритных паллет. Работа на складах с ограниченным въездом.",
+    examples: ["Разгрузка контейнеров", "Перемещение паллет", "Работа в стеснённых условиях"],
+  },
+  {
+    icon: "TreePine",
+    title: "Лесная и деревообработка",
+    desc: "Погрузка и штабелирование круглого леса, пиломатериалов и деревянных конструкций. Доставка и монтаж деревянных домокомплектов, каркасов и ферм.",
+    examples: ["Погрузка пиломатериалов", "Монтаж деревянных домов", "Штабелирование леса"],
+  },
+  {
+    icon: "Truck",
+    title: "Нефть и газ",
+    desc: "Монтаж оборудования на нефтегазовых объектах: ёмкости, сепараторы, насосы. Перемещение труб большого диаметра. Работа на удалённых и труднодоступных площадках.",
+    examples: ["Монтаж ёмкостей и сепараторов", "Укладка газопровода", "Работа на промыслах"],
+  },
+  {
+    icon: "Home",
+    title: "Частное строительство",
+    desc: "Монтаж сборных домов и фундаментных блоков. Подъём кровельных материалов. Установка ворот, заборных секций, бассейнов и септиков.",
+    examples: ["Монтаж фундаментных блоков", "Установка септиков", "Подъём кровли и ворот"],
+  },
+  {
+    icon: "ShoppingCart",
+    title: "Ритейл и торговля",
+    desc: "Оснащение торговых центров и магазинов: монтаж вывесок, климатического оборудования, кровельных конструкций. Разгрузка торгового оборудования при открытии новых объектов.",
+    examples: ["Монтаж вывесок и рекламы", "Установка кондиционеров", "Разгрузка при открытии"],
+  },
+];
+
+const UseCasesSection = () => {
+  return (
+    <section className="py-16 sm:py-32 px-4 sm:px-6 bg-accent/5">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-10 sm:mb-20">
+          <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Области применения</span>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4 mb-4 sm:mb-6">
+            <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
+              Где нужен манипулятор
+            </span>
+          </h2>
+          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
+            Манипулятор с платформой решает задачи там, где кран не проедет, а вручную — не поднять
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {useCases.map((item, i) => (
+            <div
+              key={i}
+              className="group p-5 sm:p-7 border border-accent/10 hover:border-accent/40 rounded-2xl bg-card/50 hover:bg-card/80 transition-all duration-300"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-11 h-11 rounded-xl bg-accent/10 group-hover:bg-accent/20 flex items-center justify-center transition-colors shrink-0">
+                  <Icon name={item.icon} size={20} className="text-accent" />
+                </div>
+                <h3 className="font-display font-black text-lg text-white">{item.title}</h3>
+              </div>
+              <p className="text-white/60 text-sm leading-relaxed mb-5">{item.desc}</p>
+              <ul className="space-y-1.5">
+                {item.examples.map((ex, j) => (
+                  <li key={j} className="flex items-center gap-2 text-xs text-white/50">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent/60 shrink-0" />
+                    {ex}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default UseCasesSection;
