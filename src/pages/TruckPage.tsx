@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import OrderModal from "@/components/ui/OrderModal";
+import PhoneButton from "@/components/ui/PhoneButton";
 
 const trucks: Record<string, {
   title: string;
@@ -147,14 +148,7 @@ export default function TruckPage() {
           <Link to="/" className="font-bold text-xl tracking-tighter bg-gradient-to-r from-white via-accent to-accent/80 bg-clip-text text-transparent">
             ООО Фаворит
           </Link>
-          <a
-            href="tel:+79601883084"
-            className="flex items-center gap-2 font-bold px-4 py-2 rounded-xl text-sm border"
-            style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", animation: "goldPulse 1.2s ease-in-out infinite", fontFamily: "'Cinzel', serif" }}
-          >
-            <Icon name="Phone" size={16} />
-            +7 960 188-30-84
-          </a>
+          <PhoneButton size="sm" className="rounded-xl" />
         </div>
       </header>
 

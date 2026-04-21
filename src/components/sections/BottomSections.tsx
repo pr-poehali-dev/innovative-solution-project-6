@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import Icon from "@/components/ui/icon";
 import OrderModal from "@/components/ui/OrderModal";
+import PhoneButton from "@/components/ui/PhoneButton";
 
 interface BottomSectionsProps {
   visibleSections: Record<string, boolean>;
@@ -177,14 +178,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
           </p>
 
           {/* Большая кнопка звонка */}
-          <a
-            href="tel:+79601883084"
-            className="group inline-flex items-center gap-4 px-10 sm:px-14 py-5 sm:py-6 rounded-2xl font-black text-2xl sm:text-3xl mx-auto border"
-            style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", animation: "goldPulse 1.2s ease-in-out infinite", fontFamily: "'Cinzel', serif" }}
-          >
-            <span className="text-3xl sm:text-4xl">📞</span>
-            <span>+7 960 188-30-84</span>
-          </a>
+          <PhoneButton size="lg" className="mx-auto" />
 
           <div className="inline-flex items-center gap-2 mt-6 px-5 py-3 bg-red-600/15 border border-red-500/40 rounded-2xl">
             <span className="text-xl animate-pulse">🔥</span>
@@ -235,13 +229,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
               </div>
 
               <div className="flex flex-col gap-3">
-                <a
-                  href="tel:+79601883084"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-bold text-base border"
-                  style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", animation: "goldPulse 1.2s ease-in-out infinite", fontFamily: "'Cinzel', serif" }}
-                >
-                  📞 +7 960 188-30-84
-                </a>
+                <PhoneButton size="md" className="rounded-xl w-full" />
                 <a
                   href="https://yandex.ru/maps/?pt=43.851408,56.274653&z=17&text=Шуваловский+канал+7+Нижний+Новгород"
                   target="_blank"

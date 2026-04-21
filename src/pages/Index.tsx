@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PhoneButton from "@/components/ui/PhoneButton";
 import HeroSection from "@/components/sections/HeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import FleetSection from "@/components/sections/FleetSection";
@@ -53,14 +54,7 @@ const Index = () => {
       <BottomSections visibleSections={visibleSections} />
 
       {/* Плавающая кнопка звонка */}
-      <a
-        href="tel:+79601883084"
-        className="fixed bottom-6 right-4 sm:right-6 z-50 flex items-center gap-3 rounded-full hover:scale-105 active:scale-95 px-4 sm:px-5 py-3.5 border font-black"
-        style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", animation: "goldPulse 1.2s ease-in-out infinite", fontFamily: "'Cinzel', serif" }}
-      >
-        <span className="text-xl">📞</span>
-        <span className="text-sm sm:text-base hidden sm:block">+7 960 188-30-84</span>
-      </a>
+      <PhoneButton size="sm" className="fixed bottom-6 right-4 sm:right-6 z-50 hover:scale-105 active:scale-95 shadow-2xl" />
     </div>
   );
 };

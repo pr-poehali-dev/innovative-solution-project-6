@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Icon from "@/components/ui/icon";
+import PhoneButton from "@/components/ui/PhoneButton";
 import { useEffect, useState } from "react";
 
 const SUBMIT_URL = "https://functions.poehali.dev/dc327032-aa41-4632-b107-a026d92ef031";
@@ -112,13 +113,8 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
             ))}
           </nav>
           <div className="flex gap-2 sm:gap-3 items-center">
-            <a href="tel:+79601883084" className="hidden sm:flex px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-bold rounded-full items-center gap-2 border" style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", fontFamily: "'Cinzel', serif", animation: "goldPulse 1.2s ease-in-out infinite" }}>
-              <Icon name="Phone" size={14} />
-              +7 960 188-30-84
-            </a>
-            <a href="tel:+79601883084" className="flex sm:hidden w-10 h-10 border rounded-full transition-all items-center justify-center" style={{ borderColor: "#e8a820" }}>
-              <Icon name="Phone" size={16} style={{ color: "#e8a820" }} />
-            </a>
+            <PhoneButton size="sm" className="hidden sm:inline-flex" />
+            <PhoneButton iconOnly className="flex sm:hidden" />
             <button className="hidden sm:block px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-bold rounded-full transition-all hover:opacity-90" style={{ background: "linear-gradient(135deg, #f5d060, #e8a820, #c8850a)", color: "#1a1a1a", fontFamily: "'Cinzel', serif" }}>
               Заказать
             </button>
@@ -146,13 +142,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
                 {link.label}
               </a>
             ))}
-            <a
-              href="tel:+79601883084"
-              className="mt-2 py-3 px-4 rounded-xl text-sm font-semibold text-accent border border-accent/30 text-center hover:bg-accent/10 transition-all flex items-center justify-center gap-2"
-            >
-              <Icon name="Phone" size={15} />
-              +7 960 188-30-84
-            </a>
+            <PhoneButton size="sm" className="mt-2 w-full justify-center rounded-xl" />
           </div>
         )}
       </header>
