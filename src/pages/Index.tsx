@@ -44,7 +44,6 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <HeroSection visibleSections={visibleSections} />
       <FeaturesSection visibleSections={visibleSections} />
-      <StatsSection />
       <FleetSection />
       <UseCasesSection />
       <CalculatorSection />
