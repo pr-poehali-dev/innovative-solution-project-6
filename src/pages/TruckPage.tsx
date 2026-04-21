@@ -149,7 +149,8 @@ export default function TruckPage() {
           </Link>
           <a
             href="tel:+79601883084"
-            className="flex items-center gap-2 bg-accent text-black font-bold px-4 py-2 rounded-xl hover:bg-accent/90 transition text-sm"
+            className="flex items-center gap-2 font-bold px-4 py-2 rounded-xl text-sm border"
+            style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", animation: "goldPulse 1.2s ease-in-out infinite", fontFamily: "'Cinzel', serif" }}
           >
             <Icon name="Phone" size={16} />
             +7 960 188-30-84

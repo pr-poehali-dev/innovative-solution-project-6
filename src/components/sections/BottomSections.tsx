@@ -179,10 +179,11 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
           {/* Большая кнопка звонка */}
           <a
             href="tel:+79601883084"
-            className="group inline-flex items-center gap-4 px-10 sm:px-14 py-5 sm:py-6 bg-gradient-to-r from-accent to-accent/90 text-black rounded-2xl hover:shadow-2xl hover:shadow-accent/50 transition-all font-black text-2xl sm:text-3xl mx-auto animate-pulse hover:animate-none"
+            className="group inline-flex items-center gap-4 px-10 sm:px-14 py-5 sm:py-6 rounded-2xl font-black text-2xl sm:text-3xl mx-auto border"
+            style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", animation: "goldPulse 1.2s ease-in-out infinite", fontFamily: "'Cinzel', serif" }}
           >
             <span className="text-3xl sm:text-4xl">📞</span>
-            <span className="text-red-600">+7 960 188-30-84</span>
+            <span>+7 960 188-30-84</span>
           </a>
 
           <div className="inline-flex items-center gap-2 mt-6 px-5 py-3 bg-red-600/15 border border-red-500/40 rounded-2xl">
@@ -236,7 +237,8 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
               <div className="flex flex-col gap-3">
                 <a
                   href="tel:+79601883084"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-accent to-accent/90 text-black rounded-xl font-bold text-base hover:shadow-xl hover:shadow-accent/40 transition-all"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-bold text-base border"
+                  style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", animation: "goldPulse 1.2s ease-in-out infinite", fontFamily: "'Cinzel', serif" }}
                 >
                   📞 +7 960 188-30-84
                 </a>
