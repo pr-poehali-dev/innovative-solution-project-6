@@ -31,11 +31,20 @@ const slides = [
   },
 ];
 
+const navLinks = [
+  { href: "#features", label: "Преимущества" },
+  { href: "#fleet", label: "Техника" },
+  { href: "#usecases", label: "Услуги" },
+  { href: "#how", label: "Как это работает" },
+  { href: "#pricing", label: "Тарифы" },
+];
+
 const HeroSection = ({ visibleSections }: HeroSectionProps) => {
   const [current, setCurrent] = useState(0);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -75,13 +84,11 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
             ООО Фаворит
           </div>
           <nav className="hidden md:flex gap-10 text-sm font-medium">
-            <a href="#features" className="text-muted-foreground hover:text-white transition-colors">Преимущества</a>
-            <a href="#fleet" className="text-muted-foreground hover:text-white transition-colors">Техника</a>
-            <a href="#usecases" className="text-muted-foreground hover:text-white transition-colors">Услуги</a>
-            <a href="#how" className="text-muted-foreground hover:text-white transition-colors">Как это работает</a>
-            <a href="#pricing" className="text-muted-foreground hover:text-white transition-colors">Тарифы</a>
+            {navLinks.map(link => (
+              <a key={link.href} href={link.href} className="text-muted-foreground hover:text-white transition-colors">{link.label}</a>
+            ))}
           </nav>
-          <div className="flex gap-2 sm:gap-3">
+          <div className="flex gap-2 sm:gap-3 items-center">
             <a href="tel:+79601883084" className="hidden sm:flex px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-medium border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all items-center gap-2">
               <Icon name="Phone" size={14} />
               +7 960 188-30-84
@@ -89,11 +96,42 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
             <a href="tel:+79601883084" className="flex sm:hidden w-10 h-10 border border-accent/40 rounded-full hover:bg-accent/10 transition-all items-center justify-center">
               <Icon name="Phone" size={16} className="text-accent" />
             </a>
-            <button className="px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-medium bg-gradient-to-r from-accent via-accent to-accent/80 text-black rounded-full hover:shadow-lg hover:shadow-accent/40 transition-all font-semibold">
+            <button className="hidden sm:block px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-medium bg-gradient-to-r from-accent via-accent to-accent/80 text-black rounded-full hover:shadow-lg hover:shadow-accent/40 transition-all font-semibold">
               Заказать
+            </button>
+            {/* Бургер — только мобайл */}
+            <button
+              className="flex md:hidden w-10 h-10 items-center justify-center rounded-full border border-white/10 hover:bg-white/5 transition-colors"
+              onClick={() => setMenuOpen(prev => !prev)}
+              aria-label="Меню"
+            >
+              <Icon name={menuOpen ? "X" : "Menu"} size={20} className="text-white" />
             </button>
           </div>
         </div>
+
+        {/* Мобильное меню */}
+        {menuOpen && (
+          <div className="md:hidden border-t border-accent/10 bg-background/95 backdrop-blur-2xl px-4 py-4 flex flex-col gap-1">
+            {navLinks.map(link => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="py-3 px-4 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 transition-all"
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href="tel:+79601883084"
+              className="mt-2 py-3 px-4 rounded-xl text-sm font-semibold text-accent border border-accent/30 text-center hover:bg-accent/10 transition-all flex items-center justify-center gap-2"
+            >
+              <Icon name="Phone" size={15} />
+              +7 960 188-30-84
+            </a>
+          </div>
+        )}
       </header>
 
       {/* Hero Section */}
