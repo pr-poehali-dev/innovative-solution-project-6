@@ -106,20 +106,20 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
               <span className="text-xs tracking-widest uppercase" style={{ color: "#a07010", letterSpacing: "0.2em" }}>Аренда манипуляторов</span>
             </div>
           </div>
-          <nav className="hidden md:flex gap-10 text-sm font-medium">
+          <nav className="hidden md:flex gap-10 text-base font-medium">
             {navLinks.map(link => (
               <a key={link.href} href={link.href} className="font-semibold transition-colors hover:opacity-80" style={{ color: "#e8a820", fontFamily: "'Cinzel', serif", letterSpacing: "0.05em" }}>{link.label}</a>
             ))}
           </nav>
           <div className="flex gap-2 sm:gap-3 items-center">
-            <a href="tel:+79601883084" className="hidden sm:flex px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-bold rounded-full transition-all items-center gap-2 border animate-pulse" style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)" }}>
-              <Icon name="Phone" size={14} />
+            <a href="tel:+79601883084" className="hidden sm:flex px-5 sm:px-6 py-3 text-base font-bold rounded-full transition-all items-center gap-2 border animate-pulse" style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", fontFamily: "'Cinzel', serif" }}>
+              <Icon name="Phone" size={16} />
               +7 960 188-30-84
             </a>
             <a href="tel:+79601883084" className="flex sm:hidden w-10 h-10 border rounded-full transition-all items-center justify-center" style={{ borderColor: "#e8a820" }}>
               <Icon name="Phone" size={16} style={{ color: "#e8a820" }} />
             </a>
-            <button className="hidden sm:block px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-bold rounded-full transition-all hover:opacity-90" style={{ background: "linear-gradient(135deg, #f5d060, #e8a820, #c8850a)", color: "#1a1a1a" }}>
+            <button className="hidden sm:block px-5 sm:px-6 py-3 text-base font-bold rounded-full transition-all hover:opacity-90" style={{ background: "linear-gradient(135deg, #f5d060, #e8a820, #c8850a)", color: "#1a1a1a", fontFamily: "'Cinzel', serif" }}>
               Заказать
             </button>
             {/* Бургер — только мобайл */}
