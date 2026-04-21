@@ -51,8 +51,8 @@ const trucks = [
     badge: "КМУ Kanglim",
     title: "КАМАЗ 43118 + КМУ Kanglim",
     price: "3 500 ₽/час с НДС",
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/ce5b45d0-2f2e-4d3c-9889-53fd677d2b25.jpg",
-    alt: "КАМАЗ 43118 КМУ Kanglim",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.jpg",
+    alt: "КАМАЗ 43118 КМУ Kanglim вездеход",
     specs: [
       { label: "Грузоподъёмность кузова", value: "до 10 т" },
       { label: "Грузоподъёмность стрелы", value: "до 7 т" },
