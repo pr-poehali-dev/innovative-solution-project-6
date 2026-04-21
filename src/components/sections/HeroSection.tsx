@@ -91,20 +91,10 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
 
   return (
     <>
-      {/* Акционная плашка */}
-      <div className="fixed top-0 w-full z-[60] bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white py-2 px-4 flex items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm font-medium">
-        <span className="animate-pulse">🔥</span>
-        <span>Скидка 10% на первый заказ — только до конца недели!</span>
-        <a
-          href="tel:+79601883084"
-          className="flex-shrink-0 bg-white text-red-600 font-bold px-3 sm:px-4 py-1 rounded-full hover:bg-red-50 transition-colors text-xs sm:text-sm"
-        >
-          Позвонить
-        </a>
-      </div>
+
 
       {/* Header */}
-      <header className="fixed top-9 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
+      <header className="fixed top-0 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <img src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/70f37e87-7308-44c5-ba56-e221771fff69.jpg" alt="Фаворит" className="w-20 h-20 flex-shrink-0 rounded-xl" />
