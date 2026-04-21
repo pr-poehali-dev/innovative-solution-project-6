@@ -87,7 +87,9 @@ const Index = () => {
                   Манипуляторы
                 </span>
                 <br />
-                <span className="text-accent">в аренду.</span>
+                <span className="text-accent">в аренду</span>
+                <br />
+                <span className="text-white/70 text-4xl lg:text-5xl">в Нижнем Новгороде</span>
               </h1>
               <p className="text-xl text-white/80 leading-relaxed mb-10 max-w-xl font-light">
                 Грузоподъёмность от 3 до 25 тонн. Работаем на строительных площадках,
