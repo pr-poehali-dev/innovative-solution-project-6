@@ -36,7 +36,7 @@ const trucks = [
     badge: "КМУ 3т",
     title: "ISUZU 5т + КМУ",
     price: "2 200 ₽/час с НДС",
-    image: "https://lh3.googleusercontent.com/sitesv/AA5AbUAOb32dleSEymMxBzjhmj6qyrz31FgA2pbsWV1Y0y8j-06y6dIpE-QIvy-YQhiI_UGKwbFSE2nQfnk45eQ9ci5JyF4-B_gEDS8aKcD-sJBxEWX5zgJSH3AjGjokwV7Eh2lOGpnM0USnOS-hnCMBzlq0qa8o2kuNLaxGiTZik4PaZesCuPTCZBaQgLKlSd00Am6V_q4nE6FF8ELdx-DmX-iYp9JnJ8C3o95bnkM=w1280",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/4bb58aab-783b-43b6-8d89-ee519e570e09.jpg",
     alt: "ISUZU 5т КМУ",
     specs: [
       { label: "Грузоподъёмность платформы", value: "до 5 т" },
