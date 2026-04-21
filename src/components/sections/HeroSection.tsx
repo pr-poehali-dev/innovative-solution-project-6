@@ -100,7 +100,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
             <img src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/70f37e87-7308-44c5-ba56-e221771fff69.jpg" alt="Фаворит" className="w-20 h-20 flex-shrink-0 rounded-xl" />
             <div className="flex flex-col leading-tight">
               <span className="text-xs font-medium tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>
-              <span className="font-display font-black text-2xl sm:text-3xl tracking-wide drop-shadow-lg" style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 40%, #fdeea0 60%, #c8850a 80%, #f0c040 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <span className="font-black text-2xl sm:text-3xl drop-shadow-lg" style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 40%, #fdeea0 60%, #c8850a 80%, #f0c040 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontFamily: "'Cinzel', serif", letterSpacing: "0.08em" }}>
                 ООО Фаворит
               </span>
               <span className="text-xs tracking-widest uppercase" style={{ color: "#a07010", letterSpacing: "0.2em" }}>Аренда манипуляторов</span>
@@ -108,7 +108,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
           </div>
           <nav className="hidden md:flex gap-10 text-sm font-medium">
             {navLinks.map(link => (
-              <a key={link.href} href={link.href} className="font-semibold transition-colors hover:opacity-80" style={{ color: "#e8a820" }}>{link.label}</a>
+              <a key={link.href} href={link.href} className="font-semibold transition-colors hover:opacity-80" style={{ color: "#e8a820", fontFamily: "'Cinzel', serif", letterSpacing: "0.05em" }}>{link.label}</a>
             ))}
           </nav>
           <div className="flex gap-2 sm:gap-3 items-center">
