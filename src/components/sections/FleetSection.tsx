@@ -94,7 +94,7 @@ const FleetSection = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-accent/10 via-transparent to-transparent" />
             <div className={`relative grid gap-0 ${truck.image ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
               {truck.image && (
-                <div className="relative h-52 sm:h-72 lg:h-auto flex items-center justify-center lg:hidden">
+                <div className="relative h-72 sm:h-96 lg:h-auto flex items-center justify-center lg:hidden">
                   <img
                     src={truck.image}
                     alt={truck.alt}
