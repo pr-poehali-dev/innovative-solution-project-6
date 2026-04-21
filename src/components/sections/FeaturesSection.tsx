@@ -8,31 +8,37 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
   const features = [
     {
       icon: "Clock",
+      iconBg: "from-amber-400 to-orange-500",
       title: "Подача от 1 часа",
       desc: "Оперативно реагируем на заявки и подаём технику в кратчайшие сроки по Нижнему Новгороду",
     },
     {
       icon: "Truck",
+      iconBg: "from-blue-400 to-blue-600",
       title: "Подбор под задачу",
       desc: "Подберём манипулятор с платформой нужных габаритов и грузоподъёмностью от 5 до 20 тонн",
     },
     {
       icon: "Shield",
+      iconBg: "from-green-400 to-emerald-600",
       title: "Работаем официально",
       desc: "Заключаем договор, предоставляем все закрывающие документы для юридических лиц",
     },
     {
       icon: "MapPin",
+      iconBg: "from-red-400 to-rose-600",
       title: "Весь Нижний Новгород",
       desc: "Работаем на стройках, складах и производствах — выезжаем в любой район города и область",
     },
     {
-      icon: "Wrench",
+      icon: "HardHat",
+      iconBg: "from-yellow-400 to-amber-600",
       title: "Опытные операторы",
       desc: "Профессиональные машинисты с допуском, опытом от 5 лет и всеми необходимыми разрешениями",
     },
     {
       icon: "Phone",
+      iconBg: "from-purple-400 to-violet-600",
       title: "Консультация бесплатно",
       desc: "Позвоните — поможем выбрать технику, рассчитаем стоимость и согласуем время подачи",
     },
@@ -63,8 +69,8 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
                 }`}
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
-                <div className="w-11 h-11 rounded-xl bg-accent/10 group-hover:bg-accent/20 flex items-center justify-center mb-4 sm:mb-6 transition-colors">
-                  <Icon name={item.icon} size={20} className="text-accent" />
+                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${item.iconBg} flex items-center justify-center mb-4 sm:mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                  <Icon name={item.icon} size={22} className="text-white" />
                 </div>
                 <h3 className="font-display font-bold text-lg sm:text-xl mb-2 sm:mb-3">{item.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
