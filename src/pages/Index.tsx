@@ -254,7 +254,7 @@ const Index = () => {
 
               <div className="relative h-64 lg:h-auto">
                 <img
-                  src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/3e17f3de-6d26-4fad-89a9-f87178d73779.jpg"
+                  src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/d3b30af3-b180-4166-9a30-d60cd6cec34d.jpg"
                   alt="FAW КМУ DongYang"
                   className="w-full h-full object-cover"
                 />
