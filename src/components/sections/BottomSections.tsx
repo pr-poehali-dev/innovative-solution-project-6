@@ -174,10 +174,10 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
           {/* Большая кнопка звонка */}
           <a
             href="tel:+79601883084"
-            className="group inline-flex items-center gap-4 px-10 sm:px-14 py-5 sm:py-6 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-2xl hover:shadow-2xl hover:shadow-red-500/50 transition-all font-black text-2xl sm:text-3xl mx-auto animate-pulse hover:animate-none"
+            className="group inline-flex items-center gap-4 px-10 sm:px-14 py-5 sm:py-6 bg-gradient-to-r from-accent to-accent/90 text-black rounded-2xl hover:shadow-2xl hover:shadow-accent/50 transition-all font-black text-2xl sm:text-3xl mx-auto animate-pulse hover:animate-none"
           >
             <span className="text-3xl sm:text-4xl">📞</span>
-            +7 960 188-30-84
+            <span className="text-red-600">+7 960 188-30-84</span>
           </a>
 
           <p className="text-muted-foreground text-sm mt-5">Работаем без выходных · Подача от 1 часа</p>
