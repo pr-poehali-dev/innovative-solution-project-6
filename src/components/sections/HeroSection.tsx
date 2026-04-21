@@ -118,7 +118,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
             <p className="text-base sm:text-xl text-white/80 leading-relaxed mb-7 sm:mb-10 max-w-xl font-light">
               Оставьте заявку или позвоните — мы подберём правильный манипулятор с платформой необходимых габаритов и нужной грузоподъёмностью под вашу задачу.
             </p>
-            <div className="flex gap-3 sm:gap-4 mb-8 sm:mb-12 flex-col sm:flex-row">
+            <div className="flex gap-3 sm:gap-4 mb-8 sm:mb-12 flex-row flex-wrap">
               <button className="group px-6 sm:px-8 py-3.5 sm:py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full hover:shadow-2xl hover:shadow-accent/50 transition-all font-semibold text-base sm:text-lg flex items-center gap-3 justify-center">
                 Оставить заявку
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition" />
