@@ -33,6 +33,21 @@ const trucks = [
     ],
   },
   {
+    badge: "КМУ 3т",
+    title: "ISUZU 5т + КМУ",
+    price: "2 200 ₽/час с НДС",
+    image: "",
+    alt: "ISUZU 5т КМУ",
+    specs: [
+      { label: "Грузоподъёмность платформы", value: "до 5 т" },
+      { label: "Грузоподъёмность стрелы", value: "до 3 т" },
+      { label: "Ширина кузова", value: "до 2,30 м" },
+      { label: "Длина кузова", value: "до 5,5 м" },
+      { label: "Вылет стрелы", value: "до 8,5 м" },
+      { label: "Тип кузова", value: "Бортовой" },
+    ],
+  },
+  {
     badge: "КМУ Kanglim",
     title: "КАМАЗ 43118 + КМУ Kanglim",
     price: "3 500 ₽/час с НДС",
