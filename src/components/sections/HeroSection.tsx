@@ -106,9 +106,15 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
       {/* Header */}
       <header className="fixed top-9 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5 flex justify-between items-center">
-          <div className="flex items-center gap-2 font-display font-bold text-xl sm:text-2xl tracking-tighter bg-gradient-to-r from-white via-accent to-accent/80 bg-clip-text text-transparent">
+          <div className="flex items-center gap-3">
             <img src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/70f37e87-7308-44c5-ba56-e221771fff69.jpg" alt="Фаворит" className="w-20 h-20 flex-shrink-0 rounded-xl" />
-            ООО Фаворит
+            <div className="flex flex-col leading-tight">
+              <span className="text-xs font-medium tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>
+              <span className="font-display font-black text-2xl sm:text-3xl tracking-wide drop-shadow-lg" style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 40%, #fdeea0 60%, #c8850a 80%, #f0c040 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                ООО Фаворит
+              </span>
+              <span className="text-xs tracking-widest uppercase" style={{ color: "#a07010", letterSpacing: "0.2em" }}>Аренда манипуляторов</span>
+            </div>
           </div>
           <nav className="hidden md:flex gap-10 text-sm font-medium">
             {navLinks.map(link => (
