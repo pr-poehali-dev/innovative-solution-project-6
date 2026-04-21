@@ -182,25 +182,65 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
                 Как нас найти
               </span>
             </h2>
-            <p className="text-muted-foreground mt-3 sm:mt-4 text-base sm:text-lg">Нижний Новгород, Шуваловский проезд, 7</p>
-            <div className="mt-5 sm:mt-6 inline-flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center">
-              <div className="px-5 sm:px-6 py-2.5 sm:py-3 bg-accent/10 border border-accent/20 rounded-full text-white font-semibold text-base sm:text-lg">
-                Аренда манипуляторов
-              </div>
-              <a href="tel:+79601883084" className="px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full font-bold text-base sm:text-lg hover:shadow-lg hover:shadow-accent/40 transition-all">
-                +7 960 188-30-84
-              </a>
-            </div>
           </div>
-          <div className="rounded-2xl overflow-hidden border border-accent/10 h-[280px] sm:h-[450px]">
-            <iframe
-              src="https://yandex.ru/map-widget/v1/?ll=43.848988,56.270596&z=17&l=map&pt=43.848988,56.270596,pm2rdl&text=Аренда+манипуляторов+от+компании+ФАВОРИТ"
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              allowFullScreen
-              title="Карта — ООО Фаворит"
-            />
+
+          <div className="relative border border-accent/20 rounded-2xl sm:rounded-3xl bg-card/50 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent" />
+            <div className="relative grid lg:grid-cols-2 gap-0">
+
+              {/* Левая часть — информация */}
+              <div className="p-8 sm:p-12 flex flex-col justify-between">
+                <div>
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/15 border border-accent/30 rounded-full mb-6">
+                    <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                    <span className="text-accent text-sm font-semibold">Работаем без выходных</span>
+                  </div>
+                  <h3 className="font-display font-black text-2xl sm:text-3xl mb-2 text-white">
+                    Аренда манипуляторов<br />от компании ФАВОРИТ
+                  </h3>
+                  <p className="text-muted-foreground mt-4 text-base">
+                    📍 Нижний Новгород,<br />Шуваловский проезд, 7
+                  </p>
+                  <p className="text-muted-foreground mt-2 text-sm">Выезжаем по всему городу и области</p>
+                </div>
+
+                <div className="mt-8 flex flex-col gap-3">
+                  <a
+                    href="tel:+79601883084"
+                    className="inline-flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-xl font-bold text-lg hover:shadow-xl hover:shadow-accent/40 transition-all"
+                  >
+                    📞 +7 960 188-30-84
+                  </a>
+                  <a
+                    href="https://yandex.ru/maps/?pt=43.848988,56.270596&z=17&text=Аренда+манипуляторов+от+компании+ФАВОРИТ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-accent/30 rounded-xl text-white font-medium hover:bg-accent/10 transition-all text-sm"
+                  >
+                    🗺️ Открыть в Яндекс.Картах
+                  </a>
+                </div>
+              </div>
+
+              {/* Правая часть — визуальная карта */}
+              <div className="relative h-64 lg:h-auto bg-background/40 flex items-center justify-center min-h-[280px]">
+                <div className="absolute inset-0 bg-grid opacity-30" />
+                {/* Стилизованная метка */}
+                <div className="relative flex flex-col items-center">
+                  <div className="w-20 h-20 rounded-full bg-accent/20 border-2 border-accent/40 flex items-center justify-center mb-3 animate-pulse">
+                    <div className="w-12 h-12 rounded-full bg-accent/40 border-2 border-accent flex items-center justify-center">
+                      <span className="text-2xl">📍</span>
+                    </div>
+                  </div>
+                  <div className="bg-card border border-accent/30 rounded-xl px-4 py-3 text-center shadow-xl">
+                    <p className="text-white font-bold text-sm">Аренда манипуляторов</p>
+                    <p className="text-accent font-black text-base">ФАВОРИТ</p>
+                    <p className="text-muted-foreground text-xs mt-1">Шуваловский проезд, 7</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </section>
