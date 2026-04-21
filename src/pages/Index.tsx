@@ -355,6 +355,31 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Map Section */}
+      <section className="py-24 px-6 bg-accent/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Наш адрес</span>
+            <h2 className="text-4xl lg:text-5xl font-display font-black tracking-tighter mt-4">
+              <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
+                Как нас найти
+              </span>
+            </h2>
+            <p className="text-muted-foreground mt-4 text-lg">Нижний Новгород, Шуваловский проезд, 7</p>
+          </div>
+          <div className="rounded-2xl overflow-hidden border border-accent/10 h-[450px]">
+            <iframe
+              src="https://yandex.ru/map-widget/v1/?text=Нижний+Новгород+Шуваловский+проезд+7&z=16&l=map"
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              allowFullScreen
+              title="Карта — ООО Фаворит"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-accent/10 py-12 px-6 bg-background/50">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-muted-foreground">
