@@ -87,14 +87,14 @@ const GallerySection = () => {
           {photos.map((photo, i) => (
             <div
               key={i}
-              className={`relative overflow-hidden rounded-xl sm:rounded-2xl cursor-pointer group border border-accent/10 hover:border-accent/40 transition-all duration-300 ${i === 0 ? "col-span-2 lg:col-span-2 row-span-1" : ""}`}
-              style={{ aspectRatio: i === 0 ? "4/3" : "4/3" }}
+              className={`relative overflow-hidden rounded-xl sm:rounded-2xl cursor-pointer group border border-accent/10 hover:border-accent/40 transition-all duration-300 ${i === 0 ? "col-span-2 lg:col-span-2" : ""}`}
+              style={{ aspectRatio: "4/3" }}
               onClick={() => setActive(i)}
             >
               <img
                 src={photo.url}
                 alt={photo.caption}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent sm:from-black/0 sm:via-transparent group-hover:from-black/70 group-hover:via-black/20 transition-all duration-300 flex items-end p-3 sm:p-5">
                 <p className="text-white text-xs sm:text-sm font-semibold sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300 sm:translate-y-2 group-hover:translate-y-0 line-clamp-2 drop-shadow-md">
