@@ -108,18 +108,18 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
           </div>
           <nav className="hidden md:flex gap-10 text-sm font-medium">
             {navLinks.map(link => (
-              <a key={link.href} href={link.href} className="text-muted-foreground hover:text-white transition-colors">{link.label}</a>
+              <a key={link.href} href={link.href} className="font-semibold transition-colors hover:opacity-80" style={{ color: "#e8a820" }}>{link.label}</a>
             ))}
           </nav>
           <div className="flex gap-2 sm:gap-3 items-center">
-            <a href="tel:+79601883084" className="hidden sm:flex px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-medium border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all items-center gap-2">
+            <a href="tel:+79601883084" className="hidden sm:flex px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-bold rounded-full transition-all items-center gap-2 border" style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)" }}>
               <Icon name="Phone" size={14} />
               +7 960 188-30-84
             </a>
-            <a href="tel:+79601883084" className="flex sm:hidden w-10 h-10 border border-accent/40 rounded-full hover:bg-accent/10 transition-all items-center justify-center">
-              <Icon name="Phone" size={16} className="text-accent" />
+            <a href="tel:+79601883084" className="flex sm:hidden w-10 h-10 border rounded-full transition-all items-center justify-center" style={{ borderColor: "#e8a820" }}>
+              <Icon name="Phone" size={16} style={{ color: "#e8a820" }} />
             </a>
-            <button className="hidden sm:block px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-medium bg-gradient-to-r from-accent via-accent to-accent/80 text-black rounded-full hover:shadow-lg hover:shadow-accent/40 transition-all font-semibold">
+            <button className="hidden sm:block px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-bold rounded-full transition-all hover:opacity-90" style={{ background: "linear-gradient(135deg, #f5d060, #e8a820, #c8850a)", color: "#1a1a1a" }}>
               Заказать
             </button>
             {/* Бургер — только мобайл */}
