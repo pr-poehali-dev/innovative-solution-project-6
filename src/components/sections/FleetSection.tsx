@@ -93,6 +93,16 @@ const FleetSection = () => {
           <div key={idx} className={`relative border border-accent/20 rounded-2xl sm:rounded-3xl bg-card/50 overflow-hidden ${idx < trucks.length - 1 ? "mb-6 sm:mb-8" : "mb-8 sm:mb-12"}`}>
             <div className="absolute inset-0 bg-gradient-to-r from-accent/10 via-transparent to-transparent" />
             <div className={`relative grid gap-0 ${truck.image ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
+              {truck.image && (
+                <div className="relative h-52 sm:h-72 lg:h-auto flex items-center justify-center lg:hidden">
+                  <img
+                    src={truck.image}
+                    alt={truck.alt}
+                    className="w-full h-full object-contain p-3 sm:p-4"
+                  />
+                </div>
+              )}
+
               <div className="p-5 sm:p-10 lg:p-14">
                 <div className="inline-block px-3 py-1 bg-accent/20 rounded-full text-accent text-xs font-semibold tracking-widest uppercase mb-4 sm:mb-6">
                   {truck.badge}
@@ -116,7 +126,7 @@ const FleetSection = () => {
               </div>
 
               {truck.image && (
-                <div className="relative h-52 sm:h-72 lg:h-auto flex items-center justify-center">
+                <div className="relative h-52 sm:h-72 lg:h-auto items-center justify-center hidden lg:flex">
                   <img
                     src={truck.image}
                     alt={truck.alt}
