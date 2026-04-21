@@ -94,21 +94,29 @@ const FleetSection = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-accent/10 via-transparent to-transparent" />
             <div className={`relative grid gap-0 ${truck.image ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
               {truck.image && (
-                <div className="relative h-72 sm:h-96 lg:h-auto flex items-center justify-center lg:hidden">
+                <div className="relative h-[60vw] min-h-56 max-h-80 lg:hidden overflow-hidden">
                   <img
                     src={truck.image}
                     alt={truck.alt}
-                    className="w-full h-full object-contain p-3 sm:p-4"
+                    className="w-full h-full object-cover"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <div className="inline-block px-2.5 py-0.5 bg-accent/30 backdrop-blur-sm rounded-full text-accent text-xs font-semibold tracking-widest uppercase mb-2">
+                      {truck.badge}
+                    </div>
+                    <h3 className="font-display font-black text-xl text-white leading-tight">{truck.title}</h3>
+                    <p className="text-accent font-bold text-base mt-0.5">{truck.price}</p>
+                  </div>
                 </div>
               )}
 
               <div className="p-5 sm:p-10 lg:p-14">
-                <div className="inline-block px-3 py-1 bg-accent/20 rounded-full text-accent text-xs font-semibold tracking-widest uppercase mb-4 sm:mb-6">
+                <div className="hidden lg:inline-block px-3 py-1 bg-accent/20 rounded-full text-accent text-xs font-semibold tracking-widest uppercase mb-4 sm:mb-6">
                   {truck.badge}
                 </div>
-                <h3 className="font-display font-black text-xl sm:text-3xl lg:text-4xl mb-2">{truck.title}</h3>
-                <p className="text-accent font-bold text-lg sm:text-xl mb-5 sm:mb-8">{truck.price}</p>
+                <h3 className="hidden lg:block font-display font-black text-xl sm:text-3xl lg:text-4xl mb-2">{truck.title}</h3>
+                <p className="hidden lg:block text-accent font-bold text-lg sm:text-xl mb-5 sm:mb-8">{truck.price}</p>
 
                 <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-5 sm:mb-8">
                   {truck.specs.map((spec, i) => (
