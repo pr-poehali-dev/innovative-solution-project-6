@@ -5,6 +5,7 @@ import FleetSection from "@/components/sections/FleetSection";
 import BottomSections from "@/components/sections/BottomSections";
 import ReviewsSection from "@/components/sections/ReviewsSection";
 import GallerySection from "@/components/sections/GallerySection";
+import CalculatorSection from "@/components/sections/CalculatorSection";
 
 const Index = () => {
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
@@ -41,6 +42,7 @@ const Index = () => {
       <HeroSection visibleSections={visibleSections} />
       <FeaturesSection visibleSections={visibleSections} />
       <FleetSection />
+      <CalculatorSection />
       <GallerySection />
       <ReviewsSection />
       <BottomSections visibleSections={visibleSections} />
