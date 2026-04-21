@@ -123,7 +123,7 @@ const Index = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-accent/30 via-transparent to-transparent rounded-3xl blur-3xl animate-pulse" />
               <img
-                src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/7370ef3f-8897-469f-a568-1d2f42957882.jpg"
+                src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/3e17f3de-6d26-4fad-89a9-f87178d73779.jpg"
                 alt="Манипулятор в работе"
                 className="w-full h-full object-cover rounded-3xl drop-shadow-2xl relative z-10"
               />
