@@ -155,13 +155,20 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
               Нужен манипулятор?
             </span>
           </h2>
-          <p className="text-base sm:text-xl text-muted-foreground mb-8 sm:mb-12 font-light max-w-2xl mx-auto">
-            Оставьте заявку прямо сейчас — перезвоним в течение 15 минут и согласуем все детали.
+          <p className="text-base sm:text-xl text-muted-foreground mb-8 sm:mb-10 font-light max-w-2xl mx-auto">
+            Позвоните прямо сейчас — ответим сразу, подберём технику и согласуем время подачи.
           </p>
-          <button className="group px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full hover:shadow-2xl hover:shadow-accent/40 transition-all font-bold text-base sm:text-lg flex items-center gap-3 mx-auto">
-            Оставить заявку
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition" />
-          </button>
+
+          {/* Большая кнопка звонка */}
+          <a
+            href="tel:+79601883084"
+            className="group inline-flex items-center gap-4 px-10 sm:px-14 py-5 sm:py-6 bg-gradient-to-r from-accent to-accent/90 text-black rounded-2xl hover:shadow-2xl hover:shadow-accent/50 transition-all font-black text-2xl sm:text-3xl mx-auto animate-pulse hover:animate-none"
+          >
+            <span className="text-3xl sm:text-4xl">📞</span>
+            +7 960 188-30-84
+          </a>
+
+          <p className="text-muted-foreground text-sm mt-5">Работаем без выходных · Подача от 1 часа</p>
         </div>
       </section>
 
