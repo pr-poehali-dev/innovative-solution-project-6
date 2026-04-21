@@ -1,10 +1,30 @@
 import json
 import os
 import psycopg2
+import smtplib
+from email.mime.text import MIMEText
+
+
+def send_email(name: str, phone: str, comment: str, lead_id: int):
+    msg = MIMEText(
+        f"Новая заявка #{lead_id}\n\n"
+        f"Имя: {name}\n"
+        f"Телефон: {phone}\n"
+        f"Комментарий: {comment or '—'}",
+        "plain",
+        "utf-8"
+    )
+    msg["Subject"] = f"Новая заявка с сайта — {name}"
+    msg["From"] = "960188@list.ru"
+    msg["To"] = "960188@list.ru"
+
+    with smtplib.SMTP_SSL("smtp.mail.ru", 465) as smtp:
+        smtp.login("960188@list.ru", os.environ["MAIL_PASSWORD"])
+        smtp.send_message(msg)
 
 
 def handler(event: dict, context) -> dict:
-    """Сохраняет заявку от клиента (имя, телефон, комментарий) в базу данных."""
+    """Сохраняет заявку от клиента в базу данных и отправляет уведомление на почту."""
 
     if event.get('httpMethod') == 'OPTIONS':
         return {
@@ -40,6 +60,8 @@ def handler(event: dict, context) -> dict:
     conn.commit()
     cur.close()
     conn.close()
+
+    send_email(name, phone, comment, lead_id)
 
     return {
         'statusCode': 200,
