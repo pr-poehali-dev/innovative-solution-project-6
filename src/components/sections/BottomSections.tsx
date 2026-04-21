@@ -213,36 +213,6 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
               className="absolute inset-0 w-full h-full"
             />
 
-            {/* Анимированные грузовики */}
-            <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
-              <style>{`
-                @keyframes truck1 {
-                  0%   { transform: translateX(-80px); opacity: 0; }
-                  5%   { opacity: 1; }
-                  95%  { opacity: 1; }
-                  100% { transform: translateX(calc(100vw + 80px)); opacity: 0; }
-                }
-                @keyframes truck2 {
-                  0%   { transform: translateX(calc(100vw + 80px)) scaleX(-1); opacity: 0; }
-                  5%   { opacity: 1; }
-                  95%  { opacity: 1; }
-                  100% { transform: translateX(-80px) scaleX(-1); opacity: 0; }
-                }
-                @keyframes truck3 {
-                  0%   { transform: translateX(-80px); opacity: 0; }
-                  5%   { opacity: 1; }
-                  95%  { opacity: 1; }
-                  100% { transform: translateX(calc(100vw + 80px)); opacity: 0; }
-                }
-                .truck-1 { animation: truck1 18s linear infinite; animation-delay: 0s; }
-                .truck-2 { animation: truck2 22s linear infinite; animation-delay: 6s; }
-                .truck-3 { animation: truck1 26s linear infinite; animation-delay: 12s; }
-              `}</style>
-              <div className="truck-1 absolute drop-shadow-lg" style={{ top: "28%", fontSize: "48px" }}>🏗️</div>
-              <div className="truck-2 absolute drop-shadow-lg" style={{ top: "52%", fontSize: "42px" }}>🏗️</div>
-              <div className="truck-3 absolute drop-shadow-lg" style={{ top: "70%", fontSize: "38px" }}>🏗️</div>
-            </div>
-
             {/* Левый блок поверх карты */}
             <div className="absolute top-4 left-4 bottom-4 z-10 w-72 bg-card/90 backdrop-blur-md border border-accent/30 rounded-2xl p-6 flex flex-col justify-between shadow-2xl">
               <div>
