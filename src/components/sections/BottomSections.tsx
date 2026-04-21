@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import Icon from "@/components/ui/icon";
 
 interface BottomSectionsProps {
   visibleSections: Record<string, boolean>;
@@ -8,16 +9,22 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
   const steps = [
     {
       step: "01",
+      icon: "PhoneCall",
+      iconBg: "from-blue-400 to-blue-600",
       title: "Оставьте заявку",
       desc: "Позвоните или заполните форму на сайте. Уточните объём работ, адрес и время подачи техники.",
     },
     {
       step: "02",
+      icon: "ClipboardCheck",
+      iconBg: "from-amber-400 to-orange-500",
       title: "Согласуем условия",
       desc: "Подберём подходящий манипулятор, рассчитаем стоимость и заключим договор. Всё быстро и прозрачно.",
     },
     {
       step: "03",
+      icon: "Truck",
+      iconBg: "from-green-400 to-emerald-600",
       title: "Техника на объекте",
       desc: "Оператор приедет в назначенное время. Выполним работы качественно и в срок, подпишем акт.",
     },
@@ -73,7 +80,12 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
                   className={`relative transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                   style={{ transitionDelay: `${i * 200}ms` }}
                 >
-                  <div className="text-5xl sm:text-8xl font-black text-accent/10 mb-3 sm:mb-4 leading-none">{item.step}</div>
+                  <div className="flex items-center gap-4 mb-4 sm:mb-6">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.iconBg} flex items-center justify-center shadow-lg flex-shrink-0`}>
+                      <Icon name={item.icon} size={26} className="text-white" />
+                    </div>
+                    <div className="text-5xl sm:text-6xl font-black text-accent/10 leading-none">{item.step}</div>
+                  </div>
                   <h3 className="font-display font-bold text-lg sm:text-2xl mb-3 sm:mb-4">{item.title}</h3>
                   <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{item.desc}</p>
                 </div>
