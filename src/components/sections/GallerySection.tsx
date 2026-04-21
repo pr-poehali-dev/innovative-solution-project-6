@@ -22,6 +22,22 @@ const photos = [
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/0c5ebbe2-cc38-4284-81fb-4721e3e53eaa.jpg",
     caption: "Перевозка и разгрузка кабельных барабанов",
   },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/62534a4c-b7cb-4179-a953-6bf52321d543.jpg",
+    caption: "Монтаж кровли — подъём сэндвич-панелей",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/bb2703e5-098c-4386-968f-1c4f5bd48fac.jpg",
+    caption: "Установка металлического гаража на участке",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/1d067d16-d8b2-42b2-b1ef-4a27f3db79f1.jpg",
+    caption: "Перевозка торгового павильона по городу",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/737482fb-5cef-4606-94a1-7256b0d8b9ab.jpg",
+    caption: "Монтаж фасадных панелей на здании",
+  },
 ];
 
 const GallerySection = () => {
