@@ -59,7 +59,7 @@ const useCases = [
 
 const UseCasesSection = () => {
   return (
-    <section className="py-16 sm:py-32 px-4 sm:px-6 bg-accent/5">
+    <section id="usecases" className="py-16 sm:py-32 px-4 sm:px-6 bg-accent/5">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10 sm:mb-20">
           <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Области применения</span>

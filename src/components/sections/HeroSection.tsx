@@ -77,6 +77,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
           <nav className="hidden md:flex gap-10 text-sm font-medium">
             <a href="#features" className="text-muted-foreground hover:text-white transition-colors">Преимущества</a>
             <a href="#fleet" className="text-muted-foreground hover:text-white transition-colors">Техника</a>
+            <a href="#usecases" className="text-muted-foreground hover:text-white transition-colors">Услуги</a>
             <a href="#how" className="text-muted-foreground hover:text-white transition-colors">Как это работает</a>
             <a href="#pricing" className="text-muted-foreground hover:text-white transition-colors">Тарифы</a>
           </nav>
