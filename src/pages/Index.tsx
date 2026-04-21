@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Zap, Lock, TrendingUp, Cpu, Settings, Cloud, ArrowRight } from "lucide-react";
+import { ArrowRight, Truck, Clock, Shield, Wrench, MapPin, Phone } from "lucide-react";
+import Icon from "@/components/ui/icon";
 
 const Index = () => {
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
@@ -38,12 +39,12 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
           <div className="flex items-center">
             <div className="font-display font-bold text-2xl tracking-tighter bg-gradient-to-r from-white via-accent to-accent/80 bg-clip-text text-transparent">
-              AgentForge
+              КранСервис
             </div>
           </div>
           <nav className="hidden md:flex gap-10 text-sm font-medium">
             <a href="#features" className="text-muted-foreground hover:text-white transition-colors">
-              Возможности
+              Преимущества
             </a>
             <a href="#how" className="text-muted-foreground hover:text-white transition-colors">
               Как это работает
@@ -53,11 +54,12 @@ const Index = () => {
             </a>
           </nav>
           <div className="flex gap-3">
-            <button className="px-5 py-2.5 text-sm font-medium border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all">
-              Войти
-            </button>
+            <a href="tel:+78001234567" className="px-5 py-2.5 text-sm font-medium border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all flex items-center gap-2">
+              <Icon name="Phone" size={14} />
+              8-800-123-45-67
+            </a>
             <button className="px-5 py-2.5 text-sm font-medium bg-gradient-to-r from-accent via-accent to-accent/80 text-black rounded-full hover:shadow-lg hover:shadow-accent/40 transition-all font-semibold">
-              Попробовать
+              Заказать
             </button>
           </div>
         </div>
@@ -66,11 +68,10 @@ const Index = () => {
       {/* Hero Section */}
       <section id="hero" className="relative pt-32 pb-32 px-6 min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden">
-          <img src="/images/black-hole-gif.gif" alt="Black hole animation" className="w-auto h-3/4 object-contain" />
+          <img src="/images/black-hole-gif.gif" alt="Background animation" className="w-auto h-3/4 object-contain opacity-60" />
         </div>
-        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-black/75" />
 
-        {/* Content overlay */}
         <div className="relative z-10 max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div
@@ -78,41 +79,41 @@ const Index = () => {
             >
               <div className="mb-8 inline-block">
                 <span className="text-xs font-medium tracking-widest text-accent/80 uppercase">
-                  AI-инфраструктура нового поколения
+                  Аренда спецтехники — быстро и надёжно
                 </span>
               </div>
               <h1 className="text-6xl lg:text-7xl font-display font-black leading-tight mb-8 tracking-tighter">
                 <span className="bg-gradient-to-br from-white via-white to-accent/40 bg-clip-text text-transparent">
-                  Создавай. Запускай.
+                  Манипуляторы
                 </span>
                 <br />
-                <span className="text-accent">Автоматизируй.</span>
+                <span className="text-accent">в аренду.</span>
               </h1>
               <p className="text-xl text-white/80 leading-relaxed mb-10 max-w-xl font-light">
-                AgentForge позволяет создавать, разворачивать и масштабировать умных AI-агентов.
-                От идеи до продакшена за минуты, а не месяцы.
+                Грузоподъёмность от 3 до 25 тонн. Работаем на строительных площадках,
+                складах и производствах по всему городу. Подача техники от 2 часов.
               </p>
               <div className="flex gap-4 mb-12 flex-col sm:flex-row">
                 <button className="group px-8 py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full hover:shadow-2xl hover:shadow-accent/50 transition-all font-semibold text-lg flex items-center gap-3 justify-center">
-                  Запустить сейчас
+                  Оставить заявку
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition" />
                 </button>
                 <button className="px-8 py-4 border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all font-medium text-lg text-white">
-                  Смотреть демо
+                  Посмотреть технику
                 </button>
               </div>
               <div className="grid grid-cols-3 gap-8 pt-8 border-t border-white/10">
                 <div>
-                  <div className="text-2xl font-bold text-accent mb-2">10 000+</div>
-                  <p className="text-sm text-white/60">Активных агентов</p>
+                  <div className="text-2xl font-bold text-accent mb-2">15+</div>
+                  <p className="text-sm text-white/60">Единиц техники</p>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-white mb-2">500 000+</div>
-                  <p className="text-sm text-white/60">Выполненных задач</p>
+                  <div className="text-2xl font-bold text-white mb-2">5 000+</div>
+                  <p className="text-sm text-white/60">Выполненных заказов</p>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-accent mb-2">99.99%</div>
-                  <p className="text-sm text-white/60">Аптайм</p>
+                  <div className="text-2xl font-bold text-accent mb-2">10 лет</div>
+                  <p className="text-sm text-white/60">На рынке</p>
                 </div>
               </div>
             </div>
@@ -122,9 +123,9 @@ const Index = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-accent/30 via-transparent to-transparent rounded-3xl blur-3xl animate-pulse" />
               <img
-                src="/omnius-logo.png"
-                alt="Omnius Agent"
-                className="w-full max-w-sm lg:max-w-md drop-shadow-2xl animate-float relative z-10"
+                src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/7370ef3f-8897-469f-a568-1d2f42957882.jpg"
+                alt="Манипулятор в работе"
+                className="w-full h-full object-cover rounded-3xl drop-shadow-2xl relative z-10"
               />
             </div>
           </div>
@@ -137,10 +138,10 @@ const Index = () => {
           <div
             className={`text-center mb-20 transition-all duration-1000 ${visibleSections["features"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
           >
-            <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Возможности</span>
+            <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Преимущества</span>
             <h2 className="text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4 mb-6">
               <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
-                Суперсилы встроены
+                Почему выбирают нас
               </span>
             </h2>
           </div>
@@ -148,49 +149,50 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                icon: Zap,
-                title: "Молниеносный деплой",
-                desc: "Развертывание в продакшен одним кликом без настройки",
+                icon: "Clock",
+                title: "Подача от 2 часов",
+                desc: "Оперативно реагируем на заявки и доставляем технику в кратчайшие сроки",
               },
               {
-                icon: Cpu,
-                title: "Умный AI-движок",
-                desc: "Продвинутые возможности рассуждения, которые учатся и адаптируются",
+                icon: "Truck",
+                title: "Широкий парк техники",
+                desc: "Манипуляторы грузоподъёмностью от 3 до 25 тонн под любую задачу",
               },
               {
-                icon: TrendingUp,
-                title: "Автомасштабирование",
-                desc: "Автоматическое масштабирование ресурсов на основе нагрузки",
+                icon: "Shield",
+                title: "Полная страховка",
+                desc: "Вся техника застрахована. Работаем с договором и закрывающими документами",
               },
               {
-                icon: Lock,
-                title: "Корпоративная безопасность",
-                desc: "Банковское шифрование и соответствие SOC2, GDPR, HIPAA",
+                icon: "MapPin",
+                title: "Работаем по всему городу",
+                desc: "Обслуживаем объекты в радиусе 100 км — стройки, склады, производства",
               },
               {
-                icon: Settings,
-                title: "Гибкие сценарии",
-                desc: "Создавайте сложные цепочки автоматизации в визуальном редакторе",
+                icon: "Wrench",
+                title: "Опытные операторы",
+                desc: "Профессиональные операторы с допуском, стажем от 5 лет и всеми разрешениями",
               },
               {
-                icon: Cloud,
-                title: "Мультиоблачность",
-                desc: "Разворачивайте где угодно - AWS, Azure, GCP или своя инфраструктура",
+                icon: "Phone",
+                title: "Поддержка 24/7",
+                desc: "Диспетчер всегда на связи. Принимаем заявки в любое время суток",
               },
             ].map((item, i) => {
-              const Icon = item.icon;
               const isVisible = visibleSections["features"];
               return (
                 <div
                   key={i}
-                  className={`group p-8 border border-accent/10 hover:border-accent/40 rounded-2xl bg-card/50 hover:bg-card/80 transition-all duration-500 cursor-pointer backdrop-blur-sm ${
+                  className={`group p-8 border border-accent/10 hover:border-accent/40 rounded-2xl bg-card/50 hover:bg-card/80 transition-all duration-700 ${
                     isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                   }`}
                   style={{ transitionDelay: `${i * 100}ms` }}
                 >
-                  <Icon className="w-10 h-10 mb-6 text-accent group-hover:scale-110 transition-transform" />
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 group-hover:bg-accent/20 flex items-center justify-center mb-6 transition-colors">
+                    <Icon name={item.icon} size={22} className="text-accent" />
+                  </div>
                   <h3 className="font-display font-bold text-xl mb-3">{item.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
                 </div>
               );
             })}
@@ -198,7 +200,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* How it works */}
       <section id="how" className="py-32 px-6">
         <div className="max-w-7xl mx-auto">
           <div
@@ -207,39 +209,39 @@ const Index = () => {
             <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Процесс</span>
             <h2 className="text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4">
               <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
-                От нуля до героя
+                Как это работает
               </span>
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
-              { num: "01", title: "Проектируй", desc: "Определите возможности агента в интуитивном конструкторе" },
-              { num: "02", title: "Обучай", desc: "Загрузите данные и примеры для настройки поведения" },
-              { num: "03", title: "Запускай", desc: "Запуск в продакшен одним кликом" },
-              { num: "04", title: "Масштабируй", desc: "Автомасштабирование обрабатывает миллионы запросов" },
-            ].map((step, i) => {
+              {
+                step: "01",
+                title: "Оставьте заявку",
+                desc: "Позвоните или заполните форму на сайте. Уточните объём работ, адрес и время подачи техники.",
+              },
+              {
+                step: "02",
+                title: "Согласуем условия",
+                desc: "Подберём подходящий манипулятор, рассчитаем стоимость и заключим договор. Всё быстро и прозрачно.",
+              },
+              {
+                step: "03",
+                title: "Техника на объекте",
+                desc: "Оператор приедет в назначенное время. Выполним работы качественно и в срок, подпишем акт.",
+              },
+            ].map((item, i) => {
               const isVisible = visibleSections["how"];
               return (
                 <div
                   key={i}
-                  className={`relative transition-all duration-700 ${
-                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                  }`}
-                  style={{ transitionDelay: `${i * 150}ms` }}
+                  className={`relative transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                  style={{ transitionDelay: `${i * 200}ms` }}
                 >
-                  <div className="group bg-accent/10 hover:bg-accent/20 border border-accent/20 hover:border-accent/40 rounded-2xl p-8 h-full flex flex-col justify-between transition-all backdrop-blur-sm cursor-pointer">
-                    <div>
-                      <div className="text-5xl font-display font-black text-accent mb-4 group-hover:scale-110 transition-transform">
-                        {step.num}
-                      </div>
-                      <h3 className="font-display font-bold text-xl mb-2">{step.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{step.desc}</p>
-                    </div>
-                  </div>
-                  {i < 3 && (
-                    <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-accent/40 to-transparent" />
-                  )}
+                  <div className="text-8xl font-black text-accent/10 mb-4 leading-none">{item.step}</div>
+                  <h3 className="font-display font-bold text-2xl mb-4">{item.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
                 </div>
               );
             })}
@@ -256,7 +258,7 @@ const Index = () => {
             <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Тарифы</span>
             <h2 className="text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4">
               <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
-                Простые цены
+                Прозрачные цены
               </span>
             </h2>
           </div>
@@ -264,15 +266,25 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
-                name: "Стартовый",
-                price: "4 900 \u20bd/\u043c\u0435\u0441",
-                features: ["До 10 агентов", "100 000 запросов/месяц", "Поддержка сообщества", "Базовая аналитика"],
+                name: "Почасовая аренда",
+                price: "от 2 500 ₽/час",
+                features: [
+                  "Манипулятор до 10 тонн",
+                  "Оператор в стоимости",
+                  "Минимальный заказ — 4 часа",
+                  "Подача в течение дня",
+                ],
                 highlight: false,
               },
               {
                 name: "Корпоративный",
-                price: "По запросу",
-                features: ["Безлимитные агенты", "Безлимитные запросы", "Поддержка 24/7", "Индивидуальные интеграции"],
+                price: "По договору",
+                features: [
+                  "Техника от 3 до 25 тонн",
+                  "Приоритетная подача",
+                  "Персональный менеджер",
+                  "Закрывающие документы",
+                ],
                 highlight: true,
               },
             ].map((plan, i) => {
@@ -312,7 +324,7 @@ const Index = () => {
                           : "border border-accent/20 hover:border-accent/40 hover:bg-accent/5"
                       }`}
                     >
-                      {plan.highlight ? "Связаться с нами" : "Попробовать бесплатно"}
+                      {plan.highlight ? "Связаться с нами" : "Заказать технику"}
                     </button>
                   </div>
                 </div>
@@ -329,14 +341,14 @@ const Index = () => {
         >
           <h2 className="text-5xl lg:text-6xl font-display font-black tracking-tighter mb-6">
             <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
-              Готовы создавать?
+              Нужен манипулятор?
             </span>
           </h2>
           <p className="text-xl text-muted-foreground mb-12 font-light max-w-2xl mx-auto">
-            Присоединяйтесь к тысячам разработчиков, которые строят будущее с AgentForge.
+            Оставьте заявку прямо сейчас — перезвоним в течение 15 минут и согласуем все детали.
           </p>
           <button className="group px-10 py-5 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full hover:shadow-2xl hover:shadow-accent/40 transition-all font-bold text-lg flex items-center gap-3 mx-auto">
-            Начать бесплатно
+            Оставить заявку
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition" />
           </button>
         </div>
@@ -345,7 +357,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="border-t border-accent/10 py-12 px-6 bg-background/50">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-muted-foreground">
-          <p>© 2025 AgentForge — Создавайте умных агентов</p>
+          <p>© 2026 КранСервис — Аренда манипуляторов</p>
           <div className="flex gap-8">
             <a href="#" className="hover:text-white transition-colors">
               Конфиденциальность
@@ -354,7 +366,7 @@ const Index = () => {
               Условия
             </a>
             <a href="#" className="hover:text-white transition-colors">
-              Документация
+              О компании
             </a>
             <a href="#" className="hover:text-white transition-colors">
               Контакты
