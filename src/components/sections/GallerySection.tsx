@@ -38,6 +38,14 @@ const photos = [
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/737482fb-5cef-4606-94a1-7256b0d8b9ab.jpg",
     caption: "Монтаж фасадных панелей на здании",
   },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/a386df86-71cf-4a6a-b971-87f437eab3db.jpg",
+    caption: "Совместная работа манипулятора и автовышки на стройке",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/56e40bf4-c213-4485-a5fc-cd80c85fb564.jpg",
+    caption: "Погрузка бетонных изделий на склад",
+  },
 ];
 
 const GallerySection = () => {
