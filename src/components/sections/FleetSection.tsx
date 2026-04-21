@@ -65,12 +65,12 @@ const trucks = [
 ];
 
 const orderItems = [
-  { icon: "Package", text: "Вес груза" },
-  { icon: "Maximize", text: "Размеры груза" },
-  { icon: "MapPin", text: "Место загрузки" },
-  { icon: "MapPin", text: "Место разгрузки" },
-  { icon: "MessageSquare", text: "Нюансы погрузки/разгрузки" },
-  { icon: "Phone", text: "Удобное время подачи" },
+  { icon: "Weight", iconBg: "from-blue-400 to-blue-600", text: "Вес груза" },
+  { icon: "Scaling", iconBg: "from-purple-400 to-violet-600", text: "Размеры груза" },
+  { icon: "MapPin", iconBg: "from-green-400 to-emerald-600", text: "Место загрузки" },
+  { icon: "MapPinOff", iconBg: "from-red-400 to-rose-600", text: "Место разгрузки" },
+  { icon: "MessageSquare", iconBg: "from-amber-400 to-orange-500", text: "Нюансы погрузки/разгрузки" },
+  { icon: "CalendarClock", iconBg: "from-cyan-400 to-blue-500", text: "Удобное время подачи" },
 ];
 
 const FleetSection = () => {
@@ -151,9 +151,9 @@ const FleetSection = () => {
           <h3 className="font-display font-bold text-xl sm:text-2xl mb-4 sm:mb-6 text-center">Что сообщить при заказе</h3>
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {orderItems.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 sm:gap-3 bg-background/30 rounded-xl p-3 sm:p-4 border border-accent/10">
-                <div className="w-8 h-8 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Icon name={item.icon} size={15} className="text-accent" />
+              <div key={i} className="flex items-center gap-2 sm:gap-3 bg-background/30 rounded-xl p-3 sm:p-4 border border-accent/10 hover:border-accent/30 transition-colors">
+                <div className={`w-9 h-9 bg-gradient-to-br ${item.iconBg} rounded-xl flex items-center justify-center flex-shrink-0 shadow-md`}>
+                  <Icon name={item.icon} size={16} className="text-white" />
                 </div>
                 <span className="text-xs sm:text-sm font-medium">{item.text}</span>
               </div>
