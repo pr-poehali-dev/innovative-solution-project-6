@@ -32,12 +32,32 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
     });
   };
 
-  const handleDownloadPdf = () => {
+  const handleDownloadPdf = async () => {
     const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
 
+    let startY = 20;
+
+    try {
+      const response = await fetch("https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/70f37e87-7308-44c5-ba56-e221771fff69.jpg");
+      const blob = await response.blob();
+      const reader = new FileReader();
+      await new Promise<void>((resolve) => {
+        reader.onload = () => {
+          doc.addImage(reader.result as string, "JPEG", 85, 10, 40, 40);
+          startY = 58;
+          resolve();
+        };
+        reader.readAsDataURL(blob);
+      });
+    } catch {
+      startY = 20;
+    }
+
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(14);
-    doc.text("REQUISITES / REKVIZITY", 105, 20, { align: "center" });
+    doc.setFontSize(13);
+    doc.setTextColor(20, 20, 20);
+    doc.text("OOO \"FAVORIT\" — Rekvizity organizacii", 105, startY, { align: "center" });
+    startY += 10;
 
     const lines = [
       ["Polnoe nazvanie", "Obshchestvo s ogranichennoy otvetstvennostyu \"FAVORIT\""],
@@ -53,7 +73,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
       ["Direktor", "Mkrtchyan Sargis Varuzhanovich"],
     ];
 
-    let y = 36;
+    let y = startY;
     lines.forEach(([label, value]) => {
       doc.setFont("helvetica", "bold");
       doc.setFontSize(9);
