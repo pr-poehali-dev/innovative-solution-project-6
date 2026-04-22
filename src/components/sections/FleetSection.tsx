@@ -54,6 +54,20 @@ const trucks = [
     ],
   },
   {
+    badge: "КМУ 8т",
+    title: "RENAULT LANDER + КМУ",
+    slug: "renault-lander-kmu",
+    price: "3 200 ₽/час с НДС",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/63c3b5f3-7ef6-4f5f-87f8-f9f995424c80.jpg",
+    alt: "Renault Lander манипулятор КМУ",
+    specs: [
+      { label: "Грузоподъёмность автомобиля", value: "до 15 т" },
+      { label: "Грузоподъёмность стрелы", value: "до 8 т" },
+      { label: "Максимальная рабочая высота", value: "до 20 м" },
+      { label: "Тип кузова", value: "Бортовой" },
+    ],
+  },
+  {
     badge: "КМУ 3т",
     title: "ISUZU 5т + КМУ",
     slug: "isuzu-5t-kmu",
