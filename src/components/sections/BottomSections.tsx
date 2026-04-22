@@ -375,10 +375,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
                 <span className="text-muted-foreground text-xs">БИК</span>
                 <p className="text-white font-medium">044525593</p>
               </div>
-              <div className="sm:col-span-2 border-t border-accent/10 pt-3 mt-1">
-                <span className="text-muted-foreground text-xs">Директор</span>
-                <p className="text-white font-medium">Мкртчян Саргис Варужанович, действующий на основании Устава</p>
-              </div>
+
             </div>
           </div>
 
