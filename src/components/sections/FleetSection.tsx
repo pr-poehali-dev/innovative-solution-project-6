@@ -5,6 +5,7 @@ import Icon from "@/components/ui/icon";
 import OrderModal from "@/components/ui/OrderModal";
 
 const trucks = [
+  // ── Манипуляторы ──
   {
     badge: "КМУ DongYang",
     title: "FAW + КМУ DongYang",
@@ -84,6 +85,23 @@ const trucks = [
     ],
   },
   {
+    badge: "КМУ 3т",
+    title: "ISUZU 5т + КМУ",
+    slug: "isuzu-5t-kmu",
+    price: "2 200 ₽/час с НДС",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/4bb58aab-783b-43b6-8d89-ee519e570e09.jpg",
+    alt: "ISUZU 5т КМУ",
+    specs: [
+      { label: "Грузоподъёмность платформы", value: "до 5 т" },
+      { label: "Грузоподъёмность стрелы", value: "до 3 т" },
+      { label: "Ширина кузова", value: "до 2,30 м" },
+      { label: "Длина кузова", value: "до 5,5 м" },
+      { label: "Вылет стрелы", value: "до 8,5 м" },
+      { label: "Тип кузова", value: "Бортовой" },
+    ],
+  },
+  // ── Экскаваторы-погрузчики ──
+  {
     badge: "Экскаватор-погрузчик",
     title: "Экскаватор-погрузчик JCB 4CX",
     slug: "jcb-4cx",
@@ -111,22 +129,6 @@ const trucks = [
       { label: "Объём заднего ковша", value: "0,3 м³" },
       { label: "Объём погрузочного ковша", value: "1 м³" },
       { label: "Навесное оборудование", value: "Есть" },
-    ],
-  },
-  {
-    badge: "КМУ 3т",
-    title: "ISUZU 5т + КМУ",
-    slug: "isuzu-5t-kmu",
-    price: "2 200 ₽/час с НДС",
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/4bb58aab-783b-43b6-8d89-ee519e570e09.jpg",
-    alt: "ISUZU 5т КМУ",
-    specs: [
-      { label: "Грузоподъёмность платформы", value: "до 5 т" },
-      { label: "Грузоподъёмность стрелы", value: "до 3 т" },
-      { label: "Ширина кузова", value: "до 2,30 м" },
-      { label: "Длина кузова", value: "до 5,5 м" },
-      { label: "Вылет стрелы", value: "до 8,5 м" },
-      { label: "Тип кузова", value: "Бортовой" },
     ],
   },
 ];
