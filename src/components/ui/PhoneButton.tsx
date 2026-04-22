@@ -14,8 +14,8 @@ interface PhoneButtonProps {
 
 const PhoneButton = ({ className = "", size = "md", iconOnly = false }: PhoneButtonProps) => {
   const sizeClasses = {
-    sm: "px-4 py-2 text-sm gap-2",
-    md: "px-5 py-2.5 text-sm gap-2",
+    sm: "px-3 py-2 text-xs gap-1.5 whitespace-nowrap",
+    md: "px-5 py-2.5 text-sm gap-2 whitespace-nowrap",
     lg: "px-10 sm:px-14 py-5 sm:py-6 text-2xl sm:text-3xl gap-4",
   };
 
