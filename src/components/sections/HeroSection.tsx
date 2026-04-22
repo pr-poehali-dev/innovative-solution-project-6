@@ -169,10 +169,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
         </div>
 
         <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-24 sm:pt-32 pb-16 sm:pb-32">
-          <div className={`flex flex-col lg:flex-row lg:items-end lg:justify-between lg:min-h-[70vh] gap-8 transition-all duration-1000 ${visibleSections["hero"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-
-            {/* Левая часть — заголовок */}
-            <div className="max-w-2xl">
+          <div className={`max-w-2xl transition-all duration-1000 ${visibleSections["hero"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
             <div className="mb-4 sm:mb-8 inline-block">
               <span className="text-xs font-medium tracking-widest text-accent/80 uppercase">
                 Аренда и услуги манипуляторов в Нижнем Новгороде
@@ -190,15 +187,13 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
             <p className="text-sm sm:text-xl text-white/80 leading-relaxed mb-7 sm:mb-10 max-w-full sm:max-w-xl font-light">
               Оставьте заявку или позвоните — мы подберём правильный манипулятор с платформой необходимых габаритов и нужной грузоподъёмностью под вашу задачу.
             </p>
-            <div className="flex gap-3 sm:gap-4 flex-col sm:flex-row">
+            <div className="flex gap-3 sm:gap-4 mb-8 sm:mb-12 flex-col sm:flex-row">
               <a href="#fleet" className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all font-medium text-base sm:text-lg text-white text-center">
                 Посмотреть технику
               </a>
             </div>
-            </div>
 
-            {/* Правая часть — форма */}
-            <div className="w-full lg:w-[420px] shrink-0 lg:mb-0 mt-8 lg:mt-64">
+            {/* Форма заявки */}
             {status === "success" ? (
               <div className="bg-accent/10 border border-accent/30 rounded-2xl px-6 py-5 flex items-center gap-3">
                 <Icon name="CheckCircle" size={22} className="text-accent shrink-0" />
@@ -208,7 +203,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-transparent backdrop-blur-none border border-white/20 rounded-2xl p-4 sm:p-6 flex flex-col gap-3">
+              <form onSubmit={handleSubmit} className="bg-transparent border border-white/20 rounded-2xl p-4 sm:p-6 flex flex-col gap-3">
                 <div className="flex flex-col sm:flex-row gap-3">
                   <input
                     type="text"
@@ -248,8 +243,6 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
                 )}
               </form>
             )}
-            </div>
-          </div>
           <div className="grid grid-cols-3 gap-2 sm:gap-8 pt-6 sm:pt-8 border-t border-white/10 mt-8">
             <div>
               <div className="text-xl sm:text-2xl font-bold text-accent mb-1 sm:mb-2">15+</div>
@@ -263,6 +256,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
               <div className="text-xl sm:text-2xl font-bold text-accent mb-1 sm:mb-2">10 лет</div>
               <p className="text-xs sm:text-sm text-white/60">На рынке</p>
             </div>
+          </div>
           </div>
         </div>
       </section>
