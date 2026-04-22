@@ -201,8 +201,36 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
             </h2>
           </div>
 
-          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden" style={{ height: "520px" }}>
-            {/* Карта во весь блок */}
+          {/* Блок с контактами */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+            <div className="flex flex-col gap-3 sm:col-span-1">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-accent/15 border border-accent/30 rounded-full w-fit">
+                <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                <span className="text-accent text-xs font-semibold">Работаем без выходных</span>
+              </div>
+              <h3 className="font-display font-black text-xl sm:text-2xl text-white">
+                Аренда манипуляторов<br />от компании ФАВОРИТ
+              </h3>
+              <p className="text-muted-foreground text-sm">
+                📍 Нижний Новгород,<br />Шуваловский проезд, 7
+              </p>
+              <p className="text-muted-foreground text-xs">Выезжаем по всему городу и области</p>
+            </div>
+            <div className="flex flex-col gap-3 sm:col-span-2 justify-end">
+              <PhoneButton size="md" className="rounded-xl w-full sm:w-auto" />
+              <a
+                href="https://yandex.ru/maps/?pt=43.851408,56.274653&z=17&text=Шуваловский+канал+7+Нижний+Новгород"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-accent/30 rounded-xl text-white font-medium hover:bg-accent/10 transition-all text-sm w-full sm:w-auto"
+              >
+                🗺️ Открыть в Яндекс.Картах
+              </a>
+            </div>
+          </div>
+
+          {/* Карта */}
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden" style={{ height: "700px" }}>
             <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ad4a56098b0cf87fda42b842d643c95a74c726e9616eafe64e9ea35dc809ded31&width=100%25&height=720&lang=ru_RU&scroll=true" />
             <iframe
               src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad4a56098b0cf87fda42b842d643c95a74c726e9616eafe64e9ea35dc809ded31&lang=ru_RU&scroll=true"
@@ -213,35 +241,6 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
               title="Карта — ООО Фаворит"
               className="absolute inset-0 w-full h-full"
             />
-
-            {/* Левый блок поверх карты */}
-            <div className="absolute top-4 left-4 bottom-4 z-10 w-72 bg-card/90 backdrop-blur-md border border-accent/30 rounded-2xl p-6 flex flex-col justify-between shadow-2xl">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-accent/15 border border-accent/30 rounded-full mb-5">
-                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                  <span className="text-accent text-xs font-semibold">Работаем без выходных</span>
-                </div>
-                <h3 className="font-display font-black text-xl sm:text-2xl mb-2 text-white">
-                  Аренда манипуляторов<br />от компании ФАВОРИТ
-                </h3>
-                <p className="text-muted-foreground mt-4 text-sm">
-                  📍 Нижний Новгород,<br />Шуваловский проезд, 7
-                </p>
-                <p className="text-muted-foreground mt-2 text-xs">Выезжаем по всему городу и области</p>
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <PhoneButton size="md" className="rounded-xl w-full" />
-                <a
-                  href="https://yandex.ru/maps/?pt=43.851408,56.274653&z=17&text=Шуваловский+канал+7+Нижний+Новгород"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-accent/30 rounded-xl text-white font-medium hover:bg-accent/10 transition-all text-sm"
-                >
-                  🗺️ Открыть в Яндекс.Картах
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </section>
