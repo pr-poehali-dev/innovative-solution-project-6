@@ -4,6 +4,7 @@ import Icon from "@/components/ui/icon";
 import OrderModal from "@/components/ui/OrderModal";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
+import { jsPDF } from "jspdf";
 
 interface BottomSectionsProps {
   visibleSections: Record<string, boolean>;
@@ -29,6 +30,44 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
+  };
+
+  const handleDownloadPdf = () => {
+    const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.text("REQUISITES / REKVIZITY", 105, 20, { align: "center" });
+
+    const lines = [
+      ["Polnoe nazvanie", "Obshchestvo s ogranichennoy otvetstvennostyu \"FAVORIT\""],
+      ["Sokrashchennoe nazvanie", "OOO \"FAVORIT\""],
+      ["INN", "5250077990"],
+      ["KPP", "525001001"],
+      ["OGRN", "1235200013531"],
+      ["Yuridicheskiy adres", "607657, Nizhegorodskaya obl., Kstovskiy M.O., g.Kstovo, 6-y m-on, d.2, of.13"],
+      ["Raschetnyy schet", "40702810316020000009"],
+      ["Bank", "AO \"ALFA-BANK\""],
+      ["Korr. schet", "30101810200000000593"],
+      ["BIK", "044525593"],
+      ["Direktor", "Mkrtchyan Sargis Varuzhanovich"],
+    ];
+
+    let y = 36;
+    lines.forEach(([label, value]) => {
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(9);
+      doc.setTextColor(120, 120, 120);
+      doc.text(label + ":", 20, y);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(11);
+      doc.setTextColor(20, 20, 20);
+      const wrapped = doc.splitTextToSize(value, 160);
+      doc.text(wrapped, 20, y + 5);
+      y += 5 + wrapped.length * 6 + 3;
+    });
+
+    doc.save("rekvizity-ooo-favorit.pdf");
   };
   const steps = [
     {
@@ -266,13 +305,22 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
                 <Icon name="FileText" size={16} className="text-accent" />
                 <span className="text-accent text-xs font-semibold uppercase tracking-widest">Реквизиты организации</span>
               </div>
-              <button
-                onClick={handleCopyRequisites}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-accent/20 hover:border-accent/50 hover:bg-accent/10 transition-all text-xs font-medium text-white"
-              >
-                <Icon name={copied ? "Check" : "Copy"} size={13} className={copied ? "text-green-400" : "text-accent"} />
-                {copied ? "Скопировано!" : "Скопировать"}
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleCopyRequisites}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-accent/20 hover:border-accent/50 hover:bg-accent/10 transition-all text-xs font-medium text-white"
+                >
+                  <Icon name={copied ? "Check" : "Copy"} size={13} className={copied ? "text-green-400" : "text-accent"} />
+                  {copied ? "Скопировано!" : "Скопировать"}
+                </button>
+                <button
+                  onClick={handleDownloadPdf}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-accent/20 hover:border-accent/50 hover:bg-accent/10 transition-all text-xs font-medium text-white"
+                >
+                  <Icon name="Download" size={13} className="text-accent" />
+                  PDF
+                </button>
+              </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2.5 text-sm">
               <div>
