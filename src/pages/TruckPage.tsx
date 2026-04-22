@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import OrderModal from "@/components/ui/OrderModal";
 import PhoneButton from "@/components/ui/PhoneButton";
+import BrandLogo from "@/components/ui/BrandLogo";
 
 const trucks: Record<string, {
   title: string;
@@ -145,9 +146,7 @@ export default function TruckPage() {
       {/* Хедер */}
       <header className="fixed top-0 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-          <Link to="/" className="font-bold text-xl tracking-tighter bg-gradient-to-r from-white via-accent to-accent/80 bg-clip-text text-transparent">
-            ООО Фаворит
-          </Link>
+          <BrandLogo size="sm" />
           <PhoneButton size="sm" className="rounded-xl" />
         </div>
       </header>

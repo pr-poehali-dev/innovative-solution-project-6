@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import Icon from "@/components/ui/icon";
 import OrderModal from "@/components/ui/OrderModal";
 import PhoneButton from "@/components/ui/PhoneButton";
+import BrandLogo from "@/components/ui/BrandLogo";
 
 interface BottomSectionsProps {
   visibleSections: Record<string, boolean>;
@@ -247,7 +248,10 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
       {/* Footer */}
       <footer className="border-t border-accent/10 py-8 sm:py-12 px-4 sm:px-6 bg-background/50">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
-          <p className="text-center md:text-left">© 2015 ООО Фаворит — Аренда манипуляторов в Нижнем Новгороде</p>
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <BrandLogo size="sm" />
+            <p className="text-center md:text-left mt-1">© 2015 — Аренда манипуляторов в Нижнем Новгороде</p>
+          </div>
           <a href="https://webmaster.yandex.ru/siteinfo/?site=https://фаварит.рф" target="_blank" rel="noopener noreferrer">
             <img width="88" height="31" alt="Яндекс.Метрика" style={{borderRadius: '8px'}} src="https://yandex.ru/cycounter?https://фаварит.рф&theme=light&lang=ru" />
           </a>
