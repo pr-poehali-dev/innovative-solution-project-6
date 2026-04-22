@@ -9,8 +9,27 @@ interface BottomSectionsProps {
   visibleSections: Record<string, boolean>;
 }
 
+const REQUISITES_TEXT = `Общество с ограниченной ответственностью «ФАВОРИТ»
+ООО «ФАВОРИТ»
+ИНН: 5250077990 / КПП: 525001001
+ОГРН: 1235200013531
+Юридический адрес: 607657, Нижегородская область, Кстовский М.О., г. Кстово, 6-й м-он, д. 2, офис 13
+Р/с: 40702810316020000009
+Банк: АО «АЛЬФА-БАНК»
+К/с: 30101810200000000593
+БИК: 044525593
+Директор: Мкртчян Саргис Варужанович, действующий на основании Устава`;
+
 const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyRequisites = () => {
+    navigator.clipboard.writeText(REQUISITES_TEXT).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
   const steps = [
     {
       step: "01",
@@ -242,9 +261,18 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
 
           {/* Реквизиты */}
           <div className="border border-accent/10 rounded-2xl bg-card/40 p-5 sm:p-6 mb-5">
-            <div className="flex items-center gap-2 mb-4">
-              <Icon name="FileText" size={16} className="text-accent" />
-              <span className="text-accent text-xs font-semibold uppercase tracking-widest">Реквизиты организации</span>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <Icon name="FileText" size={16} className="text-accent" />
+                <span className="text-accent text-xs font-semibold uppercase tracking-widest">Реквизиты организации</span>
+              </div>
+              <button
+                onClick={handleCopyRequisites}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-accent/20 hover:border-accent/50 hover:bg-accent/10 transition-all text-xs font-medium text-white"
+              >
+                <Icon name={copied ? "Check" : "Copy"} size={13} className={copied ? "text-green-400" : "text-accent"} />
+                {copied ? "Скопировано!" : "Скопировать"}
+              </button>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2.5 text-sm">
               <div>
