@@ -203,8 +203,9 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
 
           <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden" style={{ height: "520px" }}>
             {/* Карта во весь блок */}
+            <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ad4a56098b0cf87fda42b842d643c95a74c726e9616eafe64e9ea35dc809ded31&width=100%25&height=720&lang=ru_RU&scroll=true" />
             <iframe
-              src="https://yandex.ru/map-widget/v1/?ll=43.851408,56.274653&z=17&l=map&pt=43.851408,56.274653,pm2rdl"
+              src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad4a56098b0cf87fda42b842d643c95a74c726e9616eafe64e9ea35dc809ded31&lang=ru_RU&scroll=true"
               width="100%"
               height="100%"
               frameBorder="0"
