@@ -270,11 +270,35 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-6 sm:mb-12">
             <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Наш адрес</span>
-            <h2 className="text-xl sm:text-4xl lg:text-5xl font-display font-black tracking-tighter mt-3">
-              <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
-                Как нас найти
-              </span>
-            </h2>
+            <div className="flex flex-col items-center gap-3 mt-3">
+              <div className="flex items-center gap-3 sm:gap-5 flex-wrap justify-center">
+                <img
+                  src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/70f37e87-7308-44c5-ba56-e221771fff69.jpg"
+                  alt="Фаворит герб"
+                  className="w-12 h-12 sm:w-20 sm:h-20 flex-shrink-0 rounded-xl object-cover logo-glow"
+                />
+                <div className="flex flex-col items-center sm:items-start gap-0.5">
+                  <h2
+                    className="text-2xl sm:text-5xl lg:text-6xl font-black tracking-tight"
+                    style={{
+                      background: "linear-gradient(135deg, #f5d060 0%, #e8a820 40%, #fdeea0 60%, #c8850a 80%, #f0c040 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      fontFamily: "'Cinzel', serif",
+                      letterSpacing: "0.05em",
+                    }}
+                  >
+                    Как нас найти
+                  </h2>
+                  <p
+                    className="text-xs sm:text-sm tracking-widest uppercase"
+                    style={{ color: "#a07010", letterSpacing: "0.2em" }}
+                  >
+                    Аренда манипуляторов от компании Фаворит
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Блок с контактами */}
@@ -284,8 +308,8 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
                 <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
                 <span className="text-accent text-xs font-semibold">Работаем без выходных</span>
               </div>
-              <h3 className="font-display font-black text-base sm:text-2xl text-white">
-                Аренда манипуляторов от компании ФАВОРИТ
+              <h3 className="font-display font-black text-base sm:text-xl text-white">
+                Работаем по всему Нижнему Новгороду и области
               </h3>
               <p className="text-muted-foreground text-xs sm:text-sm">
                 📍 Нижний Новгород, Шуваловский проезд, 7
