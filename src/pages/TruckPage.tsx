@@ -101,7 +101,7 @@ const trucks: Record<string, {
     badge: "КМУ 8т",
     price: "3 200 ₽/час с НДС",
     priceNum: 3200,
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/7e2646cb-3b7f-4763-a6a0-35b12d82ee61.jpg",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/72811b07-39fb-476d-9b0a-6a3f31285de9.jpg",
     alt: "Аренда RENAULT LANDER с КМУ в Нижнем Новгороде",
     description: "Манипулятор на базе RENAULT LANDER с мощной крано-манипуляторной установкой грузоподъёмностью 8 тонн. Грузоподъёмность автомобиля 15 тонн и максимальная рабочая высота 20 метров делают эту машину универсальным решением для строительных и промышленных объектов.",
     specs: [
