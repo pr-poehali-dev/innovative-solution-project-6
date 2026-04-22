@@ -76,7 +76,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
       const res = await fetch(SUBMIT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, cargo }),
+        body: JSON.stringify({ name, phone, comment: cargo }),
       });
       if (res.ok) {
         setStatus("success");
