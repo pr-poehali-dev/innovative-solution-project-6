@@ -208,7 +208,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-4 sm:p-6 flex flex-col gap-3">
+              <form onSubmit={handleSubmit} className="bg-transparent backdrop-blur-none border border-white/20 rounded-2xl p-4 sm:p-6 flex flex-col gap-3">
                 <div className="flex flex-col sm:flex-row gap-3">
                   <input
                     type="text"
