@@ -325,14 +325,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
               >
                 📞 +7 960 169-09-90
               </a>
-              <a
-                href="https://yandex.ru/maps/?pt=43.851408,56.274653&z=17&text=Шуваловский+канал+7+Нижний+Новгород"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-accent/30 rounded-xl text-white font-medium hover:bg-accent/10 transition-all text-sm w-full"
-              >
-                🗺️ Открыть в Яндекс.Картах
-              </a>
+
               <a
                 href="https://yandex.ru/maps/org/195468245032/reviews/"
                 target="_blank"
