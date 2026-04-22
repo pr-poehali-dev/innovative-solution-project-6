@@ -58,7 +58,7 @@ const trucks = [
     title: "RENAULT LANDER + КМУ",
     slug: "renault-lander-kmu",
     price: "3 200 ₽/час с НДС",
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/63c3b5f3-7ef6-4f5f-87f8-f9f995424c80.jpg",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/096fd6c2-1047-48b8-92fd-a1d5c64ae584.jpg",
     alt: "Renault Lander манипулятор КМУ",
     specs: [
       { label: "Грузоподъёмность автомобиля", value: "до 15 т" },
