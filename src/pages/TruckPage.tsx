@@ -4,6 +4,7 @@ import Icon from "@/components/ui/icon";
 import OrderModal from "@/components/ui/OrderModal";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
+import PriceCalculator from "@/components/ui/PriceCalculator";
 
 const trucks: Record<string, {
   title: string;
@@ -309,6 +310,11 @@ export default function TruckPage() {
               </div>
             </div>
           </div>
+        </section>
+
+        {/* Калькулятор */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+          <PriceCalculator pricePerHour={truck.priceNum} onOrder={() => setModalOpen(true)} />
         </section>
 
         {/* Описание */}
