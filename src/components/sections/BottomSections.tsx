@@ -4,7 +4,7 @@ import Icon from "@/components/ui/icon";
 import OrderModal from "@/components/ui/OrderModal";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
-import { jsPDF } from "jspdf";
+
 
 interface BottomSectionsProps {
   visibleSections: Record<string, boolean>;
@@ -32,62 +32,58 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
     });
   };
 
-  const handleDownloadPdf = async () => {
-    const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
-
-    let startY = 20;
-
-    try {
-      const response = await fetch("https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/70f37e87-7308-44c5-ba56-e221771fff69.jpg");
-      const blob = await response.blob();
-      const reader = new FileReader();
-      await new Promise<void>((resolve) => {
-        reader.onload = () => {
-          doc.addImage(reader.result as string, "JPEG", 85, 10, 40, 40);
-          startY = 58;
-          resolve();
-        };
-        reader.readAsDataURL(blob);
-      });
-    } catch {
-      startY = 20;
-    }
-
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(13);
-    doc.setTextColor(20, 20, 20);
-    doc.text("OOO \"FAVORIT\" — Rekvizity organizacii", 105, startY, { align: "center" });
-    startY += 10;
-
-    const lines = [
-      ["Polnoe nazvanie", "Obshchestvo s ogranichennoy otvetstvennostyu \"FAVORIT\""],
-      ["Sokrashchennoe nazvanie", "OOO \"FAVORIT\""],
-      ["INN", "5250077990"],
-      ["KPP", "525001001"],
-      ["OGRN", "1235200013531"],
-      ["Yuridicheskiy adres", "607657, Nizhegorodskaya obl., Kstovskiy M.O., g.Kstovo, 6-y m-on, d.2, of.13"],
-      ["Raschetnyy schet", "40702810316020000009"],
-      ["Bank", "AO \"ALFA-BANK\""],
-      ["Korr. schet", "30101810200000000593"],
-      ["BIK", "044525593"],
-      ["Direktor", "Mkrtchyan Sargis Varuzhanovich"],
-    ];
-
-    let y = startY;
-    lines.forEach(([label, value]) => {
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(9);
-      doc.setTextColor(120, 120, 120);
-      doc.text(label + ":", 20, y);
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(11);
-      doc.setTextColor(20, 20, 20);
-      const wrapped = doc.splitTextToSize(value, 160);
-      doc.text(wrapped, 20, y + 5);
-      y += 5 + wrapped.length * 6 + 3;
-    });
-
-    doc.save("rekvizity-ooo-favorit.pdf");
+  const handleDownloadPdf = () => {
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) return;
+    printWindow.document.write(`<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Реквизиты ООО ФАВОРИТ</title>
+  <style>
+    @page { size: A4; margin: 20mm; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; font-size: 12pt; color: #111; }
+    .header { text-align: center; margin-bottom: 24px; }
+    .header img { width: 80px; height: 80px; object-fit: cover; border-radius: 12px; margin-bottom: 10px; }
+    .header h1 { font-size: 15pt; font-weight: bold; margin-bottom: 4px; }
+    .header p { font-size: 10pt; color: #666; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    tr { border-bottom: 1px solid #e5e5e5; }
+    td { padding: 8px 6px; vertical-align: top; }
+    td:first-child { font-size: 9pt; color: #888; width: 38%; white-space: nowrap; }
+    td:last-child { font-size: 11pt; font-weight: 500; }
+    .divider { border-top: 2px solid #ddd; margin: 12px 0; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/70f37e87-7308-44c5-ba56-e221771fff69.jpg" alt="Фаворит"/>
+    <h1>ООО «ФАВОРИТ»</h1>
+    <p>Реквизиты организации</p>
+  </div>
+  <table>
+    <tr><td>Полное название</td><td>Общество с ограниченной ответственностью «ФАВОРИТ»</td></tr>
+    <tr><td>Сокращённое название</td><td>ООО «ФАВОРИТ»</td></tr>
+    <tr><td>ИНН / КПП</td><td>5250077990 / 525001001</td></tr>
+    <tr><td>ОГРН</td><td>1235200013531</td></tr>
+    <tr><td>Юридический адрес</td><td>607657, Нижегородская область, Кстовский М.О., г. Кстово, 6-й м-он, д. 2, офис 13</td></tr>
+    <tr><td>Расчётный счёт</td><td>40702810316020000009</td></tr>
+    <tr><td>Банк</td><td>АО «АЛЬФА-БАНК»</td></tr>
+    <tr><td>Корр. счёт</td><td>30101810200000000593</td></tr>
+    <tr><td>БИК</td><td>044525593</td></tr>
+  </table>
+  <div class="divider"></div>
+  <table>
+    <tr><td>Директор</td><td>Мкртчян Саргис Варужанович, действующий на основании Устава</td></tr>
+  </table>
+</body>
+</html>`);
+    printWindow.document.close();
+    printWindow.onload = () => {
+      printWindow.focus();
+      printWindow.print();
+    };
   };
   const steps = [
     {
