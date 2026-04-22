@@ -237,6 +237,7 @@ const trucks: Record<string, {
 export default function TruckPage() {
   const { slug } = useParams<{ slug: string }>();
   const [modalOpen, setModalOpen] = useState(false);
+  const [calcSummary, setCalcSummary] = useState("");
   const truck = slug ? trucks[slug] : null;
 
   if (!truck) {
@@ -250,7 +251,7 @@ export default function TruckPage() {
 
   return (
     <>
-      <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} truckName={truck.title} />
+      <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} truckName={truck.title} calcSummary={calcSummary} />
       <title>{truck.seoTitle}</title>
       <meta name="description" content={truck.seoDesc} />
       <meta name="keywords" content={truck.seoKeywords} />
@@ -365,7 +366,10 @@ export default function TruckPage() {
 
         {/* Калькулятор */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-          <PriceCalculator pricePerHour={truck.priceNum} onOrder={() => setModalOpen(true)} />
+          <PriceCalculator pricePerHour={truck.priceNum} onOrder={(result) => {
+            setCalcSummary(`${result.hours} ч × ${result.shifts} дн. × ${result.pricePerHour.toLocaleString("ru-RU")} ₽/ч = ${result.total.toLocaleString("ru-RU")} ₽`);
+            setModalOpen(true);
+          }} />
         </section>
 
         {/* Описание */}

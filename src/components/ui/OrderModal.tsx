@@ -5,11 +5,12 @@ interface OrderModalProps {
   open: boolean;
   onClose: () => void;
   truckName?: string;
+  calcSummary?: string;
 }
 
 const SUBMIT_URL = "https://functions.poehali.dev/dc327032-aa41-4632-b107-a026d92ef031";
 
-export default function OrderModal({ open, onClose, truckName }: OrderModalProps) {
+export default function OrderModal({ open, onClose, truckName, calcSummary }: OrderModalProps) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [comment, setComment] = useState("");
@@ -46,7 +47,7 @@ export default function OrderModal({ open, onClose, truckName }: OrderModalProps
         body: JSON.stringify({
           name,
           phone,
-          comment: [truckName ? `Техника: ${truckName}` : "", comment].filter(Boolean).join("\n"),
+          comment: [truckName ? `Техника: ${truckName}` : "", calcSummary ? `Расчёт: ${calcSummary}` : "", comment].filter(Boolean).join("\n"),
         }),
       });
       if (res.ok) {
@@ -96,9 +97,14 @@ export default function OrderModal({ open, onClose, truckName }: OrderModalProps
               Оставить заявку
             </h3>
             {truckName && (
-              <p className="text-sm text-accent mb-4">{truckName}</p>
+              <p className="text-sm text-accent mb-2">{truckName}</p>
             )}
-            {!truckName && (
+            {calcSummary && (
+              <div className="mb-4 px-4 py-3 rounded-xl text-sm font-semibold" style={{ background: "rgba(232,168,32,0.10)", border: "1px solid rgba(232,168,32,0.3)", color: "#e8a820" }}>
+                Расчёт: {calcSummary}
+              </div>
+            )}
+            {!truckName && !calcSummary && (
               <p className="text-muted-foreground text-sm mb-6">Перезвоним в течение 15 минут</p>
             )}
 

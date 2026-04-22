@@ -1,9 +1,16 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
+interface CalcResult {
+  hours: number;
+  shifts: number;
+  pricePerHour: number;
+  total: number;
+}
+
 interface PriceCalculatorProps {
   pricePerHour: number;
-  onOrder: () => void;
+  onOrder: (result: CalcResult) => void;
 }
 
 const PriceCalculator = ({ pricePerHour, onOrder }: PriceCalculatorProps) => {
@@ -90,7 +97,7 @@ const PriceCalculator = ({ pricePerHour, onOrder }: PriceCalculatorProps) => {
         </div>
 
         <button
-          onClick={onOrder}
+          onClick={() => onOrder({ hours, shifts, pricePerHour, total })}
           className="w-full py-4 font-bold rounded-xl text-black text-base transition-all hover:opacity-90 hover:shadow-xl"
           style={{ background: "linear-gradient(135deg, #f5d060, #e8a820, #c8850a)" }}
         >
