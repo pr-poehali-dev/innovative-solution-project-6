@@ -177,20 +177,20 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
                 Аренда и услуги манипуляторов в Нижнем Новгороде
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-display font-black leading-tight mb-5 sm:mb-8 tracking-tighter">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-display font-black leading-tight mb-5 sm:mb-8 tracking-tighter">
               <span className="bg-gradient-to-br from-white via-white to-accent/40 bg-clip-text text-transparent">
                 Манипуляторы
               </span>
               <br />
               <span className="text-accent">в аренду</span>
               <br />
-              <span className="text-white/70 text-2xl sm:text-3xl lg:text-5xl">в Нижнем Новгороде</span>
+              <span className="text-white/70 text-xl sm:text-3xl lg:text-5xl">в Нижнем Новгороде</span>
             </h1>
-            <p className="text-base sm:text-xl text-white/80 leading-relaxed mb-7 sm:mb-10 max-w-xl font-light">
+            <p className="text-sm sm:text-xl text-white/80 leading-relaxed mb-7 sm:mb-10 max-w-full sm:max-w-xl font-light">
               Оставьте заявку или позвоните — мы подберём правильный манипулятор с платформой необходимых габаритов и нужной грузоподъёмностью под вашу задачу.
             </p>
-            <div className="flex gap-3 sm:gap-4 mb-8 sm:mb-12 flex-row flex-wrap">
-              <a href="#fleet" className="px-6 sm:px-8 py-3.5 sm:py-4 border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all font-medium text-base sm:text-lg text-white text-center">
+            <div className="flex gap-3 sm:gap-4 mb-8 sm:mb-12 flex-col sm:flex-row">
+              <a href="#fleet" className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all font-medium text-base sm:text-lg text-white text-center">
                 Посмотреть технику
               </a>
             </div>
@@ -245,7 +245,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
                 )}
               </form>
             )}
-            <div className="grid grid-cols-3 gap-4 sm:gap-8 pt-6 sm:pt-8 border-t border-white/10">
+            <div className="grid grid-cols-3 gap-2 sm:gap-8 pt-6 sm:pt-8 border-t border-white/10">
               <div>
                 <div className="text-xl sm:text-2xl font-bold text-accent mb-1 sm:mb-2">15+</div>
                 <p className="text-xs sm:text-sm text-white/60">Единиц техники</p>

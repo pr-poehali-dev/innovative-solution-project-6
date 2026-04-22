@@ -95,7 +95,7 @@ const FleetSection = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10 sm:mb-20">
           <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Наш парк</span>
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4 mb-4 sm:mb-6">
+          <h2 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4 mb-4 sm:mb-6">
             <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
               Наша техника
             </span>
@@ -110,7 +110,7 @@ const FleetSection = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-accent/10 via-transparent to-transparent" />
             <div className={`relative grid gap-0 ${truck.image ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
               {truck.image && (
-                <div className="relative h-[60vw] min-h-56 max-h-80 lg:hidden overflow-hidden">
+                <div className="relative h-[55vw] min-h-48 max-h-72 lg:hidden overflow-hidden">
                   <img
                     src={truck.image}
                     alt={truck.alt}
@@ -121,13 +121,13 @@ const FleetSection = () => {
                     <div className="inline-block px-2.5 py-0.5 bg-accent/30 backdrop-blur-sm rounded-full text-accent text-xs font-semibold tracking-widest uppercase mb-2">
                       {truck.badge}
                     </div>
-                    <h3 className="font-display font-black text-xl text-white leading-tight">{truck.title}</h3>
-                    <p className="text-accent font-bold text-base mt-0.5">{truck.price}</p>
+                    <h3 className="font-display font-black text-lg text-white leading-tight">{truck.title}</h3>
+                    <p className="text-accent font-bold text-sm mt-0.5">{truck.price}</p>
                   </div>
                 </div>
               )}
 
-              <div className="p-5 sm:p-10 lg:p-14">
+              <div className="p-4 sm:p-10 lg:p-14">
                 <div className="hidden lg:inline-block px-3 py-1 bg-accent/20 rounded-full text-accent text-xs font-semibold tracking-widest uppercase mb-4 sm:mb-6">
                   {truck.badge}
                 </div>
@@ -143,12 +143,12 @@ const FleetSection = () => {
                   ))}
                 </div>
 
-                <div className="flex flex-wrap gap-3">
-                  <button onClick={() => openModal(truck.title)} className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full font-semibold text-sm sm:text-base hover:shadow-xl hover:shadow-accent/40 transition-all">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                  <button onClick={() => openModal(truck.title)} className="group inline-flex w-full sm:w-auto justify-center items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full font-semibold text-sm sm:text-base hover:shadow-xl hover:shadow-accent/40 transition-all">
                     Заказать
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
                   </button>
-                  <Link to={`/tehnika/${truck.slug}`} className="inline-flex items-center gap-2 px-6 py-3 border border-accent/30 rounded-full font-semibold text-sm hover:border-accent/60 hover:bg-accent/5 transition-all">
+                  <Link to={`/tehnika/${truck.slug}`} className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3 border border-accent/30 rounded-full font-semibold text-sm hover:border-accent/60 hover:bg-accent/5 transition-all">
                     Подробнее
                   </Link>
                 </div>
@@ -169,8 +169,8 @@ const FleetSection = () => {
 
         {/* What to tell us */}
         <div className="border border-accent/10 rounded-2xl bg-accent/5 p-5 sm:p-10">
-          <h3 className="font-display font-bold text-xl sm:text-2xl mb-4 sm:mb-6 text-center">Что сообщить при заказе</h3>
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          <h3 className="font-display font-bold text-lg sm:text-2xl mb-4 sm:mb-6 text-center">Что сообщить при заказе</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {orderItems.map((item, i) => (
               <div key={i} className="flex items-center gap-2 sm:gap-3 bg-background/30 rounded-xl p-3 sm:p-4 border border-accent/10 hover:border-accent/30 transition-colors">
                 <div className={`w-9 h-9 bg-gradient-to-br ${item.iconBg} rounded-xl flex items-center justify-center flex-shrink-0 shadow-md`}>

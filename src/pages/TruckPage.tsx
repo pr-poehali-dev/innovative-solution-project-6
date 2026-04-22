@@ -153,7 +153,7 @@ export default function TruckPage() {
 
       <main className="pt-20 pb-16 min-h-screen">
         {/* Хлебные крошки */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 text-sm text-muted-foreground flex gap-2 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 text-sm text-muted-foreground flex gap-1 sm:gap-2 items-center flex-wrap">
           <Link to="/" className="hover:text-white transition-colors">Главная</Link>
           <span>/</span>
           <Link to="/#fleet" className="hover:text-white transition-colors">Наша техника</Link>
@@ -163,7 +163,7 @@ export default function TruckPage() {
 
         {/* Основной блок */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-16 items-start">
             {/* Фото */}
             <div className="relative rounded-2xl overflow-hidden aspect-video lg:aspect-square bg-card/50 border border-accent/10">
               <img
@@ -178,17 +178,17 @@ export default function TruckPage() {
 
             {/* Инфо */}
             <div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tighter mb-3">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tighter mb-3">
                 <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
                   {truck.title}
                 </span>
               </h1>
-              <p className="text-3xl font-black text-accent mb-6">{truck.price}</p>
-              <p className="text-muted-foreground leading-relaxed mb-8">{truck.description}</p>
+              <p className="text-2xl sm:text-3xl font-black text-accent mb-4 sm:mb-6">{truck.price}</p>
+              <p className="text-muted-foreground leading-relaxed mb-4 sm:mb-8">{truck.description}</p>
 
               <button
                 onClick={() => setModalOpen(true)}
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-accent to-accent/80 text-black font-bold px-8 py-4 rounded-2xl hover:shadow-xl hover:shadow-accent/40 transition-all text-lg mb-8"
+                className="inline-flex w-full sm:w-auto items-center gap-3 bg-gradient-to-r from-accent to-accent/80 text-black font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl hover:shadow-xl hover:shadow-accent/40 transition-all text-base sm:text-lg mb-6 sm:mb-8"
               >
                 <Icon name="Phone" size={20} />
                 Заказать — +7 960 188-30-84
@@ -229,7 +229,7 @@ export default function TruckPage() {
 
         {/* Другая техника */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-          <h2 className="text-2xl sm:text-3xl font-black tracking-tighter mb-6">Другая техника</h2>
+          <h2 className="text-xl sm:text-3xl font-black tracking-tighter mb-6">Другая техника</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {Object.entries(trucks)
               .filter(([s]) => s !== slug)

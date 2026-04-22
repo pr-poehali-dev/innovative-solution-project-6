@@ -16,8 +16,8 @@ interface BrandLogoProps {
 }
 
 const BrandLogo = ({ to = "/", size = "md" }: BrandLogoProps) => {
-  const imgSize = size === "sm" ? "w-12 h-12" : "w-20 h-20 sm:w-24 sm:h-24";
-  const titleSize = size === "sm" ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl";
+  const imgSize = size === "sm" ? "w-9 h-9 sm:w-12 sm:h-12" : "w-14 h-14 sm:w-20 sm:h-20";
+  const titleSize = size === "sm" ? "text-base sm:text-xl" : "text-xl sm:text-3xl";
 
   const content = (
     <div className="flex items-center gap-3">
@@ -27,11 +27,11 @@ const BrandLogo = ({ to = "/", size = "md" }: BrandLogoProps) => {
         className={`${imgSize} flex-shrink-0 rounded-xl object-cover logo-glow`}
       />
       <div className="flex flex-col leading-tight">
-        <span className="text-xs font-medium tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>
+        <span className="hidden sm:block text-xs font-medium tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>
         <span className={`font-black drop-shadow-lg ${titleSize}`} style={goldText}>
           ООО Фаворит
         </span>
-        <span className="text-xs tracking-widest uppercase" style={{ color: "#a07010", letterSpacing: "0.2em" }}>Надёжная аренда манипуляторов</span>
+        <span className="hidden sm:block text-xs tracking-widest uppercase" style={{ color: "#a07010", letterSpacing: "0.2em" }}>Надёжная аренда манипуляторов</span>
       </div>
     </div>
   );
