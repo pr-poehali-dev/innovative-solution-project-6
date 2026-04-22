@@ -194,7 +194,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
             </div>
 
             {/* Форма заявки */}
-            <div className="mt-8 sm:mt-16" />
+            <div className="mt-16 sm:mt-32" />
             {status === "success" ? (
               <div className="bg-accent/10 border border-accent/30 rounded-2xl px-6 py-5 flex items-center gap-3">
                 <Icon name="CheckCircle" size={22} className="text-accent shrink-0" />
