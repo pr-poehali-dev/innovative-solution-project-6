@@ -19,7 +19,7 @@ const CalculatorSection = () => {
 
   return (
     <section className="py-16 sm:py-32 px-4 sm:px-6">
-      <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} truckName={`${truck.name} · ${total.toLocaleString("ru")} ₽`} />
+      <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} truckName={`${truck.name} · ${hours} ч · ${truck.price.toLocaleString("ru")} ₽/час · Итого: ${total.toLocaleString("ru")} ₽`} />
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10 sm:mb-16">
           <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Калькулятор</span>
