@@ -157,58 +157,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
         {/* Затемнение */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40 z-10" />
 
-        {/* Форма заявки — верхний левый угол */}
-        <div className="absolute top-20 sm:top-24 left-4 sm:left-6 z-30 w-full max-w-xs sm:max-w-sm">
-          {status === "success" ? (
-            <div className="bg-accent/10 border border-accent/30 rounded-2xl px-6 py-5 flex items-center gap-3">
-              <Icon name="CheckCircle" size={22} className="text-accent shrink-0" />
-              <div>
-                <p className="font-semibold text-white">Заявка принята!</p>
-                <p className="text-sm text-white/60">Мы перезвоним вам в ближайшее время.</p>
-              </div>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="bg-transparent border border-white/20 rounded-2xl p-4 sm:p-6 flex flex-col gap-3">
-              <div className="flex flex-col gap-3">
-                <input
-                  type="text"
-                  placeholder="Ваше имя"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  required
-                  className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
-                />
-                <input
-                  type="tel"
-                  placeholder="+7 (___) ___-__-__"
-                  value={phone}
-                  onChange={e => setPhone(e.target.value)}
-                  required
-                  className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
-                />
-              </div>
-              <input
-                type="text"
-                placeholder="Что перевозим?"
-                value={cargo}
-                onChange={e => setCargo(e.target.value)}
-                className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
-              />
-              <button
-                type="submit"
-                disabled={status === "loading"}
-                className="group px-6 py-3 bg-gradient-to-r from-accent to-accent/90 text-black rounded-xl font-semibold text-sm flex items-center gap-2 justify-center hover:shadow-lg hover:shadow-accent/40 transition-all disabled:opacity-60"
-              >
-                {status === "loading" ? "Отправка..." : (
-                  <>Оставить заявку <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition" /></>
-                )}
-              </button>
-              {status === "error" && (
-                <p className="text-red-400 text-xs mt-1">Ошибка отправки, попробуйте ещё раз.</p>
-              )}
-            </form>
-          )}
-        </div>
+
 
         {/* Точки-индикаторы */}
         <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex gap-2 z-20">
@@ -228,14 +177,10 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
                 Аренда и услуги манипуляторов в Нижнем Новгороде
               </span>
             </div>
-            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-display font-black leading-tight mb-5 sm:mb-8 tracking-tighter">
-              <span className="bg-gradient-to-br from-white via-white to-accent/40 bg-clip-text text-transparent">
-                Манипуляторы
-              </span>
-              <br />
-              <span className="text-accent">в аренду</span>
-              <br />
-              <span className="text-white/70 text-xl sm:text-3xl lg:text-5xl">в Нижнем Новгороде</span>
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black leading-tight mb-5 sm:mb-8 tracking-tighter">
+              <span className="bg-gradient-to-br from-white via-white to-accent/40 bg-clip-text text-transparent">Манипуляторы </span>
+              <span className="text-accent">в аренду </span>
+              <span className="text-white/70">в Нижнем Новгороде</span>
             </h1>
             <p className="text-sm sm:text-xl text-white/80 leading-relaxed mb-7 sm:mb-10 max-w-full sm:max-w-xl font-light">
               Оставьте заявку или позвоните — мы подберём правильный манипулятор с платформой необходимых габаритов и нужной грузоподъёмностью под вашу задачу.
@@ -246,6 +191,56 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
               </a>
             </div>
 
+            {/* Форма заявки */}
+            {status === "success" ? (
+              <div className="bg-accent/10 border border-accent/30 rounded-2xl px-6 py-5 flex items-center gap-3">
+                <Icon name="CheckCircle" size={22} className="text-accent shrink-0" />
+                <div>
+                  <p className="font-semibold text-white">Заявка принята!</p>
+                  <p className="text-sm text-white/60">Мы перезвоним вам в ближайшее время.</p>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="bg-transparent border border-white/20 rounded-2xl p-4 sm:p-6 flex flex-col gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <input
+                    type="text"
+                    placeholder="Ваше имя"
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    required
+                    className="flex-1 bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
+                  />
+                  <input
+                    type="tel"
+                    placeholder="+7 (___) ___-__-__"
+                    value={phone}
+                    onChange={e => setPhone(e.target.value)}
+                    required
+                    className="flex-1 bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
+                  />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Что перевозим? (например: металлоконструкции, оборудование, стройматериалы)"
+                  value={cargo}
+                  onChange={e => setCargo(e.target.value)}
+                  className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
+                />
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="group px-6 py-3 bg-gradient-to-r from-accent to-accent/90 text-black rounded-xl font-semibold text-sm flex items-center gap-2 justify-center hover:shadow-lg hover:shadow-accent/40 transition-all disabled:opacity-60 shrink-0"
+                >
+                  {status === "loading" ? "Отправка..." : (
+                    <>Оставить заявку <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition" /></>
+                  )}
+                </button>
+                {status === "error" && (
+                  <p className="text-red-400 text-xs mt-1 sm:col-span-3">Ошибка отправки, попробуйте ещё раз.</p>
+                )}
+              </form>
+            )}
 
           <div className="grid grid-cols-3 gap-2 sm:gap-8 pt-6 sm:pt-8 border-t border-white/10 mt-8">
             <div>
