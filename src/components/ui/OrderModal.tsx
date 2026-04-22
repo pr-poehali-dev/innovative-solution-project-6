@@ -12,6 +12,7 @@ const SUBMIT_URL = "https://functions.poehali.dev/dc327032-aa41-4632-b107-a026d9
 export default function OrderModal({ open, onClose, truckName }: OrderModalProps) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [comment, setComment] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   useEffect(() => {
@@ -22,6 +23,7 @@ export default function OrderModal({ open, onClose, truckName }: OrderModalProps
       setTimeout(() => {
         setName("");
         setPhone("");
+        setComment("");
         setStatus("idle");
       }, 300);
     }
@@ -41,7 +43,11 @@ export default function OrderModal({ open, onClose, truckName }: OrderModalProps
       const res = await fetch(SUBMIT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, comment: truckName ? `Техника: ${truckName}` : "" }),
+        body: JSON.stringify({
+          name,
+          phone,
+          comment: [truckName ? `Техника: ${truckName}` : "", comment].filter(Boolean).join("\n"),
+        }),
       });
       if (res.ok) {
         setStatus("success");
@@ -112,6 +118,13 @@ export default function OrderModal({ open, onClose, truckName }: OrderModalProps
                 onChange={e => setPhone(e.target.value)}
                 required
                 className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
+              />
+              <textarea
+                placeholder="Комментарий (необязательно)"
+                value={comment}
+                onChange={e => setComment(e.target.value)}
+                rows={3}
+                className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors resize-none"
               />
 
               {status === "error" && (
