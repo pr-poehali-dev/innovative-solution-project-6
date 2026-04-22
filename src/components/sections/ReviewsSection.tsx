@@ -147,7 +147,16 @@ const ReviewsSection = () => {
                 Что говорят клиенты
               </span>
             </h2>
-            <p className="text-muted-foreground text-base sm:text-lg mt-4 max-w-xl">
+            <div className="flex items-center gap-3 mt-4">
+              <div className="flex gap-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <span key={i} className="text-yellow-400 text-xl drop-shadow-[0_0_6px_rgba(250,204,21,0.6)]">★</span>
+                ))}
+              </div>
+              <span className="text-white font-bold text-lg">5.0</span>
+              <span className="text-muted-foreground text-sm">на основе {reviews.length} отзывов</span>
+            </div>
+            <p className="text-muted-foreground text-base sm:text-lg mt-3 max-w-xl">
               Более 5 000 выполненных заказов — работаем с частными лицами, ИП и крупными предприятиями
             </p>
           </div>
@@ -209,7 +218,7 @@ const ReviewsSection = () => {
                 </div>
                 <div className="flex gap-0.5">
                   {Array.from({ length: review.rating }).map((_, j) => (
-                    <span key={j} className="text-accent text-sm">★</span>
+                    <span key={j} className="text-yellow-400 text-sm drop-shadow-[0_0_4px_rgba(250,204,21,0.5)]">★</span>
                   ))}
                 </div>
               </div>
