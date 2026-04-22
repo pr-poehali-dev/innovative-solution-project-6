@@ -320,7 +320,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
               <PhoneButton size="lg" className="rounded-2xl w-full" />
               <a
                 href="tel:+79601690990"
-                className="inline-flex items-center justify-center gap-3 px-5 py-4 border rounded-2xl font-bold text-xl sm:text-2xl w-full transition-all"
+                className="inline-flex items-center justify-center gap-4 px-10 sm:px-14 py-5 sm:py-6 border rounded-2xl font-bold text-2xl sm:text-3xl w-full transition-all"
                 style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", fontFamily: "'Cinzel', serif", animation: "goldPulse 1.2s ease-in-out infinite" }}
               >
                 📞 +7 960 169-09-90
