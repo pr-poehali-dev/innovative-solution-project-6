@@ -87,7 +87,7 @@ const trucks = [
     badge: "Экскаватор-погрузчик",
     title: "Экскаватор-погрузчик JCB 4CX",
     slug: "jcb-4cx",
-    price: "2 400 ₽/час с НДС",
+    price: "2 700 ₽/час с НДС",
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/29fc9d6a-adfb-4899-9119-3136ce0cb7d4.jpg",
     alt: "Экскаватор-погрузчик JCB 4CX",
     specs: [
