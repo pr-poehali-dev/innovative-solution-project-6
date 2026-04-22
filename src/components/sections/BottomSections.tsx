@@ -317,7 +317,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
               <p className="text-muted-foreground text-xs">Выезжаем по всему городу и области</p>
             </div>
             <div className="flex flex-col sm:flex-col gap-2 sm:col-span-2 sm:justify-end">
-              <PhoneButton size="md" className="rounded-xl w-full" />
+              <PhoneButton size="lg" className="rounded-2xl w-full" />
               <a
                 href="https://yandex.ru/maps/?pt=43.851408,56.274653&z=17&text=Шуваловский+канал+7+Нижний+Новгород"
                 target="_blank"
