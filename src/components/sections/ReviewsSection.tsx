@@ -139,7 +139,7 @@ const ReviewsSection = () => {
 
               {/* Автор */}
               <div className="border-t border-accent/10 pt-5 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full border border-accent/30 overflow-hidden flex-shrink-0 bg-accent/20">
+                <div className="w-14 h-14 rounded-full border-2 border-accent/40 overflow-hidden flex-shrink-0 bg-accent/20">
                   {review.photo
                     ? <img src={review.photo} alt={review.name} className="w-full h-full object-cover" />
                     : <span className="w-full h-full flex items-center justify-center text-accent text-xs font-bold">{review.avatar}</span>
