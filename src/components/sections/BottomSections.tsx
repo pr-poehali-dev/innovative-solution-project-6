@@ -63,37 +63,40 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
   return (
     <>
       <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} />
+
       {/* How it works */}
-      <section id="how" className="py-16 sm:py-32 px-4 sm:px-6">
+      <section id="how" className="py-12 sm:py-24 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div
-            className={`text-center mb-10 sm:mb-20 transition-all duration-1000 ${visibleSections["how"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+            className={`text-center mb-8 sm:mb-16 transition-all duration-1000 ${visibleSections["how"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
           >
             <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Процесс</span>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4">
+            <h2 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-3">
               <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
                 Как это работает
               </span>
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8">
             {steps.map((item, i) => {
               const isVisible = visibleSections["how"];
               return (
                 <div
                   key={i}
-                  className={`relative transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                  className={`relative flex sm:flex-col items-start gap-4 p-4 sm:p-0 border sm:border-0 border-accent/10 rounded-2xl sm:rounded-none bg-card/30 sm:bg-transparent transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                   style={{ transitionDelay: `${i * 200}ms` }}
                 >
-                  <div className="flex items-center gap-4 mb-4 sm:mb-6">
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.iconBg} flex items-center justify-center shadow-lg flex-shrink-0`}>
-                      <Icon name={item.icon} size={26} className="text-white" />
+                  <div className="flex items-center gap-3 sm:gap-4 sm:mb-4 flex-shrink-0">
+                    <div className={`w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br ${item.iconBg} flex items-center justify-center shadow-lg flex-shrink-0`}>
+                      <Icon name={item.icon} size={22} className="text-white" />
                     </div>
-                    <div className="text-5xl sm:text-6xl font-black text-accent/10 leading-none">{item.step}</div>
+                    <div className="text-4xl sm:text-6xl font-black text-accent/10 leading-none sm:block hidden">{item.step}</div>
                   </div>
-                  <h3 className="font-display font-bold text-lg sm:text-2xl mb-3 sm:mb-4">{item.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{item.desc}</p>
+                  <div>
+                    <h3 className="font-display font-bold text-base sm:text-2xl mb-1 sm:mb-3">{item.title}</h3>
+                    <p className="text-muted-foreground text-xs sm:text-base leading-relaxed">{item.desc}</p>
+                  </div>
                 </div>
               );
             })}
@@ -102,20 +105,20 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="py-16 sm:py-32 px-4 sm:px-6 bg-accent/5">
+      <section id="pricing" className="py-12 sm:py-24 px-4 sm:px-6 bg-accent/5">
         <div className="max-w-5xl mx-auto">
           <div
-            className={`text-center mb-10 sm:mb-20 transition-all duration-1000 ${visibleSections["pricing"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+            className={`text-center mb-8 sm:mb-16 transition-all duration-1000 ${visibleSections["pricing"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
           >
             <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Тарифы</span>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4">
+            <h2 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-3">
               <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
                 Прозрачные цены
               </span>
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-5 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
             {plans.map((plan, i) => {
               const isVisible = visibleSections["pricing"];
               return (
@@ -123,32 +126,32 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
                   key={i}
                   className={`group relative transition-all duration-700 ${
                     isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-                  } ${plan.highlight ? "md:scale-105" : ""}`}
+                  } ${plan.highlight ? "sm:scale-105" : ""}`}
                   style={{ transitionDelay: `${i * 200}ms` }}
                 >
                   {plan.highlight && (
                     <div className="absolute -inset-1 bg-gradient-to-r from-accent via-accent to-accent/60 rounded-3xl opacity-20 blur-xl group-hover:opacity-30 transition" />
                   )}
                   <div
-                    className={`relative p-6 sm:p-10 border rounded-2xl h-full flex flex-col justify-between backdrop-blur-sm transition-all ${
+                    className={`relative p-5 sm:p-10 border rounded-2xl h-full flex flex-col justify-between backdrop-blur-sm transition-all ${
                       plan.highlight ? "border-accent/40 bg-accent/10" : "border-accent/10 bg-card/50 hover:bg-card/80"
                     }`}
                   >
                     <div>
-                      <h3 className="font-display font-bold text-xl sm:text-2xl mb-2">{plan.name}</h3>
-                      <p className="text-3xl sm:text-4xl font-black text-accent mb-6 sm:mb-8">{plan.price}</p>
-                      <ul className="space-y-3 sm:space-y-4 mb-8 sm:mb-10">
+                      <h3 className="font-display font-bold text-lg sm:text-2xl mb-1 sm:mb-2">{plan.name}</h3>
+                      <p className="text-2xl sm:text-4xl font-black text-accent mb-4 sm:mb-8">{plan.price}</p>
+                      <ul className="space-y-2 sm:space-y-4 mb-5 sm:mb-10">
                         {plan.features.map((f, j) => (
-                          <li key={j} className="flex gap-3 text-sm items-start">
+                          <li key={j} className="flex gap-2 sm:gap-3 text-sm items-start">
                             <ArrowRight className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                            <span className="text-foreground/80">{f}</span>
+                            <span className="text-foreground/80 text-xs sm:text-sm">{f}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
                     <button
                       onClick={() => setModalOpen(true)}
-                      className={`w-full px-6 py-3.5 sm:py-4 rounded-xl font-semibold transition-all text-sm sm:text-base ${
+                      className={`w-full px-5 py-3 sm:py-4 rounded-xl font-semibold transition-all text-sm ${
                         plan.highlight
                           ? "bg-gradient-to-r from-accent to-accent/80 text-black hover:shadow-xl hover:shadow-accent/40"
                           : "border border-accent/20 hover:border-accent/40 hover:bg-accent/5"
@@ -165,36 +168,35 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
       </section>
 
       {/* CTA */}
-      <section id="cta" className="py-16 sm:py-32 px-4 sm:px-6">
+      <section id="cta" className="py-12 sm:py-24 px-4 sm:px-6">
         <div
           className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${visibleSections["cta"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
         >
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mb-5 sm:mb-6">
+          <h2 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mb-3 sm:mb-6">
             <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
               Нужен манипулятор?
             </span>
           </h2>
-          <p className="text-base sm:text-xl text-muted-foreground mb-8 sm:mb-10 font-light max-w-2xl mx-auto">
+          <p className="text-sm sm:text-xl text-muted-foreground mb-6 sm:mb-10 font-light max-w-2xl mx-auto">
             Позвоните прямо сейчас — ответим сразу, подберём технику и согласуем время подачи.
           </p>
 
-          {/* Большая кнопка звонка */}
           <PhoneButton size="lg" className="mx-auto" />
 
-          <div className="inline-flex items-center gap-2 mt-6 px-5 py-3 bg-red-600/15 border border-red-500/40 rounded-2xl">
-            <span className="text-xl animate-pulse">🔥</span>
-            <p className="text-red-400 font-bold text-sm sm:text-base">Скидка 10% на первый заказ — при звонке прямо сейчас!</p>
+          <div className="inline-flex items-center gap-2 mt-5 px-4 py-2.5 sm:px-5 sm:py-3 bg-red-600/15 border border-red-500/40 rounded-2xl">
+            <span className="text-lg sm:text-xl animate-pulse">🔥</span>
+            <p className="text-red-400 font-bold text-xs sm:text-base">Скидка 10% на первый заказ — при звонке прямо сейчас!</p>
           </div>
-          <p className="text-muted-foreground text-sm mt-4">Работаем без выходных · Подача от 1 часа</p>
+          <p className="text-muted-foreground text-xs sm:text-sm mt-3 sm:mt-4">Работаем без выходных · Подача от 1 часа</p>
         </div>
       </section>
 
       {/* Map Section */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-accent/5">
+      <section className="py-12 sm:py-24 px-4 sm:px-6 bg-accent/5">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12">
+          <div className="text-center mb-6 sm:mb-12">
             <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Наш адрес</span>
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-display font-black tracking-tighter mt-4">
+            <h2 className="text-xl sm:text-4xl lg:text-5xl font-display font-black tracking-tighter mt-3">
               <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
                 Как нас найти
               </span>
@@ -202,27 +204,27 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
           </div>
 
           {/* Блок с контактами */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-            <div className="flex flex-col gap-3 sm:col-span-1">
+          <div className="flex flex-col sm:grid sm:grid-cols-3 gap-4 mb-5">
+            <div className="flex flex-col gap-2 sm:col-span-1">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-accent/15 border border-accent/30 rounded-full w-fit">
                 <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
                 <span className="text-accent text-xs font-semibold">Работаем без выходных</span>
               </div>
-              <h3 className="font-display font-black text-xl sm:text-2xl text-white">
-                Аренда манипуляторов<br />от компании ФАВОРИТ
+              <h3 className="font-display font-black text-base sm:text-2xl text-white">
+                Аренда манипуляторов от компании ФАВОРИТ
               </h3>
-              <p className="text-muted-foreground text-sm">
-                📍 Нижний Новгород,<br />Шуваловский проезд, 7
+              <p className="text-muted-foreground text-xs sm:text-sm">
+                📍 Нижний Новгород, Шуваловский проезд, 7
               </p>
               <p className="text-muted-foreground text-xs">Выезжаем по всему городу и области</p>
             </div>
-            <div className="flex flex-col gap-3 sm:col-span-2 justify-end">
-              <PhoneButton size="md" className="rounded-xl w-full sm:w-auto" />
+            <div className="flex flex-col sm:flex-col gap-2 sm:col-span-2 sm:justify-end">
+              <PhoneButton size="md" className="rounded-xl w-full" />
               <a
                 href="https://yandex.ru/maps/?pt=43.851408,56.274653&z=17&text=Шуваловский+канал+7+Нижний+Новгород"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-accent/30 rounded-xl text-white font-medium hover:bg-accent/10 transition-all text-sm w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-accent/30 rounded-xl text-white font-medium hover:bg-accent/10 transition-all text-sm w-full"
               >
                 🗺️ Открыть в Яндекс.Картах
               </a>
@@ -230,8 +232,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
           </div>
 
           {/* Карта */}
-          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden" style={{ height: "700px" }}>
-            <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ad4a56098b0cf87fda42b842d643c95a74c726e9616eafe64e9ea35dc809ded31&width=100%25&height=720&lang=ru_RU&scroll=true" />
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden" style={{ height: "300px" }}>
             <iframe
               src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad4a56098b0cf87fda42b842d643c95a74c726e9616eafe64e9ea35dc809ded31&lang=ru_RU&scroll=true"
               width="100%"
@@ -246,7 +247,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-accent/10 py-8 sm:py-12 px-4 sm:px-6 bg-background/50">
+      <footer className="border-t border-accent/10 py-6 sm:py-12 px-4 sm:px-6 bg-background/50">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
           <div className="flex flex-col items-center md:items-start gap-1">
             <BrandLogo size="sm" />
@@ -255,7 +256,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
           <a href="https://webmaster.yandex.ru/siteinfo/?site=https://фаварит.рф" target="_blank" rel="noopener noreferrer">
             <img width="88" height="31" alt="Яндекс.Метрика" style={{borderRadius: '8px'}} src="https://yandex.ru/cycounter?https://фаварит.рф&theme=light&lang=ru" />
           </a>
-          <div className="flex gap-5 sm:gap-8 flex-wrap justify-center">
+          <div className="flex gap-4 sm:gap-8 flex-wrap justify-center">
             <a href="#" className="hover:text-white transition-colors">Конфиденциальность</a>
             <a href="#" className="hover:text-white transition-colors">Условия</a>
             <a href="#" className="hover:text-white transition-colors">О компании</a>
