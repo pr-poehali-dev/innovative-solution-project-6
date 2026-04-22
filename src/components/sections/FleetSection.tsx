@@ -140,11 +140,11 @@ const FleetSection = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-accent/10 via-transparent to-transparent" />
             <div className={`relative grid gap-0 ${truck.image ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
               {truck.image && (
-                <div className="relative h-[55vw] min-h-48 max-h-72 lg:hidden overflow-hidden">
+                <div className="relative h-56 min-h-48 max-h-56 lg:hidden overflow-hidden">
                   <img
                     src={truck.image}
                     alt={truck.alt}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-4">
@@ -185,11 +185,11 @@ const FleetSection = () => {
               </div>
 
               {truck.image && (
-                <div className="relative h-52 sm:h-72 lg:h-auto items-center justify-center hidden lg:flex">
+                <div className="relative hidden lg:block" style={{ aspectRatio: "4/3" }}>
                   <img
                     src={truck.image}
                     alt={truck.alt}
-                    className="w-full h-full object-contain p-3 sm:p-4"
+                    className="absolute inset-0 w-full h-full object-cover object-center"
                   />
                 </div>
               )}
