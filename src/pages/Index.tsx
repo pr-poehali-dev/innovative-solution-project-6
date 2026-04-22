@@ -53,8 +53,7 @@ const Index = () => {
       <ReviewsSection />
       <BottomSections visibleSections={visibleSections} />
 
-      {/* Плавающая кнопка звонка */}
-      <PhoneButton size="sm" className="fixed bottom-6 right-4 sm:right-6 z-50 hover:scale-105 active:scale-95 shadow-2xl" />
+
     </div>
   );
 };
