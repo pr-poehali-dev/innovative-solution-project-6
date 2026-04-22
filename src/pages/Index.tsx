@@ -49,6 +49,7 @@ const Index = () => {
       <meta property="og:title" content="Аренда манипуляторов и спецтехники в Нижнем Новгороде — ООО Фаворит" />
       <meta property="og:description" content="Аренда манипуляторов, экскаваторов-погрузчиков в Нижнем Новгороде. Собственный парк техники. Опыт 15 лет. От 2200 ₽/час." />
       <meta property="og:type" content="website" />
+      <meta name="google-site-verification" content="6TvMJWGLCEZfJBzJN2nd_HcZ-lGUr7QxdY92N2ELrg0" />
       <HeroSection visibleSections={visibleSections} />
       <FeaturesSection visibleSections={visibleSections} />
       <FleetSection />
