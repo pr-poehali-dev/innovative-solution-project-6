@@ -240,6 +240,56 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
             </div>
           </div>
 
+          {/* Реквизиты */}
+          <div className="border border-accent/10 rounded-2xl bg-card/40 p-5 sm:p-6 mb-5">
+            <div className="flex items-center gap-2 mb-4">
+              <Icon name="FileText" size={16} className="text-accent" />
+              <span className="text-accent text-xs font-semibold uppercase tracking-widest">Реквизиты организации</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2.5 text-sm">
+              <div>
+                <span className="text-muted-foreground text-xs">Полное название</span>
+                <p className="text-white font-medium">Общество с ограниченной ответственностью «ФАВОРИТ»</p>
+              </div>
+              <div>
+                <span className="text-muted-foreground text-xs">Сокращённое название</span>
+                <p className="text-white font-medium">ООО «ФАВОРИТ»</p>
+              </div>
+              <div>
+                <span className="text-muted-foreground text-xs">ИНН / КПП</span>
+                <p className="text-white font-medium">5250077990 / 525001001</p>
+              </div>
+              <div>
+                <span className="text-muted-foreground text-xs">ОГРН</span>
+                <p className="text-white font-medium">1235200013531</p>
+              </div>
+              <div className="sm:col-span-2">
+                <span className="text-muted-foreground text-xs">Юридический / почтовый адрес</span>
+                <p className="text-white font-medium">607657, Нижегородская область, Кстовский М.О., г. Кстово, 6-й м-он, д. 2, офис 13</p>
+              </div>
+              <div>
+                <span className="text-muted-foreground text-xs">Расчётный счёт</span>
+                <p className="text-white font-medium">40702810316020000009</p>
+              </div>
+              <div>
+                <span className="text-muted-foreground text-xs">Банк</span>
+                <p className="text-white font-medium">АО «АЛЬФА-БАНК»</p>
+              </div>
+              <div>
+                <span className="text-muted-foreground text-xs">Корр. счёт</span>
+                <p className="text-white font-medium">30101810200000000593</p>
+              </div>
+              <div>
+                <span className="text-muted-foreground text-xs">БИК</span>
+                <p className="text-white font-medium">044525593</p>
+              </div>
+              <div className="sm:col-span-2 border-t border-accent/10 pt-3 mt-1">
+                <span className="text-muted-foreground text-xs">Директор</span>
+                <p className="text-white font-medium">Мкртчян Саргис Варужанович, действующий на основании Устава</p>
+              </div>
+            </div>
+          </div>
+
           {/* Карта */}
           <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden" style={{ height: "300px" }}>
             <iframe
