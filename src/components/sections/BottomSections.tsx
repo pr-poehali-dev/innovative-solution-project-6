@@ -58,7 +58,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
 </head>
 <body>
   <div class="header">
-    <img src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/70f37e87-7308-44c5-ba56-e221771fff69.jpg" alt="Фаворит"/>
+    <img src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/ab248d6b-acc2-452d-a331-85642e74a1ee.jpg" alt="Фаворит"/>
     <h1>ООО «ФАВОРИТ»</h1>
     <p>Реквизиты организации</p>
   </div>
