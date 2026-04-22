@@ -67,14 +67,12 @@ const reviews = [
 const ReviewsSection = () => {
   const [active, setActive] = useState(0);
 
-  const prev = () => setActive((p) => (p - 1 + reviews.length) % reviews.length);
-  const next = () => setActive((p) => (p + 1) % reviews.length);
+  const step = 3;
+  const pages = Math.ceil(reviews.length / step);
+  const prev = () => setActive((p) => (p - 1 + pages) % pages);
+  const next = () => setActive((p) => (p + 1) % pages);
 
-  const visible = [
-    reviews[(active) % reviews.length],
-    reviews[(active + 1) % reviews.length],
-    reviews[(active + 2) % reviews.length],
-  ];
+  const visible = reviews.slice(active * step, active * step + step);
 
   return (
     <section className="py-16 sm:py-32 px-4 sm:px-6 bg-accent/5 overflow-hidden">
@@ -97,7 +95,7 @@ const ReviewsSection = () => {
           {/* Счётчик + кнопки */}
           <div className="flex items-center gap-4">
             <span className="text-muted-foreground text-sm tabular-nums">
-              <span className="text-white font-bold">{active + 1}</span> / {reviews.length}
+              <span className="text-white font-bold">{active + 1}</span> / {pages}
             </span>
             <button
               onClick={prev}
@@ -167,7 +165,7 @@ const ReviewsSection = () => {
 
         {/* Точки навигации */}
         <div className="flex justify-center gap-2 mt-8">
-          {reviews.map((_, i) => (
+          {Array.from({ length: pages }).map((_, i) => (
             <button
               key={i}
               onClick={() => setActive(i)}
