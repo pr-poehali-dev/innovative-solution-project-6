@@ -169,7 +169,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
         </div>
 
         <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-24 sm:pt-32 pb-16 sm:pb-32">
-          <div className={`flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 transition-all duration-1000 ${visibleSections["hero"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+          <div className={`flex flex-col lg:flex-row lg:items-end lg:justify-between lg:min-h-[70vh] gap-8 transition-all duration-1000 ${visibleSections["hero"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
 
             {/* Левая часть — заголовок */}
             <div className="max-w-2xl">
@@ -198,7 +198,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
             </div>
 
             {/* Правая часть — форма */}
-            <div className="w-full lg:w-[420px] shrink-0 lg:mb-0 mt-8 lg:mt-40">
+            <div className="w-full lg:w-[420px] shrink-0 lg:mb-0 mt-8 lg:mt-64">
             {status === "success" ? (
               <div className="bg-accent/10 border border-accent/30 rounded-2xl px-6 py-5 flex items-center gap-3">
                 <Icon name="CheckCircle" size={22} className="text-accent shrink-0" />
