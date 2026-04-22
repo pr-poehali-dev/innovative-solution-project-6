@@ -319,6 +319,13 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
             <div className="flex flex-col sm:flex-col gap-2 sm:col-span-2 sm:justify-end">
               <PhoneButton size="lg" className="rounded-2xl w-full" />
               <a
+                href="tel:+79601690990"
+                className="inline-flex items-center justify-center gap-3 px-5 py-4 border rounded-2xl font-bold text-xl sm:text-2xl w-full transition-all"
+                style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", fontFamily: "'Cinzel', serif", animation: "goldPulse 1.2s ease-in-out infinite" }}
+              >
+                📞 +7 960 169-09-90
+              </a>
+              <a
                 href="https://yandex.ru/maps/?pt=43.851408,56.274653&z=17&text=Шуваловский+канал+7+Нижний+Новгород"
                 target="_blank"
                 rel="noopener noreferrer"
