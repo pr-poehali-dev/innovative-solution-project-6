@@ -107,7 +107,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
           <div className="flex gap-2 sm:gap-3 items-center">
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />
-            <button className="hidden sm:block px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-bold rounded-full transition-all hover:opacity-90" style={{ background: "linear-gradient(135deg, #f5d060, #e8a820, #c8850a)", color: "#1a1a1a", fontFamily: "'Cinzel', serif" }}>
+            <button className="hidden lg:block px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-bold rounded-full transition-all hover:opacity-90" style={{ background: "linear-gradient(135deg, #f5d060, #e8a820, #c8850a)", color: "#1a1a1a", fontFamily: "'Cinzel', serif" }}>
               Заказать
             </button>
             {/* Бургер — только мобайл */}
