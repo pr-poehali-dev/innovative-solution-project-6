@@ -115,6 +115,26 @@
     }
   }
 
+  @keyframes logoGlow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 20px rgba(232, 168, 32, 0.7),
+        0 0 45px rgba(232, 168, 32, 0.4),
+        0 0 70px rgba(232, 168, 32, 0.2);
+    }
+    50% {
+      box-shadow:
+        0 0 35px rgba(232, 168, 32, 1),
+        0 0 70px rgba(232, 168, 32, 0.6),
+        0 0 100px rgba(232, 168, 32, 0.35);
+    }
+  }
+
+  .logo-glow {
+    animation: logoGlow 2s ease-in-out infinite;
+  }
+
   h1,
   h2,
   h3,

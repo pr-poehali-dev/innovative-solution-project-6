@@ -24,8 +24,7 @@ const BrandLogo = ({ to = "/", size = "md" }: BrandLogoProps) => {
       <img
         src={LOGO_URL}
         alt="Фаворит герб"
-        className={`${imgSize} flex-shrink-0 rounded-xl object-cover shadow-lg`}
-        style={{ boxShadow: "0 0 20px rgba(232,168,32,0.7), 0 0 45px rgba(232,168,32,0.4), 0 0 70px rgba(232,168,32,0.2)" }}
+        className={`${imgSize} flex-shrink-0 rounded-xl object-cover logo-glow`}
       />
       <div className="flex flex-col leading-tight">
         <span className="text-xs font-medium tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>
