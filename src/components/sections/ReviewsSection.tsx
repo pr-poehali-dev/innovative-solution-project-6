@@ -169,6 +169,19 @@ const ReviewsSection = () => {
           ))}
         </div>
 
+        {/* Кнопка отзыва на Яндекс.Картах */}
+        <div className="flex justify-center mt-10">
+          <a
+            href="https://yandex.ru/maps/org/195468245032/reviews/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 border border-accent/30 rounded-xl text-white font-medium hover:bg-accent/10 hover:border-accent/60 transition-all text-sm"
+          >
+            <span className="text-accent">★</span>
+            Оставить отзыв на Яндекс.Картах
+          </a>
+        </div>
+
       </div>
     </section>
   );
