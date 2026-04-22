@@ -9,6 +9,7 @@ const reviews = [
     rating: 5,
     service: "FAW + КМУ DongYang",
     avatar: "АС",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/19ab5009-37ca-42d0-b9f3-c1f6b74e290c.jpg",
     highlight: "Техника пришла вовремя",
   },
   {
@@ -18,6 +19,7 @@ const reviews = [
     rating: 5,
     service: "КАМАЗ 43118 + КМУ Kanglim",
     avatar: "ДК",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/e3e14a4e-5bfe-45fd-8cfc-6d1589d3262e.jpg",
     highlight: "Подобрали машину за 20 минут",
   },
   {
@@ -27,6 +29,7 @@ const reviews = [
     rating: 5,
     service: "КАМАЗ 65115 + КМУ HANGIL",
     avatar: "СМ",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/68667517-3b40-4b10-8674-0b0eb82a9c5c.jpg",
     highlight: "Справились в неудобном месте",
   },
   {
@@ -36,6 +39,7 @@ const reviews = [
     rating: 5,
     service: "FAW + КМУ DongYang",
     avatar: "НФ",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/e49db8a8-9035-4ef9-9c76-c2db01b8dd7e.jpg",
     highlight: "Сотрудничаем больше 3 лет",
   },
   {
@@ -45,6 +49,7 @@ const reviews = [
     rating: 5,
     service: "КАМАЗ 43118 + КМУ Kanglim",
     avatar: "АГ",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/f0982a1e-44fd-4ba3-b340-393993a622ca.jpg",
     highlight: "Заключили постоянный договор",
   },
   {
@@ -54,6 +59,7 @@ const reviews = [
     rating: 5,
     service: "КАМАЗ 65115 + КМУ HANGIL",
     avatar: "ВЗ",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/ee3f5ad8-86c4-404c-b18b-232de7c965e8.jpg",
     highlight: "Груз не повреждён",
   },
 ];
@@ -133,8 +139,11 @@ const ReviewsSection = () => {
 
               {/* Автор */}
               <div className="border-t border-accent/10 pt-5 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-accent/20 border border-accent/30 flex items-center justify-center text-accent text-xs font-bold flex-shrink-0">
-                  {review.avatar}
+                <div className="w-10 h-10 rounded-full border border-accent/30 overflow-hidden flex-shrink-0 bg-accent/20">
+                  {review.photo
+                    ? <img src={review.photo} alt={review.name} className="w-full h-full object-cover" />
+                    : <span className="w-full h-full flex items-center justify-center text-accent text-xs font-bold">{review.avatar}</span>
+                  }
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-bold text-white text-sm">{review.name}</p>
