@@ -39,9 +39,11 @@ def handler(event: dict, context) -> dict:
         }
 
     body = json.loads(event.get('body') or '{}')
+    print("RAW BODY:", body)
     name = (body.get('name') or '').strip()
     phone = (body.get('phone') or '').strip()
     comment = (body.get('comment') or '').strip()
+    print("COMMENT:", repr(comment))
 
     if not name or not phone:
         return {
