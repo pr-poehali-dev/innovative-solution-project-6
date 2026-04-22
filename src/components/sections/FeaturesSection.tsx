@@ -7,40 +7,34 @@ interface FeaturesSectionProps {
 const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
   const features = [
     {
-      icon: "Clock",
-      iconBg: "from-amber-400 to-orange-500",
-      title: "Подача от 1 часа",
-      desc: "Оперативно реагируем на заявки и подаём технику в кратчайшие сроки по Нижнему Новгороду",
+      icon: "FileText",
+      title: "Работа с НДС и полный ЭДО",
+      desc: "Обеспечиваем юридическую чистоту сделки и предоставляем полный пакет закрывающих документов. Работаем через систему электронного документооборота (Диадок/СБИС).",
     },
     {
       icon: "Truck",
-      iconBg: "from-blue-400 to-blue-600",
-      title: "Подбор под задачу",
-      desc: "Подберём манипулятор с платформой нужных габаритов и грузоподъёмностью от 5 до 20 тонн",
+      title: "Собственный автопарк",
+      desc: "Вы работаете напрямую с собственником, что исключает переплаты агентских комиссий. Вся техника поставлена на учёт в Ростехнадзоре и имеет все необходимые разрешения.",
     },
     {
-      icon: "Shield",
-      iconBg: "from-green-400 to-emerald-600",
-      title: "Работаем официально",
-      desc: "Заключаем договор, предоставляем все закрывающие документы для юридических лиц",
+      icon: "RefreshCw",
+      title: "Гарантия оперативной замены",
+      desc: "В случае технической неисправности обязуемся заменить технику на аналогичную в течение 3–5 часов. Ваши процессы не встанут из-за поломки одной машины.",
     },
     {
-      icon: "MapPin",
-      iconBg: "from-red-400 to-rose-600",
-      title: "Весь Нижний Новгород",
-      desc: "Работаем на стройках, складах и производствах — выезжаем в любой район города и область",
+      icon: "Clock",
+      title: "Подача от 1 часа",
+      desc: "Оперативно реагируем на заявки и подаём технику в кратчайшие сроки по Нижнему Новгороду и области. Работаем без выходных и праздников.",
     },
     {
       icon: "HardHat",
-      iconBg: "from-yellow-400 to-amber-600",
       title: "Опытные операторы",
-      desc: "Профессиональные машинисты с допуском, опытом от 5 лет и всеми необходимыми разрешениями",
+      desc: "Профессиональные машинисты с допуском и опытом от 5 лет. Все необходимые разрешения и удостоверения в наличии.",
     },
     {
-      icon: "Phone",
-      iconBg: "from-purple-400 to-violet-600",
-      title: "Консультация бесплатно",
-      desc: "Позвоните — поможем выбрать технику, рассчитаем стоимость и согласуем время подачи",
+      icon: "MapPin",
+      title: "Весь Нижний Новгород и область",
+      desc: "Работаем на стройках, складах и производствах — выезжаем в любой район города и Нижегородской области.",
     },
   ];
 
@@ -48,7 +42,7 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
     <section id="features" className="py-12 sm:py-24 px-4 sm:px-6 bg-accent/5">
       <div className="max-w-7xl mx-auto">
         <div
-          className={`text-center mb-8 sm:mb-16 transition-all duration-1000 ${visibleSections["features"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+          className={`text-center mb-8 sm:mb-14 transition-all duration-1000 ${visibleSections["features"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
         >
           <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Преимущества</span>
           <h2 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-3 mb-3 sm:mb-6">
@@ -58,23 +52,26 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+        <div className="flex flex-col gap-3 sm:gap-4 max-w-3xl mx-auto">
           {features.map((item, i) => {
             const isVisible = visibleSections["features"];
             return (
               <div
                 key={i}
-                className={`group flex sm:flex-col items-start gap-3 sm:gap-0 p-4 sm:p-8 border border-accent/10 hover:border-accent/40 rounded-2xl bg-card/50 hover:bg-card/80 transition-all duration-700 ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                className={`flex items-start gap-4 sm:gap-5 p-5 sm:p-6 border border-accent/20 rounded-2xl bg-card/60 hover:border-accent/50 hover:bg-card/80 transition-all duration-500 ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                 }`}
-                style={{ transitionDelay: `${i * 100}ms` }}
+                style={{ transitionDelay: `${i * 80}ms` }}
               >
-                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br ${item.iconBg} flex items-center justify-center sm:mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
-                  <Icon name={item.icon} size={18} className="text-white" />
+                <div
+                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ background: "rgba(232,168,32,0.12)", border: "1.5px solid rgba(232,168,32,0.3)" }}
+                >
+                  <Icon name={item.icon} size={24} style={{ color: "#e8a820" }} />
                 </div>
                 <div>
-                  <h3 className="font-display font-bold text-sm sm:text-xl mb-1 sm:mb-3">{item.title}</h3>
-                  <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{item.desc}</p>
+                  <h3 className="font-black text-base sm:text-lg text-white mb-1.5">{item.title}</h3>
+                  <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             );
