@@ -99,6 +99,21 @@ const trucks = [
     ],
   },
   {
+    badge: "Экскаватор-погрузчик",
+    title: "Экскаватор-погрузчик JCB 3CX",
+    slug: "jcb-3cx",
+    price: "2 400 ₽/час с НДС",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/761d840a-c678-4fee-a5eb-4531b7ca7d17.png",
+    alt: "Экскаватор-погрузчик JCB 3CX",
+    specs: [
+      { label: "Макс. глубина копания", value: "4,24 м" },
+      { label: "Масса", value: "8,136 т" },
+      { label: "Объём заднего ковша", value: "0,3 м³" },
+      { label: "Объём погрузочного ковша", value: "1 м³" },
+      { label: "Навесное оборудование", value: "Есть" },
+    ],
+  },
+  {
     badge: "КМУ 3т",
     title: "ISUZU 5т + КМУ",
     slug: "isuzu-5t-kmu",
