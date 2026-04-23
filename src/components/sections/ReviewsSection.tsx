@@ -9,7 +9,7 @@ const reviews = [
     rating: 5,
     service: "FAW + КМУ DongYang",
     avatar: "АС",
-    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/19ab5009-37ca-42d0-b9f3-c1f6b74e290c.jpg",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/19ab5009-37ca-42d0-b9f3-c1f6b74e290c.webp",
     highlight: "Техника пришла вовремя",
   },
   {
@@ -19,7 +19,7 @@ const reviews = [
     rating: 5,
     service: "КАМАЗ 43118 + КМУ Kanglim",
     avatar: "ДК",
-    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/e3e14a4e-5bfe-45fd-8cfc-6d1589d3262e.jpg",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/e3e14a4e-5bfe-45fd-8cfc-6d1589d3262e.webp",
     highlight: "Подобрали машину за 20 минут",
   },
   {
@@ -29,7 +29,7 @@ const reviews = [
     rating: 5,
     service: "КАМАЗ 65115 + КМУ HANGIL",
     avatar: "СМ",
-    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/68667517-3b40-4b10-8674-0b0eb82a9c5c.jpg",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/68667517-3b40-4b10-8674-0b0eb82a9c5c.webp",
     highlight: "Справились в неудобном месте",
   },
   {
@@ -39,7 +39,7 @@ const reviews = [
     rating: 5,
     service: "FAW + КМУ DongYang",
     avatar: "НФ",
-    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/e49db8a8-9035-4ef9-9c76-c2db01b8dd7e.jpg",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/e49db8a8-9035-4ef9-9c76-c2db01b8dd7e.webp",
     highlight: "Сотрудничаем больше 3 лет",
   },
   {
@@ -49,7 +49,7 @@ const reviews = [
     rating: 5,
     service: "КАМАЗ 43118 + КМУ Kanglim",
     avatar: "АГ",
-    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/f0982a1e-44fd-4ba3-b340-393993a622ca.jpg",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/f0982a1e-44fd-4ba3-b340-393993a622ca.webp",
     highlight: "Заключили постоянный договор",
   },
   {
@@ -59,7 +59,7 @@ const reviews = [
     rating: 5,
     service: "КАМАЗ 65115 + КМУ HANGIL",
     avatar: "ВЗ",
-    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/ee3f5ad8-86c4-404c-b18b-232de7c965e8.jpg",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ee3f5ad8-86c4-404c-b18b-232de7c965e8.webp",
     highlight: "Груз не повреждён",
   },
   {
@@ -69,7 +69,7 @@ const reviews = [
     rating: 5,
     service: "FAW + КМУ DongYang",
     avatar: "ПО",
-    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/4711159a-7e16-4915-ae94-0f3c69b2fb90.jpg",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/4711159a-7e16-4915-ae94-0f3c69b2fb90.webp",
     highlight: "Никаких задержек",
   },
   {
@@ -79,7 +79,7 @@ const reviews = [
     rating: 5,
     service: "КАМАЗ 43118 + КМУ Kanglim",
     avatar: "ИВ",
-    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/33168f2b-e3a9-4ac5-913d-a52d840fc0a1.jpg",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/33168f2b-e3a9-4ac5-913d-a52d840fc0a1.webp",
     highlight: "Всё разложили точно по местам",
   },
   {
@@ -89,7 +89,7 @@ const reviews = [
     rating: 5,
     service: "КАМАЗ 65115 + КМУ HANGIL",
     avatar: "ЕС",
-    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/f64d1322-b01f-476d-870f-539fd9cb034e.jpg",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/f64d1322-b01f-476d-870f-539fd9cb034e.webp",
     highlight: "Теперь только к ним",
   },
   {
@@ -99,7 +99,7 @@ const reviews = [
     rating: 5,
     service: "FAW + КМУ DongYang",
     avatar: "МК",
-    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/9b5b1160-2886-4dfc-b7f6-875c0835e442.jpg",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/9b5b1160-2886-4dfc-b7f6-875c0835e442.webp",
     highlight: "Сделали за один день",
   },
   {
@@ -109,7 +109,7 @@ const reviews = [
     rating: 5,
     service: "КАМАЗ 43118 + КМУ Kanglim",
     avatar: "РТ",
-    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/05076928-b099-40b3-9e2c-9ab67b8f0a31.jpg",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/05076928-b099-40b3-9e2c-9ab67b8f0a31.webp",
     highlight: "Выручают в последний момент",
   },
   {
@@ -119,7 +119,7 @@ const reviews = [
     rating: 5,
     service: "КАМАЗ 65115 + КМУ HANGIL",
     avatar: "ОБ",
-    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/a977bc9c-20e3-4dbd-a71f-a6d563803d74.jpg",
+    photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/a977bc9c-20e3-4dbd-a71f-a6d563803d74.webp",
     highlight: "Пять лет без единого срыва",
   },
 ];

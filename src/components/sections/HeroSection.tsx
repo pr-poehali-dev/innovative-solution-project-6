@@ -12,35 +12,35 @@ interface HeroSectionProps {
 
 const slides = [
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/df8d23ad-2b19-4a5c-bfef-8403f404cab9.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/df8d23ad-2b19-4a5c-bfef-8403f404cab9.webp",
     alt: "FAW КМУ DongYang",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.webp",
     alt: "КАМАЗ 43118 вездеход КМУ Kanglim",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/b646729f-a106-46bf-b7e4-abf0fe1c4983.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/b646729f-a106-46bf-b7e4-abf0fe1c4983.webp",
     alt: "КАМАЗ 65115 КМУ HANGIL",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/96f657e8-7741-4d2b-b428-ca560b0047fb.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/96f657e8-7741-4d2b-b428-ca560b0047fb.webp",
     alt: "Работа манипулятора на объекте",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/0c5ebbe2-cc38-4284-81fb-4721e3e53eaa.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/0c5ebbe2-cc38-4284-81fb-4721e3e53eaa.webp",
     alt: "Манипулятор на стройке",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/ad03fa64-abbe-491a-85cc-f51f79cefc0a.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ad03fa64-abbe-491a-85cc-f51f79cefc0a.webp",
     alt: "Перевозка торгового павильона по городу",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/f96d4e3d-b06a-4cab-818e-ba49896791b5.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/f96d4e3d-b06a-4cab-818e-ba49896791b5.webp",
     alt: "Работа автовышки на объектах РЖД",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/e8b0e860-8ca1-40df-8600-4d28597aa247.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/e8b0e860-8ca1-40df-8600-4d28597aa247.webp",
     alt: "КамАЗ с манипулятором DY",
   },
 ];

@@ -3,59 +3,59 @@ import Icon from "@/components/ui/icon";
 
 const photos = [
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/96f657e8-7741-4d2b-b428-ca560b0047fb.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/96f657e8-7741-4d2b-b428-ca560b0047fb.webp",
     caption: "Монтаж металлоконструкций ангара",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/8f5f1c5e-cd31-4f9e-83e9-6814c83c395e.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/8f5f1c5e-cd31-4f9e-83e9-6814c83c395e.webp",
     caption: "Работа на высоте — строительство склада",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/b5c276a4-5b1a-4bc7-ad4f-af1964ea3099.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/b5c276a4-5b1a-4bc7-ad4f-af1964ea3099.webp",
     caption: "Монтаж конструкций на промышленном объекте",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/201f98a5-c2c5-42cf-9c8f-6fbd5c67b508.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/201f98a5-c2c5-42cf-9c8f-6fbd5c67b508.webp",
     caption: "Два манипулятора на строительстве производственного здания",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/0c5ebbe2-cc38-4284-81fb-4721e3e53eaa.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/0c5ebbe2-cc38-4284-81fb-4721e3e53eaa.webp",
     caption: "Перевозка и разгрузка кабельных барабанов",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/62534a4c-b7cb-4179-a953-6bf52321d543.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/62534a4c-b7cb-4179-a953-6bf52321d543.webp",
     caption: "Монтаж кровли — подъём сэндвич-панелей",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/bb2703e5-098c-4386-968f-1c4f5bd48fac.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/bb2703e5-098c-4386-968f-1c4f5bd48fac.webp",
     caption: "Установка металлического гаража на участке",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/1d067d16-d8b2-42b2-b1ef-4a27f3db79f1.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/1d067d16-d8b2-42b2-b1ef-4a27f3db79f1.webp",
     caption: "Перевозка торгового павильона по городу",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/737482fb-5cef-4606-94a1-7256b0d8b9ab.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/737482fb-5cef-4606-94a1-7256b0d8b9ab.webp",
     caption: "Монтаж фасадных панелей на здании",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/a386df86-71cf-4a6a-b971-87f437eab3db.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/a386df86-71cf-4a6a-b971-87f437eab3db.webp",
     caption: "Совместная работа манипулятора и автовышки на стройке",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/56e40bf4-c213-4485-a5fc-cd80c85fb564.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/56e40bf4-c213-4485-a5fc-cd80c85fb564.webp",
     caption: "Погрузка бетонных изделий на склад",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/ad03fa64-abbe-491a-85cc-f51f79cefc0a.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ad03fa64-abbe-491a-85cc-f51f79cefc0a.webp",
     caption: "Перевозка торгового павильона «Хочу Есть» по городу",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/f96d4e3d-b06a-4cab-818e-ba49896791b5.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/f96d4e3d-b06a-4cab-818e-ba49896791b5.webp",
     caption: "Работа автовышки на объектах РЖД зимой",
   },
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/e8b0e860-8ca1-40df-8600-4d28597aa247.jpg",
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/e8b0e860-8ca1-40df-8600-4d28597aa247.webp",
     caption: "КамАЗ с манипулятором DY — готов к выезду на объект",
   },
 ];

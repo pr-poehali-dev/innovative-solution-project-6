@@ -58,7 +58,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
 </head>
 <body>
   <div class="header">
-    <img src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/ab248d6b-acc2-452d-a331-85642e74a1ee.jpg" alt="Фаворит"/>
+    <img src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp" alt="Фаворит"/>
     <h1>ООО «ФАВОРИТ»</h1>
     <p>Реквизиты организации</p>
   </div>
@@ -273,7 +273,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
             <div className="flex flex-col items-center gap-3 mt-3">
               <div className="flex items-center gap-3 sm:gap-5 flex-wrap justify-center">
                 <img
-                  src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/ab248d6b-acc2-452d-a331-85642e74a1ee.jpg"
+                  src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp"
                   alt="Фаворит герб"
                   className="w-12 h-12 sm:w-20 sm:h-20 flex-shrink-0 rounded-xl object-cover logo-glow"
                 />

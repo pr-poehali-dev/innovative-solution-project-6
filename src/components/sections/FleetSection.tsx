@@ -11,7 +11,7 @@ const trucks = [
     title: "FAW + КМУ DongYang",
     slug: "faw-kmu-dongyoung",
     price: "3 000 ₽/час с НДС",
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/df8d23ad-2b19-4a5c-bfef-8403f404cab9.jpg",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/df8d23ad-2b19-4a5c-bfef-8403f404cab9.webp",
     alt: "FAW КМУ DongYang",
     specs: [
       { label: "Грузоподъёмность кузова", value: "до 17 т" },
@@ -27,7 +27,7 @@ const trucks = [
     title: "КАМАЗ 65115 + КМУ HANGIL",
     slug: "kamaz-65115-hangil",
     price: "2 800 ₽/час с НДС",
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/b646729f-a106-46bf-b7e4-abf0fe1c4983.jpg",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/b646729f-a106-46bf-b7e4-abf0fe1c4983.webp",
     alt: "КАМАЗ 65115 КМУ HANGIL",
     specs: [
       { label: "Грузоподъёмность платформы", value: "до 12 т" },
@@ -43,7 +43,7 @@ const trucks = [
     title: "КАМАЗ 43118 + КМУ Kanglim",
     slug: "kamaz-43118-kanglim",
     price: "3 500 ₽/час с НДС",
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.jpg",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.webp",
     alt: "КАМАЗ 43118 КМУ Kanglim вездеход",
     specs: [
       { label: "Грузоподъёмность кузова", value: "до 10 т" },
@@ -59,7 +59,7 @@ const trucks = [
     title: "FAW J6 + КМУ DONGYANG 1966",
     slug: "faw-j6-dongyang-1966",
     price: "3 500 ₽/час с НДС",
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/cb1469ab-3878-4eea-9eac-9ce6f4129301.jpeg",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/cb1469ab-3878-4eea-9eac-9ce6f4129301.webp",
     alt: "FAW J6 кран-манипулятор DONGYANG 1966 с буром",
     specs: [
       { label: "Грузоподъёмность шасси", value: "до 20 т" },
@@ -75,7 +75,7 @@ const trucks = [
     title: "RENAULT LANDER + КМУ",
     slug: "renault-lander-kmu",
     price: "3 200 ₽/час с НДС",
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/72811b07-39fb-476d-9b0a-6a3f31285de9.jpg",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/72811b07-39fb-476d-9b0a-6a3f31285de9.webp",
     alt: "Renault Lander манипулятор КМУ",
     specs: [
       { label: "Грузоподъёмность автомобиля", value: "до 15 т" },
@@ -89,7 +89,7 @@ const trucks = [
     title: "ISUZU 5т + КМУ",
     slug: "isuzu-5t-kmu",
     price: "2 200 ₽/час с НДС",
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/4bb58aab-783b-43b6-8d89-ee519e570e09.jpg",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/4bb58aab-783b-43b6-8d89-ee519e570e09.webp",
     alt: "ISUZU 5т КМУ",
     specs: [
       { label: "Грузоподъёмность платформы", value: "до 5 т" },
@@ -106,7 +106,7 @@ const trucks = [
     title: "Экскаватор-погрузчик JCB 4CX",
     slug: "jcb-4cx",
     price: "2 700 ₽/час с НДС",
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/29fc9d6a-adfb-4899-9119-3136ce0cb7d4.jpg",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/29fc9d6a-adfb-4899-9119-3136ce0cb7d4.webp",
     alt: "Экскаватор-погрузчик JCB 4CX",
     specs: [
       { label: "Макс. глубина копания", value: "5,58 м" },
@@ -121,7 +121,7 @@ const trucks = [
     title: "Экскаватор-погрузчик JCB 3CX",
     slug: "jcb-3cx",
     price: "2 400 ₽/час с НДС",
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/761d840a-c678-4fee-a5eb-4531b7ca7d17.png",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/761d840a-c678-4fee-a5eb-4531b7ca7d17.webp",
     alt: "Экскаватор-погрузчик JCB 3CX",
     specs: [
       { label: "Макс. глубина копания", value: "4,24 м" },
