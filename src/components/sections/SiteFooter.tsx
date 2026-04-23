@@ -82,30 +82,58 @@ const SiteFooter = () => {
             <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mt-3 sm:mt-4 mb-4 max-w-md">
               Собственный автопарк манипуляторов в Нижнем Новгороде. Работаем с 2015 года. Аренда техники с опытным оператором.
             </p>
-            <div className="flex flex-col gap-2.5">
+
+            {/* Крупные кнопки звонка */}
+            <div className="flex flex-col gap-2.5 mb-4">
               <a
                 href="tel:+79601883084"
-                className="inline-flex items-center gap-2 text-white font-bold text-sm sm:text-base hover:text-accent transition-colors"
+                className="group flex items-center gap-3 px-4 py-3 rounded-2xl shadow-lg shadow-accent/30 active:scale-[0.98] transition-transform"
+                style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
               >
-                <div className="w-8 h-8 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
-                  <Icon name="Phone" size={14} className="text-accent" />
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-black/15 flex items-center justify-center flex-shrink-0">
+                  <Icon name="Phone" size={18} className="text-black" />
                 </div>
-                +7 960 188-30-84
+                <div className="flex flex-col leading-tight">
+                  <span className="text-black/70 text-[10px] sm:text-xs font-bold uppercase tracking-wider">Позвонить</span>
+                  <span className="text-black font-black text-base sm:text-lg tabular-nums">+7 960 188-30-84</span>
+                </div>
               </a>
               <a
-                href="mailto:960188@list.ru"
-                className="inline-flex items-center gap-2 text-muted-foreground text-sm hover:text-accent transition-colors break-all"
+                href="tel:+79601690990"
+                className="group flex items-center gap-3 px-4 py-3 rounded-2xl border border-accent/40 bg-accent/5 hover:bg-accent/10 transition-colors"
               >
-                <div className="w-8 h-8 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
-                  <Icon name="Mail" size={14} className="text-accent" />
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
+                  <Icon name="PhoneCall" size={18} className="text-accent" />
+                </div>
+                <div className="flex flex-col leading-tight">
+                  <span className="text-accent/80 text-[10px] sm:text-xs font-bold uppercase tracking-wider">Запасной номер</span>
+                  <span className="text-white font-black text-base sm:text-lg tabular-nums">+7 960 169-09-90</span>
+                </div>
+              </a>
+            </div>
+
+            {/* Email и адрес */}
+            <div className="flex flex-col gap-2">
+              <a
+                href="mailto:960188@list.ru"
+                className="inline-flex items-center gap-2 text-muted-foreground text-xs sm:text-sm hover:text-accent transition-colors break-all"
+              >
+                <div className="w-7 h-7 rounded-lg bg-accent/10 border border-accent/25 flex items-center justify-center flex-shrink-0">
+                  <Icon name="Mail" size={12} className="text-accent" />
                 </div>
                 960188@list.ru
               </a>
               <div className="inline-flex items-start gap-2 text-muted-foreground text-xs sm:text-sm">
-                <div className="w-8 h-8 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
-                  <Icon name="MapPin" size={14} className="text-accent" />
+                <div className="w-7 h-7 rounded-lg bg-accent/10 border border-accent/25 flex items-center justify-center flex-shrink-0">
+                  <Icon name="MapPin" size={12} className="text-accent" />
                 </div>
-                <span className="mt-1.5">Нижний Новгород,<br className="sm:hidden" /> Шуваловский проезд, 7</span>
+                <span className="mt-1">Нижний Новгород,<br className="sm:hidden" /> Шуваловский проезд, 7</span>
+              </div>
+              <div className="inline-flex items-center gap-2 text-muted-foreground text-xs sm:text-sm">
+                <div className="w-7 h-7 rounded-lg bg-accent/10 border border-accent/25 flex items-center justify-center flex-shrink-0">
+                  <Icon name="Clock" size={12} className="text-accent" />
+                </div>
+                <span>Работаем без выходных · с 7:00 до 22:00</span>
               </div>
             </div>
           </div>
