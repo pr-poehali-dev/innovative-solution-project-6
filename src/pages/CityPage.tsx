@@ -4,6 +4,7 @@ import Icon from "@/components/ui/icon";
 import SectionBadge from "@/components/ui/SectionBadge";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import LazySection from "@/components/LazySection";
 import { getCityBySlug, cities } from "@/data/cities";
 
@@ -50,13 +51,13 @@ const CityPage = () => {
       {/* Hero */}
       <section className="pt-24 sm:pt-32 pb-10 sm:pb-16 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-accent transition-colors mb-6"
-          >
-            <Icon name="ChevronLeft" size={16} />
-            На главную
-          </Link>
+          <Breadcrumbs
+            items={[
+              { label: "Главная", to: "/" },
+              { label: "Города", to: "/" },
+              { label: city.name },
+            ]}
+          />
 
           <div className="flex justify-start mb-4">
             <SectionBadge>Город {city.name}</SectionBadge>

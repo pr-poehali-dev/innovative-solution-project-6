@@ -4,6 +4,7 @@ import Icon from "@/components/ui/icon";
 import OrderModal from "@/components/ui/OrderModal";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import PriceCalculator from "@/components/ui/PriceCalculator";
 
 const trucks: Record<string, {
@@ -306,12 +307,14 @@ export default function TruckPage() {
 
       <main className="pt-20 pb-16 min-h-screen">
         {/* Хлебные крошки */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 text-sm text-muted-foreground flex gap-1 sm:gap-2 items-center flex-wrap">
-          <Link to="/" className="hover:text-white transition-colors">Главная</Link>
-          <span>/</span>
-          <Link to="/#fleet" className="hover:text-white transition-colors">Наша техника</Link>
-          <span>/</span>
-          <span className="text-white">{truck.title}</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+          <Breadcrumbs
+            items={[
+              { label: "Главная", to: "/" },
+              { label: "Наша техника", to: "/#fleet" },
+              { label: truck.title },
+            ]}
+          />
         </div>
 
         {/* Основной блок */}
