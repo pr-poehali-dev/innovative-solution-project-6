@@ -30,6 +30,7 @@ const trucks = [
     slug: "kamaz-65115-hangil",
     price: "2 800 ₽/час с НДС",
     count: 3,
+    tag: { label: "Хит заказов", icon: "Flame", color: "from-orange-500 to-red-600" },
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/b646729f-a106-46bf-b7e4-abf0fe1c4983.webp",
     alt: "КАМАЗ 65115 КМУ HANGIL",
     specs: [
@@ -47,6 +48,7 @@ const trucks = [
     slug: "kamaz-43118-kanglim",
     price: "3 500 ₽/час с НДС",
     count: 2,
+    tag: { label: "Популярно", icon: "TrendingUp", color: "from-blue-500 to-indigo-600" },
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.webp",
     alt: "КАМАЗ 43118 КМУ Kanglim вездеход",
     specs: [
@@ -64,6 +66,7 @@ const trucks = [
     slug: "faw-j6-dongyang-1966",
     price: "3 500 ₽/час с НДС",
     count: 1,
+    tag: { label: "Эксклюзив", icon: "Crown", color: "from-purple-500 to-pink-600" },
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/cb1469ab-3878-4eea-9eac-9ce6f4129301.webp",
     alt: "FAW J6 кран-манипулятор DONGYANG 1966 с буром",
     specs: [
@@ -96,6 +99,7 @@ const trucks = [
     slug: "isuzu-5t-kmu",
     price: "2 200 ₽/час с НДС",
     count: 2,
+    tag: { label: "Выгодная цена", icon: "BadgePercent", color: "from-emerald-500 to-green-600" },
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/4bb58aab-783b-43b6-8d89-ee519e570e09.webp",
     alt: "ISUZU 5т КМУ",
     specs: [
@@ -130,6 +134,7 @@ const trucks = [
     slug: "jcb-3cx",
     price: "2 400 ₽/час с НДС",
     count: 1,
+    tag: { label: "Новинка", icon: "Sparkles", color: "from-cyan-500 to-blue-500" },
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/761d840a-c678-4fee-a5eb-4531b7ca7d17.webp",
     alt: "Экскаватор-погрузчик JCB 3CX",
     specs: [
@@ -188,8 +193,17 @@ const FleetSection = () => {
           </p>
         </div>
 
-        {trucks.map((truck, idx) => (
+        {trucks.map((truck, idx) => {
+          const tag = (truck as typeof truck & { tag?: { label: string; icon: string; color: string } }).tag;
+          return (
           <div key={idx} className={`relative border border-accent/20 rounded-2xl sm:rounded-3xl bg-card/50 overflow-hidden ${idx < trucks.length - 1 ? "mb-6 sm:mb-8" : "mb-8 sm:mb-12"}`}>
+            {/* Угловой "лейбл-флажок" — только если есть тег */}
+            {tag && (
+              <div className={`absolute top-0 right-0 z-20 flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r ${tag.color} text-white text-xs sm:text-sm font-black uppercase tracking-wider shadow-xl rounded-bl-2xl`}>
+                <Icon name={tag.icon} size={14} />
+                {tag.label}
+              </div>
+            )}
             <div className="absolute inset-0 bg-gradient-to-r from-accent/10 via-transparent to-transparent" />
             <div className={`relative grid gap-0 ${truck.image ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
               {truck.image && (
@@ -293,7 +307,8 @@ const FleetSection = () => {
               )}
             </div>
           </div>
-        ))}
+          );
+        })}
 
         {/* What to tell us */}
         <div className="border border-accent/10 rounded-2xl bg-accent/5 p-5 sm:p-10">

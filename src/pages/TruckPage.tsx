@@ -15,6 +15,7 @@ const trucks: Record<string, {
   price: string;
   priceNum: number;
   count: number;
+  tag?: { label: string; icon: string; color: string };
   image: string;
   alt: string;
   description: string;
@@ -58,6 +59,7 @@ const trucks: Record<string, {
     price: "2 800 ₽/час с НДС",
     priceNum: 2800,
     count: 3,
+    tag: { label: "Хит заказов", icon: "Flame", color: "from-orange-500 to-red-600" },
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/b646729f-a106-46bf-b7e4-abf0fe1c4983.webp",
     alt: "Аренда КАМАЗ 65115 с КМУ HANGIL в Нижнем Новгороде",
     description: "Компания «Фаворит» предлагает в аренду манипулятор КАМАЗ 65115 с КМУ HANGIL — проверенную спецтехнику для погрузки, разгрузки и транспортировки грузов в Нижнем Новгороде и области. Грузоподъёмность платформы до 12 тонн и вылет стрелы до 19 метров обеспечивают высокую эффективность на строительных и промышленных объектах.",
@@ -86,6 +88,7 @@ const trucks: Record<string, {
     price: "3 500 ₽/час с НДС",
     priceNum: 3500,
     count: 2,
+    tag: { label: "Популярно", icon: "TrendingUp", color: "from-blue-500 to-indigo-600" },
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.webp",
     alt: "Аренда КАМАЗ 43118 вездеход с КМУ Kanglim в Нижнем Новгороде",
     description: "Компания «Фаворит» предлагает в аренду полноприводный манипулятор-вездеход КАМАЗ 43118 с КМУ Kanglim в Нижнем Новгороде и области. Максимальный вылет стрелы 23 метра — самый большой в нашем парке. Идеальный выбор для работ на бездорожье, труднодоступных объектах и при монтаже на большой высоте.",
@@ -114,6 +117,7 @@ const trucks: Record<string, {
     price: "3 500 ₽/час с НДС",
     priceNum: 3500,
     count: 1,
+    tag: { label: "Эксклюзив", icon: "Crown", color: "from-purple-500 to-pink-600" },
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/cb1469ab-3878-4eea-9eac-9ce6f4129301.webp",
     alt: "Аренда FAW J6 с КМУ DONGYANG 1966 и буром в Нижнем Новгороде",
     description: "Компания «Фаворит» предлагает в аренду кран-манипулятор DONGYANG 1966 с буром на шасси FAW J6 в Нижнем Новгороде и области. Грузоподъёмность шасси до 20 тонн, стрелы до 8 тонн, вылет до 22 метров. Оснащён буровой установкой и монтажной люлькой — универсальная машина для строительных, монтажных и буровых работ.",
@@ -195,6 +199,7 @@ const trucks: Record<string, {
     price: "2 400 ₽/час с НДС",
     priceNum: 2400,
     count: 1,
+    tag: { label: "Новинка", icon: "Sparkles", color: "from-cyan-500 to-blue-500" },
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/761d840a-c678-4fee-a5eb-4531b7ca7d17.webp",
     alt: "Аренда экскаватора-погрузчика JCB 3CX в Нижнем Новгороде",
     description: "Компания «Фаворит» предлагает в аренду экскаватор-погрузчик JCB 3CX в Нижнем Новгороде и области. Компактная и манёвренная машина для коммунальных и строительных работ: погрузка и выгрузка материалов, расчистка территории, копка траншей и котлованов глубиной до 4,24 м, разработка и трамбовка грунтов.\n\nВсе наши JCB 3CX оснащены навесным оборудованием: узкий ковш 40 см, стандартный ковш 60 см, широкий ковш 80 см, гидромолот для разрушения мёрзлого грунта, бетона и асфальта.\n\nВся техника является собственностью ООО «Фаворит», находится в отличном техническом состоянии и обслуживается опытными квалифицированными операторами.",
@@ -222,6 +227,7 @@ const trucks: Record<string, {
     price: "2 200 ₽/час с НДС",
     priceNum: 2200,
     count: 2,
+    tag: { label: "Выгодная цена", icon: "BadgePercent", color: "from-emerald-500 to-green-600" },
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/4bb58aab-783b-43b6-8d89-ee519e570e09.webp",
     alt: "Аренда ISUZU 5т с КМУ в Нижнем Новгороде",
     description: "Компания «Фаворит» предлагает в аренду компактный манипулятор ISUZU 5т с КМУ в Нижнем Новгороде и области. Манёвренная машина грузоподъёмностью до 5 тонн идеально подходит для работы в стеснённых условиях — во дворах, на узких улицах и небольших объектах. Самый доступный вариант в нашем парке для небольших задач.",
@@ -379,6 +385,12 @@ export default function TruckPage() {
 
             {/* Инфо */}
             <div>
+              {truck.tag && (
+                <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r ${truck.tag.color} text-white text-xs sm:text-sm font-black uppercase tracking-wider shadow-lg mb-3`}>
+                  <Icon name={truck.tag.icon} size={14} />
+                  {truck.tag.label}
+                </div>
+              )}
               <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tighter mb-3">
                 <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
                   {truck.title}
