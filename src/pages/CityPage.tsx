@@ -11,6 +11,7 @@ import { getCityBySlug, cities } from "@/data/cities";
 const FleetSection = lazy(() => import("@/components/sections/FleetSection"));
 const FaqSection = lazy(() => import("@/components/sections/FaqSection"));
 const ReviewsSection = lazy(() => import("@/components/sections/ReviewsSection"));
+const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
 const CityPage = () => {
   const { slug } = useParams();
@@ -189,11 +190,7 @@ const CityPage = () => {
         </div>
       </section>
 
-      <footer className="border-t border-accent/10 py-6 sm:py-8 px-4 sm:px-6 bg-background/50">
-        <div className="max-w-7xl mx-auto text-center text-xs sm:text-sm text-muted-foreground">
-          <p>© 2015 ООО «Фаворит» — аренда манипуляторов в Нижнем Новгороде и области</p>
-        </div>
-      </footer>
+      <LazySection><SiteFooter /></LazySection>
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
-import BrandLogo from "@/components/ui/BrandLogo";
 import SectionBadge from "@/components/ui/SectionBadge";
 
 interface MapAndRequisitesSectionProps {
@@ -189,24 +188,6 @@ const MapAndRequisitesSection = ({
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-accent/10 py-6 sm:py-12 px-4 sm:px-6 bg-background/50">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
-          <div className="flex flex-col items-center md:items-start gap-1">
-            <BrandLogo size="sm" />
-            <p className="text-center md:text-left mt-1">© 2015 — Аренда манипуляторов в Нижнем Новгороде</p>
-          </div>
-          <a href="https://webmaster.yandex.ru/siteinfo/?site=https://фаварит.рф" target="_blank" rel="noopener noreferrer">
-            <img width="88" height="31" alt="Яндекс.Метрика" style={{borderRadius: '8px'}} src="https://yandex.ru/cycounter?https://фаварит.рф&theme=light&lang=ru" />
-          </a>
-          <div className="flex gap-4 sm:gap-8 flex-wrap justify-center">
-            <a href="#" className="hover:text-white transition-colors">Конфиденциальность</a>
-            <a href="#" className="hover:text-white transition-colors">Условия</a>
-            <a href="#" className="hover:text-white transition-colors">О компании</a>
-            <a href="#" className="hover:text-white transition-colors">Контакты</a>
-          </div>
-        </div>
-      </footer>
     </>
   );
 };

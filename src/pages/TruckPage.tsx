@@ -6,6 +6,7 @@ import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import PriceCalculator from "@/components/ui/PriceCalculator";
+import SiteFooter from "@/components/sections/SiteFooter";
 
 const trucks: Record<string, {
   title: string;
@@ -438,6 +439,7 @@ export default function TruckPage() {
           </a>
         </section>
       </main>
+      <SiteFooter />
     </>
   );
 }
