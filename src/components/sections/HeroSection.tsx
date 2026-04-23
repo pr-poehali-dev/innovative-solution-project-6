@@ -43,10 +43,37 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
   const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 4000);
-    return () => clearInterval(timer);
+    // Автослайд: запускаем только когда вкладка активна — экономит CPU на мобильных
+    let timer: ReturnType<typeof setInterval> | null = null;
+    const start = () => {
+      if (timer) return;
+      timer = setInterval(() => {
+        setCurrent((prev) => (prev + 1) % slides.length);
+      }, 5000);
+    };
+    const stop = () => {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+    const handleVisibility = () => {
+      if (document.hidden) stop();
+      else start();
+    };
+    // Откладываем запуск автослайда до полной загрузки страницы, чтобы не мешать LCP/TBT
+    const kickoff = () => start();
+    if (document.readyState === "complete") {
+      kickoff();
+    } else {
+      window.addEventListener("load", kickoff, { once: true });
+    }
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => {
+      stop();
+      window.removeEventListener("load", kickoff);
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {

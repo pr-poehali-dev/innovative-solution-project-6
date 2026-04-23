@@ -28,7 +28,14 @@ const LazySection = ({ children, minHeight = "400px", rootMargin = "300px" }: La
   }, [visible, rootMargin]);
 
   return (
-    <div ref={ref} style={{ minHeight: visible ? undefined : minHeight }}>
+    <div
+      ref={ref}
+      style={{
+        minHeight: visible ? undefined : minHeight,
+        contentVisibility: visible ? undefined : ("auto" as const),
+        containIntrinsicSize: visible ? undefined : `1px ${minHeight}`,
+      }}
+    >
       {visible && <Suspense fallback={<div style={{ minHeight }} />}>{children}</Suspense>}
     </div>
   );
