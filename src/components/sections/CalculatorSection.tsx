@@ -63,16 +63,18 @@ const CalculatorSection = () => {
             {/* Слайдер часов */}
             <div className="mb-8">
               <div className="flex justify-between items-center mb-3">
-                <p className="text-sm text-muted-foreground font-medium">Количество часов</p>
+                <label htmlFor="calc-hours-main" className="text-sm text-muted-foreground font-medium">Количество часов</label>
                 <span className="text-accent font-black text-xl">{hours} ч</span>
               </div>
               <input
+                id="calc-hours-main"
                 type="range"
                 min={4}
                 max={24}
                 step={1}
                 value={hours}
                 onChange={(e) => setHours(Number(e.target.value))}
+                aria-label="Количество часов аренды"
                 className="w-full h-2 rounded-full appearance-none cursor-pointer accent-[hsl(var(--accent))]"
                 style={{
                   background: `linear-gradient(to right, hsl(var(--accent)) 0%, hsl(var(--accent)) ${((hours - 4) / 20) * 100}%, hsl(var(--accent) / 0.2) ${((hours - 4) / 20) * 100}%, hsl(var(--accent) / 0.2) 100%)`

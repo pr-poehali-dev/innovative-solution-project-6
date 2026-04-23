@@ -10,39 +10,17 @@ interface HeroSectionProps {
   visibleSections: Record<string, boolean>;
 }
 
-const slides = [
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/df8d23ad-2b19-4a5c-bfef-8403f404cab9.webp",
-    alt: "FAW КМУ DongYang",
-  },
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.webp",
-    alt: "КАМАЗ 43118 вездеход КМУ Kanglim",
-  },
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/b646729f-a106-46bf-b7e4-abf0fe1c4983.webp",
-    alt: "КАМАЗ 65115 КМУ HANGIL",
-  },
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/96f657e8-7741-4d2b-b428-ca560b0047fb.webp",
-    alt: "Работа манипулятора на объекте",
-  },
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/0c5ebbe2-cc38-4284-81fb-4721e3e53eaa.webp",
-    alt: "Манипулятор на стройке",
-  },
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ad03fa64-abbe-491a-85cc-f51f79cefc0a.webp",
-    alt: "Перевозка торгового павильона по городу",
-  },
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/f96d4e3d-b06a-4cab-818e-ba49896791b5.webp",
-    alt: "Работа автовышки на объектах РЖД",
-  },
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/e8b0e860-8ca1-40df-8600-4d28597aa247.webp",
-    alt: "КамАЗ с манипулятором DY",
-  },
+const WEBP_BASE = "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp";
+
+const slides: { id: string; alt: string }[] = [
+  { id: "df8d23ad-2b19-4a5c-bfef-8403f404cab9", alt: "FAW КМУ DongYang" },
+  { id: "861dfbdb-0341-4b64-ac9b-f77e5a4fa99d", alt: "КАМАЗ 43118 вездеход КМУ Kanglim" },
+  { id: "b646729f-a106-46bf-b7e4-abf0fe1c4983", alt: "КАМАЗ 65115 КМУ HANGIL" },
+  { id: "96f657e8-7741-4d2b-b428-ca560b0047fb", alt: "Работа манипулятора на объекте" },
+  { id: "0c5ebbe2-cc38-4284-81fb-4721e3e53eaa", alt: "Манипулятор на стройке" },
+  { id: "ad03fa64-abbe-491a-85cc-f51f79cefc0a", alt: "Перевозка торгового павильона по городу" },
+  { id: "f96d4e3d-b06a-4cab-818e-ba49896791b5", alt: "Работа автовышки на объектах РЖД" },
+  { id: "e8b0e860-8ca1-40df-8600-4d28597aa247", alt: "КамАЗ с манипулятором DY" },
 ];
 
 const navLinks = [
@@ -140,24 +118,34 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
       {/* Hero Section */}
       <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
 
-        {/* Слайдер фото */}
-        {slides.map((slide, i) => (
-          <div
-            key={i}
-            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${i === current ? "opacity-100" : "opacity-0"}`}
-          >
-            <img
-              src={slide.url}
-              alt={slide.alt}
-              className="w-full h-full object-cover object-center"
-              width="1920"
-              height="1080"
-              loading={i === 0 ? "eager" : "lazy"}
-              fetchPriority={i === 0 ? "high" : "low"}
-              decoding="async"
-            />
-          </div>
-        ))}
+        {/* Слайдер фото — рендерим только активный и следующий слайд */}
+        {slides.map((slide, i) => {
+          const isActive = i === current;
+          const isNext = i === (current + 1) % slides.length;
+          const shouldRender = isActive || isNext || i === 0;
+          if (!shouldRender) return null;
+          const src800 = `${WEBP_BASE}/w800/${slide.id}.webp`;
+          const src1600 = `${WEBP_BASE}/w1600/${slide.id}.webp`;
+          return (
+            <div
+              key={i}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}
+            >
+              <img
+                src={src1600}
+                srcSet={`${src800} 800w, ${src1600} 1600w`}
+                sizes="100vw"
+                alt={slide.alt}
+                className="w-full h-full object-cover object-center"
+                width="1600"
+                height="900"
+                loading={i === 0 ? "eager" : "lazy"}
+                fetchPriority={i === 0 ? "high" : "low"}
+                decoding="async"
+              />
+            </div>
+          );
+        })}
 
         {/* Затемнение */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40 z-10" />
@@ -165,13 +153,19 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
 
 
         {/* Точки-индикаторы */}
-        <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex gap-0 z-20">
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`rounded-full transition-all duration-300 ${i === current ? "w-6 h-2 bg-accent" : "w-2 h-2 bg-white/40 hover:bg-white/70"}`}
-            />
+              aria-label={`Перейти к слайду ${i + 1} из ${slides.length}`}
+              aria-current={i === current ? "true" : undefined}
+              className="p-3 group"
+            >
+              <span
+                className={`block rounded-full transition-all duration-300 ${i === current ? "w-6 h-2 bg-accent" : "w-2 h-2 bg-white/40 group-hover:bg-white/70"}`}
+              />
+            </button>
           ))}
         </div>
 

@@ -33,16 +33,18 @@ const PriceCalculator = ({ pricePerHour, onOrder }: PriceCalculatorProps) => {
         {/* Часы */}
         <div>
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm text-muted-foreground">Количество часов</span>
+            <label htmlFor="calc-hours" className="text-sm text-muted-foreground">Количество часов</label>
             <span className="font-black text-white text-lg">{hours} ч</span>
           </div>
           <input
+            id="calc-hours"
             type="range"
             min={minHours}
             max={24}
             step={1}
             value={hours}
             onChange={e => setHours(Number(e.target.value))}
+            aria-label="Количество часов аренды"
             className="w-full accent-yellow-400 cursor-pointer"
           />
           <div className="flex justify-between text-xs text-muted-foreground mt-1">

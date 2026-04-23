@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import PhoneButton from "@/components/ui/PhoneButton";
+import { lazy, Suspense, useEffect, useState } from "react";
 import HeroSection from "@/components/sections/HeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
-import FleetSection from "@/components/sections/FleetSection";
-import BottomSections from "@/components/sections/BottomSections";
-import ReviewsSection from "@/components/sections/ReviewsSection";
-import GallerySection from "@/components/sections/GallerySection";
-import CalculatorSection from "@/components/sections/CalculatorSection";
-import ClientsSection from "@/components/sections/ClientsSection";
-import UseCasesSection from "@/components/sections/UseCasesSection";
-import StatsSection from "@/components/sections/StatsSection";
+
+const FleetSection = lazy(() => import("@/components/sections/FleetSection"));
+const BottomSections = lazy(() => import("@/components/sections/BottomSections"));
+const ReviewsSection = lazy(() => import("@/components/sections/ReviewsSection"));
+const GallerySection = lazy(() => import("@/components/sections/GallerySection"));
+const CalculatorSection = lazy(() => import("@/components/sections/CalculatorSection"));
+const ClientsSection = lazy(() => import("@/components/sections/ClientsSection"));
+const UseCasesSection = lazy(() => import("@/components/sections/UseCasesSection"));
 
 const Index = () => {
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
@@ -87,13 +86,15 @@ const Index = () => {
       })}</script>
       <HeroSection visibleSections={visibleSections} />
       <FeaturesSection visibleSections={visibleSections} />
-      <FleetSection />
-      <UseCasesSection />
-      <CalculatorSection />
-      <GallerySection />
-      <ClientsSection />
-      <ReviewsSection />
-      <BottomSections visibleSections={visibleSections} />
+      <Suspense fallback={<div className="min-h-[400px]" />}>
+        <FleetSection />
+        <UseCasesSection />
+        <CalculatorSection />
+        <GallerySection />
+        <ClientsSection />
+        <ReviewsSection />
+        <BottomSections visibleSections={visibleSections} />
+      </Suspense>
 
 
     </div>
