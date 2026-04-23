@@ -34,6 +34,7 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
   const handleDownloadPdf = () => {
     const printWindow = window.open("", "_blank");
     if (!printWindow) return;
+    const today = new Date().toLocaleDateString("ru-RU", { day: "2-digit", month: "long", year: "numeric" });
     printWindow.document.write(`<!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -47,12 +48,15 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
     .header img { width: 80px; height: 80px; object-fit: cover; border-radius: 12px; margin-bottom: 10px; }
     .header h1 { font-size: 15pt; font-weight: bold; margin-bottom: 4px; }
     .header p { font-size: 10pt; color: #666; }
+    .meta { display: flex; justify-content: space-between; font-size: 9pt; color: #888; margin-bottom: 16px; padding: 8px 12px; background: #f7f7f7; border-radius: 6px; }
     table { width: 100%; border-collapse: collapse; margin-top: 8px; }
     tr { border-bottom: 1px solid #e5e5e5; }
     td { padding: 8px 6px; vertical-align: top; }
     td:first-child { font-size: 9pt; color: #888; width: 38%; white-space: nowrap; }
     td:last-child { font-size: 11pt; font-weight: 500; }
     .divider { border-top: 2px solid #ddd; margin: 12px 0; }
+    .footer { margin-top: 24px; padding-top: 12px; border-top: 1px solid #ddd; text-align: center; font-size: 9pt; color: #666; }
+    .footer strong { color: #111; font-size: 11pt; display: block; margin-bottom: 4px; }
   </style>
 </head>
 <body>
@@ -60,6 +64,10 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
     <img src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp" alt="Фаворит"/>
     <h1>ООО «ФАВОРИТ»</h1>
     <p>Реквизиты организации</p>
+  </div>
+  <div class="meta">
+    <span>Дата формирования: ${today}</span>
+    <span>Телефон: +7 960 169-09-90</span>
   </div>
   <table>
     <tr><td>Полное название</td><td>Общество с ограниченной ответственностью «ФАВОРИТ»</td></tr>
@@ -72,6 +80,11 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
     <tr><td>Корр. счёт</td><td>30101810200000000593</td></tr>
     <tr><td>БИК</td><td>044525593</td></tr>
   </table>
+  <div class="footer">
+    <strong>Связаться с нами</strong>
+    Телефон: +7 960 169-09-90 · Нижний Новгород, Шуваловский проезд, 7<br/>
+    Работаем без выходных · Подача техники от 1 часа
+  </div>
 </body>
 </html>`);
     printWindow.document.close();
