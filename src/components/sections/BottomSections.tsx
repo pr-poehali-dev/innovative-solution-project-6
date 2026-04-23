@@ -339,67 +339,84 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
           </div>
 
           {/* Реквизиты */}
-          <div className="border border-accent/10 rounded-2xl bg-card/40 p-5 sm:p-6 mb-5">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <Icon name="FileText" size={16} className="text-accent" />
-                <span className="text-accent text-xs font-semibold uppercase tracking-widest">Реквизиты организации</span>
+          <div className="relative overflow-hidden rounded-3xl border border-accent/30 p-5 sm:p-8 mb-5 shadow-2xl" style={{ background: "linear-gradient(135deg, rgba(232,168,32,0.08) 0%, rgba(255,255,255,0.04) 50%, rgba(232,168,32,0.06) 100%)" }}>
+            <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-accent/10 blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-accent/5 blur-3xl pointer-events-none" />
+
+            <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-accent/30 to-accent/10 border border-accent/40 flex items-center justify-center shadow-lg">
+                  <Icon name="BadgeCheck" size={22} className="text-accent" />
+                </div>
+                <div>
+                  <div className="text-accent text-[10px] sm:text-xs font-semibold uppercase tracking-widest">Официальные реквизиты</div>
+                  <div
+                    className="text-lg sm:text-2xl font-black"
+                    style={{
+                      background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #fdeea0 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      fontFamily: "'Cinzel', serif",
+                      letterSpacing: "0.05em",
+                    }}
+                  >
+                    ООО «ФАВОРИТ»
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 w-full sm:w-auto">
                 <button
                   onClick={handleCopyRequisites}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-accent/20 hover:border-accent/50 hover:bg-accent/10 transition-all text-xs font-medium text-white"
+                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-accent/30 bg-accent/5 hover:bg-accent/15 hover:border-accent/60 transition-all text-xs font-semibold text-white"
                 >
-                  <Icon name={copied ? "Check" : "Copy"} size={13} className={copied ? "text-green-400" : "text-accent"} />
-                  {copied ? "Скопировано!" : "Скопировать"}
+                  <Icon name={copied ? "Check" : "Copy"} size={14} className={copied ? "text-green-400" : "text-accent"} />
+                  {copied ? "Скопировано" : "Скопировать"}
                 </button>
                 <button
                   onClick={handleDownloadPdf}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-accent/20 hover:border-accent/50 hover:bg-accent/10 transition-all text-xs font-medium text-white"
+                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-accent/30 bg-accent/5 hover:bg-accent/15 hover:border-accent/60 transition-all text-xs font-semibold text-white"
                 >
-                  <Icon name="Download" size={13} className="text-accent" />
+                  <Icon name="Download" size={14} className="text-accent" />
                   PDF
                 </button>
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2.5 text-sm">
-              <div>
-                <span className="text-muted-foreground text-xs">Полное название</span>
-                <p className="text-white font-medium">Общество с ограниченной ответственностью «ФАВОРИТ»</p>
-              </div>
-              <div>
-                <span className="text-muted-foreground text-xs">Сокращённое название</span>
-                <p className="text-white font-medium">ООО «ФАВОРИТ»</p>
-              </div>
-              <div>
-                <span className="text-muted-foreground text-xs">ИНН / КПП</span>
-                <p className="text-white font-medium">5250077990 / 525001001</p>
-              </div>
-              <div>
-                <span className="text-muted-foreground text-xs">ОГРН</span>
-                <p className="text-white font-medium">1235200013531</p>
-              </div>
-              <div className="sm:col-span-2">
-                <span className="text-muted-foreground text-xs">Юридический / почтовый адрес</span>
-                <p className="text-white font-medium">607657, Нижегородская область, Кстовский М.О., г. Кстово, 6-й м-он, д. 2, офис 13</p>
-              </div>
-              <div>
-                <span className="text-muted-foreground text-xs">Расчётный счёт</span>
-                <p className="text-white font-medium">40702810316020000009</p>
-              </div>
-              <div>
-                <span className="text-muted-foreground text-xs">Банк</span>
-                <p className="text-white font-medium">АО «АЛЬФА-БАНК»</p>
-              </div>
-              <div>
-                <span className="text-muted-foreground text-xs">Корр. счёт</span>
-                <p className="text-white font-medium">30101810200000000593</p>
-              </div>
-              <div>
-                <span className="text-muted-foreground text-xs">БИК</span>
-                <p className="text-white font-medium">044525593</p>
-              </div>
 
+            <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                { icon: "Building2", label: "Полное название", value: "Общество с ограниченной ответственностью «ФАВОРИТ»", full: true },
+                { icon: "Hash", label: "ИНН / КПП", value: "5250077990 / 525001001" },
+                { icon: "FileBadge", label: "ОГРН", value: "1235200013531" },
+                { icon: "MapPin", label: "Юридический адрес", value: "607657, Нижегородская обл., Кстовский М.О., г. Кстово, 6-й м-он, д. 2, офис 13", full: true },
+                { icon: "CreditCard", label: "Расчётный счёт", value: "40702810316020000009" },
+                { icon: "Landmark", label: "Банк", value: "АО «АЛЬФА-БАНК»" },
+                { icon: "Wallet", label: "Корр. счёт", value: "30101810200000000593" },
+                { icon: "Fingerprint", label: "БИК", value: "044525593" },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className={`group flex items-start gap-3 p-3 sm:p-4 rounded-xl bg-white/5 border border-white/10 hover:border-accent/40 hover:bg-accent/5 transition-all ${item.full ? "sm:col-span-2" : ""}`}
+                >
+                  <div className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/25 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
+                    <Icon name={item.icon} size={16} className="text-accent" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-muted-foreground text-[10px] sm:text-xs uppercase tracking-wider mb-0.5">{item.label}</div>
+                    <div className="text-white font-semibold text-sm sm:text-base break-words">{item.value}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="relative mt-4 flex items-center gap-3 p-3 sm:p-4 rounded-xl border border-accent/25 bg-gradient-to-r from-accent/10 to-transparent">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center shadow-lg flex-shrink-0">
+                <Icon name="UserCheck" size={18} className="text-black" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-muted-foreground text-[10px] sm:text-xs uppercase tracking-wider">Директор</div>
+                <div className="text-white font-semibold text-sm sm:text-base">Мкртчян Саргис Варужанович</div>
+                <div className="text-muted-foreground text-xs">действует на основании Устава</div>
+              </div>
             </div>
           </div>
 
