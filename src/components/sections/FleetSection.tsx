@@ -172,21 +172,22 @@ const FleetSection = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-accent/10 via-transparent to-transparent" />
             <div className={`relative grid gap-0 ${truck.image ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
               {truck.image && (
-                <div className="relative lg:hidden overflow-hidden bg-card/80">
+                <div className="relative lg:hidden overflow-hidden bg-white/5">
                   <img
                     src={truck.image}
                     alt={truck.alt}
-                    className="w-full object-contain max-h-64"
+                    className="w-full object-contain h-72 sm:h-96"
                     loading="lazy"
                     decoding="async"
                     width="800"
                     height="600"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <div className="inline-block px-2.5 py-0.5 bg-accent/30 backdrop-blur-sm rounded-full text-accent text-xs font-semibold tracking-widest uppercase mb-2">
+                  <div className="absolute top-3 left-3">
+                    <div className="inline-block px-2.5 py-1 bg-accent/90 backdrop-blur-sm rounded-full text-black text-[10px] font-bold tracking-widest uppercase shadow-lg">
                       {truck.badge}
                     </div>
+                  </div>
+                  <div className="px-4 py-3 bg-gradient-to-b from-transparent to-black/40">
                     <h3 className="font-display font-black text-lg text-white leading-tight">{truck.title}</h3>
                     <p className="text-accent font-bold text-sm mt-0.5">{truck.price}</p>
                   </div>
