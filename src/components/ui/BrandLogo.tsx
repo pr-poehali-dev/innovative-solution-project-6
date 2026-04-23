@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const LOGO_URL = "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp";
@@ -15,9 +16,23 @@ interface BrandLogoProps {
   size?: "sm" | "md";
 }
 
+const isOnlineNow = () => {
+  const hour = new Date().getHours();
+  return hour >= 7 && hour < 22;
+};
+
 const BrandLogo = ({ to = "/", size = "md" }: BrandLogoProps) => {
   const imgSize = size === "sm" ? "w-9 h-9 sm:w-12 sm:h-12" : "w-14 h-14 sm:w-20 sm:h-20";
   const titleSize = size === "sm" ? "text-base sm:text-xl" : "text-xl sm:text-3xl";
+
+  const [online, setOnline] = useState(isOnlineNow);
+
+  useEffect(() => {
+    const tick = () => setOnline(isOnlineNow());
+    tick();
+    const interval = setInterval(tick, 60_000);
+    return () => clearInterval(interval);
+  }, []);
 
   const content = (
     <div className="flex items-center gap-3">
@@ -32,13 +47,20 @@ const BrandLogo = ({ to = "/", size = "md" }: BrandLogoProps) => {
       <div className="flex flex-col leading-tight">
         <div className="flex items-center gap-2">
           <span className="block text-[9px] sm:text-xs font-medium tracking-[0.22em] sm:tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>
-          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-green-500/15 border border-green-500/40">
-            <span className="relative flex w-1.5 h-1.5">
-              <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75" />
-              <span className="relative rounded-full w-1.5 h-1.5 bg-green-400" />
+          {online ? (
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-green-500/15 border border-green-500/40" title="Работаем сейчас — звоните">
+              <span className="relative flex w-1.5 h-1.5">
+                <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75" />
+                <span className="relative rounded-full w-1.5 h-1.5 bg-green-400" />
+              </span>
+              <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-green-400">Онлайн</span>
             </span>
-            <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-green-400">Онлайн</span>
-          </span>
+          ) : (
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-white/10 border border-white/20" title="Работаем с 7:00 до 22:00. Заявки принимаются круглосуточно">
+              <span className="w-1.5 h-1.5 rounded-full bg-white/50" />
+              <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-white/70">Оффлайн</span>
+            </span>
+          )}
         </div>
         <span className={`font-black drop-shadow-lg ${titleSize}`} style={goldText}>
           ООО Фаворит
