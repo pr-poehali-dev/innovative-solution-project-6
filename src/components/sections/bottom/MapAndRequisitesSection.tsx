@@ -163,50 +163,50 @@ const MapAndRequisitesSection = ({
 
           </div>
 
-          {/* Карта + кнопка отзыва на Яндекс.Картах */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-3 sm:gap-4 items-stretch">
-            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden" style={{ minHeight: "300px", height: "300px" }}>
-              <iframe
-                src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad4a56098b0cf87fda42b842d643c95a74c726e9616eafe64e9ea35dc809ded31&lang=ru_RU&scroll=true"
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                allowFullScreen
-                title="Карта — ООО Фаворит"
-                className="absolute inset-0 w-full h-full"
-                loading="lazy"
-              />
+          {/* Карта */}
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden" style={{ minHeight: "300px", height: "300px" }}>
+            <iframe
+              src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad4a56098b0cf87fda42b842d643c95a74c726e9616eafe64e9ea35dc809ded31&lang=ru_RU&scroll=true"
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              allowFullScreen
+              title="Карта — ООО Фаворит"
+              className="absolute inset-0 w-full h-full"
+              loading="lazy"
+            />
+          </div>
+
+          {/* Блок с кнопкой отзыва — под картой */}
+          <div
+            className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-accent/30 p-5 sm:p-6 mt-4 sm:mt-5 flex flex-col sm:flex-row items-center justify-between gap-4"
+            style={{ background: "linear-gradient(135deg, rgba(232,168,32,0.12) 0%, rgba(255,255,255,0.04) 50%, rgba(232,168,32,0.08) 100%)" }}
+          >
+            <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-accent/15 blur-3xl pointer-events-none" />
+
+            <div className="relative flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+              <div className="w-12 h-12 rounded-xl bg-accent/15 border border-accent/40 flex items-center justify-center flex-shrink-0">
+                <Icon name="Star" size={22} className="text-accent" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-accent text-[10px] sm:text-xs font-semibold uppercase tracking-widest">Нам важно ваше мнение</div>
+                <div className="text-white font-bold text-base sm:text-lg leading-tight">Поделитесь опытом работы с нами</div>
+                <p className="text-muted-foreground text-xs sm:text-sm leading-snug mt-1 hidden sm:block">
+                  Оставьте отзыв на Яндекс.Картах — это помогает другим клиентам сделать правильный выбор.
+                </p>
+              </div>
             </div>
 
-            {/* Блок с кнопкой отзыва — рядом с картой (на десктопе справа, на мобайле снизу) */}
-            <div
-              className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-accent/30 p-5 sm:p-6 flex flex-col justify-center gap-4 lg:w-[320px]"
-              style={{ background: "linear-gradient(135deg, rgba(232,168,32,0.12) 0%, rgba(255,255,255,0.04) 50%, rgba(232,168,32,0.08) 100%)" }}
+            <a
+              href="https://yandex.ru/maps/org/195468245032/reviews/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-xl font-bold text-sm transition-all w-full sm:w-auto flex-shrink-0"
+              style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)", color: "#1a1a1a" }}
             >
-              <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-accent/15 blur-3xl pointer-events-none" />
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-accent/15 border border-accent/40 flex items-center justify-center flex-shrink-0">
-                  <Icon name="Star" size={20} className="text-accent" />
-                </div>
-                <div>
-                  <div className="text-accent text-[10px] sm:text-xs font-semibold uppercase tracking-widest">Нам важно ваше мнение</div>
-                  <div className="text-white font-bold text-base sm:text-lg leading-tight">Поделитесь опытом</div>
-                </div>
-              </div>
-              <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
-                Работали с нами? Оставьте отзыв на Яндекс.Картах — это помогает другим клиентам сделать правильный выбор.
-              </p>
-              <a
-                href="https://yandex.ru/maps/org/195468245032/reviews/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-bold text-sm transition-all"
-                style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)", color: "#1a1a1a" }}
-              >
-                <Icon name="Star" size={16} />
-                Оставить отзыв
-              </a>
-            </div>
+              <Icon name="Star" size={16} />
+              Оставить отзыв на Яндекс.Картах
+            </a>
           </div>
         </div>
       </section>
