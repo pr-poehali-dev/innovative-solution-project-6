@@ -145,6 +145,7 @@ const orderItems = [
 const FleetSection = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedTruck, setSelectedTruck] = useState("");
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string; title: string } | null>(null);
 
   const openModal = (truckTitle: string) => {
     setSelectedTruck(truckTitle);
@@ -173,15 +174,25 @@ const FleetSection = () => {
             <div className={`relative grid gap-0 ${truck.image ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
               {truck.image && (
                 <div className="relative lg:hidden overflow-hidden bg-white/5">
-                  <img
-                    src={truck.image}
-                    alt={truck.alt}
-                    className="w-full object-contain h-72 sm:h-96"
-                    loading="lazy"
-                    decoding="async"
-                    width="800"
-                    height="600"
-                  />
+                  <button
+                    type="button"
+                    onClick={() => setLightbox({ src: truck.image, alt: truck.alt, title: truck.title })}
+                    className="block w-full group"
+                    aria-label={`Открыть фото ${truck.title} на весь экран`}
+                  >
+                    <img
+                      src={truck.image}
+                      alt={truck.alt}
+                      className="w-full object-contain h-72 sm:h-96 group-active:scale-[0.98] transition-transform"
+                      loading="lazy"
+                      decoding="async"
+                      width="800"
+                      height="600"
+                    />
+                    <div className="absolute bottom-20 right-3 w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg">
+                      <Icon name="Maximize2" size={16} className="text-white" />
+                    </div>
+                  </button>
                   <div className="absolute top-3 left-3">
                     <div className="inline-block px-2.5 py-1 bg-accent/90 backdrop-blur-sm rounded-full text-black text-[10px] font-bold tracking-widest uppercase shadow-lg">
                       {truck.badge}
@@ -256,6 +267,34 @@ const FleetSection = () => {
           </p>
         </div>
       </div>
+
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-sm p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setLightbox(null)}
+            className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors z-10"
+            aria-label="Закрыть"
+          >
+            <Icon name="X" size={20} className="text-white" />
+          </button>
+          <div className="absolute top-4 left-4 right-20 text-white/90 text-sm sm:text-base font-semibold truncate">
+            {lightbox.title}
+          </div>
+          <img
+            src={lightbox.src}
+            alt={lightbox.alt}
+            className="max-w-full max-h-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <div className="absolute bottom-4 left-0 right-0 text-center text-white/60 text-xs">
+            Нажмите вне фото, чтобы закрыть
+          </div>
+        </div>
+      )}
     </section>
   );
 };
