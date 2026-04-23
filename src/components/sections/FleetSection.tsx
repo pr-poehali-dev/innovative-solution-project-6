@@ -12,6 +12,7 @@ const trucks = [
     title: "FAW + КМУ DongYang",
     slug: "faw-kmu-dongyoung",
     price: "3 000 ₽/час с НДС",
+    count: 2,
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/df8d23ad-2b19-4a5c-bfef-8403f404cab9.webp",
     alt: "FAW КМУ DongYang",
     specs: [
@@ -28,6 +29,7 @@ const trucks = [
     title: "КАМАЗ 65115 + КМУ HANGIL",
     slug: "kamaz-65115-hangil",
     price: "2 800 ₽/час с НДС",
+    count: 3,
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/b646729f-a106-46bf-b7e4-abf0fe1c4983.webp",
     alt: "КАМАЗ 65115 КМУ HANGIL",
     specs: [
@@ -44,6 +46,7 @@ const trucks = [
     title: "КАМАЗ 43118 + КМУ Kanglim",
     slug: "kamaz-43118-kanglim",
     price: "3 500 ₽/час с НДС",
+    count: 2,
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.webp",
     alt: "КАМАЗ 43118 КМУ Kanglim вездеход",
     specs: [
@@ -60,6 +63,7 @@ const trucks = [
     title: "FAW J6 + КМУ DONGYANG 1966",
     slug: "faw-j6-dongyang-1966",
     price: "3 500 ₽/час с НДС",
+    count: 1,
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/cb1469ab-3878-4eea-9eac-9ce6f4129301.webp",
     alt: "FAW J6 кран-манипулятор DONGYANG 1966 с буром",
     specs: [
@@ -76,6 +80,7 @@ const trucks = [
     title: "RENAULT LANDER + КМУ",
     slug: "renault-lander-kmu",
     price: "3 200 ₽/час с НДС",
+    count: 2,
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/72811b07-39fb-476d-9b0a-6a3f31285de9.webp",
     alt: "Renault Lander манипулятор КМУ",
     specs: [
@@ -90,6 +95,7 @@ const trucks = [
     title: "ISUZU 5т + КМУ",
     slug: "isuzu-5t-kmu",
     price: "2 200 ₽/час с НДС",
+    count: 2,
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/4bb58aab-783b-43b6-8d89-ee519e570e09.webp",
     alt: "ISUZU 5т КМУ",
     specs: [
@@ -107,6 +113,7 @@ const trucks = [
     title: "Экскаватор-погрузчик JCB 4CX",
     slug: "jcb-4cx",
     price: "2 700 ₽/час с НДС",
+    count: 2,
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/29fc9d6a-adfb-4899-9119-3136ce0cb7d4.webp",
     alt: "Экскаватор-погрузчик JCB 4CX",
     specs: [
@@ -122,6 +129,7 @@ const trucks = [
     title: "Экскаватор-погрузчик JCB 3CX",
     slug: "jcb-3cx",
     price: "2 400 ₽/час с НДС",
+    count: 1,
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/761d840a-c678-4fee-a5eb-4531b7ca7d17.webp",
     alt: "Экскаватор-погрузчик JCB 3CX",
     specs: [
@@ -133,6 +141,15 @@ const trucks = [
     ],
   },
 ];
+
+// Вспомогательная функция — склонение слова "единица" по числу
+const pluralizeUnits = (n: number) => {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return "единица";
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return "единицы";
+  return "единиц";
+};
 
 const orderItems = [
   { icon: "Weight", iconBg: "from-blue-400 to-blue-600", text: "Вес груза" },
@@ -203,14 +220,26 @@ const FleetSection = () => {
                   </div>
                   <div className="px-4 py-3 bg-gradient-to-b from-transparent to-black/40">
                     <h3 className="font-display font-black text-lg text-white leading-tight">{truck.title}</h3>
-                    <p className="text-accent font-bold text-sm mt-0.5">{truck.price}</p>
+                    <div className="flex items-center gap-2 mt-1 flex-wrap">
+                      <p className="text-accent font-bold text-sm">{truck.price}</p>
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-accent/15 border border-accent/40 text-accent text-[11px] font-bold">
+                        <Icon name="Truck" size={11} />
+                        В парке: {truck.count} {pluralizeUnits(truck.count)}
+                      </span>
+                    </div>
                   </div>
                 </div>
               )}
 
               <div className="p-4 sm:p-10 lg:p-14">
-                <div className="hidden lg:inline-block px-3 py-1 bg-accent/20 rounded-full text-accent text-xs font-semibold tracking-widest uppercase mb-4 sm:mb-6">
-                  {truck.badge}
+                <div className="hidden lg:flex items-center gap-3 mb-4 sm:mb-6 flex-wrap">
+                  <div className="inline-block px-3 py-1 bg-accent/20 rounded-full text-accent text-xs font-semibold tracking-widest uppercase">
+                    {truck.badge}
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 border border-accent/40 text-accent text-xs font-bold">
+                    <Icon name="Truck" size={13} />
+                    В парке: {truck.count} {pluralizeUnits(truck.count)}
+                  </div>
                 </div>
                 <h3 className="hidden lg:block font-display font-black text-xl sm:text-3xl lg:text-4xl mb-2">{truck.title}</h3>
                 <p className="hidden lg:block text-accent font-bold text-lg sm:text-xl mb-5 sm:mb-8">{truck.price}</p>
