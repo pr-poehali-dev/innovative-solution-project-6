@@ -30,6 +30,7 @@ const navLinks = [
   { href: "#usecases", label: "Услуги" },
   { href: "#how", label: "Как это работает" },
   { href: "#pricing", label: "Тарифы" },
+  { href: "/blog", label: "Блог" },
 ];
 
 const HeroSection = ({ visibleSections }: HeroSectionProps) => {

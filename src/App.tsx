@@ -9,6 +9,8 @@ const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const TruckPage = lazy(() => import("./pages/TruckPage"));
 const CityPage = lazy(() => import("./pages/CityPage"));
+const BlogIndex = lazy(() => import("./pages/BlogIndex"));
+const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 
 const queryClient = new QueryClient();
 
@@ -29,6 +31,8 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/tehnika/:slug" element={<TruckPage />} />
             <Route path="/gorod/:slug" element={<CityPage />} />
+            <Route path="/blog" element={<BlogIndex />} />
+            <Route path="/blog/:slug" element={<BlogArticle />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
