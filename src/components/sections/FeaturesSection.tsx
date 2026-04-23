@@ -58,7 +58,7 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
             return (
               <div
                 key={i}
-                className={`flex items-start gap-4 sm:gap-5 p-5 sm:p-6 border border-accent/20 rounded-2xl bg-card/60 hover:border-accent/50 hover:bg-card/80 transition-all duration-500 ${
+                className={`flex items-start gap-4 sm:gap-5 p-5 sm:p-6 border border-accent/40 rounded-2xl bg-white/10 backdrop-blur-sm shadow-lg hover:border-accent/70 hover:bg-white/15 hover:shadow-xl transition-all duration-500 ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                 }`}
                 style={{ transitionDelay: `${i * 80}ms` }}
