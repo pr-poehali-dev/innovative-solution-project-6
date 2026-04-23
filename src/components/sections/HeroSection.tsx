@@ -116,9 +116,57 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
       </header>
 
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
+      <section id="hero" className="relative lg:min-h-screen lg:flex lg:items-center overflow-hidden">
 
-        {/* Слайдер фото — рендерим только активный слайд */}
+        {/* Мобильный слайдер — отдельным блоком сверху, картинка видна целиком */}
+        <div className="relative lg:hidden w-full pt-20 bg-gradient-to-b from-background via-background to-black">
+          <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden bg-black">
+            {slides.map((slide, i) => {
+              const isActive = i === current;
+              const shouldRender = isActive || i === 0;
+              if (!shouldRender) return null;
+              const src800 = `${WEBP_BASE}/w800/${slide.id}.webp`;
+              const src1600 = `${WEBP_BASE}/w1600/${slide.id}.webp`;
+              return (
+                <div
+                  key={i}
+                  className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}
+                >
+                  <img
+                    src={src1600}
+                    srcSet={`${src800} 800w, ${src1600} 1600w`}
+                    sizes="100vw"
+                    alt={slide.alt}
+                    className="w-full h-full object-contain object-center"
+                    width="1600"
+                    height="900"
+                    loading={i === 0 ? "eager" : "lazy"}
+                    fetchPriority={i === 0 ? "high" : "low"}
+                    decoding="async"
+                  />
+                </div>
+              );
+            })}
+            {/* Точки-индикаторы — мобильные */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-0 z-20">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent(i)}
+                  aria-label={`Перейти к слайду ${i + 1} из ${slides.length}`}
+                  aria-current={i === current ? "true" : undefined}
+                  className="p-2 group"
+                >
+                  <span
+                    className={`block rounded-full transition-all duration-300 ${i === current ? "w-6 h-2 bg-accent" : "w-2 h-2 bg-white/40 group-hover:bg-white/70"}`}
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Десктопный слайдер — фон на весь экран */}
         {slides.map((slide, i) => {
           const isActive = i === current;
           const shouldRender = isActive || i === 0;
@@ -128,7 +176,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
           return (
             <div
               key={i}
-              className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}
+              className={`hidden lg:block absolute inset-0 w-full h-full transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}
             >
               <img
                 src={src1600}
@@ -146,13 +194,11 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
           );
         })}
 
-        {/* Затемнение */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/10 z-10" />
+        {/* Затемнение — только для десктопа */}
+        <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/10 z-10" />
 
-
-
-        {/* Точки-индикаторы */}
-        <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex gap-0 z-20">
+        {/* Точки-индикаторы — десктоп */}
+        <div className="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 gap-0 z-20">
           {slides.map((_, i) => (
             <button
               key={i}
@@ -168,7 +214,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
           ))}
         </div>
 
-        <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-24 sm:pt-32 pb-16 sm:pb-32">
+        <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-6 lg:pt-32 pb-16 sm:pb-32">
           <div className={`max-w-2xl transition-all duration-1000 ${visibleSections["hero"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
             <div className="mb-4 sm:mb-8 inline-block">
               <span className="text-xs font-medium tracking-widest text-accent/80 uppercase">
