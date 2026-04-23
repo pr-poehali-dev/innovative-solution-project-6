@@ -393,132 +393,98 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
               </a>
             </div>
 
-            {/* Форма заявки — яркая и заметная */}
+            {/* Форма заявки — компактная и заметная */}
             {status === "success" ? (
-              <div className="relative rounded-3xl p-[2px] overflow-hidden" style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}>
-                <div className="bg-background rounded-3xl px-6 py-6 sm:px-8 sm:py-7 flex items-center gap-4">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-accent/20 border border-accent/40 flex items-center justify-center flex-shrink-0">
-                    <Icon name="CheckCircle" size={28} className="text-accent" />
+              <div className="relative rounded-2xl p-[2px] overflow-hidden" style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}>
+                <div className="bg-background rounded-2xl px-5 py-4 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-accent/20 border border-accent/40 flex items-center justify-center flex-shrink-0">
+                    <Icon name="CheckCircle" size={22} className="text-accent" />
                   </div>
                   <div>
-                    <p className="font-black text-white text-lg sm:text-xl">Заявка принята!</p>
-                    <p className="text-sm text-white/70 mt-0.5">Перезвоним в ближайшие 5 минут.</p>
+                    <p className="font-black text-white text-base">Заявка принята!</p>
+                    <p className="text-xs text-white/70">Перезвоним в ближайшие 5 минут.</p>
                   </div>
                 </div>
               </div>
             ) : (
               <div className="relative" id="order">
-                {/* Золотое свечение позади формы */}
+                {/* Мягкое золотое свечение */}
                 <div
-                  className="absolute -inset-1 rounded-3xl opacity-40 blur-xl pointer-events-none animate-pulse"
+                  className="absolute -inset-0.5 rounded-2xl opacity-30 blur-md pointer-events-none animate-pulse"
                   style={{ background: "linear-gradient(135deg, #e8a820 0%, transparent 50%, #e8a820 100%)" }}
                 />
 
-                {/* Рамка с золотым градиентом */}
-                <div className="relative rounded-3xl p-[2px]" style={{ background: "linear-gradient(135deg, rgba(245,208,96,0.9) 0%, rgba(232,168,32,0.4) 40%, rgba(200,133,10,0.2) 60%, rgba(232,168,32,0.8) 100%)" }}>
-                  <div className="relative rounded-3xl bg-gradient-to-br from-zinc-950 via-background to-black p-5 sm:p-7 overflow-hidden">
-                    {/* Декоративные блики */}
-                    <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-accent/25 blur-3xl pointer-events-none" />
-                    <div className="absolute -bottom-24 -left-16 w-44 h-44 rounded-full bg-accent/15 blur-3xl pointer-events-none" />
+                {/* Золотая рамка-градиент */}
+                <div className="relative rounded-2xl p-[1.5px]" style={{ background: "linear-gradient(135deg, rgba(245,208,96,0.9) 0%, rgba(232,168,32,0.3) 50%, rgba(232,168,32,0.8) 100%)" }}>
+                  <div className="relative rounded-2xl bg-gradient-to-br from-zinc-950 via-background to-black p-3.5 sm:p-4 overflow-hidden">
+                    <div className="absolute -top-16 -right-16 w-32 h-32 rounded-full bg-accent/20 blur-3xl pointer-events-none" />
 
                     <div className="relative">
-                      {/* Бейдж + заголовок */}
-                      <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                        <span className="relative flex w-2.5 h-2.5">
+                      {/* Компактный заголовок одной строкой */}
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="relative flex w-2 h-2">
                           <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-75" />
-                          <span className="relative rounded-full w-2.5 h-2.5 bg-accent" />
+                          <span className="relative rounded-full w-2 h-2 bg-accent" />
                         </span>
-                        <span className="text-accent text-[11px] sm:text-xs font-black uppercase tracking-widest">Онлайн · ответим за 5 минут</span>
+                        <h3 className="text-white text-sm sm:text-base font-black">
+                          Оставить заявку <span className="text-accent/80 font-normal">· ответим за 5 минут</span>
+                        </h3>
                       </div>
 
-                      <h3 className="text-white text-xl sm:text-2xl lg:text-3xl font-black leading-tight mb-1 sm:mb-2">
-                        Оставьте заявку — <span className="text-accent">рассчитаем цену бесплатно</span>
-                      </h3>
-                      <p className="text-white/70 text-xs sm:text-sm mb-4 sm:mb-5">
-                        Подберём технику под задачу и перезвоним за 5 минут
-                      </p>
-
-                      <form onSubmit={handleSubmit} className="flex flex-col gap-2.5 sm:gap-3">
-                        <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3">
+                      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+                        <div className="flex flex-col sm:flex-row gap-2">
                           <div className="relative flex-1">
-                            <Icon name="User" size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
+                            <Icon name="User" size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
                             <input
                               type="text"
                               placeholder="Ваше имя"
                               value={name}
                               onChange={e => setName(e.target.value)}
                               required
-                              className="w-full bg-white/[0.07] border border-white/20 rounded-xl pl-11 pr-4 py-3.5 text-white placeholder:text-white/50 text-sm sm:text-base focus:outline-none focus:border-accent focus:bg-white/[0.1] focus:ring-2 focus:ring-accent/30 transition-all"
+                              className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
                             />
                           </div>
                           <div className="relative flex-1">
-                            <Icon name="Phone" size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
+                            <Icon name="Phone" size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
                             <input
                               type="tel"
                               placeholder="+7 (___) ___-__-__"
                               value={phone}
                               onChange={e => setPhone(e.target.value)}
                               required
-                              className="w-full bg-white/[0.07] border border-white/20 rounded-xl pl-11 pr-4 py-3.5 text-white placeholder:text-white/50 text-sm sm:text-base focus:outline-none focus:border-accent focus:bg-white/[0.1] focus:ring-2 focus:ring-accent/30 transition-all"
+                              className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
                             />
                           </div>
-                        </div>
-                        <div className="relative">
-                          <Icon name="Package" size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
-                          <input
-                            type="text"
-                            placeholder="Что перевозим? (необязательно)"
-                            value={cargo}
-                            onChange={e => setCargo(e.target.value)}
-                            className="w-full bg-white/[0.07] border border-white/20 rounded-xl pl-11 pr-4 py-3.5 text-white placeholder:text-white/50 text-sm sm:text-base focus:outline-none focus:border-accent focus:bg-white/[0.1] focus:ring-2 focus:ring-accent/30 transition-all"
-                          />
                         </div>
 
                         <button
                           type="submit"
                           disabled={status === "loading"}
-                          className="group relative mt-1 sm:mt-2 w-full px-6 py-4 sm:py-5 rounded-xl font-black text-base sm:text-lg flex items-center gap-2 justify-center transition-all disabled:opacity-60 active:scale-[0.98] overflow-hidden"
+                          className="group relative mt-0.5 w-full px-5 py-3 rounded-lg font-black text-sm sm:text-base flex items-center gap-2 justify-center transition-all disabled:opacity-60 active:scale-[0.98] overflow-hidden"
                           style={{
                             background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
                             color: "#000",
-                            boxShadow: "0 8px 28px rgba(232,168,32,0.45), inset 0 1px 0 rgba(255,255,255,0.4)",
+                            boxShadow: "0 4px 18px rgba(232,168,32,0.4), inset 0 1px 0 rgba(255,255,255,0.4)",
                             fontFamily: "'Cinzel', serif",
                             letterSpacing: "0.03em",
                           }}
                         >
-                          {/* Блик, пробегающий по кнопке */}
                           <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
                           {status === "loading" ? (
                             <>
-                              <Icon name="Loader2" size={20} className="animate-spin" />
+                              <Icon name="Loader2" size={16} className="animate-spin" />
                               <span className="relative">Отправка...</span>
                             </>
                           ) : (
                             <>
-                              <span className="relative">Получить расчёт</span>
-                              <ArrowRight className="relative w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={3} />
+                              <span className="relative">Оставить заявку</span>
+                              <ArrowRight className="relative w-4 h-4 group-hover:translate-x-1 transition-transform" strokeWidth={3} />
                             </>
                           )}
                         </button>
 
-                        {/* Мини-гарантии под кнопкой */}
-                        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 mt-2 text-[11px] sm:text-xs text-white/60">
-                          <span className="inline-flex items-center gap-1">
-                            <Icon name="ShieldCheck" size={12} className="text-accent" />
-                            Без обязательств
-                          </span>
-                          <span className="inline-flex items-center gap-1">
-                            <Icon name="Zap" size={12} className="text-accent" />
-                            Ответ за 5 минут
-                          </span>
-                          <span className="inline-flex items-center gap-1">
-                            <Icon name="Lock" size={12} className="text-accent" />
-                            Данные защищены
-                          </span>
-                        </div>
-
                         {status === "error" && (
-                          <p className="text-red-400 text-xs text-center mt-1">Ошибка отправки, попробуйте ещё раз или позвоните.</p>
+                          <p className="text-red-400 text-xs text-center">Ошибка отправки, попробуйте ещё раз или позвоните.</p>
                         )}
                       </form>
                     </div>
