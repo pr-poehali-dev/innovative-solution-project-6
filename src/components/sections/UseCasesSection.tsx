@@ -1,4 +1,5 @@
 import Icon from "@/components/ui/icon";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 const useCases = [
   {
@@ -62,8 +63,10 @@ const UseCasesSection = () => {
     <section id="usecases" className="py-16 sm:py-32 px-4 sm:px-6 bg-accent/5">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10 sm:mb-20">
-          <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Области применения</span>
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4 mb-4 sm:mb-6">
+          <div className="flex justify-center mb-4">
+            <SectionBadge>Области применения</SectionBadge>
+          </div>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mb-4 sm:mb-6">
             <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
               Где нужен манипулятор
             </span>

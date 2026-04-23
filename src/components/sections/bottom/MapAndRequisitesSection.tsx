@@ -1,6 +1,7 @@
 import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 interface MapAndRequisitesSectionProps {
   copied: boolean;
@@ -32,7 +33,9 @@ const MapAndRequisitesSection = ({
       <section className="py-12 sm:py-24 px-4 sm:px-6 bg-accent/5">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-6 sm:mb-12">
-            <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Наш адрес</span>
+            <div className="flex justify-center mb-4">
+              <SectionBadge>Наш адрес</SectionBadge>
+            </div>
             <div className="flex flex-col items-center gap-3 mt-3">
               <div className="flex items-center gap-3 sm:gap-5 flex-wrap justify-center">
                 <img

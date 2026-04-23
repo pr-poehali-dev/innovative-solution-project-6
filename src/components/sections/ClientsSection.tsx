@@ -1,3 +1,5 @@
+import SectionBadge from "@/components/ui/SectionBadge";
+
 const clients = [
   { name: "ЛУКОЙЛ", color: "#e8001d" },
   { name: "ГАЗ", color: "#003087" },
@@ -18,8 +20,10 @@ const ClientsSection = () => {
     <section className="py-16 sm:py-32 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8 sm:mb-14">
-          <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Партнёры</span>
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-3">
+          <div className="flex justify-center mb-4">
+            <SectionBadge>Партнёры</SectionBadge>
+          </div>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter">
             <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
               Наши заказчики
             </span>

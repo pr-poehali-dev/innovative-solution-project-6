@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import OrderModal from "@/components/ui/OrderModal";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 const trucks = [
   { name: "ISUZU 5т + КМУ", price: 2200 },
@@ -22,8 +23,10 @@ const CalculatorSection = () => {
       <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} truckName={`${truck.name} · ${hours} ч · ${truck.price.toLocaleString("ru")} ₽/час · Итого: ${total.toLocaleString("ru")} ₽`} />
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10 sm:mb-16">
-          <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Калькулятор</span>
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4 mb-4">
+          <div className="flex justify-center mb-4">
+            <SectionBadge>Калькулятор</SectionBadge>
+          </div>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mb-4">
             <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
               Рассчитайте стоимость
             </span>

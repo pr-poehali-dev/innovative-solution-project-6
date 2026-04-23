@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 const reviews = [
   {
@@ -141,8 +142,10 @@ const ReviewsSection = () => {
         {/* Шапка */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 sm:mb-16 gap-6">
           <div>
-            <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Отзывы</span>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-3">
+            <div className="flex justify-center mb-4">
+              <SectionBadge>Отзывы</SectionBadge>
+            </div>
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter">
               <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
                 Что говорят клиенты
               </span>

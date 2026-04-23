@@ -1,4 +1,5 @@
 import Icon from "@/components/ui/icon";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 interface FeaturesSectionProps {
   visibleSections: Record<string, boolean>;
@@ -44,8 +45,10 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
         <div
           className={`text-center mb-8 sm:mb-14 transition-all duration-1000 ${visibleSections["features"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
         >
-          <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Преимущества</span>
-          <h2 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-3 mb-3 sm:mb-6">
+          <div className="flex justify-center mb-4">
+            <SectionBadge>Преимущества</SectionBadge>
+          </div>
+          <h2 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mb-3 sm:mb-6">
             <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
               Почему выбирают нас
             </span>

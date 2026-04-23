@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import OrderModal from "@/components/ui/OrderModal";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 const trucks = [
   // ── Манипуляторы ──
@@ -157,8 +158,10 @@ const FleetSection = () => {
       <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} truckName={selectedTruck} />
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10 sm:mb-20">
-          <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Наш парк</span>
-          <h2 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-4 mb-4 sm:mb-6">
+          <div className="flex justify-center mb-4">
+            <SectionBadge>Наш парк</SectionBadge>
+          </div>
+          <h2 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mb-4 sm:mb-6">
             <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
               Наша техника
             </span>

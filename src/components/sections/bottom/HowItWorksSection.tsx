@@ -1,4 +1,5 @@
 import Icon from "@/components/ui/icon";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 interface HowItWorksSectionProps {
   visibleSections: Record<string, boolean>;
@@ -35,8 +36,10 @@ const HowItWorksSection = ({ visibleSections }: HowItWorksSectionProps) => {
         <div
           className={`text-center mb-8 sm:mb-16 transition-all duration-1000 ${visibleSections["how"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
         >
-          <span className="text-xs font-medium tracking-widest text-accent/60 uppercase">Процесс</span>
-          <h2 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mt-3">
+          <div className="flex justify-center mb-4">
+            <SectionBadge>Процесс</SectionBadge>
+          </div>
+          <h2 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter">
             <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
               Как это работает
             </span>
