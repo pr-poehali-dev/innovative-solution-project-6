@@ -15,6 +15,7 @@ const ClientsSection = lazy(() => import("@/components/sections/ClientsSection")
 const UseCasesSection = lazy(() => import("@/components/sections/UseCasesSection"));
 const SeoTextSection = lazy(() => import("@/components/sections/SeoTextSection"));
 const FaqSection = lazy(() => import("@/components/sections/FaqSection"));
+const SeoFooterLinks = lazy(() => import("@/components/sections/SeoFooterLinks"));
 
 const SECTION_IDS = ["hero", "features", "how", "pricing", "cta"];
 
@@ -36,6 +37,7 @@ const Index = () => {
       <LazySection><SeoTextSection /></LazySection>
       <LazySection><FaqSection /></LazySection>
       <LazySection><BottomSections visibleSections={visibleSections} /></LazySection>
+      <LazySection><SeoFooterLinks /></LazySection>
     </div>
   );
 };
