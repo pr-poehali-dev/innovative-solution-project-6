@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import BrandLogo from "@/components/ui/BrandLogo";
+import CallbackModal from "@/components/ui/CallbackModal";
 import { cities } from "@/data/cities";
 
 const trucks = [
@@ -69,8 +70,10 @@ const LinkItem = ({ label }: { label: string }) => (
 );
 
 const SiteFooter = () => {
+  const [callbackOpen, setCallbackOpen] = useState(false);
   return (
     <footer className="relative border-t border-accent/20 bg-gradient-to-b from-background to-black">
+      <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
 
       {/* Верхний блок с колонками */}
@@ -110,6 +113,20 @@ const SiteFooter = () => {
                   <span className="text-white font-black text-base sm:text-lg tabular-nums">+7 960 169-09-90</span>
                 </div>
               </a>
+
+              <button
+                type="button"
+                onClick={() => setCallbackOpen(true)}
+                className="group flex items-center gap-3 px-4 py-3 rounded-2xl border border-dashed border-accent/40 bg-transparent hover:border-accent/70 hover:bg-accent/5 transition-all text-left"
+              >
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+                  <Icon name="MessageCircle" size={18} className="text-accent" />
+                </div>
+                <div className="flex flex-col leading-tight">
+                  <span className="text-accent/80 text-[10px] sm:text-xs font-bold uppercase tracking-wider">Не можете позвонить?</span>
+                  <span className="text-white font-bold text-sm sm:text-base">Заказать обратный звонок</span>
+                </div>
+              </button>
             </div>
 
             {/* Email и адрес */}
