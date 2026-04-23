@@ -24,8 +24,8 @@ const CityPage = () => {
     return <Navigate to="/" replace />;
   }
 
-  const title = `Аренда манипулятора в ${city.nameIn} — услуги манипулятора | ООО Фаворит`;
-  const description = `Аренда манипулятора и услуги манипулятора в ${city.nameIn} от 2200 ₽/час. Подача от 1 часа, работа без выходных. КАМАЗ, FAW, ISUZU с КМУ. Оператор в стоимости. Звоните: +7 960 188-30-84.`;
+  const title = `Аренда манипулятора в ${city.nameIn} от 2200 ₽/час — Фаворит`;
+  const description = `Манипулятор в ${city.nameIn} от 2200 ₽/час. Подача от 1 часа, без выходных. До 17 т, стрела 23 м. Оператор включён. ☎ +7 960 188-30-84`;
 
   const otherCities = cities.filter((c) => c.slug !== city.slug);
 
