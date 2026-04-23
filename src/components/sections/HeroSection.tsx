@@ -119,28 +119,29 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
       {/* Hero Section */}
       <section id="hero" className="relative lg:min-h-screen lg:flex lg:items-center overflow-hidden">
 
-        {/* Мобильный слайдер — премиум-карточка с рамкой и бликами */}
-        <div className="relative lg:hidden w-full pt-20 pb-6 px-3 bg-gradient-to-b from-background via-background to-black/80">
+        {/* Мобильный и планшетный слайдер — премиум-карточка с рамкой и бликами */}
+        <div className="relative lg:hidden w-full pt-20 pb-6 px-3 sm:px-6 md:px-10 bg-gradient-to-b from-background via-background to-black/80">
           {/* Декор — размытые золотые круги */}
-          <div className="absolute top-16 -left-10 w-40 h-40 rounded-full bg-accent/20 blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 -right-10 w-44 h-44 rounded-full bg-accent/10 blur-3xl pointer-events-none" />
+          <div className="absolute top-16 -left-10 w-40 h-40 sm:w-56 sm:h-56 rounded-full bg-accent/20 blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 -right-10 w-44 h-44 sm:w-64 sm:h-64 rounded-full bg-accent/10 blur-3xl pointer-events-none" />
 
-          {/* Бейдж над фото */}
-          <div className="relative flex items-center justify-between mb-3 px-1">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent/40 bg-accent/10 backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              <span className="text-accent text-[10px] font-bold uppercase tracking-widest">Наш автопарк</span>
+          <div className="relative max-w-3xl mx-auto">
+            {/* Бейдж над фото */}
+            <div className="flex items-center justify-between mb-3 sm:mb-4 px-1">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-accent/40 bg-accent/10 backdrop-blur-sm">
+                <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                <span className="text-accent text-[10px] sm:text-xs font-bold uppercase tracking-widest">Наш автопарк</span>
+              </div>
+              <div className="text-white/80 text-xs sm:text-sm font-mono tabular-nums">
+                <span className="text-accent font-bold">{String(current + 1).padStart(2, "0")}</span>
+                <span className="text-white/30"> / {String(slides.length).padStart(2, "0")}</span>
+              </div>
             </div>
-            <div className="text-white/80 text-xs font-mono tabular-nums">
-              <span className="text-accent font-bold">{String(current + 1).padStart(2, "0")}</span>
-              <span className="text-white/30"> / {String(slides.length).padStart(2, "0")}</span>
-            </div>
-          </div>
 
-          {/* Карточка с фото */}
-          <div className="relative rounded-3xl p-[2px]" style={{ background: "linear-gradient(135deg, rgba(232,168,32,0.6) 0%, rgba(232,168,32,0.1) 40%, rgba(232,168,32,0.05) 60%, rgba(232,168,32,0.5) 100%)" }}>
+            {/* Карточка с фото */}
+            <div className="relative rounded-3xl p-[2px]" style={{ background: "linear-gradient(135deg, rgba(232,168,32,0.6) 0%, rgba(232,168,32,0.1) 40%, rgba(232,168,32,0.05) 60%, rgba(232,168,32,0.5) 100%)" }}>
             <div
-              className="relative w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden rounded-3xl bg-gradient-to-br from-zinc-900 via-black to-zinc-900"
+              className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] overflow-hidden rounded-3xl bg-gradient-to-br from-zinc-900 via-black to-zinc-900"
               onTouchStart={(e) => {
                 touchStartX.current = e.touches[0].clientX;
               }}
@@ -234,6 +235,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
                 />
               ))}
             </div>
+          </div>
           </div>
           <style>{`@keyframes heroProgress { from { width: 0% } to { width: 100% } }`}</style>
         </div>
