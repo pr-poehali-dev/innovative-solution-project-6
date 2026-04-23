@@ -233,15 +233,21 @@ const ReviewsSection = () => {
         </div>
 
         {/* Точки навигации */}
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="flex justify-center gap-1 mt-8">
           {Array.from({ length: pages }).map((_, i) => (
             <button
               key={i}
               onClick={() => setActive(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === active ? "w-8 bg-accent" : "w-2 bg-accent/20 hover:bg-accent/40"
-              }`}
-            />
+              aria-label={`Страница отзывов ${i + 1} из ${pages}`}
+              aria-current={i === active ? "true" : undefined}
+              className="p-3 group"
+            >
+              <span
+                className={`block h-1.5 rounded-full transition-all duration-300 ${
+                  i === active ? "w-8 bg-accent" : "w-2 bg-accent/20 group-hover:bg-accent/40"
+                }`}
+              />
+            </button>
           ))}
         </div>
 
