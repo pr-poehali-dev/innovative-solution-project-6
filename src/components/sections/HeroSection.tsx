@@ -118,11 +118,10 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
       {/* Hero Section */}
       <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
 
-        {/* Слайдер фото — рендерим только активный и следующий слайд */}
+        {/* Слайдер фото — рендерим только активный слайд */}
         {slides.map((slide, i) => {
           const isActive = i === current;
-          const isNext = i === (current + 1) % slides.length;
-          const shouldRender = isActive || isNext || i === 0;
+          const shouldRender = isActive || i === 0;
           if (!shouldRender) return null;
           const src800 = `${WEBP_BASE}/w800/${slide.id}.webp`;
           const src1600 = `${WEBP_BASE}/w1600/${slide.id}.webp`;

@@ -1,6 +1,7 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import HeroSection from "@/components/sections/HeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
+import LazySection from "@/components/LazySection";
 
 const FleetSection = lazy(() => import("@/components/sections/FleetSection"));
 const BottomSections = lazy(() => import("@/components/sections/BottomSections"));
@@ -86,15 +87,13 @@ const Index = () => {
       })}</script>
       <HeroSection visibleSections={visibleSections} />
       <FeaturesSection visibleSections={visibleSections} />
-      <Suspense fallback={<div className="min-h-[400px]" />}>
-        <FleetSection />
-        <UseCasesSection />
-        <CalculatorSection />
-        <GallerySection />
-        <ClientsSection />
-        <ReviewsSection />
-        <BottomSections visibleSections={visibleSections} />
-      </Suspense>
+      <LazySection><FleetSection /></LazySection>
+      <LazySection><UseCasesSection /></LazySection>
+      <LazySection><CalculatorSection /></LazySection>
+      <LazySection><GallerySection /></LazySection>
+      <LazySection><ClientsSection /></LazySection>
+      <LazySection><ReviewsSection /></LazySection>
+      <LazySection><BottomSections visibleSections={visibleSections} /></LazySection>
 
 
     </div>
