@@ -1,63 +1,68 @@
+import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import { cities } from "@/data/cities";
 
-const linkGroups = [
+interface LinkItem {
+  label: string;
+  to?: string;
+}
+
+interface LinkGroup {
+  title: string;
+  icon: string;
+  links: LinkItem[];
+}
+
+const linkGroups: LinkGroup[] = [
   {
     title: "Популярные услуги",
     icon: "Wrench",
     links: [
-      "Аренда манипулятора с оператором",
-      "Услуги манипулятора с люлькой",
-      "Манипулятор с буровой установкой",
-      "Аренда крана-манипулятора",
-      "Манипулятор для монтажа",
-      "Услуги автовышки",
-      "Разгрузка манипулятором",
-      "Перевозка негабаритных грузов",
+      { label: "Аренда манипулятора с оператором" },
+      { label: "Услуги манипулятора с люлькой" },
+      { label: "Манипулятор с буровой установкой" },
+      { label: "Аренда крана-манипулятора" },
+      { label: "Манипулятор для монтажа" },
+      { label: "Услуги автовышки" },
+      { label: "Разгрузка манипулятором" },
+      { label: "Перевозка негабаритных грузов" },
     ],
   },
   {
     title: "География работы",
     icon: "MapPin",
-    links: [
-      "Аренда манипулятора в Нижнем Новгороде",
-      "Манипулятор в Кстово",
-      "Услуги манипулятора в Дзержинске",
-      "Манипулятор в Богородске",
-      "Аренда манипулятора в Боре",
-      "Манипулятор в Арзамасе",
-      "Услуги в Павлово",
-      "Аренда в Балахне",
-      "Манипулятор в Городце",
-      "По Нижегородской области",
-    ],
+    links: cities.map((c) => ({
+      label: `Манипулятор в ${c.nameIn}`,
+      to: `/gorod/${c.slug}`,
+    })),
   },
   {
     title: "Техника в аренду",
     icon: "Truck",
     links: [
-      "Манипулятор 5 тонн",
-      "Манипулятор 10 тонн",
-      "Манипулятор 12 тонн",
-      "Манипулятор 17 тонн",
-      "КАМАЗ с манипулятором",
-      "FAW с КМУ DongYang",
-      "КАМАЗ 43118 вездеход",
-      "ISUZU 5т с КМУ",
-      "Экскаватор-погрузчик JCB",
+      { label: "Манипулятор 5 тонн" },
+      { label: "Манипулятор 10 тонн" },
+      { label: "Манипулятор 12 тонн" },
+      { label: "Манипулятор 17 тонн" },
+      { label: "КАМАЗ с манипулятором" },
+      { label: "FAW с КМУ DongYang" },
+      { label: "КАМАЗ 43118 вездеход" },
+      { label: "ISUZU 5т с КМУ" },
+      { label: "Экскаватор-погрузчик JCB" },
     ],
   },
   {
     title: "Для бизнеса",
     icon: "Briefcase",
     links: [
-      "Аренда манипулятора для строительства",
-      "Услуги для ЖКХ",
-      "Манипулятор для промышленности",
-      "Монтаж металлоконструкций",
-      "Работа с НДС и ЭДО",
-      "Корпоративные тарифы",
-      "Длительная аренда техники",
-      "Работа по договору",
+      { label: "Аренда манипулятора для строительства" },
+      { label: "Услуги для ЖКХ" },
+      { label: "Манипулятор для промышленности" },
+      { label: "Монтаж металлоконструкций" },
+      { label: "Работа с НДС и ЭДО" },
+      { label: "Корпоративные тарифы" },
+      { label: "Длительная аренда техники" },
+      { label: "Работа по договору" },
     ],
   },
 ];
@@ -87,17 +92,29 @@ const SeoFooterLinks = () => {
                 </h3>
               </div>
               <ul className="space-y-2">
-                {group.links.map((link, j) => (
-                  <li key={j}>
-                    <a
-                      href="tel:+79601883084"
-                      className="inline-flex items-start gap-1.5 text-muted-foreground text-xs sm:text-sm leading-snug hover:text-accent transition-colors group"
-                    >
+                {group.links.map((link, j) => {
+                  const baseClass =
+                    "inline-flex items-start gap-1.5 text-muted-foreground text-xs sm:text-sm leading-snug hover:text-accent transition-colors group";
+                  const inner = (
+                    <>
                       <span className="text-accent/50 group-hover:text-accent mt-0.5 flex-shrink-0">›</span>
-                      <span>{link}</span>
-                    </a>
-                  </li>
-                ))}
+                      <span>{link.label}</span>
+                    </>
+                  );
+                  return (
+                    <li key={j}>
+                      {link.to ? (
+                        <Link to={link.to} className={baseClass}>
+                          {inner}
+                        </Link>
+                      ) : (
+                        <a href="tel:+79601883084" className={baseClass}>
+                          {inner}
+                        </a>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
