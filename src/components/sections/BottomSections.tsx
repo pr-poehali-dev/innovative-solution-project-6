@@ -18,8 +18,7 @@ const REQUISITES_TEXT = `Общество с ограниченной ответ
 Р/с: 40702810316020000009
 Банк: АО «АЛЬФА-БАНК»
 К/с: 30101810200000000593
-БИК: 044525593
-Директор: Мкртчян Саргис Варужанович, действующий на основании Устава`;
+БИК: 044525593`;
 
 const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -72,10 +71,6 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
     <tr><td>Банк</td><td>АО «АЛЬФА-БАНК»</td></tr>
     <tr><td>Корр. счёт</td><td>30101810200000000593</td></tr>
     <tr><td>БИК</td><td>044525593</td></tr>
-  </table>
-  <div class="divider"></div>
-  <table>
-    <tr><td>Директор</td><td>Мкртчян Саргис Варужанович, действующий на основании Устава</td></tr>
   </table>
 </body>
 </html>`);
