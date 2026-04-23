@@ -16,19 +16,45 @@ interface BrandLogoProps {
   size?: "sm" | "md";
 }
 
-const isOnlineNow = () => {
-  const hour = new Date().getHours();
-  return hour >= 7 && hour < 22;
+const OPEN_HOUR = 7;
+const CLOSE_HOUR = 22;
+
+const getStatus = () => {
+  const now = new Date();
+  const hour = now.getHours();
+  const online = hour >= OPEN_HOUR && hour < CLOSE_HOUR;
+
+  if (online) {
+    return { online: true, timeLeft: "" };
+  }
+
+  const openDate = new Date(now);
+  if (hour >= CLOSE_HOUR) {
+    openDate.setDate(openDate.getDate() + 1);
+  }
+  openDate.setHours(OPEN_HOUR, 0, 0, 0);
+
+  const diffMs = openDate.getTime() - now.getTime();
+  const totalMinutes = Math.max(0, Math.floor(diffMs / 60_000));
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  let timeLeft = "";
+  if (hours > 0 && minutes > 0) timeLeft = `${hours} ч ${minutes} мин`;
+  else if (hours > 0) timeLeft = `${hours} ч`;
+  else timeLeft = `${minutes} мин`;
+
+  return { online: false, timeLeft };
 };
 
 const BrandLogo = ({ to = "/", size = "md" }: BrandLogoProps) => {
   const imgSize = size === "sm" ? "w-9 h-9 sm:w-12 sm:h-12" : "w-14 h-14 sm:w-20 sm:h-20";
   const titleSize = size === "sm" ? "text-base sm:text-xl" : "text-xl sm:text-3xl";
 
-  const [online, setOnline] = useState(isOnlineNow);
+  const [status, setStatus] = useState(getStatus);
 
   useEffect(() => {
-    const tick = () => setOnline(isOnlineNow());
+    const tick = () => setStatus(getStatus());
     tick();
     const interval = setInterval(tick, 60_000);
     return () => clearInterval(interval);
@@ -45,9 +71,9 @@ const BrandLogo = ({ to = "/", size = "md" }: BrandLogoProps) => {
         decoding="async"
       />
       <div className="flex flex-col leading-tight">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <span className="block text-[9px] sm:text-xs font-medium tracking-[0.22em] sm:tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>
-          {online ? (
+          {status.online ? (
             <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-green-500/15 border border-green-500/40" title="Работаем сейчас — звоните">
               <span className="relative flex w-1.5 h-1.5">
                 <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75" />
@@ -56,12 +82,17 @@ const BrandLogo = ({ to = "/", size = "md" }: BrandLogoProps) => {
               <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-green-400">Онлайн</span>
             </span>
           ) : (
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-white/10 border border-white/20" title="Работаем с 7:00 до 22:00. Заявки принимаются круглосуточно">
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-white/10 border border-white/20" title={`Откроемся через ${status.timeLeft}. Работаем с 7:00 до 22:00`}>
               <span className="w-1.5 h-1.5 rounded-full bg-white/50" />
               <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-white/70">Оффлайн</span>
             </span>
           )}
         </div>
+        {!status.online && status.timeLeft && (
+          <span className="block text-[9px] sm:text-[10px] font-semibold mt-0.5" style={{ color: "#e8a820" }}>
+            Откроемся через {status.timeLeft}
+          </span>
+        )}
         <span className={`font-black drop-shadow-lg ${titleSize}`} style={goldText}>
           ООО Фаворит
         </span>
