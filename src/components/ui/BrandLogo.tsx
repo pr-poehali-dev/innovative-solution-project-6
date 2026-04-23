@@ -30,7 +30,7 @@ const BrandLogo = ({ to = "/", size = "md" }: BrandLogoProps) => {
         decoding="async"
       />
       <div className="flex flex-col leading-tight">
-        <span className="hidden sm:block text-xs font-medium tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>
+        <span className="block text-[9px] sm:text-xs font-medium tracking-[0.22em] sm:tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>
         <span className={`font-black drop-shadow-lg ${titleSize}`} style={goldText}>
           ООО Фаворит
         </span>
