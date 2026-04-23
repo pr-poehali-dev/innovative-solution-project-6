@@ -5,7 +5,9 @@ import SectionBadge from "@/components/ui/SectionBadge";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import CallbackModal from "@/components/ui/CallbackModal";
 import LazySection from "@/components/LazySection";
+import { useState } from "react";
 import { getCityBySlug, cities } from "@/data/cities";
 
 const FleetSection = lazy(() => import("@/components/sections/FleetSection"));
@@ -15,6 +17,7 @@ const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
 const CityPage = () => {
   const { slug } = useParams();
+  const [callbackOpen, setCallbackOpen] = useState(false);
   const city = slug ? getCityBySlug(slug) : undefined;
 
   if (!city) {
@@ -38,11 +41,29 @@ const CityPage = () => {
       <meta property="og:description" content={description} />
       <link rel="canonical" href={`https://xn--e1afamdhf.xn--p1ai/gorod/${city.slug}`} />
 
+      <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
+
       {/* Header */}
       <header className="fixed top-0 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5 flex justify-between items-center">
           <BrandLogo />
           <div className="flex gap-2 sm:gap-3 items-center">
+            <button
+              type="button"
+              onClick={() => setCallbackOpen(true)}
+              className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all text-sm font-semibold text-white"
+            >
+              <Icon name="MessageCircle" size={14} className="text-accent" />
+              Перезвоните мне
+            </button>
+            <button
+              type="button"
+              onClick={() => setCallbackOpen(true)}
+              className="flex md:hidden w-10 h-10 items-center justify-center rounded-full border border-accent/40 bg-accent/5"
+              aria-label="Заказать обратный звонок"
+            >
+              <Icon name="MessageCircle" size={18} className="text-accent" />
+            </button>
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />
           </div>

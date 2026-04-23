@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
+import CallbackModal from "@/components/ui/CallbackModal";
 import { useEffect, useRef, useState } from "react";
 
 const SUBMIT_URL = "https://functions.poehali.dev/dc327032-aa41-4632-b107-a026d92ef031";
@@ -38,6 +39,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
   const [cargo, setCargo] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [callbackOpen, setCallbackOpen] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
@@ -84,6 +86,27 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
             ))}
           </nav>
           <div className="flex gap-2 sm:gap-3 items-center">
+            {/* Кнопка обратного звонка — десктоп/планшет */}
+            <button
+              type="button"
+              onClick={() => setCallbackOpen(true)}
+              className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all text-sm font-semibold text-white"
+              aria-label="Заказать обратный звонок"
+            >
+              <Icon name="MessageCircle" size={14} className="text-accent" />
+              <span>Перезвоните мне</span>
+            </button>
+
+            {/* Кнопка обратного звонка — мобайл (иконка) */}
+            <button
+              type="button"
+              onClick={() => setCallbackOpen(true)}
+              className="flex md:hidden w-10 h-10 items-center justify-center rounded-full border border-accent/40 bg-accent/5 hover:bg-accent/15 transition-colors"
+              aria-label="Заказать обратный звонок"
+            >
+              <Icon name="MessageCircle" size={18} className="text-accent" />
+            </button>
+
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />
 
@@ -112,9 +135,19 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
               </a>
             ))}
             <PhoneButton size="sm" className="mt-2 w-full justify-center rounded-xl" />
+            <button
+              type="button"
+              onClick={() => { setMenuOpen(false); setCallbackOpen(true); }}
+              className="mt-1 w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-accent/40 bg-accent/5 text-sm font-semibold text-white"
+            >
+              <Icon name="MessageCircle" size={16} className="text-accent" />
+              Заказать обратный звонок
+            </button>
           </div>
         )}
       </header>
+
+      <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
 
       {/* Hero Section */}
       <section id="hero" className="relative lg:min-h-screen lg:flex lg:items-center overflow-hidden">

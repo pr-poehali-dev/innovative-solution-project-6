@@ -5,6 +5,7 @@ import OrderModal from "@/components/ui/OrderModal";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import CallbackModal from "@/components/ui/CallbackModal";
 import PriceCalculator from "@/components/ui/PriceCalculator";
 import SiteFooter from "@/components/sections/SiteFooter";
 
@@ -240,6 +241,7 @@ export default function TruckPage() {
   const { slug } = useParams<{ slug: string }>();
   const [modalOpen, setModalOpen] = useState(false);
   const [calcSummary, setCalcSummary] = useState("");
+  const [callbackOpen, setCallbackOpen] = useState(false);
   const truck = slug ? trucks[slug] : null;
 
   if (!truck) {
@@ -298,11 +300,31 @@ export default function TruckPage() {
         }
       })}</script>
 
+      <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
+
       {/* Хедер */}
       <header className="fixed top-0 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
           <BrandLogo size="sm" />
-          <PhoneButton size="sm" className="rounded-xl" />
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              type="button"
+              onClick={() => setCallbackOpen(true)}
+              className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all text-sm font-semibold text-white"
+            >
+              <Icon name="MessageCircle" size={14} className="text-accent" />
+              Перезвоните мне
+            </button>
+            <button
+              type="button"
+              onClick={() => setCallbackOpen(true)}
+              className="flex md:hidden w-10 h-10 items-center justify-center rounded-full border border-accent/40 bg-accent/5"
+              aria-label="Заказать обратный звонок"
+            >
+              <Icon name="MessageCircle" size={18} className="text-accent" />
+            </button>
+            <PhoneButton size="sm" className="rounded-xl" />
+          </div>
         </div>
       </header>
 
