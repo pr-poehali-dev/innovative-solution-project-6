@@ -34,7 +34,7 @@ const BrandLogo = ({ to = "/", size = "md" }: BrandLogoProps) => {
         <span className={`font-black drop-shadow-lg ${titleSize}`} style={goldText}>
           ООО Фаворит
         </span>
-        <span className="hidden sm:block text-xs tracking-widest uppercase" style={{ color: "#a07010", letterSpacing: "0.2em" }}>Надёжная аренда манипуляторов</span>
+        <span className="block text-[9px] sm:text-xs tracking-widest uppercase" style={{ color: "#a07010", letterSpacing: "0.18em" }}>Надёжная аренда манипуляторов</span>
       </div>
     </div>
   );
