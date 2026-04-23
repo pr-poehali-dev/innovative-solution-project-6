@@ -420,17 +420,6 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
                     <div className="absolute -top-16 -right-16 w-32 h-32 rounded-full bg-accent/20 blur-3xl pointer-events-none" />
 
                     <div className="relative">
-                      {/* Компактный заголовок одной строкой */}
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="relative flex w-2 h-2">
-                          <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-75" />
-                          <span className="relative rounded-full w-2 h-2 bg-accent" />
-                        </span>
-                        <h3 className="text-white text-sm sm:text-base font-black">
-                          Оставить заявку <span className="text-accent/80 font-normal">· ответим за 5 минут</span>
-                        </h3>
-                      </div>
-
                       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
                         <div className="flex flex-col sm:flex-row gap-2">
                           <div className="relative flex-1">
