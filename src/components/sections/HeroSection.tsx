@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const SUBMIT_URL = "https://functions.poehali.dev/dc327032-aa41-4632-b107-a026d92ef031";
 
@@ -38,6 +38,7 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
   const [cargo, setCargo] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [menuOpen, setMenuOpen] = useState(false);
+  const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -118,52 +119,123 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
       {/* Hero Section */}
       <section id="hero" className="relative lg:min-h-screen lg:flex lg:items-center overflow-hidden">
 
-        {/* Мобильный слайдер — отдельным блоком сверху, картинка видна целиком */}
-        <div className="relative lg:hidden w-full pt-20 bg-gradient-to-b from-background via-background to-black">
-          <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden bg-black">
-            {slides.map((slide, i) => {
-              const isActive = i === current;
-              const shouldRender = isActive || i === 0;
-              if (!shouldRender) return null;
-              const src800 = `${WEBP_BASE}/w800/${slide.id}.webp`;
-              const src1600 = `${WEBP_BASE}/w1600/${slide.id}.webp`;
-              return (
-                <div
-                  key={i}
-                  className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}
-                >
-                  <img
-                    src={src1600}
-                    srcSet={`${src800} 800w, ${src1600} 1600w`}
-                    sizes="100vw"
-                    alt={slide.alt}
-                    className="w-full h-full object-contain object-center"
-                    width="1600"
-                    height="900"
-                    loading={i === 0 ? "eager" : "lazy"}
-                    fetchPriority={i === 0 ? "high" : "low"}
-                    decoding="async"
-                  />
-                </div>
-              );
-            })}
-            {/* Точки-индикаторы — мобильные */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-0 z-20">
+        {/* Мобильный слайдер — премиум-карточка с рамкой и бликами */}
+        <div className="relative lg:hidden w-full pt-20 pb-6 px-3 bg-gradient-to-b from-background via-background to-black/80">
+          {/* Декор — размытые золотые круги */}
+          <div className="absolute top-16 -left-10 w-40 h-40 rounded-full bg-accent/20 blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 -right-10 w-44 h-44 rounded-full bg-accent/10 blur-3xl pointer-events-none" />
+
+          {/* Бейдж над фото */}
+          <div className="relative flex items-center justify-between mb-3 px-1">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent/40 bg-accent/10 backdrop-blur-sm">
+              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+              <span className="text-accent text-[10px] font-bold uppercase tracking-widest">Наш автопарк</span>
+            </div>
+            <div className="text-white/80 text-xs font-mono tabular-nums">
+              <span className="text-accent font-bold">{String(current + 1).padStart(2, "0")}</span>
+              <span className="text-white/30"> / {String(slides.length).padStart(2, "0")}</span>
+            </div>
+          </div>
+
+          {/* Карточка с фото */}
+          <div className="relative rounded-3xl p-[2px]" style={{ background: "linear-gradient(135deg, rgba(232,168,32,0.6) 0%, rgba(232,168,32,0.1) 40%, rgba(232,168,32,0.05) 60%, rgba(232,168,32,0.5) 100%)" }}>
+            <div
+              className="relative w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden rounded-3xl bg-gradient-to-br from-zinc-900 via-black to-zinc-900"
+              onTouchStart={(e) => {
+                touchStartX.current = e.touches[0].clientX;
+              }}
+              onTouchEnd={(e) => {
+                const startX = touchStartX.current;
+                if (startX === null) return;
+                const endX = e.changedTouches[0].clientX;
+                const diff = endX - startX;
+                if (Math.abs(diff) > 40) {
+                  if (diff < 0) setCurrent((prev) => (prev + 1) % slides.length);
+                  else setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+                }
+                touchStartX.current = null;
+              }}
+            >
+              {/* Сетка-узор на фоне */}
+              <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(232,168,32,0.3) 1px, transparent 0)", backgroundSize: "20px 20px" }} />
+
+              {slides.map((slide, i) => {
+                const isActive = i === current;
+                const shouldRender = isActive || i === 0;
+                if (!shouldRender) return null;
+                const src800 = `${WEBP_BASE}/w800/${slide.id}.webp`;
+                const src1600 = `${WEBP_BASE}/w1600/${slide.id}.webp`;
+                return (
+                  <div
+                    key={i}
+                    className={`absolute inset-0 w-full h-full transition-all duration-700 ${isActive ? "opacity-100 scale-100" : "opacity-0 scale-105"}`}
+                  >
+                    <img
+                      src={src1600}
+                      srcSet={`${src800} 800w, ${src1600} 1600w`}
+                      sizes="100vw"
+                      alt={slide.alt}
+                      className="w-full h-full object-contain object-center drop-shadow-2xl"
+                      width="1600"
+                      height="900"
+                      loading={i === 0 ? "eager" : "lazy"}
+                      fetchPriority={i === 0 ? "high" : "low"}
+                      decoding="async"
+                    />
+                  </div>
+                );
+              })}
+
+              {/* Блик сверху */}
+              <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
+
+              {/* Стрелки навигации */}
+              <button
+                onClick={() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length)}
+                className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center active:scale-90 transition-transform z-10"
+                aria-label="Предыдущий слайд"
+              >
+                <Icon name="ChevronLeft" size={18} className="text-white" />
+              </button>
+              <button
+                onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center active:scale-90 transition-transform z-10"
+                aria-label="Следующий слайд"
+              >
+                <Icon name="ChevronRight" size={18} className="text-white" />
+              </button>
+
+              {/* Подпись слайда */}
+              <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                <p key={current} className="text-white text-sm font-semibold text-center animate-in fade-in slide-in-from-bottom-2 duration-500">
+                  {slides[current].alt}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Прогресс-полоска + точки */}
+          <div className="relative mt-4 px-1">
+            <div className="h-1 w-full rounded-full bg-white/10 overflow-hidden">
+              <div
+                key={current}
+                className="h-full bg-gradient-to-r from-accent/60 via-accent to-accent/60 rounded-full"
+                style={{ animation: "heroProgress 4s linear forwards" }}
+              />
+            </div>
+            <div className="flex justify-center gap-1.5 mt-3">
               {slides.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
                   aria-label={`Перейти к слайду ${i + 1} из ${slides.length}`}
                   aria-current={i === current ? "true" : undefined}
-                  className="p-2 group"
-                >
-                  <span
-                    className={`block rounded-full transition-all duration-300 ${i === current ? "w-6 h-2 bg-accent" : "w-2 h-2 bg-white/40 group-hover:bg-white/70"}`}
-                  />
-                </button>
+                  className={`rounded-full transition-all duration-300 ${i === current ? "w-8 h-1.5 bg-accent" : "w-1.5 h-1.5 bg-white/30"}`}
+                />
               ))}
             </div>
           </div>
+          <style>{`@keyframes heroProgress { from { width: 0% } to { width: 100% } }`}</style>
         </div>
 
         {/* Десктопный слайдер — фон на весь экран */}
