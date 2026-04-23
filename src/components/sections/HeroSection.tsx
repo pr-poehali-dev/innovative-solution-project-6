@@ -367,9 +367,26 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
               <span className="text-accent">в аренду </span>
               <span className="text-white/70">в Нижнем Новгороде</span>
             </h1>
-            <p className="text-sm sm:text-xl text-white/80 leading-relaxed mb-7 sm:mb-10 max-w-full sm:max-w-xl font-light">
+            <p className="text-sm sm:text-xl text-white/80 leading-relaxed mb-5 sm:mb-7 max-w-full sm:max-w-xl font-light">
               Оставьте заявку или позвоните — мы подберём правильный манипулятор с платформой необходимых габаритов и нужной грузоподъёмностью под вашу задачу.
             </p>
+
+            {/* Ключевые условия: цена · мин. заказ · оператор */}
+            <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 max-w-xl">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-accent/40 bg-accent/10 text-white text-xs sm:text-sm">
+                <Icon name="Wallet" size={14} className="text-accent" />
+                <span className="font-semibold">от 2200 ₽/час</span>
+              </div>
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-white/15 bg-white/5 text-white text-xs sm:text-sm">
+                <Icon name="Clock" size={14} className="text-accent" />
+                <span>Мин. заказ — <span className="font-semibold">4 часа</span></span>
+              </div>
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-white/15 bg-white/5 text-white text-xs sm:text-sm">
+                <Icon name="UserCheck" size={14} className="text-accent" />
+                <span>Оператор включён</span>
+              </div>
+            </div>
+
             <div className="flex gap-3 sm:gap-4 mb-8 sm:mb-12 flex-col sm:flex-row">
               <a href="#fleet" className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all font-medium text-base sm:text-lg text-white text-center">
                 Посмотреть технику
