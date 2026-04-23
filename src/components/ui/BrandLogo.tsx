@@ -25,6 +25,9 @@ const BrandLogo = ({ to = "/", size = "md" }: BrandLogoProps) => {
         src={LOGO_URL}
         alt="Фаворит герб"
         className={`${imgSize} flex-shrink-0 rounded-xl object-cover logo-glow`}
+        width="80"
+        height="80"
+        decoding="async"
       />
       <div className="flex flex-col leading-tight">
         <span className="hidden sm:block text-xs font-medium tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>

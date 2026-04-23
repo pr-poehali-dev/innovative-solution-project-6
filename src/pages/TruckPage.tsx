@@ -323,6 +323,10 @@ export default function TruckPage() {
                 src={truck.image}
                 alt={truck.alt}
                 className="w-full h-full object-contain"
+                width="1200"
+                height="900"
+                fetchPriority="high"
+                decoding="async"
               />
               <div className="absolute top-4 left-4 bg-accent text-black text-xs font-bold px-3 py-1 rounded-full">
                 {truck.badge}

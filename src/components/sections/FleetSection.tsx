@@ -177,6 +177,10 @@ const FleetSection = () => {
                     src={truck.image}
                     alt={truck.alt}
                     className="w-full object-contain max-h-64"
+                    loading="lazy"
+                    decoding="async"
+                    width="800"
+                    height="600"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-4">
@@ -222,6 +226,10 @@ const FleetSection = () => {
                     src={truck.image}
                     alt={truck.alt}
                     className="absolute inset-0 w-full h-full object-contain object-center"
+                    loading="lazy"
+                    decoding="async"
+                    width="1200"
+                    height="900"
                   />
                 </div>
               )}

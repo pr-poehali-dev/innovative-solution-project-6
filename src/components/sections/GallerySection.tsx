@@ -95,6 +95,10 @@ const GallerySection = () => {
                 src={photo.url}
                 alt={photo.caption}
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="600"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent sm:from-black/0 sm:via-transparent group-hover:from-black/70 group-hover:via-black/20 transition-all duration-300 flex items-end p-3 sm:p-5">
                 <p className="text-white text-xs sm:text-sm font-semibold sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300 sm:translate-y-2 group-hover:translate-y-0 line-clamp-2 drop-shadow-md">
@@ -131,6 +135,8 @@ const GallerySection = () => {
               src={photos[active].url}
               alt={photos[active].caption}
               className="w-full max-h-[80vh] object-contain rounded-xl"
+              loading="lazy"
+              decoding="async"
             />
             <p className="text-center text-white/70 mt-4 text-sm">{photos[active].caption}</p>
             <p className="text-center text-accent/50 text-xs mt-1">{active + 1} / {photos.length}</p>

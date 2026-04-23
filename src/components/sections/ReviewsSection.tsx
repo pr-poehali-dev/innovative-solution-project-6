@@ -208,7 +208,7 @@ const ReviewsSection = () => {
               <div className="border-t border-accent/10 pt-5 flex items-center gap-4">
                 <div className="w-14 h-14 rounded-full border-2 border-accent/40 overflow-hidden flex-shrink-0 bg-accent/20">
                   {review.photo
-                    ? <img src={review.photo} alt={review.name} className="w-full h-full object-cover" />
+                    ? <img src={review.photo} alt={review.name} className="w-full h-full object-cover" loading="lazy" decoding="async" width="56" height="56" />
                     : <span className="w-full h-full flex items-center justify-center text-accent text-xs font-bold">{review.avatar}</span>
                   }
                 </div>
