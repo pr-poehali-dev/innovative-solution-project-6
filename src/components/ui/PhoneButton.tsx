@@ -1,4 +1,15 @@
+import Icon from "@/components/ui/icon";
+
 const goldStyle = {
+  color: "#000",
+  borderColor: "#e8a820",
+  background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
+  animation: "goldPulse 1.2s ease-in-out infinite",
+  fontFamily: "'Cinzel', serif",
+  boxShadow: "0 4px 14px rgba(232,168,32,0.4)",
+};
+
+const goldStyleOutline = {
   color: "#e8a820",
   borderColor: "#e8a820",
   background: "rgba(232,168,32,0.08)",
@@ -23,10 +34,12 @@ const PhoneButton = ({ className = "", size = "md", iconOnly = false }: PhoneBut
     return (
       <a
         href="tel:+79601883084"
-        className={`flex items-center justify-center w-10 h-10 border rounded-full ${className}`}
+        className={`inline-flex items-center justify-center gap-1.5 px-3 h-10 border-2 rounded-full font-black text-sm active:scale-95 transition-transform ${className}`}
         style={goldStyle}
+        aria-label="Позвонить +7 960 188-30-84"
       >
-        📞
+        <Icon name="Phone" size={16} />
+        <span>Звонок</span>
       </a>
     );
   }
@@ -35,9 +48,10 @@ const PhoneButton = ({ className = "", size = "md", iconOnly = false }: PhoneBut
     <a
       href="tel:+79601883084"
       className={`inline-flex items-center justify-center border rounded-full font-bold ${sizeClasses[size]} ${className}`}
-      style={goldStyle}
+      style={goldStyleOutline}
     >
-      📞 +7 960 188-30-84
+      <Icon name="Phone" size={16} />
+      +7 960 188-30-84
     </a>
   );
 };
