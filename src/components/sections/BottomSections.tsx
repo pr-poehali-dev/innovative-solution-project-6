@@ -408,16 +408,6 @@ const BottomSections = ({ visibleSections }: BottomSectionsProps) => {
               ))}
             </div>
 
-            <div className="relative mt-4 flex items-center gap-3 p-3 sm:p-4 rounded-xl border border-accent/25 bg-gradient-to-r from-accent/10 to-transparent">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center shadow-lg flex-shrink-0">
-                <Icon name="UserCheck" size={18} className="text-black" />
-              </div>
-              <div className="min-w-0">
-                <div className="text-muted-foreground text-[10px] sm:text-xs uppercase tracking-wider">Директор</div>
-                <div className="text-white font-semibold text-sm sm:text-base">Мкртчян Саргис Варужанович</div>
-                <div className="text-muted-foreground text-xs">действует на основании Устава</div>
-              </div>
-            </div>
           </div>
 
           {/* Карта */}
