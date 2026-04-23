@@ -30,7 +30,16 @@ const BrandLogo = ({ to = "/", size = "md" }: BrandLogoProps) => {
         decoding="async"
       />
       <div className="flex flex-col leading-tight">
-        <span className="block text-[9px] sm:text-xs font-medium tracking-[0.22em] sm:tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>
+        <div className="flex items-center gap-2">
+          <span className="block text-[9px] sm:text-xs font-medium tracking-[0.22em] sm:tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>
+          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-green-500/15 border border-green-500/40">
+            <span className="relative flex w-1.5 h-1.5">
+              <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75" />
+              <span className="relative rounded-full w-1.5 h-1.5 bg-green-400" />
+            </span>
+            <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-green-400">Онлайн</span>
+          </span>
+        </div>
         <span className={`font-black drop-shadow-lg ${titleSize}`} style={goldText}>
           ООО Фаворит
         </span>
