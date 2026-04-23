@@ -213,9 +213,16 @@ const FleetSection = () => {
                       <Icon name="Maximize2" size={16} className="text-white" />
                     </div>
                   </button>
-                  <div className="absolute top-3 left-3">
+                  <div className="absolute top-3 left-3 flex items-center gap-2">
                     <div className="inline-block px-2.5 py-1 bg-accent/90 backdrop-blur-sm rounded-full text-black text-[10px] font-bold tracking-widest uppercase shadow-lg">
                       {truck.badge}
+                    </div>
+                    <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-500/90 backdrop-blur-sm text-black text-[10px] font-bold tracking-widest uppercase shadow-lg">
+                      <span className="relative flex w-1.5 h-1.5">
+                        <span className="absolute inset-0 rounded-full bg-white animate-ping opacity-75" />
+                        <span className="relative rounded-full w-1.5 h-1.5 bg-white" />
+                      </span>
+                      В наличии
                     </div>
                   </div>
                   <div className="px-4 py-3 bg-gradient-to-b from-transparent to-black/40">
@@ -239,6 +246,13 @@ const FleetSection = () => {
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 border border-accent/40 text-accent text-xs font-bold">
                     <Icon name="Truck" size={13} />
                     В парке: {truck.count} {pluralizeUnits(truck.count)}
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/40 text-green-400 text-xs font-bold">
+                    <span className="relative flex w-2 h-2">
+                      <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75" />
+                      <span className="relative rounded-full w-2 h-2 bg-green-400" />
+                    </span>
+                    В наличии
                   </div>
                 </div>
                 <h3 className="hidden lg:block font-display font-black text-xl sm:text-3xl lg:text-4xl mb-2">{truck.title}</h3>
