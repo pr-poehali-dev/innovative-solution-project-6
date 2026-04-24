@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Icon from "@/components/ui/icon";
+import { reachGoal } from "@/lib/metrika";
 
 interface OrderModalProps {
   open: boolean;
@@ -19,6 +20,7 @@ export default function OrderModal({ open, onClose, truckName, calcSummary }: Or
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
+      reachGoal("order_modal_open", { truck: truckName });
     } else {
       document.body.style.overflow = "";
       setTimeout(() => {
@@ -52,6 +54,7 @@ export default function OrderModal({ open, onClose, truckName, calcSummary }: Or
       });
       if (res.ok) {
         setStatus("success");
+        reachGoal("order_sent", { truck: truckName });
       } else {
         setStatus("error");
       }

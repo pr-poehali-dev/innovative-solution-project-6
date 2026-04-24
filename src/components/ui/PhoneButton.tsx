@@ -1,4 +1,5 @@
 import Icon from "@/components/ui/icon";
+import { reachGoal } from "@/lib/metrika";
 
 const goldStyle = {
   color: "#000",
@@ -34,6 +35,7 @@ const PhoneButton = ({ className = "", size = "md", iconOnly = false }: PhoneBut
     return (
       <a
         href="tel:+79601883084"
+        onClick={() => reachGoal("phone_click")}
         className={`inline-flex items-center justify-center gap-1.5 px-3 h-10 border-2 rounded-full font-black text-sm active:scale-95 transition-transform ${className}`}
         style={goldStyle}
         aria-label="Позвонить +7 960 188-30-84"
@@ -47,6 +49,7 @@ const PhoneButton = ({ className = "", size = "md", iconOnly = false }: PhoneBut
   return (
     <a
       href="tel:+79601883084"
+      onClick={() => reachGoal("phone_click")}
       className={`inline-flex items-center justify-center border rounded-full font-bold ${sizeClasses[size]} ${className}`}
       style={goldStyleOutline}
     >

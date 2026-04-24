@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
+import { reachGoal } from "@/lib/metrika";
 
 interface CalcResult {
   hours: number;
@@ -99,7 +100,10 @@ const PriceCalculator = ({ pricePerHour, onOrder }: PriceCalculatorProps) => {
         </div>
 
         <button
-          onClick={() => onOrder({ hours, shifts, pricePerHour, total })}
+          onClick={() => {
+            reachGoal("calc_order", { hours, shifts, total });
+            onOrder({ hours, shifts, pricePerHour, total });
+          }}
           className="w-full py-4 font-bold rounded-xl text-black text-base transition-all hover:opacity-90 hover:shadow-xl"
           style={{ background: "linear-gradient(135deg, #f5d060, #e8a820, #c8850a)" }}
         >

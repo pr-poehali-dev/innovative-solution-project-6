@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 import func2url from "../../../backend/func2url.json";
+import { reachGoal } from "@/lib/metrika";
 
 interface CallbackModalProps {
   open: boolean;
@@ -12,6 +13,10 @@ const CallbackModal = ({ open, onClose }: CallbackModalProps) => {
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (open) reachGoal("callback_modal_open");
+  }, [open]);
 
   if (!open) return null;
 
@@ -47,6 +52,7 @@ const CallbackModal = ({ open, onClose }: CallbackModalProps) => {
       });
       if (!res.ok) throw new Error("Не удалось отправить заявку");
       setStatus("success");
+      reachGoal("callback_sent");
       setTimeout(() => close(), 2500);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Ошибка отправки");
