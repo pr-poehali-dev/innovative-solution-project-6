@@ -202,6 +202,105 @@ const ReviewsPage = () => {
         </div>
       </section>
 
+      {/* QR-КОД ДЛЯ ВОДИТЕЛЕЙ И МЕНЕДЖЕРОВ */}
+      <section className="pb-16 sm:pb-24 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="rounded-3xl border border-accent/25 bg-card/40 p-6 sm:p-10">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/15 border border-accent/30 text-accent text-xs font-bold uppercase tracking-wider">
+                <Icon name="QrCode" size={12} />
+                Для водителей и менеджеров
+              </div>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-black text-white mb-3">
+              QR-код для быстрого сбора отзывов
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-8 max-w-3xl">
+              Распечатайте этот QR-код и положите в каждую машину. После выполнения работы показывайте клиенту — он сканирует камерой телефона и сразу попадает на форму отзыва. Без диктовки ссылок, без поиска в интернете.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-6 sm:gap-10 items-center">
+              {/* QR-код */}
+              <div className="mx-auto md:mx-0 flex flex-col items-center gap-3">
+                <div className="relative p-5 bg-white rounded-2xl shadow-2xl">
+                  <img
+                    src={`https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(YANDEX_REVIEW_URL)}&margin=0&ecc=M`}
+                    alt="QR-код для отзыва на Яндекс.Картах"
+                    width="280"
+                    height="280"
+                    className="block w-[220px] h-[220px] sm:w-[280px] sm:h-[280px]"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center shadow-lg border-2 border-accent/30">
+                      <Icon name="Star" size={28} className="text-accent fill-accent" />
+                    </div>
+                  </div>
+                </div>
+
+                <a
+                  href={`https://api.qrserver.com/v1/create-qr-code/?size=800x800&data=${encodeURIComponent(YANDEX_REVIEW_URL)}&margin=2&ecc=M&format=png`}
+                  download="QR-otzyv-favorit.png"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-accent/40 bg-accent/10 hover:bg-accent/20 transition-colors text-accent font-semibold text-sm"
+                >
+                  <Icon name="Download" size={16} />
+                  Скачать QR для печати
+                </a>
+              </div>
+
+              {/* Инструкция */}
+              <div>
+                <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
+                  <Icon name="ListChecks" size={20} className="text-accent" />
+                  Как пользоваться
+                </h3>
+
+                <ol className="space-y-4 mb-6">
+                  <li className="flex items-start gap-3">
+                    <span className="w-7 h-7 rounded-lg bg-accent/20 border border-accent/40 text-accent font-black text-sm flex items-center justify-center flex-shrink-0">1</span>
+                    <div>
+                      <div className="text-white font-semibold text-sm">Скачайте QR-код</div>
+                      <div className="text-muted-foreground text-xs mt-0.5">Кнопка слева — PNG в высоком качестве для печати</div>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-7 h-7 rounded-lg bg-accent/20 border border-accent/40 text-accent font-black text-sm flex items-center justify-center flex-shrink-0">2</span>
+                    <div>
+                      <div className="text-white font-semibold text-sm">Распечатайте в формате А5 или А6</div>
+                      <div className="text-muted-foreground text-xs mt-0.5">Заламинируйте, чтобы не боялся дождя и грязи</div>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-7 h-7 rounded-lg bg-accent/20 border border-accent/40 text-accent font-black text-sm flex items-center justify-center flex-shrink-0">3</span>
+                    <div>
+                      <div className="text-white font-semibold text-sm">Положите в каждую машину</div>
+                      <div className="text-muted-foreground text-xs mt-0.5">В папку с документами или на приборную панель</div>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-7 h-7 rounded-lg bg-accent/20 border border-accent/40 text-accent font-black text-sm flex items-center justify-center flex-shrink-0">4</span>
+                    <div>
+                      <div className="text-white font-semibold text-sm">Показывайте клиенту после работы</div>
+                      <div className="text-muted-foreground text-xs mt-0.5">«Наведите камеру — оставьте отзыв за минуту, будет скидка 5% на следующий заказ»</div>
+                    </div>
+                  </li>
+                </ol>
+
+                <div className="p-4 rounded-xl bg-accent/5 border border-accent/20">
+                  <div className="flex items-start gap-2 text-xs text-muted-foreground">
+                    <Icon name="Lightbulb" size={14} className="text-accent flex-shrink-0 mt-0.5" />
+                    <span>
+                      <span className="text-accent font-semibold">Совет:</span> клиент сканирует QR → сразу попадает в форму отзыва на Яндекс.Картах. Не нужно диктовать адрес, искать компанию, регистрироваться — всё в 2 касания.
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA СНИЗУ — ЗВОНОК */}
       <section className="pb-16 sm:pb-24 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
