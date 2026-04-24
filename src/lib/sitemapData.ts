@@ -11,7 +11,7 @@ import { cities } from "@/data/cities";
 import { seoLandings } from "@/data/seoLandings";
 import { trucks } from "@/pages/truck/trucksData";
 
-export const SITE_DOMAIN = "https://xn--e1afamdhf.xn--p1ai";
+export const SITE_DOMAIN = "https://фаварит.рф";
 
 export interface SitemapEntry {
   loc: string;

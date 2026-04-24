@@ -43,7 +43,7 @@ const BlogIndex = () => {
       <meta name="description" content={description} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <link rel="canonical" href="https://xn--e1afamdhf.xn--p1ai/blog" />
+      <link rel="canonical" href="https://фаварит.рф/blog" />
 
       <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
 

@@ -30,7 +30,7 @@ const SeoLandingPage = ({ slugOverride }: SeoLandingPageProps) => {
     return <Navigate to="/" replace />;
   }
 
-  const canonicalUrl = `https://xn--e1afamdhf.xn--p1ai/${data.slug}`;
+  const canonicalUrl = `https://фаварит.рф/${data.slug}`;
 
   const faqJsonLd = {
     "@context": "https://schema.org",

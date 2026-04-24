@@ -10,7 +10,7 @@ interface BreadcrumbsProps {
   items: BreadcrumbItem[];
 }
 
-const SITE_URL = "https://xn--e1afamdhf.xn--p1ai";
+const SITE_URL = "https://фаварит.рф";
 
 const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
   const structuredData = {

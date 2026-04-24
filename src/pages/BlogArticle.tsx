@@ -106,7 +106,7 @@ const BlogArticle = () => {
       <meta property="og:description" content={article.seoDesc} />
       <meta property="og:image" content={article.cover} />
       <meta property="og:type" content="article" />
-      <link rel="canonical" href={`https://xn--e1afamdhf.xn--p1ai/blog/${article.slug}`} />
+      <link rel="canonical" href={`https://фаварит.рф/blog/${article.slug}`} />
 
       <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
 

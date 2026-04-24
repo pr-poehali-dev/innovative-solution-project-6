@@ -39,7 +39,7 @@ const CityPage = () => {
       />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <link rel="canonical" href={`https://xn--e1afamdhf.xn--p1ai/gorod/${city.slug}`} />
+      <link rel="canonical" href={`https://фаварит.рф/gorod/${city.slug}`} />
 
       <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
 

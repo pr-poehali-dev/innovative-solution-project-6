@@ -3,7 +3,7 @@ const StructuredData = () => {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "ООО Фаворит",
-    "url": "https://фаворит.рф",
+    "url": "https://фаварит.рф",
     "telephone": "+79601883084",
     "address": {
       "@type": "PostalAddress",
