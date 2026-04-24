@@ -17,12 +17,12 @@ const trucks = [
 ];
 
 const sections = [
-  { href: "/#features", label: "Преимущества" },
-  { href: "/#fleet", label: "Техника" },
-  { href: "/#usecases", label: "Услуги" },
-  { href: "/#how", label: "Как это работает" },
+  { href: "/arenda-manipulyatora-nizhny-novgorod", label: "Аренда манипулятора НН" },
+  { href: "/uslugi-manipulyatora", label: "Услуги манипулятора" },
+  { href: "/manipulyator-s-lyulkoy", label: "Манипулятор с люлькой" },
+  { href: "/#fleet", label: "Наша техника" },
+  { href: "/#usecases", label: "Виды работ" },
   { href: "/#pricing", label: "Тарифы" },
-  { href: "/#gallery", label: "Портфолио" },
   { href: "/otzyvy", label: "Отзывы" },
   { href: "/blog", label: "Блог" },
 ];

@@ -8,6 +8,7 @@
  */
 import { articles } from "@/data/articles";
 import { cities } from "@/data/cities";
+import { seoLandings } from "@/data/seoLandings";
 import { trucks } from "@/pages/truck/trucksData";
 
 export const SITE_DOMAIN = "https://xn--e1afamdhf.xn--p1ai";
@@ -49,6 +50,16 @@ export const buildSitemapEntries = (): SitemapEntry[] => {
     lastmod: today,
     changefreq: "weekly",
     priority: "0.85",
+  });
+
+  // SEO-лендинги (главные продвигаемые страницы)
+  Object.keys(seoLandings).forEach((slug) => {
+    entries.push({
+      loc: `${SITE_DOMAIN}/${slug}`,
+      lastmod: today,
+      changefreq: "weekly",
+      priority: "0.95",
+    });
   });
 
   // Техника
