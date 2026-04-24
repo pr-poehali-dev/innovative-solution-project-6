@@ -9,6 +9,7 @@ import { useVisibleSections } from "@/hooks/useVisibleSections";
 const FleetSection = lazy(() => import("@/components/sections/FleetSection"));
 const BottomSections = lazy(() => import("@/components/sections/BottomSections"));
 const ReviewsSection = lazy(() => import("@/components/sections/ReviewsSection"));
+const LeaveReviewBanner = lazy(() => import("@/components/sections/LeaveReviewBanner"));
 const GallerySection = lazy(() => import("@/components/sections/GallerySection"));
 const CalculatorSection = lazy(() => import("@/components/sections/CalculatorSection"));
 const ClientsSection = lazy(() => import("@/components/sections/ClientsSection"));
@@ -35,6 +36,7 @@ const Index = () => {
       <LazySection><GallerySection /></LazySection>
       <LazySection><ClientsSection /></LazySection>
       <LazySection><ReviewsSection /></LazySection>
+      <LazySection><LeaveReviewBanner /></LazySection>
       <LazySection><SeoTextSection /></LazySection>
       <LazySection><FaqSection /></LazySection>
       <LazySection><BottomSections visibleSections={visibleSections} /></LazySection>
