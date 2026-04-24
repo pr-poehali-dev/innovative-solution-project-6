@@ -23,6 +23,7 @@ const sections = [
   { href: "/#how", label: "Как это работает" },
   { href: "/#pricing", label: "Тарифы" },
   { href: "/#gallery", label: "Портфолио" },
+  { href: "/otzyvy", label: "Отзывы" },
   { href: "/blog", label: "Блог" },
 ];
 

@@ -11,6 +11,7 @@ const TruckPage = lazy(() => import("./pages/TruckPage"));
 const CityPage = lazy(() => import("./pages/CityPage"));
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
 const BlogArticle = lazy(() => import("./pages/BlogArticle"));
+const ReviewsPage = lazy(() => import("./pages/ReviewsPage"));
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/gorod/:slug" element={<CityPage />} />
             <Route path="/blog" element={<BlogIndex />} />
             <Route path="/blog/:slug" element={<BlogArticle />} />
+            <Route path="/otzyvy" element={<ReviewsPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
