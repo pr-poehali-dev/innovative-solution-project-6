@@ -212,7 +212,7 @@ const FleetSection = () => {
   };
 
   return (
-    <section id="fleet" className="py-16 sm:py-32 px-4 sm:px-6">
+    <section id="fleet" className="py-16 sm:py-32 px-4 sm:px-6 scroll-mt-20 sm:scroll-mt-24">
       <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} truckName={selectedTruck} />
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10 sm:mb-20">
@@ -233,14 +233,14 @@ const FleetSection = () => {
           const tag = (truck as typeof truck & { tag?: { label: string; icon: string; color: string } }).tag;
           return (
           <div key={idx} className={`relative border border-accent/20 rounded-2xl sm:rounded-3xl bg-card/50 overflow-hidden ${idx < trucks.length - 1 ? "mb-6 sm:mb-8" : "mb-8 sm:mb-12"}`}>
-            {/* Угловой "лейбл-флажок" — только если есть тег */}
+            {/* Угловой "лейбл-флажок" — на десктопе, на мобилке вынесен под фото */}
             {tag && (
-              <div className={`absolute top-0 right-0 z-20 flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r ${tag.color} text-white text-[10px] sm:text-sm font-black uppercase tracking-wider shadow-xl rounded-bl-xl sm:rounded-bl-2xl`}>
+              <div className={`hidden lg:flex absolute top-0 right-0 z-20 items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r ${tag.color} text-white text-[10px] sm:text-sm font-black uppercase tracking-wider shadow-xl rounded-bl-xl sm:rounded-bl-2xl`}>
                 <Icon name={tag.icon} size={12} className="sm:w-[14px] sm:h-[14px]" />
                 <span className="whitespace-nowrap">{tag.label}</span>
               </div>
             )}
-            <div className="absolute inset-0 bg-gradient-to-r from-accent/10 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-accent/10 via-transparent to-transparent pointer-events-none" />
             <div className={`relative grid gap-0 ${truck.image ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
               {truck.image && (
                 <div className="relative lg:hidden overflow-hidden bg-white/5">
@@ -263,19 +263,26 @@ const FleetSection = () => {
                       <Icon name="Maximize2" size={16} className="text-white" />
                     </div>
                   </button>
-                  <div className="absolute top-3 left-3 flex items-center gap-2">
-                    <div className="inline-block px-2.5 py-1 bg-accent/90 backdrop-blur-sm rounded-full text-black text-[10px] font-bold tracking-widest uppercase shadow-lg">
-                      {truck.badge}
-                    </div>
-                    <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-500/90 backdrop-blur-sm text-black text-[10px] font-bold tracking-widest uppercase shadow-lg">
-                      <span className="relative flex w-1.5 h-1.5">
-                        <span className="absolute inset-0 rounded-full bg-white animate-ping opacity-75" />
-                        <span className="relative rounded-full w-1.5 h-1.5 bg-white" />
-                      </span>
-                      В наличии
-                    </div>
-                  </div>
+                  {/* Информационный блок ПОД фото — больше не перекрывает машину */}
                   <div className="px-4 py-3 bg-gradient-to-b from-transparent to-black/40">
+                    <div className="flex items-center gap-2 flex-wrap mb-2">
+                      <div className="inline-block px-2.5 py-1 bg-accent/90 rounded-full text-black text-[10px] font-bold tracking-widest uppercase shadow-lg">
+                        {truck.badge}
+                      </div>
+                      <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-500/90 text-black text-[10px] font-bold tracking-widest uppercase shadow-lg">
+                        <span className="relative flex w-1.5 h-1.5">
+                          <span className="absolute inset-0 rounded-full bg-white animate-ping opacity-75" />
+                          <span className="relative rounded-full w-1.5 h-1.5 bg-white" />
+                        </span>
+                        В наличии
+                      </div>
+                      {tag && (
+                        <div className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r ${tag.color} text-white text-[10px] font-bold tracking-widest uppercase shadow-lg`}>
+                          <Icon name={tag.icon} size={11} />
+                          {tag.label}
+                        </div>
+                      )}
+                    </div>
                     <h3 className="font-display font-black text-lg text-white leading-tight">{truck.title}</h3>
                     <div className="flex items-center gap-2 mt-1 flex-wrap">
                       <p className="text-accent font-bold text-sm">{truck.price}</p>
