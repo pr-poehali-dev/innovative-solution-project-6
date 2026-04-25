@@ -95,8 +95,6 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
 
             {slides.map((slide, i) => {
               const isActive = i === current;
-              const shouldRender = isActive || i === 0;
-              if (!shouldRender) return null;
               const src800 = `${WEBP_BASE}/w800/${slide.id}.webp`;
               const src1600 = `${WEBP_BASE}/w1600/${slide.id}.webp`;
               const useFullSrc = !!slide.fullSrc;
@@ -177,8 +175,6 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
       {/* Десктопный слайдер — фон на весь экран */}
       {slides.map((slide, i) => {
         const isActive = i === current;
-        const shouldRender = isActive || i === 0;
-        if (!shouldRender) return null;
         const src800 = `${WEBP_BASE}/w800/${slide.id}.webp`;
         const src1600 = `${WEBP_BASE}/w1600/${slide.id}.webp`;
         const useFullSrc = !!slide.fullSrc;
