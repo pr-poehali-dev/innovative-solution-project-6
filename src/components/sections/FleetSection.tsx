@@ -322,6 +322,13 @@ const FleetSection = () => {
                     Заказать
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
                   </button>
+                  <a
+                    href="tel:+79601883084"
+                    className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3 bg-green-500/15 border border-green-500/40 text-green-400 rounded-full font-semibold text-sm hover:bg-green-500/25 hover:border-green-500/60 transition-all"
+                  >
+                    <Icon name="Phone" size={16} />
+                    Позвонить
+                  </a>
                   <Link to={`/tehnika/${truck.slug}`} className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3 border border-accent/30 rounded-full font-semibold text-sm hover:border-accent/60 hover:bg-accent/5 transition-all">
                     Подробнее
                   </Link>
