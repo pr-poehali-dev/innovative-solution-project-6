@@ -70,10 +70,10 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
                   className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center flex-shrink-0"
                   style={{ background: "rgba(232,168,32,0.12)", border: "1.5px solid rgba(232,168,32,0.3)" }}
                 >
-                  <Icon name={item.icon} size={24} style={{ color: "#e8a820" }} />
+                  <Icon name={item.icon} size={20} className="sm:!w-6 sm:!h-6" style={{ color: "#e8a820" }} />
                 </div>
                 <div>
-                  <h3 className="font-black text-base sm:text-lg text-white mb-1.5">{item.title}</h3>
+                  <h3 className="font-black text-sm sm:text-base lg:text-lg text-white mb-1.5">{item.title}</h3>
                   <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">{item.desc}</p>
                 </div>
               </div>

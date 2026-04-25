@@ -40,11 +40,11 @@ const MapAndRequisitesSection = ({
                 <img
                   src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp"
                   alt="Фаворит герб"
-                  className="w-12 h-12 sm:w-20 sm:h-20 flex-shrink-0 rounded-xl object-cover logo-glow"
+                  className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 flex-shrink-0 rounded-xl object-cover logo-glow"
                 />
                 <div className="flex flex-col items-center sm:items-start gap-0.5">
                   <h2
-                    className="text-2xl sm:text-5xl lg:text-6xl font-black tracking-tight"
+                    className="text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight"
                     style={{
                       background: "linear-gradient(135deg, #f5d060 0%, #e8a820 40%, #fdeea0 60%, #c8850a 80%, #f0c040 100%)",
                       WebkitBackgroundClip: "text",
@@ -85,7 +85,7 @@ const MapAndRequisitesSection = ({
               <PhoneButton size="lg" className="rounded-2xl w-full" />
               <a
                 href="tel:+79601690990"
-                className="inline-flex items-center justify-center gap-4 px-10 sm:px-14 py-5 sm:py-6 border rounded-2xl font-bold text-2xl sm:text-3xl w-full transition-all"
+                className="inline-flex items-center justify-center gap-4 px-10 sm:px-14 py-5 sm:py-6 border rounded-2xl font-bold text-lg sm:text-2xl md:text-3xl w-full transition-all"
                 style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", fontFamily: "'Cinzel', serif", animation: "goldPulse 1.2s ease-in-out infinite" }}
               >
                 📞 +7 960 169-09-90

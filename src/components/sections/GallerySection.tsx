@@ -86,7 +86,7 @@ const GallerySection = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-1.5 sm:gap-2.5 md:gap-3 lg:gap-4">
           {photos.map((photo, i) => (
             <div
               key={i}
@@ -127,7 +127,7 @@ const GallerySection = () => {
           </button>
 
           <button
-            className="absolute left-4 lg:left-8 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
+            className="absolute left-4 lg:left-8 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
             onClick={(e) => { e.stopPropagation(); prev(); }}
           >
             <Icon name="ChevronLeft" size={24} className="text-white" />
@@ -146,7 +146,7 @@ const GallerySection = () => {
           </div>
 
           <button
-            className="absolute right-4 lg:right-8 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
+            className="absolute right-4 lg:right-8 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
             onClick={(e) => { e.stopPropagation(); next(); }}
           >
             <Icon name="ChevronRight" size={24} className="text-white" />

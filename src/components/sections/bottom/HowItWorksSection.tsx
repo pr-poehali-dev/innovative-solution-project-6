@@ -46,7 +46,7 @@ const HowItWorksSection = ({ visibleSections }: HowItWorksSectionProps) => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
           {steps.map((item, i) => {
             const isVisible = visibleSections["how"];
             return (
@@ -57,12 +57,12 @@ const HowItWorksSection = ({ visibleSections }: HowItWorksSectionProps) => {
               >
                 <div className="flex items-center gap-3 sm:gap-4 sm:mb-4 flex-shrink-0">
                   <div className={`w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br ${item.iconBg} flex items-center justify-center shadow-lg flex-shrink-0`}>
-                    <Icon name={item.icon} size={22} className="text-white" />
+                    <Icon name={item.icon} size={20} className="text-white sm:!w-[22px] sm:!h-[22px]" />
                   </div>
                   <div className="text-4xl sm:text-6xl font-black text-accent/10 leading-none sm:block hidden">{item.step}</div>
                 </div>
                 <div>
-                  <h3 className="font-display font-bold text-base sm:text-2xl mb-1 sm:mb-3">{item.title}</h3>
+                  <h3 className="font-display font-bold text-sm sm:text-lg md:text-xl lg:text-2xl mb-1 sm:mb-3">{item.title}</h3>
                   <p className="text-muted-foreground text-xs sm:text-base leading-relaxed">{item.desc}</p>
                 </div>
               </div>

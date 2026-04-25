@@ -145,7 +145,7 @@ const ReviewsSection = () => {
             <div className="flex justify-center mb-4">
               <SectionBadge>Отзывы</SectionBadge>
             </div>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-black tracking-tighter">
               <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
                 Что говорят клиенты
               </span>
@@ -166,20 +166,20 @@ const ReviewsSection = () => {
 
           {/* Счётчик + кнопки */}
           <div className="flex items-center gap-4">
-            <span className="text-muted-foreground text-sm tabular-nums">
+            <span className="text-muted-foreground text-xs sm:text-sm tabular-nums">
               <span className="text-white font-bold">{active + 1}</span> / {pages}
             </span>
             <button
               onClick={prev}
-              className="w-10 h-10 rounded-full border border-accent/20 hover:border-accent/60 hover:bg-accent/10 transition-all flex items-center justify-center text-white"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-accent/20 hover:border-accent/60 hover:bg-accent/10 transition-all flex items-center justify-center text-white"
             >
-              <Icon name="ChevronLeft" size={18} />
+              <Icon name="ChevronLeft" size={16} className="sm:!w-[18px] sm:!h-[18px]" />
             </button>
             <button
               onClick={next}
-              className="w-10 h-10 rounded-full border border-accent/20 hover:border-accent/60 hover:bg-accent/10 transition-all flex items-center justify-center text-white"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-accent/20 hover:border-accent/60 hover:bg-accent/10 transition-all flex items-center justify-center text-white"
             >
-              <Icon name="ChevronRight" size={18} />
+              <Icon name="ChevronRight" size={16} className="sm:!w-[18px] sm:!h-[18px]" />
             </button>
           </div>
         </div>

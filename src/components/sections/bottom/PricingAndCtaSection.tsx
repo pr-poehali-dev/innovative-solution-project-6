@@ -66,13 +66,13 @@ const PricingAndCtaSection = ({ visibleSections, onOpenModal }: PricingAndCtaSec
                     <div className="absolute -inset-1 bg-gradient-to-r from-accent via-accent to-accent/60 rounded-3xl opacity-20 blur-xl group-hover:opacity-30 transition" />
                   )}
                   <div
-                    className={`relative p-5 sm:p-10 border rounded-2xl h-full flex flex-col justify-between backdrop-blur-sm transition-all ${
+                    className={`relative p-4 sm:p-6 md:p-8 lg:p-10 border rounded-2xl h-full flex flex-col justify-between backdrop-blur-sm transition-all ${
                       plan.highlight ? "border-accent/40 bg-accent/10" : "border-accent/10 bg-card/50 hover:bg-card/80"
                     }`}
                   >
                     <div>
                       <h3 className="font-display font-bold text-lg sm:text-2xl mb-1 sm:mb-2">{plan.name}</h3>
-                      <p className="text-2xl sm:text-4xl font-black text-accent mb-4 sm:mb-8">{plan.price}</p>
+                      <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-black text-accent mb-4 sm:mb-8">{plan.price}</p>
                       <ul className="space-y-2 sm:space-y-4 mb-5 sm:mb-10">
                         {plan.features.map((f, j) => (
                           <li key={j} className="flex gap-2 sm:gap-3 text-sm items-start">
@@ -105,7 +105,7 @@ const PricingAndCtaSection = ({ visibleSections, onOpenModal }: PricingAndCtaSec
         <div
           className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${visibleSections["cta"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
         >
-          <h2 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mb-3 sm:mb-6">
+          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-black tracking-tighter mb-3 sm:mb-6">
             <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
               Нужен манипулятор?
             </span>

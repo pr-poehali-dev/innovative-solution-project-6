@@ -96,7 +96,7 @@ const SiteFooter = () => {
                 style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
               >
                 <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-black/15 flex items-center justify-center flex-shrink-0">
-                  <Icon name="Phone" size={18} className="text-black" />
+                  <Icon name="Phone" size={16} className="text-black sm:!w-[18px] sm:!h-[18px]" />
                 </div>
                 <div className="flex flex-col leading-tight">
                   <span className="text-black/70 text-[10px] sm:text-xs font-bold uppercase tracking-wider">Позвонить</span>
@@ -108,7 +108,7 @@ const SiteFooter = () => {
                 className="group flex items-center gap-3 px-4 py-3 rounded-2xl border border-accent/40 bg-accent/5 hover:bg-accent/10 transition-colors"
               >
                 <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
-                  <Icon name="PhoneCall" size={18} className="text-accent" />
+                  <Icon name="PhoneCall" size={16} className="text-accent sm:!w-[18px] sm:!h-[18px]" />
                 </div>
                 <div className="flex flex-col leading-tight">
                   <span className="text-accent/80 text-[10px] sm:text-xs font-bold uppercase tracking-wider">Запасной номер</span>
@@ -122,7 +122,7 @@ const SiteFooter = () => {
                 className="group flex items-center gap-3 px-4 py-3 rounded-2xl border border-dashed border-accent/40 bg-transparent hover:border-accent/70 hover:bg-accent/5 transition-all text-left"
               >
                 <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
-                  <Icon name="MessageCircle" size={18} className="text-accent" />
+                  <Icon name="MessageCircle" size={16} className="text-accent sm:!w-[18px] sm:!h-[18px]" />
                 </div>
                 <div className="flex flex-col leading-tight">
                   <span className="text-accent/80 text-[10px] sm:text-xs font-bold uppercase tracking-wider">Не можете позвонить?</span>
