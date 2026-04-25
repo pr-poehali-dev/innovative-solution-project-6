@@ -36,12 +36,11 @@ const PhoneButton = ({ className = "", size = "md", iconOnly = false }: PhoneBut
       <a
         href="tel:+79601883084"
         onClick={() => reachGoal("phone_click")}
-        className={`inline-flex items-center justify-center gap-1.5 px-3 h-10 border-2 rounded-full font-black text-sm active:scale-95 transition-transform ${className}`}
+        className={`inline-flex w-10 h-10 items-center justify-center border-2 rounded-full font-black active:scale-95 transition-transform ${className}`}
         style={goldStyle}
         aria-label="Позвонить +7 960 188-30-84"
       >
-        <Icon name="Phone" size={16} />
-        <span>Звонок</span>
+        <Icon name="Phone" size={18} />
       </a>
     );
   }
