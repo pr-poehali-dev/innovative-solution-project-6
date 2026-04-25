@@ -253,7 +253,7 @@ const FleetSection = () => {
                     <img
                       src={truck.image}
                       alt={truck.alt}
-                      className="w-full object-contain h-64 sm:h-80 md:h-[420px] group-active:scale-[0.98] transition-transform"
+                      className="w-full object-contain h-80 sm:h-[420px] md:h-[520px] group-active:scale-[0.98] transition-transform"
                       loading="lazy"
                       decoding="async"
                       width="800"
