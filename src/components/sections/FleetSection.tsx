@@ -94,6 +94,42 @@ const trucks = [
     ],
   },
   {
+    badge: "КМУ HIAB 8т · Стрела 22м",
+    title: "Hyundai Gold + КМУ HIAB 190TM",
+    slug: "hyundai-gold-kmu-8t",
+    price: "3 200 ₽/час с НДС",
+    count: 1,
+    tag: { label: "Длинная стрела", icon: "MoveUpRight", color: "from-sky-500 to-blue-600" },
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/106c30cf-02d3-4b99-ac02-47e7404652e2.jpg",
+    alt: "Hyundai Gold КМУ HIAB 190TM 8 тонн",
+    specs: [
+      { label: "Грузоподъёмность кузова", value: "до 10 т" },
+      { label: "Грузоподъёмность КМУ", value: "до 8 т" },
+      { label: "Длина стрелы (вылет)", value: "до 22 м" },
+      { label: "Размер платформы", value: "6,0 × 2,45 м" },
+      { label: "Тип КМУ", value: "Тросовый" },
+      { label: "Колёсная формула", value: "6×4" },
+    ],
+  },
+  {
+    badge: "КМУ Kanglim 7т · Тросовый",
+    title: "Hino 500 + КМУ Kanglim KS1256G-II",
+    slug: "hino-500-kmu-7t",
+    price: "2 700 ₽/час с НДС",
+    count: 1,
+    tag: { label: "Универсал", icon: "Truck", color: "from-amber-500 to-orange-600" },
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/660a8623-ee67-4819-a414-68b954548e0b.jpg",
+    alt: "Hino 500 КМУ Kanglim KS1256G-II 7 тонн",
+    specs: [
+      { label: "Грузоподъёмность кузова", value: "до 6 т" },
+      { label: "Грузоподъёмность КМУ", value: "до 7 т" },
+      { label: "Длина стрелы (вылет)", value: "до 19 м" },
+      { label: "Размер платформы", value: "6,85 × 2,45 м" },
+      { label: "Тип КМУ", value: "Тросовый" },
+      { label: "Двигатель", value: "Дизель 260 л.с." },
+    ],
+  },
+  {
     badge: "КМУ 3т",
     title: "ISUZU 5т + КМУ",
     slug: "isuzu-5t-kmu",
@@ -199,9 +235,9 @@ const FleetSection = () => {
           <div key={idx} className={`relative border border-accent/20 rounded-2xl sm:rounded-3xl bg-card/50 overflow-hidden ${idx < trucks.length - 1 ? "mb-6 sm:mb-8" : "mb-8 sm:mb-12"}`}>
             {/* Угловой "лейбл-флажок" — только если есть тег */}
             {tag && (
-              <div className={`absolute top-0 right-0 z-20 flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r ${tag.color} text-white text-xs sm:text-sm font-black uppercase tracking-wider shadow-xl rounded-bl-2xl`}>
-                <Icon name={tag.icon} size={14} />
-                {tag.label}
+              <div className={`absolute top-0 right-0 z-20 flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r ${tag.color} text-white text-[10px] sm:text-sm font-black uppercase tracking-wider shadow-xl rounded-bl-xl sm:rounded-bl-2xl`}>
+                <Icon name={tag.icon} size={12} className="sm:w-[14px] sm:h-[14px]" />
+                <span className="whitespace-nowrap">{tag.label}</span>
               </div>
             )}
             <div className="absolute inset-0 bg-gradient-to-r from-accent/10 via-transparent to-transparent" />
@@ -217,13 +253,13 @@ const FleetSection = () => {
                     <img
                       src={truck.image}
                       alt={truck.alt}
-                      className="w-full object-contain h-72 sm:h-96 group-active:scale-[0.98] transition-transform"
+                      className="w-full object-contain h-64 sm:h-80 md:h-[420px] group-active:scale-[0.98] transition-transform"
                       loading="lazy"
                       decoding="async"
                       width="800"
                       height="600"
                     />
-                    <div className="absolute bottom-20 right-3 w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg">
+                    <div className="absolute top-3 right-3 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg">
                       <Icon name="Maximize2" size={16} className="text-white" />
                     </div>
                   </button>
@@ -252,7 +288,7 @@ const FleetSection = () => {
                 </div>
               )}
 
-              <div className="p-4 sm:p-10 lg:p-14">
+              <div className="p-4 sm:p-6 md:p-8 lg:p-14">
                 <div className="hidden lg:flex items-center gap-3 mb-4 sm:mb-6 flex-wrap">
                   <div className="inline-block px-3 py-1 bg-accent/20 rounded-full text-accent text-xs font-semibold tracking-widest uppercase">
                     {truck.badge}
@@ -272,10 +308,10 @@ const FleetSection = () => {
                 <h3 className="hidden lg:block font-display font-black text-xl sm:text-3xl lg:text-4xl mb-2">{truck.title}</h3>
                 <p className="hidden lg:block text-accent font-bold text-lg sm:text-xl mb-5 sm:mb-8">{truck.price}</p>
 
-                <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-5 sm:mb-8">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-2 sm:gap-3 md:gap-4 mb-5 sm:mb-8">
                   {truck.specs.map((spec, i) => (
                     <div key={i} className="bg-background/40 rounded-xl p-3 sm:p-4 border border-accent/10">
-                      <p className="text-muted-foreground text-xs mb-1">{spec.label}</p>
+                      <p className="text-muted-foreground text-[11px] sm:text-xs mb-1 leading-tight">{spec.label}</p>
                       <p className="font-bold text-white text-sm sm:text-base">{spec.value}</p>
                     </div>
                   ))}
