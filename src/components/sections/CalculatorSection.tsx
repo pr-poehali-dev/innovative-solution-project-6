@@ -363,7 +363,7 @@ const CalculatorSection = () => {
                           isOther ? "text-amber-300" : c.hours === 0 ? "text-emerald-400" : "text-muted-foreground"
                         }`}>
                           {isOther
-                            ? "Уточнит диспетчер"
+                            ? "Уточните у менеджера"
                             : c.hours === 0
                             ? "Бесплатная подача"
                             : `+${surcharge.toLocaleString("ru")} ₽ (${c.hours} ч пути)`}
@@ -386,7 +386,7 @@ const CalculatorSection = () => {
                     </label>
                     <p className="text-[10px] text-muted-foreground mt-1.5 flex items-center gap-1">
                       <Icon name="Info" size={10} className="text-accent" />
-                      Стоимость выезда диспетчер уточнит после заявки
+                      Стоимость выезда уточните у менеджера
                     </p>
                   </div>
                 )}
