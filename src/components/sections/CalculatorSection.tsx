@@ -39,13 +39,20 @@ const tasks: { id: string; label: string; icon: string; suggested: number[] }[] 
   { id: "tower", label: "Высотные работы", icon: "Building2", suggested: [4, 5, 7] },
 ];
 
-const cities: { name: string; surcharge: number }[] = [
-  { name: "Нижний Новгород", surcharge: 0 },
-  { name: "Дзержинск", surcharge: 1500 },
-  { name: "Бор", surcharge: 1000 },
-  { name: "Кстово", surcharge: 1000 },
-  { name: "Богородск", surcharge: 1500 },
-  { name: "Другой город", surcharge: 2500 },
+// Выезд в города области = N часов работы по тарифу выбранной техники (туда-обратно)
+const cities: { name: string; hours: number }[] = [
+  { name: "Нижний Новгород", hours: 0 },
+  { name: "Бор", hours: 0.5 },
+  { name: "Кстово", hours: 0.5 },
+  { name: "Дзержинск", hours: 1 },
+  { name: "Богородск", hours: 1 },
+  { name: "Балахна", hours: 1 },
+  { name: "Городец", hours: 1.5 },
+  { name: "Павлово", hours: 1.5 },
+  { name: "Семёнов", hours: 1.5 },
+  { name: "Арзамас", hours: 2 },
+  { name: "Выкса", hours: 2.5 },
+  { name: "Другой город", hours: 2 },
 ];
 
 const CalculatorSection = () => {
@@ -54,7 +61,6 @@ const CalculatorSection = () => {
   const [truckIdx, setTruckIdx] = useState(0);
   const [hours, setHours] = useState(4);
   const [cityIdx, setCityIdx] = useState(0);
-  const [withDocs, setWithDocs] = useState(false);
   const [withRigger, setWithRigger] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [showCheck, setShowCheck] = useState(false);
@@ -79,9 +85,9 @@ const CalculatorSection = () => {
   const discountPct = hours >= 12 ? 0.08 : hours >= 8 ? 0.05 : 0;
   const discount = Math.round(baseTotal * discountPct);
   const city = cities[cityIdx];
-  const docsPrice = withDocs ? 500 : 0;
-  const riggerPrice = withRigger ? 800 * hours : 0;
-  const finalTotal = baseTotal - discount + city.surcharge + docsPrice + riggerPrice;
+  const citySurcharge = Math.round(city.hours * truck.price);
+  const riggerPrice = withRigger ? 250 * hours : 0;
+  const finalTotal = baseTotal - discount + citySurcharge + riggerPrice;
 
   const competitorPrice = Math.round(finalTotal * 1.18);
   const savings = competitorPrice - finalTotal;
@@ -103,7 +109,7 @@ const CalculatorSection = () => {
       <OrderModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        truckName={`${truck.name} · ${hours} ч · ${city.name}${withDocs ? " · с документами" : ""}${withRigger ? " · стропальщик" : ""} · Итого: ${finalTotal.toLocaleString("ru")} ₽`}
+        truckName={`${truck.name} · ${hours} ч · ${city.name}${withRigger ? " · стропальщик" : ""} · Итого: ${finalTotal.toLocaleString("ru")} ₽`}
       />
 
       <div className="max-w-5xl mx-auto relative">
@@ -329,24 +335,32 @@ const CalculatorSection = () => {
                 <p className="text-sm text-muted-foreground mb-3 font-medium flex items-center gap-2">
                   <Icon name="MapPin" size={14} className="text-accent" />
                   Куда подать технику?
+                  <span className="ml-auto text-[10px] text-muted-foreground/70 font-normal">
+                    выезд по тарифу выбранной техники
+                  </span>
                 </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {cities.map((c, i) => (
-                    <button
-                      key={c.name}
-                      onClick={() => setCityIdx(i)}
-                      className={`p-2.5 rounded-lg border-2 text-left transition-all ${
-                        cityIdx === i
-                          ? "border-accent bg-accent/15"
-                          : "border-accent/10 bg-background/30 hover:border-accent/30"
-                      }`}
-                    >
-                      <p className={`text-xs font-bold ${cityIdx === i ? "text-white" : "text-foreground/80"}`}>{c.name}</p>
-                      <p className={`text-[10px] mt-0.5 ${c.surcharge === 0 ? "text-emerald-400" : "text-muted-foreground"}`}>
-                        {c.surcharge === 0 ? "Бесплатная подача" : `+${c.surcharge.toLocaleString("ru")} ₽ выезд`}
-                      </p>
-                    </button>
-                  ))}
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+                  {cities.map((c, i) => {
+                    const surcharge = Math.round(c.hours * truck.price);
+                    return (
+                      <button
+                        key={c.name}
+                        onClick={() => setCityIdx(i)}
+                        className={`p-2.5 rounded-lg border-2 text-left transition-all ${
+                          cityIdx === i
+                            ? "border-accent bg-accent/15"
+                            : "border-accent/10 bg-background/30 hover:border-accent/30"
+                        }`}
+                      >
+                        <p className={`text-xs font-bold ${cityIdx === i ? "text-white" : "text-foreground/80"}`}>{c.name}</p>
+                        <p className={`text-[10px] mt-0.5 ${c.hours === 0 ? "text-emerald-400" : "text-muted-foreground"}`}>
+                          {c.hours === 0
+                            ? "Бесплатная подача"
+                            : `+${surcharge.toLocaleString("ru")} ₽ (${c.hours} ч пути)`}
+                        </p>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -356,26 +370,7 @@ const CalculatorSection = () => {
                   <Icon name="PlusCircle" size={14} className="text-accent" />
                   Дополнительные опции
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  <label className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                    withDocs ? "border-accent bg-accent/10" : "border-accent/10 bg-background/30 hover:border-accent/30"
-                  }`}>
-                    <input type="checkbox" checked={withDocs} onChange={(e) => setWithDocs(e.target.checked)} className="sr-only" />
-                    <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 ${
-                      withDocs ? "bg-accent border-accent" : "border-accent/40"
-                    }`}>
-                      {withDocs && <Icon name="Check" size={12} className="text-black" strokeWidth={3} />}
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
-                        <Icon name="FileCheck" size={12} className="text-accent" />
-                        Закрывающие документы
-                      </p>
-                      <p className="text-[10px] text-muted-foreground">УПД, акт, счёт-фактура</p>
-                    </div>
-                    <span className="text-xs font-black text-accent">+500 ₽</span>
-                  </label>
-
+                <div className="grid grid-cols-1 gap-2">
                   <label className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
                     withRigger ? "border-accent bg-accent/10" : "border-accent/10 bg-background/30 hover:border-accent/30"
                   }`}>
@@ -392,7 +387,7 @@ const CalculatorSection = () => {
                       </p>
                       <p className="text-[10px] text-muted-foreground">Помощь со строповкой груза</p>
                     </div>
-                    <span className="text-xs font-black text-accent">+800 ₽/ч</span>
+                    <span className="text-xs font-black text-accent">+250 ₽/ч</span>
                   </label>
                 </div>
               </div>
@@ -421,16 +416,10 @@ const CalculatorSection = () => {
                       <span className="font-bold tabular-nums">−{discount.toLocaleString("ru")} ₽</span>
                     </div>
                   )}
-                  {city.surcharge > 0 && (
+                  {citySurcharge > 0 && (
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Выезд в «{city.name}»</span>
-                      <span className="font-bold tabular-nums">+{city.surcharge.toLocaleString("ru")} ₽</span>
-                    </div>
-                  )}
-                  {withDocs && (
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Закрывающие документы</span>
-                      <span className="font-bold tabular-nums">+{docsPrice.toLocaleString("ru")} ₽</span>
+                      <span className="text-muted-foreground">Выезд в «{city.name}» ({city.hours} ч × {truck.price.toLocaleString("ru")} ₽)</span>
+                      <span className="font-bold tabular-nums">+{citySurcharge.toLocaleString("ru")} ₽</span>
                     </div>
                   )}
                   {withRigger && (
@@ -469,7 +458,7 @@ const CalculatorSection = () => {
                     {discount > 0 && (
                       <div className="flex items-center gap-2 mb-1">
                         <span className="text-sm text-muted-foreground line-through">
-                          {(baseTotal + city.surcharge + docsPrice + riggerPrice).toLocaleString("ru")} ₽
+                          {(baseTotal + citySurcharge + riggerPrice).toLocaleString("ru")} ₽
                         </span>
                         <span className="px-2 py-0.5 bg-emerald-500/20 border border-emerald-500/40 rounded text-emerald-400 text-[10px] font-black">
                           −{discount.toLocaleString("ru")} ₽
