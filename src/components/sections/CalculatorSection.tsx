@@ -82,15 +82,10 @@ const CalculatorSection = () => {
 
   const truck = trucks[truckIdx];
   const baseTotal = truck.price * hours;
-  const discountPct = hours >= 12 ? 0.08 : hours >= 8 ? 0.05 : 0;
-  const discount = Math.round(baseTotal * discountPct);
   const city = cities[cityIdx];
   const citySurcharge = Math.round(city.hours * truck.price);
   const riggerPrice = withRigger ? 250 * hours : 0;
-  const finalTotal = baseTotal - discount + citySurcharge + riggerPrice;
-
-  const competitorPrice = Math.round(finalTotal * 1.18);
-  const savings = competitorPrice - finalTotal;
+  const finalTotal = baseTotal + citySurcharge + riggerPrice;
 
   const minPrice = Math.min(...trucks.map((t) => t.price));
   const maxPrice = Math.max(...trucks.map((t) => t.price));
@@ -123,7 +118,7 @@ const CalculatorSection = () => {
             </span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-            3 простых шага — узнайте точную сумму с учётом скидки, города и доп. услуг
+            3 простых шага — узнайте точную сумму с учётом города и доп. услуг
           </p>
 
           <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mt-6">
@@ -138,8 +133,8 @@ const CalculatorSection = () => {
               </span>
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30">
-              <Icon name="Percent" size={14} className="text-emerald-400" />
-              <span className="text-xs sm:text-sm text-emerald-300">До 8% скидки</span>
+              <Icon name="Zap" size={14} className="text-emerald-400" />
+              <span className="text-xs sm:text-sm text-emerald-300">Подача от 1 часа</span>
             </div>
           </div>
         </div>
@@ -308,8 +303,8 @@ const CalculatorSection = () => {
                 />
                 <div className="flex justify-between text-[11px] text-muted-foreground mt-2">
                   <span>4 ч</span>
-                  <span className={hours >= 8 ? "text-emerald-400 font-bold" : ""}>8 ч (-5%)</span>
-                  <span className={hours >= 12 ? "text-emerald-400 font-bold" : ""}>12 ч (-8%)</span>
+                  <span>8 ч</span>
+                  <span>16 ч</span>
                   <span>24 ч</span>
                 </div>
 
@@ -410,12 +405,6 @@ const CalculatorSection = () => {
                     <span className="text-muted-foreground">{truck.short} × {hours} ч</span>
                     <span className="font-bold tabular-nums">{baseTotal.toLocaleString("ru")} ₽</span>
                   </div>
-                  {discount > 0 && (
-                    <div className="flex justify-between text-emerald-400">
-                      <span>Скидка {Math.round(discountPct * 100)}% за длительность</span>
-                      <span className="font-bold tabular-nums">−{discount.toLocaleString("ru")} ₽</span>
-                    </div>
-                  )}
                   {citySurcharge > 0 && (
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Выезд в «{city.name}» ({city.hours} ч × {truck.price.toLocaleString("ru")} ₽)</span>
@@ -437,34 +426,12 @@ const CalculatorSection = () => {
 
               {/* Итог */}
               <div className="border-t border-accent/10 pt-6">
-                {savings > 1000 && (
-                  <div className="mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
-                      <Icon name="TrendingDown" size={18} className="text-emerald-400" />
-                    </div>
-                    <div className="flex-1 text-xs sm:text-sm">
-                      <p className="font-bold text-emerald-300">Вы экономите ~{savings.toLocaleString("ru")} ₽</p>
-                      <p className="text-emerald-400/70 text-[11px]">по сравнению со средним рынком ({competitorPrice.toLocaleString("ru")} ₽)</p>
-                    </div>
-                  </div>
-                )}
-
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-5">
                   <div className="flex-1">
                     <p className="text-muted-foreground text-xs sm:text-sm mb-1 flex items-center gap-1.5">
                       <Icon name="Calculator" size={12} className="text-accent" />
                       Итоговая стоимость
                     </p>
-                    {discount > 0 && (
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sm text-muted-foreground line-through">
-                          {(baseTotal + citySurcharge + riggerPrice).toLocaleString("ru")} ₽
-                        </span>
-                        <span className="px-2 py-0.5 bg-emerald-500/20 border border-emerald-500/40 rounded text-emerald-400 text-[10px] font-black">
-                          −{discount.toLocaleString("ru")} ₽
-                        </span>
-                      </div>
-                    )}
                     <p className="text-3xl sm:text-5xl font-black bg-gradient-to-r from-accent via-amber-300 to-accent bg-clip-text text-transparent tabular-nums">
                       {finalTotal.toLocaleString("ru")} ₽
                     </p>
