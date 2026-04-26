@@ -40,7 +40,19 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
         </div>
 
         <div className="flex gap-3 sm:gap-4 mb-8 sm:mb-12 flex-col sm:flex-row">
-          <a href="#fleet" className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all font-medium text-base sm:text-lg text-white text-center">
+          <a
+            href="#fleet"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById("fleet");
+              if (el) {
+                const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
+                window.scrollTo({ top, behavior: "smooth" });
+                history.replaceState(null, "", "#fleet");
+              }
+            }}
+            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all font-medium text-base sm:text-lg text-white text-center cursor-pointer"
+          >
             Посмотреть технику
           </a>
         </div>
