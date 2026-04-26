@@ -134,7 +134,7 @@ const CalculatorSection = () => {
           <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mt-6">
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20">
               <Icon name="Truck" size={14} className="text-accent" />
-              <span className="text-xs sm:text-sm">{trucks.length} единиц техники</span>
+              <span className="text-xs sm:text-sm">15+ единиц техники</span>
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20">
               <Icon name="Wallet" size={14} className="text-accent" />
