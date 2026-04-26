@@ -47,12 +47,19 @@ const cities: { name: string; hours: number }[] = [
   { name: "Дзержинск", hours: 1 },
   { name: "Богородск", hours: 1 },
   { name: "Балахна", hours: 1 },
+  { name: "Заволжье", hours: 1.5 },
   { name: "Городец", hours: 1.5 },
   { name: "Павлово", hours: 1.5 },
   { name: "Семёнов", hours: 1.5 },
+  { name: "Лысково", hours: 2 },
+  { name: "Ворсма", hours: 1.5 },
+  { name: "Чкаловск", hours: 2 },
   { name: "Арзамас", hours: 2 },
   { name: "Выкса", hours: 2.5 },
-  { name: "Другой город", hours: 2 },
+  { name: "Кулебаки", hours: 2.5 },
+  { name: "Шахунья", hours: 3.5 },
+  { name: "Урень", hours: 3 },
+  { name: "Другой город", hours: 0 },
 ];
 
 const CalculatorSection = () => {
@@ -61,6 +68,7 @@ const CalculatorSection = () => {
   const [truckIdx, setTruckIdx] = useState(0);
   const [hours, setHours] = useState(4);
   const [cityIdx, setCityIdx] = useState(0);
+  const [customCity, setCustomCity] = useState("");
   const [withRigger, setWithRigger] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [showCheck, setShowCheck] = useState(false);
@@ -83,6 +91,8 @@ const CalculatorSection = () => {
   const truck = trucks[truckIdx];
   const baseTotal = truck.price * hours;
   const city = cities[cityIdx];
+  const isCustomCity = city.name === "Другой город";
+  const cityLabel = isCustomCity && customCity.trim() ? customCity.trim() : city.name;
   const citySurcharge = Math.round(city.hours * truck.price);
   const riggerPrice = withRigger ? 2500 * hours : 0;
   const finalTotal = baseTotal + citySurcharge + riggerPrice;
@@ -104,7 +114,7 @@ const CalculatorSection = () => {
       <OrderModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        truckName={`${truck.name} · ${hours} ч · ${city.name}${withRigger ? " · стропальщик" : ""} · Итого: ${finalTotal.toLocaleString("ru")} ₽`}
+        truckName={`${truck.name} · ${hours} ч · ${cityLabel}${withRigger ? " · стропальщик" : ""} · Итого: ${finalTotal.toLocaleString("ru")} ₽`}
       />
 
       <div className="max-w-5xl mx-auto relative">
@@ -337,6 +347,7 @@ const CalculatorSection = () => {
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
                   {cities.map((c, i) => {
                     const surcharge = Math.round(c.hours * truck.price);
+                    const isOther = c.name === "Другой город";
                     return (
                       <button
                         key={c.name}
@@ -348,8 +359,12 @@ const CalculatorSection = () => {
                         }`}
                       >
                         <p className={`text-xs font-bold ${cityIdx === i ? "text-white" : "text-foreground/80"}`}>{c.name}</p>
-                        <p className={`text-[10px] mt-0.5 ${c.hours === 0 ? "text-emerald-400" : "text-muted-foreground"}`}>
-                          {c.hours === 0
+                        <p className={`text-[10px] mt-0.5 ${
+                          isOther ? "text-amber-300" : c.hours === 0 ? "text-emerald-400" : "text-muted-foreground"
+                        }`}>
+                          {isOther
+                            ? "Уточнит диспетчер"
+                            : c.hours === 0
                             ? "Бесплатная подача"
                             : `+${surcharge.toLocaleString("ru")} ₽ (${c.hours} ч пути)`}
                         </p>
@@ -357,6 +372,24 @@ const CalculatorSection = () => {
                     );
                   })}
                 </div>
+                {isCustomCity && (
+                  <div className="mt-3">
+                    <label className="block">
+                      <span className="text-[11px] text-muted-foreground mb-1.5 block">Введите название города или адрес</span>
+                      <input
+                        type="text"
+                        value={customCity}
+                        onChange={(e) => setCustomCity(e.target.value)}
+                        placeholder="Например: Лысково, Сергач, посёлок Афонино"
+                        className="w-full px-3 py-2.5 rounded-lg bg-background/40 border-2 border-accent/20 focus:border-accent text-sm text-white placeholder:text-muted-foreground/50 outline-none transition-colors"
+                      />
+                    </label>
+                    <p className="text-[10px] text-muted-foreground mt-1.5 flex items-center gap-1">
+                      <Icon name="Info" size={10} className="text-accent" />
+                      Стоимость выезда диспетчер уточнит после заявки
+                    </p>
+                  </div>
+                )}
               </div>
 
               {/* Доп. услуги */}
@@ -407,8 +440,14 @@ const CalculatorSection = () => {
                   </div>
                   {citySurcharge > 0 && (
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Выезд в «{city.name}» ({city.hours} ч × {truck.price.toLocaleString("ru")} ₽)</span>
+                      <span className="text-muted-foreground">Выезд в «{cityLabel}» ({city.hours} ч × {truck.price.toLocaleString("ru")} ₽)</span>
                       <span className="font-bold tabular-nums">+{citySurcharge.toLocaleString("ru")} ₽</span>
+                    </div>
+                  )}
+                  {isCustomCity && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Выезд в «{cityLabel}»</span>
+                      <span className="font-bold tabular-nums text-amber-300">по запросу</span>
                     </div>
                   )}
                   {withRigger && (
