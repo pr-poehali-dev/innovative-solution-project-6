@@ -212,7 +212,7 @@ const FleetSection = () => {
   };
 
   return (
-    <section id="fleet" className="py-16 sm:py-32 px-4 sm:px-6 scroll-mt-20 sm:scroll-mt-24">
+    <section className="py-16 sm:py-32 px-4 sm:px-6 scroll-mt-20 sm:scroll-mt-24">
       <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} truckName={selectedTruck} />
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10 sm:mb-20">

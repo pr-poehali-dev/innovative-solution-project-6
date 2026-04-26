@@ -29,7 +29,7 @@ const Index = () => {
       <StructuredData />
       <HeroSection visibleSections={visibleSections} />
       <FeaturesSection visibleSections={visibleSections} />
-      <LazySection><FleetSection /></LazySection>
+      <LazySection id="fleet"><FleetSection /></LazySection>
       <LazySection><UseCasesSection /></LazySection>
       <LazySection><CalculatorSection /></LazySection>
       <LazySection><GallerySection /></LazySection>

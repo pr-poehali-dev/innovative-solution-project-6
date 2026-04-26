@@ -4,9 +4,10 @@ interface LazySectionProps {
   children: ReactNode;
   minHeight?: string;
   rootMargin?: string;
+  id?: string;
 }
 
-const LazySection = ({ children, minHeight = "400px", rootMargin = "300px" }: LazySectionProps) => {
+const LazySection = ({ children, minHeight = "400px", rootMargin = "300px", id }: LazySectionProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -30,6 +31,7 @@ const LazySection = ({ children, minHeight = "400px", rootMargin = "300px" }: La
   return (
     <div
       ref={ref}
+      id={id}
       style={{
         minHeight: visible ? undefined : minHeight,
         contentVisibility: visible ? undefined : ("auto" as const),
