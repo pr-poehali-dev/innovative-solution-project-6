@@ -84,7 +84,7 @@ const CalculatorSection = () => {
   const baseTotal = truck.price * hours;
   const city = cities[cityIdx];
   const citySurcharge = Math.round(city.hours * truck.price);
-  const riggerPrice = withRigger ? 250 * hours : 0;
+  const riggerPrice = withRigger ? 2500 * hours : 0;
   const finalTotal = baseTotal + citySurcharge + riggerPrice;
 
   const minPrice = Math.min(...trucks.map((t) => t.price));
@@ -382,7 +382,7 @@ const CalculatorSection = () => {
                       </p>
                       <p className="text-[10px] text-muted-foreground">Помощь со строповкой груза</p>
                     </div>
-                    <span className="text-xs font-black text-accent">+250 ₽/ч</span>
+                    <span className="text-xs font-black text-accent">+2 500 ₽/ч</span>
                   </label>
                 </div>
               </div>
