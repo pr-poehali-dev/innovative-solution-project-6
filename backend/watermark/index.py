@@ -15,7 +15,7 @@ def add_diagonal_watermark(image_bytes: bytes, text: str = 'фаварит.рф'
     txt_layer = Image.new('RGBA', (width, height), (255, 255, 255, 0))
     draw = ImageDraw.Draw(txt_layer)
 
-    font_size = max(42, int(min(width, height) / 11))
+    font_size = max(28, int(min(width, height) / 18))
     font = None
     font_paths = [
         '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
@@ -37,11 +37,10 @@ def add_diagonal_watermark(image_bytes: bytes, text: str = 'фаварит.рф'
     text_h = bbox[3] - bbox[1]
 
     alpha = int(255 * opacity_pct / 100)
-    stroke_alpha = min(255, int(alpha * 1.5))
 
     diagonal = int(math.sqrt(width * width + height * height))
-    step_x = int(text_w * 1.5)
-    step_y = int(text_h * 4)
+    step_x = int(text_w * 1.8)
+    step_y = int(text_h * 5)
 
     big_layer = Image.new('RGBA', (diagonal, diagonal), (255, 255, 255, 0))
     big_draw = ImageDraw.Draw(big_layer)
@@ -54,8 +53,8 @@ def add_diagonal_watermark(image_bytes: bytes, text: str = 'фаварит.рф'
                 text,
                 font=font,
                 fill=(255, 255, 255, alpha),
-                stroke_width=3,
-                stroke_fill=(0, 0, 0, stroke_alpha)
+                stroke_width=2,
+                stroke_fill=(0, 0, 0, int(alpha * 0.6))
             )
 
     rotated = big_layer.rotate(-30, resample=Image.BICUBIC, expand=False)
