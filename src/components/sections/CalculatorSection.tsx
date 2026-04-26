@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import OrderModal from "@/components/ui/OrderModal";
 import SectionBadge from "@/components/ui/SectionBadge";
 import Icon from "@/components/ui/icon";
@@ -11,44 +11,89 @@ type Truck = {
   capacity: string;
   boom?: string;
   highlight?: string;
+  image: string;
 };
 
 const trucks: Truck[] = [
-  // Манипуляторы
-  { name: "ISUZU 5т + КМУ", short: "ISUZU 5т", price: 2200, category: "Манипулятор", capacity: "до 5 т", boom: "8,5 м", highlight: "Выгодная цена" },
-  { name: "Hino 500 + КМУ Kanglim KS1256G-II", short: "Hino 500", price: 2700, category: "Манипулятор", capacity: "до 6 т", boom: "19 м", highlight: "Универсал" },
-  { name: "КАМАЗ 65115 + КМУ HANGIL", short: "КАМАЗ 65115", price: 2800, category: "Манипулятор", capacity: "до 12 т", boom: "19 м", highlight: "Хит заказов" },
-  { name: "FAW + КМУ DongYang", short: "FAW DongYang", price: 3000, category: "Манипулятор", capacity: "до 17 т", boom: "21 м" },
-  { name: "Hyundai Gold + КМУ HIAB 190TM", short: "Hyundai Gold", price: 3200, category: "Манипулятор", capacity: "до 10 т", boom: "22 м", highlight: "Длинная стрела" },
-  { name: "RENAULT LANDER + КМУ", short: "Renault Lander", price: 3200, category: "Манипулятор", capacity: "до 15 т", boom: "20 м" },
-  { name: "КАМАЗ 43118 + КМУ Kanglim", short: "КАМАЗ 43118", price: 3500, category: "Манипулятор", capacity: "до 10 т", boom: "23 м", highlight: "Вездеход" },
-  { name: "FAW J6 + КМУ DONGYANG 1966", short: "FAW J6 + Бур", price: 3500, category: "Манипулятор", capacity: "до 20 т", boom: "22 м", highlight: "Эксклюзив · Бур" },
-  // Экскаваторы
-  { name: "Экскаватор-погрузчик JCB 3CX", short: "JCB 3CX", price: 2400, category: "Экскаватор", capacity: "8,1 т", boom: "копание 4,24 м", highlight: "Новинка" },
-  { name: "Экскаватор-погрузчик JCB 4CX", short: "JCB 4CX", price: 2700, category: "Экскаватор", capacity: "8,8 т", boom: "копание 5,58 м" },
+  { name: "ISUZU 5т + КМУ", short: "ISUZU 5т", price: 2200, category: "Манипулятор", capacity: "до 5 т", boom: "8,5 м", highlight: "Выгодная цена", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/4bb58aab-783b-43b6-8d89-ee519e570e09.webp" },
+  { name: "Hino 500 + КМУ Kanglim KS1256G-II", short: "Hino 500", price: 2700, category: "Манипулятор", capacity: "до 6 т", boom: "19 м", highlight: "Универсал", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/660a8623-ee67-4819-a414-68b954548e0b.webp" },
+  { name: "КАМАЗ 65115 + КМУ HANGIL", short: "КАМАЗ 65115", price: 2800, category: "Манипулятор", capacity: "до 12 т", boom: "19 м", highlight: "Хит заказов", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/b646729f-a106-46bf-b7e4-abf0fe1c4983.webp" },
+  { name: "FAW + КМУ DongYang", short: "FAW DongYang", price: 3000, category: "Манипулятор", capacity: "до 17 т", boom: "21 м", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/df8d23ad-2b19-4a5c-bfef-8403f404cab9.webp" },
+  { name: "Hyundai Gold + КМУ HIAB 190TM", short: "Hyundai Gold", price: 3200, category: "Манипулятор", capacity: "до 10 т", boom: "22 м", highlight: "Длинная стрела", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/106c30cf-02d3-4b99-ac02-47e7404652e2.webp" },
+  { name: "RENAULT LANDER + КМУ", short: "Renault Lander", price: 3200, category: "Манипулятор", capacity: "до 15 т", boom: "20 м", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/72811b07-39fb-476d-9b0a-6a3f31285de9.webp" },
+  { name: "КАМАЗ 43118 + КМУ Kanglim", short: "КАМАЗ 43118", price: 3500, category: "Манипулятор", capacity: "до 10 т", boom: "23 м", highlight: "Вездеход", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.webp" },
+  { name: "FAW J6 + КМУ DONGYANG 1966", short: "FAW J6 + Бур", price: 3500, category: "Манипулятор", capacity: "до 20 т", boom: "22 м", highlight: "Эксклюзив · Бур", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/cb1469ab-3878-4eea-9eac-9ce6f4129301.webp" },
+  { name: "Экскаватор-погрузчик JCB 3CX", short: "JCB 3CX", price: 2400, category: "Экскаватор", capacity: "8,1 т", boom: "копание 4,24 м", highlight: "Новинка", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/761d840a-c678-4fee-a5eb-4531b7ca7d17.webp" },
+  { name: "Экскаватор-погрузчик JCB 4CX", short: "JCB 4CX", price: 2700, category: "Экскаватор", capacity: "8,8 т", boom: "копание 5,58 м", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/29fc9d6a-adfb-4899-9119-3136ce0cb7d4.webp" },
 ];
 
 const categories = ["Все", "Манипулятор", "Экскаватор"] as const;
 type Category = (typeof categories)[number];
 
+const tasks: { id: string; label: string; icon: string; suggested: number[] }[] = [
+  { id: "any", label: "Любая задача", icon: "Sparkles", suggested: [] },
+  { id: "build", label: "Стройка / разгрузка", icon: "Hammer", suggested: [2, 3, 6] },
+  { id: "long", label: "Длинные грузы", icon: "MoveHorizontal", suggested: [3, 6, 7] },
+  { id: "heavy", label: "Тяжёлые до 20 т", icon: "Anchor", suggested: [3, 7] },
+  { id: "dig", label: "Копать / грунт", icon: "Construction", suggested: [8, 9] },
+  { id: "tower", label: "Высотные работы", icon: "Building2", suggested: [4, 5, 7] },
+];
+
+const cities: { name: string; surcharge: number }[] = [
+  { name: "Нижний Новгород", surcharge: 0 },
+  { name: "Дзержинск", surcharge: 1500 },
+  { name: "Бор", surcharge: 1000 },
+  { name: "Кстово", surcharge: 1000 },
+  { name: "Богородск", surcharge: 1500 },
+  { name: "Другой город", surcharge: 2500 },
+];
+
 const CalculatorSection = () => {
   const [activeCat, setActiveCat] = useState<Category>("Все");
+  const [taskId, setTaskId] = useState("any");
   const [truckIdx, setTruckIdx] = useState(0);
   const [hours, setHours] = useState(4);
+  const [cityIdx, setCityIdx] = useState(0);
+  const [withDocs, setWithDocs] = useState(false);
+  const [withRigger, setWithRigger] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [showCheck, setShowCheck] = useState(false);
 
-  const filtered = useMemo(
-    () => (activeCat === "Все" ? trucks : trucks.filter((t) => t.category === activeCat)),
-    [activeCat]
-  );
+  const filtered = useMemo(() => {
+    let list = activeCat === "Все" ? trucks : trucks.filter((t) => t.category === activeCat);
+    const t = tasks.find((x) => x.id === taskId);
+    if (t && t.suggested.length > 0) {
+      list = list.filter((tr) => t.suggested.includes(trucks.indexOf(tr)));
+    }
+    return list;
+  }, [activeCat, taskId]);
+
+  useEffect(() => {
+    if (!filtered.find((t) => trucks.indexOf(t) === truckIdx) && filtered.length > 0) {
+      setTruckIdx(trucks.indexOf(filtered[0]));
+    }
+  }, [filtered, truckIdx]);
 
   const truck = trucks[truckIdx];
-  const total = truck.price * hours;
-  const discount = hours >= 8 ? Math.round(total * 0.05) : 0;
-  const finalTotal = total - discount;
+  const baseTotal = truck.price * hours;
+  const discountPct = hours >= 12 ? 0.08 : hours >= 8 ? 0.05 : 0;
+  const discount = Math.round(baseTotal * discountPct);
+  const city = cities[cityIdx];
+  const docsPrice = withDocs ? 500 : 0;
+  const riggerPrice = withRigger ? 800 * hours : 0;
+  const finalTotal = baseTotal - discount + city.surcharge + docsPrice + riggerPrice;
+
+  const competitorPrice = Math.round(finalTotal * 1.18);
+  const savings = competitorPrice - finalTotal;
 
   const minPrice = Math.min(...trucks.map((t) => t.price));
   const maxPrice = Math.max(...trucks.map((t) => t.price));
+
+  const stepsDone = [
+    truck ? 1 : 0,
+    hours > 4 || hours === 4 ? 1 : 0,
+    cityIdx >= 0 ? 1 : 0,
+  ].reduce((a, b) => a + b, 0);
 
   return (
     <section className="py-16 sm:py-32 px-4 sm:px-6 relative overflow-hidden">
@@ -58,11 +103,11 @@ const CalculatorSection = () => {
       <OrderModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        truckName={`${truck.name} · ${hours} ч · ${truck.price.toLocaleString("ru")} ₽/час · Итого: ${finalTotal.toLocaleString("ru")} ₽${discount > 0 ? ` (скидка ${discount.toLocaleString("ru")} ₽)` : ""}`}
+        truckName={`${truck.name} · ${hours} ч · ${city.name}${withDocs ? " · с документами" : ""}${withRigger ? " · стропальщик" : ""} · Итого: ${finalTotal.toLocaleString("ru")} ₽`}
       />
 
       <div className="max-w-5xl mx-auto relative">
-        <div className="text-center mb-10 sm:mb-16">
+        <div className="text-center mb-10 sm:mb-12">
           <div className="flex justify-center mb-4">
             <SectionBadge>Калькулятор</SectionBadge>
           </div>
@@ -72,10 +117,9 @@ const CalculatorSection = () => {
             </span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-            Выберите технику, укажите часы — узнайте точную сумму. При заказе от 8 часов скидка 5%.
+            3 простых шага — узнайте точную сумму с учётом скидки, города и доп. услуг
           </p>
 
-          {/* Stat strip */}
           <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mt-6">
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20">
               <Icon name="Truck" size={14} className="text-accent" />
@@ -89,22 +133,59 @@ const CalculatorSection = () => {
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30">
               <Icon name="Percent" size={14} className="text-emerald-400" />
-              <span className="text-xs sm:text-sm text-emerald-300">Скидка 5% от 8 часов</span>
+              <span className="text-xs sm:text-sm text-emerald-300">До 8% скидки</span>
             </div>
           </div>
         </div>
 
-        {/* Wrapper with animated golden border */}
+        {/* Stepper */}
+        <div className="flex items-center justify-center gap-1 sm:gap-3 mb-6">
+          {["Задача", "Техника", "Часы и опции"].map((step, i) => (
+            <div key={step} className="flex items-center gap-1 sm:gap-3">
+              <div className={`flex items-center gap-2 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold transition-all ${
+                i < stepsDone ? "bg-accent text-black" : "bg-background/40 border border-accent/20 text-muted-foreground"
+              }`}>
+                <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] ${
+                  i < stepsDone ? "bg-black/20" : "bg-accent/20"
+                }`}>{i + 1}</span>
+                {step}
+              </div>
+              {i < 2 && <div className={`w-3 sm:w-6 h-0.5 ${i < stepsDone - 1 ? "bg-accent" : "bg-accent/20"}`} />}
+            </div>
+          ))}
+        </div>
+
         <div className="relative rounded-2xl sm:rounded-3xl p-[1.5px] bg-gradient-to-br from-accent/40 via-accent/10 to-accent/40">
           <div className="border-0 rounded-2xl sm:rounded-3xl bg-card/80 backdrop-blur-sm p-5 sm:p-10 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent pointer-events-none" />
             <div className="relative">
-              {/* Категории */}
+
+              {/* Шаг 1: Тип задачи */}
               <div className="mb-6">
                 <p className="text-sm text-muted-foreground mb-3 font-medium flex items-center gap-2">
-                  <Icon name="LayoutGrid" size={14} className="text-accent" />
-                  Категория техники
+                  <span className="w-5 h-5 rounded-full bg-accent text-black text-[10px] font-black flex items-center justify-center">1</span>
+                  Какая у вас задача?
                 </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+                  {tasks.map((t) => (
+                    <button
+                      key={t.id}
+                      onClick={() => setTaskId(t.id)}
+                      className={`p-2.5 rounded-xl border-2 transition-all flex flex-col items-center gap-1.5 ${
+                        taskId === t.id
+                          ? "border-accent bg-accent/15 text-white"
+                          : "border-accent/10 bg-background/30 text-muted-foreground hover:border-accent/30"
+                      }`}
+                    >
+                      <Icon name={t.icon} size={18} className={taskId === t.id ? "text-accent" : "text-accent/60"} />
+                      <span className="text-[11px] sm:text-xs font-semibold leading-tight text-center">{t.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Категории фильтр */}
+              <div className="mb-4">
                 <div className="flex flex-wrap gap-2">
                   {categories.map((cat) => {
                     const count = cat === "Все" ? trucks.length : trucks.filter((t) => t.category === cat).length;
@@ -112,7 +193,7 @@ const CalculatorSection = () => {
                       <button
                         key={cat}
                         onClick={() => setActiveCat(cat)}
-                        className={`px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all ${
+                        className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
                           activeCat === cat
                             ? "bg-accent text-black shadow-lg shadow-accent/30"
                             : "bg-background/40 border border-accent/20 text-muted-foreground hover:border-accent/50 hover:text-white"
@@ -128,13 +209,31 @@ const CalculatorSection = () => {
                 </div>
               </div>
 
-              {/* Выбор машины */}
+              {/* Шаг 2: Выбор техники */}
               <div className="mb-8">
                 <p className="text-sm text-muted-foreground mb-3 font-medium flex items-center gap-2">
-                  <Icon name="MousePointerClick" size={14} className="text-accent" />
+                  <span className="w-5 h-5 rounded-full bg-accent text-black text-[10px] font-black flex items-center justify-center">2</span>
                   Выберите технику
+                  {filtered.length < trucks.length && (
+                    <span className="ml-auto text-[11px] text-accent/80">Подобрано: {filtered.length}</span>
+                  )}
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3 max-h-[420px] overflow-y-auto pr-1 custom-scroll">
+
+                {/* Selected truck preview */}
+                <div className="mb-3 p-3 rounded-xl border-2 border-accent/40 bg-gradient-to-r from-accent/10 to-transparent flex items-center gap-3">
+                  <img src={truck.image} alt={truck.short} className="w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-lg flex-shrink-0 bg-black/30" loading="lazy" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] text-accent font-bold tracking-wider mb-0.5">ВЫБРАНО</p>
+                    <p className="font-bold text-sm sm:text-base text-white truncate">{truck.name}</p>
+                    <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] text-muted-foreground mt-1">
+                      <span className="flex items-center gap-1"><Icon name="Weight" size={10} />{truck.capacity}</span>
+                      {truck.boom && <span className="flex items-center gap-1"><Icon name="MoveUpRight" size={10} />{truck.boom}</span>}
+                      <span className="flex items-center gap-1 text-accent"><Icon name="Wallet" size={10} />{truck.price.toLocaleString("ru")} ₽/ч</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 max-h-[340px] overflow-y-auto pr-1 custom-scroll">
                   {filtered.map((t) => {
                     const i = trucks.indexOf(t);
                     const selected = truckIdx === i;
@@ -142,56 +241,29 @@ const CalculatorSection = () => {
                       <button
                         key={i}
                         onClick={() => setTruckIdx(i)}
-                        className={`group relative text-left p-3.5 rounded-xl border-2 transition-all overflow-hidden ${
+                        className={`group relative text-left rounded-xl border-2 transition-all overflow-hidden ${
                           selected
-                            ? "border-accent bg-gradient-to-br from-accent/20 to-accent/5 shadow-lg shadow-accent/20"
-                            : "border-accent/10 bg-background/30 hover:border-accent/40 hover:bg-background/50"
+                            ? "border-accent shadow-lg shadow-accent/20"
+                            : "border-accent/10 hover:border-accent/40"
                         }`}
                       >
-                        {selected && (
-                          <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-accent flex items-center justify-center">
-                            <Icon name="Check" size={12} className="text-black" strokeWidth={3} />
+                        <div className="relative aspect-[4/3] overflow-hidden bg-black/30">
+                          <img src={t.image} alt={t.short} className="w-full h-full object-cover" loading="lazy" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                          {selected && (
+                            <div className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-accent flex items-center justify-center">
+                              <Icon name="Check" size={12} className="text-black" strokeWidth={3} />
+                            </div>
+                          )}
+                          {t.highlight && (
+                            <div className="absolute top-1.5 left-1.5 px-1.5 py-0.5 bg-accent/90 text-black text-[9px] font-black rounded">
+                              ★ {t.highlight}
+                            </div>
+                          )}
+                          <div className="absolute bottom-1.5 left-1.5 right-1.5">
+                            <p className="font-bold text-xs text-white leading-tight truncate">{t.short}</p>
+                            <p className="text-[10px] text-accent font-black">{t.price.toLocaleString("ru")} ₽/ч</p>
                           </div>
-                        )}
-
-                        <div className="flex items-start gap-2 mb-2">
-                          <div
-                            className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                              selected ? "bg-accent/30" : "bg-accent/10 group-hover:bg-accent/20"
-                            }`}
-                          >
-                            <Icon
-                              name={t.category === "Экскаватор" ? "Construction" : "Truck"}
-                              size={16}
-                              className="text-accent"
-                            />
-                          </div>
-                          <div className="min-w-0">
-                            <p className={`font-bold text-sm leading-tight ${selected ? "text-white" : "text-foreground/90"}`}>
-                              {t.short}
-                            </p>
-                            {t.highlight && (
-                              <span className="inline-block mt-0.5 text-[10px] text-accent/90 font-semibold">
-                                ★ {t.highlight}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="flex items-center justify-between gap-2 mt-2 pt-2 border-t border-accent/10">
-                          <div className="flex flex-col gap-0.5 text-[10px] text-muted-foreground">
-                            <span className="flex items-center gap-1">
-                              <Icon name="Weight" size={10} /> {t.capacity}
-                            </span>
-                            {t.boom && (
-                              <span className="flex items-center gap-1">
-                                <Icon name="MoveUpRight" size={10} /> {t.boom}
-                              </span>
-                            )}
-                          </div>
-                          <p className={`font-black text-sm whitespace-nowrap ${selected ? "text-accent" : "text-white/80"}`}>
-                            {t.price.toLocaleString("ru")} ₽
-                          </p>
                         </div>
                       </button>
                     );
@@ -199,40 +271,42 @@ const CalculatorSection = () => {
                 </div>
               </div>
 
-              {/* Слайдер часов */}
-              <div className="mb-6 sm:mb-8">
+              {/* Шаг 3: Часы */}
+              <div className="mb-6">
+                <p className="text-sm text-muted-foreground mb-3 font-medium flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-accent text-black text-[10px] font-black flex items-center justify-center">3</span>
+                  Сколько часов нужна техника?
+                </p>
+
                 <div className="flex justify-between items-center mb-3">
-                  <label htmlFor="calc-hours-main" className="text-sm text-muted-foreground font-medium flex items-center gap-2">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Icon name="Clock" size={14} className="text-accent" />
-                    Количество часов
-                  </label>
+                    <span>Часов работы</span>
+                  </div>
                   <div className="flex items-baseline gap-1">
                     <span className="text-accent font-black text-2xl sm:text-3xl tabular-nums">{hours}</span>
                     <span className="text-accent/70 text-sm">ч</span>
                   </div>
                 </div>
                 <input
-                  id="calc-hours-main"
                   type="range"
                   min={4}
                   max={24}
                   step={1}
                   value={hours}
                   onChange={(e) => setHours(Number(e.target.value))}
-                  aria-label="Количество часов аренды"
                   className="w-full h-2 rounded-full appearance-none cursor-pointer accent-[hsl(var(--accent))]"
                   style={{
                     background: `linear-gradient(to right, hsl(var(--accent)) 0%, hsl(var(--accent)) ${((hours - 4) / 20) * 100}%, hsl(var(--accent) / 0.2) ${((hours - 4) / 20) * 100}%, hsl(var(--accent) / 0.2) 100%)`,
                   }}
                 />
-                <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                  <span>4 ч (мин.)</span>
+                <div className="flex justify-between text-[11px] text-muted-foreground mt-2">
+                  <span>4 ч</span>
                   <span className={hours >= 8 ? "text-emerald-400 font-bold" : ""}>8 ч (-5%)</span>
-                  <span>16 ч</span>
+                  <span className={hours >= 12 ? "text-emerald-400 font-bold" : ""}>12 ч (-8%)</span>
                   <span>24 ч</span>
                 </div>
 
-                {/* Quick presets */}
                 <div className="flex gap-2 mt-3">
                   {[4, 8, 12, 24].map((h) => (
                     <button
@@ -250,8 +324,142 @@ const CalculatorSection = () => {
                 </div>
               </div>
 
+              {/* Город */}
+              <div className="mb-6">
+                <p className="text-sm text-muted-foreground mb-3 font-medium flex items-center gap-2">
+                  <Icon name="MapPin" size={14} className="text-accent" />
+                  Куда подать технику?
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {cities.map((c, i) => (
+                    <button
+                      key={c.name}
+                      onClick={() => setCityIdx(i)}
+                      className={`p-2.5 rounded-lg border-2 text-left transition-all ${
+                        cityIdx === i
+                          ? "border-accent bg-accent/15"
+                          : "border-accent/10 bg-background/30 hover:border-accent/30"
+                      }`}
+                    >
+                      <p className={`text-xs font-bold ${cityIdx === i ? "text-white" : "text-foreground/80"}`}>{c.name}</p>
+                      <p className={`text-[10px] mt-0.5 ${c.surcharge === 0 ? "text-emerald-400" : "text-muted-foreground"}`}>
+                        {c.surcharge === 0 ? "Бесплатная подача" : `+${c.surcharge.toLocaleString("ru")} ₽ выезд`}
+                      </p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Доп. услуги */}
+              <div className="mb-6">
+                <p className="text-sm text-muted-foreground mb-3 font-medium flex items-center gap-2">
+                  <Icon name="PlusCircle" size={14} className="text-accent" />
+                  Дополнительные опции
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <label className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
+                    withDocs ? "border-accent bg-accent/10" : "border-accent/10 bg-background/30 hover:border-accent/30"
+                  }`}>
+                    <input type="checkbox" checked={withDocs} onChange={(e) => setWithDocs(e.target.checked)} className="sr-only" />
+                    <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 ${
+                      withDocs ? "bg-accent border-accent" : "border-accent/40"
+                    }`}>
+                      {withDocs && <Icon name="Check" size={12} className="text-black" strokeWidth={3} />}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
+                        <Icon name="FileCheck" size={12} className="text-accent" />
+                        Закрывающие документы
+                      </p>
+                      <p className="text-[10px] text-muted-foreground">УПД, акт, счёт-фактура</p>
+                    </div>
+                    <span className="text-xs font-black text-accent">+500 ₽</span>
+                  </label>
+
+                  <label className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
+                    withRigger ? "border-accent bg-accent/10" : "border-accent/10 bg-background/30 hover:border-accent/30"
+                  }`}>
+                    <input type="checkbox" checked={withRigger} onChange={(e) => setWithRigger(e.target.checked)} className="sr-only" />
+                    <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 ${
+                      withRigger ? "bg-accent border-accent" : "border-accent/40"
+                    }`}>
+                      {withRigger && <Icon name="Check" size={12} className="text-black" strokeWidth={3} />}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
+                        <Icon name="HardHat" size={12} className="text-accent" />
+                        Стропальщик
+                      </p>
+                      <p className="text-[10px] text-muted-foreground">Помощь со строповкой груза</p>
+                    </div>
+                    <span className="text-xs font-black text-accent">+800 ₽/ч</span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Чек */}
+              <button
+                type="button"
+                onClick={() => setShowCheck(!showCheck)}
+                className="w-full flex items-center justify-between text-xs text-muted-foreground hover:text-accent transition-colors mb-3"
+              >
+                <span className="flex items-center gap-1.5">
+                  <Icon name="ReceiptText" size={12} />
+                  Детальный чек
+                </span>
+                <Icon name={showCheck ? "ChevronUp" : "ChevronDown"} size={14} />
+              </button>
+              {showCheck && (
+                <div className="mb-4 p-3 rounded-lg bg-background/40 border border-accent/10 space-y-1.5 text-xs">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">{truck.short} × {hours} ч</span>
+                    <span className="font-bold tabular-nums">{baseTotal.toLocaleString("ru")} ₽</span>
+                  </div>
+                  {discount > 0 && (
+                    <div className="flex justify-between text-emerald-400">
+                      <span>Скидка {Math.round(discountPct * 100)}% за длительность</span>
+                      <span className="font-bold tabular-nums">−{discount.toLocaleString("ru")} ₽</span>
+                    </div>
+                  )}
+                  {city.surcharge > 0 && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Выезд в «{city.name}»</span>
+                      <span className="font-bold tabular-nums">+{city.surcharge.toLocaleString("ru")} ₽</span>
+                    </div>
+                  )}
+                  {withDocs && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Закрывающие документы</span>
+                      <span className="font-bold tabular-nums">+{docsPrice.toLocaleString("ru")} ₽</span>
+                    </div>
+                  )}
+                  {withRigger && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Стропальщик × {hours} ч</span>
+                      <span className="font-bold tabular-nums">+{riggerPrice.toLocaleString("ru")} ₽</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between pt-1.5 border-t border-accent/10 text-accent">
+                    <span className="font-bold">Итого</span>
+                    <span className="font-black tabular-nums">{finalTotal.toLocaleString("ru")} ₽</span>
+                  </div>
+                </div>
+              )}
+
               {/* Итог */}
               <div className="border-t border-accent/10 pt-6">
+                {savings > 1000 && (
+                  <div className="mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                      <Icon name="TrendingDown" size={18} className="text-emerald-400" />
+                    </div>
+                    <div className="flex-1 text-xs sm:text-sm">
+                      <p className="font-bold text-emerald-300">Вы экономите ~{savings.toLocaleString("ru")} ₽</p>
+                      <p className="text-emerald-400/70 text-[11px]">по сравнению со средним рынком ({competitorPrice.toLocaleString("ru")} ₽)</p>
+                    </div>
+                  </div>
+                )}
+
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-5">
                   <div className="flex-1">
                     <p className="text-muted-foreground text-xs sm:text-sm mb-1 flex items-center gap-1.5">
@@ -261,7 +469,7 @@ const CalculatorSection = () => {
                     {discount > 0 && (
                       <div className="flex items-center gap-2 mb-1">
                         <span className="text-sm text-muted-foreground line-through">
-                          {total.toLocaleString("ru")} ₽
+                          {(baseTotal + city.surcharge + docsPrice + riggerPrice).toLocaleString("ru")} ₽
                         </span>
                         <span className="px-2 py-0.5 bg-emerald-500/20 border border-emerald-500/40 rounded text-emerald-400 text-[10px] font-black">
                           −{discount.toLocaleString("ru")} ₽
@@ -289,7 +497,6 @@ const CalculatorSection = () => {
                   </button>
                 </div>
 
-                {/* Trust line */}
                 <div className="flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-2 mt-5 pt-5 border-t border-accent/10 text-[11px] sm:text-xs text-muted-foreground">
                   <span className="flex items-center gap-1.5">
                     <Icon name="ShieldCheck" size={12} className="text-accent" /> Договор
@@ -301,7 +508,7 @@ const CalculatorSection = () => {
                     <Icon name="Zap" size={12} className="text-accent" /> Подача от 1 часа
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <Icon name="FileCheck" size={12} className="text-accent" /> Закрывающие документы
+                    <Icon name="CreditCard" size={12} className="text-accent" /> Нал/безнал/карта
                   </span>
                 </div>
               </div>
