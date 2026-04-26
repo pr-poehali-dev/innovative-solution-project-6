@@ -16,7 +16,8 @@ const plans = [
     pricePrefix: "от",
     oldPrice: "2 500 ₽",
     features: [
-      { icon: "Truck", text: "Манипулятор от 5 до 10 тонн" },
+      { icon: "Truck", text: "Манипулятор от 5 до 20 тонн" },
+      { icon: "Package", text: "КМУ от 3 до 8 тонн" },
       { icon: "UserCheck", text: "Опытный оператор в стоимости" },
       { icon: "Clock", text: "Минимальный заказ — 4 часа" },
       { icon: "Zap", text: "Подача в течение 1 часа" },
