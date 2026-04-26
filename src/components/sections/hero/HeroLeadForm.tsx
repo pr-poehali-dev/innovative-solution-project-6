@@ -91,7 +91,7 @@ const HeroLeadForm = () => {
                 <Icon name="Package" size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
                 <input
                   type="text"
-                  placeholder="Что перевозим? (необязательно)"
+                  placeholder="Что перевозим?"
                   value={cargo}
                   onChange={e => setCargo(e.target.value)}
                   className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
