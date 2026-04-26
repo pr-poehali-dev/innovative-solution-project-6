@@ -95,17 +95,14 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
 
             {slides.map((slide, i) => {
               const isActive = i === current;
-              const src800 = `${WEBP_BASE}/w800/${slide.id}.webp`;
-              const src1600 = `${WEBP_BASE}/w1600/${slide.id}.webp`;
-              const useFullSrc = !!slide.fullSrc;
+              const fullSrc = slide.fullSrc || `${WEBP_BASE}/${slide.id}.webp`;
               return (
                 <div
                   key={i}
                   className={`absolute inset-0 w-full h-full transition-all duration-700 ${isActive ? "opacity-100 scale-100" : "opacity-0 scale-105"}`}
                 >
                   <img
-                    src={useFullSrc ? slide.fullSrc : src1600}
-                    srcSet={useFullSrc ? undefined : `${src800} 800w, ${src1600} 1600w`}
+                    src={fullSrc}
                     sizes="100vw"
                     alt={slide.alt}
                     className="w-full h-full object-contain object-center drop-shadow-2xl"
@@ -175,17 +172,14 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
       {/* Десктопный слайдер — фон на весь экран */}
       {slides.map((slide, i) => {
         const isActive = i === current;
-        const src800 = `${WEBP_BASE}/w800/${slide.id}.webp`;
-        const src1600 = `${WEBP_BASE}/w1600/${slide.id}.webp`;
-        const useFullSrc = !!slide.fullSrc;
+        const fullSrc = slide.fullSrc || `${WEBP_BASE}/${slide.id}.webp`;
         return (
           <div
             key={i}
             className={`hidden lg:block absolute inset-0 w-full h-full transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}
           >
             <img
-              src={useFullSrc ? slide.fullSrc : src1600}
-              srcSet={useFullSrc ? undefined : `${src800} 800w, ${src1600} 1600w`}
+              src={fullSrc}
               sizes="100vw"
               alt={slide.alt}
               className="w-full h-full object-cover object-center"

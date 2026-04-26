@@ -27,7 +27,7 @@ export const articles: Article[] = [
     date: "2026-04-10",
     readMinutes: 6,
     cover:
-      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/df8d23ad-2b19-4a5c-bfef-8403f404cab9.webp",
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/df8d23ad-2b19-4a5c-bfef-8403f404cab9.webp",
     tag: "Инструкция",
     seoTitle: "Как выбрать манипулятор для аренды — гайд 2026 | Фаворит НН",
     seoDesc:
@@ -91,7 +91,7 @@ export const articles: Article[] = [
     date: "2026-03-25",
     readMinutes: 5,
     cover:
-      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.webp",
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.webp",
     tag: "Цены",
     seoTitle: "Цена аренды манипулятора в Нижнем Новгороде 2026 | Фаворит НН",
     seoDesc:
@@ -150,7 +150,7 @@ export const articles: Article[] = [
     date: "2026-03-12",
     readMinutes: 4,
     cover:
-      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/b646729f-a106-46bf-b7e4-abf0fe1c4983.webp",
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/b646729f-a106-46bf-b7e4-abf0fe1c4983.webp",
     tag: "Кейсы",
     seoTitle: "Разгрузка контейнера манипулятором в Нижнем Новгороде | Фаворит",
     seoDesc:
@@ -201,7 +201,7 @@ export const articles: Article[] = [
     date: "2026-02-28",
     readMinutes: 4,
     cover:
-      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/96f657e8-7741-4d2b-b428-ca560b0047fb.webp",
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/96f657e8-7741-4d2b-b428-ca560b0047fb.webp",
     tag: "Сравнение",
     seoTitle: "Манипулятор или автокран: что выбрать | Фаворит НН",
     seoDesc:
