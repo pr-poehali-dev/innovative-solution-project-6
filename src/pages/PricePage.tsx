@@ -3,15 +3,15 @@ import BrandLogo from "@/components/ui/BrandLogo";
 import Icon from "@/components/ui/icon";
 
 const trucks = [
-  { name: "ISUZU 5т + КМУ", perHour: "1 800 ₽" },
-  { name: "FAW J6 + DONGYANG 1966", perHour: "2 130 ₽" },
-  { name: "КАМАЗ 65115 + КМУ HANGIL", perHour: "2 300 ₽" },
-  { name: "FAW + КМУ DongYang", perHour: "2 460 ₽" },
-  { name: "Renault Lander + КМУ", perHour: "2 620 ₽" },
-  { name: "Hyundai Gold + КМУ 8т", perHour: "2 620 ₽" },
-  { name: "КАМАЗ 43118 + Kanglim вездеход", perHour: "2 870 ₽" },
-  { name: "JCB 3CX", perHour: "1 480 ₽" },
-  { name: "JCB 4CX", perHour: "1 640 ₽" },
+  { name: "ISUZU 5т + КМУ", perHour: "2 200 ₽" },
+  { name: "FAW J6 + КМУ DONGYANG 1966", perHour: "3 500 ₽" },
+  { name: "КАМАЗ 65115 + КМУ HANGIL", perHour: "2 800 ₽" },
+  { name: "FAW + КМУ DongYang", perHour: "3 000 ₽" },
+  { name: "Renault Lander + КМУ", perHour: "3 200 ₽" },
+  { name: "Hyundai Gold + КМУ 8т", perHour: "3 200 ₽" },
+  { name: "КАМАЗ 43118 + Kanglim вездеход", perHour: "3 500 ₽" },
+  { name: "JCB 3CX", perHour: "2 400 ₽" },
+  { name: "JCB 4CX", perHour: "2 700 ₽" },
 ];
 
 const PricePage = () => {
