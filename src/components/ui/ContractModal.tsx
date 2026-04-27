@@ -154,7 +154,7 @@ const ContractModal = ({ open, onClose }: ContractModalProps) => {
                 <p>Р/с 40702810316020000009</p>
                 <p>АО «АЛЬФА-БАНК»</p>
                 <p>К/с 30101810200000000593, БИК 044525593</p>
-                <p>Тел.: +7 (960) 188-30-84, +7 (960) 169-09-90</p>
+                <p>Тел.: +7 (960) 169-09-90</p>
                 <p className="sig mt-6 pt-2 border-t border-white/20 text-xs">Директор ___________________ / ___________ /</p>
               </div>
               <div className="col">
@@ -180,12 +180,12 @@ const ContractModal = ({ open, onClose }: ContractModalProps) => {
             Готовый договор пришлём на email после согласования заявки
           </p>
           <a
-            href="tel:+79601883084"
+            href="tel:+79601690990"
             className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-accent/30"
             style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)", color: "#111" }}
           >
             <Icon name="Phone" size={14} />
-            Заказать договор: +7 960 188-30-84
+            Заказать договор: +7 960 169-09-90
           </a>
         </div>
       </div>
