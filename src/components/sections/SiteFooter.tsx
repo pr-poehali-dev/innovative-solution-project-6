@@ -111,7 +111,7 @@ const SiteFooter = () => {
                   <Icon name="PhoneCall" size={16} className="text-accent sm:!w-[18px] sm:!h-[18px]" />
                 </div>
                 <div className="flex flex-col leading-tight">
-                  <span className="text-accent/80 text-[10px] sm:text-xs font-bold uppercase tracking-wider">Запасной номер</span>
+                  <span className="text-accent/80 text-[10px] sm:text-xs font-bold uppercase tracking-wider">Директор</span>
                   <span className="text-white font-black text-base sm:text-lg tabular-nums">+7 960 169-09-90</span>
                 </div>
               </a>
