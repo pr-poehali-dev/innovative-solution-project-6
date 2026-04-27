@@ -2,6 +2,7 @@ import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import ShareButton from "@/components/ui/ShareButton";
 import type { Truck } from "./trucksData";
 import { pluralizeUnits } from "./trucksData";
 
@@ -101,13 +102,19 @@ export default function TruckHero({ truck, onOrder }: Omit<TruckHeroProps, "onCa
               </span>
             </div>
 
-            <button
-              onClick={onOrder}
-              className="inline-flex w-full sm:w-auto items-center gap-3 bg-gradient-to-r from-accent to-accent/80 text-black font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl hover:shadow-xl hover:shadow-accent/40 transition-all text-base sm:text-lg mb-6 sm:mb-8"
-            >
-              <Icon name="Phone" size={20} />
-              Заказать — +7 960 188-30-84
-            </button>
+            <div className="flex flex-col sm:flex-row gap-3 mb-6 sm:mb-8">
+              <button
+                onClick={onOrder}
+                className="inline-flex flex-1 sm:flex-initial items-center justify-center gap-3 bg-gradient-to-r from-accent to-accent/80 text-black font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl hover:shadow-xl hover:shadow-accent/40 transition-all text-base sm:text-lg"
+              >
+                <Icon name="Phone" size={20} />
+                Заказать — +7 960 188-30-84
+              </button>
+              <ShareButton
+                title={truck.title}
+                text={`${truck.title} — ${truck.price}. Аренда в Нижнем Новгороде. ООО Фаворит, +7 960 188-30-84`}
+              />
+            </div>
 
             {/* Характеристики */}
             <div className="border border-accent/10 rounded-2xl overflow-hidden bg-card/30">
