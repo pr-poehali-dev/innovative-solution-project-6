@@ -22,27 +22,6 @@ const HeroHeader = () => {
             ))}
           </nav>
           <div className="flex gap-2 sm:gap-3 items-center">
-            {/* Кнопка обратного звонка — десктоп/планшет */}
-            <button
-              type="button"
-              onClick={() => setCallbackOpen(true)}
-              className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all text-sm font-semibold text-white"
-              aria-label="Заказать обратный звонок"
-            >
-              <Icon name="MessageCircle" size={14} className="text-accent" />
-              <span>Перезвоните мне</span>
-            </button>
-
-            {/* Кнопка обратного звонка — мобайл (иконка) */}
-            <button
-              type="button"
-              onClick={() => setCallbackOpen(true)}
-              className="flex md:hidden w-10 h-10 items-center justify-center rounded-full border border-accent/40 bg-accent/5 hover:bg-accent/15 transition-colors"
-              aria-label="Заказать обратный звонок"
-            >
-              <Icon name="MessageCircle" size={18} className="text-accent" />
-            </button>
-
             {/* Поделиться сайтом */}
             <ShareButton
               iconOnly
