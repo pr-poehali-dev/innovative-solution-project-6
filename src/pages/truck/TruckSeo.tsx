@@ -2,9 +2,10 @@ import type { Truck } from "./trucksData";
 
 interface TruckSeoProps {
   truck: Truck;
+  slug: string;
 }
 
-export default function TruckSeo({ truck }: TruckSeoProps) {
+export default function TruckSeo({ truck, slug }: TruckSeoProps) {
   return (
     <>
       <title>{truck.seoTitle}</title>
@@ -29,15 +30,15 @@ export default function TruckSeo({ truck }: TruckSeoProps) {
         "name": truck.title,
         "description": truck.seoDesc,
         "image": truck.image,
-        "sku": truck.slug,
-        "mpn": truck.slug,
+        "sku": slug,
+        "mpn": slug,
         "brand": {
           "@type": "Brand",
           "name": "ООО Фаворит"
         },
         "offers": {
           "@type": "Offer",
-          "url": `https://фаварит.рф/tehnika/${truck.slug}`,
+          "url": `https://фаварит.рф/tehnika/${slug}`,
           "priceCurrency": "RUB",
           "price": truck.priceNum,
           "priceSpecification": {
