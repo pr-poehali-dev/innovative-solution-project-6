@@ -29,8 +29,15 @@ export default function TruckSeo({ truck }: TruckSeoProps) {
         "name": truck.title,
         "description": truck.seoDesc,
         "image": truck.image,
+        "sku": truck.slug,
+        "mpn": truck.slug,
+        "brand": {
+          "@type": "Brand",
+          "name": "ООО Фаворит"
+        },
         "offers": {
           "@type": "Offer",
+          "url": `https://фаварит.рф/tehnika/${truck.slug}`,
           "priceCurrency": "RUB",
           "price": truck.priceNum,
           "priceSpecification": {
@@ -40,6 +47,7 @@ export default function TruckSeo({ truck }: TruckSeoProps) {
             "unitText": "час"
           },
           "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/UsedCondition",
           "seller": {
             "@type": "LocalBusiness",
             "name": "ООО Фаворит",
@@ -50,6 +58,39 @@ export default function TruckSeo({ truck }: TruckSeoProps) {
               "addressRegion": "Нижегородская область",
               "addressCountry": "RU"
             }
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": {
+              "@type": "MonetaryAmount",
+              "value": "0",
+              "currency": "RUB"
+            },
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "RU",
+              "addressRegion": "Нижегородская область"
+            },
+            "deliveryTime": {
+              "@type": "ShippingDeliveryTime",
+              "handlingTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 0,
+                "maxValue": 1,
+                "unitCode": "HUR"
+              },
+              "transitTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 0,
+                "maxValue": 2,
+                "unitCode": "HUR"
+              }
+            }
+          },
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "RU",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
           }
         },
         "aggregateRating": {
