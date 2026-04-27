@@ -31,5 +31,6 @@ export const navLinks = [
   { href: "#usecases", label: "Услуги" },
   { href: "#how", label: "Как это работает" },
   { href: "#pricing", label: "Тарифы" },
+  { href: "/price", label: "Прайс" },
   { href: "/blog", label: "Блог" },
 ];
