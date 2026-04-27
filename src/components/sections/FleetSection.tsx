@@ -343,7 +343,7 @@ const FleetSection = () => {
                   <ShareButton
                     compact
                     title={truck.title}
-                    text={`${truck.title} — ${truck.price}. Аренда в Нижнем Новгороде. ООО Фаворит, +7 960 188-30-84`}
+                    text={`${truck.title} — ${truck.price}. Аренда в Нижнем Новгороде. ООО Фаворит, +7 960 188-30-84. Сайт: https://фаварит.рф/tehnika/${truck.slug}`}
                     url={`https://фаварит.рф/tehnika/${truck.slug}`}
                     className="w-full sm:w-auto"
                   />

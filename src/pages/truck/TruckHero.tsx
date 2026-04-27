@@ -112,7 +112,7 @@ export default function TruckHero({ truck, onOrder }: Omit<TruckHeroProps, "onCa
               </button>
               <ShareButton
                 title={truck.title}
-                text={`${truck.title} — ${truck.price}. Аренда в Нижнем Новгороде. ООО Фаворит, +7 960 188-30-84`}
+                text={`${truck.title} — ${truck.price}. Аренда в Нижнем Новгороде. ООО Фаворит, +7 960 188-30-84. Сайт: https://фаварит.рф`}
               />
             </div>
 
