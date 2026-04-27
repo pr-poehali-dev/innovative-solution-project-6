@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import OrderModal from "@/components/ui/OrderModal";
 import SectionBadge from "@/components/ui/SectionBadge";
+import ShareButton from "@/components/ui/ShareButton";
 
 const trucks = [
   // ── Манипуляторы ──
@@ -339,6 +340,13 @@ const FleetSection = () => {
                   <Link to={`/tehnika/${truck.slug}`} className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3 border border-accent/30 rounded-full font-semibold text-sm hover:border-accent/60 hover:bg-accent/5 transition-all">
                     Подробнее
                   </Link>
+                  <ShareButton
+                    compact
+                    title={truck.title}
+                    text={`${truck.title} — ${truck.price}. Аренда в Нижнем Новгороде. ООО Фаворит, +7 960 188-30-84`}
+                    url={`https://фаварит.рф/tehnika/${truck.slug}`}
+                    className="w-full sm:w-auto"
+                  />
                 </div>
               </div>
 

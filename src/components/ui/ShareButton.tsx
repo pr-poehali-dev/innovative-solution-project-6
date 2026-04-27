@@ -6,9 +6,10 @@ interface ShareButtonProps {
   text?: string;
   url?: string;
   className?: string;
+  compact?: boolean;
 }
 
-export default function ShareButton({ title, text, url, className }: ShareButtonProps) {
+export default function ShareButton({ title, text, url, className, compact }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -69,10 +70,14 @@ export default function ShareButton({ title, text, url, className }: ShareButton
       <button
         type="button"
         onClick={handleClick}
-        className="inline-flex items-center gap-2 px-4 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all text-sm sm:text-base font-semibold text-white"
+        className={
+          compact
+            ? "inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3 rounded-full border border-accent/30 hover:border-accent/60 hover:bg-accent/5 transition-all text-sm font-semibold text-white"
+            : "inline-flex items-center gap-2 px-4 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all text-sm sm:text-base font-semibold text-white"
+        }
         aria-label="Поделиться"
       >
-        <Icon name="Share2" size={18} className="text-accent" />
+        <Icon name="Share2" size={compact ? 16 : 18} className="text-accent" />
         Поделиться
       </button>
 
