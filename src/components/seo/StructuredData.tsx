@@ -27,16 +27,30 @@ const StructuredData = () => {
     "@type": "LocalBusiness",
     "@id": "https://фаварит.рф/#organization",
     "name": "ООО Фаворит",
+    "legalName": "Общество с ограниченной ответственностью «ФАВОРИТ»",
     "url": "https://фаварит.рф",
-    "telephone": "+79601883084",
+    "telephone": ["+79601883084", "+79601690990"],
+    "email": "960188@list.ru",
     "image": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg",
+    "logo": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Нижний Новгород",
+      "streetAddress": "6-й микрорайон, д. 2, офис 13",
+      "addressLocality": "Кстово",
       "addressRegion": "Нижегородская область",
+      "postalCode": "607657",
       "addressCountry": "RU"
     },
-    "description": "Аренда манипуляторов и спецтехники в Нижнем Новгороде. Собственный парк техники. Опыт 15 лет.",
+    "vatID": "5250077990",
+    "taxID": "5250077990",
+    "iso6523Code": "0211:1235200013531",
+    "identifier": [
+      { "@type": "PropertyValue", "propertyID": "ИНН", "value": "5250077990" },
+      { "@type": "PropertyValue", "propertyID": "КПП", "value": "525001001" },
+      { "@type": "PropertyValue", "propertyID": "ОГРН", "value": "1235200013531" }
+    ],
+    "foundingDate": "2023",
+    "description": "ООО «ФАВОРИТ» — аренда манипуляторов и спецтехники в Нижнем Новгороде. ИНН 5250077990, ОГРН 1235200013531. Собственный парк техники, работа с НДС, договор для юр. лиц.",
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5",
