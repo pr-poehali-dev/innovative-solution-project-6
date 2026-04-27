@@ -134,13 +134,13 @@ const SiteFooter = () => {
             {/* Email и адрес */}
             <div className="flex flex-col gap-2">
               <a
-                href="mailto:960188@list.ru"
+                href="mailto:Avrora.888@bk.ru"
                 className="inline-flex items-center gap-2 text-muted-foreground text-xs sm:text-sm hover:text-accent transition-colors break-all"
               >
                 <div className="w-7 h-7 rounded-lg bg-accent/10 border border-accent/25 flex items-center justify-center flex-shrink-0">
                   <Icon name="Mail" size={12} className="text-accent" />
                 </div>
-                960188@list.ru
+                Avrora.888@bk.ru
               </a>
               <div className="inline-flex items-start gap-2 text-muted-foreground text-xs sm:text-sm">
                 <div className="w-7 h-7 rounded-lg bg-accent/10 border border-accent/25 flex items-center justify-center flex-shrink-0">
