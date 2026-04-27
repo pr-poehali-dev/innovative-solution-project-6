@@ -207,6 +207,18 @@ const SiteFooter = () => {
         </div>
       </div>
 
+      {/* Дисклеймер — не публичная оферта */}
+      <div className="border-t border-accent/10 bg-black/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+          <p className="text-[11px] sm:text-xs text-muted-foreground/70 text-center leading-relaxed flex items-start sm:items-center justify-center gap-2">
+            <Icon name="Info" size={12} className="text-accent/60 flex-shrink-0 mt-0.5 sm:mt-0" />
+            <span>
+              Обращаем ваше внимание, что сайт носит исключительно информационный характер и ни при каких условиях не является публичной офертой.
+            </span>
+          </p>
+        </div>
+      </div>
+
       {/* Нижняя полоска */}
       <div className="border-t border-accent/10 bg-black/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-[11px] sm:text-xs text-muted-foreground/80">
