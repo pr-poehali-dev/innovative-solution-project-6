@@ -106,6 +106,7 @@ const CalculatorSection = () => {
   const [customCity, setCustomCity] = useState("");
   const [citySearch, setCitySearch] = useState("");
   const [cityListOpen, setCityListOpen] = useState(false);
+  const [truckListOpen, setTruckListOpen] = useState(false);
   const [withRigger, setWithRigger] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [showCheck, setShowCheck] = useState(false);
@@ -267,56 +268,97 @@ const CalculatorSection = () => {
                   )}
                 </p>
 
-                {/* Selected truck preview */}
-                <div className="mb-3 p-3 rounded-xl border-2 border-accent/40 bg-gradient-to-r from-accent/10 to-transparent flex items-center gap-3">
-                  <img src={truck.image} alt={truck.short} className="w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-lg flex-shrink-0 bg-black/30" loading="lazy" />
+                {/* Selected truck preview — кликабельный, открывает список */}
+                <button
+                  type="button"
+                  onClick={() => setTruckListOpen((v) => !v)}
+                  className="w-full mb-2 p-3 rounded-xl border-2 border-accent/40 bg-gradient-to-r from-accent/10 to-transparent flex items-center gap-3 hover:border-accent transition-all text-left"
+                >
+                  <img src={truck.image} alt={truck.short} className="w-16 h-14 sm:w-20 sm:h-16 object-cover rounded-lg flex-shrink-0 bg-black/30" loading="lazy" />
                   <div className="flex-1 min-w-0">
                     <p className="text-[10px] text-accent font-bold tracking-wider mb-0.5">ВЫБРАНО</p>
-                    <p className="font-bold text-sm sm:text-base text-white truncate">{truck.name}</p>
+                    <p className="font-bold text-sm text-white truncate">{truck.name}</p>
                     <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] text-muted-foreground mt-1">
                       <span className="flex items-center gap-1"><Icon name="Weight" size={10} />{truck.capacity}</span>
                       {truck.boom && <span className="flex items-center gap-1"><Icon name="MoveUpRight" size={10} />{truck.boom}</span>}
-                      <span className="flex items-center gap-1 text-accent"><Icon name="Wallet" size={10} />{truck.price.toLocaleString("ru")} ₽/ч</span>
+                      <span className="flex items-center gap-1 text-accent font-bold"><Icon name="Wallet" size={10} />{truck.price.toLocaleString("ru")} ₽/ч</span>
                     </div>
                   </div>
-                </div>
+                  <Icon name={truckListOpen ? "ChevronUp" : "ChevronDown"} size={18} className="text-accent flex-shrink-0" />
+                </button>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 max-h-[340px] overflow-y-auto pr-1 custom-scroll">
-                  {filtered.map((t) => {
-                    const i = trucks.indexOf(t);
-                    const selected = truckIdx === i;
-                    return (
-                      <button
-                        key={i}
-                        onClick={() => setTruckIdx(i)}
-                        className={`group relative text-left rounded-xl border-2 transition-all overflow-hidden ${
-                          selected
-                            ? "border-accent shadow-lg shadow-accent/20"
-                            : "border-accent/10 hover:border-accent/40"
-                        }`}
-                      >
-                        <div className="relative aspect-[4/3] overflow-hidden bg-black/30">
-                          <img src={t.image} alt={t.short} className="w-full h-full object-cover" loading="lazy" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                          {selected && (
-                            <div className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-accent flex items-center justify-center">
-                              <Icon name="Check" size={12} className="text-black" strokeWidth={3} />
+                {/* Горизонтальная лента миниатюр */}
+                {!truckListOpen && (
+                  <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 custom-scroll snap-x">
+                    {filtered.map((t) => {
+                      const i = trucks.indexOf(t);
+                      const selected = truckIdx === i;
+                      return (
+                        <button
+                          key={i}
+                          onClick={() => setTruckIdx(i)}
+                          className={`relative flex-shrink-0 w-[110px] snap-start rounded-lg border-2 overflow-hidden transition-all ${
+                            selected
+                              ? "border-accent shadow-lg shadow-accent/20"
+                              : "border-accent/10 hover:border-accent/40"
+                          }`}
+                        >
+                          <div className="relative aspect-[4/3] bg-black/30">
+                            <img src={t.image} alt={t.short} className="w-full h-full object-cover" loading="lazy" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                            {selected && (
+                              <div className="absolute top-1 right-1 w-4 h-4 rounded-full bg-accent flex items-center justify-center">
+                                <Icon name="Check" size={10} className="text-black" strokeWidth={3} />
+                              </div>
+                            )}
+                            <div className="absolute bottom-1 left-1 right-1">
+                              <p className="font-bold text-[10px] text-white leading-tight truncate">{t.short}</p>
+                              <p className="text-[10px] text-accent font-black leading-tight">{t.price.toLocaleString("ru")} ₽/ч</p>
                             </div>
-                          )}
-                          {t.highlight && (
-                            <div className="absolute top-1.5 left-1.5 px-1.5 py-0.5 bg-accent/90 text-black text-[9px] font-black rounded">
-                              ★ {t.highlight}
-                            </div>
-                          )}
-                          <div className="absolute bottom-1.5 left-1.5 right-1.5">
-                            <p className="font-bold text-xs text-white leading-tight truncate">{t.short}</p>
-                            <p className="text-[10px] text-accent font-black">{t.price.toLocaleString("ru")} ₽/ч</p>
                           </div>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Раскрывающийся полный список */}
+                {truckListOpen && (
+                  <div className="rounded-xl border-2 border-accent/20 bg-background/60 overflow-hidden">
+                    <div className="max-h-[300px] overflow-y-auto custom-scroll">
+                      {filtered.map((t) => {
+                        const i = trucks.indexOf(t);
+                        const selected = truckIdx === i;
+                        return (
+                          <button
+                            key={i}
+                            onClick={() => {
+                              setTruckIdx(i);
+                              setTruckListOpen(false);
+                            }}
+                            className={`w-full flex items-center gap-3 p-2.5 text-left border-b border-accent/5 last:border-0 transition-colors ${
+                              selected ? "bg-accent/15" : "hover:bg-accent/5"
+                            }`}
+                          >
+                            <img src={t.image} alt={t.short} className="w-14 h-11 object-cover rounded-md flex-shrink-0 bg-black/30" loading="lazy" />
+                            <div className="flex-1 min-w-0">
+                              <p className={`text-xs font-bold truncate ${selected ? "text-white" : "text-foreground/90"}`}>{t.name}</p>
+                              <div className="flex flex-wrap gap-x-2 text-[10px] text-muted-foreground">
+                                <span>{t.capacity}</span>
+                                {t.boom && <span>· {t.boom}</span>}
+                                {t.highlight && <span className="text-accent">· {t.highlight}</span>}
+                              </div>
+                            </div>
+                            <span className="text-xs font-black text-accent tabular-nums flex-shrink-0">
+                              {t.price.toLocaleString("ru")} ₽/ч
+                            </span>
+                            {selected && <Icon name="Check" size={14} className="text-accent flex-shrink-0" strokeWidth={3} />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Шаг 3: Часы */}
