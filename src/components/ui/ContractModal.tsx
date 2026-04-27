@@ -154,7 +154,7 @@ const ContractModal = ({ open, onClose }: ContractModalProps) => {
                 <p>Р/с 40702810316020000009</p>
                 <p>АО «АЛЬФА-БАНК»</p>
                 <p>К/с 30101810200000000593, БИК 044525593</p>
-                <p>Тел.: +7 960 188-30-84</p>
+                <p>Тел.: +7 (960) 188-30-84, +7 (960) 169-09-90</p>
                 <p className="sig mt-6 pt-2 border-t border-white/20 text-xs">Директор ___________________ / ___________ /</p>
               </div>
               <div className="col">
