@@ -9,9 +9,10 @@ interface ShareButtonProps {
   compact?: boolean;
   iconOnly?: boolean;
   menuAlign?: "left" | "right";
+  tooltip?: string;
 }
 
-export default function ShareButton({ title, text, url, className, compact, iconOnly, menuAlign = "left" }: ShareButtonProps) {
+export default function ShareButton({ title, text, url, className, compact, iconOnly, menuAlign = "left", tooltip }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -67,11 +68,14 @@ export default function ShareButton({ title, text, url, className, compact, icon
     { name: "Viber", icon: "Phone", href: `viber://forward?text=${encodedText}%20${encodedUrl}` },
   ];
 
+  const tooltipText = tooltip || "Поделиться";
+
   return (
-    <div className={`relative inline-block ${className || ""}`}>
+    <div className={`relative inline-block group ${className || ""}`}>
       <button
         type="button"
         onClick={handleClick}
+        title={tooltipText}
         className={
           iconOnly
             ? "flex w-10 h-10 items-center justify-center rounded-full border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all"
@@ -79,11 +83,19 @@ export default function ShareButton({ title, text, url, className, compact, icon
               ? "inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3 rounded-full border border-accent/30 hover:border-accent/60 hover:bg-accent/5 transition-all text-sm font-semibold text-white"
               : "inline-flex items-center gap-2 px-4 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all text-sm sm:text-base font-semibold text-white"
         }
-        aria-label="Поделиться"
+        aria-label={tooltipText}
       >
         <Icon name="Share2" size={iconOnly ? 18 : compact ? 16 : 18} className="text-accent" />
         {!iconOnly && "Поделиться"}
       </button>
+
+      {tooltip && !menuOpen && (
+        <span
+          className={`pointer-events-none absolute top-full mt-2 px-3 py-1.5 rounded-lg bg-black/90 border border-accent/30 text-white text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity hidden md:block z-50 ${menuAlign === "right" ? "right-0" : "left-1/2 -translate-x-1/2"}`}
+        >
+          {tooltip}
+        </span>
+      )}
 
       {menuOpen && (
         <>
