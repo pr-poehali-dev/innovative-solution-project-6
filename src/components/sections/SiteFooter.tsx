@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import BrandLogo from "@/components/ui/BrandLogo";
 import CallbackModal from "@/components/ui/CallbackModal";
+import DocumentsBlock from "@/components/ui/DocumentsBlock";
 import { cities } from "@/data/cities";
 
 const trucks = [
@@ -154,6 +155,15 @@ const SiteFooter = () => {
                 </div>
                 <span>Работаем без выходных · с 7:00 до 22:00</span>
               </div>
+            </div>
+
+            {/* Документы для клиентов */}
+            <div className="mt-5 pt-5 border-t border-accent/10">
+              <h3 className="font-display font-black text-sm uppercase tracking-widest mb-3 flex items-center gap-2" style={{ color: "#e8a820" }}>
+                <Icon name="FileDown" size={14} />
+                Документы для клиентов
+              </h3>
+              <DocumentsBlock />
             </div>
           </div>
 
