@@ -3,6 +3,7 @@ import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
 import CallbackModal from "@/components/ui/CallbackModal";
+import ShareButton from "@/components/ui/ShareButton";
 import { navLinks } from "./heroData";
 
 const HeroHeader = () => {
@@ -41,6 +42,15 @@ const HeroHeader = () => {
             >
               <Icon name="MessageCircle" size={18} className="text-accent" />
             </button>
+
+            {/* Поделиться сайтом */}
+            <ShareButton
+              iconOnly
+              menuAlign="right"
+              title="ООО Фаворит — аренда манипуляторов и спецтехники в Нижнем Новгороде"
+              text="Аренда манипуляторов и экскаваторов-погрузчиков в Нижнем Новгороде. ООО Фаворит, +7 960 188-30-84"
+              url="https://фаварит.рф"
+            />
 
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />

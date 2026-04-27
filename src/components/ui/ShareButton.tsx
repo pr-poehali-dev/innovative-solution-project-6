@@ -7,9 +7,11 @@ interface ShareButtonProps {
   url?: string;
   className?: string;
   compact?: boolean;
+  iconOnly?: boolean;
+  menuAlign?: "left" | "right";
 }
 
-export default function ShareButton({ title, text, url, className, compact }: ShareButtonProps) {
+export default function ShareButton({ title, text, url, className, compact, iconOnly, menuAlign = "left" }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -71,14 +73,16 @@ export default function ShareButton({ title, text, url, className, compact }: Sh
         type="button"
         onClick={handleClick}
         className={
-          compact
-            ? "inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3 rounded-full border border-accent/30 hover:border-accent/60 hover:bg-accent/5 transition-all text-sm font-semibold text-white"
-            : "inline-flex items-center gap-2 px-4 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all text-sm sm:text-base font-semibold text-white"
+          iconOnly
+            ? "flex w-10 h-10 items-center justify-center rounded-full border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all"
+            : compact
+              ? "inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3 rounded-full border border-accent/30 hover:border-accent/60 hover:bg-accent/5 transition-all text-sm font-semibold text-white"
+              : "inline-flex items-center gap-2 px-4 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all text-sm sm:text-base font-semibold text-white"
         }
         aria-label="Поделиться"
       >
-        <Icon name="Share2" size={compact ? 16 : 18} className="text-accent" />
-        Поделиться
+        <Icon name="Share2" size={iconOnly ? 18 : compact ? 16 : 18} className="text-accent" />
+        {!iconOnly && "Поделиться"}
       </button>
 
       {menuOpen && (
@@ -88,7 +92,7 @@ export default function ShareButton({ title, text, url, className, compact }: Sh
             onClick={() => setMenuOpen(false)}
             aria-hidden="true"
           />
-          <div className="absolute z-50 mt-2 right-0 sm:right-auto sm:left-0 w-64 rounded-2xl border border-accent/20 bg-card/95 backdrop-blur-xl shadow-2xl overflow-hidden">
+          <div className={`absolute z-50 mt-2 w-64 rounded-2xl border border-accent/20 bg-card/95 backdrop-blur-xl shadow-2xl overflow-hidden ${menuAlign === "right" ? "right-0" : "right-0 sm:right-auto sm:left-0"}`}>
             <div className="p-2">
               <button
                 type="button"
