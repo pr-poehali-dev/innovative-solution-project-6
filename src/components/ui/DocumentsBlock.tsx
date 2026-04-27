@@ -1,4 +1,6 @@
+import { useState } from "react";
 import Icon from "@/components/ui/icon";
+import ContractModal from "@/components/ui/ContractModal";
 
 const printDoc = (title: string, html: string) => {
   const win = window.open("", "_blank", "width=900,height=700");
@@ -96,8 +98,10 @@ const priceHtml = `
 `;
 
 const DocumentsBlock = () => {
+  const [contractOpen, setContractOpen] = useState(false);
+
   return (
-    <div className="grid grid-cols-1 gap-2.5 sm:gap-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
       <button
         type="button"
         onClick={() => printDoc("Прайс-лист", priceHtml)}
@@ -112,6 +116,23 @@ const DocumentsBlock = () => {
         </div>
         <Icon name="Download" size={14} className="text-accent/60 group-hover:text-accent transition-colors flex-shrink-0" />
       </button>
+
+      <button
+        type="button"
+        onClick={() => setContractOpen(true)}
+        className="w-full inline-flex items-center gap-3 px-4 py-3 rounded-2xl border border-accent/30 bg-accent/5 hover:bg-accent/15 hover:border-accent/60 transition-all text-left group"
+      >
+        <div className="w-10 h-10 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/25 transition-colors">
+          <Icon name="FileText" size={16} className="text-accent" />
+        </div>
+        <div className="flex flex-col leading-tight min-w-0 flex-1">
+          <span className="text-accent/80 text-[10px] font-bold uppercase tracking-wider">PDF · Договор</span>
+          <span className="text-white font-bold text-sm">Договор аренды техники</span>
+        </div>
+        <Icon name="Download" size={14} className="text-accent/60 group-hover:text-accent transition-colors flex-shrink-0" />
+      </button>
+
+      <ContractModal open={contractOpen} onClose={() => setContractOpen(false)} />
     </div>
   );
 };
