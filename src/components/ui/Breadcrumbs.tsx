@@ -13,15 +13,28 @@ interface BreadcrumbsProps {
 const SITE_URL = "https://фаварит.рф";
 
 const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
+  const currentUrl =
+    typeof window !== "undefined"
+      ? `${SITE_URL}${window.location.pathname}`
+      : SITE_URL;
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: items.map((item, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: item.label,
-      ...(item.to ? { item: `${SITE_URL}${item.to}` } : {}),
-    })),
+    itemListElement: items.map((item, i) => {
+      const isLast = i === items.length - 1;
+      const itemUrl = item.to
+        ? `${SITE_URL}${item.to}`
+        : isLast
+          ? currentUrl
+          : undefined;
+      return {
+        "@type": "ListItem",
+        position: i + 1,
+        name: item.label,
+        ...(itemUrl ? { item: itemUrl } : {}),
+      };
+    }),
   };
 
   return (
