@@ -3,10 +3,12 @@ import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
 import ShareButton from "@/components/ui/ShareButton";
+import ContractModal from "@/components/ui/ContractModal";
 import { navLinks } from "./heroData";
 
 const HeroHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [contractOpen, setContractOpen] = useState(false);
 
   return (
     <>
@@ -20,6 +22,20 @@ const HeroHeader = () => {
             ))}
           </nav>
           <div className="flex gap-2 sm:gap-3 items-center">
+            {/* Договор */}
+            <button
+              type="button"
+              onClick={() => setContractOpen(true)}
+              title="Договор аренды техники"
+              className="group relative flex w-10 h-10 items-center justify-center rounded-full border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all"
+              aria-label="Договор аренды"
+            >
+              <Icon name="FileText" size={18} className="text-accent" />
+              <span className="pointer-events-none absolute top-full mt-2 right-0 px-3 py-1.5 rounded-lg bg-black/90 border border-accent/30 text-white text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity hidden md:block z-50">
+                Скачать договор аренды
+              </span>
+            </button>
+
             {/* Поделиться сайтом */}
             <ShareButton
               iconOnly
@@ -61,6 +77,7 @@ const HeroHeader = () => {
           </div>
         )}
       </header>
+      <ContractModal open={contractOpen} onClose={() => setContractOpen(false)} />
     </>
   );
 };
