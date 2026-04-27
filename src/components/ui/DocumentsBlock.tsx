@@ -64,21 +64,21 @@ const priceHtml = `
 
   <h2>Манипуляторы (КМУ)</h2>
   <table>
-    <tr><th>Техника</th><th>Грузоподъёмность</th><th>Стрела</th><th>Цена, ₽/час</th></tr>
-    <tr><td>ISUZU 5т + КМУ</td><td>до 5 т</td><td>до 8,5 м</td><td>2 200 ₽</td></tr>
-    <tr><td>FAW J6 + DONGYANG 1966</td><td>до 8 т</td><td>до 19 м, люлька</td><td>2 600 ₽</td></tr>
-    <tr><td>КАМАЗ 65115 + КМУ HANGIL</td><td>до 12 т</td><td>до 19 м</td><td>2 800 ₽</td></tr>
-    <tr><td>FAW + КМУ DongYang</td><td>до 17 т</td><td>до 21 м, люлька</td><td>3 000 ₽</td></tr>
-    <tr><td>Renault Lander + КМУ</td><td>до 10 т</td><td>до 18 м</td><td>3 200 ₽</td></tr>
-    <tr><td>Hyundai Gold + КМУ 8т</td><td>до 8 т</td><td>до 18 м</td><td>3 200 ₽</td></tr>
-    <tr><td>КАМАЗ 43118 + Kanglim вездеход</td><td>до 10 т</td><td>до 23 м, 6×6</td><td>3 500 ₽</td></tr>
+    <tr><th>Техника</th><th>Грузоподъёмность</th><th>Стрела</th><th>Без НДС, ₽/час</th><th>С НДС 22%, ₽/час</th></tr>
+    <tr><td>ISUZU 5т + КМУ</td><td>до 5 т</td><td>до 8,5 м</td><td>1 800 ₽</td><td>2 200 ₽</td></tr>
+    <tr><td>FAW J6 + DONGYANG 1966</td><td>до 8 т</td><td>до 19 м, люлька</td><td>2 130 ₽</td><td>2 600 ₽</td></tr>
+    <tr><td>КАМАЗ 65115 + КМУ HANGIL</td><td>до 12 т</td><td>до 19 м</td><td>2 300 ₽</td><td>2 800 ₽</td></tr>
+    <tr><td>FAW + КМУ DongYang</td><td>до 17 т</td><td>до 21 м, люлька</td><td>2 460 ₽</td><td>3 000 ₽</td></tr>
+    <tr><td>Renault Lander + КМУ</td><td>до 10 т</td><td>до 18 м</td><td>2 620 ₽</td><td>3 200 ₽</td></tr>
+    <tr><td>Hyundai Gold + КМУ 8т</td><td>до 8 т</td><td>до 18 м</td><td>2 620 ₽</td><td>3 200 ₽</td></tr>
+    <tr><td>КАМАЗ 43118 + Kanglim вездеход</td><td>до 10 т</td><td>до 23 м, 6×6</td><td>2 870 ₽</td><td>3 500 ₽</td></tr>
   </table>
 
   <h2>Экскаваторы-погрузчики</h2>
   <table>
-    <tr><th>Техника</th><th>Глубина копания</th><th>Цена, ₽/час</th></tr>
-    <tr><td>JCB 3CX</td><td>до 5,4 м</td><td>1 800 ₽</td></tr>
-    <tr><td>JCB 4CX</td><td>до 6,0 м</td><td>2 000 ₽</td></tr>
+    <tr><th>Техника</th><th>Глубина копания</th><th>Без НДС, ₽/час</th><th>С НДС 22%, ₽/час</th></tr>
+    <tr><td>JCB 3CX</td><td>до 5,4 м</td><td>1 480 ₽</td><td>1 800 ₽</td></tr>
+    <tr><td>JCB 4CX</td><td>до 6,0 м</td><td>1 640 ₽</td><td>2 000 ₽</td></tr>
   </table>
 
   <h2>Условия аренды</h2>
