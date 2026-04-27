@@ -104,6 +104,8 @@ const CalculatorSection = () => {
   const [hours, setHours] = useState(4);
   const [cityIdx, setCityIdx] = useState(0);
   const [customCity, setCustomCity] = useState("");
+  const [citySearch, setCitySearch] = useState("");
+  const [cityListOpen, setCityListOpen] = useState(false);
   const [withRigger, setWithRigger] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [showCheck, setShowCheck] = useState(false);
@@ -375,38 +377,119 @@ const CalculatorSection = () => {
                 <p className="text-sm text-muted-foreground mb-3 font-medium flex items-center gap-2">
                   <Icon name="MapPin" size={14} className="text-accent" />
                   Куда подать технику?
-                  <span className="ml-auto text-[10px] text-muted-foreground/70 font-normal">
-                    выезд по тарифу выбранной техники
+                  <span className="ml-auto text-[10px] text-muted-foreground/70 font-normal hidden sm:inline">
+                    выезд по тарифу техники
                   </span>
                 </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
-                  {cities.map((c, i) => {
-                    const surcharge = Math.round(c.hours * truck.price);
-                    const isOther = c.name === "Другой город";
-                    return (
+
+                {/* Текущий выбор + поиск */}
+                <button
+                  type="button"
+                  onClick={() => setCityListOpen((v) => !v)}
+                  className="w-full flex items-center justify-between gap-2 p-3 rounded-xl border-2 border-accent/40 bg-accent/10 hover:border-accent transition-all"
+                >
+                  <div className="flex items-center gap-2 min-w-0">
+                    <Icon name="MapPin" size={16} className="text-accent flex-shrink-0" />
+                    <div className="min-w-0 text-left">
+                      <p className="text-xs text-muted-foreground leading-none mb-1">Город подачи</p>
+                      <p className="text-sm font-bold text-white truncate">{cityLabel}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <span className={`text-xs font-black tabular-nums ${
+                      isCustomCity ? "text-amber-300" : citySurcharge === 0 ? "text-emerald-400" : "text-accent"
+                    }`}>
+                      {isCustomCity ? "по запросу" : citySurcharge === 0 ? "бесплатно" : `+${citySurcharge.toLocaleString("ru")} ₽`}
+                    </span>
+                    <Icon name={cityListOpen ? "ChevronUp" : "ChevronDown"} size={16} className="text-accent" />
+                  </div>
+                </button>
+
+                {/* Быстрые чипы — топ 6 ближайших */}
+                {!cityListOpen && (
+                  <div className="flex flex-wrap gap-1.5 mt-2">
+                    {[0, 1, 2, 3, 4, 5].map((i) => (
                       <button
-                        key={c.name}
+                        key={i}
                         onClick={() => setCityIdx(i)}
-                        className={`p-2.5 rounded-lg border-2 text-left transition-all ${
+                        className={`px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all ${
                           cityIdx === i
-                            ? "border-accent bg-accent/15"
-                            : "border-accent/10 bg-background/30 hover:border-accent/30"
+                            ? "bg-accent text-black"
+                            : "bg-background/40 border border-accent/20 text-muted-foreground hover:border-accent/50 hover:text-white"
                         }`}
                       >
-                        <p className={`text-xs font-bold ${cityIdx === i ? "text-white" : "text-foreground/80"}`}>{c.name}</p>
-                        <p className={`text-[10px] mt-0.5 ${
-                          isOther ? "text-amber-300" : c.hours === 0 ? "text-emerald-400" : "text-muted-foreground"
-                        }`}>
-                          {isOther
-                            ? "Уточните у менеджера"
-                            : c.hours === 0
-                            ? "Бесплатная подача"
-                            : `+${surcharge.toLocaleString("ru")} ₽ (${c.hours} ч пути)`}
-                        </p>
+                        {cities[i].name}
                       </button>
-                    );
-                  })}
-                </div>
+                    ))}
+                    <button
+                      onClick={() => setCityListOpen(true)}
+                      className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-background/40 border border-accent/20 text-accent hover:border-accent transition-all"
+                    >
+                      ещё {cities.length - 6}+
+                    </button>
+                  </div>
+                )}
+
+                {/* Раскрывающийся список с поиском */}
+                {cityListOpen && (
+                  <div className="mt-2 rounded-xl border-2 border-accent/20 bg-background/60 overflow-hidden">
+                    <div className="p-2 border-b border-accent/10">
+                      <div className="relative">
+                        <Icon name="Search" size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                        <input
+                          type="text"
+                          value={citySearch}
+                          onChange={(e) => setCitySearch(e.target.value)}
+                          placeholder="Поиск города…"
+                          className="w-full pl-8 pr-3 py-2 rounded-lg bg-background/60 border border-accent/20 focus:border-accent text-sm text-white placeholder:text-muted-foreground/50 outline-none"
+                          autoFocus
+                        />
+                      </div>
+                    </div>
+                    <div className="max-h-[240px] overflow-y-auto custom-scroll">
+                      {cities
+                        .map((c, i) => ({ c, i }))
+                        .filter(({ c }) =>
+                          c.name.toLowerCase().includes(citySearch.toLowerCase().trim())
+                        )
+                        .map(({ c, i }) => {
+                          const surcharge = Math.round(c.hours * truck.price);
+                          const isOther = c.name === "Другой город";
+                          const selected = cityIdx === i;
+                          return (
+                            <button
+                              key={c.name}
+                              onClick={() => {
+                                setCityIdx(i);
+                                setCityListOpen(false);
+                                setCitySearch("");
+                              }}
+                              className={`w-full flex items-center justify-between gap-2 px-3 py-2 text-left border-b border-accent/5 last:border-0 transition-colors ${
+                                selected ? "bg-accent/15" : "hover:bg-accent/5"
+                              }`}
+                            >
+                              <span className="flex items-center gap-2 min-w-0">
+                                {selected && <Icon name="Check" size={12} className="text-accent flex-shrink-0" strokeWidth={3} />}
+                                <span className={`text-xs font-semibold truncate ${selected ? "text-white" : "text-foreground/80"}`}>
+                                  {c.name}
+                                </span>
+                              </span>
+                              <span className={`text-[11px] font-bold tabular-nums flex-shrink-0 ${
+                                isOther ? "text-amber-300" : c.hours === 0 ? "text-emerald-400" : "text-accent/80"
+                              }`}>
+                                {isOther
+                                  ? "по запросу"
+                                  : c.hours === 0
+                                  ? "бесплатно"
+                                  : `+${surcharge.toLocaleString("ru")} ₽`}
+                              </span>
+                            </button>
+                          );
+                        })}
+                    </div>
+                  </div>
+                )}
+
                 {isCustomCity && (
                   <div className="mt-3">
                     <label className="block">
