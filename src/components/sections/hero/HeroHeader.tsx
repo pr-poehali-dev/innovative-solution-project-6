@@ -2,13 +2,11 @@ import { useState } from "react";
 import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
-import CallbackModal from "@/components/ui/CallbackModal";
 import ShareButton from "@/components/ui/ShareButton";
 import { navLinks } from "./heroData";
 
 const HeroHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [callbackOpen, setCallbackOpen] = useState(false);
 
   return (
     <>
@@ -59,19 +57,9 @@ const HeroHeader = () => {
               </a>
             ))}
             <PhoneButton size="sm" className="mt-2 w-full justify-center rounded-xl" />
-            <button
-              type="button"
-              onClick={() => { setMenuOpen(false); setCallbackOpen(true); }}
-              className="mt-1 w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-accent/40 bg-accent/5 text-sm font-semibold text-white"
-            >
-              <Icon name="MessageCircle" size={16} className="text-accent" />
-              Заказать обратный звонок
-            </button>
           </div>
         )}
       </header>
-
-      <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
     </>
   );
 };
