@@ -36,7 +36,7 @@ const printDoc = (title: string, html: string) => {
 const QR_API = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=0&data=";
 const qrPhone = `${QR_API}${encodeURIComponent("tel:+79601690990")}`;
 const qrSite = `${QR_API}${encodeURIComponent("https://фаварит.рф")}`;
-const qrEmail = `${QR_API}${encodeURIComponent("mailto:960188@list.ru")}`;
+const qrEmail = `${QR_API}${encodeURIComponent("mailto:Avrora.888@bk.ru")}`;
 
 const qrBlockHtml = `
   <div class="qr-block">
@@ -53,7 +53,7 @@ const qrBlockHtml = `
     <div class="qr-item">
       <img src="${qrEmail}" alt="QR Email" />
       <div class="qr-label">Написать на email</div>
-      <div class="qr-sub">960188@list.ru</div>
+      <div class="qr-sub">Avrora.888@bk.ru</div>
     </div>
   </div>
 `;
@@ -70,7 +70,7 @@ const cardHtml = `
     <tr><th>ОГРН</th><td>1235200013531</td></tr>
     <tr><th>Юридический адрес</th><td>607657, Нижегородская обл., Кстовский М.О., г. Кстово, 6-й м-он, д. 2, офис 13</td></tr>
     <tr><th>Фактический адрес</th><td>г. Нижний Новгород, Шуваловский проезд, 7</td></tr>
-    <tr><th>Email</th><td>960188@list.ru</td></tr>
+    <tr><th>Email</th><td>Avrora.888@bk.ru</td></tr>
     <tr><th>Телефон</th><td>+7 960 169-09-90</td></tr>
     <tr><th>Сайт</th><td>https://фаварит.рф</td></tr>
   </table>
