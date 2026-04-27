@@ -14,7 +14,6 @@ const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 const ReviewsPage = lazy(() => import("./pages/ReviewsPage"));
 const SitemapSourcePage = lazy(() => import("./pages/SitemapSourcePage"));
 const SeoLandingPage = lazy(() => import("./pages/SeoLandingPage"));
-const PricePage = lazy(() => import("./pages/PricePage"));
 
 const queryClient = new QueryClient();
 
@@ -38,7 +37,6 @@ const App = () => (
             <Route path="/blog" element={<BlogIndex />} />
             <Route path="/blog/:slug" element={<BlogArticle />} />
             <Route path="/otzyvy" element={<ReviewsPage />} />
-            <Route path="/price" element={<PricePage />} />
             <Route path="/sitemap-source" element={<SitemapSourcePage />} />
             <Route
               path="/arenda-manipulyatora-nizhny-novgorod"
