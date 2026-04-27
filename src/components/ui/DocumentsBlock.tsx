@@ -20,13 +20,43 @@ const printDoc = (title: string, html: string) => {
       .label { color: #666; font-size: 11px; text-transform: uppercase; }
       .value { font-weight: bold; }
       .footer { margin-top: 30px; padding-top: 12px; border-top: 1px solid #999; font-size: 11px; color: #666; }
-      @media print { body { padding: 20px; } }
+      .qr-block { display: flex; gap: 24px; margin-top: 24px; padding: 16px; border: 1px solid #999; border-radius: 8px; align-items: center; justify-content: center; flex-wrap: wrap; }
+      .qr-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+      .qr-item img { width: 110px; height: 110px; border: 1px solid #ddd; }
+      .qr-item .qr-label { font-size: 11px; color: #333; font-weight: bold; text-align: center; }
+      .qr-item .qr-sub { font-size: 10px; color: #666; text-align: center; }
+      @media print { body { padding: 20px; } .qr-block { page-break-inside: avoid; } }
     </style></head>
     <body>${html}</body></html>
   `);
   win.document.close();
   setTimeout(() => win.print(), 300);
 };
+
+const QR_API = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=0&data=";
+const qrPhone = `${QR_API}${encodeURIComponent("tel:+79601690990")}`;
+const qrSite = `${QR_API}${encodeURIComponent("https://фаварит.рф")}`;
+const qrEmail = `${QR_API}${encodeURIComponent("mailto:960188@list.ru")}`;
+
+const qrBlockHtml = `
+  <div class="qr-block">
+    <div class="qr-item">
+      <img src="${qrPhone}" alt="QR Телефон" />
+      <div class="qr-label">Позвонить</div>
+      <div class="qr-sub">+7 960 169-09-90</div>
+    </div>
+    <div class="qr-item">
+      <img src="${qrSite}" alt="QR Сайт" />
+      <div class="qr-label">Открыть сайт</div>
+      <div class="qr-sub">фаварит.рф</div>
+    </div>
+    <div class="qr-item">
+      <img src="${qrEmail}" alt="QR Email" />
+      <div class="qr-label">Написать на email</div>
+      <div class="qr-sub">960188@list.ru</div>
+    </div>
+  </div>
+`;
 
 const cardHtml = `
   <h1>КАРТОЧКА ПРЕДПРИЯТИЯ</h1>
@@ -53,6 +83,8 @@ const cardHtml = `
   </table>
   <h2>Деятельность</h2>
   <p>Аренда манипуляторов и спецтехники с экипажем. Работа с НДС, полный электронный документооборот (Диадок/СБИС), договор для юридических лиц, закрывающие документы (УПД, акт, счёт-фактура).</p>
+  <h2>Быстрая связь · QR-коды</h2>
+  ${qrBlockHtml}
   <div class="footer">
     Документ сформирован автоматически с сайта фаварит.рф. Для получения карточки предприятия с подписью и печатью обратитесь по телефону +7 960 169-09-90.
   </div>
@@ -125,6 +157,9 @@ const priceHtml = `
     <li>Для юр. лиц — безналичный расчёт, договор, закрывающие документы</li>
     <li>Для постоянных клиентов — индивидуальные тарифы</li>
   </ul>
+
+  <h2>Быстрый заказ · QR-коды</h2>
+  ${qrBlockHtml}
 
   <div class="footer">
     Цены актуальны на дату формирования документа. Точную стоимость уточняйте у диспетчера: +7 960 169-09-90. Сайт: фаварит.рф
