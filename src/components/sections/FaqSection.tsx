@@ -48,8 +48,22 @@ const faqs = [
 const FaqSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((f) => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.answer,
+      },
+    })),
+  };
+
   return (
     <section className="py-12 sm:py-20 px-4 sm:px-6">
+      <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8 sm:mb-12">
           <div className="flex justify-center mb-4">
