@@ -62,23 +62,40 @@ const priceHtml = `
   <h1>ПРАЙС-ЛИСТ НА АРЕНДУ ТЕХНИКИ</h1>
   <p style="text-align:center;font-size:13px;color:#666;">ООО «ФАВОРИТ» · Нижний Новгород · +7 960 169-09-90</p>
 
-  <h2>Манипуляторы (КМУ)</h2>
+  <h2>Манипуляторы (КМУ) · цены с НДС 22%</h2>
   <table>
-    <tr><th>Техника</th><th>Грузоподъёмность</th><th>Стрела</th><th>Без НДС, ₽/час</th><th>С НДС 22%, ₽/час</th></tr>
-    <tr><td>ISUZU 5т + КМУ</td><td>до 5 т</td><td>до 8,5 м</td><td>1 800 ₽</td><td>2 200 ₽</td></tr>
-    <tr><td>FAW J6 + DONGYANG 1966</td><td>до 8 т</td><td>до 19 м, люлька</td><td>2 130 ₽</td><td>2 600 ₽</td></tr>
-    <tr><td>КАМАЗ 65115 + КМУ HANGIL</td><td>до 12 т</td><td>до 19 м</td><td>2 300 ₽</td><td>2 800 ₽</td></tr>
-    <tr><td>FAW + КМУ DongYang</td><td>до 17 т</td><td>до 21 м, люлька</td><td>2 460 ₽</td><td>3 000 ₽</td></tr>
-    <tr><td>Renault Lander + КМУ</td><td>до 10 т</td><td>до 18 м</td><td>2 620 ₽</td><td>3 200 ₽</td></tr>
-    <tr><td>Hyundai Gold + КМУ 8т</td><td>до 8 т</td><td>до 18 м</td><td>2 620 ₽</td><td>3 200 ₽</td></tr>
-    <tr><td>КАМАЗ 43118 + Kanglim вездеход</td><td>до 10 т</td><td>до 23 м, 6×6</td><td>2 870 ₽</td><td>3 500 ₽</td></tr>
+    <tr><th>Техника</th><th>Грузоподъёмность</th><th>Стрела</th><th>1 час</th><th>Смена (8 ч)</th><th>Сутки (24 ч)</th></tr>
+    <tr><td>ISUZU 5т + КМУ</td><td>до 5 т</td><td>до 8,5 м</td><td>2 200 ₽</td><td>16 720 ₽</td><td>44 880 ₽</td></tr>
+    <tr><td>FAW J6 + DONGYANG 1966</td><td>до 8 т</td><td>до 19 м, люлька</td><td>2 600 ₽</td><td>19 760 ₽</td><td>53 040 ₽</td></tr>
+    <tr><td>КАМАЗ 65115 + КМУ HANGIL</td><td>до 12 т</td><td>до 19 м</td><td>2 800 ₽</td><td>21 280 ₽</td><td>57 120 ₽</td></tr>
+    <tr><td>FAW + КМУ DongYang</td><td>до 17 т</td><td>до 21 м, люлька</td><td>3 000 ₽</td><td>22 800 ₽</td><td>61 200 ₽</td></tr>
+    <tr><td>Renault Lander + КМУ</td><td>до 10 т</td><td>до 18 м</td><td>3 200 ₽</td><td>24 320 ₽</td><td>65 280 ₽</td></tr>
+    <tr><td>Hyundai Gold + КМУ 8т</td><td>до 8 т</td><td>до 18 м</td><td>3 200 ₽</td><td>24 320 ₽</td><td>65 280 ₽</td></tr>
+    <tr><td>КАМАЗ 43118 + Kanglim вездеход</td><td>до 10 т</td><td>до 23 м, 6×6</td><td>3 500 ₽</td><td>26 600 ₽</td><td>71 400 ₽</td></tr>
+  </table>
+  <p style="font-size:11px;color:#666;margin-top:6px;">
+    Смена (8 ч) — скидка 5%. Сутки (24 ч) — скидка 15%. Для постоянных клиентов — индивидуальные тарифы.
+  </p>
+
+  <h2>Экскаваторы-погрузчики · цены с НДС 22%</h2>
+  <table>
+    <tr><th>Техника</th><th>Глубина копания</th><th>1 час</th><th>Смена (8 ч)</th><th>Сутки (24 ч)</th></tr>
+    <tr><td>JCB 3CX</td><td>до 5,4 м</td><td>1 800 ₽</td><td>13 680 ₽</td><td>36 720 ₽</td></tr>
+    <tr><td>JCB 4CX</td><td>до 6,0 м</td><td>2 000 ₽</td><td>15 200 ₽</td><td>40 800 ₽</td></tr>
   </table>
 
-  <h2>Экскаваторы-погрузчики</h2>
+  <h2>Цены без НДС (база)</h2>
   <table>
-    <tr><th>Техника</th><th>Глубина копания</th><th>Без НДС, ₽/час</th><th>С НДС 22%, ₽/час</th></tr>
-    <tr><td>JCB 3CX</td><td>до 5,4 м</td><td>1 480 ₽</td><td>1 800 ₽</td></tr>
-    <tr><td>JCB 4CX</td><td>до 6,0 м</td><td>1 640 ₽</td><td>2 000 ₽</td></tr>
+    <tr><th>Техника</th><th>1 час</th><th>Смена (8 ч)</th><th>Сутки (24 ч)</th></tr>
+    <tr><td>ISUZU 5т + КМУ</td><td>1 800 ₽</td><td>13 700 ₽</td><td>36 790 ₽</td></tr>
+    <tr><td>FAW J6 + DONGYANG 1966</td><td>2 130 ₽</td><td>16 200 ₽</td><td>43 480 ₽</td></tr>
+    <tr><td>КАМАЗ 65115 + КМУ HANGIL</td><td>2 300 ₽</td><td>17 440 ₽</td><td>46 820 ₽</td></tr>
+    <tr><td>FAW + КМУ DongYang</td><td>2 460 ₽</td><td>18 690 ₽</td><td>50 160 ₽</td></tr>
+    <tr><td>Renault Lander + КМУ</td><td>2 620 ₽</td><td>19 930 ₽</td><td>53 510 ₽</td></tr>
+    <tr><td>Hyundai Gold + КМУ 8т</td><td>2 620 ₽</td><td>19 930 ₽</td><td>53 510 ₽</td></tr>
+    <tr><td>КАМАЗ 43118 + Kanglim вездеход</td><td>2 870 ₽</td><td>21 800 ₽</td><td>58 520 ₽</td></tr>
+    <tr><td>JCB 3CX</td><td>1 480 ₽</td><td>11 210 ₽</td><td>30 100 ₽</td></tr>
+    <tr><td>JCB 4CX</td><td>1 640 ₽</td><td>12 460 ₽</td><td>33 440 ₽</td></tr>
   </table>
 
   <h2>Условия аренды</h2>
