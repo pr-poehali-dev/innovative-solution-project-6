@@ -29,14 +29,34 @@ const drawRoundedRect = (
   ctx.closePath();
 };
 
-const loadImage = (src: string): Promise<HTMLImageElement> =>
-  new Promise((resolve, reject) => {
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.onload = () => resolve(img);
-    img.onerror = reject;
-    img.src = src;
-  });
+const loadImage = async (src: string): Promise<HTMLImageElement> => {
+  try {
+    const res = await fetch(src, { mode: "cors", cache: "no-cache" });
+    if (!res.ok) throw new Error("fetch failed");
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    return await new Promise<HTMLImageElement>((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        resolve(img);
+      };
+      img.onerror = (e) => {
+        URL.revokeObjectURL(url);
+        reject(e);
+      };
+      img.src = url;
+    });
+  } catch {
+    return await new Promise<HTMLImageElement>((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = src + (src.includes("?") ? "&" : "?") + "t=" + Date.now();
+    });
+  }
+};
 
 const renderBanner = async (canvas: HTMLCanvasElement) => {
   const photo = await loadImage(PHOTO_URL);
