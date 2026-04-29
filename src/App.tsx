@@ -14,6 +14,7 @@ const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 const ReviewsPage = lazy(() => import("./pages/ReviewsPage"));
 const SitemapSourcePage = lazy(() => import("./pages/SitemapSourcePage"));
 const SeoLandingPage = lazy(() => import("./pages/SeoLandingPage"));
+const TruckCard = lazy(() => import("./pages/TruckCard"));
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ const App = () => (
               path="/manipulyator-s-lyulkoy"
               element={<SeoLandingPage slugOverride="manipulyator-s-lyulkoy" />}
             />
+            <Route path="/karta/faw-j6p-390" element={<TruckCard />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
