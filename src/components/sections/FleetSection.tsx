@@ -232,7 +232,18 @@ const FleetSection = () => {
         {trucks.map((truck, idx) => {
           const tag = (truck as typeof truck & { tag?: { label: string; icon: string; color: string } }).tag;
           return (
-          <div key={idx} className={`relative border border-accent/20 rounded-2xl sm:rounded-3xl bg-card/50 overflow-hidden ${idx < trucks.length - 1 ? "mb-6 sm:mb-8" : "mb-8 sm:mb-12"}`}>
+          <div key={idx} className={`group relative ${idx < trucks.length - 1 ? "mb-6 sm:mb-8" : "mb-8 sm:mb-12"}`}>
+          {/* Пульсирующая изумрудная подсветка */}
+          <div
+            className="emerald-pulse absolute -inset-0.5 rounded-2xl sm:rounded-3xl pointer-events-none"
+            style={{ background: "linear-gradient(135deg, #2dd4bf 0%, #10b981 50%, #0d9488 100%)", animationDelay: `${(idx % 4) * 0.6}s` }}
+          />
+          {/* Градиентная рамка */}
+          <div
+            className="relative rounded-2xl sm:rounded-3xl p-[1.5px]"
+            style={{ background: "linear-gradient(135deg, rgba(45,212,191,0.85) 0%, rgba(16,185,129,0.25) 50%, rgba(13,148,136,0.8) 100%)" }}
+          >
+          <div className="relative rounded-2xl sm:rounded-3xl bg-gradient-to-br from-zinc-950 via-background to-black overflow-hidden">
             {/* Угловой "лейбл-флажок" — на десктопе, на мобилке вынесен под фото */}
             {tag && (
               <div className={`hidden lg:flex absolute top-0 right-0 z-20 items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r ${tag.color} text-white text-[10px] sm:text-sm font-black uppercase tracking-wider shadow-xl rounded-bl-xl sm:rounded-bl-2xl`}>
@@ -356,6 +367,8 @@ const FleetSection = () => {
                 </div>
               )}
             </div>
+          </div>
+          </div>
           </div>
           );
         })}
