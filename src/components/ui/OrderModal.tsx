@@ -111,30 +111,42 @@ export default function OrderModal({ open, onClose, truckName, calcSummary }: Or
               <p className="text-muted-foreground text-sm mb-6">Перезвоним в течение 15 минут</p>
             )}
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4">
-              <input
-                type="text"
-                placeholder="Ваше имя"
-                value={name}
-                onChange={e => setName(e.target.value)}
-                required
-                className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
-              />
-              <input
-                type="tel"
-                placeholder="+7 (___) ___-__-__"
-                value={phone}
-                onChange={e => setPhone(e.target.value)}
-                required
-                className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors"
-              />
-              <textarea
-                placeholder="Комментарий (необязательно)"
-                value={comment}
-                onChange={e => setComment(e.target.value)}
-                rows={3}
-                className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent/60 transition-colors resize-none"
-              />
+            <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 mt-3">
+              <p className="text-[11px] text-white/60 mb-1 leading-snug text-center">
+                Перезвоним за 15 минут · уточним детали · согласуем цену
+              </p>
+              <div className="relative">
+                <Icon name="User" size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
+                <input
+                  type="text"
+                  placeholder="Имя или компания"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  required
+                  className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
+                />
+              </div>
+              <div className="relative">
+                <Icon name="Phone" size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
+                <input
+                  type="tel"
+                  placeholder="Телефон +7 (___) ___-__-__"
+                  value={phone}
+                  onChange={e => setPhone(e.target.value)}
+                  required
+                  className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
+                />
+              </div>
+              <div className="relative">
+                <Icon name="MessageSquare" size={14} className="absolute left-3 top-3 text-accent/70 pointer-events-none" />
+                <textarea
+                  placeholder="Что перевезти / поднять и нюансы (вес, габариты, адрес, время)"
+                  value={comment}
+                  onChange={e => setComment(e.target.value)}
+                  rows={2}
+                  className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all resize-none leading-snug"
+                />
+              </div>
 
               {status === "error" && (
                 <p className="text-red-400 text-sm">Ошибка отправки. Позвоните нам: +7 960 188-30-84</p>

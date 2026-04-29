@@ -89,8 +89,8 @@ const CallbackModal = ({ open, onClose }: CallbackModalProps) => {
           </div>
         </div>
 
-        <p className="text-muted-foreground text-sm mb-5">
-          Оставьте имя и телефон — перезвоним в течение 10 минут, уточним задачу и подберём технику.
+        <p className="text-[11px] text-white/60 mb-3 leading-snug text-center">
+          Перезвоним за 10 минут · уточним задачу · подберём технику
         </p>
 
         {status === "success" ? (
@@ -102,11 +102,9 @@ const CallbackModal = ({ open, onClose }: CallbackModalProps) => {
             <p className="text-muted-foreground text-sm">Перезвоним в ближайшее время</p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-            <div>
-              <label htmlFor="callback-name" className="text-xs text-muted-foreground font-medium mb-1.5 block">
-                Ваше имя
-              </label>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-1.5">
+            <div className="relative">
+              <Icon name="User" size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
               <input
                 id="callback-name"
                 type="text"
@@ -116,15 +114,13 @@ const CallbackModal = ({ open, onClose }: CallbackModalProps) => {
                   setStatus("idle");
                   setError("");
                 }}
-                placeholder="Как к вам обращаться"
+                placeholder="Имя или компания"
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-accent/60 focus:outline-none text-white placeholder:text-muted-foreground/70 text-sm"
+                className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
               />
             </div>
-            <div>
-              <label htmlFor="callback-phone" className="text-xs text-muted-foreground font-medium mb-1.5 block">
-                Телефон
-              </label>
+            <div className="relative">
+              <Icon name="Phone" size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
               <input
                 id="callback-phone"
                 type="tel"
@@ -134,9 +130,9 @@ const CallbackModal = ({ open, onClose }: CallbackModalProps) => {
                   setStatus("idle");
                   setError("");
                 }}
-                placeholder="+7 ___ ___-__-__"
+                placeholder="Телефон +7 (___) ___-__-__"
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-accent/60 focus:outline-none text-white placeholder:text-muted-foreground/70 text-sm tabular-nums"
+                className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all tabular-nums"
               />
             </div>
 
