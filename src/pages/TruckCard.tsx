@@ -160,8 +160,8 @@ const TruckCard = () => {
   const [photoError, setPhotoError] = useState(false);
 
   useEffect(() => {
+    // Сначала пробуем простую загрузку (без CORS) — для предпросмотра
     const img = new Image();
-    img.crossOrigin = "anonymous";
     img.onload = () => setPhotoLoaded(true);
     img.onerror = () => setPhotoError(true);
     img.src = TRUCK_PHOTO_URL;
@@ -175,13 +175,30 @@ const TruckCard = () => {
       const padding = 28;
       const innerW = W - padding * 2;
 
-      // Загружаем фото
+      // Загружаем фото через fetch+blob (обходит проблему с CORS для canvas)
+      let photoSrc = TRUCK_PHOTO_URL;
+      try {
+        const resp = await fetch(TRUCK_PHOTO_URL, { mode: "cors" });
+        if (resp.ok) {
+          const blob = await resp.blob();
+          photoSrc = URL.createObjectURL(blob);
+        }
+      } catch {
+        // если fetch не сработал — попробуем загрузить как обычное Image
+      }
+
       const photo = await new Promise<HTMLImageElement>((resolve, reject) => {
         const img = new Image();
         img.crossOrigin = "anonymous";
         img.onload = () => resolve(img);
-        img.onerror = () => reject(new Error("Не удалось загрузить фото"));
-        img.src = TRUCK_PHOTO_URL;
+        img.onerror = () => {
+          // финальный фолбек — без crossOrigin (canvas будет «tainted», но drawImage сработает)
+          const img2 = new Image();
+          img2.onload = () => resolve(img2);
+          img2.onerror = () => reject(new Error("Не удалось загрузить фото"));
+          img2.src = TRUCK_PHOTO_URL;
+        };
+        img.src = photoSrc;
       });
 
       // Расчёт высот блоков (создадим временный canvas для измерения)
