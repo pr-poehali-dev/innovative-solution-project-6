@@ -7,6 +7,8 @@ const HeroLeadForm = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [cargo, setCargo] = useState("");
+  const [fromAddr, setFromAddr] = useState("");
+  const [toAddr, setToAddr] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -14,16 +16,23 @@ const HeroLeadForm = () => {
     if (!name.trim() || !phone.trim()) return;
     setStatus("loading");
     try {
+      const commentParts = [
+        cargo && `Груз: ${cargo}`,
+        fromAddr && `Откуда: ${fromAddr}`,
+        toAddr && `Куда: ${toAddr}`,
+      ].filter(Boolean);
       const res = await fetch(SUBMIT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, comment: cargo }),
+        body: JSON.stringify({ name, phone, comment: commentParts.join(" · ") }),
       });
       if (res.ok) {
         setStatus("success");
         setName("");
         setPhone("");
         setCargo("");
+        setFromAddr("");
+        setToAddr("");
       } else {
         setStatus("error");
       }
@@ -62,21 +71,26 @@ const HeroLeadForm = () => {
           <div className="absolute -top-16 -right-16 w-32 h-32 rounded-full bg-accent/20 blur-3xl pointer-events-none" />
 
           <div className="relative">
+            <p className="text-[11px] text-white/60 mb-2 leading-snug">
+              Заполните форму — перезвоним за 5 минут, рассчитаем стоимость и подберём технику.
+            </p>
             <form onSubmit={handleSubmit} className="flex flex-col gap-2">
               <div className="flex flex-col sm:flex-row gap-2">
-                <div className="relative flex-1">
-                  <Icon name="User" size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
+                <label className="relative flex-1 block">
+                  <span className="block text-[10px] font-bold text-accent/80 mb-1 ml-1 uppercase tracking-wider">Как к вам обращаться</span>
+                  <Icon name="User" size={14} className="absolute left-3 top-[34px] text-accent/70 pointer-events-none" />
                   <input
                     type="text"
-                    placeholder="Ваше имя"
+                    placeholder="Например: Алексей или ООО Стройсервис"
                     value={name}
                     onChange={e => setName(e.target.value)}
                     required
                     className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
                   />
-                </div>
-                <div className="relative flex-1">
-                  <Icon name="Phone" size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
+                </label>
+                <label className="relative flex-1 block">
+                  <span className="block text-[10px] font-bold text-accent/80 mb-1 ml-1 uppercase tracking-wider">Телефон для связи</span>
+                  <Icon name="Phone" size={14} className="absolute left-3 top-[34px] text-accent/70 pointer-events-none" />
                   <input
                     type="tel"
                     placeholder="+7 (___) ___-__-__"
@@ -85,17 +99,42 @@ const HeroLeadForm = () => {
                     required
                     className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
                   />
-                </div>
+                </label>
               </div>
-              <div className="relative">
-                <Icon name="Package" size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
+              <label className="relative block">
+                <span className="block text-[10px] font-bold text-accent/80 mb-1 ml-1 uppercase tracking-wider">Что нужно перевезти или поднять</span>
+                <Icon name="Package" size={14} className="absolute left-3 top-[34px] text-accent/70 pointer-events-none" />
                 <input
                   type="text"
-                  placeholder="Что перевозим?"
+                  placeholder="Например: ж/б плиты 5 т, контейнер, бытовка, металлопрокат"
                   value={cargo}
                   onChange={e => setCargo(e.target.value)}
                   className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
                 />
+              </label>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <label className="relative flex-1 block">
+                  <span className="block text-[10px] font-bold text-accent/80 mb-1 ml-1 uppercase tracking-wider">Откуда забрать</span>
+                  <Icon name="MapPin" size={14} className="absolute left-3 top-[34px] text-accent/70 pointer-events-none" />
+                  <input
+                    type="text"
+                    placeholder="Адрес погрузки"
+                    value={fromAddr}
+                    onChange={e => setFromAddr(e.target.value)}
+                    className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
+                  />
+                </label>
+                <label className="relative flex-1 block">
+                  <span className="block text-[10px] font-bold text-accent/80 mb-1 ml-1 uppercase tracking-wider">Куда доставить</span>
+                  <Icon name="Flag" size={14} className="absolute left-3 top-[34px] text-accent/70 pointer-events-none" />
+                  <input
+                    type="text"
+                    placeholder="Адрес разгрузки"
+                    value={toAddr}
+                    onChange={e => setToAddr(e.target.value)}
+                    className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
+                  />
+                </label>
               </div>
 
               <button
