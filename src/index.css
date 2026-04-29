@@ -188,4 +188,29 @@
   .animate-glow {
     animation: glow 3s ease-in-out infinite;
   }
+
+  @keyframes emeraldPulse {
+    0%,
+    100% {
+      opacity: 0.25;
+      filter: blur(8px);
+    }
+    50% {
+      opacity: 0.55;
+      filter: blur(14px);
+    }
+  }
+
+  .emerald-pulse {
+    animation: emeraldPulse 3.5s ease-in-out infinite;
+  }
+
+  .group:hover .emerald-pulse {
+    animation: none;
+    opacity: 0.95;
+    filter: blur(12px);
+    transition:
+      opacity 0.5s ease,
+      filter 0.5s ease;
+  }
 }

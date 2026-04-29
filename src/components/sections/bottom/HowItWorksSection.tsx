@@ -52,10 +52,10 @@ const HowItWorksSection = ({ visibleSections }: HowItWorksSectionProps) => {
                 className={`group relative transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{ transitionDelay: `${i * 200}ms` }}
               >
-                {/* Внешнее изумрудно-бирюзовое свечение */}
+                {/* Внешнее изумрудно-бирюзовое свечение с пульсацией */}
                 <div
-                  className="absolute -inset-0.5 rounded-2xl opacity-30 group-hover:opacity-90 blur-md transition-opacity duration-500 pointer-events-none"
-                  style={{ background: "linear-gradient(135deg, #2dd4bf 0%, #10b981 50%, #0d9488 100%)" }}
+                  className="emerald-pulse absolute -inset-0.5 rounded-2xl pointer-events-none"
+                  style={{ background: "linear-gradient(135deg, #2dd4bf 0%, #10b981 50%, #0d9488 100%)", animationDelay: `${i * 0.7}s` }}
                 />
 
                 {/* Градиентная рамка */}
