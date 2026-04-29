@@ -58,12 +58,31 @@ const TruckCard = () => {
     }
     setDownloading(true);
     try {
+      // ждём, чтобы все картинки внутри карточки точно были декодированы браузером
+      const imgs = Array.from(captureRef.current.querySelectorAll("img"));
+      await Promise.all(
+        imgs.map(
+          (img) =>
+            new Promise<void>((resolve) => {
+              if (img.complete && img.naturalWidth > 0) {
+                resolve();
+              } else {
+                img.onload = () => resolve();
+                img.onerror = () => resolve();
+              }
+            })
+        )
+      );
+      // дополнительная пауза для гарантии раскладки
+      await new Promise((r) => setTimeout(r, 200));
+
       const canvas = await html2canvas(captureRef.current, {
         backgroundColor: "#0a0a0a",
         scale: 2,
         useCORS: true,
         allowTaint: true,
         logging: false,
+        imageTimeout: 15000,
       });
       const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
       const link = document.createElement("a");
@@ -173,11 +192,16 @@ const TruckCard = () => {
       <div style={{ marginBottom: 20 }}>{renderTable(truck.rows)}</div>
 
       {/* Фото */}
-      <div style={{ marginBottom: 20, borderRadius: 12, overflow: "hidden", border: "2px solid rgba(45,212,191,0.4)" }}>
+      <div style={{ marginBottom: 20, borderRadius: 10, border: "2px solid rgba(45,212,191,0.4)", padding: 4, background: "#0a0a0a" }}>
         {photoData ? (
-          <img src={photoData} alt="FAW J6P-390" style={{ width: "100%", height: "auto", display: "block" }} />
+          <img
+            src={photoData}
+            alt="FAW J6P-390"
+            crossOrigin="anonymous"
+            style={{ width: "100%", height: "auto", display: "block", borderRadius: 6 }}
+          />
         ) : (
-          <div style={{ width: "100%", aspectRatio: "16/9", background: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.4)", fontSize: 14 }}>
+          <div style={{ width: "100%", height: 320, background: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.4)", fontSize: 14, borderRadius: 6 }}>
             {photoError ? "Не удалось загрузить фото" : "Загрузка фото…"}
           </div>
         )}
