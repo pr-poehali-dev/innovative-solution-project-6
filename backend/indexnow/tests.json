@@ -1,0 +1,26 @@
+{
+  "tests": [
+    {
+      "name": "OPTIONS CORS",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Send single URL",
+      "method": "POST",
+      "path": "/",
+      "body": {"urls": ["https://xn--80aafz3bni.xn--p1ai/"]},
+      "expectedStatus": 200,
+      "expectedBody": {"sent_urls": 1},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Empty urls returns 400",
+      "method": "POST",
+      "path": "/",
+      "body": {"urls": []},
+      "expectedStatus": 400
+    }
+  ]
+}
