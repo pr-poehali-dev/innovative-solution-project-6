@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { toJpeg } from "html-to-image";
+import html2canvas from "html2canvas";
 import Icon from "@/components/ui/icon";
 
 const TRUCK_PHOTO_URL = "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/a2338211-12bc-4ec4-8d21-b22ac64d6d1b.jpg";
@@ -27,7 +27,7 @@ const driver = {
 };
 
 const TruckCard = () => {
-  const cardRef = useRef<HTMLDivElement>(null);
+  const captureRef = useRef<HTMLDivElement>(null);
   const [downloading, setDownloading] = useState(false);
   const [photoData, setPhotoData] = useState<string>("");
   const [photoError, setPhotoError] = useState(false);
@@ -51,15 +51,21 @@ const TruckCard = () => {
   }, []);
 
   const handleDownload = async () => {
-    if (!cardRef.current) return;
+    if (!captureRef.current) return;
+    if (!photoData) {
+      alert("Подождите, фото ещё загружается...");
+      return;
+    }
     setDownloading(true);
     try {
-      const dataUrl = await toJpeg(cardRef.current, {
-        quality: 0.98,
+      const canvas = await html2canvas(captureRef.current, {
         backgroundColor: "#0a0a0a",
-        pixelRatio: 2,
-        cacheBust: true,
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        logging: false,
       });
+      const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
       const link = document.createElement("a");
       link.download = "kartochka-faw-j6p-390.jpg";
       link.href = dataUrl;
@@ -71,8 +77,9 @@ const TruckCard = () => {
     }
   };
 
+  // Стили для таблицы — простые, без blur и градиентов на тексте
   const renderTable = (rows: string[][]) => (
-    <table className="w-full border-collapse" style={{ borderRadius: 12, overflow: "hidden" }}>
+    <table style={{ width: "100%", borderCollapse: "collapse", borderRadius: 10, overflow: "hidden", border: "1px solid rgba(45,212,191,0.3)" }}>
       <tbody>
         {rows.map(([label, value], i) => (
           <tr key={i}>
@@ -85,7 +92,7 @@ const TruckCard = () => {
                 width: "45%",
                 verticalAlign: "middle",
                 fontSize: 13,
-                color: "rgba(255,255,255,0.6)",
+                color: "rgba(255,255,255,0.7)",
                 fontWeight: 500,
               }}
             >
@@ -111,13 +118,125 @@ const TruckCard = () => {
     </table>
   );
 
+  // Карточка для рендера в JPG — без blur, без пульсаций, без градиентного текста
+  const renderCard = () => (
+    <div
+      style={{
+        width: 640,
+        background: "#0a0a0a",
+        border: "2px solid rgba(45,212,191,0.5)",
+        borderRadius: 16,
+        padding: 28,
+        fontFamily: "Manrope, Arial, sans-serif",
+        boxSizing: "border-box",
+      }}
+    >
+      {/* Шапка */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18, paddingBottom: 14, borderBottom: "1px solid rgba(45,212,191,0.25)" }}>
+        <div>
+          <div style={{ fontSize: 11, fontWeight: 900, letterSpacing: 4, color: "#5eead4", marginBottom: 4 }}>
+            ООО «ФАВОРИТ»
+          </div>
+          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}>аренда манипуляторов · Нижний Новгород</div>
+        </div>
+        <div style={{ textAlign: "right" }}>
+          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}>Сайт</div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "#f5d060" }}>фаварит.рф</div>
+        </div>
+      </div>
+
+      {/* Бейдж + заголовок */}
+      <div style={{ textAlign: "center", marginBottom: 18 }}>
+        <div
+          style={{
+            display: "inline-block",
+            padding: "4px 12px",
+            borderRadius: 999,
+            background: "rgba(45,212,191,0.12)",
+            border: "1px solid rgba(45,212,191,0.4)",
+            fontSize: 10,
+            fontWeight: 700,
+            letterSpacing: 2,
+            textTransform: "uppercase",
+            color: "#5eead4",
+            marginBottom: 12,
+          }}
+        >
+          Карточка техники
+        </div>
+        <h1 style={{ fontSize: 26, fontWeight: 900, color: "#fff", margin: 0, letterSpacing: "0.02em" }}>
+          FAW J6P-390 + КМУ
+        </h1>
+      </div>
+
+      {/* Таблица техники */}
+      <div style={{ marginBottom: 20 }}>{renderTable(truck.rows)}</div>
+
+      {/* Фото */}
+      <div style={{ marginBottom: 20, borderRadius: 12, overflow: "hidden", border: "2px solid rgba(45,212,191,0.4)" }}>
+        {photoData ? (
+          <img src={photoData} alt="FAW J6P-390" style={{ width: "100%", height: "auto", display: "block" }} />
+        ) : (
+          <div style={{ width: "100%", aspectRatio: "16/9", background: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.4)", fontSize: 14 }}>
+            {photoError ? "Не удалось загрузить фото" : "Загрузка фото…"}
+          </div>
+        )}
+      </div>
+
+      {/* Бейдж водителя */}
+      <div style={{ textAlign: "center", marginBottom: 12 }}>
+        <div
+          style={{
+            display: "inline-block",
+            padding: "4px 12px",
+            borderRadius: 999,
+            background: "rgba(45,212,191,0.12)",
+            border: "1px solid rgba(45,212,191,0.4)",
+            fontSize: 10,
+            fontWeight: 700,
+            letterSpacing: 2,
+            textTransform: "uppercase",
+            color: "#5eead4",
+          }}
+        >
+          Карточка водителя
+        </div>
+      </div>
+
+      {/* Таблица водителя */}
+      <div style={{ marginBottom: 20 }}>{renderTable(driver.rows)}</div>
+
+      {/* Контакты */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, paddingTop: 16, borderTop: "1px solid rgba(45,212,191,0.25)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, padding: 10, borderRadius: 10, background: "rgba(45,212,191,0.07)" }}>
+          <div style={{ width: 32, height: 32, borderRadius: 8, background: "rgba(45,212,191,0.18)", border: "1px solid rgba(45,212,191,0.5)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 16 }}>
+            ☎
+          </div>
+          <div>
+            <div style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 1 }}>Телефон</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: "#fff" }}>+7 960 188-30-84</div>
+          </div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, padding: 10, borderRadius: 10, background: "rgba(245,208,96,0.07)" }}>
+          <div style={{ width: 32, height: 32, borderRadius: 8, background: "rgba(245,208,96,0.18)", border: "1px solid rgba(245,208,96,0.5)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 16 }}>
+            🌐
+          </div>
+          <div>
+            <div style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 1 }}>Сайт</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: "#f5d060" }}>фаварит.рф</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen py-6 px-4" style={{ background: "linear-gradient(135deg, #0a0a0a 0%, #18181b 50%, #0a0a0a 100%)" }}>
       {/* Кнопки управления */}
       <div className="max-w-[640px] mx-auto mb-5 flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch">
         <button
           onClick={handleDownload}
-          disabled={downloading}
+          disabled={downloading || !photoData}
           className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-black text-sm shadow-xl disabled:opacity-60"
           style={{ background: "linear-gradient(135deg, #5eead4 0%, #2dd4bf 50%, #10b981 100%)", boxShadow: "0 8px 24px rgba(45,212,191,0.4)" }}
         >
@@ -125,6 +244,11 @@ const TruckCard = () => {
             <>
               <Icon name="Loader2" size={16} className="animate-spin" />
               Готовлю файл...
+            </>
+          ) : !photoData ? (
+            <>
+              <Icon name="Loader2" size={16} className="animate-spin" />
+              Загружаю фото...
             </>
           ) : (
             <>
@@ -142,111 +266,9 @@ const TruckCard = () => {
         </a>
       </div>
 
-      {/* Карточка с пульсирующей подсветкой */}
-      <div className="max-w-[640px] mx-auto relative">
-        <div
-          className="emerald-pulse absolute -inset-1 rounded-2xl pointer-events-none"
-          style={{ background: "linear-gradient(135deg, #2dd4bf 0%, #10b981 50%, #0d9488 100%)" }}
-        />
-        <div
-          className="relative rounded-2xl p-[1.5px]"
-          style={{ background: "linear-gradient(135deg, rgba(45,212,191,0.85) 0%, rgba(16,185,129,0.3) 50%, rgba(13,148,136,0.85) 100%)" }}
-        >
-          <div
-            ref={cardRef}
-            className="rounded-2xl p-5 sm:p-7 relative overflow-hidden"
-            style={{
-              background: "linear-gradient(135deg, #0a0a0a 0%, #111113 50%, #0a0a0a 100%)",
-              fontFamily: "Manrope, system-ui, sans-serif",
-            }}
-          >
-            {/* Декоративное свечение в углах */}
-            <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full pointer-events-none" style={{ background: "rgba(45,212,191,0.18)", filter: "blur(60px)" }} />
-            <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full pointer-events-none" style={{ background: "rgba(16,185,129,0.12)", filter: "blur(60px)" }} />
-
-            {/* Шапка с логотипом */}
-            <div className="relative flex items-center justify-between gap-3 mb-5 pb-4" style={{ borderBottom: "1px solid rgba(45,212,191,0.2)" }}>
-              <div>
-                <div className="text-[10px] font-black tracking-[0.2em] mb-1" style={{ color: "#5eead4" }}>
-                  ООО «ФАВОРИТ»
-                </div>
-                <div className="text-[11px] text-white/50">аренда манипуляторов · Нижний Новгород</div>
-              </div>
-              <div className="text-right">
-                <div className="text-[11px] text-white/50">Сайт</div>
-                <div className="text-sm font-bold" style={{ color: "#f5d060" }}>
-                  фаварит.рф
-                </div>
-              </div>
-            </div>
-
-            {/* Заголовок 1 */}
-            <div className="relative mb-4 text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-3" style={{ background: "rgba(45,212,191,0.1)", border: "1px solid rgba(45,212,191,0.3)" }}>
-                <Icon name="Truck" size={12} style={{ color: "#5eead4" }} />
-                <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: "#5eead4" }}>Карточка техники</span>
-              </div>
-              <h1
-                className="font-black text-2xl sm:text-3xl bg-clip-text text-transparent"
-                style={{ backgroundImage: "linear-gradient(135deg, #fff 0%, #5eead4 100%)", letterSpacing: "0.02em" }}
-              >
-                FAW J6P-390 + КМУ
-              </h1>
-            </div>
-
-            {/* Таблица характеристик */}
-            <div className="relative mb-5">{renderTable(truck.rows)}</div>
-
-            {/* Фото машины */}
-            <div className="relative mb-5 rounded-xl overflow-hidden" style={{ border: "1.5px solid rgba(45,212,191,0.3)", boxShadow: "0 8px 24px rgba(45,212,191,0.15)" }}>
-              {photoData ? (
-                <img
-                  src={photoData}
-                  alt="FAW J6P-390 манипулятор"
-                  className="w-full h-auto"
-                  style={{ display: "block" }}
-                />
-              ) : (
-                <div className="w-full flex items-center justify-center text-white/40 text-sm" style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.03)" }}>
-                  {photoError ? "Не удалось загрузить фото" : "Загрузка фото…"}
-                </div>
-              )}
-            </div>
-
-            {/* Заголовок 2 */}
-            <div className="relative mb-3 text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-2" style={{ background: "rgba(45,212,191,0.1)", border: "1px solid rgba(45,212,191,0.3)" }}>
-                <Icon name="UserCheck" size={12} style={{ color: "#5eead4" }} />
-                <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: "#5eead4" }}>Карточка водителя</span>
-              </div>
-            </div>
-
-            {/* Таблица водителя */}
-            <div className="relative mb-5">{renderTable(driver.rows)}</div>
-
-            {/* Подвал с контактами */}
-            <div className="relative pt-4 grid grid-cols-1 sm:grid-cols-2 gap-3" style={{ borderTop: "1px solid rgba(45,212,191,0.2)" }}>
-              <div className="flex items-center gap-2.5 p-2.5 rounded-lg" style={{ background: "rgba(45,212,191,0.06)" }}>
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(45,212,191,0.15)", border: "1px solid rgba(45,212,191,0.4)" }}>
-                  <Icon name="Phone" size={14} style={{ color: "#5eead4" }} />
-                </div>
-                <div className="min-w-0">
-                  <div className="text-[9px] text-white/40 uppercase tracking-wider">Телефон</div>
-                  <div className="text-sm font-bold text-white">+7 960 188-30-84</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2.5 p-2.5 rounded-lg" style={{ background: "rgba(245,208,96,0.06)" }}>
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(245,208,96,0.15)", border: "1px solid rgba(245,208,96,0.4)" }}>
-                  <Icon name="Globe" size={14} style={{ color: "#f5d060" }} />
-                </div>
-                <div className="min-w-0">
-                  <div className="text-[9px] text-white/40 uppercase tracking-wider">Сайт</div>
-                  <div className="text-sm font-bold" style={{ color: "#f5d060" }}>фаварит.рф</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Видимая карточка для просмотра */}
+      <div className="max-w-[640px] mx-auto">
+        <div ref={captureRef}>{renderCard()}</div>
       </div>
 
       <p className="max-w-[640px] mx-auto mt-4 text-center text-xs text-white/40">
