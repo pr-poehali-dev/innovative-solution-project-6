@@ -1,7 +1,5 @@
-import { useRef, useState, useEffect } from "react";
+import { useState } from "react";
 import Icon from "@/components/ui/icon";
-
-const TRUCK_PHOTO_URL = "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/a2338211-12bc-4ec4-8d21-b22ac64d6d1b.jpg";
 
 const truckRows: [string, string][] = [
   ["Машина (марка ТС)", "FAW J6P-390"],
@@ -42,7 +40,6 @@ const drawRoundedRect = (
   ctx.closePath();
 };
 
-// Перенос длинных строк по ширине
 const wrapText = (
   ctx: CanvasRenderingContext2D,
   text: string,
@@ -75,10 +72,8 @@ const drawTable = (
   const valueW = width - labelW;
   const padX = 14;
   const padY = 12;
-  const rowGap = 0;
   const lineH = 18;
 
-  // Сначала рассчитаем высоты строк
   const rowHeights: number[] = [];
   for (const [label, value] of rows) {
     ctx.font = "500 13px Arial, sans-serif";
@@ -88,15 +83,13 @@ const drawTable = (
     const maxLines = Math.max(labelLines.length, valueLines.length);
     rowHeights.push(maxLines * lineH + padY * 2);
   }
-  const totalH = rowHeights.reduce((a, b) => a + b + rowGap, 0);
+  const totalH = rowHeights.reduce((a, b) => a + b, 0);
 
-  // Внешняя обводка
   ctx.strokeStyle = "rgba(45,212,191,0.3)";
   ctx.lineWidth = 1;
   drawRoundedRect(ctx, x, y, width, totalH, 10);
   ctx.stroke();
 
-  // Клипуем для скруглённых углов
   ctx.save();
   drawRoundedRect(ctx, x, y, width, totalH, 10);
   ctx.clip();
@@ -106,14 +99,11 @@ const drawTable = (
     const [label, value] = rows[i];
     const h = rowHeights[i];
 
-    // Фон левой ячейки
     ctx.fillStyle = "rgba(45,212,191,0.07)";
     ctx.fillRect(x, curY, labelW, h);
-    // Фон правой
     ctx.fillStyle = "rgba(16,185,129,0.04)";
     ctx.fillRect(x + labelW, curY, valueW, h);
 
-    // Разделитель снизу
     if (i < rows.length - 1) {
       ctx.strokeStyle = "rgba(45,212,191,0.18)";
       ctx.beginPath();
@@ -121,14 +111,12 @@ const drawTable = (
       ctx.lineTo(x + width, curY + h);
       ctx.stroke();
     }
-    // Вертикальный разделитель
     ctx.strokeStyle = "rgba(45,212,191,0.18)";
     ctx.beginPath();
     ctx.moveTo(x + labelW, curY);
     ctx.lineTo(x + labelW, curY + h);
     ctx.stroke();
 
-    // Label
     ctx.fillStyle = "rgba(255,255,255,0.7)";
     ctx.font = "500 13px Arial, sans-serif";
     ctx.textAlign = "left";
@@ -138,7 +126,6 @@ const drawTable = (
       ctx.fillText(ln, x + padX, curY + padY + j * lineH);
     });
 
-    // Value
     ctx.fillStyle = "#ffffff";
     ctx.font = "700 14px Arial, sans-serif";
     ctx.textAlign = "center";
@@ -147,69 +134,27 @@ const drawTable = (
       ctx.fillText(ln, x + labelW + valueW / 2, curY + padY + j * lineH);
     });
 
-    curY += h + rowGap;
+    curY += h;
   }
   ctx.restore();
   return totalH;
 };
 
 const TruckCard = () => {
-  const previewRef = useRef<HTMLDivElement>(null);
   const [downloading, setDownloading] = useState(false);
-  const [photoLoaded, setPhotoLoaded] = useState(false);
-  const [photoError, setPhotoError] = useState(false);
-
-  useEffect(() => {
-    // Сначала пробуем простую загрузку (без CORS) — для предпросмотра
-    const img = new Image();
-    img.onload = () => setPhotoLoaded(true);
-    img.onerror = () => setPhotoError(true);
-    img.src = TRUCK_PHOTO_URL;
-  }, []);
 
   const handleDownload = async () => {
     setDownloading(true);
     try {
-      // === Рендеринг через нативный Canvas API ===
-      const W = 720; // ширина итоговой картинки (logical)
+      const W = 720;
       const padding = 28;
       const innerW = W - padding * 2;
 
-      // Загружаем фото через fetch+blob (обходит проблему с CORS для canvas)
-      let photoSrc = TRUCK_PHOTO_URL;
-      try {
-        const resp = await fetch(TRUCK_PHOTO_URL, { mode: "cors" });
-        if (resp.ok) {
-          const blob = await resp.blob();
-          photoSrc = URL.createObjectURL(blob);
-        }
-      } catch {
-        // если fetch не сработал — попробуем загрузить как обычное Image
-      }
-
-      const photo = await new Promise<HTMLImageElement>((resolve, reject) => {
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        img.onload = () => resolve(img);
-        img.onerror = () => {
-          // финальный фолбек — без crossOrigin (canvas будет «tainted», но drawImage сработает)
-          const img2 = new Image();
-          img2.onload = () => resolve(img2);
-          img2.onerror = () => reject(new Error("Не удалось загрузить фото"));
-          img2.src = TRUCK_PHOTO_URL;
-        };
-        img.src = photoSrc;
-      });
-
-      // Расчёт высот блоков (создадим временный canvas для измерения)
       const measure = document.createElement("canvas");
       const mctx = measure.getContext("2d")!;
 
-      // Шапка
       const headerH = 68;
-      // Бейдж + заголовок (техника)
       const titleBlock1 = 80;
-      // Таблица техники — измеряем
       const tbl1H = (() => {
         let total = 0;
         for (const [label, value] of truckRows) {
@@ -221,11 +166,7 @@ const TruckCard = () => {
         }
         return total;
       })();
-      // Фото
-      const photoBoxH = (innerW * photo.naturalHeight) / photo.naturalWidth + 8;
-      // Бейдж водителя
       const titleBlock2 = 44;
-      // Таблица водителя
       const tbl2H = (() => {
         let total = 0;
         for (const [label, value] of driverRows) {
@@ -237,22 +178,19 @@ const TruckCard = () => {
         }
         return total;
       })();
-      // Контакты
-      const contactsH = 80;
+      const contactsH = 130;
 
-      const gaps = 18 * 6;
+      const gaps = 18 * 5;
       const H =
         padding * 2 +
         headerH +
         titleBlock1 +
         tbl1H +
-        photoBoxH +
         titleBlock2 +
         tbl2H +
         contactsH +
         gaps;
 
-      // Главный canvas (с retina x2)
       const scale = 2;
       const canvas = document.createElement("canvas");
       canvas.width = W * scale;
@@ -276,8 +214,7 @@ const TruckCard = () => {
 
       let cy = padding;
 
-      // === Шапка ===
-      // Левая часть
+      // Шапка
       ctx.fillStyle = "#5eead4";
       ctx.font = "900 11px Arial, sans-serif";
       ctx.textAlign = "left";
@@ -287,7 +224,6 @@ const TruckCard = () => {
       ctx.font = "400 11px Arial, sans-serif";
       ctx.fillText("аренда манипуляторов · Нижний Новгород", padding, cy + 18);
 
-      // Правая часть
       ctx.fillStyle = "rgba(255,255,255,0.5)";
       ctx.textAlign = "right";
       ctx.font = "400 11px Arial, sans-serif";
@@ -297,7 +233,6 @@ const TruckCard = () => {
       ctx.fillText("фаварит.рф", W - padding, cy + 16);
 
       cy += 44;
-      // Разделитель
       ctx.strokeStyle = "rgba(45,212,191,0.25)";
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -306,7 +241,7 @@ const TruckCard = () => {
       ctx.stroke();
       cy += 18;
 
-      // === Бейдж + заголовок 1 ===
+      // Бейдж + заголовок 1
       const badge1Text = "КАРТОЧКА ТЕХНИКИ";
       ctx.font = "700 10px Arial, sans-serif";
       const b1w = ctx.measureText(badge1Text).width + 24;
@@ -330,28 +265,11 @@ const TruckCard = () => {
       ctx.fillText("FAW J6P-390 + КМУ", W / 2, cy);
       cy += 38;
 
-      // === Таблица техники ===
+      // Таблица техники
       const t1H = drawTable(ctx, truckRows, padding, cy, innerW);
       cy += t1H + 18;
 
-      // === Фото ===
-      const photoX = padding;
-      const photoW = innerW;
-      const photoH = (photoW * photo.naturalHeight) / photo.naturalWidth;
-      // Рамка
-      ctx.strokeStyle = "rgba(45,212,191,0.4)";
-      ctx.lineWidth = 2;
-      drawRoundedRect(ctx, photoX, cy, photoW, photoH + 8, 10);
-      ctx.stroke();
-      // Картинка с клипом
-      ctx.save();
-      drawRoundedRect(ctx, photoX + 4, cy + 4, photoW - 8, photoH, 6);
-      ctx.clip();
-      ctx.drawImage(photo, photoX + 4, cy + 4, photoW - 8, photoH);
-      ctx.restore();
-      cy += photoH + 8 + 18;
-
-      // === Бейдж водителя ===
+      // Бейдж водителя
       const badge2Text = "КАРТОЧКА ВОДИТЕЛЯ";
       ctx.font = "700 10px Arial, sans-serif";
       const b2w = ctx.measureText(badge2Text).width + 24;
@@ -368,11 +286,11 @@ const TruckCard = () => {
       ctx.fillText(badge2Text, W / 2, cy + 11);
       cy += 32;
 
-      // === Таблица водителя ===
+      // Таблица водителя
       const t2H = drawTable(ctx, driverRows, padding, cy, innerW);
       cy += t2H + 18;
 
-      // === Контакты ===
+      // Контакты
       ctx.strokeStyle = "rgba(45,212,191,0.25)";
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -381,35 +299,61 @@ const TruckCard = () => {
       ctx.stroke();
       cy += 14;
 
-      const contactW = (innerW - 10) / 2;
-      const contactH = 50;
+      const colW = (innerW - 10) / 2;
+      const cardH = 56;
 
-      // Телефон
-      ctx.fillStyle = "rgba(45,212,191,0.08)";
-      drawRoundedRect(ctx, padding, cy, contactW, contactH, 10);
+      // Директор
+      ctx.fillStyle = "rgba(245,208,96,0.07)";
+      drawRoundedRect(ctx, padding, cy, colW, cardH, 10);
       ctx.fill();
+      ctx.strokeStyle = "rgba(245,208,96,0.3)";
+      ctx.lineWidth = 1;
+      drawRoundedRect(ctx, padding, cy, colW, cardH, 10);
+      ctx.stroke();
       ctx.fillStyle = "rgba(255,255,255,0.4)";
-      ctx.font = "500 9px Arial, sans-serif";
+      ctx.font = "700 9px Arial, sans-serif";
       ctx.textAlign = "left";
       ctx.textBaseline = "top";
-      ctx.fillText("ТЕЛЕФОН", padding + 14, cy + 10);
+      ctx.fillText("ДИРЕКТОР", padding + 14, cy + 10);
+      ctx.fillStyle = "#f5d060";
+      ctx.font = "700 16px Arial, sans-serif";
+      ctx.fillText("+7 960 169-09-90", padding + 14, cy + 26);
+
+      // Диспетчер
+      const col2X = padding + colW + 10;
+      ctx.fillStyle = "rgba(45,212,191,0.07)";
+      drawRoundedRect(ctx, col2X, cy, colW, cardH, 10);
+      ctx.fill();
+      ctx.strokeStyle = "rgba(45,212,191,0.3)";
+      ctx.lineWidth = 1;
+      drawRoundedRect(ctx, col2X, cy, colW, cardH, 10);
+      ctx.stroke();
+      ctx.fillStyle = "rgba(255,255,255,0.4)";
+      ctx.font = "700 9px Arial, sans-serif";
+      ctx.fillText("ДИСПЕТЧЕР", col2X + 14, cy + 10);
       ctx.fillStyle = "#fff";
-      ctx.font = "700 14px Arial, sans-serif";
-      ctx.fillText("+7 960 188-30-84", padding + 14, cy + 24);
+      ctx.font = "700 16px Arial, sans-serif";
+      ctx.fillText("+7 960 188-30-84", col2X + 14, cy + 26);
+
+      cy += cardH + 10;
 
       // Сайт
-      const siteX = padding + contactW + 10;
-      ctx.fillStyle = "rgba(245,208,96,0.08)";
-      drawRoundedRect(ctx, siteX, cy, contactW, contactH, 10);
+      ctx.fillStyle = "rgba(45,212,191,0.07)";
+      drawRoundedRect(ctx, padding, cy, innerW, 36, 10);
       ctx.fill();
-      ctx.fillStyle = "rgba(255,255,255,0.4)";
-      ctx.font = "500 9px Arial, sans-serif";
-      ctx.fillText("САЙТ", siteX + 14, cy + 10);
+      ctx.strokeStyle = "rgba(45,212,191,0.3)";
+      drawRoundedRect(ctx, padding, cy, innerW, 36, 10);
+      ctx.stroke();
+      ctx.fillStyle = "rgba(255,255,255,0.5)";
+      ctx.font = "500 11px Arial, sans-serif";
+      ctx.textAlign = "left";
+      ctx.fillText("Подробнее на сайте:", padding + 14, cy + 12);
       ctx.fillStyle = "#f5d060";
-      ctx.font = "700 14px Arial, sans-serif";
-      ctx.fillText("фаварит.рф", siteX + 14, cy + 24);
+      ctx.font = "700 13px Arial, sans-serif";
+      ctx.textAlign = "right";
+      ctx.fillText("фаварит.рф", W - padding - 14, cy + 11);
 
-      // === Скачивание ===
+      // Скачивание
       const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
       const link = document.createElement("a");
       link.download = "kartochka-faw-j6p-390.jpg";
@@ -422,7 +366,6 @@ const TruckCard = () => {
     }
   };
 
-  // Стили для таблицы предпросмотра
   const renderTable = (rows: [string, string][]) => (
     <table style={{ width: "100%", borderCollapse: "collapse", borderRadius: 10, overflow: "hidden", border: "1px solid rgba(45,212,191,0.3)" }}>
       <tbody>
@@ -465,11 +408,10 @@ const TruckCard = () => {
 
   return (
     <div className="min-h-screen py-6 px-4" style={{ background: "linear-gradient(135deg, #0a0a0a 0%, #18181b 50%, #0a0a0a 100%)" }}>
-      {/* Кнопки управления */}
       <div className="max-w-[640px] mx-auto mb-5 flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch">
         <button
           onClick={handleDownload}
-          disabled={downloading || !photoLoaded}
+          disabled={downloading}
           className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-black text-sm shadow-xl disabled:opacity-60"
           style={{ background: "linear-gradient(135deg, #5eead4 0%, #2dd4bf 50%, #10b981 100%)", boxShadow: "0 8px 24px rgba(45,212,191,0.4)" }}
         >
@@ -477,11 +419,6 @@ const TruckCard = () => {
             <>
               <Icon name="Loader2" size={16} className="animate-spin" />
               Готовлю файл...
-            </>
-          ) : !photoLoaded ? (
-            <>
-              <Icon name="Loader2" size={16} className="animate-spin" />
-              {photoError ? "Ошибка загрузки фото" : "Загружаю фото..."}
             </>
           ) : (
             <>
@@ -499,9 +436,8 @@ const TruckCard = () => {
         </a>
       </div>
 
-      {/* Предпросмотр карточки */}
-      <div ref={previewRef} className="max-w-[640px] mx-auto" style={{ background: "#0a0a0a", border: "2px solid rgba(45,212,191,0.5)", borderRadius: 16, padding: 28, fontFamily: "Arial, sans-serif" }}>
-        {/* Шапка */}
+      {/* Предпросмотр */}
+      <div className="max-w-[640px] mx-auto" style={{ background: "#0a0a0a", border: "2px solid rgba(45,212,191,0.5)", borderRadius: 16, padding: 28, fontFamily: "Arial, sans-serif" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18, paddingBottom: 14, borderBottom: "1px solid rgba(45,212,191,0.25)" }}>
           <div>
             <div style={{ fontSize: 11, fontWeight: 900, letterSpacing: 4, color: "#5eead4", marginBottom: 4 }}>ООО «ФАВОРИТ»</div>
@@ -522,16 +458,6 @@ const TruckCard = () => {
 
         <div style={{ marginBottom: 20 }}>{renderTable(truckRows)}</div>
 
-        <div style={{ marginBottom: 20, borderRadius: 10, border: "2px solid rgba(45,212,191,0.4)", padding: 4, background: "#0a0a0a" }}>
-          {photoLoaded ? (
-            <img src={TRUCK_PHOTO_URL} alt="FAW J6P-390" style={{ width: "100%", height: "auto", display: "block", borderRadius: 6 }} />
-          ) : (
-            <div style={{ width: "100%", height: 200, display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.4)", fontSize: 14 }}>
-              {photoError ? "Не удалось загрузить фото" : "Загрузка фото…"}
-            </div>
-          )}
-        </div>
-
         <div style={{ textAlign: "center", marginBottom: 12 }}>
           <div style={{ display: "inline-block", padding: "4px 12px", borderRadius: 999, background: "rgba(45,212,191,0.12)", border: "1px solid rgba(45,212,191,0.4)", fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", color: "#5eead4" }}>
             Карточка водителя
@@ -540,15 +466,21 @@ const TruckCard = () => {
 
         <div style={{ marginBottom: 20 }}>{renderTable(driverRows)}</div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, paddingTop: 16, borderTop: "1px solid rgba(45,212,191,0.25)" }}>
-          <div style={{ padding: 10, borderRadius: 10, background: "rgba(45,212,191,0.07)" }}>
-            <div style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 1 }}>Телефон</div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: "#fff", marginTop: 4 }}>+7 960 188-30-84</div>
+        {/* Контакты директора и диспетчера */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, paddingTop: 16, borderTop: "1px solid rgba(45,212,191,0.25)", marginBottom: 10 }}>
+          <div style={{ padding: 12, borderRadius: 10, background: "rgba(245,208,96,0.07)", border: "1px solid rgba(245,208,96,0.3)" }}>
+            <div style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 1, fontWeight: 700 }}>Директор</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: "#f5d060", marginTop: 6 }}>+7 960 169-09-90</div>
           </div>
-          <div style={{ padding: 10, borderRadius: 10, background: "rgba(245,208,96,0.07)" }}>
-            <div style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 1 }}>Сайт</div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: "#f5d060", marginTop: 4 }}>фаварит.рф</div>
+          <div style={{ padding: 12, borderRadius: 10, background: "rgba(45,212,191,0.07)", border: "1px solid rgba(45,212,191,0.3)" }}>
+            <div style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 1, fontWeight: 700 }}>Диспетчер</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: "#fff", marginTop: 6 }}>+7 960 188-30-84</div>
           </div>
+        </div>
+
+        <div style={{ padding: "10px 14px", borderRadius: 10, background: "rgba(45,212,191,0.07)", border: "1px solid rgba(45,212,191,0.3)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}>Подробнее на сайте:</span>
+          <span style={{ fontSize: 13, fontWeight: 700, color: "#f5d060" }}>фаварит.рф</span>
         </div>
       </div>
 
