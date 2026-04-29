@@ -76,27 +76,60 @@ const UseCasesSection = () => {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {useCases.map((item, i) => (
-            <div
-              key={i}
-              className="group p-5 sm:p-7 border border-accent/10 hover:border-accent/40 rounded-2xl bg-card/50 hover:bg-card/80 transition-all duration-300"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-11 h-11 rounded-xl bg-accent/10 group-hover:bg-accent/20 flex items-center justify-center transition-colors shrink-0">
-                  <Icon name={item.icon} size={20} className="text-accent" />
+            <div key={i} className="group relative">
+              {/* Внешнее изумрудно-бирюзовое свечение */}
+              <div
+                className="absolute -inset-0.5 rounded-2xl opacity-30 group-hover:opacity-90 blur-md transition-opacity duration-500 pointer-events-none"
+                style={{ background: "linear-gradient(135deg, #2dd4bf 0%, #10b981 50%, #0d9488 100%)" }}
+              />
+
+              {/* Градиентная рамка */}
+              <div
+                className="relative rounded-2xl p-[1.5px] h-full"
+                style={{ background: "linear-gradient(135deg, rgba(45,212,191,0.85) 0%, rgba(16,185,129,0.25) 50%, rgba(13,148,136,0.8) 100%)" }}
+              >
+                <div className="relative h-full flex flex-col p-5 sm:p-7 rounded-2xl bg-gradient-to-br from-zinc-950 via-background to-black overflow-hidden">
+                  {/* Внутреннее свечение в углу */}
+                  <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-emerald-400/15 blur-3xl pointer-events-none group-hover:bg-emerald-400/30 transition-colors duration-500" />
+
+                  <div className="relative flex items-center gap-3 mb-4">
+                    {/* Иконка с подсветкой */}
+                    <div className="relative shrink-0">
+                      <div
+                        className="absolute inset-0 rounded-xl blur-md opacity-50 group-hover:opacity-100 transition-opacity duration-500"
+                        style={{ background: "radial-gradient(circle, rgba(45,212,191,0.6) 0%, transparent 70%)" }}
+                      />
+                      <div
+                        className="relative w-11 h-11 rounded-xl flex items-center justify-center"
+                        style={{
+                          background: "linear-gradient(135deg, rgba(45,212,191,0.25) 0%, rgba(13,148,136,0.15) 100%)",
+                          border: "1.5px solid rgba(45,212,191,0.5)",
+                          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15), 0 4px 12px rgba(16,185,129,0.25)",
+                        }}
+                      >
+                        <Icon name={item.icon} size={20} style={{ color: "#5eead4" }} />
+                      </div>
+                    </div>
+                    <h3
+                      className="font-display font-black text-lg bg-clip-text text-transparent"
+                      style={{ backgroundImage: "linear-gradient(135deg, #fff 0%, #5eead4 100%)" }}
+                    >
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p className="relative text-white/70 text-sm leading-relaxed mb-5">{item.desc}</p>
+                  <ul className="relative space-y-1.5 mt-auto">
+                    {item.examples.map((ex, j) => (
+                      <li key={j} className="flex items-center gap-2 text-xs text-white/60">
+                        <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#5eead4", boxShadow: "0 0 6px rgba(94,234,212,0.6)" }} />
+                        {ex}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="font-display font-black text-lg text-white">{item.title}</h3>
               </div>
-              <p className="text-white/60 text-sm leading-relaxed mb-5">{item.desc}</p>
-              <ul className="space-y-1.5">
-                {item.examples.map((ex, j) => (
-                  <li key={j} className="flex items-center gap-2 text-xs text-white/50">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent/60 shrink-0" />
-                    {ex}
-                  </li>
-                ))}
-              </ul>
             </div>
           ))}
         </div>
