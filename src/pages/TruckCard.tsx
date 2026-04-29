@@ -85,11 +85,6 @@ const drawTable = (
   }
   const totalH = rowHeights.reduce((a, b) => a + b, 0);
 
-  ctx.strokeStyle = "rgba(45,212,191,0.3)";
-  ctx.lineWidth = 1;
-  drawRoundedRect(ctx, x, y, width, totalH, 10);
-  ctx.stroke();
-
   ctx.save();
   drawRoundedRect(ctx, x, y, width, totalH, 10);
   ctx.clip();
@@ -99,26 +94,26 @@ const drawTable = (
     const [label, value] = rows[i];
     const h = rowHeights[i];
 
-    ctx.fillStyle = "rgba(45,212,191,0.07)";
+    ctx.fillStyle = "rgba(45,212,191,0.18)";
     ctx.fillRect(x, curY, labelW, h);
-    ctx.fillStyle = "rgba(16,185,129,0.04)";
+    ctx.fillStyle = "rgba(255,255,255,0.95)";
     ctx.fillRect(x + labelW, curY, valueW, h);
 
     if (i < rows.length - 1) {
-      ctx.strokeStyle = "rgba(45,212,191,0.18)";
+      ctx.strokeStyle = "rgba(13,148,136,0.35)";
       ctx.beginPath();
       ctx.moveTo(x, curY + h);
       ctx.lineTo(x + width, curY + h);
       ctx.stroke();
     }
-    ctx.strokeStyle = "rgba(45,212,191,0.18)";
+    ctx.strokeStyle = "rgba(13,148,136,0.35)";
     ctx.beginPath();
     ctx.moveTo(x + labelW, curY);
     ctx.lineTo(x + labelW, curY + h);
     ctx.stroke();
 
-    ctx.fillStyle = "rgba(255,255,255,0.7)";
-    ctx.font = "500 13px Arial, sans-serif";
+    ctx.fillStyle = "#0f766e";
+    ctx.font = "700 13px Arial, sans-serif";
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
     const labelLines = wrapText(ctx, label, labelW - padX * 2);
@@ -126,7 +121,7 @@ const drawTable = (
       ctx.fillText(ln, x + padX, curY + padY + j * lineH);
     });
 
-    ctx.fillStyle = "#ffffff";
+    ctx.fillStyle = "#1f2937";
     ctx.font = "700 14px Arial, sans-serif";
     ctx.textAlign = "center";
     const valueLines = wrapText(ctx, value, valueW - padX * 2);
@@ -137,6 +132,13 @@ const drawTable = (
     curY += h;
   }
   ctx.restore();
+
+  // Внешняя обводка
+  ctx.strokeStyle = "rgba(13,148,136,0.45)";
+  ctx.lineWidth = 1;
+  drawRoundedRect(ctx, x, y, width, totalH, 10);
+  ctx.stroke();
+
   return totalH;
 };
 
@@ -198,16 +200,16 @@ const TruckCard = () => {
       const ctx = canvas.getContext("2d")!;
       ctx.scale(scale, scale);
 
-      // Фон
+      // Светлый фон
       const bgGrad = ctx.createLinearGradient(0, 0, W, H);
-      bgGrad.addColorStop(0, "#0a0a0a");
-      bgGrad.addColorStop(0.5, "#18181b");
-      bgGrad.addColorStop(1, "#0a0a0a");
+      bgGrad.addColorStop(0, "#f0fdfa");
+      bgGrad.addColorStop(0.5, "#f8fafc");
+      bgGrad.addColorStop(1, "#f0fdfa");
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, W, H);
 
       // Рамка карточки
-      ctx.strokeStyle = "rgba(45,212,191,0.5)";
+      ctx.strokeStyle = "rgba(13,148,136,0.55)";
       ctx.lineWidth = 2;
       drawRoundedRect(ctx, 6, 6, W - 12, H - 12, 16);
       ctx.stroke();
@@ -215,25 +217,25 @@ const TruckCard = () => {
       let cy = padding;
 
       // Шапка
-      ctx.fillStyle = "#5eead4";
+      ctx.fillStyle = "#0d9488";
       ctx.font = "900 11px Arial, sans-serif";
       ctx.textAlign = "left";
       ctx.textBaseline = "top";
       ctx.fillText("ООО «ФАВОРИТ»", padding, cy);
-      ctx.fillStyle = "rgba(255,255,255,0.5)";
+      ctx.fillStyle = "#64748b";
       ctx.font = "400 11px Arial, sans-serif";
       ctx.fillText("аренда манипуляторов · Нижний Новгород", padding, cy + 18);
 
-      ctx.fillStyle = "rgba(255,255,255,0.5)";
+      ctx.fillStyle = "#64748b";
       ctx.textAlign = "right";
       ctx.font = "400 11px Arial, sans-serif";
       ctx.fillText("Сайт", W - padding, cy);
-      ctx.fillStyle = "#f5d060";
+      ctx.fillStyle = "#b45309";
       ctx.font = "700 14px Arial, sans-serif";
       ctx.fillText("фаварит.рф", W - padding, cy + 16);
 
       cy += 44;
-      ctx.strokeStyle = "rgba(45,212,191,0.25)";
+      ctx.strokeStyle = "rgba(13,148,136,0.3)";
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(padding, cy);
@@ -245,20 +247,20 @@ const TruckCard = () => {
       const badge1Text = "КАРТОЧКА ТЕХНИКИ";
       ctx.font = "700 10px Arial, sans-serif";
       const b1w = ctx.measureText(badge1Text).width + 24;
-      ctx.fillStyle = "rgba(45,212,191,0.12)";
+      ctx.fillStyle = "rgba(45,212,191,0.2)";
       drawRoundedRect(ctx, W / 2 - b1w / 2, cy, b1w, 22, 11);
       ctx.fill();
-      ctx.strokeStyle = "rgba(45,212,191,0.4)";
+      ctx.strokeStyle = "rgba(13,148,136,0.5)";
       ctx.lineWidth = 1;
       drawRoundedRect(ctx, W / 2 - b1w / 2, cy, b1w, 22, 11);
       ctx.stroke();
-      ctx.fillStyle = "#5eead4";
+      ctx.fillStyle = "#0d9488";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillText(badge1Text, W / 2, cy + 11);
       cy += 32;
 
-      ctx.fillStyle = "#fff";
+      ctx.fillStyle = "#0f172a";
       ctx.font = "900 26px Arial, sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "top";
@@ -273,14 +275,14 @@ const TruckCard = () => {
       const badge2Text = "КАРТОЧКА ВОДИТЕЛЯ";
       ctx.font = "700 10px Arial, sans-serif";
       const b2w = ctx.measureText(badge2Text).width + 24;
-      ctx.fillStyle = "rgba(45,212,191,0.12)";
+      ctx.fillStyle = "rgba(45,212,191,0.2)";
       drawRoundedRect(ctx, W / 2 - b2w / 2, cy, b2w, 22, 11);
       ctx.fill();
-      ctx.strokeStyle = "rgba(45,212,191,0.4)";
+      ctx.strokeStyle = "rgba(13,148,136,0.5)";
       ctx.lineWidth = 1;
       drawRoundedRect(ctx, W / 2 - b2w / 2, cy, b2w, 22, 11);
       ctx.stroke();
-      ctx.fillStyle = "#5eead4";
+      ctx.fillStyle = "#0d9488";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillText(badge2Text, W / 2, cy + 11);
@@ -291,7 +293,7 @@ const TruckCard = () => {
       cy += t2H + 18;
 
       // Контакты
-      ctx.strokeStyle = "rgba(45,212,191,0.25)";
+      ctx.strokeStyle = "rgba(13,148,136,0.3)";
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(padding, cy);
@@ -303,52 +305,52 @@ const TruckCard = () => {
       const cardH = 56;
 
       // Директор
-      ctx.fillStyle = "rgba(245,208,96,0.07)";
+      ctx.fillStyle = "rgba(252,211,77,0.25)";
       drawRoundedRect(ctx, padding, cy, colW, cardH, 10);
       ctx.fill();
-      ctx.strokeStyle = "rgba(245,208,96,0.3)";
+      ctx.strokeStyle = "rgba(180,83,9,0.5)";
       ctx.lineWidth = 1;
       drawRoundedRect(ctx, padding, cy, colW, cardH, 10);
       ctx.stroke();
-      ctx.fillStyle = "rgba(255,255,255,0.4)";
+      ctx.fillStyle = "#92400e";
       ctx.font = "700 9px Arial, sans-serif";
       ctx.textAlign = "left";
       ctx.textBaseline = "top";
       ctx.fillText("ДИРЕКТОР", padding + 14, cy + 10);
-      ctx.fillStyle = "#f5d060";
+      ctx.fillStyle = "#b45309";
       ctx.font = "700 16px Arial, sans-serif";
       ctx.fillText("+7 960 169-09-90", padding + 14, cy + 26);
 
       // Водитель
       const col2X = padding + colW + 10;
-      ctx.fillStyle = "rgba(45,212,191,0.07)";
+      ctx.fillStyle = "rgba(45,212,191,0.25)";
       drawRoundedRect(ctx, col2X, cy, colW, cardH, 10);
       ctx.fill();
-      ctx.strokeStyle = "rgba(45,212,191,0.3)";
+      ctx.strokeStyle = "rgba(13,148,136,0.5)";
       ctx.lineWidth = 1;
       drawRoundedRect(ctx, col2X, cy, colW, cardH, 10);
       ctx.stroke();
-      ctx.fillStyle = "rgba(255,255,255,0.4)";
+      ctx.fillStyle = "#0f766e";
       ctx.font = "700 9px Arial, sans-serif";
       ctx.fillText("ВОДИТЕЛЬ", col2X + 14, cy + 10);
-      ctx.fillStyle = "#fff";
+      ctx.fillStyle = "#0f172a";
       ctx.font = "700 16px Arial, sans-serif";
       ctx.fillText("+7 960 188-30-84", col2X + 14, cy + 26);
 
       cy += cardH + 10;
 
       // Сайт
-      ctx.fillStyle = "rgba(45,212,191,0.07)";
+      ctx.fillStyle = "rgba(45,212,191,0.18)";
       drawRoundedRect(ctx, padding, cy, innerW, 36, 10);
       ctx.fill();
-      ctx.strokeStyle = "rgba(45,212,191,0.3)";
+      ctx.strokeStyle = "rgba(13,148,136,0.4)";
       drawRoundedRect(ctx, padding, cy, innerW, 36, 10);
       ctx.stroke();
-      ctx.fillStyle = "rgba(255,255,255,0.5)";
+      ctx.fillStyle = "#475569";
       ctx.font = "500 11px Arial, sans-serif";
       ctx.textAlign = "left";
       ctx.fillText("Подробнее на сайте:", padding + 14, cy + 12);
-      ctx.fillStyle = "#f5d060";
+      ctx.fillStyle = "#b45309";
       ctx.font = "700 13px Arial, sans-serif";
       ctx.textAlign = "right";
       ctx.fillText("фаварит.рф", W - padding - 14, cy + 11);
@@ -367,21 +369,21 @@ const TruckCard = () => {
   };
 
   const renderTable = (rows: [string, string][]) => (
-    <table style={{ width: "100%", borderCollapse: "collapse", borderRadius: 10, overflow: "hidden", border: "1px solid rgba(45,212,191,0.3)" }}>
+    <table style={{ width: "100%", borderCollapse: "collapse", borderRadius: 10, overflow: "hidden", border: "1px solid rgba(13,148,136,0.45)" }}>
       <tbody>
         {rows.map(([label, value], i) => (
           <tr key={i}>
             <td
               style={{
                 padding: "11px 14px",
-                background: "rgba(45,212,191,0.07)",
-                borderBottom: i < rows.length - 1 ? "1px solid rgba(45,212,191,0.18)" : "none",
-                borderRight: "1px solid rgba(45,212,191,0.18)",
+                background: "rgba(45,212,191,0.18)",
+                borderBottom: i < rows.length - 1 ? "1px solid rgba(13,148,136,0.35)" : "none",
+                borderRight: "1px solid rgba(13,148,136,0.35)",
                 width: "45%",
                 verticalAlign: "middle",
                 fontSize: 13,
-                color: "rgba(255,255,255,0.7)",
-                fontWeight: 500,
+                color: "#0f766e",
+                fontWeight: 700,
               }}
             >
               {label}
@@ -389,11 +391,11 @@ const TruckCard = () => {
             <td
               style={{
                 padding: "11px 14px",
-                background: "rgba(16,185,129,0.04)",
-                borderBottom: i < rows.length - 1 ? "1px solid rgba(45,212,191,0.18)" : "none",
+                background: "#ffffff",
+                borderBottom: i < rows.length - 1 ? "1px solid rgba(13,148,136,0.35)" : "none",
                 verticalAlign: "middle",
                 fontSize: 14,
-                color: "#fff",
+                color: "#1f2937",
                 fontWeight: 700,
                 textAlign: "center",
               }}
@@ -407,13 +409,13 @@ const TruckCard = () => {
   );
 
   return (
-    <div className="min-h-screen py-6 px-4" style={{ background: "linear-gradient(135deg, #0a0a0a 0%, #18181b 50%, #0a0a0a 100%)" }}>
+    <div className="min-h-screen py-6 px-4" style={{ background: "linear-gradient(135deg, #f0fdfa 0%, #ecfeff 50%, #f0fdfa 100%)" }}>
       <div className="max-w-[640px] mx-auto mb-5 flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch">
         <button
           onClick={handleDownload}
           disabled={downloading}
-          className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-black text-sm shadow-xl disabled:opacity-60"
-          style={{ background: "linear-gradient(135deg, #5eead4 0%, #2dd4bf 50%, #10b981 100%)", boxShadow: "0 8px 24px rgba(45,212,191,0.4)" }}
+          className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-white text-sm shadow-xl disabled:opacity-60"
+          style={{ background: "linear-gradient(135deg, #14b8a6 0%, #0d9488 50%, #0f766e 100%)", boxShadow: "0 8px 24px rgba(13,148,136,0.4)" }}
         >
           {downloading ? (
             <>
@@ -429,7 +431,7 @@ const TruckCard = () => {
         </button>
         <a
           href="/"
-          className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-white/80 text-sm border border-white/15 hover:bg-white/5"
+          className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-slate-700 text-sm bg-white border border-slate-200 hover:bg-slate-50 shadow-sm"
         >
           <Icon name="ArrowLeft" size={16} />
           На сайт
@@ -437,54 +439,64 @@ const TruckCard = () => {
       </div>
 
       {/* Предпросмотр */}
-      <div className="max-w-[640px] mx-auto" style={{ background: "#0a0a0a", border: "2px solid rgba(45,212,191,0.5)", borderRadius: 16, padding: 28, fontFamily: "Arial, sans-serif" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18, paddingBottom: 14, borderBottom: "1px solid rgba(45,212,191,0.25)" }}>
+      <div
+        className="max-w-[640px] mx-auto"
+        style={{
+          background: "linear-gradient(135deg, #f0fdfa 0%, #f8fafc 50%, #f0fdfa 100%)",
+          border: "2px solid rgba(13,148,136,0.55)",
+          borderRadius: 16,
+          padding: 28,
+          fontFamily: "Arial, sans-serif",
+          boxShadow: "0 10px 30px rgba(13,148,136,0.15)",
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18, paddingBottom: 14, borderBottom: "1px solid rgba(13,148,136,0.3)" }}>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 900, letterSpacing: 4, color: "#5eead4", marginBottom: 4 }}>ООО «ФАВОРИТ»</div>
-            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}>аренда манипуляторов · Нижний Новгород</div>
+            <div style={{ fontSize: 11, fontWeight: 900, letterSpacing: 4, color: "#0d9488", marginBottom: 4 }}>ООО «ФАВОРИТ»</div>
+            <div style={{ fontSize: 11, color: "#64748b" }}>аренда манипуляторов · Нижний Новгород</div>
           </div>
           <div style={{ textAlign: "right" }}>
-            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}>Сайт</div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: "#f5d060" }}>фаварит.рф</div>
+            <div style={{ fontSize: 11, color: "#64748b" }}>Сайт</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: "#b45309" }}>фаварит.рф</div>
           </div>
         </div>
 
         <div style={{ textAlign: "center", marginBottom: 18 }}>
-          <div style={{ display: "inline-block", padding: "4px 12px", borderRadius: 999, background: "rgba(45,212,191,0.12)", border: "1px solid rgba(45,212,191,0.4)", fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", color: "#5eead4", marginBottom: 12 }}>
+          <div style={{ display: "inline-block", padding: "4px 12px", borderRadius: 999, background: "rgba(45,212,191,0.2)", border: "1px solid rgba(13,148,136,0.5)", fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", color: "#0d9488", marginBottom: 12 }}>
             Карточка техники
           </div>
-          <h1 style={{ fontSize: 26, fontWeight: 900, color: "#fff", margin: 0 }}>FAW J6P-390 + КМУ</h1>
+          <h1 style={{ fontSize: 26, fontWeight: 900, color: "#0f172a", margin: 0 }}>FAW J6P-390 + КМУ</h1>
         </div>
 
         <div style={{ marginBottom: 20 }}>{renderTable(truckRows)}</div>
 
         <div style={{ textAlign: "center", marginBottom: 12 }}>
-          <div style={{ display: "inline-block", padding: "4px 12px", borderRadius: 999, background: "rgba(45,212,191,0.12)", border: "1px solid rgba(45,212,191,0.4)", fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", color: "#5eead4" }}>
+          <div style={{ display: "inline-block", padding: "4px 12px", borderRadius: 999, background: "rgba(45,212,191,0.2)", border: "1px solid rgba(13,148,136,0.5)", fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", color: "#0d9488" }}>
             Карточка водителя
           </div>
         </div>
 
         <div style={{ marginBottom: 20 }}>{renderTable(driverRows)}</div>
 
-        {/* Контакты директора и диспетчера */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, paddingTop: 16, borderTop: "1px solid rgba(45,212,191,0.25)", marginBottom: 10 }}>
-          <div style={{ padding: 12, borderRadius: 10, background: "rgba(245,208,96,0.07)", border: "1px solid rgba(245,208,96,0.3)" }}>
-            <div style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 1, fontWeight: 700 }}>Директор</div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: "#f5d060", marginTop: 6 }}>+7 960 169-09-90</div>
+        {/* Контакты директора и водителя */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, paddingTop: 16, borderTop: "1px solid rgba(13,148,136,0.3)", marginBottom: 10 }}>
+          <div style={{ padding: 12, borderRadius: 10, background: "rgba(252,211,77,0.25)", border: "1px solid rgba(180,83,9,0.5)" }}>
+            <div style={{ fontSize: 9, color: "#92400e", textTransform: "uppercase", letterSpacing: 1, fontWeight: 700 }}>Директор</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: "#b45309", marginTop: 6 }}>+7 960 169-09-90</div>
           </div>
-          <div style={{ padding: 12, borderRadius: 10, background: "rgba(45,212,191,0.07)", border: "1px solid rgba(45,212,191,0.3)" }}>
-            <div style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 1, fontWeight: 700 }}>Водитель</div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: "#fff", marginTop: 6 }}>+7 960 188-30-84</div>
+          <div style={{ padding: 12, borderRadius: 10, background: "rgba(45,212,191,0.25)", border: "1px solid rgba(13,148,136,0.5)" }}>
+            <div style={{ fontSize: 9, color: "#0f766e", textTransform: "uppercase", letterSpacing: 1, fontWeight: 700 }}>Водитель</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: "#0f172a", marginTop: 6 }}>+7 960 188-30-84</div>
           </div>
         </div>
 
-        <div style={{ padding: "10px 14px", borderRadius: 10, background: "rgba(45,212,191,0.07)", border: "1px solid rgba(45,212,191,0.3)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}>Подробнее на сайте:</span>
-          <span style={{ fontSize: 13, fontWeight: 700, color: "#f5d060" }}>фаварит.рф</span>
+        <div style={{ padding: "10px 14px", borderRadius: 10, background: "rgba(45,212,191,0.18)", border: "1px solid rgba(13,148,136,0.4)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <span style={{ fontSize: 11, color: "#475569" }}>Подробнее на сайте:</span>
+          <span style={{ fontSize: 13, fontWeight: 700, color: "#b45309" }}>фаварит.рф</span>
         </div>
       </div>
 
-      <p className="max-w-[640px] mx-auto mt-4 text-center text-xs text-white/40">
+      <p className="max-w-[640px] mx-auto mt-4 text-center text-xs text-slate-500">
         Карточка техники в фирменном стиле · отправляйте клиентам в WhatsApp / Telegram
       </p>
     </div>
