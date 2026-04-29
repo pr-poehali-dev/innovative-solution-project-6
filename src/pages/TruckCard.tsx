@@ -3,7 +3,7 @@ import { toJpeg } from "html-to-image";
 import Icon from "@/components/ui/icon";
 
 const truck = {
-  photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/9a8c51fb-cb86-4fcc-b454-3abff0f7a6c9.jpg",
+  photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/a2338211-12bc-4ec4-8d21-b22ac64d6d1b.jpg",
   rows: [
     ["Машина (марка ТС)", "FAW J6P-390"],
     ["Гос. номер", "А479ХО252"],
