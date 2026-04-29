@@ -319,7 +319,7 @@ const TruckCard = () => {
       ctx.font = "700 16px Arial, sans-serif";
       ctx.fillText("+7 960 169-09-90", padding + 14, cy + 26);
 
-      // Диспетчер
+      // Водитель
       const col2X = padding + colW + 10;
       ctx.fillStyle = "rgba(45,212,191,0.07)";
       drawRoundedRect(ctx, col2X, cy, colW, cardH, 10);
@@ -330,7 +330,7 @@ const TruckCard = () => {
       ctx.stroke();
       ctx.fillStyle = "rgba(255,255,255,0.4)";
       ctx.font = "700 9px Arial, sans-serif";
-      ctx.fillText("ДИСПЕТЧЕР", col2X + 14, cy + 10);
+      ctx.fillText("ВОДИТЕЛЬ", col2X + 14, cy + 10);
       ctx.fillStyle = "#fff";
       ctx.font = "700 16px Arial, sans-serif";
       ctx.fillText("+7 960 188-30-84", col2X + 14, cy + 26);
@@ -473,7 +473,7 @@ const TruckCard = () => {
             <div style={{ fontSize: 16, fontWeight: 700, color: "#f5d060", marginTop: 6 }}>+7 960 169-09-90</div>
           </div>
           <div style={{ padding: 12, borderRadius: 10, background: "rgba(45,212,191,0.07)", border: "1px solid rgba(45,212,191,0.3)" }}>
-            <div style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 1, fontWeight: 700 }}>Диспетчер</div>
+            <div style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 1, fontWeight: 700 }}>Водитель</div>
             <div style={{ fontSize: 16, fontWeight: 700, color: "#fff", marginTop: 6 }}>+7 960 188-30-84</div>
           </div>
         </div>
