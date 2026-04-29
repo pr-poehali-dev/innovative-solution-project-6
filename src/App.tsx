@@ -15,6 +15,7 @@ const ReviewsPage = lazy(() => import("./pages/ReviewsPage"));
 const SitemapSourcePage = lazy(() => import("./pages/SitemapSourcePage"));
 const SeoLandingPage = lazy(() => import("./pages/SeoLandingPage"));
 const TruckCard = lazy(() => import("./pages/TruckCard"));
+const AdBanner = lazy(() => import("./pages/AdBanner"));
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,7 @@ const App = () => (
               element={<SeoLandingPage slugOverride="manipulyator-s-lyulkoy" />}
             />
             <Route path="/karta/faw-j6p-390" element={<TruckCard />} />
+            <Route path="/banner" element={<AdBanner />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
