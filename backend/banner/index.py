@@ -177,22 +177,21 @@ def _make_banner() -> bytes:
     fd.text((phone_x + 3, phone_y + 3), phone_text, font=phone_font, fill=(0, 0, 0))
     fd.text((phone_x, phone_y), phone_text, font=phone_font, fill=(255, 255, 255))
 
-    # Иконка телефона в круге слева от номера
+    # Иконка телефона слева от номера (без круга)
     icon_d = int(phone_size * 1.0)
     icon_cx = phone_x - icon_d // 2 - 16
     icon_cy = phone_y + phone_h // 2
-    fd.ellipse(
-        [icon_cx - icon_d // 2, icon_cy - icon_d // 2,
-         icon_cx + icon_d // 2, icon_cy + icon_d // 2],
-        fill=(212, 164, 55),
-    )
-    icon_font = _font(int(icon_d * 0.7), bold=True)
+    icon_font = _font(int(icon_d * 0.85), bold=True)
     icon_text = '☎'
     ibbox = fd.textbbox((0, 0), icon_text, font=icon_font)
     iw = ibbox[2] - ibbox[0]
     ih = ibbox[3] - ibbox[1]
-    fd.text((icon_cx - iw // 2, icon_cy - ih // 2 - 4),
-            icon_text, font=icon_font, fill=(15, 23, 42))
+    ix = icon_cx - iw // 2
+    iy = icon_cy - ih // 2 - 4
+    # Тень
+    fd.text((ix + 3, iy + 3), icon_text, font=icon_font, fill=(0, 0, 0))
+    # Сама иконка золотом
+    fd.text((ix, iy), icon_text, font=icon_font, fill=(212, 164, 55))
 
     out = io.BytesIO()
     final.save(out, format='JPEG', quality=92, optimize=True)
