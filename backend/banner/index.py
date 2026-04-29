@@ -29,6 +29,85 @@ def _font(size: int, bold: bool = False):
     return ImageFont.load_default()
 
 
+def _make_banner_v2() -> bytes:
+    '''Вариант 2: телефон сверху крупно, логотип внизу справа, слоган слева'''
+    photo = Image.open(io.BytesIO(_fetch(PHOTO_URL))).convert('RGBA')
+    logo = Image.open(io.BytesIO(_fetch(LOGO_URL))).convert('RGBA')
+
+    W, H = photo.size
+    canvas = photo.copy()
+    overlay = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+
+    # ---- Верхняя плашка с градиентом для телефона ----
+    top_h = int(H * 0.22)
+    for i in range(top_h):
+        alpha = int(255 * (1 - i / top_h) ** 1.2 * 0.92)
+        draw.rectangle([0, i, W, i + 1], fill=(15, 23, 42, alpha))
+
+    accent_h = max(4, int(H * 0.005))
+    draw.rectangle([0, top_h - accent_h, W, top_h], fill=(212, 164, 55, 255))
+
+    # ---- Нижняя плашка для лого + слогана ----
+    bot_h = int(H * 0.16)
+    bot_y = H - bot_h
+    for i in range(bot_h):
+        alpha = int(255 * (i / bot_h) ** 1.2 * 0.92)
+        draw.rectangle([0, bot_y + i, W, bot_y + i + 1], fill=(15, 23, 42, alpha))
+    draw.rectangle([0, bot_y, W, bot_y + accent_h], fill=(212, 164, 55, 255))
+
+    canvas = Image.alpha_composite(canvas, overlay)
+
+    # ---- Логотип внизу справа ----
+    logo_w = int(W * 0.18)
+    ratio = logo.height / logo.width
+    logo_h = int(logo_w * ratio)
+    logo_resized = logo.resize((logo_w, logo_h), Image.LANCZOS)
+    lx = W - logo_w - int(W * 0.03)
+    ly = bot_y + (bot_h - logo_h) // 2
+    canvas.paste(logo_resized, (lx, ly), logo_resized)
+
+    final = canvas.convert('RGB')
+    fd = ImageDraw.Draw(final)
+
+    # ---- Телефон сверху по центру, очень крупно ----
+    label_size = max(22, int(H * 0.032))
+    label_font = _font(label_size, bold=True)
+    phone_size = max(60, int(H * 0.105))
+    phone_font = _font(phone_size, bold=True)
+
+    label_text = '☎  ЗВОНИТЕ ПРЯМО СЕЙЧАС'
+    lb = fd.textbbox((0, 0), label_text, font=label_font)
+    lw = lb[2] - lb[0]
+    fd.text(((W - lw) // 2, int(H * 0.025)),
+            label_text, font=label_font, fill=(212, 164, 55))
+
+    pb = fd.textbbox((0, 0), PHONE, font=phone_font)
+    pw = pb[2] - pb[0]
+    px = (W - pw) // 2
+    py = int(H * 0.07)
+    fd.text((px + 4, py + 4), PHONE, font=phone_font, fill=(0, 0, 0))
+    fd.text((px, py), PHONE, font=phone_font, fill=(255, 255, 255))
+
+    # ---- Слоган внизу слева ----
+    slogan_size = max(24, int(H * 0.038))
+    slogan_font = _font(slogan_size, bold=True)
+    sub_size = max(18, int(H * 0.024))
+    sub_font = _font(sub_size, bold=False)
+
+    sx = int(W * 0.04)
+    sy_top = bot_y + int(bot_h * 0.22)
+    fd.text((sx, sy_top), 'АРЕНДА МАНИПУЛЯТОРОВ',
+            font=slogan_font, fill=(255, 255, 255))
+    fd.text((sx, sy_top + slogan_size + 6),
+            'Нижний Новгород · Без выходных',
+            font=sub_font, fill=(212, 164, 55))
+
+    out = io.BytesIO()
+    final.save(out, format='JPEG', quality=92, optimize=True)
+    return out.getvalue()
+
+
 def _make_banner() -> bytes:
     photo = Image.open(io.BytesIO(_fetch(PHOTO_URL))).convert('RGBA')
     logo = Image.open(io.BytesIO(_fetch(LOGO_URL))).convert('RGBA')
@@ -140,7 +219,13 @@ def handler(event, context):
             'body': '',
         }
 
-    img_bytes = _make_banner()
+    params = event.get('queryStringParameters') or {}
+    variant = str(params.get('v', '1'))
+
+    if variant == '2':
+        img_bytes = _make_banner_v2()
+    else:
+        img_bytes = _make_banner()
     b64 = base64.b64encode(img_bytes).decode('ascii')
 
     return {
