@@ -22,17 +22,12 @@ const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: items.map((item, i) => {
-      const isLast = i === items.length - 1;
-      const itemUrl = item.to
-        ? `${SITE_URL}${item.to}`
-        : isLast
-          ? currentUrl
-          : undefined;
+      const itemUrl = item.to ? `${SITE_URL}${item.to}` : currentUrl;
       return {
         "@type": "ListItem",
         position: i + 1,
         name: item.label,
-        ...(itemUrl ? { item: itemUrl } : {}),
+        item: itemUrl,
       };
     }),
   };

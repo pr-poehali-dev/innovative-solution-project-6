@@ -18,7 +18,20 @@ const reviewSchema = reviews.map((r) => ({
   "author": { "@type": "Person", "name": r.name },
   "datePublished": r.date,
   "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
-  "reviewBody": r.body
+  "reviewBody": r.body,
+  "itemReviewed": {
+    "@type": "LocalBusiness",
+    "name": "ООО Фаворит",
+    "image": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "6-й микрорайон, д. 2, офис 13",
+      "addressLocality": "Кстово",
+      "addressRegion": "Нижегородская область",
+      "postalCode": "607657",
+      "addressCountry": "RU"
+    }
+  }
 }));
 
 const StructuredData = () => {
@@ -95,8 +108,7 @@ const StructuredData = () => {
       "reviewCount": String(reviews.length),
       "bestRating": "5",
       "worstRating": "1"
-    },
-    "review": reviewSchema
+    }
   };
 
   return (
