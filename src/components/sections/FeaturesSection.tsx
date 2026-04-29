@@ -66,43 +66,43 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
                 }`}
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
-                {/* Внешнее золотое свечение */}
+                {/* Внешнее изумрудно-бирюзовое свечение */}
                 <div
                   className="absolute -inset-0.5 rounded-2xl opacity-40 group-hover:opacity-100 blur-md transition-opacity duration-500 pointer-events-none"
-                  style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
+                  style={{ background: "linear-gradient(135deg, #2dd4bf 0%, #10b981 50%, #0d9488 100%)" }}
                 />
 
                 {/* Градиентная рамка */}
                 <div
                   className="relative rounded-2xl p-[1.5px]"
-                  style={{ background: "linear-gradient(135deg, rgba(245,208,96,0.9) 0%, rgba(232,168,32,0.3) 50%, rgba(232,168,32,0.85) 100%)" }}
+                  style={{ background: "linear-gradient(135deg, rgba(45,212,191,0.9) 0%, rgba(16,185,129,0.3) 50%, rgba(13,148,136,0.85) 100%)" }}
                 >
                   <div className="relative flex items-start gap-4 sm:gap-5 p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-zinc-950 via-background to-black overflow-hidden">
-                    {/* Внутреннее золотое свечение в углу */}
-                    <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-accent/20 blur-3xl pointer-events-none group-hover:bg-accent/30 transition-colors duration-500" />
+                    {/* Внутреннее свечение в углу */}
+                    <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-emerald-400/20 blur-3xl pointer-events-none group-hover:bg-emerald-400/35 transition-colors duration-500" />
 
                     {/* Иконка с подсветкой */}
                     <div className="relative flex-shrink-0">
                       <div
                         className="absolute inset-0 rounded-xl blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-500"
-                        style={{ background: "radial-gradient(circle, rgba(232,168,32,0.6) 0%, transparent 70%)" }}
+                        style={{ background: "radial-gradient(circle, rgba(45,212,191,0.6) 0%, transparent 70%)" }}
                       />
                       <div
                         className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center"
                         style={{
-                          background: "linear-gradient(135deg, rgba(245,208,96,0.25) 0%, rgba(200,133,10,0.15) 100%)",
-                          border: "1.5px solid rgba(232,168,32,0.5)",
-                          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15), 0 4px 12px rgba(232,168,32,0.25)",
+                          background: "linear-gradient(135deg, rgba(45,212,191,0.25) 0%, rgba(13,148,136,0.15) 100%)",
+                          border: "1.5px solid rgba(45,212,191,0.5)",
+                          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15), 0 4px 12px rgba(16,185,129,0.3)",
                         }}
                       >
-                        <Icon name={item.icon} size={20} className="sm:!w-6 sm:!h-6" style={{ color: "#f5d060" }} />
+                        <Icon name={item.icon} size={20} className="sm:!w-6 sm:!h-6" style={{ color: "#5eead4" }} />
                       </div>
                     </div>
 
                     <div className="relative">
                       <h3
                         className="font-black text-sm sm:text-base lg:text-lg mb-1.5 bg-clip-text text-transparent"
-                        style={{ backgroundImage: "linear-gradient(135deg, #fff 0%, #f5d060 100%)" }}
+                        style={{ backgroundImage: "linear-gradient(135deg, #fff 0%, #5eead4 100%)" }}
                       >
                         {item.title}
                       </h3>
