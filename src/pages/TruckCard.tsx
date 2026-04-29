@@ -1,9 +1,11 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { toJpeg } from "html-to-image";
 import Icon from "@/components/ui/icon";
 
+const TRUCK_PHOTO_URL = "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/a2338211-12bc-4ec4-8d21-b22ac64d6d1b.jpg";
+
 const truck = {
-  photo: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/a2338211-12bc-4ec4-8d21-b22ac64d6d1b.jpg",
+  photo: TRUCK_PHOTO_URL,
   rows: [
     ["Машина (марка ТС)", "FAW J6P-390"],
     ["Гос. номер", "А479ХО252"],
@@ -27,6 +29,27 @@ const driver = {
 const TruckCard = () => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [downloading, setDownloading] = useState(false);
+  const [photoData, setPhotoData] = useState<string>("");
+  const [photoError, setPhotoError] = useState(false);
+
+  useEffect(() => {
+    fetch(TRUCK_PHOTO_URL, { mode: "cors" })
+      .then((r) => {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.blob();
+      })
+      .then((blob) => {
+        const reader = new FileReader();
+        reader.onloadend = () => setPhotoData(reader.result as string);
+        reader.onerror = () => setPhotoError(true);
+        reader.readAsDataURL(blob);
+      })
+      .catch(() => {
+        // если CORS заблокировал — оставим прямой URL, страница покажет фото, но в JPG может не попасть
+        setPhotoData(TRUCK_PHOTO_URL);
+        setPhotoError(true);
+      });
+  }, []);
 
   const handleDownload = async () => {
     if (!cardRef.current) return;
@@ -120,13 +143,18 @@ const TruckCard = () => {
 
         {/* Фото машины */}
         <div className="mb-6">
-          <img
-            src={truck.photo}
-            alt="FAW J6P-390 манипулятор"
-            crossOrigin="anonymous"
-            className="w-full h-auto rounded"
-            style={{ display: "block" }}
-          />
+          {photoData ? (
+            <img
+              src={photoData}
+              alt="FAW J6P-390 манипулятор"
+              className="w-full h-auto rounded"
+              style={{ display: "block" }}
+            />
+          ) : (
+            <div className="w-full bg-zinc-100 rounded flex items-center justify-center text-zinc-400 text-sm" style={{ aspectRatio: "16/9" }}>
+              {photoError ? "Не удалось загрузить фото" : "Загрузка фото…"}
+            </div>
+          )}
         </div>
 
         {/* Заголовок 2 */}
