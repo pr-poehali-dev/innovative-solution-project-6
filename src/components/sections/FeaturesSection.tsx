@@ -55,26 +55,60 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
           </h2>
         </div>
 
-        <div className="flex flex-col gap-3 sm:gap-4 max-w-3xl mx-auto">
+        <div className="flex flex-col gap-4 sm:gap-5 max-w-3xl mx-auto">
           {features.map((item, i) => {
             const isVisible = visibleSections["features"];
             return (
               <div
                 key={i}
-                className={`flex items-start gap-4 sm:gap-5 p-5 sm:p-6 border border-accent/40 rounded-2xl bg-white/10 backdrop-blur-sm shadow-lg hover:border-accent/70 hover:bg-white/15 hover:shadow-xl transition-all duration-500 ${
+                className={`group relative transition-all duration-700 ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                 }`}
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
+                {/* Внешнее золотое свечение */}
                 <div
-                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center flex-shrink-0"
-                  style={{ background: "rgba(232,168,32,0.12)", border: "1.5px solid rgba(232,168,32,0.3)" }}
+                  className="absolute -inset-0.5 rounded-2xl opacity-40 group-hover:opacity-100 blur-md transition-opacity duration-500 pointer-events-none"
+                  style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
+                />
+
+                {/* Градиентная рамка */}
+                <div
+                  className="relative rounded-2xl p-[1.5px]"
+                  style={{ background: "linear-gradient(135deg, rgba(245,208,96,0.9) 0%, rgba(232,168,32,0.3) 50%, rgba(232,168,32,0.85) 100%)" }}
                 >
-                  <Icon name={item.icon} size={20} className="sm:!w-6 sm:!h-6" style={{ color: "#e8a820" }} />
-                </div>
-                <div>
-                  <h3 className="font-black text-sm sm:text-base lg:text-lg text-white mb-1.5">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">{item.desc}</p>
+                  <div className="relative flex items-start gap-4 sm:gap-5 p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-zinc-950 via-background to-black overflow-hidden">
+                    {/* Внутреннее золотое свечение в углу */}
+                    <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-accent/20 blur-3xl pointer-events-none group-hover:bg-accent/30 transition-colors duration-500" />
+
+                    {/* Иконка с подсветкой */}
+                    <div className="relative flex-shrink-0">
+                      <div
+                        className="absolute inset-0 rounded-xl blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                        style={{ background: "radial-gradient(circle, rgba(232,168,32,0.6) 0%, transparent 70%)" }}
+                      />
+                      <div
+                        className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center"
+                        style={{
+                          background: "linear-gradient(135deg, rgba(245,208,96,0.25) 0%, rgba(200,133,10,0.15) 100%)",
+                          border: "1.5px solid rgba(232,168,32,0.5)",
+                          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15), 0 4px 12px rgba(232,168,32,0.25)",
+                        }}
+                      >
+                        <Icon name={item.icon} size={20} className="sm:!w-6 sm:!h-6" style={{ color: "#f5d060" }} />
+                      </div>
+                    </div>
+
+                    <div className="relative">
+                      <h3
+                        className="font-black text-sm sm:text-base lg:text-lg mb-1.5 bg-clip-text text-transparent"
+                        style={{ backgroundImage: "linear-gradient(135deg, #fff 0%, #f5d060 100%)" }}
+                      >
+                        {item.title}
+                      </h3>
+                      <p className="text-white/70 text-sm sm:text-base leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             );
