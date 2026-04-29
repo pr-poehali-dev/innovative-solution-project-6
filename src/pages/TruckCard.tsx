@@ -45,7 +45,6 @@ const TruckCard = () => {
         reader.readAsDataURL(blob);
       })
       .catch(() => {
-        // если CORS заблокировал — оставим прямой URL, страница покажет фото, но в JPG может не попасть
         setPhotoData(TRUCK_PHOTO_URL);
         setPhotoError(true);
       });
@@ -57,7 +56,7 @@ const TruckCard = () => {
     try {
       const dataUrl = await toJpeg(cardRef.current, {
         quality: 0.98,
-        backgroundColor: "#ffffff",
+        backgroundColor: "#0a0a0a",
         pixelRatio: 2,
         cacheBust: true,
       });
@@ -72,14 +71,55 @@ const TruckCard = () => {
     }
   };
 
+  const renderTable = (rows: string[][]) => (
+    <table className="w-full border-collapse" style={{ borderRadius: 12, overflow: "hidden" }}>
+      <tbody>
+        {rows.map(([label, value], i) => (
+          <tr key={i}>
+            <td
+              style={{
+                padding: "11px 14px",
+                background: "rgba(45,212,191,0.07)",
+                borderBottom: i < rows.length - 1 ? "1px solid rgba(45,212,191,0.18)" : "none",
+                borderRight: "1px solid rgba(45,212,191,0.18)",
+                width: "45%",
+                verticalAlign: "middle",
+                fontSize: 13,
+                color: "rgba(255,255,255,0.6)",
+                fontWeight: 500,
+              }}
+            >
+              {label}
+            </td>
+            <td
+              style={{
+                padding: "11px 14px",
+                background: "rgba(16,185,129,0.04)",
+                borderBottom: i < rows.length - 1 ? "1px solid rgba(45,212,191,0.18)" : "none",
+                verticalAlign: "middle",
+                fontSize: 14,
+                color: "#fff",
+                fontWeight: 700,
+                textAlign: "center",
+              }}
+            >
+              {value}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+
   return (
-    <div className="min-h-screen bg-zinc-100 py-6 px-4">
-      <div className="max-w-[600px] mx-auto mb-4 flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch">
+    <div className="min-h-screen py-6 px-4" style={{ background: "linear-gradient(135deg, #0a0a0a 0%, #18181b 50%, #0a0a0a 100%)" }}>
+      {/* Кнопки управления */}
+      <div className="max-w-[640px] mx-auto mb-5 flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch">
         <button
           onClick={handleDownload}
           disabled={downloading}
-          className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-white text-sm shadow-lg disabled:opacity-60"
-          style={{ background: "linear-gradient(135deg, #2dd4bf 0%, #10b981 50%, #0d9488 100%)" }}
+          className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-black text-sm shadow-xl disabled:opacity-60"
+          style={{ background: "linear-gradient(135deg, #5eead4 0%, #2dd4bf 50%, #10b981 100%)", boxShadow: "0 8px 24px rgba(45,212,191,0.4)" }}
         >
           {downloading ? (
             <>
@@ -95,111 +135,123 @@ const TruckCard = () => {
         </button>
         <a
           href="/"
-          className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-zinc-700 text-sm bg-white border border-zinc-200 hover:bg-zinc-50"
+          className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-white/80 text-sm border border-white/15 hover:bg-white/5"
         >
           <Icon name="ArrowLeft" size={16} />
           На сайт
         </a>
       </div>
 
-      <div ref={cardRef} className="max-w-[600px] mx-auto bg-white p-5 sm:p-7" style={{ fontFamily: "Arial, sans-serif" }}>
-        {/* Заголовок 1 */}
-        <h1 className="text-center font-black text-2xl sm:text-3xl tracking-wide mb-4 text-zinc-800" style={{ letterSpacing: "0.05em" }}>
-          КАРТОЧКА МАНИПУЛЯТОРА
-        </h1>
+      {/* Карточка с пульсирующей подсветкой */}
+      <div className="max-w-[640px] mx-auto relative">
+        <div
+          className="emerald-pulse absolute -inset-1 rounded-2xl pointer-events-none"
+          style={{ background: "linear-gradient(135deg, #2dd4bf 0%, #10b981 50%, #0d9488 100%)" }}
+        />
+        <div
+          className="relative rounded-2xl p-[1.5px]"
+          style={{ background: "linear-gradient(135deg, rgba(45,212,191,0.85) 0%, rgba(16,185,129,0.3) 50%, rgba(13,148,136,0.85) 100%)" }}
+        >
+          <div
+            ref={cardRef}
+            className="rounded-2xl p-5 sm:p-7 relative overflow-hidden"
+            style={{
+              background: "linear-gradient(135deg, #0a0a0a 0%, #111113 50%, #0a0a0a 100%)",
+              fontFamily: "Manrope, system-ui, sans-serif",
+            }}
+          >
+            {/* Декоративное свечение в углах */}
+            <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full pointer-events-none" style={{ background: "rgba(45,212,191,0.18)", filter: "blur(60px)" }} />
+            <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full pointer-events-none" style={{ background: "rgba(16,185,129,0.12)", filter: "blur(60px)" }} />
 
-        {/* Таблица характеристик */}
-        <table className="w-full border-collapse mb-6" style={{ border: "1px solid #d4d4d8" }}>
-          <tbody>
-            {truck.rows.map(([label, value], i) => (
-              <tr key={i}>
-                <td
-                  className="text-sm sm:text-[15px] text-zinc-800"
-                  style={{
-                    border: "1px solid #d4d4d8",
-                    padding: "10px 12px",
-                    background: "#fdf6e3",
-                    width: "45%",
-                    verticalAlign: "middle",
-                  }}
-                >
-                  {label}
-                </td>
-                <td
-                  className="text-sm sm:text-[15px] text-zinc-800 text-center font-medium"
-                  style={{
-                    border: "1px solid #d4d4d8",
-                    padding: "10px 12px",
-                    background: "#fdf6e3",
-                    verticalAlign: "middle",
-                  }}
-                >
-                  {value}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        {/* Фото машины */}
-        <div className="mb-6">
-          {photoData ? (
-            <img
-              src={photoData}
-              alt="FAW J6P-390 манипулятор"
-              className="w-full h-auto rounded"
-              style={{ display: "block" }}
-            />
-          ) : (
-            <div className="w-full bg-zinc-100 rounded flex items-center justify-center text-zinc-400 text-sm" style={{ aspectRatio: "16/9" }}>
-              {photoError ? "Не удалось загрузить фото" : "Загрузка фото…"}
+            {/* Шапка с логотипом */}
+            <div className="relative flex items-center justify-between gap-3 mb-5 pb-4" style={{ borderBottom: "1px solid rgba(45,212,191,0.2)" }}>
+              <div>
+                <div className="text-[10px] font-black tracking-[0.2em] mb-1" style={{ color: "#5eead4" }}>
+                  ООО «ФАВОРИТ»
+                </div>
+                <div className="text-[11px] text-white/50">аренда манипуляторов · Нижний Новгород</div>
+              </div>
+              <div className="text-right">
+                <div className="text-[11px] text-white/50">Сайт</div>
+                <div className="text-sm font-bold" style={{ color: "#f5d060" }}>
+                  фаварит.рф
+                </div>
+              </div>
             </div>
-          )}
+
+            {/* Заголовок 1 */}
+            <div className="relative mb-4 text-center">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-3" style={{ background: "rgba(45,212,191,0.1)", border: "1px solid rgba(45,212,191,0.3)" }}>
+                <Icon name="Truck" size={12} style={{ color: "#5eead4" }} />
+                <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: "#5eead4" }}>Карточка техники</span>
+              </div>
+              <h1
+                className="font-black text-2xl sm:text-3xl bg-clip-text text-transparent"
+                style={{ backgroundImage: "linear-gradient(135deg, #fff 0%, #5eead4 100%)", letterSpacing: "0.02em" }}
+              >
+                FAW J6P-390 + КМУ
+              </h1>
+            </div>
+
+            {/* Таблица характеристик */}
+            <div className="relative mb-5">{renderTable(truck.rows)}</div>
+
+            {/* Фото машины */}
+            <div className="relative mb-5 rounded-xl overflow-hidden" style={{ border: "1.5px solid rgba(45,212,191,0.3)", boxShadow: "0 8px 24px rgba(45,212,191,0.15)" }}>
+              {photoData ? (
+                <img
+                  src={photoData}
+                  alt="FAW J6P-390 манипулятор"
+                  className="w-full h-auto"
+                  style={{ display: "block" }}
+                />
+              ) : (
+                <div className="w-full flex items-center justify-center text-white/40 text-sm" style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.03)" }}>
+                  {photoError ? "Не удалось загрузить фото" : "Загрузка фото…"}
+                </div>
+              )}
+            </div>
+
+            {/* Заголовок 2 */}
+            <div className="relative mb-3 text-center">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-2" style={{ background: "rgba(45,212,191,0.1)", border: "1px solid rgba(45,212,191,0.3)" }}>
+                <Icon name="UserCheck" size={12} style={{ color: "#5eead4" }} />
+                <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: "#5eead4" }}>Карточка водителя</span>
+              </div>
+            </div>
+
+            {/* Таблица водителя */}
+            <div className="relative mb-5">{renderTable(driver.rows)}</div>
+
+            {/* Подвал с контактами */}
+            <div className="relative pt-4 grid grid-cols-1 sm:grid-cols-2 gap-3" style={{ borderTop: "1px solid rgba(45,212,191,0.2)" }}>
+              <div className="flex items-center gap-2.5 p-2.5 rounded-lg" style={{ background: "rgba(45,212,191,0.06)" }}>
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(45,212,191,0.15)", border: "1px solid rgba(45,212,191,0.4)" }}>
+                  <Icon name="Phone" size={14} style={{ color: "#5eead4" }} />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-[9px] text-white/40 uppercase tracking-wider">Телефон</div>
+                  <div className="text-sm font-bold text-white">+7 960 188-30-84</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2.5 p-2.5 rounded-lg" style={{ background: "rgba(245,208,96,0.06)" }}>
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(245,208,96,0.15)", border: "1px solid rgba(245,208,96,0.4)" }}>
+                  <Icon name="Globe" size={14} style={{ color: "#f5d060" }} />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-[9px] text-white/40 uppercase tracking-wider">Сайт</div>
+                  <div className="text-sm font-bold" style={{ color: "#f5d060" }}>фаварит.рф</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        {/* Заголовок 2 */}
-        <h2 className="text-center font-black text-xl sm:text-2xl tracking-wide mb-4 text-zinc-800" style={{ letterSpacing: "0.05em" }}>
-          КАРТОЧКА ВОДИТЕЛЯ
-        </h2>
-
-        {/* Таблица водителя */}
-        <table className="w-full border-collapse mb-3" style={{ border: "1px solid #d4d4d8" }}>
-          <tbody>
-            {driver.rows.map(([label, value], i) => (
-              <tr key={i}>
-                <td
-                  className="text-sm sm:text-[15px] text-zinc-800"
-                  style={{
-                    border: "1px solid #d4d4d8",
-                    padding: "10px 12px",
-                    background: "#fdf6e3",
-                    width: "45%",
-                    verticalAlign: "middle",
-                  }}
-                >
-                  {label}
-                </td>
-                <td
-                  className="text-sm sm:text-[15px] text-zinc-800 text-center font-medium"
-                  style={{
-                    border: "1px solid #d4d4d8",
-                    padding: "10px 12px",
-                    background: "#fdf6e3",
-                    verticalAlign: "middle",
-                  }}
-                >
-                  {value}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        {/* Подвал */}
-        <p className="text-center text-xs text-zinc-500 mt-5 pt-3 border-t border-zinc-200">
-          ООО «ФАВОРИТ» · фаварит.рф · +7 960 188-30-84
-        </p>
       </div>
+
+      <p className="max-w-[640px] mx-auto mt-4 text-center text-xs text-white/40">
+        Карточка техники в фирменном стиле · отправляйте клиентам в WhatsApp / Telegram
+      </p>
     </div>
   );
 };
