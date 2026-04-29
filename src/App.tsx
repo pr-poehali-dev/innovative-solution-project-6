@@ -16,6 +16,7 @@ const SitemapSourcePage = lazy(() => import("./pages/SitemapSourcePage"));
 const SeoLandingPage = lazy(() => import("./pages/SeoLandingPage"));
 const TruckCard = lazy(() => import("./pages/TruckCard"));
 const AdBanner = lazy(() => import("./pages/AdBanner"));
+const AdminReindex = lazy(() => import("./pages/AdminReindex"));
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,7 @@ const App = () => (
             />
             <Route path="/karta/faw-j6p-390" element={<TruckCard />} />
             <Route path="/banner" element={<AdBanner />} />
+            <Route path="/admin/reindex" element={<AdminReindex />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
