@@ -52,6 +52,22 @@ const StructuredData = () => {
     ],
     "foundingDate": "2023",
     "description": "ООО «ФАВОРИТ» — аренда манипуляторов и спецтехники в Нижнем Новгороде. ИНН 5250077990, ОГРН 1235200013531. Собственный парк техники, работа с НДС, договор для юр. лиц.",
+    "priceRange": "1800-3500 RUB",
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 56.270596,
+      "longitude": 43.848988
+    },
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "00:00",
+      "closes": "23:59"
+    }],
+    "areaServed": [
+      { "@type": "City", "name": "Нижний Новгород" },
+      { "@type": "AdministrativeArea", "name": "Нижегородская область" }
+    ],
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5",
