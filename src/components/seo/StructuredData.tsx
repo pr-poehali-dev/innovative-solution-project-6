@@ -95,7 +95,8 @@ const StructuredData = () => {
       "reviewCount": String(reviews.length),
       "bestRating": "5",
       "worstRating": "1"
-    }
+    },
+    "review": reviewSchema
   };
 
   return (
