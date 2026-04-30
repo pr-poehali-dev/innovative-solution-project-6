@@ -1,19 +1,25 @@
 User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /admin/
+Disallow: /banner
+Disallow: /karta/
 
 User-agent: Googlebot
 Allow: /
 Disallow: /api/
+Disallow: /admin/
 
 User-agent: Yandex
 Allow: /
 Disallow: /api/
-Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term
-Host: xn--80aafz3bni.xn--p1ai
+Disallow: /admin/
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&yclid&gclid&fbclid
 
 User-agent: Bingbot
 Allow: /
+Disallow: /api/
+Disallow: /admin/
 
 User-agent: Twitterbot
 Allow: /
