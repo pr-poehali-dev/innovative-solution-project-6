@@ -162,6 +162,13 @@ export default function OrderModal({ open, onClose, truckName, calcSummary, subm
                 {status === "loading" ? "Отправка..." : submitLabel || "Перезвоните мне"}
               </button>
 
+              <p className="text-center text-[10px] text-muted-foreground/70 leading-snug">
+                Нажимая кнопку, вы соглашаетесь с{" "}
+                <a href="/privacy" target="_blank" rel="noopener" className="text-accent/80 hover:text-accent hover:underline">
+                  политикой конфиденциальности
+                </a>
+              </p>
+
               <p className="text-center text-xs text-muted-foreground">
                 Или звоните напрямую:{" "}
                 <a href="tel:+79601883084" className="text-accent hover:underline">
