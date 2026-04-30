@@ -213,7 +213,13 @@ const FleetSection = () => {
 
   return (
     <section className="py-16 sm:py-32 px-4 sm:px-6 scroll-mt-20 sm:scroll-mt-24">
-      <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} truckName={selectedTruck} />
+      <OrderModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        truckName={selectedTruck}
+        title="Заказать эту технику"
+        submitLabel="Заказать технику"
+      />
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10 sm:mb-20">
           <div className="flex justify-center mb-4">

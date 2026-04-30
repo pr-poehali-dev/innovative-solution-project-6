@@ -27,7 +27,14 @@ export default function TruckPage() {
 
   return (
     <>
-      <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} truckName={truck.title} calcSummary={calcSummary} />
+      <OrderModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        truckName={truck.title}
+        calcSummary={calcSummary}
+        title="Заказать эту технику"
+        submitLabel="Заказать технику"
+      />
       <TruckSeo truck={truck} slug={slug!} />
       <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
 

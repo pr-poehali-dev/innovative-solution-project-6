@@ -61,6 +61,8 @@ const CalculatorSection = () => {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         truckName={`${truck.name} · ${hours} ч · ${cityLabel}${withRigger ? " · стропальщик" : ""} · Итого: ${finalTotal.toLocaleString("ru")} ₽`}
+        title="Получить расчёт"
+        submitLabel="Получить расчёт"
       />
 
       <div className="max-w-5xl mx-auto relative">

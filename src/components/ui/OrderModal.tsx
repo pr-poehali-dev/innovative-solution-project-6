@@ -7,11 +7,13 @@ interface OrderModalProps {
   onClose: () => void;
   truckName?: string;
   calcSummary?: string;
+  submitLabel?: string;
+  title?: string;
 }
 
 const SUBMIT_URL = "https://functions.poehali.dev/dc327032-aa41-4632-b107-a026d92ef031";
 
-export default function OrderModal({ open, onClose, truckName, calcSummary }: OrderModalProps) {
+export default function OrderModal({ open, onClose, truckName, calcSummary, submitLabel, title }: OrderModalProps) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [comment, setComment] = useState("");
@@ -97,7 +99,7 @@ export default function OrderModal({ open, onClose, truckName, calcSummary }: Or
         ) : (
           <>
             <h3 className="text-2xl font-black tracking-tighter mb-1">
-              Оставить заявку
+              {title || "Оставить заявку"}
             </h3>
             {truckName && (
               <p className="text-sm text-accent mb-2">{truckName}</p>
@@ -157,7 +159,7 @@ export default function OrderModal({ open, onClose, truckName, calcSummary }: Or
                 disabled={status === "loading"}
                 className="w-full py-4 bg-gradient-to-r from-accent to-accent/80 text-black font-bold rounded-xl hover:shadow-xl hover:shadow-accent/40 transition-all disabled:opacity-60 text-base"
               >
-                {status === "loading" ? "Отправка..." : "Перезвоните мне"}
+                {status === "loading" ? "Отправка..." : submitLabel || "Перезвоните мне"}
               </button>
 
               <p className="text-center text-xs text-muted-foreground">
