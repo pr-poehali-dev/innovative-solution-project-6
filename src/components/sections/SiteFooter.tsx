@@ -221,26 +221,10 @@ const SiteFooter = () => {
 
       {/* Нижняя полоска */}
       <div className="border-t border-accent/10 bg-black/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-[11px] sm:text-xs text-muted-foreground/80">
-          <p className="text-center sm:text-left order-2 sm:order-1 leading-relaxed">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] sm:text-xs text-muted-foreground/80">
+          <p className="text-center leading-relaxed">
             © 2015–2026 ООО «Фаворит» — аренда манипуляторов<br className="sm:hidden" /> в Нижнем Новгороде и области
           </p>
-          <div className="flex items-center gap-3 sm:gap-4 order-1 sm:order-2">
-            <a
-              href="https://webmaster.yandex.ru/siteinfo/?site=https://фаварит.рф"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:opacity-80 transition-opacity flex-shrink-0"
-            >
-              <img
-                width="88"
-                height="31"
-                alt="Яндекс.Метрика"
-                style={{ borderRadius: "6px" }}
-                src="https://yandex.ru/cycounter?https://фаварит.рф&theme=light&lang=ru"
-              />
-            </a>
-          </div>
         </div>
       </div>
     </footer>
