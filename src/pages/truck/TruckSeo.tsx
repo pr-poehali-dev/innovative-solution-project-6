@@ -6,6 +6,8 @@ interface TruckSeoProps {
 }
 
 export default function TruckSeo({ truck, slug }: TruckSeoProps) {
+  if (!slug || !truck) return null;
+  const pageUrl = `https://xn--80aafz3bni.xn--p1ai/tehnika/${slug}`;
   return (
     <>
       <title>{truck.seoTitle}</title>
@@ -38,7 +40,7 @@ export default function TruckSeo({ truck, slug }: TruckSeoProps) {
         },
         "offers": {
           "@type": "Offer",
-          "url": `https://фаварит.рф/tehnika/${slug}`,
+          "url": pageUrl,
           "priceCurrency": "RUB",
           "price": truck.priceNum,
           "priceSpecification": {
