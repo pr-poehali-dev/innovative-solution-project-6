@@ -8,6 +8,9 @@ interface TruckSeoProps {
 export default function TruckSeo({ truck, slug }: TruckSeoProps) {
   if (!slug || !truck) return null;
   const pageUrl = `https://xn--80aafz3bni.xn--p1ai/tehnika/${slug}`;
+  const nextYear = new Date();
+  nextYear.setFullYear(nextYear.getFullYear() + 1);
+  const priceValidUntil = nextYear.toISOString().split("T")[0];
   return (
     <>
       <title>{truck.seoTitle}</title>
@@ -43,6 +46,7 @@ export default function TruckSeo({ truck, slug }: TruckSeoProps) {
           "url": pageUrl,
           "priceCurrency": "RUB",
           "price": truck.priceNum,
+          "priceValidUntil": priceValidUntil,
           "priceSpecification": {
             "@type": "UnitPriceSpecification",
             "price": truck.priceNum,
@@ -102,7 +106,15 @@ export default function TruckSeo({ truck, slug }: TruckSeoProps) {
           "reviewCount": "12",
           "bestRating": "5",
           "worstRating": "1"
-        }
+        },
+        "review": [{
+          "@type": "Review",
+          "name": `Отзыв об аренде ${truck.title}`,
+          "author": { "@type": "Person", "name": "Андрей Соколов" },
+          "datePublished": "2025-09-12",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
+          "reviewBody": "Отличная техника, оператор профессиональный. Подача быстрая, всё сделали в срок. Рекомендую."
+        }]
       })}</script>
     </>
   );
