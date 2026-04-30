@@ -140,7 +140,7 @@ export default function OrderModal({ open, onClose, truckName, calcSummary }: Or
               <div className="relative">
                 <Icon name="MessageSquare" size={14} className="absolute left-3 top-3 text-accent/70 pointer-events-none" />
                 <textarea
-                  placeholder="Что перевезти / поднять и нюансы (вес, габариты, адрес, время)"
+                  placeholder="Что везём (груз, вес, размеры, подъездные пути для техники)"
                   value={comment}
                   onChange={e => setComment(e.target.value)}
                   rows={2}
