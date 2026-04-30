@@ -240,9 +240,6 @@ const SiteFooter = () => {
                 src="https://yandex.ru/cycounter?https://фаварит.рф&theme=light&lang=ru"
               />
             </a>
-            <a href="/sitemap.xml" className="hover:text-accent transition-colors whitespace-nowrap">
-              Карта сайта
-            </a>
           </div>
         </div>
       </div>
