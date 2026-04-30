@@ -125,7 +125,7 @@ const HeroLeadForm = () => {
                 <Icon name="Package" size={14} className="absolute left-3 top-3 text-accent/70 pointer-events-none" />
                 <textarea
                   rows={2}
-                  placeholder="Что перевезти / поднять и нюансы (вес, габариты, этаж, доступ техники)"
+                  placeholder="Что везём: груз, вес, размеры, подъездные пути для техники"
                   value={cargo}
                   onChange={e => setCargo(e.target.value)}
                   className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all resize-none leading-snug"
