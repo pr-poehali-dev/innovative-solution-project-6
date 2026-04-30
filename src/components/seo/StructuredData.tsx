@@ -15,6 +15,7 @@ const reviews = [
 
 const reviewSchema = reviews.map((r) => ({
   "@type": "Review",
+  "name": `Отзыв от ${r.name}`,
   "author": { "@type": "Person", "name": r.name },
   "datePublished": r.date,
   "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
