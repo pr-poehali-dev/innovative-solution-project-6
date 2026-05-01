@@ -95,7 +95,7 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
                     width="800"
                     height="600"
                     loading={i === 0 ? "eager" : "lazy"}
-                    fetchPriority={i === 0 ? "high" : "low"}
+                    {...({ fetchpriority: i === 0 ? "high" : "low" } as Record<string, string>)}
                     decoding="async"
                   />
                 </div>
@@ -148,7 +148,7 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
               width="1600"
               height="900"
               loading={i === 0 ? "eager" : "lazy"}
-              fetchPriority={i === 0 ? "high" : "low"}
+              {...({ fetchpriority: i === 0 ? "high" : "low" } as Record<string, string>)}
               decoding="async"
             />
           </div>
