@@ -7,7 +7,7 @@ interface HeroContentProps {
 
 const HeroContent = ({ visibleSections }: HeroContentProps) => {
   return (
-    <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-24 sm:pt-28 lg:pt-32 pb-16 sm:pb-32">
+    <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-4 sm:pt-6 lg:pt-32 pb-16 sm:pb-32">
       <div className={`max-w-2xl transition-all duration-1000 ${visibleSections["hero"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
         <div className="mb-4 sm:mb-8 inline-block">
           <span className="text-xs font-medium tracking-widest text-accent/80 uppercase">

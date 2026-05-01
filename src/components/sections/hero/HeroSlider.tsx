@@ -47,7 +47,7 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
   return (
     <>
       {/* Мобильный и планшетный слайдер — на всю ширину экрана */}
-      <div className="relative lg:hidden w-full pt-20 sm:pt-24 pb-4 sm:pb-6 bg-gradient-to-b from-background via-background to-black/80">
+      <div className="relative lg:hidden w-full pt-16 sm:pt-20 pb-3 sm:pb-4 bg-gradient-to-b from-background via-background to-black/80">
         {/* Декор — размытые золотые круги (только на планшете, на мобилке съедает FPS) */}
         <div className="hidden sm:block absolute top-16 -left-10 w-40 h-40 sm:w-56 sm:h-56 rounded-full bg-accent/20 blur-3xl pointer-events-none" />
         <div className="hidden sm:block absolute bottom-0 -right-10 w-44 h-44 sm:w-64 sm:h-64 rounded-full bg-accent/10 blur-3xl pointer-events-none" />
@@ -56,7 +56,7 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
           {/* Карточка с фото — на всю ширину, без скруглений */}
           <div className="relative">
           <div
-            className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/10] lg:aspect-[16/9] overflow-hidden bg-gradient-to-br from-zinc-900 via-black to-zinc-900"
+            className="relative w-full aspect-[16/9] sm:aspect-[16/9] md:aspect-[16/9] lg:aspect-[16/9] overflow-hidden bg-gradient-to-br from-zinc-900 via-black to-zinc-900"
             onTouchStart={(e) => {
               touchStartX.current = e.touches[0].clientX;
             }}
