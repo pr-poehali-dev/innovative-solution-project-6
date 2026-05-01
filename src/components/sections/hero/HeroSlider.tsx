@@ -107,11 +107,11 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
                 >
                   <img
                     src={fullSrc}
-                    sizes="100vw"
+                    sizes="(max-width: 640px) 92vw, (max-width: 1024px) 720px, 0px"
                     alt={slide.alt}
                     className="w-full h-full object-contain object-center drop-shadow-2xl"
-                    width="1600"
-                    height="900"
+                    width="800"
+                    height="600"
                     loading={i === 0 ? "eager" : "lazy"}
                     fetchPriority={i === 0 ? "high" : "low"}
                     decoding="async"
