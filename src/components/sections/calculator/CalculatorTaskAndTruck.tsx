@@ -93,7 +93,7 @@ const CalculatorTaskAndTruck = ({
           onClick={() => setTruckListOpen((v) => !v)}
           className="w-full mb-2 p-3 rounded-xl border-2 border-accent/40 bg-gradient-to-r from-accent/10 to-transparent flex items-center gap-3 hover:border-accent transition-all text-left"
         >
-          <img src={truck.image} alt={truck.short} className="w-16 h-14 sm:w-20 sm:h-16 object-cover rounded-lg flex-shrink-0 bg-black/30" loading="lazy" />
+          <img src={truck.image} alt={truck.short} className="w-16 h-14 sm:w-20 sm:h-16 object-cover rounded-lg flex-shrink-0 bg-black/30" loading="lazy" decoding="async" width="80" height="64" />
           <div className="flex-1 min-w-0">
             <p className="text-[10px] text-accent font-bold tracking-wider mb-0.5">ВЫБРАНО</p>
             <p className="font-bold text-sm text-white truncate">{truck.name}</p>
@@ -123,7 +123,7 @@ const CalculatorTaskAndTruck = ({
                   }`}
                 >
                   <div className="relative aspect-[4/3] bg-black/30">
-                    <img src={t.image} alt={t.short} className="w-full h-full object-cover" loading="lazy" />
+                    <img src={t.image} alt={t.short} className="w-full h-full object-cover" loading="lazy" decoding="async" width="160" height="120" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                     {selected && (
                       <div className="absolute top-1 right-1 w-4 h-4 rounded-full bg-accent flex items-center justify-center">
@@ -159,7 +159,7 @@ const CalculatorTaskAndTruck = ({
                       selected ? "bg-accent/15" : "hover:bg-accent/5"
                     }`}
                   >
-                    <img src={t.image} alt={t.short} className="w-14 h-11 object-cover rounded-md flex-shrink-0 bg-black/30" loading="lazy" />
+                    <img src={t.image} alt={t.short} className="w-14 h-11 object-cover rounded-md flex-shrink-0 bg-black/30" loading="lazy" decoding="async" width="56" height="44" />
                     <div className="flex-1 min-w-0">
                       <p className={`text-xs font-bold truncate ${selected ? "text-white" : "text-foreground/90"}`}>{t.name}</p>
                       <div className="flex flex-wrap gap-x-2 text-[10px] text-muted-foreground">

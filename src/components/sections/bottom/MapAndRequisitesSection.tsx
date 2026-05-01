@@ -42,6 +42,10 @@ const MapAndRequisitesSection = ({
                   src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp"
                   alt="Фаворит герб"
                   className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 flex-shrink-0 rounded-xl object-cover logo-glow"
+                  loading="lazy"
+                  decoding="async"
+                  width="80"
+                  height="80"
                 />
                 <div className="flex flex-col items-center sm:items-start gap-0.5">
                   <h2
