@@ -56,7 +56,7 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
           {/* Карточка с фото — на всю ширину, без скруглений */}
           <div className="relative">
           <div
-            className="relative w-full aspect-[16/9] sm:aspect-[16/9] md:aspect-[16/9] lg:aspect-[16/9] overflow-hidden bg-gradient-to-br from-zinc-900 via-black to-zinc-900"
+            className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/10] lg:aspect-[16/9] overflow-hidden bg-gradient-to-br from-zinc-900 via-black to-zinc-900"
             onTouchStart={(e) => {
               touchStartX.current = e.touches[0].clientX;
             }}
@@ -124,29 +124,7 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
           </div>
         </div>
 
-        {/* Прогресс-полоска + точки */}
-        <div className="relative mt-4 px-1">
-          <div className="h-1 w-full rounded-full bg-white/10 overflow-hidden">
-            <div
-              key={current}
-              className="h-full bg-gradient-to-r from-accent/60 via-accent to-accent/60 rounded-full"
-              style={{ animation: "heroProgress 4s linear forwards" }}
-            />
-          </div>
-          <div className="flex justify-center gap-1.5 mt-3">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                aria-label={`Перейти к слайду ${i + 1} из ${slides.length}`}
-                aria-current={i === current ? "true" : undefined}
-                className={`rounded-full transition-all duration-300 ${i === current ? "w-8 h-1.5 bg-accent" : "w-1.5 h-1.5 bg-white/30"}`}
-              />
-            ))}
-          </div>
         </div>
-        </div>
-        <style>{`@keyframes heroProgress { from { width: 0% } to { width: 100% } }`}</style>
       </div>
 
       {/* Десктопный слайдер — фон на весь экран */}
