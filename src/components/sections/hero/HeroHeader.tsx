@@ -10,7 +10,7 @@ const HeroHeader = () => {
   return (
     <>
       {/* Header */}
-      <header className="fixed top-0 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
+      <header className="fixed top-0 w-full bg-background/95 lg:bg-background/80 lg:backdrop-blur-2xl border-b border-accent/20 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5 flex justify-between items-center">
           <BrandLogo />
           <nav className="hidden md:flex gap-10 text-sm font-medium">
