@@ -121,12 +121,6 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
               <Icon name="ChevronRight" size={16} className="text-white sm:!w-[18px] sm:!h-[18px]" />
             </button>
 
-            {/* Подпись слайда */}
-            <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
-              <p key={current} className="text-white text-sm font-semibold text-center animate-in fade-in slide-in-from-bottom-2 duration-500">
-                {slides[current].alt}
-              </p>
-            </div>
           </div>
         </div>
 
