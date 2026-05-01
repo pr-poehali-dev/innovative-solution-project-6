@@ -47,7 +47,7 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
   return (
     <>
       {/* Мобильный и планшетный слайдер — премиум-карточка с рамкой и бликами */}
-      <div className="relative lg:hidden w-full pt-24 sm:pt-28 pb-4 sm:pb-6 px-3 sm:px-6 md:px-10 bg-gradient-to-b from-background via-background to-black/80">
+      <div className="relative lg:hidden w-full pt-2 sm:pt-4 pb-4 sm:pb-6 px-3 sm:px-6 md:px-10 bg-gradient-to-b from-background via-background to-black/80">
         {/* Декор — размытые золотые круги (только на десктопе/планшете, на мобилке съедает FPS) */}
         <div className="hidden sm:block absolute top-16 -left-10 w-40 h-40 sm:w-56 sm:h-56 rounded-full bg-accent/20 blur-3xl pointer-events-none" />
         <div className="hidden sm:block absolute bottom-0 -right-10 w-44 h-44 sm:w-64 sm:h-64 rounded-full bg-accent/10 blur-3xl pointer-events-none" />
@@ -112,8 +112,8 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
                     className="w-full h-full object-contain object-center drop-shadow-2xl"
                     width="800"
                     height="600"
-                    loading={i === 0 ? "eager" : "lazy"}
-                    fetchPriority={i === 0 ? "high" : "low"}
+                    loading="lazy"
+                    fetchPriority="low"
                     decoding="async"
                   />
                 </div>

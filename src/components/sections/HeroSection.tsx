@@ -14,10 +14,14 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
     <>
       <HeroHeader />
 
-      {/* Hero Section */}
-      <section id="hero" className="relative lg:min-h-screen lg:flex lg:items-center overflow-hidden">
-        <HeroSlider current={current} setCurrent={setCurrent} />
-        <HeroContent visibleSections={visibleSections} />
+      {/* Hero Section: на мобиле текст идёт первым (быстрый LCP), слайдер ниже. На десктопе слайдер — абсолютный фон, порядок не важен. */}
+      <section id="hero" className="relative flex flex-col lg:block lg:min-h-screen lg:items-center overflow-hidden">
+        <div className="order-2 lg:order-none">
+          <HeroSlider current={current} setCurrent={setCurrent} />
+        </div>
+        <div className="order-1 lg:order-none lg:flex lg:items-center lg:min-h-screen">
+          <HeroContent visibleSections={visibleSections} />
+        </div>
       </section>
     </>
   );
