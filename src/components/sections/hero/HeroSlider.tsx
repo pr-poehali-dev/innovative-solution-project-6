@@ -95,6 +95,10 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
 
             {slides.map((slide, i) => {
               const isActive = i === current;
+              const next = (current + 1) % slides.length;
+              const prev = (current - 1 + slides.length) % slides.length;
+              const shouldRender = isActive || i === next || i === prev;
+              if (!shouldRender) return null;
               const fullSrc = slide.fullSrc || `${WEBP_BASE}/${slide.id}.webp`;
               return (
                 <div
@@ -172,6 +176,10 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
       {/* Десктопный слайдер — фон на весь экран */}
       {slides.map((slide, i) => {
         const isActive = i === current;
+        const next = (current + 1) % slides.length;
+        const prev = (current - 1 + slides.length) % slides.length;
+        const shouldRender = isActive || i === next || i === prev;
+        if (!shouldRender) return null;
         const fullSrc = slide.fullSrc || `${WEBP_BASE}/${slide.id}.webp`;
         return (
           <div
