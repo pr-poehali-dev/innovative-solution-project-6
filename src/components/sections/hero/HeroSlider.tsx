@@ -53,24 +53,6 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
         <div className="hidden sm:block absolute bottom-0 -right-10 w-44 h-44 sm:w-64 sm:h-64 rounded-full bg-accent/10 blur-3xl pointer-events-none" />
 
         <div className="relative w-full">
-          {/* Бейдж над фото */}
-          <div className="flex items-center justify-between mb-3 sm:mb-4 px-3 sm:px-6">
-            <div
-              className="inline-flex items-center gap-2 px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full shadow-lg shadow-accent/30"
-              style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
-            >
-              <span className="relative flex w-2 h-2">
-                <span className="absolute inset-0 rounded-full bg-white animate-ping opacity-75" />
-                <span className="relative rounded-full w-2 h-2 bg-white" />
-              </span>
-              <span className="text-black text-[11px] sm:text-sm font-black uppercase tracking-widest">Наш автопарк</span>
-            </div>
-            <div className="text-white text-sm sm:text-base font-mono tabular-nums font-bold">
-              <span className="text-accent">{String(current + 1).padStart(2, "0")}</span>
-              <span className="text-white/50"> / {String(slides.length).padStart(2, "0")}</span>
-            </div>
-          </div>
-
           {/* Карточка с фото — на всю ширину, без скруглений */}
           <div className="relative">
           <div
