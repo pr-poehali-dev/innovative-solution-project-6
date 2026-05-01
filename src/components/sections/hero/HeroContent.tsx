@@ -9,22 +9,22 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
   return (
     <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-4 sm:pt-6 lg:pt-32 pb-16 sm:pb-32">
       <div className={`max-w-2xl transition-all duration-1000 ${visibleSections["hero"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-        <div className="mb-4 sm:mb-8 inline-block">
-          <span className="text-xs font-medium tracking-widest text-accent/80 uppercase">
+        <div className="mb-2 sm:mb-8 inline-block">
+          <span className="text-[10px] sm:text-xs font-medium tracking-widest text-accent/80 uppercase">
             Аренда и услуги манипуляторов в Нижнем Новгороде
           </span>
         </div>
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black leading-tight mb-5 sm:mb-8 tracking-tighter">
+        <h1 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black leading-tight mb-2 sm:mb-8 tracking-tighter">
           <span className="bg-gradient-to-br from-white via-white to-accent/40 bg-clip-text text-transparent">Манипуляторы </span>
           <span className="text-accent">в аренду </span>
           <span className="text-white/70">в Нижнем Новгороде</span>
         </h1>
-        <p className="text-sm sm:text-xl text-white/80 leading-relaxed mb-5 sm:mb-7 max-w-full sm:max-w-xl font-light">
+        <p className="text-xs sm:text-xl text-white/80 leading-snug sm:leading-relaxed mb-3 sm:mb-7 max-w-full sm:max-w-xl font-light">
           Оставьте заявку или позвоните — мы подберём правильный манипулятор с платформой необходимых габаритов и нужной грузоподъёмностью под вашу задачу.
         </p>
 
         {/* Ключевые условия: цена · мин. заказ · оператор */}
-        <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 max-w-xl">
+        <div className="flex flex-wrap gap-1.5 sm:gap-3 mb-3 sm:mb-8 max-w-xl">
           <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-accent/40 bg-accent/10 text-white text-xs sm:text-sm">
             <Icon name="Wallet" size={14} className="text-accent" />
             <span className="font-semibold">от 1800 ₽/час</span>
@@ -39,7 +39,7 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
           </div>
         </div>
 
-        <div className="flex gap-3 sm:gap-4 mb-8 sm:mb-12 flex-col sm:flex-row">
+        <div className="flex gap-3 sm:gap-4 mb-4 sm:mb-12 flex-col sm:flex-row">
           <a
             href="#fleet"
             onClick={(e) => {
@@ -51,7 +51,7 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
                 history.replaceState(null, "", "#fleet");
               }
             }}
-            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all font-medium text-base sm:text-lg text-white text-center cursor-pointer"
+            className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-4 border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all font-medium text-sm sm:text-lg text-white text-center cursor-pointer"
           >
             Посмотреть технику
           </a>
