@@ -40,7 +40,7 @@ const CalculatorSection = () => {
   const isCustomCity = city.name === "Другой город";
   const cityLabel = isCustomCity && customCity.trim() ? customCity.trim() : city.name;
   const citySurcharge = Math.round(city.hours * truck.price);
-  const riggerPrice = withRigger ? 2500 * hours : 0;
+  const riggerPrice = withRigger ? 1500 * Math.max(hours, 4) : 0;
   const finalTotal = baseTotal + citySurcharge + riggerPrice;
 
   const minPrice = Math.min(...trucks.map((t) => t.price));

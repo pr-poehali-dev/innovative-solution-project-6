@@ -266,9 +266,9 @@ const CalculatorOptionsAndTotal = ({
                 <Icon name="HardHat" size={12} className="text-accent" />
                 Стропальщик
               </p>
-              <p className="text-[10px] text-muted-foreground">Помощь со строповкой груза</p>
+              <p className="text-[10px] text-muted-foreground">Помощь со строповкой груза · мин. 4 часа</p>
             </div>
-            <span className="text-xs font-black text-accent">+2 500 ₽/ч</span>
+            <span className="text-xs font-black text-accent">+1 500 ₽/ч</span>
           </label>
         </div>
       </div>
@@ -305,7 +305,7 @@ const CalculatorOptionsAndTotal = ({
           )}
           {withRigger && (
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Стропальщик × {hours} ч</span>
+              <span className="text-muted-foreground">Стропальщик × {Math.max(hours, 4)} ч (1 500 ₽/ч)</span>
               <span className="font-bold tabular-nums">+{riggerPrice.toLocaleString("ru")} ₽</span>
             </div>
           )}
