@@ -113,24 +113,35 @@
     }
   }
 
-  @keyframes logoGlow {
+  .logo-glow {
+    position: relative;
+    box-shadow: 0 0 18px rgba(232, 168, 32, 0.6);
+  }
+  .logo-glow::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    box-shadow: 0 0 28px rgba(232, 168, 32, 0.9);
+    opacity: 0;
+    pointer-events: none;
+    animation: logoGlowOpacity 3s ease-in-out infinite;
+    will-change: opacity;
+  }
+  @keyframes logoGlowOpacity {
     0%,
     100% {
-      box-shadow: 0 0 18px rgba(232, 168, 32, 0.6);
+      opacity: 0;
     }
     50% {
-      box-shadow: 0 0 28px rgba(232, 168, 32, 0.9);
+      opacity: 1;
     }
-  }
-
-  .logo-glow {
-    animation: logoGlow 3s ease-in-out infinite;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .logo-glow {
+    .logo-glow::after {
       animation: none;
-      box-shadow: 0 0 18px rgba(232, 168, 32, 0.6);
+      opacity: 0;
     }
   }
 
