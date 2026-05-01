@@ -28,9 +28,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <!-- Загрузка шрифта неблокирующим способом: print-media хак + fallback -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" media="print" onload="this.media='all'"/>
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap"/></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" media="print" onload="this.media='all'"/>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap"/></noscript>
     <!-- LCP: мобильный preload маленькой картинки, десктопный preload большой — выбор браузером по media -->
     <link rel="preload" as="image" href="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/df8d23ad-2b19-4a5c-bfef-8403f404cab9.webp" fetchpriority="high" type="image/webp"/>
     <link rel="icon" type="image/jpeg" sizes="any" href="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/e898d763-541f-4f6c-8cb7-c9002f77671e.jpg">
@@ -102,7 +102,14 @@
   </head>
 
 <body>
-<div id="root"></div>
+<div id="root">
+    <!-- Статический skeleton — даёт мгновенный FCP пока React грузится -->
+    <div style="min-height:100vh;background:#3a3f4a;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:system-ui,sans-serif;padding:20px;text-align:center">
+        <div style="width:64px;height:64px;border-radius:50%;background:#e8a820;margin-bottom:16px;box-shadow:0 0 20px rgba(232,168,32,.6)"></div>
+        <h1 style="margin:0 0 8px;font-size:18px;color:#e8a820">ООО Фаворит</h1>
+        <p style="margin:0;font-size:13px;opacity:.7">Аренда манипуляторов в Нижнем Новгороде</p>
+    </div>
+</div>
 <script type="module" src="/src/main.tsx"></script>
 
 <!-- Yandex.Metrika counter — загружается с отсрочкой, чтобы не блокировать LCP/FCP -->

@@ -116,21 +116,22 @@
   @keyframes logoGlow {
     0%,
     100% {
-      box-shadow:
-        0 0 20px rgba(232, 168, 32, 0.7),
-        0 0 45px rgba(232, 168, 32, 0.4),
-        0 0 70px rgba(232, 168, 32, 0.2);
+      box-shadow: 0 0 18px rgba(232, 168, 32, 0.6);
     }
     50% {
-      box-shadow:
-        0 0 35px rgba(232, 168, 32, 1),
-        0 0 70px rgba(232, 168, 32, 0.6),
-        0 0 100px rgba(232, 168, 32, 0.35);
+      box-shadow: 0 0 28px rgba(232, 168, 32, 0.9);
     }
   }
 
   .logo-glow {
-    animation: logoGlow 2s ease-in-out infinite;
+    animation: logoGlow 3s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-glow {
+      animation: none;
+      box-shadow: 0 0 18px rgba(232, 168, 32, 0.6);
+    }
   }
 
   h1,
@@ -193,24 +194,28 @@
     0%,
     100% {
       opacity: 0.25;
-      filter: blur(8px);
     }
     50% {
       opacity: 0.55;
-      filter: blur(14px);
     }
   }
 
   .emerald-pulse {
+    filter: blur(10px);
     animation: emeraldPulse 3.5s ease-in-out infinite;
+    will-change: opacity;
   }
 
   .group:hover .emerald-pulse {
     animation: none;
     opacity: 0.95;
-    filter: blur(12px);
-    transition:
-      opacity 0.5s ease,
-      filter 0.5s ease;
+    transition: opacity 0.5s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .emerald-pulse {
+      animation: none;
+      opacity: 0.4;
+    }
   }
 }
