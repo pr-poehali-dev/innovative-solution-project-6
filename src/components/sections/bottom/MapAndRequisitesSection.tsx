@@ -47,7 +47,7 @@ const MapAndRequisitesSection = ({
                   width="80"
                   height="80"
                 />
-                <div className="flex flex-col items-center sm:items-start gap-0.5">
+                <div className="flex flex-col items-center sm:items-start gap-1.5">
                   <h2
                     className="text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight"
                     style={{
