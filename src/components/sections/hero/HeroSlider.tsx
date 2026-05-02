@@ -23,8 +23,28 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
   useEffect(() => {
     if (interacted) return;
     const mark = () => setInteracted(true);
-    const t = setTimeout(mark, 2500);
-    return () => clearTimeout(t);
+    // Откладываем подгрузку соседних слайдов до полной загрузки + idle,
+    // чтобы LCP-картинка не конкурировала за сеть/CPU
+    let idleId: number | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    const schedule = () => {
+      if ("requestIdleCallback" in window) {
+        idleId = (window as unknown as {
+          requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number;
+        }).requestIdleCallback(mark, { timeout: 8000 });
+      } else {
+        timeoutId = setTimeout(mark, 6000);
+      }
+    };
+    if (document.readyState === "complete") schedule();
+    else window.addEventListener("load", schedule, { once: true });
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      if (idleId !== null && "cancelIdleCallback" in window) {
+        (window as unknown as { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(idleId);
+      }
+      window.removeEventListener("load", schedule);
+    };
   }, [interacted]);
 
   useEffect(() => {
