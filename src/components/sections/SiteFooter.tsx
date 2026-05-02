@@ -66,7 +66,7 @@ const CollapsibleColumn = ({ icon, title, defaultOpen = false, children }: Colla
 
 const LinkItem = ({ label }: { label: string }) => (
   <span className="inline-flex items-start gap-1.5 leading-snug">
-    <span className="text-accent/40 group-hover:text-accent flex-shrink-0">›</span>
+    <span className="text-accent/70 group-hover:text-accent flex-shrink-0">›</span>
     <span>{label}</span>
   </span>
 );
@@ -84,7 +84,7 @@ const SiteFooter = () => {
           {/* Колонка 1 — О компании (всегда видна полностью) */}
           <div className="md:col-span-2 lg:col-span-1">
             <BrandLogo size="sm" />
-            <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mt-3 sm:mt-4 mb-4 max-w-md">
+            <p className="text-white/80 text-sm leading-relaxed mt-3 sm:mt-4 mb-4 max-w-md">
               Собственный автопарк манипуляторов в Нижнем Новгороде. Работаем с 2015 года. Аренда техники с опытным оператором.
             </p>
 
@@ -135,20 +135,20 @@ const SiteFooter = () => {
             <div className="flex flex-col gap-2">
               <a
                 href="mailto:Avrora.888@bk.ru"
-                className="inline-flex items-center gap-2 text-muted-foreground text-xs sm:text-sm hover:text-accent transition-colors break-all"
+                className="inline-flex items-center gap-2 text-white/85 text-sm hover:text-accent transition-colors break-all"
               >
                 <div className="w-7 h-7 rounded-lg bg-accent/10 border border-accent/25 flex items-center justify-center flex-shrink-0">
                   <Icon name="Mail" size={12} className="text-accent" />
                 </div>
                 Avrora.888@bk.ru
               </a>
-              <div className="inline-flex items-start gap-2 text-muted-foreground text-xs sm:text-sm">
+              <div className="inline-flex items-start gap-2 text-white/85 text-sm">
                 <div className="w-7 h-7 rounded-lg bg-accent/10 border border-accent/25 flex items-center justify-center flex-shrink-0">
                   <Icon name="MapPin" size={12} className="text-accent" />
                 </div>
                 <span className="mt-1">Нижний Новгород,<br className="sm:hidden" /> Шуваловский проезд, 7</span>
               </div>
-              <div className="inline-flex items-center gap-2 text-muted-foreground text-xs sm:text-sm">
+              <div className="inline-flex items-center gap-2 text-white/85 text-sm">
                 <div className="w-7 h-7 rounded-lg bg-accent/10 border border-accent/25 flex items-center justify-center flex-shrink-0">
                   <Icon name="Clock" size={12} className="text-accent" />
                 </div>
@@ -164,7 +164,7 @@ const SiteFooter = () => {
                 <li key={s.href}>
                   <a
                     href={s.href}
-                    className="text-muted-foreground text-xs sm:text-sm hover:text-accent transition-colors group"
+                    className="text-white/80 text-sm hover:text-accent transition-colors group"
                   >
                     <LinkItem label={s.label} />
                   </a>
@@ -180,7 +180,7 @@ const SiteFooter = () => {
                 <li key={c.slug}>
                   <Link
                     to={`/gorod/${c.slug}`}
-                    className="text-muted-foreground text-xs sm:text-sm hover:text-accent transition-colors group"
+                    className="text-white/80 text-sm hover:text-accent transition-colors group"
                   >
                     <LinkItem label={c.name} />
                   </Link>
@@ -196,7 +196,7 @@ const SiteFooter = () => {
                 <li key={t.slug}>
                   <Link
                     to={`/tehnika/${t.slug}`}
-                    className="text-muted-foreground text-xs sm:text-sm hover:text-accent transition-colors group"
+                    className="text-white/80 text-sm hover:text-accent transition-colors group"
                   >
                     <LinkItem label={t.label} />
                   </Link>
