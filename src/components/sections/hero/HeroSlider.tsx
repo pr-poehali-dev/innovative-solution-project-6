@@ -9,6 +9,23 @@ interface HeroSliderProps {
 
 const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
   const touchStartX = useRef<number | null>(null);
+  const [interacted, setInteracted] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 1024px)");
+    const update = () => setIsDesktop(mql.matches);
+    update();
+    mql.addEventListener?.("change", update);
+    return () => mql.removeEventListener?.("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (interacted) return;
+    const mark = () => setInteracted(true);
+    const t = setTimeout(mark, 2500);
+    return () => clearTimeout(t);
+  }, [interacted]);
 
   useEffect(() => {
     // Автослайд: запускаем только когда вкладка активна — экономит CPU на мобильных
@@ -79,7 +96,7 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
               const isActive = i === current;
               const next = (current + 1) % slides.length;
               const prev = (current - 1 + slides.length) % slides.length;
-              const shouldRender = isActive || i === next || i === prev;
+              const shouldRender = isActive || (interacted && (i === next || i === prev));
               if (!shouldRender) return null;
               const fullSrc = slide.fullSrc || `${WEBP_BASE}/${slide.id}.webp`;
               return (
@@ -127,12 +144,12 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
         </div>
       </div>
 
-      {/* Десктопный слайдер — фон на весь экран */}
-      {slides.map((slide, i) => {
+      {/* Десктопный слайдер — фон на весь экран. Рендерим только если реально десктоп */}
+      {isDesktop && slides.map((slide, i) => {
         const isActive = i === current;
         const next = (current + 1) % slides.length;
         const prev = (current - 1 + slides.length) % slides.length;
-        const shouldRender = isActive || i === next || i === prev;
+        const shouldRender = isActive || (interacted && (i === next || i === prev));
         if (!shouldRender) return null;
         const fullSrc = slide.fullSrc || `${WEBP_BASE}/${slide.id}.webp`;
         return (
