@@ -208,10 +208,10 @@ const SiteFooter = () => {
       </div>
 
       {/* Дисклеймер — не публичная оферта */}
-      <div className="border-t border-accent/10 bg-black/30">
+      <div className="border-t border-accent/15 bg-black/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
-          <p className="text-[11px] sm:text-xs text-muted-foreground/70 text-center leading-relaxed flex items-start sm:items-center justify-center gap-2">
-            <Icon name="Info" size={12} className="text-accent/60 flex-shrink-0 mt-0.5 sm:mt-0" />
+          <p className="text-xs sm:text-sm text-white/85 text-center leading-relaxed flex items-start sm:items-center justify-center gap-2">
+            <Icon name="Info" size={14} className="text-accent flex-shrink-0 mt-0.5 sm:mt-0" />
             <span>
               Обращаем ваше внимание, что сайт носит исключительно информационный характер и ни при каких условиях не является публичной офертой.
             </span>
@@ -220,12 +220,12 @@ const SiteFooter = () => {
       </div>
 
       {/* Нижняя полоска */}
-      <div className="border-t border-accent/10 bg-black/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] sm:text-xs text-muted-foreground/80 flex flex-col items-center gap-2">
-          <p className="text-center leading-relaxed">
+      <div className="border-t border-accent/15 bg-black/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-xs sm:text-sm text-white/85 flex flex-col items-center gap-2">
+          <p className="text-center leading-relaxed font-medium">
             © 2015–2026 ООО «Фаворит» — аренда манипуляторов<br className="sm:hidden" /> в Нижнем Новгороде и области
           </p>
-          <Link to="/privacy" className="hover:text-accent transition-colors">
+          <Link to="/privacy" className="text-accent hover:text-accent/80 underline-offset-4 hover:underline transition-colors font-semibold">
             Политика конфиденциальности
           </Link>
         </div>
