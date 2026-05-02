@@ -145,6 +145,13 @@
     }
   }
 
+  @media (max-width: 1023px) {
+    .logo-glow::after {
+      animation: none;
+      opacity: 0;
+    }
+  }
+
   @keyframes brandTaglineGlow {
     0%,
     100% {
@@ -166,6 +173,22 @@
 
   @media (prefers-reduced-motion: reduce) {
     .brand-tagline-glow {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .brand-tagline-glow {
+      animation: none;
+    }
+    .emerald-pulse {
+      animation: none;
+      filter: none;
+    }
+    .animate-float {
+      animation: none;
+    }
+    .animate-glow {
       animation: none;
     }
   }
