@@ -145,6 +145,31 @@
     }
   }
 
+  @keyframes brandTaglineGlow {
+    0%,
+    100% {
+      text-shadow:
+        0 0 6px rgba(245, 214, 128, 0.45),
+        0 0 12px rgba(232, 168, 32, 0.25);
+    }
+    50% {
+      text-shadow:
+        0 0 12px rgba(245, 214, 128, 0.85),
+        0 0 22px rgba(232, 168, 32, 0.55);
+    }
+  }
+
+  .brand-tagline-glow {
+    animation: brandTaglineGlow 3s ease-in-out infinite;
+    will-change: text-shadow;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .brand-tagline-glow {
+      animation: none;
+    }
+  }
+
   h1,
   h2,
   h3,
