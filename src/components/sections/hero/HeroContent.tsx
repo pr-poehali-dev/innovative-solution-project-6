@@ -10,7 +10,7 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
     <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-4 sm:pt-6 lg:pt-32 pb-16 sm:pb-32">
       <div className={`max-w-2xl transition-all duration-1000 ${visibleSections["hero"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
         <div className="mb-2 sm:mb-8 inline-block">
-          <span className="text-[10px] sm:text-xs font-medium tracking-widest text-accent/80 uppercase">
+          <span className="brand-tagline-glow text-[11px] sm:text-sm font-semibold tracking-widest uppercase" style={{ color: "#f5d680", letterSpacing: "0.2em" }}>
             Аренда и услуги манипуляторов в Нижнем Новгороде
           </span>
         </div>
