@@ -61,8 +61,8 @@ const MapAndRequisitesSection = ({
                     Как нас найти
                   </h2>
                   <p
-                    className="text-xs sm:text-sm tracking-widest uppercase"
-                    style={{ color: "#a07010", letterSpacing: "0.2em" }}
+                    className="brand-tagline-glow text-[11px] sm:text-sm font-semibold tracking-widest uppercase"
+                    style={{ color: "#f5d680", letterSpacing: "0.2em" }}
                   >
                     Аренда манипуляторов от компании Фаворит
                   </p>
