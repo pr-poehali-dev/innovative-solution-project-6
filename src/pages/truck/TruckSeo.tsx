@@ -7,7 +7,7 @@ interface TruckSeoProps {
 
 export default function TruckSeo({ truck, slug }: TruckSeoProps) {
   if (!slug || !truck) return null;
-  const pageUrl = `https://xn--80aafz3bni.xn--p1ai/tehnika/${slug}`;
+  const pageUrl = `https://фаварит.рф/tehnika/${slug}`;
   const nextYear = new Date();
   nextYear.setFullYear(nextYear.getFullYear() + 1);
   const priceValidUntil = nextYear.toISOString().split("T")[0];
@@ -29,6 +29,17 @@ export default function TruckSeo({ truck, slug }: TruckSeoProps) {
       <meta name="twitter:title" content="Аренда манипулятора в Нижнем Новгороде — ООО Фаворит" />
       <meta name="twitter:description" content="Аренда манипулятора с КМУ от 2200 ₽/час. Подача от 1 часа. +7 960 188-30-84" />
       <meta name="twitter:image" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
+      <link rel="canonical" href={pageUrl} />
+      <script type="application/ld+json">{JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://фаварит.рф/" },
+          { "@type": "ListItem", "position": 2, "name": "Техника", "item": "https://фаварит.рф/#fleet" },
+          { "@type": "ListItem", "position": 3, "name": truck.title, "item": pageUrl },
+          { "@type": "ListItem", "position": 4, "name": "Контакты", "item": "https://фаварит.рф/#contacts" }
+        ]
+      })}</script>
       <script type="application/ld+json">{JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Product",

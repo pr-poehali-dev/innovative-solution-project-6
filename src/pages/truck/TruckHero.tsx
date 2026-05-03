@@ -7,6 +7,7 @@ import { pluralizeUnits } from "./trucksData";
 
 interface TruckHeroProps {
   truck: Truck;
+  slug: string;
   onOrder: () => void;
   onCallback: () => void;
 }
@@ -40,7 +41,7 @@ export function TruckHeader({ onCallback }: { onCallback: () => void }) {
   );
 }
 
-export default function TruckHero({ truck, onOrder }: Omit<TruckHeroProps, "onCallback">) {
+export default function TruckHero({ truck, slug, onOrder }: Omit<TruckHeroProps, "onCallback">) {
   return (
     <>
       {/* Хлебные крошки */}
@@ -48,8 +49,9 @@ export default function TruckHero({ truck, onOrder }: Omit<TruckHeroProps, "onCa
         <Breadcrumbs
           items={[
             { label: "Главная", to: "/" },
-            { label: "Наша техника", to: "/#fleet" },
-            { label: truck.title },
+            { label: "Техника", to: "/#fleet" },
+            { label: truck.title, to: `/tehnika/${slug}` },
+            { label: "Контакты", to: "/#contacts" },
           ]}
         />
       </div>

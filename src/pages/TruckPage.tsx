@@ -41,7 +41,7 @@ export default function TruckPage() {
       <TruckHeader onCallback={() => setCallbackOpen(true)} />
 
       <main className="pt-20 pb-16 min-h-screen">
-        <TruckHero truck={truck} onOrder={() => setModalOpen(true)} />
+        <TruckHero truck={truck} slug={slug!} onOrder={() => setModalOpen(true)} />
 
         {/* Калькулятор */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-4">

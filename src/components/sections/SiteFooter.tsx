@@ -74,7 +74,7 @@ const LinkItem = ({ label }: { label: string }) => (
 const SiteFooter = () => {
   const [callbackOpen, setCallbackOpen] = useState(false);
   return (
-    <footer className="relative border-t border-accent/20 bg-gradient-to-b from-background to-black">
+    <footer id="contacts" className="relative border-t border-accent/20 bg-gradient-to-b from-background to-black">
       <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
 
