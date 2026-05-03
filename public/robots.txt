@@ -27,4 +27,5 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-Sitemap: https://xn--80aafz3bni.xn--p1ai/sitemap.xml
+Host: https://фаварит.рф
+Sitemap: https://фаварит.рф/sitemap.xml
