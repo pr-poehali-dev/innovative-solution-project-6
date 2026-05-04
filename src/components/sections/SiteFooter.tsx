@@ -85,7 +85,7 @@ const SiteFooter = () => {
           <div className="md:col-span-2 lg:col-span-1">
             <BrandLogo size="sm" />
             <p className="text-white/80 text-sm leading-relaxed mt-3 sm:mt-4 mb-4 max-w-md">
-              Собственный автопарк манипуляторов в Нижнем Новгороде. Работаем с 2015 года. Аренда техники с опытным оператором.
+              <strong className="text-white">фаварит.рф</strong> — официальный сайт компании <strong className="text-white">Фаворит</strong> (ООО «ФАВОРИТ»). Собственный автопарк манипуляторов в Нижнем Новгороде. Работаем с 2015 года. Аренда техники с опытным оператором.
             </p>
 
             {/* Крупные кнопки звонка */}
