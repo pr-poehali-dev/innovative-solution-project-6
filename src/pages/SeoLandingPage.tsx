@@ -82,16 +82,16 @@ const SeoLandingPage = ({ slugOverride }: SeoLandingPageProps) => {
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="фаварит.рф" />
       <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:title" content="Аренда манипулятора в Нижнем Новгороде — ООО Фаворит" />
-      <meta property="og:description" content="Аренда манипулятора с КМУ от 2200 ₽/час. Подача от 1 часа. +7 960 188-30-84" />
+      <meta property="og:title" content={data.metaTitle} />
+      <meta property="og:description" content={data.metaDescription} />
       <meta property="og:image" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
       <meta property="og:image:secure_url" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:type" content="image/jpeg" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Аренда манипулятора в Нижнем Новгороде — ООО Фаворит" />
-      <meta name="twitter:description" content="Аренда манипулятора с КМУ от 2200 ₽/час. Подача от 1 часа. +7 960 188-30-84" />
+      <meta name="twitter:title" content={data.metaTitle} />
+      <meta name="twitter:description" content={data.metaDescription} />
       <meta name="twitter:image" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
       <link rel="canonical" href={canonicalUrl} />
       <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>

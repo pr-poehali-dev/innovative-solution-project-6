@@ -33,9 +33,9 @@ const formatDate = (iso: string) => {
 const BlogIndex = () => {
   const [callbackOpen, setCallbackOpen] = useState(false);
 
-  const title = "Блог о спецтехнике и манипуляторах — ООО Фаворит Нижний Новгород";
+  const title = "Блог о манипуляторах и спецтехнике в Нижнем Новгороде | Фаворит";
   const description =
-    "Статьи о выборе и аренде манипуляторов, ценах, кейсах и сравнениях. Полезные материалы от экспертов ООО Фаворит в Нижнем Новгороде.";
+    "Статьи о выборе и аренде манипуляторов, ценах, кейсах и сравнениях. Полезные материалы от экспертов компании Фаворит в Нижнем Новгороде.";
 
   return (
     <div className="min-h-screen bg-background">
@@ -43,16 +43,16 @@ const BlogIndex = () => {
       <meta name="description" content={description} />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="фаварит.рф" />
-      <meta property="og:title" content="Аренда манипулятора в Нижнем Новгороде — ООО Фаворит" />
-      <meta property="og:description" content="Аренда манипулятора с КМУ от 2200 ₽/час. Подача от 1 часа. +7 960 188-30-84" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
       <meta property="og:image" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
       <meta property="og:image:secure_url" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:type" content="image/jpeg" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Аренда манипулятора в Нижнем Новгороде — ООО Фаворит" />
-      <meta name="twitter:description" content="Аренда манипулятора с КМУ от 2200 ₽/час. Подача от 1 часа. +7 960 188-30-84" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
       <link rel="canonical" href="https://фаварит.рф/blog" />
 
