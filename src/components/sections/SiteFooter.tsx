@@ -69,8 +69,8 @@ const CollapsibleColumn = ({ icon, title, defaultOpen = false, children }: Colla
 
 const LinkItem = ({ label }: { label: string }) => (
   <span className="inline-flex items-start gap-1.5 leading-snug">
-    <span className="text-accent/70 group-hover:text-accent flex-shrink-0">›</span>
-    <span>{label}</span>
+    <span className="text-accent/70 group-hover:text-accent group-hover:translate-x-1 transition-transform duration-200 flex-shrink-0">›</span>
+    <span className="group-hover:text-accent transition-colors duration-200">{label}</span>
   </span>
 );
 
