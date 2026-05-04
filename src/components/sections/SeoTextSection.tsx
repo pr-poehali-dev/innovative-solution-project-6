@@ -48,7 +48,7 @@ const SeoTextSection = () => {
               Аренда крана-манипулятора: техника на выбор
             </h3>
             <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-3">
-              В нашем автопарке — манипуляторы КАМАЗ, FAW, ISUZU и Renault с КМУ DongYang, Kanglim, HANGIL. Грузоподъёмность шасси до 17 тонн, вылет стрелы до 23 метров.
+              В нашем автопарке — 15 манипуляторов КАМАЗ, FAW, ISUZU и Renault с КМУ DongYang, Kanglim, HANGIL. Грузоподъёмность шасси до 20 тонн, вылет стрелы до 23 метров.
             </p>
             <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
               Подберём манипулятор под ваш груз: бортовые платформы шириной до 2,45 м, есть модели с монтажной люлькой и буровой установкой.
