@@ -49,7 +49,7 @@ export default function TruckContent({ truck, slug }: TruckContentProps) {
                 to={`/tehnika/${s}`}
                 className="block p-4 border border-accent/10 rounded-xl bg-card/30 hover:border-accent/30 hover:bg-card/60 transition-all group"
               >
-                <img src={t.image} alt={t.alt} className="w-full aspect-video object-cover rounded-lg mb-3" />
+                <img src={t.image} alt={t.alt} loading="lazy" decoding="async" className="w-full aspect-video object-cover rounded-lg mb-3" />
                 <p className="font-semibold text-sm group-hover:text-accent transition-colors">{t.title}</p>
                 <p className="text-accent text-sm font-bold mt-1">{t.price}</p>
               </Link>
