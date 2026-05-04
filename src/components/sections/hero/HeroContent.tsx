@@ -19,28 +19,9 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
           <span className="text-accent">в аренду </span>
           <span className="text-white/70">в Нижнем Новгороде</span>
         </h1>
-        <p className="text-xs sm:text-xl text-white/80 leading-snug sm:leading-relaxed mb-3 sm:mb-5 max-w-full sm:max-w-xl font-light">
+        <p className="text-xs sm:text-xl text-white/80 leading-snug sm:leading-relaxed mb-3 sm:mb-7 max-w-full sm:max-w-xl font-light">
           Оставьте заявку или позвоните — мы подберём правильный манипулятор с платформой необходимых габаритов и нужной грузоподъёмностью под вашу задачу.
         </p>
-
-        {/* Крупный телефон для связи */}
-        <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3 sm:mb-6">
-          <a
-            href="tel:+79601883084"
-            className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl shadow-lg shadow-accent/30 active:scale-[0.98] transition-transform"
-            style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
-          >
-            <Icon name="Phone" size={18} className="text-black" />
-            <span className="text-black font-black text-base sm:text-2xl tabular-nums whitespace-nowrap">+7 960 188-30-84</span>
-          </a>
-          <a
-            href="tel:+79601690990"
-            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl border border-accent/40 bg-accent/5 hover:bg-accent/10 transition-colors text-white"
-          >
-            <Icon name="PhoneCall" size={16} className="text-accent" />
-            <span className="font-semibold text-sm sm:text-lg tabular-nums whitespace-nowrap">+7 960 169-09-90</span>
-          </a>
-        </div>
 
         {/* Ключевые условия: цена · мин. заказ · оператор */}
         <div className="flex flex-wrap gap-1.5 sm:gap-3 mb-3 sm:mb-8 max-w-xl">
