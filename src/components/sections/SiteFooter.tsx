@@ -52,10 +52,13 @@ const CollapsibleColumn = ({ icon, title, defaultOpen = false, children }: Colla
         <Icon name={open ? "ChevronUp" : "ChevronDown"} size={16} className="text-accent/70" />
       </button>
       {/* Статичный заголовок — на планшете и десктопе */}
-      <h3 className="hidden md:flex font-display font-black text-sm uppercase tracking-widest mb-4 items-center gap-2" style={{ color: "#e8a820" }}>
-        <Icon name={icon} size={14} />
-        {title}
-      </h3>
+      <div className="hidden md:block mb-4">
+        <h3 className="font-display font-black text-sm uppercase tracking-widest flex items-center gap-2" style={{ color: "#e8a820" }}>
+          <Icon name={icon} size={14} />
+          {title}
+        </h3>
+        <div className="mt-2 h-px w-10 bg-gradient-to-r from-accent/80 to-transparent" />
+      </div>
       {/* Контент */}
       <div className={`${open ? "block" : "hidden"} md:block pb-3 md:pb-0`}>
         {children}
