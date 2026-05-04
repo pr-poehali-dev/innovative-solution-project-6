@@ -84,8 +84,8 @@ const SiteFooter = () => {
           {/* Колонка 1 — О компании (всегда видна полностью) */}
           <div className="md:col-span-2 lg:col-span-1">
             <BrandLogo size="sm" />
-            <p className="text-white/80 text-sm leading-relaxed mt-3 sm:mt-4 mb-4 max-w-md">
-              <strong className="text-accent">фаварит.рф</strong> — манипуляторы в Нижнем Новгороде. Свой автопарк <span className="text-white">·</span> опытные операторы <span className="text-white">·</span> с 2015 года.
+            <p className="text-white/80 text-sm leading-relaxed mt-3 sm:mt-4 mb-4 max-w-md border-l-2 border-accent/60 pl-3 italic">
+              <strong className="text-accent not-italic">фаварит.рф</strong> — манипуляторы в Нижнем Новгороде. Свой автопарк <span className="text-white not-italic">·</span> опытные операторы <span className="text-white not-italic">·</span> с 2015 года.
             </p>
 
             {/* Крупные кнопки звонка */}
