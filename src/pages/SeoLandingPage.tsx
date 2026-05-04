@@ -67,7 +67,7 @@ const SeoLandingPage = ({ slugOverride }: SeoLandingPageProps) => {
     offers: {
       "@type": "Offer",
       priceCurrency: "RUB",
-      price: "1800",
+      price: "1500",
       priceValidUntil: "2026-12-31",
     },
   };

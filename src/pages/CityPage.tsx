@@ -24,7 +24,7 @@ const CityPage = () => {
     return <Navigate to="/" replace />;
   }
 
-  const title = `Манипулятор с КМУ в ${city.nameIn} — заказать от 1800 ₽/час | Фаворит`;
+  const title = `Манипулятор с КМУ в ${city.nameIn} — заказать от 1500 ₽/час | Фаворит`;
   const description = `Заказать манипулятор в ${city.nameIn}: подача от 1 часа, до 20 т, стрела 23 м, люлька. Работаем без выходных, оператор включён. ☎ +7 960 188-30-84`;
 
   const otherCities = cities.filter((c) => c.slug !== city.slug);

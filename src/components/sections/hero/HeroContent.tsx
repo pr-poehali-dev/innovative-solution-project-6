@@ -27,7 +27,7 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
         <div className="flex flex-wrap gap-1.5 sm:gap-3 mb-3 sm:mb-8 max-w-xl">
           <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-accent/40 bg-accent/10 text-white text-xs sm:text-sm">
             <Icon name="Wallet" size={14} className="text-accent" />
-            <span className="font-semibold">от 1800 ₽/час</span>
+            <span className="font-semibold">от 1500 ₽/час</span>
           </div>
           <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-white/15 bg-white/5 text-white text-xs sm:text-sm">
             <Icon name="Clock" size={14} className="text-accent" />
