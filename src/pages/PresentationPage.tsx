@@ -187,7 +187,7 @@ const PresentationPage = () => {
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <div className="text-slate-500 mb-1 uppercase text-xs tracking-wide">Телефон</div>
-                  <div className="font-bold text-slate-900 text-lg">+7 (___) ___-__-__</div>
+                  <div className="font-bold text-slate-900 text-lg">+7 (960) 169-09-90</div>
                 </div>
                 <div>
                   <div className="text-slate-500 mb-1 uppercase text-xs tracking-wide">Регион работы</div>
