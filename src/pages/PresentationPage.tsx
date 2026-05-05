@@ -53,20 +53,36 @@ const PresentationPage = () => {
   };
 
   const directions = [
-    { icon: "Construction", color: "orange", title: "Строительство зданий", desc: "Жилые и нежилые здания — полный цикл" },
-    { icon: "Route", color: "amber", title: "Строительство дорог", desc: "Автомобильные дороги и автомагистрали" },
+    { icon: "Truck", color: "orange", title: "Аренда манипулятора", desc: "До 7 тонн, стрела до 20 м" },
+    { icon: "Forklift", color: "amber", title: "Аренда экскаватора", desc: "Колёсные и гусеничные", fallback: "Truck" },
+    { icon: "Tractor", color: "yellow", title: "Аренда погрузчика", desc: "Фронтальные и мини-погрузчики", fallback: "Truck" },
+    { icon: "Truck", color: "stone", title: "Самосвалы и тонары", desc: "Перевозка сыпучих грузов" },
+    { icon: "Construction", color: "orange", title: "Строительство зданий", desc: "Жилые и нежилые — полный цикл" },
+    { icon: "Building2", color: "amber", title: "Строительство ангаров", desc: "Каркасные и промышленные здания" },
+    { icon: "Route", color: "stone", title: "Строительство дорог", desc: "Автомобильные дороги и магистрали" },
+    { icon: "Layers", color: "stone", title: "Асфальтирование", desc: "Укладка асфальта, ямочный ремонт" },
     { icon: "Hammer", color: "red", title: "Разборка и снос зданий", desc: "Демонтаж зданий и сооружений" },
     { icon: "TrafficCone", color: "rose", title: "Снос дорожных участков", desc: "Разборка участков автодорог" },
-    { icon: "Bulldozer", color: "yellow", title: "Подготовка площадки", desc: "Расчистка территории под застройку", fallback: "Truck" },
-    { icon: "Sprout", color: "green", title: "Дренажные работы", desc: "Сельхозземли, леса, стройплощадки" },
+    { icon: "Wrecking-ball", color: "red", title: "Снос прочих сооружений", desc: "Заборы, павильоны, фундаменты", fallback: "Hammer" },
+    { icon: "Shovel", color: "yellow", title: "Земляные работы", desc: "Котлованы, траншеи, планировка", fallback: "Pickaxe" },
+    { icon: "Bulldozer", color: "amber", title: "Подготовка площадки", desc: "Расчистка территории под застройку", fallback: "Truck" },
+    { icon: "TreePine", color: "green", title: "Расчистка территории", desc: "Спил деревьев, корчевание пней" },
+    { icon: "Sprout", color: "green", title: "Дренажные работы", desc: "Отвод грунтовых вод, мелиорация" },
+    { icon: "Trees", color: "emerald", title: "Благоустройство", desc: "Озеленение, газоны, малые формы" },
+    { icon: "SquareStack", color: "stone", title: "Укладка тротуаров", desc: "Брусчатка, плитка, бордюры", fallback: "Layers" },
+    { icon: "Fence", color: "amber", title: "Установка ограждений", desc: "Заборы, ворота, калитки", fallback: "DoorClosed" },
+    { icon: "Home", color: "cyan", title: "Кровельные работы", desc: "Монтаж и ремонт крыш" },
     { icon: "PaintRoller", color: "blue", title: "Штукатурные работы", desc: "Внутренние и фасадные" },
+    { icon: "Brush", color: "pink", title: "Малярные работы", desc: "Покраска стен, потолков, фасадов" },
+    { icon: "Square", color: "cyan", title: "Стекольные работы", desc: "Остекление окон, витрин, перегородок" },
     { icon: "DoorOpen", color: "indigo", title: "Установка окон и дверей", desc: "Дверные и оконные конструкции" },
     { icon: "LayoutPanelTop", color: "violet", title: "Внутренняя отделка", desc: "Потолки, перегородки, отделка" },
-    { icon: "Brush", color: "pink", title: "Малярные и стекольные", desc: "Покраска и остекление" },
-    { icon: "Home", color: "cyan", title: "Кровельные работы", desc: "Монтаж и ремонт крыш" },
-    { icon: "Trees", color: "emerald", title: "Благоустройство территории", desc: "Озеленение, тротуары, газоны" },
-    { icon: "Layers", color: "stone", title: "Асфальтирование", desc: "Укладка асфальта, ямочный ремонт" },
-    { icon: "Truck", color: "orange", title: "Аренда грузового транспорта", desc: "Грузовые автомобили в аренду" },
+    { icon: "Wrench", color: "stone", title: "Сантехнические работы", desc: "Монтаж труб, водопровода, канализации" },
+    { icon: "Zap", color: "yellow", title: "Электромонтаж", desc: "Прокладка кабеля, освещение" },
+    { icon: "Thermometer", color: "red", title: "Утепление зданий", desc: "Фасадов, кровли, фундамента" },
+    { icon: "Hammer", color: "orange", title: "Фундаментные работы", desc: "Заливка, армирование, гидроизоляция" },
+    { icon: "Boxes", color: "amber", title: "Бетонные работы", desc: "Стяжки, перекрытия, опалубка" },
+    { icon: "Truck", color: "orange", title: "Аренда грузового транспорта", desc: "Доставка стройматериалов" },
   ];
 
   const services = [
@@ -79,22 +95,6 @@ const PresentationPage = () => {
     { icon: "Wrench", title: "Установка конструкций", desc: "Двери, окна, перегородки, потолки" },
     { icon: "Pickaxe", title: "Земляные работы", desc: "Расчистка, подготовка, дренаж участков" },
   ];
-
-  const colorMap: Record<string, { bg: string; text: string }> = {
-    orange: { bg: "bg-orange-100", text: "text-orange-600" },
-    amber: { bg: "bg-amber-100", text: "text-amber-600" },
-    red: { bg: "bg-red-100", text: "text-red-600" },
-    rose: { bg: "bg-rose-100", text: "text-rose-600" },
-    yellow: { bg: "bg-yellow-100", text: "text-yellow-600" },
-    green: { bg: "bg-green-100", text: "text-green-600" },
-    blue: { bg: "bg-blue-100", text: "text-blue-600" },
-    indigo: { bg: "bg-indigo-100", text: "text-indigo-600" },
-    violet: { bg: "bg-violet-100", text: "text-violet-600" },
-    pink: { bg: "bg-pink-100", text: "text-pink-600" },
-    cyan: { bg: "bg-cyan-100", text: "text-cyan-600" },
-    emerald: { bg: "bg-emerald-100", text: "text-emerald-600" },
-    stone: { bg: "bg-stone-200", text: "text-stone-700" },
-  };
 
   return (
     <div className="min-h-screen bg-slate-100">
@@ -277,30 +277,28 @@ const PresentationPage = () => {
                 Дополнительные направления
               </div>
               <div className="grid grid-cols-2 gap-2">
-                {directions.map((d) => {
-                  const c = colorMap[d.color] || colorMap.orange;
-                  return (
+                {directions.map((d) => (
+                  <div
+                    key={d.title}
+                    className="flex items-start gap-2.5 px-3 py-2 bg-gradient-to-br from-white to-orange-50/30 border border-slate-200 rounded-lg hover:border-orange-300 hover:shadow-sm transition-all"
+                  >
                     <div
-                      key={d.title}
-                      className="flex items-start gap-2.5 px-3 py-2.5 bg-white border border-slate-200 rounded-lg hover:border-orange-300 transition-colors"
+                      className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm"
+                      style={{ background: "linear-gradient(135deg, #FB923C 0%, #F97316 100%)" }}
                     >
-                      <div
-                        className={`w-9 h-9 ${c.bg} rounded-lg flex items-center justify-center flex-shrink-0`}
-                      >
-                        <Icon
-                          name={d.icon}
-                          size={18}
-                          className={c.text}
-                          fallback={d.fallback || "Wrench"}
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm font-bold text-slate-900 leading-tight">{d.title}</div>
-                        <div className="text-xs text-slate-500 leading-snug mt-0.5">{d.desc}</div>
-                      </div>
+                      <Icon
+                        name={d.icon}
+                        size={16}
+                        className="text-white"
+                        fallback={d.fallback || "Wrench"}
+                      />
                     </div>
-                  );
-                })}
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[13px] font-bold text-slate-900 leading-tight">{d.title}</div>
+                      <div className="text-[11px] text-slate-500 leading-snug mt-0.5">{d.desc}</div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -337,10 +335,15 @@ const RequisiteCard = ({
   value: string;
   full?: boolean;
 }) => (
-  <div className={`border border-slate-200 rounded-lg p-4 ${full ? "col-span-2" : ""}`}>
+  <div
+    className={`border border-slate-200 rounded-xl p-4 bg-gradient-to-br from-white to-orange-50/30 hover:shadow-md transition-shadow ${full ? "col-span-2" : ""}`}
+  >
     <div className="flex items-start gap-3">
-      <div className="w-9 h-9 bg-slate-100 rounded-lg flex items-center justify-center flex-shrink-0">
-        <Icon name={icon} size={16} className="text-slate-600" fallback="Info" />
+      <div
+        className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm"
+        style={{ background: "linear-gradient(135deg, #FB923C 0%, #F97316 100%)" }}
+      >
+        <Icon name={icon} size={18} className="text-white" fallback="Info" />
       </div>
       <div className="flex-1 min-w-0">
         <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">{label}</div>
