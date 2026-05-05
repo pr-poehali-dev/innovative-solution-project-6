@@ -98,39 +98,67 @@ const PresentationPage = () => {
 
   return (
     <div className="min-h-screen bg-slate-100">
+      <style>{`
+        @media print {
+          @page { size: A4 portrait; margin: 0; }
+          html, body { background: #fff !important; }
+          body * { visibility: hidden; }
+          .print-area, .print-area * { visibility: visible; }
+          .print-area { position: absolute; left: 0; top: 0; width: 100%; }
+          .no-print { display: none !important; }
+          .print-page {
+            width: 210mm !important;
+            min-height: 297mm !important;
+            box-shadow: none !important;
+            margin: 0 !important;
+            page-break-after: always;
+            break-after: page;
+          }
+          .print-page:last-child { page-break-after: auto; break-after: auto; }
+        }
+      `}</style>
       {/* Управление */}
-      <div className="sticky top-0 z-50 bg-white border-b shadow-sm">
+      <div className="sticky top-0 z-50 bg-white border-b shadow-sm no-print">
         <div className="max-w-[210mm] mx-auto px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2 text-slate-700">
             <Icon name="FileText" size={20} />
             <span className="font-medium">Презентация компании</span>
           </div>
-          <button
-            onClick={handleDownloadPDF}
-            disabled={generating}
-            className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 disabled:opacity-60 disabled:cursor-not-allowed text-white px-5 py-2 rounded-lg font-medium transition-colors"
-          >
-            {generating ? (
-              <>
-                <Icon name="Loader2" size={18} className="animate-spin" />
-                Создаём PDF...
-              </>
-            ) : (
-              <>
-                <Icon name="Download" size={18} />
-                Скачать PDF
-              </>
-            )}
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => window.print()}
+              className="flex items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white px-5 py-2 rounded-lg font-medium transition-colors"
+            >
+              <Icon name="Printer" size={18} />
+              Распечатать
+            </button>
+            <button
+              onClick={handleDownloadPDF}
+              disabled={generating}
+              className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 disabled:opacity-60 disabled:cursor-not-allowed text-white px-5 py-2 rounded-lg font-medium transition-colors"
+            >
+              {generating ? (
+                <>
+                  <Icon name="Loader2" size={18} className="animate-spin" />
+                  Создаём PDF...
+                </>
+              ) : (
+                <>
+                  <Icon name="Download" size={18} />
+                  Скачать PDF
+                </>
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-[210mm] mx-auto px-6 py-8">
+      <div className="max-w-[210mm] mx-auto px-6 py-8 print-area">
         {/* СТРАНИЦА 1 */}
         <div
           ref={page1Ref}
           style={{ width: "210mm", minHeight: "297mm" }}
-          className="bg-white shadow-lg overflow-hidden mb-8"
+          className="bg-white shadow-lg overflow-hidden mb-8 print-page"
         >
           <div
             style={{
@@ -268,7 +296,7 @@ const PresentationPage = () => {
         <div
           ref={page2Ref}
           style={{ width: "210mm", minHeight: "297mm" }}
-          className="bg-white shadow-lg overflow-hidden"
+          className="bg-white shadow-lg overflow-hidden print-page"
         >
           <div className="p-10">
             <div className="mb-10">
