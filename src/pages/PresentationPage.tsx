@@ -101,20 +101,46 @@ const PresentationPage = () => {
       <style>{`
         @media print {
           @page { size: A4 portrait; margin: 0; }
-          html, body { background: #fff !important; }
+          html, body {
+            background: #fff !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
           body * { visibility: hidden; }
           .print-area, .print-area * { visibility: visible; }
-          .print-area { position: absolute; left: 0; top: 0; width: 100%; }
+          .print-area {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 210mm;
+            margin: 0 !important;
+            padding: 0 !important;
+            max-width: none !important;
+          }
           .no-print { display: none !important; }
           .print-page {
             width: 210mm !important;
+            height: 297mm !important;
             min-height: 297mm !important;
+            max-height: 297mm !important;
             box-shadow: none !important;
             margin: 0 !important;
+            overflow: hidden !important;
             page-break-after: always;
             break-after: page;
+            page-break-inside: avoid;
+            break-inside: avoid;
           }
-          .print-page:last-child { page-break-after: auto; break-after: auto; }
+          .print-page:last-child {
+            page-break-after: auto;
+            break-after: auto;
+          }
+          .print-page * {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+          }
         }
       `}</style>
       {/* Управление */}
