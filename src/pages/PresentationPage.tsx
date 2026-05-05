@@ -52,42 +52,49 @@ const PresentationPage = () => {
     }
   };
 
-  const okvedAdditional = [
-    { code: "41.20", name: "Строительство жилых и нежилых зданий" },
-    { code: "42.11", name: "Строительство автомобильных дорог и автомагистралей" },
-    { code: "43.11", name: "Разборка и снос зданий" },
-    { code: "43.11.2", name: "Разборка и снос участков автомобильных дорог" },
-    { code: "43.11.9", name: "Разборка и снос прочих сооружений" },
-    { code: "43.12", name: "Подготовка строительной площадки" },
-    { code: "43.12.1", name: "Расчистка территории строительной площадки" },
-    {
-      code: "43.12.2",
-      name: "Производство дренажных работ на сельскохозяйственных землях, землях лесных территорий, а также на строительных площадках",
-    },
-    { code: "43.31", name: "Производство штукатурных работ" },
-    {
-      code: "43.32.1",
-      name: "Установка дверей (кроме автоматических и вращающихся), окон, дверных и оконных рам из дерева или прочих материалов",
-    },
-    {
-      code: "43.32.3",
-      name: "Производство работ по внутренней отделке зданий (включая потолки, раздвижные и съемные перегородки и т.д.)",
-    },
-    { code: "43.34", name: "Производство малярных и стекольных работ" },
-    { code: "43.34.1", name: "Производство малярных работ" },
-    { code: "43.34.2", name: "Производство стекольных работ" },
-    { code: "43.91", name: "Производство кровельных работ" },
-    { code: "77.12", name: "Аренда и лизинг грузовых транспортных средств" },
+  const directions = [
+    { icon: "Construction", color: "orange", title: "Строительство зданий", desc: "Жилые и нежилые здания — полный цикл" },
+    { icon: "Route", color: "amber", title: "Строительство дорог", desc: "Автомобильные дороги и автомагистрали" },
+    { icon: "Hammer", color: "red", title: "Разборка и снос зданий", desc: "Демонтаж зданий и сооружений" },
+    { icon: "TrafficCone", color: "rose", title: "Снос дорожных участков", desc: "Разборка участков автодорог" },
+    { icon: "Bulldozer", color: "yellow", title: "Подготовка площадки", desc: "Расчистка территории под застройку", fallback: "Truck" },
+    { icon: "Sprout", color: "green", title: "Дренажные работы", desc: "Сельхозземли, леса, стройплощадки" },
+    { icon: "PaintRoller", color: "blue", title: "Штукатурные работы", desc: "Внутренние и фасадные" },
+    { icon: "DoorOpen", color: "indigo", title: "Установка окон и дверей", desc: "Дверные и оконные конструкции" },
+    { icon: "LayoutPanelTop", color: "violet", title: "Внутренняя отделка", desc: "Потолки, перегородки, отделка" },
+    { icon: "Brush", color: "pink", title: "Малярные и стекольные", desc: "Покраска и остекление" },
+    { icon: "Home", color: "cyan", title: "Кровельные работы", desc: "Монтаж и ремонт крыш" },
+    { icon: "Trees", color: "emerald", title: "Благоустройство территории", desc: "Озеленение, тротуары, газоны" },
+    { icon: "Layers", color: "stone", title: "Асфальтирование", desc: "Укладка асфальта, ямочный ремонт" },
+    { icon: "Truck", color: "orange", title: "Аренда грузового транспорта", desc: "Грузовые автомобили в аренду" },
   ];
 
   const services = [
-    { icon: "Truck", title: "Аренда манипулятора", desc: "Грузоподъёмность до 7 тонн, стрела до 20 м" },
+    { icon: "Truck", title: "Аренда и услуги спецтехники", desc: "Манипуляторы, экскаваторы, самосвалы" },
     { icon: "Building2", title: "Строительные работы", desc: "Полный цикл от подготовки до отделки" },
     { icon: "Hammer", title: "Демонтаж и снос", desc: "Зданий, сооружений, дорожных участков" },
-    { icon: "Home", title: "Отделочные работы", desc: "Малярные, штукатурные, кровельные, стекольные" },
+    { icon: "Trees", title: "Благоустройство", desc: "Озеленение, тротуары, малые формы" },
+    { icon: "Layers", title: "Асфальтирование", desc: "Укладка асфальта, ямочный ремонт дорог" },
+    { icon: "Home", title: "Отделочные работы", desc: "Малярные, штукатурные, кровельные" },
     { icon: "Wrench", title: "Установка конструкций", desc: "Двери, окна, перегородки, потолки" },
     { icon: "Pickaxe", title: "Земляные работы", desc: "Расчистка, подготовка, дренаж участков" },
   ];
+
+  const colorMap: Record<string, { bg: string; text: string }> = {
+    orange: { bg: "bg-orange-100", text: "text-orange-600" },
+    amber: { bg: "bg-amber-100", text: "text-amber-600" },
+    red: { bg: "bg-red-100", text: "text-red-600" },
+    rose: { bg: "bg-rose-100", text: "text-rose-600" },
+    yellow: { bg: "bg-yellow-100", text: "text-yellow-600" },
+    green: { bg: "bg-green-100", text: "text-green-600" },
+    blue: { bg: "bg-blue-100", text: "text-blue-600" },
+    indigo: { bg: "bg-indigo-100", text: "text-indigo-600" },
+    violet: { bg: "bg-violet-100", text: "text-violet-600" },
+    pink: { bg: "bg-pink-100", text: "text-pink-600" },
+    cyan: { bg: "bg-cyan-100", text: "text-cyan-600" },
+    emerald: { bg: "bg-emerald-100", text: "text-emerald-600" },
+    stone: { bg: "bg-stone-200", text: "text-stone-700" },
+  };
 
   return (
     <div className="min-h-screen bg-slate-100">
@@ -144,7 +151,7 @@ const PresentationPage = () => {
               </div>
             </div>
             <h1 className="text-4xl font-bold leading-tight mb-3">
-              Аренда манипулятора и
+              Услуги спецтехники и
               <br />
               строительные услуги
             </h1>
@@ -216,16 +223,22 @@ const PresentationPage = () => {
                 <h2 className="text-2xl font-bold text-slate-900">Направления деятельности</h2>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 {services.map((s) => (
-                  <div key={s.title} className="border border-slate-200 rounded-xl p-4">
+                  <div
+                    key={s.title}
+                    className="border border-slate-200 rounded-xl p-4 bg-gradient-to-br from-white to-orange-50/30 hover:shadow-md transition-shadow"
+                  >
                     <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Icon name={s.icon} size={20} className="text-orange-600" />
+                      <div
+                        className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm"
+                        style={{ background: "linear-gradient(135deg, #FB923C 0%, #F97316 100%)" }}
+                      >
+                        <Icon name={s.icon} size={22} className="text-white" fallback="Sparkles" />
                       </div>
                       <div>
-                        <div className="font-bold text-slate-900 mb-1">{s.title}</div>
-                        <div className="text-sm text-slate-600">{s.desc}</div>
+                        <div className="font-bold text-slate-900 mb-1 leading-tight">{s.title}</div>
+                        <div className="text-xs text-slate-600 leading-snug">{s.desc}</div>
                       </div>
                     </div>
                   </div>
@@ -236,41 +249,58 @@ const PresentationPage = () => {
             <div>
               <div className="flex items-center gap-2 mb-6">
                 <div className="w-1 h-7 bg-orange-500 rounded-full" />
-                <h2 className="text-2xl font-bold text-slate-900">Коды ОКВЭД</h2>
+                <h2 className="text-2xl font-bold text-slate-900">Все направления деятельности</h2>
               </div>
 
               <div
-                style={{ background: "linear-gradient(90deg, #F97316 0%, #F59E0B 100%)" }}
-                className="rounded-xl p-5 mb-5 text-white shadow-md"
+                style={{ background: "linear-gradient(135deg, #F97316 0%, #EA580C 50%, #C2410C 100%)" }}
+                className="rounded-xl p-5 mb-5 text-white shadow-lg"
               >
                 <div className="flex items-start gap-4">
-                  <div className="bg-white/20 rounded-lg px-3 py-2">
-                    <div className="text-xs uppercase tracking-wider opacity-90">Основной</div>
-                    <div className="text-2xl font-bold">43.39</div>
+                  <div className="bg-white/20 backdrop-blur rounded-lg p-3 flex items-center justify-center">
+                    <Icon name="Star" size={28} className="text-white" />
                   </div>
                   <div className="flex-1 pt-1">
+                    <div className="text-xs uppercase tracking-wider opacity-90 mb-1">Основное направление</div>
                     <div className="font-bold text-lg leading-snug">
+                      Отделочные и завершающие работы
+                    </div>
+                    <div className="text-sm opacity-90 mt-0.5">
                       Производство прочих отделочных и завершающих работ
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="text-sm font-bold text-slate-700 mb-3 uppercase tracking-wide">
-                Дополнительные коды
+              <div className="text-sm font-bold text-slate-700 mb-3 uppercase tracking-wide flex items-center gap-2">
+                <Icon name="ListChecks" size={16} className="text-orange-500" />
+                Дополнительные направления
               </div>
-              <div className="grid grid-cols-1 gap-2">
-                {okvedAdditional.map((o) => (
-                  <div
-                    key={o.code}
-                    className="flex items-start gap-3 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg"
-                  >
-                    <div className="font-mono font-bold text-orange-600 text-sm min-w-[60px]">
-                      {o.code}
+              <div className="grid grid-cols-2 gap-2">
+                {directions.map((d) => {
+                  const c = colorMap[d.color] || colorMap.orange;
+                  return (
+                    <div
+                      key={d.title}
+                      className="flex items-start gap-2.5 px-3 py-2.5 bg-white border border-slate-200 rounded-lg hover:border-orange-300 transition-colors"
+                    >
+                      <div
+                        className={`w-9 h-9 ${c.bg} rounded-lg flex items-center justify-center flex-shrink-0`}
+                      >
+                        <Icon
+                          name={d.icon}
+                          size={18}
+                          className={c.text}
+                          fallback={d.fallback || "Wrench"}
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-bold text-slate-900 leading-tight">{d.title}</div>
+                        <div className="text-xs text-slate-500 leading-snug mt-0.5">{d.desc}</div>
+                      </div>
                     </div>
-                    <div className="text-sm text-slate-800 leading-snug">{o.name}</div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
