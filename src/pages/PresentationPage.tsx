@@ -326,10 +326,6 @@ const PresentationPage = () => {
                 </div>
               </div>
 
-              <div className="text-sm font-bold text-slate-700 mb-3 uppercase tracking-wide flex items-center gap-2">
-                <Icon name="ListChecks" size={16} className="text-orange-500" />
-                Дополнительные направления
-              </div>
               <div className="grid grid-cols-2 gap-2">
                 {directions.map((d) => (
                   <div
