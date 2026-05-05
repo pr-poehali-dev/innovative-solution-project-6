@@ -180,6 +180,60 @@ const PresentationPage = () => {
               <RequisiteCard icon="Wallet" label="Корр. счёт" value="30101810200000000824" />
             </div>
 
+            {/* Почему выбирают нас */}
+            <div className="mb-8">
+              <div className="flex items-center gap-2 mb-5">
+                <div className="w-1 h-7 bg-orange-500 rounded-full" />
+                <h2 className="text-2xl font-bold text-slate-900">Почему выбирают нас</h2>
+              </div>
+
+              <div className="grid grid-cols-4 gap-3 mb-4">
+                {[
+                  { value: "10+", label: "лет опыта", icon: "Award" },
+                  { value: "500+", label: "проектов", icon: "CheckCircle2" },
+                  { value: "24/7", label: "на связи", icon: "Clock" },
+                  { value: "100%", label: "договор", icon: "FileCheck2" },
+                ].map((s) => (
+                  <div
+                    key={s.label}
+                    className="rounded-xl p-3 text-center text-white shadow-md"
+                    style={{ background: "linear-gradient(135deg, #FB923C 0%, #EA580C 100%)" }}
+                  >
+                    <Icon name={s.icon} size={20} className="text-white/90 mx-auto mb-1" />
+                    <div className="text-2xl font-black leading-none">{s.value}</div>
+                    <div className="text-[10px] uppercase tracking-wider opacity-90 mt-1">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { icon: "Truck", title: "Свой автопарк", desc: "Спецтехника без посредников" },
+                  { icon: "UserCheck", title: "Опытные операторы", desc: "Сертифицированные специалисты" },
+                  { icon: "Wallet", title: "Прозрачные цены", desc: "Без скрытых доплат и наценок" },
+                  { icon: "Shield", title: "Гарантия качества", desc: "Договор и ответственность" },
+                  { icon: "Zap", title: "Выезд в день заявки", desc: "Реагируем быстро, без задержек" },
+                  { icon: "Building2", title: "Работа с юрлицами", desc: "Безналичный расчёт, документы" },
+                ].map((a) => (
+                  <div
+                    key={a.title}
+                    className="flex items-start gap-3 px-4 py-3 bg-gradient-to-br from-white to-orange-50/30 border border-slate-200 rounded-xl"
+                  >
+                    <div
+                      className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm"
+                      style={{ background: "linear-gradient(135deg, #FB923C 0%, #F97316 100%)" }}
+                    >
+                      <Icon name={a.icon} size={18} className="text-white" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-bold text-slate-900 leading-tight">{a.title}</div>
+                      <div className="text-xs text-slate-500 leading-snug mt-0.5">{a.desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div
               style={{
                 background: "linear-gradient(90deg, #FFF7ED 0%, #FEF3C7 100%)",
