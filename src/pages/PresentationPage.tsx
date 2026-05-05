@@ -141,6 +141,27 @@ const PresentationPage = () => {
             page-break-inside: avoid !important;
             break-inside: avoid !important;
           }
+          .print-page {
+            transform: scale(0.96);
+            transform-origin: top left;
+          }
+          .print-page .p-10 { padding: 24px !important; }
+          .print-page .p-8 { padding: 18px !important; }
+          .print-page .p-6 { padding: 14px !important; }
+          .print-page .p-5 { padding: 12px !important; }
+          .print-page .p-4 { padding: 10px !important; }
+          .print-page .py-3 { padding-top: 6px !important; padding-bottom: 6px !important; }
+          .print-page .py-2 { padding-top: 4px !important; padding-bottom: 4px !important; }
+          .print-page .mb-8 { margin-bottom: 14px !important; }
+          .print-page .mb-6 { margin-bottom: 10px !important; }
+          .print-page .mb-5 { margin-bottom: 8px !important; }
+          .print-page .mb-4 { margin-bottom: 6px !important; }
+          .print-page .mb-3 { margin-bottom: 4px !important; }
+          .print-page .mt-8 { margin-top: 12px !important; }
+          .print-page .pt-6 { padding-top: 10px !important; }
+          .print-page .gap-4 { gap: 8px !important; }
+          .print-page .gap-3 { gap: 6px !important; }
+          .print-page .gap-2 { gap: 4px !important; }
         }
       `}</style>
       {/* Управление */}
