@@ -23,6 +23,7 @@ const TruckCard = lazy(() => import("./pages/TruckCard"));
 const AdBanner = lazy(() => import("./pages/AdBanner"));
 const AdminReindex = lazy(() => import("./pages/AdminReindex"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
+const PresentationPage = lazy(() => import("./pages/PresentationPage"));
 
 const queryClient = new QueryClient();
 
@@ -65,6 +66,7 @@ const App = () => (
             <Route path="/banner" element={<AdBanner />} />
             <Route path="/admin/reindex" element={<AdminReindex />} />
             <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/presentation" element={<PresentationPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
