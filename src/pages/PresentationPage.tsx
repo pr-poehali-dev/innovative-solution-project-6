@@ -122,12 +122,11 @@ const PresentationPage = () => {
           .no-print { display: none !important; }
           .print-page {
             width: 210mm !important;
-            height: 297mm !important;
-            min-height: 297mm !important;
-            max-height: 297mm !important;
+            min-height: auto !important;
+            max-height: none !important;
             box-shadow: none !important;
             margin: 0 !important;
-            overflow: hidden !important;
+            overflow: visible !important;
             page-break-after: always;
             break-after: page;
             page-break-inside: avoid;
@@ -142,25 +141,27 @@ const PresentationPage = () => {
             break-inside: avoid !important;
           }
           .print-page {
-            transform: scale(0.96);
-            transform-origin: top left;
+            zoom: 0.82;
           }
-          .print-page .p-10 { padding: 24px !important; }
-          .print-page .p-8 { padding: 18px !important; }
-          .print-page .p-6 { padding: 14px !important; }
-          .print-page .p-5 { padding: 12px !important; }
-          .print-page .p-4 { padding: 10px !important; }
-          .print-page .py-3 { padding-top: 6px !important; padding-bottom: 6px !important; }
-          .print-page .py-2 { padding-top: 4px !important; padding-bottom: 4px !important; }
-          .print-page .mb-8 { margin-bottom: 14px !important; }
-          .print-page .mb-6 { margin-bottom: 10px !important; }
-          .print-page .mb-5 { margin-bottom: 8px !important; }
-          .print-page .mb-4 { margin-bottom: 6px !important; }
+          .print-page .p-10 { padding: 22px !important; }
+          .print-page .p-8 { padding: 16px !important; }
+          .print-page .p-6 { padding: 12px !important; }
+          .print-page .p-5 { padding: 10px !important; }
+          .print-page .p-4 { padding: 8px !important; }
+          .print-page .p-3 { padding: 6px !important; }
+          .print-page .py-3 { padding-top: 5px !important; padding-bottom: 5px !important; }
+          .print-page .py-2 { padding-top: 3px !important; padding-bottom: 3px !important; }
+          .print-page .px-4 { padding-left: 8px !important; padding-right: 8px !important; }
+          .print-page .px-3 { padding-left: 6px !important; padding-right: 6px !important; }
+          .print-page .mb-8 { margin-bottom: 10px !important; }
+          .print-page .mb-6 { margin-bottom: 8px !important; }
+          .print-page .mb-5 { margin-bottom: 6px !important; }
+          .print-page .mb-4 { margin-bottom: 5px !important; }
           .print-page .mb-3 { margin-bottom: 4px !important; }
-          .print-page .mt-8 { margin-top: 12px !important; }
-          .print-page .pt-6 { padding-top: 10px !important; }
-          .print-page .gap-4 { gap: 8px !important; }
-          .print-page .gap-3 { gap: 6px !important; }
+          .print-page .mt-8 { margin-top: 10px !important; }
+          .print-page .pt-6 { padding-top: 8px !important; }
+          .print-page .gap-4 { gap: 6px !important; }
+          .print-page .gap-3 { gap: 5px !important; }
           .print-page .gap-2 { gap: 4px !important; }
         }
       `}</style>
