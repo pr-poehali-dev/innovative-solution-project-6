@@ -210,46 +210,6 @@ const SiteFooter = () => {
         </div>
       </div>
 
-      {/* Реквизиты компании */}
-      <div className="border-t border-accent/15 bg-black/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          <div className="flex items-center gap-2 mb-4">
-            <Icon name="Building2" size={14} className="text-accent" />
-            <h3 className="font-display font-black text-xs sm:text-sm uppercase tracking-widest" style={{ color: "#e8a820" }}>
-              Реквизиты компании
-            </h3>
-            <div className="flex-1 h-px bg-gradient-to-r from-accent/40 to-transparent" />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 text-xs sm:text-sm">
-            <div className="p-3 rounded-lg border border-accent/15 bg-white/[0.02]">
-              <div className="text-accent/70 text-[10px] uppercase tracking-wider font-bold mb-1">Полное наименование</div>
-              <div className="text-white/90 leading-snug">Общество с ограниченной ответственностью «Фаворит»</div>
-            </div>
-            <div className="p-3 rounded-lg border border-accent/15 bg-white/[0.02]">
-              <div className="text-accent/70 text-[10px] uppercase tracking-wider font-bold mb-1">ИНН / КПП</div>
-              <div className="text-white/90 tabular-nums">5250077990 / 525001001</div>
-              <div className="text-accent/70 text-[10px] uppercase tracking-wider font-bold mt-2 mb-1">ОГРН</div>
-              <div className="text-white/90 tabular-nums">1235200013531</div>
-            </div>
-            <div className="p-3 rounded-lg border border-accent/15 bg-white/[0.02]">
-              <div className="text-accent/70 text-[10px] uppercase tracking-wider font-bold mb-1">Юридический адрес</div>
-              <div className="text-white/90 leading-snug">607650, Нижегородская область, г. Кстово, ул. Магистральная, д. 24Б</div>
-            </div>
-            <div className="p-3 rounded-lg border border-accent/15 bg-white/[0.02]">
-              <div className="text-accent/70 text-[10px] uppercase tracking-wider font-bold mb-1">Директор</div>
-              <div className="text-white/90 leading-snug mb-2">Действует на основании Устава</div>
-              <div className="text-accent/70 text-[10px] uppercase tracking-wider font-bold mb-1">Дата регистрации</div>
-              <div className="text-white/90 tabular-nums">07.03.2023</div>
-            </div>
-          </div>
-
-          <p className="text-[11px] sm:text-xs text-white/60 mt-4 leading-relaxed">
-            Работаем по договору с физическими и юридическими лицами. Безналичный расчёт с НДС, электронный документооборот (ЭДО), страхование грузов и ответственности.
-          </p>
-        </div>
-      </div>
-
       {/* Дисклеймер — не публичная оферта */}
       <div className="border-t border-accent/15 bg-black/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
