@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import type { Truck } from "./trucksData";
 import { trucks } from "./trucksData";
+import { cities } from "@/data/cities";
 
 interface TruckContentProps {
   truck: Truck;
@@ -54,6 +55,33 @@ export default function TruckContent({ truck, slug }: TruckContentProps) {
                 <p className="text-accent text-sm font-bold mt-1">{t.price}</p>
               </Link>
             ))}
+        </div>
+      </section>
+
+      {/* Города работы */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <h2 className="text-xl sm:text-3xl font-black tracking-tighter mb-2">
+          Куда подаём {truck.title}
+        </h2>
+        <p className="text-sm text-muted-foreground mb-6">
+          Работаем в Нижнем Новгороде и по всей Нижегородской области — выберите ваш город
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+          {cities.map((c) => (
+            <Link
+              key={c.slug}
+              to={`/gorod/${c.slug}`}
+              className="group p-3 sm:p-4 rounded-xl border border-accent/10 bg-card/30 hover:border-accent/40 hover:bg-card/60 transition-all"
+            >
+              <div className="flex items-center gap-2">
+                <Icon name="MapPin" size={14} className="text-accent flex-shrink-0" />
+                <span className="font-bold text-sm group-hover:text-accent transition-colors truncate">
+                  {c.name}
+                </span>
+              </div>
+              <p className="text-[11px] text-muted-foreground mt-1 ml-6">{c.distance}</p>
+            </Link>
+          ))}
         </div>
       </section>
 

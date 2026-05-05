@@ -237,6 +237,49 @@ const CityPage = () => {
       {/* FAQ */}
       <LazySection><FaqSection /></LazySection>
 
+      {/* Popular tech in this city */}
+      <section className="py-10 sm:py-14 px-4 sm:px-6 border-t border-accent/10 bg-accent/[0.03]">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-6 sm:mb-8">
+            <div className="flex justify-center mb-4">
+              <SectionBadge>Популярная техника</SectionBadge>
+            </div>
+            <h2 className="font-display font-black text-xl sm:text-3xl text-white mb-2">
+              Какой манипулятор заказывают в {city.nameIn}
+            </h2>
+            <p className="text-muted-foreground text-sm">
+              Самые востребованные модели нашего автопарка с подачей в {city.name}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {[
+              { slug: "faw-kmu-dongyoung", name: "FAW + КМУ DongYang", spec: "17 т · стрела 21 м · люлька", price: "от 3000 ₽/час" },
+              { slug: "kamaz-65115-hangil", name: "КАМАЗ 65115 + HANGIL", spec: "10 т · надёжный КАМАЗ", price: "от 2800 ₽/час" },
+              { slug: "renault-lander-kmu", name: "Renault Lander + КМУ", spec: "15 т · стрела 20 м · бортовой", price: "от 3200 ₽/час" },
+              { slug: "faw-j6-dongyang-1966", name: "FAW J6 + бур и люлька", spec: "20 т · стрела 22 м · бур", price: "от 3500 ₽/час" },
+              { slug: "hyundai-gold-kmu-8t", name: "Hyundai Gold + HIAB", spec: "8 т · длинная стрела 22 м", price: "от 3200 ₽/час" },
+              { slug: "isuzu-kmu-5t", name: "ISUZU 5т + КМУ", spec: "5 т · компактный, для города", price: "от 2200 ₽/час" },
+            ].map((t) => (
+              <Link
+                key={t.slug}
+                to={`/tehnika/${t.slug}`}
+                className="group p-4 rounded-xl border border-accent/20 bg-card/30 hover:border-accent/60 hover:bg-accent/5 transition-all"
+              >
+                <div className="flex items-start gap-2 mb-1.5">
+                  <Icon name="Truck" size={16} className="text-accent flex-shrink-0 mt-0.5" />
+                  <span className="font-display font-bold text-sm sm:text-base text-white group-hover:text-accent transition-colors leading-tight">
+                    {t.name}
+                  </span>
+                </div>
+                <p className="text-[11px] sm:text-xs text-muted-foreground ml-6 mb-1">{t.spec}</p>
+                <p className="text-[11px] sm:text-xs text-accent/80 ml-6 font-semibold">{t.price}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Other cities */}
       <section className="py-10 sm:py-16 px-4 sm:px-6 border-t border-accent/10">
         <div className="max-w-5xl mx-auto">
