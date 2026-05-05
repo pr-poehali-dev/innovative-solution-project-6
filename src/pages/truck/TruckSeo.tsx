@@ -16,19 +16,29 @@ export default function TruckSeo({ truck, slug }: TruckSeoProps) {
       <title>{truck.seoTitle}</title>
       <meta name="description" content={truck.seoDesc} />
       <meta name="keywords" content={truck.seoKeywords} />
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content="product" />
       <meta property="og:site_name" content="фаварит.рф" />
-      <meta property="og:title" content="Аренда манипулятора в Нижнем Новгороде — ООО Фаворит" />
-      <meta property="og:description" content="Аренда манипулятора с КМУ от 2200 ₽/час. Подача от 1 часа. +7 960 188-30-84" />
-      <meta property="og:image" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
-      <meta property="og:image:secure_url" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
+      <meta property="og:url" content={pageUrl} />
+      <meta property="og:locale" content="ru_RU" />
+      <meta property="og:title" content={truck.seoTitle} />
+      <meta property="og:description" content={truck.seoDesc} />
+      <meta property="og:image" content={truck.image} />
+      <meta property="og:image:secure_url" content={truck.image} />
+      <meta property="og:image:alt" content={truck.alt} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:type" content="image/jpeg" />
+      <meta property="product:price:amount" content={String(truck.priceNum)} />
+      <meta property="product:price:currency" content="RUB" />
+      <meta property="product:availability" content="in stock" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Аренда манипулятора в Нижнем Новгороде — ООО Фаворит" />
-      <meta name="twitter:description" content="Аренда манипулятора с КМУ от 2200 ₽/час. Подача от 1 часа. +7 960 188-30-84" />
-      <meta name="twitter:image" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
+      <meta name="twitter:title" content={truck.seoTitle} />
+      <meta name="twitter:description" content={truck.seoDesc} />
+      <meta name="twitter:image" content={truck.image} />
+      <meta name="twitter:image:alt" content={truck.alt} />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+      <meta name="geo.region" content="RU-NIZ" />
+      <meta name="geo.placename" content="Нижний Новгород" />
       <link rel="canonical" href={pageUrl} />
       <script type="application/ld+json">{JSON.stringify({
         "@context": "https://schema.org",

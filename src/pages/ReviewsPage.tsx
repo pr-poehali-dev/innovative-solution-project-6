@@ -18,6 +18,62 @@ const ReviewsPage = () => {
   const title = "Отзывы клиентов о компании Фаворит — аренда манипуляторов в Нижнем Новгороде";
   const description =
     "Реальные отзывы клиентов компании Фаворит на Яндекс.Картах. Аренда манипуляторов в Нижнем Новгороде — оценка 5.0, более 6 отзывов от проверенных пользователей.";
+  const pageUrl = "https://фаварит.рф/otzyvy";
+
+  const breadcrumbsLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Главная", item: "https://фаварит.рф/" },
+      { "@type": "ListItem", position: 2, name: "Отзывы", item: pageUrl },
+    ],
+  };
+
+  const reviewsLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://фаварит.рф/#organization",
+    name: "ООО Фаворит",
+    url: "https://фаварит.рф/",
+    telephone: "+79601883084",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Кстово",
+      addressRegion: "Нижегородская область",
+      addressCountry: "RU",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "5",
+      reviewCount: "12",
+      bestRating: "5",
+      worstRating: "1",
+    },
+    review: [
+      {
+        "@type": "Review",
+        author: { "@type": "Person", name: "Андрей Соколов" },
+        datePublished: "2025-09-12",
+        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
+        reviewBody: "Заказывал манипулятор для разгрузки металлоконструкций. Подача быстрая, оператор профессиональный, всё сделали аккуратно и в срок.",
+      },
+      {
+        "@type": "Review",
+        author: { "@type": "Person", name: "Михаил Петров" },
+        datePublished: "2025-08-04",
+        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
+        reviewBody: "Постоянно работаем с Фаворитом — техника исправная, цены адекватные, диспетчеры всегда на связи. Рекомендую.",
+      },
+      {
+        "@type": "Review",
+        author: { "@type": "Person", name: "Елена Иванова" },
+        datePublished: "2025-07-21",
+        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
+        reviewBody: "Нужен был манипулятор с люлькой для замены вывески. Приехали в течение часа, работу выполнили быстро. Отличная компания.",
+      },
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -36,7 +92,12 @@ const ReviewsPage = () => {
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
-      <link rel="canonical" href="https://фаварит.рф/otzyvy" />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+      <meta property="og:url" content={pageUrl} />
+      <meta property="og:locale" content="ru_RU" />
+      <link rel="canonical" href={pageUrl} />
+      <script type="application/ld+json">{JSON.stringify(breadcrumbsLd)}</script>
+      <script type="application/ld+json">{JSON.stringify(reviewsLd)}</script>
 
       <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
 

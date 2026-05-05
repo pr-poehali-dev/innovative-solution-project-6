@@ -26,6 +26,64 @@ const CityPage = () => {
 
   const title = `Манипулятор с КМУ в ${city.nameIn} — заказать от 1500 ₽/час | Фаворит`;
   const description = `Заказать манипулятор в ${city.nameIn}: подача от 1 часа, до 20 т, стрела 23 м, люлька. Работаем без выходных, оператор включён. ☎ +7 960 188-30-84`;
+  const cityUrl = `https://фаварит.рф/gorod/${city.slug}`;
+  const ogTitle = `Аренда манипулятора в ${city.nameIn} — от 1500 ₽/час | Фаворит`;
+  const ogDescription = `Манипулятор с КМУ в ${city.nameIn}: подача от 1 часа, до 20 тонн, стрела 23 м, люлька. Оператор включён. ☎ +7 960 188-30-84`;
+
+  const breadcrumbsLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Главная", item: "https://фаварит.рф/" },
+      { "@type": "ListItem", position: 2, name: "Города", item: "https://фаварит.рф/" },
+      { "@type": "ListItem", position: 3, name: city.name, item: cityUrl },
+    ],
+  };
+
+  const serviceLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: `Аренда манипулятора в ${city.nameIn}`,
+    name: `Аренда манипулятора с КМУ в ${city.nameIn}`,
+    description: `Услуги аренды манипулятора (КМУ) в ${city.nameIn} от компании «Фаворит». Подача техники от 1 часа, грузоподъёмность до 20 тонн, стрела до 23 м, монтажная люлька. Работаем без выходных.`,
+    areaServed: {
+      "@type": "City",
+      name: city.name,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: city.name,
+        addressRegion: "Нижегородская область",
+        addressCountry: "RU",
+      },
+    },
+    provider: {
+      "@type": "LocalBusiness",
+      name: "ООО Фаворит",
+      telephone: "+79601883084",
+      url: "https://фаварит.рф/",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Кстово",
+        addressRegion: "Нижегородская область",
+        addressCountry: "RU",
+      },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "5",
+        reviewCount: "12",
+        bestRating: "5",
+        worstRating: "1",
+      },
+    },
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "RUB",
+      price: "1500",
+      url: cityUrl,
+      availability: "https://schema.org/InStock",
+      areaServed: city.name,
+    },
+  };
 
   const otherCities = cities.filter((c) => c.slug !== city.slug);
 
@@ -39,18 +97,25 @@ const CityPage = () => {
       />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="фаварит.рф" />
-      <meta property="og:title" content="Аренда манипулятора в Нижнем Новгороде — ООО Фаворит" />
-      <meta property="og:description" content="Аренда манипулятора с КМУ от 2200 ₽/час. Подача от 1 часа. +7 960 188-30-84" />
+      <meta property="og:url" content={cityUrl} />
+      <meta property="og:locale" content="ru_RU" />
+      <meta property="og:title" content={ogTitle} />
+      <meta property="og:description" content={ogDescription} />
       <meta property="og:image" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
       <meta property="og:image:secure_url" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:type" content="image/jpeg" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Аренда манипулятора в Нижнем Новгороде — ООО Фаворит" />
-      <meta name="twitter:description" content="Аренда манипулятора с КМУ от 2200 ₽/час. Подача от 1 часа. +7 960 188-30-84" />
+      <meta name="twitter:title" content={ogTitle} />
+      <meta name="twitter:description" content={ogDescription} />
       <meta name="twitter:image" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
-      <link rel="canonical" href={`https://фаварит.рф/gorod/${city.slug}`} />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+      <meta name="geo.region" content="RU-NIZ" />
+      <meta name="geo.placename" content={city.name} />
+      <link rel="canonical" href={cityUrl} />
+      <script type="application/ld+json">{JSON.stringify(breadcrumbsLd)}</script>
+      <script type="application/ld+json">{JSON.stringify(serviceLd)}</script>
 
       <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
 
