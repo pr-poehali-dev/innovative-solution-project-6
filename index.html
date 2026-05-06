@@ -59,7 +59,7 @@
 
     <!-- LocalBusiness, Service, FAQ микроразметка добавляется динамически в src/components/seo/StructuredData.tsx и FaqSection.tsx -->
 
-    <!-- WebSite микроразметка с навигацией для sitelinks в Яндексе/Google -->
+    <!-- WebSite микроразметка + поиск по сайту -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -74,18 +74,7 @@
           "urlTemplate": "https://фаварит.рф/?q={search_term_string}"
         },
         "query-input": "required name=search_term_string"
-      },
-      "hasPart": [
-        {"@type": "SiteNavigationElement", "name": "Главная", "url": "https://фаварит.рф/"},
-        {"@type": "SiteNavigationElement", "name": "Каталог техники", "url": "https://фаварит.рф/#fleet"},
-        {"@type": "SiteNavigationElement", "name": "Преимущества", "url": "https://фаварит.рф/#features"},
-        {"@type": "SiteNavigationElement", "name": "Услуги", "url": "https://фаварит.рф/#usecases"},
-        {"@type": "SiteNavigationElement", "name": "Тарифы и цены", "url": "https://фаварит.рф/#pricing"},
-        {"@type": "SiteNavigationElement", "name": "Как это работает", "url": "https://фаварит.рф/#how"},
-        {"@type": "SiteNavigationElement", "name": "Отзывы клиентов", "url": "https://фаварит.рф/otzyvy"},
-        {"@type": "SiteNavigationElement", "name": "Блог о манипуляторах", "url": "https://фаварит.рф/blog"},
-        {"@type": "SiteNavigationElement", "name": "Аренда в Нижнем Новгороде", "url": "https://фаварит.рф/arenda-manipulyatora-nizhny-novgorod"}
-      ]
+      }
     }
     </script>
 

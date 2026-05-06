@@ -35,8 +35,7 @@ const CityPage = () => {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Главная", item: "https://фаварит.рф/" },
-      { "@type": "ListItem", position: 2, name: "Города", item: "https://фаварит.рф/" },
-      { "@type": "ListItem", position: 3, name: city.name, item: cityUrl },
+      { "@type": "ListItem", position: 2, name: city.name, item: cityUrl },
     ],
   };
 
