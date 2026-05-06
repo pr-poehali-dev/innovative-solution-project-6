@@ -232,14 +232,6 @@ const SiteFooter = () => {
             <Link to="/privacy" className="text-accent hover:text-accent/80 underline-offset-4 hover:underline transition-colors font-semibold">
               Политика конфиденциальности
             </Link>
-            <span className="text-white/20">·</span>
-            <Link
-              to="/presentation"
-              className="text-white/40 hover:text-accent underline-offset-4 hover:underline transition-colors text-xs"
-              title="Презентация компании для клиентов"
-            >
-              Презентация
-            </Link>
           </div>
         </div>
       </div>
