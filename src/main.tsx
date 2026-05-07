@@ -47,3 +47,9 @@ requestAnimationFrame(() => {
     setTimeout(() => loader.remove(), 350);
   }
 });
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(() => {});
+  });
+}
