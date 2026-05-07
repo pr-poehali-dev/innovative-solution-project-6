@@ -6,6 +6,7 @@ import BrandLogo from "@/components/ui/BrandLogo";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import CallbackModal from "@/components/ui/CallbackModal";
 import LazySection from "@/components/LazySection";
+import { reviews, reviewSchema } from "@/data/reviews";
 
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
@@ -46,33 +47,11 @@ const ReviewsPage = () => {
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "5",
-      reviewCount: "12",
+      reviewCount: String(reviews.length),
       bestRating: "5",
       worstRating: "1",
     },
-    review: [
-      {
-        "@type": "Review",
-        author: { "@type": "Person", name: "Андрей Соколов" },
-        datePublished: "2025-09-12",
-        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
-        reviewBody: "Заказывал манипулятор для разгрузки металлоконструкций. Подача быстрая, оператор профессиональный, всё сделали аккуратно и в срок.",
-      },
-      {
-        "@type": "Review",
-        author: { "@type": "Person", name: "Михаил Петров" },
-        datePublished: "2025-08-04",
-        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
-        reviewBody: "Постоянно работаем с Фаворитом — техника исправная, цены адекватные, диспетчеры всегда на связи. Рекомендую.",
-      },
-      {
-        "@type": "Review",
-        author: { "@type": "Person", name: "Елена Иванова" },
-        datePublished: "2025-07-21",
-        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
-        reviewBody: "Нужен был манипулятор с люлькой для замены вывески. Приехали в течение часа, работу выполнили быстро. Отличная компания.",
-      },
-    ],
+    review: reviewSchema,
   };
 
   return (
@@ -161,8 +140,8 @@ const ReviewsPage = () => {
             </div>
             <div className="h-px w-full sm:w-px sm:h-14 bg-accent/20" />
             <div className="flex flex-col items-center sm:items-start">
-              <span className="text-white font-bold text-lg">6+ отзывов</span>
-              <span className="text-muted-foreground text-sm">на Яндекс.Картах</span>
+              <span className="text-white font-bold text-lg">{reviews.length}+ отзывов</span>
+              <span className="text-muted-foreground text-sm">от реальных клиентов</span>
             </div>
             <div className="h-px w-full sm:w-px sm:h-14 bg-accent/20" />
             <div className="flex flex-col items-center sm:items-start">
