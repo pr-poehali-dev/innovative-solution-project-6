@@ -1,4 +1,5 @@
 import type { Truck } from "./trucksData";
+import { reviews, reviewSchema } from "@/data/reviews";
 
 interface TruckSeoProps {
   truck: Truck;
@@ -124,18 +125,11 @@ export default function TruckSeo({ truck, slug }: TruckSeoProps) {
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "5",
-          "reviewCount": "12",
+          "reviewCount": String(reviews.length),
           "bestRating": "5",
           "worstRating": "1"
         },
-        "review": [{
-          "@type": "Review",
-          "name": `Отзыв об аренде ${truck.title}`,
-          "author": { "@type": "Person", "name": "Андрей Соколов" },
-          "datePublished": "2025-09-12",
-          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
-          "reviewBody": "Отличная техника, оператор профессиональный. Подача быстрая, всё сделали в срок. Рекомендую."
-        }]
+        "review": reviewSchema
       })}</script>
     </>
   );
