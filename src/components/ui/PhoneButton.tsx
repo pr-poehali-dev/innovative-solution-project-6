@@ -26,7 +26,7 @@ interface PhoneButtonProps {
 
 const PhoneButton = ({ className = "", size = "md", iconOnly = false }: PhoneButtonProps) => {
   const sizeClasses = {
-    sm: "px-4 py-2.5 text-sm gap-2 whitespace-nowrap",
+    sm: "px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm gap-1.5 sm:gap-2 whitespace-nowrap",
     md: "px-5 py-2.5 text-sm gap-2 whitespace-nowrap",
     lg: "px-10 sm:px-14 py-5 sm:py-6 text-2xl sm:text-3xl gap-4",
   };
@@ -36,11 +36,12 @@ const PhoneButton = ({ className = "", size = "md", iconOnly = false }: PhoneBut
       <a
         href="tel:+79601883084"
         onClick={() => reachGoal("phone_click")}
-        className={`inline-flex w-10 h-10 items-center justify-center border-2 rounded-full font-black active:scale-95 transition-transform ${className}`}
-        style={goldStyle}
+        className={`inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs whitespace-nowrap border rounded-full font-bold active:scale-95 transition-transform ${className}`}
+        style={goldStyleOutline}
         aria-label="Позвонить +7 960 188-30-84"
       >
-        <Icon name="Phone" size={18} />
+        <Icon name="Phone" size={14} />
+        +7 960 188-30-84
       </a>
     );
   }
