@@ -173,7 +173,8 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
       })}
 
       {/* Затемнение — только для десктопа */}
-      <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/10 z-10" />
+      <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20 z-10" />
+      <div className="hidden lg:block absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/70 to-transparent z-10 pointer-events-none" />
 
       {/* Точки-индикаторы — десктоп */}
       <div className="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 gap-0 z-20">

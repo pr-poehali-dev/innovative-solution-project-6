@@ -7,19 +7,20 @@ interface HeroContentProps {
 
 const HeroContent = ({ visibleSections }: HeroContentProps) => {
   return (
-    <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-4 sm:pt-6 lg:pt-32 pb-16 sm:pb-32">
+    <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-24 sm:pt-28 lg:pt-40 pb-16 sm:pb-32">
       <div className={`max-w-2xl transition-all duration-1000 ${visibleSections["hero"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-        <div className="mb-3 sm:mb-8 inline-block">
-          <span className="brand-tagline-glow text-[11px] sm:text-sm font-semibold tracking-widest uppercase" style={{ color: "#f5d680", letterSpacing: "0.2em" }}>
-            Аренда и услуги манипуляторов в Нижнем Новгороде
+        <div className="mb-3 sm:mb-8 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/55 backdrop-blur-sm border border-accent/40 shadow-lg">
+          <span className="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_8px_rgba(245,214,128,0.8)]" />
+          <span className="text-[10px] sm:text-xs font-bold tracking-widest uppercase" style={{ color: "#f5d680", letterSpacing: "0.18em" }}>
+            Аренда манипуляторов в Нижнем Новгороде
           </span>
         </div>
-        <h1 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black leading-tight mb-2 sm:mb-8 tracking-tighter">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black leading-tight mb-2 sm:mb-8 tracking-tighter drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]">
           <span className="bg-gradient-to-br from-white via-white to-accent/40 bg-clip-text text-transparent">Манипуляторы </span>
           <span className="text-accent">в аренду </span>
-          <span className="text-white/70">в Нижнем Новгороде</span>
+          <span className="text-white/90">в Нижнем Новгороде</span>
         </h1>
-        <p className="text-xs sm:text-xl text-white/80 leading-snug sm:leading-relaxed mb-3 sm:mb-7 max-w-full sm:max-w-xl font-light">
+        <p className="text-sm sm:text-xl text-white leading-snug sm:leading-relaxed mb-3 sm:mb-7 max-w-full sm:max-w-xl font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
           Оставьте заявку или позвоните — мы подберём правильный манипулятор с платформой необходимых габаритов и нужной грузоподъёмностью под вашу задачу.
         </p>
 
