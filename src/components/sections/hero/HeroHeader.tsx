@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
@@ -6,13 +6,23 @@ import { navLinks } from "./heroData";
 
 const HeroHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
       {/* Header */}
-      <header className="fixed top-0 w-full bg-background/95 lg:bg-background/85 backdrop-blur-2xl border-b border-accent/30 shadow-[0_4px_24px_rgba(0,0,0,0.5)] z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5 flex justify-between items-center">
-          <BrandLogo />
+      <header
+        className={`fixed top-0 w-full bg-background/95 lg:bg-background/85 backdrop-blur-2xl border-b border-accent/30 shadow-[0_4px_24px_rgba(0,0,0,0.5)] z-50 transition-all duration-300 ${scrolled ? "bg-background/98 lg:bg-background/95" : ""}`}
+      >
+        <div className={`max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center transition-all duration-300 ${scrolled ? "py-2 sm:py-2.5" : "py-3 sm:py-5"}`}>
+          <BrandLogo compact={scrolled} />
           <nav className="hidden md:flex gap-8 lg:gap-10 text-sm font-medium">
             {navLinks.map(link => (
               <a
