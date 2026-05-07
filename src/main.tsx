@@ -39,3 +39,11 @@ window.addEventListener("load", () => {
 });
 
 createRoot(document.getElementById("root")!).render(<App />);
+
+requestAnimationFrame(() => {
+  const loader = document.getElementById("initial-loader");
+  if (loader) {
+    loader.classList.add("hidden");
+    setTimeout(() => loader.remove(), 350);
+  }
+});

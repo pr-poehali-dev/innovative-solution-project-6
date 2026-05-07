@@ -4,11 +4,6 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <!-- Против кеширования HTML — свежая версия при каждом заходе -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-    <meta http-equiv="Pragma" content="no-cache"/>
-    <meta http-equiv="Expires" content="0"/>
-
     <title>Аренда манипулятора в Нижнем Новгороде, Заказать услуги— от 1500 ₽/час!</title>
     <meta name="description" content="Аренда манипулятора с оператором в Нижнем Новгороде от 1500 ₽/час. КМУ 3–8 тонн, стрела до 23 м, люлька, бур. Подача за 1 час, работаем 24/7. ☎ +7 960 188-30-84">
     <meta name="keywords" content="аренда манипулятора Нижний Новгород, аренда манипулятора нижний новгород фаворит, услуги манипулятора в нижнем новгороде, аренда манипулятора фаварит, ооо фаворит, фаварит.рф, кран-манипулятор с оператором, КМУ аренда, манипулятор с люлькой, манипулятор с буром, аренда спецтехники Нижегородская область"/>
@@ -91,8 +86,29 @@
   </head>
 
 <body>
+<style>
+  #initial-loader{position:fixed;inset:0;background:#0b0f14;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;color:#f5d680;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;transition:opacity .25s ease}
+  #initial-loader.hidden{opacity:0;pointer-events:none}
+  #initial-loader .il-logo{width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,#f5d060 0%,#c8850a 100%);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px;color:#1a1208;box-shadow:0 8px 32px rgba(245,208,96,.25);margin-bottom:14px}
+  #initial-loader .il-title{font-size:18px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+  #initial-loader .il-bar{width:140px;height:3px;border-radius:3px;background:rgba(245,214,128,.15);margin-top:14px;overflow:hidden;position:relative}
+  #initial-loader .il-bar::after{content:"";position:absolute;left:-40%;top:0;bottom:0;width:40%;background:linear-gradient(90deg,transparent,#f5d680,transparent);animation:il-slide 1s linear infinite}
+  @keyframes il-slide{to{left:100%}}
+</style>
+<div id="initial-loader" aria-hidden="true">
+  <div class="il-logo">Ф</div>
+  <div class="il-title">ООО Фаворит</div>
+  <div class="il-bar"></div>
+</div>
 <div id="root"></div>
 <script type="module" src="/src/main.tsx"></script>
+<script>
+  window.addEventListener("load", function(){
+    var l = document.getElementById("initial-loader");
+    if(!l) return;
+    requestAnimationFrame(function(){ l.classList.add("hidden"); setTimeout(function(){ l.remove(); }, 350); });
+  });
+</script>
 
 <!-- Yandex.Metrika counter — загружается с отсрочкой, чтобы не блокировать LCP/FCP -->
 <script type="text/javascript">
