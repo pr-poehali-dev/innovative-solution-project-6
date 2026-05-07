@@ -153,6 +153,24 @@ const ReviewsPage = () => {
               <span className="text-muted-foreground text-sm">только реальные клиенты</span>
             </div>
           </div>
+
+          <div className="mt-6 sm:mt-8">
+            <a
+              href="#leave-review"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("leave-review")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-2xl shadow-lg shadow-accent/30 active:scale-[0.98] transition-transform"
+              style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
+            >
+              <Icon name="Star" size={18} className="text-black fill-black" />
+              <span className="text-black font-black text-sm sm:text-base">Оставить отзыв</span>
+              <Icon name="ArrowDown" size={16} className="text-black group-hover:translate-y-0.5 transition-transform" />
+            </a>
+          </div>
         </div>
       </section>
 
@@ -215,7 +233,7 @@ const ReviewsPage = () => {
       </section>
 
       {/* БЛОК «ОСТАВИТЬ ОТЗЫВ» */}
-      <section className="pb-16 sm:pb-24 px-4 sm:px-6">
+      <section id="leave-review" className="pb-16 sm:pb-24 px-4 sm:px-6 scroll-mt-24">
         <div className="max-w-6xl mx-auto">
           <div className="relative overflow-hidden rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/10 via-card/40 to-transparent p-6 sm:p-10">
             <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-accent/15 blur-3xl" />
