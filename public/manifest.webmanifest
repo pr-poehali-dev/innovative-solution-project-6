@@ -1,0 +1,54 @@
+{
+  "name": "ООО Фаворит — аренда манипуляторов",
+  "short_name": "Фаворит",
+  "description": "Аренда манипуляторов с КМУ в Нижнем Новгороде. От 1500 ₽/час, подача за 1 час, работаем 24/7.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0f14",
+  "theme_color": "#0b0f14",
+  "lang": "ru",
+  "dir": "ltr",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/e898d763-541f-4f6c-8cb7-c9002f77671e.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/e898d763-541f-4f6c-8cb7-c9002f77671e.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/e898d763-541f-4f6c-8cb7-c9002f77671e.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Позвонить",
+      "short_name": "Звонок",
+      "description": "Позвонить менеджеру",
+      "url": "tel:+79601883084"
+    },
+    {
+      "name": "Техника",
+      "short_name": "Техника",
+      "description": "Наша техника",
+      "url": "/?source=pwa#fleet"
+    },
+    {
+      "name": "Отзывы",
+      "short_name": "Отзывы",
+      "description": "Отзывы клиентов",
+      "url": "/otzyvy?source=pwa"
+    }
+  ]
+}
