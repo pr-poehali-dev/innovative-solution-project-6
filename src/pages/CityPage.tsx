@@ -143,7 +143,8 @@ const CityPage = () => {
             >
               <Icon name="MessageCircle" size={18} className="text-accent" />
             </button>
-            <PhoneButton iconOnly />
+            <PhoneButton size="sm" className="hidden sm:inline-flex" />
+            <PhoneButton iconOnly className="flex sm:hidden" />
           </div>
         </div>
       </header>

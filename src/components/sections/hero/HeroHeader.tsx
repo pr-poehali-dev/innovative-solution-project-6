@@ -36,7 +36,8 @@ const HeroHeader = () => {
             ))}
           </nav>
           <div className="flex gap-2 sm:gap-3 items-center">
-            <PhoneButton iconOnly />
+            <PhoneButton size="sm" className="hidden sm:inline-flex" />
+            <PhoneButton iconOnly className="flex sm:hidden" />
 
             {/* Бургер — только мобайл */}
             <button

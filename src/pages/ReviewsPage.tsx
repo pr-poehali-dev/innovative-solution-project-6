@@ -124,7 +124,8 @@ const ReviewsPage = () => {
               <Icon name="MessageCircle" size={14} className="text-accent" />
               Перезвоните мне
             </button>
-            <PhoneButton iconOnly />
+            <PhoneButton size="sm" className="hidden sm:inline-flex" />
+            <PhoneButton iconOnly className="flex sm:hidden" />
           </div>
         </div>
       </header>
