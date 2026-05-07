@@ -10,12 +10,19 @@ const HeroHeader = () => {
   return (
     <>
       {/* Header */}
-      <header className="fixed top-0 w-full bg-background/95 lg:bg-background/80 lg:backdrop-blur-2xl border-b border-accent/20 z-50">
+      <header className="fixed top-0 w-full bg-background/95 lg:bg-background/85 backdrop-blur-2xl border-b border-accent/30 shadow-[0_4px_24px_rgba(0,0,0,0.5)] z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5 flex justify-between items-center">
           <BrandLogo />
-          <nav className="hidden md:flex gap-10 text-sm font-medium">
+          <nav className="hidden md:flex gap-8 lg:gap-10 text-sm font-medium">
             {navLinks.map(link => (
-              <a key={link.href} href={link.href} className="font-semibold transition-colors hover:opacity-80" style={{ color: "#e8a820", fontFamily: "'Cinzel', serif", letterSpacing: "0.05em" }}>{link.label}</a>
+              <a
+                key={link.href}
+                href={link.href}
+                className="font-semibold transition-colors hover:text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                style={{ color: "#f5d680", fontFamily: "'Cinzel', serif", letterSpacing: "0.05em" }}
+              >
+                {link.label}
+              </a>
             ))}
           </nav>
           <div className="flex gap-2 sm:gap-3 items-center">
