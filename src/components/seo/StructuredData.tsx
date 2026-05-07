@@ -106,15 +106,7 @@ const StructuredData = () => {
       },
       "availability": "https://schema.org/InStock",
       "seller": { "@id": "https://фаварит.рф/#organization" }
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5",
-      "reviewCount": String(reviews.length),
-      "bestRating": "5",
-      "worstRating": "1"
-    },
-    "review": reviewSchema
+    }
   };
 
   return (
