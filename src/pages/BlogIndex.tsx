@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { lazy, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
 import SectionBadge from "@/components/ui/SectionBadge";
 import PhoneButton from "@/components/ui/PhoneButton";
@@ -33,6 +33,10 @@ const formatDate = (iso: string) => {
 const BlogIndex = () => {
   const [callbackOpen, setCallbackOpen] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
+
   const title = "Блог о манипуляторах и спецтехнике в Нижнем Новгороде | Фаворит";
   const description =
     "Статьи о выборе и аренде манипуляторов, ценах, кейсах и сравнениях. Полезные материалы от экспертов компании Фаворит в Нижнем Новгороде.";
@@ -60,7 +64,7 @@ const BlogIndex = () => {
 
       <header className="fixed top-0 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5 flex justify-between items-center">
-          <BrandLogo />
+          <BrandLogo compact />
           <div className="flex gap-2 sm:gap-3 items-center">
             <button
               type="button"

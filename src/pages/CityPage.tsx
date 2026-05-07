@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import SectionBadge from "@/components/ui/SectionBadge";
@@ -19,6 +19,10 @@ const CityPage = () => {
   const { slug } = useParams();
   const [callbackOpen, setCallbackOpen] = useState(false);
   const city = slug ? getCityBySlug(slug) : undefined;
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [slug]);
 
   if (!city) {
     return <Navigate to="/" replace />;
@@ -121,7 +125,7 @@ const CityPage = () => {
       {/* Header */}
       <header className="fixed top-0 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5 flex justify-between items-center">
-          <BrandLogo />
+          <BrandLogo compact />
           <div className="flex gap-2 sm:gap-3 items-center">
             <button
               type="button"
