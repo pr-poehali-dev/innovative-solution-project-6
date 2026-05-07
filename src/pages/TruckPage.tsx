@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import OrderModal from "@/components/ui/OrderModal";
 import CallbackModal from "@/components/ui/CallbackModal";
@@ -15,6 +15,10 @@ export default function TruckPage() {
   const [calcSummary, setCalcSummary] = useState("");
   const [callbackOpen, setCallbackOpen] = useState(false);
   const truck = slug ? trucks[slug] : null;
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [slug]);
 
   if (!truck) {
     return (

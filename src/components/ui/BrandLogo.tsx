@@ -14,6 +14,7 @@ const goldText = {
 interface BrandLogoProps {
   to?: string;
   size?: "sm" | "md";
+  compact?: boolean;
 }
 
 const OPEN_HOUR = 7;
@@ -47,9 +48,17 @@ const getStatus = () => {
   return { online: false, timeLeft };
 };
 
-const BrandLogo = ({ to = "/", size = "md" }: BrandLogoProps) => {
-  const imgSize = size === "sm" ? "w-9 h-9 sm:w-12 sm:h-12" : "w-14 h-14 sm:w-20 sm:h-20";
-  const titleSize = size === "sm" ? "text-base sm:text-xl" : "text-xl sm:text-3xl";
+const BrandLogo = ({ to = "/", size = "md", compact = false }: BrandLogoProps) => {
+  const imgSize = compact
+    ? "w-8 h-8 sm:w-12 sm:h-12"
+    : size === "sm"
+      ? "w-9 h-9 sm:w-12 sm:h-12"
+      : "w-14 h-14 sm:w-20 sm:h-20";
+  const titleSize = compact
+    ? "text-sm sm:text-xl"
+    : size === "sm"
+      ? "text-base sm:text-xl"
+      : "text-xl sm:text-3xl";
 
   const [status, setStatus] = useState(getStatus);
 
@@ -71,7 +80,7 @@ const BrandLogo = ({ to = "/", size = "md" }: BrandLogoProps) => {
         decoding="async"
       />
       <div className="flex flex-col leading-tight">
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className={`${compact ? "hidden sm:flex" : "flex"} items-center gap-2 flex-wrap`}>
           <span className="block text-[9px] sm:text-xs font-medium tracking-[0.22em] sm:tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>
           {status.online ? (
             <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-green-500/15 border border-green-500/40" title="Работаем сейчас — звоните">
@@ -89,14 +98,14 @@ const BrandLogo = ({ to = "/", size = "md" }: BrandLogoProps) => {
           )}
         </div>
         {!status.online && status.timeLeft && (
-          <span className="block text-[9px] sm:text-[10px] font-semibold mt-0.5" style={{ color: "#e8a820" }}>
+          <span className={`${compact ? "hidden sm:block" : "block"} text-[9px] sm:text-[10px] font-semibold mt-0.5`} style={{ color: "#e8a820" }}>
             Откроемся через {status.timeLeft}
           </span>
         )}
         <span className={`font-black drop-shadow-lg ${titleSize}`} style={goldText}>
           ООО Фаворит
         </span>
-        <span className="brand-tagline-glow block text-[11px] sm:text-sm font-semibold tracking-widest uppercase mt-1" style={{ color: "#f5d680", letterSpacing: "0.18em" }}>Надёжная аренда манипуляторов</span>
+        <span className={`brand-tagline-glow ${compact ? "hidden sm:block" : "block"} text-[11px] sm:text-sm font-semibold tracking-widest uppercase mt-1`} style={{ color: "#f5d680", letterSpacing: "0.18em" }}>Надёжная аренда манипуляторов</span>
       </div>
     </div>
   );
