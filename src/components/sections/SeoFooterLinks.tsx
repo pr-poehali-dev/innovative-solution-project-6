@@ -47,7 +47,7 @@ const linkGroups: LinkGroup[] = [
       { label: "Renault Lander с КМУ", to: "/tehnika/renault-lander-kmu" },
       { label: "Hyundai Gold + HIAB 8 т", to: "/tehnika/hyundai-gold-kmu-8t" },
       { label: "Hino 500 + Kanglim 7 т", to: "/tehnika/hino-500-kmu-7t" },
-      { label: "ISUZU 5т с КМУ", to: "/tehnika/isuzu-kmu-5t" },
+      { label: "ISUZU 5т с КМУ", to: "/tehnika/isuzu-5t-kmu" },
       { label: "Экскаватор-погрузчик JCB 4CX", to: "/tehnika/jcb-4cx" },
       { label: "Экскаватор-погрузчик JCB 3CX", to: "/tehnika/jcb-3cx" },
     ],
