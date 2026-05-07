@@ -88,21 +88,41 @@ const ReviewsPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5 flex justify-between items-center">
           <BrandLogo compact />
           <div className="flex gap-2 sm:gap-3 items-center">
+            <a
+              href="#leave-review"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("leave-review")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full shadow-md shadow-accent/30 active:scale-[0.98] transition-transform text-sm font-bold"
+              style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)", color: "#000" }}
+            >
+              <Icon name="Star" size={14} className="fill-black" />
+              Оставить отзыв
+            </a>
+            <a
+              href="#leave-review"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("leave-review")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              aria-label="Оставить отзыв"
+              className="flex md:hidden w-10 h-10 items-center justify-center rounded-full shadow-md shadow-accent/30"
+              style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
+            >
+              <Icon name="Star" size={18} className="fill-black text-black" />
+            </a>
             <button
               type="button"
               onClick={() => setCallbackOpen(true)}
-              className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all text-sm font-semibold text-white"
+              className="hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all text-sm font-semibold text-white"
             >
               <Icon name="MessageCircle" size={14} className="text-accent" />
               Перезвоните мне
-            </button>
-            <button
-              type="button"
-              onClick={() => setCallbackOpen(true)}
-              className="flex md:hidden w-10 h-10 items-center justify-center rounded-full border border-accent/40 bg-accent/5"
-              aria-label="Заказать обратный звонок"
-            >
-              <Icon name="MessageCircle" size={18} className="text-accent" />
             </button>
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />
