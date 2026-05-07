@@ -152,6 +152,64 @@ const ReviewsPage = () => {
         </div>
       </section>
 
+      {/* КАРТОЧКИ ОТЗЫВОВ */}
+      <section className="pb-12 sm:pb-16 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-end justify-between mb-6 sm:mb-8 gap-4 flex-wrap">
+            <div>
+              <h2 className="text-2xl sm:text-4xl font-display font-black text-white mb-1">
+                Развёрнутые отзывы клиентов
+              </h2>
+              <p className="text-muted-foreground text-sm sm:text-base">
+                Истории заказов от компаний и частных клиентов — без сокращений
+              </p>
+            </div>
+            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/30">
+              <Icon name="ShieldCheck" size={14} className="text-accent" />
+              <span className="text-xs font-semibold text-white">Все отзывы — реальные</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+            {reviews.map((r) => {
+              const date = new Date(r.date);
+              const dateStr = date.toLocaleDateString("ru-RU", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              });
+              const initials = r.name
+                .split(" ")
+                .map((p) => p[0])
+                .slice(0, 2)
+                .join("");
+              return (
+                <article
+                  key={r.name + r.date}
+                  className="flex flex-col gap-3 p-5 sm:p-6 rounded-2xl border border-accent/20 bg-card/40 hover:border-accent/40 hover:bg-card/60 transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-full bg-gradient-to-br from-accent/30 to-accent/10 border border-accent/30 flex items-center justify-center flex-shrink-0">
+                      <span className="text-accent font-bold text-sm">{initials}</span>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-white font-bold text-sm truncate">{r.name}</div>
+                      <div className="text-muted-foreground text-xs">{dateStr}</div>
+                    </div>
+                    <div className="flex items-center gap-0.5 flex-shrink-0">
+                      {[1, 2, 3, 4, 5].map((i) => (
+                        <Icon key={i} name="Star" size={12} className="text-accent fill-accent" />
+                      ))}
+                    </div>
+                  </div>
+                  <p className="text-white/85 text-sm leading-relaxed">{r.body}</p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* ВИДЖЕТ ЯНДЕКС.КАРТ С ОТЗЫВАМИ */}
       <section className="pb-12 sm:pb-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
