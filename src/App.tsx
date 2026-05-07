@@ -9,6 +9,7 @@ const Toaster = lazy(() =>
 const Sonner = lazy(() =>
   import("@/components/ui/sonner").then((m) => ({ default: m.Toaster }))
 );
+const InstallPrompt = lazy(() => import("@/components/ui/InstallPrompt"));
 
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -32,6 +33,7 @@ const App = () => (
       <Suspense fallback={null}>
         <Toaster />
         <Sonner />
+        <InstallPrompt />
       </Suspense>
       <div className="fixed inset-0 -z-10 bg-background">
         <div className="absolute inset-0 bg-grid opacity-100" />
