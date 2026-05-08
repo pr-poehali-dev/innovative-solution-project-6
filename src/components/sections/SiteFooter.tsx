@@ -4,6 +4,7 @@ import Icon from "@/components/ui/icon";
 import BrandLogo from "@/components/ui/BrandLogo";
 import CallbackModal from "@/components/ui/CallbackModal";
 import InstallAppButton from "@/components/ui/InstallAppButton";
+import OfflineReadyBadge from "@/components/ui/OfflineReadyBadge";
 import { cities } from "@/data/cities";
 
 const trucks = [
@@ -235,7 +236,10 @@ const SiteFooter = () => {
                 </p>
               </div>
             </div>
-            <InstallAppButton className="!px-4 !py-2.5 !text-sm" />
+            <div className="flex flex-col items-center sm:items-end gap-2">
+              <InstallAppButton className="!px-4 !py-2.5 !text-sm" />
+              <OfflineReadyBadge />
+            </div>
           </div>
         </div>
       </div>
