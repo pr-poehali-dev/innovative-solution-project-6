@@ -3,6 +3,7 @@ import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
 import InstallAppButton from "@/components/ui/InstallAppButton";
+import OfflineStatusDot from "@/components/ui/OfflineStatusDot";
 import { navLinks } from "./heroData";
 
 const HeroHeader = () => {
@@ -37,6 +38,7 @@ const HeroHeader = () => {
             ))}
           </nav>
           <div className="flex gap-2 sm:gap-3 items-center">
+            <OfflineStatusDot />
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />
 
