@@ -7,9 +7,9 @@ interface HeroContentProps {
 
 const HeroContent = ({ visibleSections }: HeroContentProps) => {
   return (
-    <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-24 sm:pt-28 lg:pt-40 pb-16 sm:pb-32">
+    <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-4 sm:pt-28 lg:pt-40 pb-16 sm:pb-32">
       <div className={`max-w-2xl transition-all duration-1000 ${visibleSections["hero"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-        <div className="mb-3 sm:mb-8 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/55 backdrop-blur-sm border border-accent/40 shadow-lg">
+        <div className="hidden sm:inline-flex mb-3 sm:mb-8 items-center gap-2 px-3 py-1.5 rounded-full bg-black/55 backdrop-blur-sm border border-accent/40 shadow-lg">
           <span className="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_8px_rgba(245,214,128,0.8)]" />
           <span className="text-[10px] sm:text-xs font-bold tracking-widest uppercase" style={{ color: "#f5d680", letterSpacing: "0.18em" }}>
             Аренда манипуляторов в Нижнем Новгороде
