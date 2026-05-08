@@ -5,56 +5,74 @@ const useCases = [
   {
     icon: "Building2",
     title: "Строительство",
+    tag: "Высотные работы",
     desc: "Подъём и монтаж металлоконструкций, балок, плит перекрытий. Подача стройматериалов на этажи — кирпич, блоки, мешки с раствором. Установка колонн, ферм и кровельных элементов.",
     examples: ["Монтаж каркасов зданий", "Подача материалов на высоту", "Установка лестничных маршей"],
+    color: { main: "#5eead4", soft: "rgba(45,212,191," },
   },
   {
     icon: "Zap",
     title: "Энергетика и связь",
+    tag: "ЛЭП и вышки",
     desc: "Установка опор ЛЭП и освещения, монтаж трансформаторных подстанций. Подъём антенн и вышек сотовой связи. Замена кабельных барабанов.",
     examples: ["Монтаж опор ЛЭП", "Установка трансформаторов", "Подъём антенных мачт"],
+    color: { main: "#fbbf24", soft: "rgba(251,191,36," },
   },
   {
     icon: "Droplets",
     title: "ЖКХ и водоснабжение",
+    tag: "Трубопроводы",
     desc: "Монтаж трубопроводов большого диаметра, установка насосных станций и канализационных люков. Замена секций теплотрасс в траншеях.",
     examples: ["Укладка труб в траншеи", "Монтаж насосных станций", "Замена тепловых сетей"],
+    color: { main: "#60a5fa", soft: "rgba(96,165,250," },
   },
   {
     icon: "Factory",
     title: "Промышленность",
+    tag: "Тяжёлое оборудование",
     desc: "Перемещение тяжёлого оборудования внутри и снаружи цехов. Монтаж станков и производственных линий. Погрузка и разгрузка металлопроката, труб, листового металла.",
     examples: ["Монтаж производственных линий", "Перемещение станков", "Разгрузка металлопроката"],
+    color: { main: "#f87171", soft: "rgba(248,113,113," },
   },
   {
     icon: "Warehouse",
     title: "Логистика и склады",
+    tag: "Разгрузка и хранение",
     desc: "Разгрузка фур и контейнеров с нестандартным грузом. Перемещение крупногабаритных паллет. Работа на складах с ограниченным въездом.",
     examples: ["Разгрузка контейнеров", "Перемещение паллет", "Работа в стеснённых условиях"],
+    color: { main: "#a78bfa", soft: "rgba(167,139,250," },
   },
   {
     icon: "TreePine",
     title: "Лесная и деревообработка",
+    tag: "Пиломатериалы",
     desc: "Погрузка и штабелирование круглого леса, пиломатериалов и деревянных конструкций. Доставка и монтаж деревянных домокомплектов, каркасов и ферм.",
     examples: ["Погрузка пиломатериалов", "Монтаж деревянных домов", "Штабелирование леса"],
+    color: { main: "#34d399", soft: "rgba(52,211,153," },
   },
   {
     icon: "Truck",
     title: "Нефть и газ",
+    tag: "Нефтегазовый сектор",
     desc: "Монтаж оборудования на нефтегазовых объектах: ёмкости, сепараторы, насосы. Перемещение труб большого диаметра. Работа на удалённых и труднодоступных площадках.",
     examples: ["Монтаж ёмкостей и сепараторов", "Укладка газопровода", "Работа на промыслах"],
+    color: { main: "#fb923c", soft: "rgba(251,146,60," },
   },
   {
     icon: "Home",
     title: "Частное строительство",
+    tag: "Загородные дома",
     desc: "Монтаж сборных домов и фундаментных блоков. Подъём кровельных материалов. Установка ворот, заборных секций, бассейнов и септиков.",
     examples: ["Монтаж фундаментных блоков", "Установка септиков", "Подъём кровли и ворот"],
+    color: { main: "#22d3ee", soft: "rgba(34,211,238," },
   },
   {
     icon: "ShoppingCart",
     title: "Ритейл и торговля",
+    tag: "ТЦ и магазины",
     desc: "Оснащение торговых центров и магазинов: монтаж вывесок, климатического оборудования, кровельных конструкций. Разгрузка торгового оборудования при открытии новых объектов.",
     examples: ["Монтаж вывесок и рекламы", "Установка кондиционеров", "Разгрузка при открытии"],
+    color: { main: "#f472b6", soft: "rgba(244,114,182," },
   },
 ];
 
@@ -76,62 +94,116 @@ const UseCasesSection = () => {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-          {useCases.map((item, i) => (
-            <div key={i} className="group relative">
-              {/* Внешнее изумрудно-бирюзовое свечение с пульсацией */}
-              <div
-                className="emerald-pulse absolute -inset-0.5 rounded-2xl pointer-events-none"
-                style={{ background: "linear-gradient(135deg, #2dd4bf 0%, #10b981 50%, #0d9488 100%)", animationDelay: `${(i % 3) * 0.5}s` }}
-              />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-7">
+          {useCases.map((item, i) => {
+            const c = item.color.main;
+            const s = item.color.soft;
+            return (
+              <div key={i} className="group relative transition-transform duration-500 hover:-translate-y-1.5">
+                {/* Внешнее свечение с пульсацией — индивидуальный цвет */}
+                <div
+                  className="emerald-pulse absolute -inset-0.5 rounded-2xl pointer-events-none opacity-70 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: `linear-gradient(135deg, ${c} 0%, ${s}0.4) 50%, ${c} 100%)`,
+                    animationDelay: `${(i % 3) * 0.5}s`,
+                  }}
+                />
 
-              {/* Градиентная рамка */}
-              <div
-                className="relative rounded-2xl p-[1.5px] h-full"
-                style={{ background: "linear-gradient(135deg, rgba(45,212,191,0.85) 0%, rgba(16,185,129,0.25) 50%, rgba(13,148,136,0.8) 100%)" }}
-              >
-                <div className="relative h-full flex flex-col p-5 sm:p-7 rounded-2xl bg-gradient-to-br from-zinc-950 via-background to-black overflow-hidden">
-                  {/* Внутреннее свечение в углу */}
-                  <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-emerald-400/15 blur-3xl pointer-events-none group-hover:bg-emerald-400/30 transition-colors duration-500" />
+                {/* Градиентная рамка */}
+                <div
+                  className="relative rounded-2xl p-[1.5px] h-full"
+                  style={{ background: `linear-gradient(135deg, ${s}0.85) 0%, ${s}0.2) 50%, ${s}0.7) 100%)` }}
+                >
+                  <div className="relative h-full flex flex-col p-5 sm:p-8 rounded-2xl bg-gradient-to-br from-zinc-950 via-background to-black overflow-hidden">
+                    {/* Внутреннее свечение в углу */}
+                    <div
+                      className="absolute -top-20 -right-20 w-48 h-48 rounded-full blur-3xl pointer-events-none group-hover:scale-125 transition-transform duration-700"
+                      style={{ background: `${s}0.18)` }}
+                    />
 
-                  <div className="relative flex items-center gap-3 mb-4">
-                    {/* Иконка с подсветкой */}
-                    <div className="relative shrink-0">
-                      <div
-                        className="absolute inset-0 rounded-xl blur-md opacity-50 group-hover:opacity-100 transition-opacity duration-500"
-                        style={{ background: "radial-gradient(circle, rgba(45,212,191,0.6) 0%, transparent 70%)" }}
-                      />
-                      <div
-                        className="relative w-11 h-11 rounded-xl flex items-center justify-center"
+                    {/* Большой номер на фоне */}
+                    <div
+                      className="absolute -bottom-6 -right-2 font-display font-black text-[120px] leading-none pointer-events-none select-none opacity-[0.07] group-hover:opacity-[0.14] transition-opacity duration-500"
+                      style={{ color: c }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </div>
+
+                    {/* Верхняя строка — иконка + тег категории */}
+                    <div className="relative flex items-start justify-between mb-5">
+                      <div className="relative shrink-0">
+                        <div
+                          className="absolute inset-0 rounded-xl blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                          style={{ background: `radial-gradient(circle, ${s}0.6) 0%, transparent 70%)` }}
+                        />
+                        <div
+                          className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500"
+                          style={{
+                            background: `linear-gradient(135deg, ${s}0.28) 0%, ${s}0.12) 100%)`,
+                            border: `1.5px solid ${s}0.55)`,
+                            boxShadow: `inset 0 1px 0 rgba(255,255,255,0.15), 0 4px 14px ${s}0.3)`,
+                          }}
+                        >
+                          <Icon name={item.icon} size={24} style={{ color: c }} />
+                        </div>
+                      </div>
+
+                      <span
+                        className="relative text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full whitespace-nowrap"
                         style={{
-                          background: "linear-gradient(135deg, rgba(45,212,191,0.25) 0%, rgba(13,148,136,0.15) 100%)",
-                          border: "1.5px solid rgba(45,212,191,0.5)",
-                          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15), 0 4px 12px rgba(16,185,129,0.25)",
+                          color: c,
+                          background: `${s}0.1)`,
+                          border: `1px solid ${s}0.3)`,
                         }}
                       >
-                        <Icon name={item.icon} size={20} style={{ color: "#5eead4" }} />
-                      </div>
+                        {item.tag}
+                      </span>
                     </div>
+
+                    {/* Заголовок — крупнее на ПК */}
                     <h3
-                      className="font-display font-black text-lg bg-clip-text text-transparent"
-                      style={{ backgroundImage: "linear-gradient(135deg, #fff 0%, #5eead4 100%)" }}
+                      className="relative font-display font-black text-xl sm:text-2xl bg-clip-text text-transparent mb-3 leading-tight"
+                      style={{ backgroundImage: `linear-gradient(135deg, #fff 0%, ${c} 100%)` }}
                     >
                       {item.title}
                     </h3>
+
+                    {/* Цветная разделительная линия */}
+                    <div
+                      className="relative h-px w-12 mb-4 rounded-full"
+                      style={{ background: `linear-gradient(90deg, ${c} 0%, transparent 100%)` }}
+                    />
+
+                    {/* Описание — крупнее и читабельнее на ПК */}
+                    <p className="relative text-white/75 text-sm sm:text-[15px] leading-relaxed mb-5">
+                      {item.desc}
+                    </p>
+
+                    {/* Список примеров с разделителем сверху */}
+                    <div
+                      className="relative pt-4 mt-auto"
+                      style={{ borderTop: `1px dashed ${s}0.2)` }}
+                    >
+                      <div className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2.5">
+                        Типовые задачи
+                      </div>
+                      <ul className="space-y-2">
+                        {item.examples.map((ex, j) => (
+                          <li key={j} className="flex items-center gap-2.5 text-xs sm:text-sm text-white/70">
+                            <span
+                              className="w-1.5 h-1.5 rounded-full shrink-0"
+                              style={{ background: c, boxShadow: `0 0 8px ${s}0.7)` }}
+                            />
+                            {ex}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                  <p className="relative text-white/70 text-sm leading-relaxed mb-5">{item.desc}</p>
-                  <ul className="relative space-y-1.5 mt-auto">
-                    {item.examples.map((ex, j) => (
-                      <li key={j} className="flex items-center gap-2 text-xs text-white/60">
-                        <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#5eead4", boxShadow: "0 0 6px rgba(94,234,212,0.6)" }} />
-                        {ex}
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
