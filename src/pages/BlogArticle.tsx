@@ -1,5 +1,5 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import { lazy, useEffect, useState } from "react";
+import { lazy, useState } from "react";
 import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
@@ -91,9 +91,7 @@ const BlogArticle = () => {
   const [callbackOpen, setCallbackOpen] = useState(false);
   const article = slug ? getArticleBySlug(slug) : undefined;
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, [slug]);
+
 
   if (!article) {
     return <Navigate to="/blog" replace />;

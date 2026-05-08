@@ -17,7 +17,7 @@ export default function TruckPage() {
   const truck = slug ? trucks[slug] : null;
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
   }, [slug]);
 
   if (!truck) {

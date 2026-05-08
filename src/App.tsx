@@ -10,6 +10,7 @@ const Sonner = lazy(() =>
   import("@/components/ui/sonner").then((m) => ({ default: m.Toaster }))
 );
 const InstallPrompt = lazy(() => import("@/components/ui/InstallPrompt"));
+const ScrollToTop = lazy(() => import("@/components/ScrollToTop"));
 
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -42,6 +43,9 @@ const App = () => (
         <div className="hidden lg:block absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-orange-500/5 blur-[100px]" />
       </div>
       <BrowserRouter>
+        <Suspense fallback={null}>
+          <ScrollToTop />
+        </Suspense>
         <Suspense fallback={<div className="min-h-screen" />}>
           <Routes>
             <Route path="/" element={<Index />} />

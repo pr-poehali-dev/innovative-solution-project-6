@@ -17,7 +17,7 @@ const ReviewsPage = () => {
   const [callbackOpen, setCallbackOpen] = useState(false);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
   }, []);
 
   const title = "Отзывы клиентов о компании Фаворит — аренда манипуляторов в Нижнем Новгороде";

@@ -27,7 +27,7 @@ const SeoLandingPage = ({ slugOverride }: SeoLandingPageProps) => {
   const data = getSeoLandingBySlug(slug);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
   }, [slug]);
 
   if (!data) {

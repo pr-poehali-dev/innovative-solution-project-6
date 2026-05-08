@@ -33,9 +33,7 @@ const formatDate = (iso: string) => {
 const BlogIndex = () => {
   const [callbackOpen, setCallbackOpen] = useState(false);
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, []);
+
 
   const title = "Блог о манипуляторах и спецтехнике в Нижнем Новгороде | Фаворит";
   const description =
