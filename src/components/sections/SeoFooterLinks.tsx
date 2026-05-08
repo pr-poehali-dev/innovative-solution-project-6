@@ -84,15 +84,22 @@ const SeoFooterLinks = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {linkGroups.map((group, i) => (
             <div key={i} className="p-4 sm:p-5 rounded-2xl border border-accent/15 bg-card/30">
-              <div className="flex items-center gap-2 mb-4 pb-3 border-b border-accent/15">
-                <div className="w-8 h-8 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
-                  <Icon name={group.icon} size={15} className="text-accent" />
+              <div className="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-accent/15">
+                <div className="flex items-center gap-2 min-w-0">
+                  <div className="w-8 h-8 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
+                    <Icon name={group.icon} size={15} className="text-accent" />
+                  </div>
+                  <h3 className="font-display font-bold text-sm sm:text-base text-white truncate">
+                    {group.title}
+                  </h3>
                 </div>
-                <h3 className="font-display font-bold text-sm sm:text-base text-white">
-                  {group.title}
-                </h3>
+                {group.links.length > 10 && (
+                  <span className="text-[11px] font-bold text-accent shrink-0">
+                    {group.links.length}+
+                  </span>
+                )}
               </div>
-              <ul className="space-y-2">
+              <ul className={`space-y-2 ${group.links.length > 12 ? "max-h-72 overflow-y-auto pr-1 custom-scroll" : ""}`}>
                 {group.links.map((link, j) => {
                   const baseClass =
                     "inline-flex items-start gap-1.5 text-muted-foreground text-xs sm:text-sm leading-snug hover:text-accent transition-colors group";

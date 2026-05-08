@@ -9,7 +9,7 @@ export interface CityInfo {
   popular: string[];
 }
 
-export const cities: CityInfo[] = [
+const baseCities: CityInfo[] = [
   {
     slug: "nizhny-novgorod",
     name: "Нижний Новгород",
@@ -182,5 +182,76 @@ export const cities: CityInfo[] = [
     ],
   },
 ];
+
+const extraCitiesRaw: { slug: string; name: string; nameIn: string; nameGenitive: string; distance: string }[] = [
+  { slug: "kulebaki", name: "Кулебаки", nameIn: "Кулебаках", nameGenitive: "Кулебак", distance: "180 км от Нижнего Новгорода" },
+  { slug: "vyksa", name: "Выкса", nameIn: "Выксе", nameGenitive: "Выксы", distance: "190 км от Нижнего Новгорода" },
+  { slug: "lyskovo", name: "Лысково", nameIn: "Лыскове", nameGenitive: "Лыскова", distance: "90 км от Нижнего Новгорода" },
+  { slug: "knyaginino", name: "Княгинино", nameIn: "Княгинине", nameGenitive: "Княгинина", distance: "115 км от Нижнего Новгорода" },
+  { slug: "sergach", name: "Сергач", nameIn: "Сергаче", nameGenitive: "Сергача", distance: "150 км от Нижнего Новгорода" },
+  { slug: "shahunya", name: "Шахунья", nameIn: "Шахунье", nameGenitive: "Шахуньи", distance: "240 км от Нижнего Новгорода" },
+  { slug: "uren", name: "Урень", nameIn: "Урене", nameGenitive: "Уреня", distance: "180 км от Нижнего Новгорода" },
+  { slug: "semenov", name: "Семёнов", nameIn: "Семёнове", nameGenitive: "Семёнова", distance: "70 км от Нижнего Новгорода" },
+  { slug: "navashino", name: "Навашино", nameIn: "Навашине", nameGenitive: "Навашина", distance: "175 км от Нижнего Новгорода" },
+  { slug: "perevoz", name: "Перевоз", nameIn: "Перевозе", nameGenitive: "Перевоза", distance: "130 км от Нижнего Новгорода" },
+  { slug: "vorsma", name: "Ворсма", nameIn: "Ворсме", nameGenitive: "Ворсмы", distance: "70 км от Нижнего Новгорода" },
+  { slug: "pervomaysk", name: "Первомайск", nameIn: "Первомайске", nameGenitive: "Первомайска", distance: "200 км от Нижнего Новгорода" },
+  { slug: "lukoyanov", name: "Лукоянов", nameIn: "Лукоянове", nameGenitive: "Лукоянова", distance: "175 км от Нижнего Новгорода" },
+  { slug: "zavolzhe", name: "Заволжье", nameIn: "Заволжье", nameGenitive: "Заволжья", distance: "55 км от Нижнего Новгорода" },
+  { slug: "chkalovsk", name: "Чкаловск", nameIn: "Чкаловске", nameGenitive: "Чкаловска", distance: "85 км от Нижнего Новгорода" },
+  { slug: "vetluga", name: "Ветлуга", nameIn: "Ветлуге", nameGenitive: "Ветлуги", distance: "245 км от Нижнего Новгорода" },
+  { slug: "krasnye-baki", name: "Красные Баки", nameIn: "Красных Баках", nameGenitive: "Красных Баков", distance: "150 км от Нижнего Новгорода" },
+  { slug: "voskresenskoe", name: "Воскресенское", nameIn: "Воскресенском", nameGenitive: "Воскресенского", distance: "150 км от Нижнего Новгорода" },
+  { slug: "tonkino", name: "Тонкино", nameIn: "Тонкине", nameGenitive: "Тонкина", distance: "210 км от Нижнего Новгорода" },
+  { slug: "tonshaevo", name: "Тоншаево", nameIn: "Тоншаеве", nameGenitive: "Тоншаева", distance: "270 км от Нижнего Новгорода" },
+  { slug: "sharanga", name: "Шаранга", nameIn: "Шаранге", nameGenitive: "Шаранги", distance: "230 км от Нижнего Новгорода" },
+  { slug: "varnavino", name: "Варнавино", nameIn: "Варнавине", nameGenitive: "Варнавина", distance: "180 км от Нижнего Новгорода" },
+  { slug: "kovernino", name: "Ковернино", nameIn: "Ковернине", nameGenitive: "Ковернина", distance: "100 км от Нижнего Новгорода" },
+  { slug: "sosnovskoe", name: "Сосновское", nameIn: "Сосновском", nameGenitive: "Сосновского", distance: "90 км от Нижнего Новгорода" },
+  { slug: "vorotynec", name: "Воротынец", nameIn: "Воротынце", nameGenitive: "Воротынца", distance: "130 км от Нижнего Новгорода" },
+  { slug: "spasskoe", name: "Спасское", nameIn: "Спасском", nameGenitive: "Спасского", distance: "120 км от Нижнего Новгорода" },
+  { slug: "buturlino", name: "Бутурлино", nameIn: "Бутурлине", nameGenitive: "Бутурлина", distance: "130 км от Нижнего Новгорода" },
+  { slug: "gagino", name: "Гагино", nameIn: "Гагине", nameGenitive: "Гагина", distance: "175 км от Нижнего Новгорода" },
+  { slug: "krasnooktyabrskiy", name: "Уразовка", nameIn: "Уразовке", nameGenitive: "Уразовки", distance: "190 км от Нижнего Новгорода" },
+  { slug: "pilna", name: "Пильна", nameIn: "Пильне", nameGenitive: "Пильны", distance: "190 км от Нижнего Новгорода" },
+  { slug: "sechenovo", name: "Сеченово", nameIn: "Сеченове", nameGenitive: "Сеченова", distance: "210 км от Нижнего Новгорода" },
+  { slug: "ardatov", name: "Ардатов", nameIn: "Ардатове", nameGenitive: "Ардатова", distance: "165 км от Нижнего Новгорода" },
+  { slug: "diveevo", name: "Дивеево", nameIn: "Дивееве", nameGenitive: "Дивеева", distance: "175 км от Нижнего Новгорода" },
+  { slug: "vad", name: "Вад", nameIn: "Ваде", nameGenitive: "Вада", distance: "85 км от Нижнего Новгорода" },
+  { slug: "shatki", name: "Шатки", nameIn: "Шатках", nameGenitive: "Шатков", distance: "140 км от Нижнего Новгорода" },
+  { slug: "bolshoe-boldino", name: "Большое Болдино", nameIn: "Большом Болдине", nameGenitive: "Большого Болдина", distance: "210 км от Нижнего Новгорода" },
+  { slug: "krasnogorsky", name: "Краснооктябрьское", nameIn: "Красной Горке", nameGenitive: "Красной Горки", distance: "200 км от Нижнего Новгорода" },
+  { slug: "sokolskoe", name: "Сокольское", nameIn: "Сокольском", nameGenitive: "Сокольского", distance: "130 км от Нижнего Новгорода" },
+  { slug: "dalnee-konstantinovo", name: "Дальнее Константиново", nameIn: "Дальнем Константинове", nameGenitive: "Дальнего Константинова", distance: "55 км от Нижнего Новгорода" },
+  { slug: "afanasyevo", name: "Афанасьево", nameIn: "Афанасьеве", nameGenitive: "Афанасьева", distance: "70 км от Нижнего Новгорода" },
+  { slug: "kstovo-afonino", name: "Афонино", nameIn: "Афонине", nameGenitive: "Афонина", distance: "10 км от Нижнего Новгорода" },
+  { slug: "novinki", name: "Новинки", nameIn: "Новинках", nameGenitive: "Новинок", distance: "8 км от Нижнего Новгорода" },
+  { slug: "fedyakovo", name: "Федяково", nameIn: "Федякове", nameGenitive: "Федякова", distance: "15 км от Нижнего Новгорода" },
+  { slug: "podnove", name: "Подновье", nameIn: "Подновье", nameGenitive: "Подновья", distance: "12 км от Нижнего Новгорода" },
+  { slug: "neklyudovo", name: "Неклюдово", nameIn: "Неклюдове", nameGenitive: "Неклюдова", distance: "25 км от Нижнего Новгорода" },
+  { slug: "kantaurovo", name: "Кантаурово", nameIn: "Кантаурове", nameGenitive: "Кантаурова", distance: "30 км от Нижнего Новгорода" },
+  { slug: "linda", name: "Линда", nameIn: "Линде", nameGenitive: "Линды", distance: "35 км от Нижнего Новгорода" },
+  { slug: "kudma", name: "Кудьма", nameIn: "Кудьме", nameGenitive: "Кудьмы", distance: "20 км от Нижнего Новгорода" },
+];
+
+const buildExtraCity = (raw: { slug: string; name: string; nameIn: string; nameGenitive: string; distance: string }): CityInfo => ({
+  slug: raw.slug,
+  name: raw.name,
+  nameIn: raw.nameIn,
+  nameGenitive: raw.nameGenitive,
+  distance: raw.distance,
+  description: `${raw.name} — населённый пункт Нижегородской области (${raw.distance}). Компания «Фаворит» предоставляет аренду манипуляторов с КМУ в ${raw.nameIn} для строительных компаний, агрокомплексов, частных клиентов и предприятий района. Грузоподъёмность техники до 20 тонн, вылет стрелы до 23 метров, доступна монтажная люлька. Оператор включён в стоимость, выезжаем по предварительной заявке.`,
+  specifics: `Выезжаем в ${raw.nameIn} с базы в Нижнем Новгороде и Кстово. Стоимость рассчитывается с учётом дороги — выгодны смены от 8 часов и долгосрочные контракты. Безналичный расчёт с НДС, страхование грузов и ответственности, опытные операторы со стажем 10+ лет.`,
+  popular: [
+    `Доставка и разгрузка стройматериалов в ${raw.nameIn}`,
+    "Монтаж металлоконструкций, ангаров и складов",
+    "Установка септиков, ёмкостей и резервуаров",
+    "Строительство частных домов и обустройство участков",
+    "Перевозка сельхозтехники и крупногабаритного оборудования",
+    "Работы с люлькой на высоте до 23 м",
+  ],
+});
+
+export const cities: CityInfo[] = [...baseCities, ...extraCitiesRaw.map(buildExtraCity)];
 
 export const getCityBySlug = (slug: string) => cities.find((c) => c.slug === slug);
