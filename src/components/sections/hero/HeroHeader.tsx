@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
+import InstallAppButton from "@/components/ui/InstallAppButton";
 import { navLinks } from "./heroData";
 
 const HeroHeader = () => {
@@ -36,6 +37,8 @@ const HeroHeader = () => {
             ))}
           </nav>
           <div className="flex gap-2 sm:gap-3 items-center">
+            <InstallAppButton className="hidden md:inline-flex" />
+            <InstallAppButton iconOnly className="flex md:hidden" />
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />
 
