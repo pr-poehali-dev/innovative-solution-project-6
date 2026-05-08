@@ -37,8 +37,6 @@ const HeroHeader = () => {
             ))}
           </nav>
           <div className="flex gap-2 sm:gap-3 items-center">
-            <InstallAppButton className="hidden md:inline-flex" />
-            <InstallAppButton iconOnly className="flex md:hidden" />
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />
 
@@ -66,7 +64,10 @@ const HeroHeader = () => {
                 {link.label}
               </a>
             ))}
-            <PhoneButton size="sm" className="mt-2 w-full justify-center rounded-xl" />
+            <div className="mt-2 pt-3 border-t border-accent/10 flex flex-col gap-2" onClick={() => setMenuOpen(false)}>
+              <InstallAppButton className="w-full !justify-center !py-3 !text-sm" />
+              <PhoneButton size="sm" className="w-full justify-center rounded-xl" />
+            </div>
           </div>
         )}
       </header>
