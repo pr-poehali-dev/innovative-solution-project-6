@@ -29,14 +29,6 @@ const linkGroups: LinkGroup[] = [
     ],
   },
   {
-    title: "География работы",
-    icon: "MapPin",
-    links: cities.map((c) => ({
-      label: `Манипулятор в ${c.nameIn}`,
-      to: `/gorod/${c.slug}`,
-    })),
-  },
-  {
     title: "Техника в аренду",
     icon: "Truck",
     links: [
@@ -81,25 +73,18 @@ const SeoFooterLinks = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
           {linkGroups.map((group, i) => (
             <div key={i} className="p-4 sm:p-5 rounded-2xl border border-accent/15 bg-card/30">
-              <div className="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-accent/15">
-                <div className="flex items-center gap-2 min-w-0">
-                  <div className="w-8 h-8 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
-                    <Icon name={group.icon} size={15} className="text-accent" />
-                  </div>
-                  <h3 className="font-display font-bold text-sm sm:text-base text-white truncate">
-                    {group.title}
-                  </h3>
+              <div className="flex items-center gap-2 mb-4 pb-3 border-b border-accent/15">
+                <div className="w-8 h-8 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
+                  <Icon name={group.icon} size={15} className="text-accent" />
                 </div>
-                {group.links.length > 10 && (
-                  <span className="text-[11px] font-bold text-accent shrink-0">
-                    {group.links.length}+
-                  </span>
-                )}
+                <h3 className="font-display font-bold text-sm sm:text-base text-white truncate">
+                  {group.title}
+                </h3>
               </div>
-              <ul className={`space-y-2 ${group.links.length > 12 ? "max-h-72 overflow-y-auto pr-1 custom-scroll" : ""}`}>
+              <ul className="space-y-2">
                 {group.links.map((link, j) => {
                   const baseClass =
                     "inline-flex items-start gap-1.5 text-muted-foreground text-xs sm:text-sm leading-snug hover:text-accent transition-colors group";
@@ -126,6 +111,36 @@ const SeoFooterLinks = () => {
               </ul>
             </div>
           ))}
+        </div>
+
+        {/* География работы — компактные чипы */}
+        <div className="p-4 sm:p-5 rounded-2xl border border-accent/15 bg-card/30">
+          <div className="flex items-center justify-between gap-2 mb-3 sm:mb-4 pb-3 border-b border-accent/15">
+            <div className="flex items-center gap-2 min-w-0">
+              <div className="w-8 h-8 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
+                <Icon name="MapPin" size={15} className="text-accent" />
+              </div>
+              <h3 className="font-display font-bold text-sm sm:text-base text-white truncate">
+                География работы
+              </h3>
+            </div>
+            <span className="text-[11px] font-bold text-accent shrink-0 px-2 py-0.5 rounded-full bg-accent/10 border border-accent/30">
+              {cities.length} городов
+            </span>
+          </div>
+
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            {cities.map((c) => (
+              <Link
+                key={c.slug}
+                to={`/gorod/${c.slug}`}
+                title={`Манипулятор в ${c.nameIn}`}
+                className="inline-flex items-center px-2.5 py-1 rounded-full bg-accent/[0.06] border border-accent/20 text-[11px] sm:text-xs text-muted-foreground hover:bg-accent/15 hover:border-accent/50 hover:text-accent transition-all"
+              >
+                {c.name}
+              </Link>
+            ))}
+          </div>
         </div>
 
         <div className="mt-6 sm:mt-8 text-center text-[11px] sm:text-xs text-muted-foreground/60 max-w-3xl mx-auto leading-relaxed">
