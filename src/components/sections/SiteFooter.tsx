@@ -176,20 +176,24 @@ const SiteFooter = () => {
             </ul>
           </CollapsibleColumn>
 
-          {/* Колонка 3 — Города */}
+          {/* Колонка 3 — Города (компактные чипы) */}
           <CollapsibleColumn icon="MapPin" title="Города работы">
-            <ul className="space-y-2 sm:space-y-2.5">
+            <div className="mb-2 inline-flex items-center gap-1.5 text-[11px] font-bold text-accent px-2 py-0.5 rounded-full bg-accent/10 border border-accent/30">
+              <Icon name="CheckCircle2" size={11} />
+              {cities.length} городов области
+            </div>
+            <div className="flex flex-wrap gap-1 sm:gap-1.5">
               {cities.map((c) => (
-                <li key={c.slug}>
-                  <Link
-                    to={`/gorod/${c.slug}`}
-                    className="text-white/80 text-sm hover:text-accent transition-colors group"
-                  >
-                    <LinkItem label={c.name} />
-                  </Link>
-                </li>
+                <Link
+                  key={c.slug}
+                  to={`/gorod/${c.slug}`}
+                  title={`Манипулятор в ${c.nameIn}`}
+                  className="inline-flex items-center px-2 py-0.5 rounded-full bg-accent/[0.06] border border-accent/20 text-[11px] sm:text-xs text-white/80 hover:bg-accent/15 hover:border-accent/50 hover:text-accent transition-all"
+                >
+                  {c.name}
+                </Link>
               ))}
-            </ul>
+            </div>
           </CollapsibleColumn>
 
           {/* Колонка 4 — Техника */}
