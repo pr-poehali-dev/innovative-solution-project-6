@@ -50,6 +50,28 @@ requestAnimationFrame(() => {
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/sw.js").catch(() => {});
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then((reg) => {
+        // Проверяем обновления каждые 60 секунд
+        setInterval(() => reg.update().catch(() => {}), 60_000);
+        reg.addEventListener("updatefound", () => {
+          const sw = reg.installing;
+          if (!sw) return;
+          sw.addEventListener("statechange", () => {
+            if (sw.state === "installed" && navigator.serviceWorker.controller) {
+              sw.postMessage("SKIP_WAITING");
+            }
+          });
+        });
+      })
+      .catch(() => {});
+
+    let reloading = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (reloading) return;
+      reloading = true;
+      window.location.reload();
+    });
   });
 }
