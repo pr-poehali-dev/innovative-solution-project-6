@@ -48,6 +48,33 @@ requestAnimationFrame(() => {
   }
 });
 
+// Прогрев всех страниц для офлайн-режима — после загрузки главной
+const prewarmRoutes = () => {
+  const idle = (cb: () => void) => {
+    const w = window as unknown as { requestIdleCallback?: (cb: () => void) => void };
+    if (w.requestIdleCallback) w.requestIdleCallback(cb);
+    else setTimeout(cb, 2000);
+  };
+  idle(() => {
+    Promise.all([
+      import("./pages/TruckPage"),
+      import("./pages/CityPage"),
+      import("./pages/BlogIndex"),
+      import("./pages/BlogArticle"),
+      import("./pages/ReviewsPage"),
+      import("./pages/SeoLandingPage"),
+      import("./pages/PrivacyPage"),
+      import("./pages/NotFound"),
+    ]).catch(() => {});
+  });
+};
+
+if (document.readyState === "complete") {
+  prewarmRoutes();
+} else {
+  window.addEventListener("load", prewarmRoutes, { once: true });
+}
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker

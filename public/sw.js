@@ -1,10 +1,27 @@
-/* Service Worker — Фаворит PWA v2 (полноценная работа всех страниц без сети) */
-const CACHE_VERSION = "v2";
+/* Service Worker — Фаворит PWA v3 (Cache First, мгновенная работа без интернета) */
+const CACHE_VERSION = "v3";
 const STATIC_CACHE = `favorit-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `favorit-runtime-${CACHE_VERSION}`;
 const IMAGE_CACHE = `favorit-images-${CACHE_VERSION}`;
 
 const APP_SHELL = ["/", "/index.html", "/manifest.webmanifest"];
+
+// Таймаут сети — после этого отдаём кеш, не ждём вечно
+const NET_TIMEOUT = 2500;
+
+const fetchWithTimeout = (req, ms = NET_TIMEOUT) =>
+  new Promise((resolve, reject) => {
+    const t = setTimeout(() => reject(new Error("timeout")), ms);
+    fetch(req)
+      .then((r) => {
+        clearTimeout(t);
+        resolve(r);
+      })
+      .catch((e) => {
+        clearTimeout(t);
+        reject(e);
+      });
+  });
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -42,10 +59,8 @@ self.addEventListener("fetch", (event) => {
   const isOwnOrigin = url.origin === self.location.origin;
   const isCdn = url.hostname === "cdn.poehali.dev";
 
-  // Не обрабатываем сторонние домены, кроме нашего CDN
   if (!isOwnOrigin && !isCdn) return;
 
-  // Не кешируем API/функции/аналитику
   if (
     url.hostname.includes("functions.poehali.dev") ||
     url.hostname.includes("mc.yandex.ru") ||
@@ -54,48 +69,48 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // НАВИГАЦИЯ — любая страница (/, /blog, /tehnika/..., /gorod/...) → SPA-фолбэк через index.html
+  // НАВИГАЦИЯ — Cache First (мгновенно), потом обновляем из сети в фоне
   const isNavigation =
     req.mode === "navigate" ||
     (req.headers.get("accept") || "").includes("text/html");
 
   if (isNavigation) {
     event.respondWith(
-      fetch(req)
-        .then((res) => {
-          // Кешируем только успешные HTML-ответы
-          if (res && res.status === 200 && res.type === "basic") {
-            const copy = res.clone();
-            caches.open(RUNTIME_CACHE).then((c) => c.put(req, copy));
-            // Дублируем как / и index.html — это и есть SPA-shell
-            caches.open(STATIC_CACHE).then((c) => {
-              c.put("/", res.clone());
-              c.put("/index.html", res.clone());
-            });
-          }
-          return res;
-        })
-        .catch(async () => {
-          // Сначала ищем точно эту страницу в кеше
-          const cached = await caches.match(req);
-          if (cached) return cached;
-          // Иначе отдаём app-shell — React-router сам отрисует нужную страницу
-          const shell =
-            (await caches.match("/index.html")) || (await caches.match("/"));
-          if (shell) return shell;
-          return new Response(
-            "<h1>Нет соединения</h1><p>Откройте приложение, когда будет интернет.</p>",
-            {
-              status: 503,
-              headers: { "Content-Type": "text/html; charset=utf-8" },
+      caches.match("/index.html").then((shell) => {
+        // Если есть закешированный shell — отдаём моментально
+        const networkUpdate = fetchWithTimeout(new Request("/index.html", { cache: "no-cache" }))
+          .then((res) => {
+            if (res && res.status === 200) {
+              const copy = res.clone();
+              caches.open(STATIC_CACHE).then((c) => {
+                c.put("/", copy.clone());
+                c.put("/index.html", copy);
+              });
             }
-          );
-        })
+            return res;
+          })
+          .catch(() => null);
+
+        if (shell) {
+          // Обновляем в фоне, отдаём кеш
+          networkUpdate;
+          return shell;
+        }
+        // Кеша нет (первая загрузка) — ждём сеть
+        return networkUpdate.then(
+          (res) =>
+            res ||
+            new Response(
+              "<h1>Нет соединения</h1><p>Откройте приложение, когда будет интернет.</p>",
+              { status: 503, headers: { "Content-Type": "text/html; charset=utf-8" } }
+            )
+        );
+      })
     );
     return;
   }
 
-  // ИЗОБРАЖЕНИЯ — Cache First (картинки техники, фото)
+  // ИЗОБРАЖЕНИЯ — Cache First
   const isImage =
     req.destination === "image" ||
     /\.(?:png|jpe?g|svg|gif|webp|avif|ico)(?:\?.*)?$/i.test(url.pathname);
@@ -111,14 +126,14 @@ self.addEventListener("fetch", (event) => {
                 if (res && res.status === 200) cache.put(req, res.clone());
                 return res;
               })
-              .catch(() => cached)
+              .catch(() => cached || Response.error())
         )
       )
     );
     return;
   }
 
-  // СТАТИКА (JS, CSS, шрифты) — Stale-While-Revalidate
+  // СТАТИКА (JS, CSS, шрифты) — Cache First (мгновенно), сеть в фоне
   const isStatic =
     ["script", "style", "font"].includes(req.destination) ||
     /\.(?:js|css|woff2?|ttf|otf)(?:\?.*)?$/i.test(url.pathname);
@@ -140,16 +155,19 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Остальное — Network First с фолбэком на кеш
+  // Остальное — Cache First с обновлением в фоне
   event.respondWith(
-    fetch(req)
-      .then((res) => {
-        if (res && res.status === 200) {
-          const copy = res.clone();
-          caches.open(RUNTIME_CACHE).then((c) => c.put(req, copy));
-        }
-        return res;
-      })
-      .catch(() => caches.match(req))
+    caches.match(req).then((cached) => {
+      const network = fetch(req)
+        .then((res) => {
+          if (res && res.status === 200) {
+            const copy = res.clone();
+            caches.open(RUNTIME_CACHE).then((c) => c.put(req, copy));
+          }
+          return res;
+        })
+        .catch(() => cached);
+      return cached || network;
+    })
   );
 });
