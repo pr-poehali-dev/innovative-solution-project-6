@@ -1,7 +1,5 @@
-import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
-import { cities } from "@/data/cities";
 
 interface LinkItem {
   label: string;
@@ -61,16 +59,7 @@ const linkGroups: LinkGroup[] = [
   },
 ];
 
-const normalize = (s: string) => s.toLowerCase().replace(/ё/g, "е").trim();
-
 const SeoFooterLinks = () => {
-  const [query, setQuery] = useState("");
-  const filteredCities = useMemo(() => {
-    const q = normalize(query);
-    if (!q) return cities;
-    return cities.filter((c) => normalize(c.name).includes(q) || normalize(c.nameIn).includes(q));
-  }, [query]);
-
   return (
     <section className="py-10 sm:py-16 px-4 sm:px-6 border-t border-accent/10 bg-accent/[0.03]">
       <div className="max-w-7xl mx-auto">
@@ -123,70 +112,7 @@ const SeoFooterLinks = () => {
           ))}
         </div>
 
-        {/* География работы — компактные чипы */}
-        <div className="p-4 sm:p-5 rounded-2xl border border-accent/15 bg-card/30">
-          <div className="flex items-center justify-between gap-2 mb-3 sm:mb-4 pb-3 border-b border-accent/15">
-            <div className="flex items-center gap-2 min-w-0">
-              <div className="w-8 h-8 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
-                <Icon name="MapPin" size={15} className="text-accent" />
-              </div>
-              <h3 className="font-display font-bold text-sm sm:text-base text-white truncate">
-                География работы
-              </h3>
-            </div>
-            <span className="text-[11px] font-bold text-accent shrink-0 px-2 py-0.5 rounded-full bg-accent/10 border border-accent/30">
-              {query ? `${filteredCities.length} из ${cities.length}` : `${cities.length} городов`}
-            </span>
-          </div>
 
-          {/* Поиск */}
-          <div className="relative mb-3 sm:mb-4">
-            <Icon
-              name="Search"
-              size={14}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground/60 pointer-events-none"
-            />
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Найти город — например, Кстово, Бор, Дзержинск"
-              className="w-full pl-9 pr-9 py-2 rounded-full bg-background/60 border border-accent/20 text-xs sm:text-sm text-white placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent/60 focus:bg-background/80 transition-all"
-            />
-            {query && (
-              <button
-                type="button"
-                onClick={() => setQuery("")}
-                aria-label="Очистить"
-                className="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full hover:bg-accent/15 flex items-center justify-center transition-colors"
-              >
-                <Icon name="X" size={12} className="text-muted-foreground" />
-              </button>
-            )}
-          </div>
-
-          {filteredCities.length > 0 ? (
-            <div className="flex flex-wrap gap-1.5 sm:gap-2">
-              {filteredCities.map((c) => (
-                <Link
-                  key={c.slug}
-                  to={`/gorod/${c.slug}`}
-                  title={`Манипулятор в ${c.nameIn}`}
-                  className="inline-flex items-center px-2.5 py-1 rounded-full bg-accent/[0.06] border border-accent/20 text-[11px] sm:text-xs text-muted-foreground hover:bg-accent/15 hover:border-accent/50 hover:text-accent transition-all"
-                >
-                  {c.name}
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-4 text-xs text-muted-foreground">
-              Город не найден. Позвоните — выезжаем по всей области:{" "}
-              <a href="tel:+79601883084" className="text-accent hover:underline whitespace-nowrap">
-                +7 960 188-30-84
-              </a>
-            </div>
-          )}
-        </div>
 
         <div className="mt-6 sm:mt-8 text-center text-[11px] sm:text-xs text-muted-foreground/60 max-w-3xl mx-auto leading-relaxed">
           ООО «Фаворит» — аренда манипулятора и услуги крана-манипулятора в Нижнем Новгороде и Нижегородской области.
