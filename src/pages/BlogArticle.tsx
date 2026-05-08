@@ -102,7 +102,7 @@ const BlogArticle = () => {
   const related = articles.filter((a) => a.slug !== article.slug).slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background page-enter">
       <title>{article.seoTitle}</title>
       <meta name="description" content={article.seoDesc} />
       <meta name="keywords" content={article.seoKeywords} />

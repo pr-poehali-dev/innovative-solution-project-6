@@ -11,7 +11,7 @@ const PrivacyPage = () => {
   }, []);
 
   return (
-    <>
+    <div className="page-enter">
       <main className="min-h-screen pt-8 pb-16 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
           <Link
@@ -121,7 +121,7 @@ const PrivacyPage = () => {
       </main>
 
       <SiteFooter />
-    </>
+    </div>
   );
 };
 

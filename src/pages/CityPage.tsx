@@ -91,7 +91,7 @@ const CityPage = () => {
   const otherCities = cities.filter((c) => c.slug !== city.slug);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background page-enter">
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta

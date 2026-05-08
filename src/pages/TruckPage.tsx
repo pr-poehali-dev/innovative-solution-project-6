@@ -30,7 +30,7 @@ export default function TruckPage() {
   }
 
   return (
-    <>
+    <div className="page-enter">
       <OrderModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -58,6 +58,6 @@ export default function TruckPage() {
         <TruckContent truck={truck} slug={slug!} />
       </main>
       <SiteFooter />
-    </>
+    </div>
   );
 }

@@ -79,7 +79,7 @@ const SeoLandingPage = ({ slugOverride }: SeoLandingPageProps) => {
   const popularTrucks = Object.entries(trucks).slice(0, 4);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background page-enter">
       <title>{data.metaTitle}</title>
       <meta name="description" content={data.metaDescription} />
       <meta name="keywords" content={data.metaKeywords} />

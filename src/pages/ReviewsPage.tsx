@@ -59,7 +59,7 @@ const ReviewsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background page-enter">
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta property="og:type" content="website" />

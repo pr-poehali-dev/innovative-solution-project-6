@@ -24,7 +24,7 @@ const Index = () => {
   const visibleSections = useVisibleSections(SECTION_IDS);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background page-enter">
       <SeoMeta />
       <StructuredData />
       <HeroSection visibleSections={visibleSections} />

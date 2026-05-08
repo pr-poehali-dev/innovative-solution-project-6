@@ -42,7 +42,7 @@ const BlogIndex = () => {
     "Статьи о выборе и аренде манипуляторов, ценах, кейсах и сравнениях. Полезные материалы от экспертов компании Фаворит в Нижнем Новгороде.";
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background page-enter">
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta property="og:type" content="website" />
