@@ -279,7 +279,8 @@ ${buildHtml()}
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-3xl max-h-[90vh] bg-card border border-accent/30 rounded-2xl overflow-hidden flex flex-col"
+        className="relative w-full max-w-3xl max-h-[90vh] border border-accent/30 rounded-2xl overflow-hidden flex flex-col"
+        style={{ background: "#1a1a1a" }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}

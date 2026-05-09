@@ -174,16 +174,8 @@ const MapAndRequisitesSection = ({
               ))}
             </div>
 
-            {/* Документы для клиентов */}
-            <div className="relative mt-5 pt-5 border-t border-accent/20">
-              <div className="flex items-center gap-2 mb-3">
-                <Icon name="FileDown" size={14} className="text-accent" />
-                <h3 className="font-display font-black text-xs sm:text-sm uppercase tracking-widest" style={{ color: "#e8a820" }}>
-                  Документы для клиентов
-                </h3>
-              </div>
-              <DocumentsBlock />
-            </div>
+            {/* Скрытый держатель модалки договора (открывается через кнопку «Договор» сверху) */}
+            <DocumentsBlock />
 
           </div>
 
