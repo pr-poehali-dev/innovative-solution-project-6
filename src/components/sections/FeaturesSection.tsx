@@ -178,6 +178,37 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
             );
           })}
         </div>
+
+        {/* CTA-кнопка */}
+        <div
+          className={`mt-10 sm:mt-14 flex justify-center transition-all duration-1000 ${
+            visibleSections["features"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
+          style={{ transitionDelay: "600ms" }}
+        >
+          <a
+            href="#hero"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("hero")?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+            className="group relative inline-flex items-center gap-3 px-7 sm:px-10 py-4 sm:py-5 rounded-2xl font-bold text-base sm:text-lg text-background bg-accent overflow-hidden shadow-[0_10px_40px_-10px_rgba(45,212,191,0.6)] hover:shadow-[0_15px_50px_-10px_rgba(45,212,191,0.9)] transition-all duration-500 hover:-translate-y-0.5"
+          >
+            <span
+              className="absolute inset-0 bg-gradient-to-r from-amber-400 via-accent to-amber-400 bg-[length:200%_100%] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              style={{ animation: "shimmer 3s linear infinite" }}
+            />
+            <span className="relative flex items-center gap-3">
+              <Icon name="Calculator" size={22} />
+              Получить расчёт
+              <Icon
+                name="ArrowRight"
+                size={20}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </span>
+          </a>
+        </div>
       </div>
     </section>
   );
