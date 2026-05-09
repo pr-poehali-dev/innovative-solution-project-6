@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import OrderModal from "@/components/ui/OrderModal";
 import SectionBadge from "@/components/ui/SectionBadge";
+import MobileSwipeGallery from "@/components/ui/MobileSwipeGallery";
 
 const trucks = [
   // ── Манипуляторы ──
@@ -307,14 +308,15 @@ const FleetSection = () => {
             <div className={`relative grid gap-0 lg:items-stretch ${truck.image ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
               {truck.image && (
                 <div className="relative lg:hidden overflow-hidden bg-white/5">
-                  <img
-                    src={truck.image}
+                  <MobileSwipeGallery
+                    images={
+                      (truck as typeof truck & { images?: string[] }).images?.length
+                        ? (truck as typeof truck & { images?: string[] }).images!
+                        : [truck.image]
+                    }
                     alt={truck.alt}
-                    className="w-full object-contain h-80 sm:h-[420px] md:h-[520px]"
-                    loading="lazy"
-                    decoding="async"
-                    width="800"
-                    height="600"
+                    className="w-full h-80 sm:h-[420px] md:h-[520px]"
+                    imgClassName="object-contain h-80 sm:h-[420px] md:h-[520px]"
                   />
                   {/* Информационный блок ПОД фото — больше не перекрывает машину */}
                   <div className="px-4 py-3 bg-gradient-to-b from-transparent to-black/40">
