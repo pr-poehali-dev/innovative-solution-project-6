@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import BrandLogo from "@/components/ui/BrandLogo";
 import CallbackModal from "@/components/ui/CallbackModal";
-import InstallAppButton from "@/components/ui/InstallAppButton";
-import OfflineReadyBadge from "@/components/ui/OfflineReadyBadge";
 import { cities } from "@/data/cities";
 
 const trucks = [
@@ -213,34 +211,6 @@ const SiteFooter = () => {
               ))}
             </ul>
           </CollapsibleColumn>
-        </div>
-      </div>
-
-      {/* Установить приложение */}
-      <div className="border-t border-accent/15 bg-gradient-to-r from-accent/5 via-accent/10 to-accent/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
-          <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-4 sm:gap-6">
-            <div className="flex items-center gap-3 sm:gap-4">
-              <div
-                className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center font-black text-xl sm:text-2xl text-black shadow-lg"
-                style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
-              >
-                Ф
-              </div>
-              <div className="text-center sm:text-left">
-                <div className="text-white font-bold text-sm sm:text-base mb-0.5">
-                  Установите «Фаворит» на телефон
-                </div>
-                <p className="text-muted-foreground text-xs sm:text-sm leading-snug">
-                  Открытие одним касанием · работает без интернета · быстрый звонок
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col items-center sm:items-end gap-2">
-              <InstallAppButton className="!px-4 !py-2.5 !text-sm" />
-              <OfflineReadyBadge />
-            </div>
-          </div>
         </div>
       </div>
 
