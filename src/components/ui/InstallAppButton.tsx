@@ -85,6 +85,31 @@ const InstallAppButton = ({ className = "", iconOnly = false }: InstallAppButton
     }
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const KEY = "favorit_offline_autoshown_v1";
+      if (localStorage.getItem(KEY)) return;
+      const isStandalone =
+        window.matchMedia("(display-mode: standalone)").matches ||
+        (navigator as unknown as { standalone?: boolean }).standalone === true;
+      if (isStandalone) return;
+
+      const t = window.setTimeout(() => {
+        if (!startedRef.current) {
+          localStorage.setItem(KEY, "1");
+          setOpen(true);
+          setStage("idle");
+          window.setTimeout(() => startDownload(), 200);
+        }
+      }, 4000);
+      return () => window.clearTimeout(t);
+    } catch {
+      void 0;
+    }
+     
+  }, []);
+
   if (installed) return null;
 
   const startDownload = async () => {
