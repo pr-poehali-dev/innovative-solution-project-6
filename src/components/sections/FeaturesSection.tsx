@@ -52,8 +52,21 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
   ];
 
   return (
-    <section id="features" className="py-12 sm:py-24 px-4 sm:px-6 bg-accent/5">
-      <div className="max-w-7xl mx-auto">
+    <section id="features" className="relative py-12 sm:py-24 px-4 sm:px-6 bg-accent/5 overflow-hidden">
+      {/* Декоративные световые пятна по бокам */}
+      <div className="hidden lg:block absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-accent/10 blur-[120px] pointer-events-none animate-pulse" />
+      <div
+        className="hidden lg:block absolute top-2/3 -right-32 w-96 h-96 rounded-full bg-amber-500/10 blur-[120px] pointer-events-none animate-pulse"
+        style={{ animationDelay: "1.5s" }}
+      />
+      <div
+        className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-blue-500/[0.04] blur-[140px] pointer-events-none"
+      />
+
+      {/* Тонкая центральная вертикальная линия между колонками */}
+      <div className="hidden lg:block absolute top-32 bottom-32 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-transparent via-accent/20 to-transparent pointer-events-none" />
+
+      <div className="relative max-w-7xl mx-auto">
         <div
           className={`text-center mb-8 sm:mb-14 transition-all duration-1000 ${visibleSections["features"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
         >
