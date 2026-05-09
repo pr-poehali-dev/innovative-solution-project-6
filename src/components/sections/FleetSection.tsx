@@ -298,7 +298,7 @@ const FleetSection = () => {
           <div className="relative rounded-2xl sm:rounded-3xl bg-gradient-to-br from-zinc-950 via-background to-black overflow-hidden">
             {/* Угловой "лейбл-флажок" — на десктопе, на мобилке вынесен под фото */}
             {tag && (
-              <div className={`hidden lg:flex absolute top-0 right-0 z-20 items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r ${tag.color} text-white text-[10px] sm:text-sm font-black uppercase tracking-wider shadow-xl rounded-bl-xl sm:rounded-bl-2xl`}>
+              <div className={`hidden lg:flex absolute top-0 left-0 z-20 items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r ${tag.color} text-white text-[10px] sm:text-sm font-black uppercase tracking-wider shadow-xl rounded-br-xl sm:rounded-br-2xl`}>
                 <Icon name={tag.icon} size={12} className="sm:w-[14px] sm:h-[14px]" />
                 <span className="whitespace-nowrap">{tag.label}</span>
               </div>
