@@ -4,7 +4,198 @@ import psycopg2
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
 from datetime import datetime
+
+
+DIRECTOR_EMAIL = "Avrora.888@bk.ru"
+SENDER_EMAIL = "960188@list.ru"
+
+
+def esc(s) -> str:
+    if s is None:
+        return ""
+    return (
+        str(s)
+        .replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+    )
+
+
+def fld(value, placeholder: str = "_______________________________") -> str:
+    if value and str(value).strip():
+        return esc(str(value).strip())
+    return placeholder
+
+
+def format_date_long(iso: str) -> str:
+    if not iso:
+        return "«___» __________ 20___ г."
+    try:
+        parts = iso.split(".")
+        if len(parts) == 3:
+            day, month, year = parts
+            months = [
+                "января", "февраля", "марта", "апреля", "мая", "июня",
+                "июля", "августа", "сентября", "октября", "ноября", "декабря",
+            ]
+            return f"«{day}» {months[int(month) - 1]} {year} г."
+    except Exception:
+        pass
+    return esc(iso)
+
+
+def build_contract_html(d: dict) -> str:
+    body = f"""
+    <h1 style="text-align:center;font-size:16pt;margin-bottom:8px;">ДОГОВОР АРЕНДЫ ТЕХНИКИ С ЭКИПАЖЕМ № {fld(d.get('contractNumber'), '___')}</h1>
+    <p style="text-align:center;font-size:11pt;margin-bottom:18px;">г. Нижний Новгород · {format_date_long(d.get('date', ''))}</p>
+    <p><b>Общество с ограниченной ответственностью «ФАВОРИТ»</b> (ИНН 5250077990, ОГРН 1235200013531), именуемое в дальнейшем «Арендодатель», в лице директора, действующего на основании Устава, с одной стороны, и <b>{fld(d.get('tenantName'))}</b>, в лице {fld(d.get('tenantSignatory'))}, именуемый(ая) в дальнейшем «Арендатор», с другой стороны, заключили настоящий договор о нижеследующем:</p>
+    <h2>1. Предмет договора</h2>
+    <p>1.1. Арендодатель предоставляет Арендатору во временное владение и пользование транспортное средство с экипажем — <b>{fld(d.get('technique'))}</b> для выполнения работ Арендатора по адресу: <b>{fld(d.get('workAddress'))}</b>.</p>
+    <p>1.2. Арендодатель своими силами оказывает услуги по управлению техникой и её технической эксплуатации.</p>
+    <h2>2. Стоимость и порядок оплаты</h2>
+    <p>2.1. Стоимость аренды — <b>{fld(d.get('totalSum'), 'согласно действующему прайс-листу')}</b>.</p>
+    <p>2.2. Минимальный заказ — 4 часа работы техники.</p>
+    <p>2.3. Оплата производится наличными, переводом на расчётный счёт или картой. Для юр. лиц — по безналичному расчёту с НДС 22%.</p>
+    <p>2.4. Закрывающие документы: акт выполненных работ, счёт-фактура, УПД (Диадок/СБИС).</p>
+    <h2>3. Права и обязанности сторон</h2>
+    <p>3.1. <b>Арендодатель обязуется:</b></p>
+    <ul>
+      <li>Подать исправную технику в согласованное время и место;</li>
+      <li>Обеспечить квалифицированного оператора;</li>
+      <li>Нести расходы по содержанию техники, ГСМ и страхованию;</li>
+      <li>Соблюдать требования безопасности при выполнении работ.</li>
+    </ul>
+    <p>3.2. <b>Арендатор обязуется:</b></p>
+    <ul>
+      <li>Своевременно оплачивать услуги;</li>
+      <li>Обеспечить условия для подъезда и работы техники;</li>
+      <li>Не использовать технику для перевозки запрещённых грузов;</li>
+      <li>Подписать акт выполненных работ по окончании смены.</li>
+    </ul>
+    <h2>4. Ответственность сторон</h2>
+    <p>4.1. За несвоевременную оплату Арендатор уплачивает пени 0,1% от суммы задолженности за каждый день просрочки.</p>
+    <p>4.2. Стороны освобождаются от ответственности при форс-мажоре.</p>
+    <h2>5. Срок действия и прочие условия</h2>
+    <p>5.1. Договор вступает в силу с момента подписания и действует до полного исполнения сторонами своих обязательств.</p>
+    <p>5.2. Все споры решаются путём переговоров, а в случае недостижения согласия — в Арбитражном суде Нижегородской области.</p>
+    <p>5.3. Договор составлен в 2-х экземплярах, имеющих равную юридическую силу.</p>
+    <h2>6. Реквизиты сторон</h2>
+    <table style="width:100%;border-collapse:collapse;margin-top:10px;">
+      <tr>
+        <td style="vertical-align:top;width:50%;padding:6px;border:1px solid #999;">
+          <p><b>Арендодатель:</b></p>
+          <p>ООО «ФАВОРИТ»</p>
+          <p>ИНН 5250077990 / КПП 525001001</p>
+          <p>ОГРН 1235200013531</p>
+          <p>607657, Нижегородская обл., г. Кстово, 6-й м-он, д. 2, оф. 13</p>
+          <p>Р/с 40702810316020000009</p>
+          <p>АО «АЛЬФА-БАНК»</p>
+          <p>К/с 30101810200000000593, БИК 044525593</p>
+          <p>Тел.: +7 (960) 169-09-90</p>
+          <p style="margin-top:30px;border-top:1px solid #000;padding-top:4px;">Директор ___________________ / ___________ /</p>
+        </td>
+        <td style="vertical-align:top;width:50%;padding:6px;border:1px solid #999;">
+          <p><b>Арендатор:</b></p>
+          <p>{fld(d.get('tenantName'))}</p>
+          <p>ИНН {fld(d.get('tenantInn'), '_____________')} / КПП {fld(d.get('tenantKpp'), '___________')}</p>
+          <p>ОГРН {fld(d.get('tenantOgrn'), '____________________________')}</p>
+          <p>Адрес: {fld(d.get('tenantAddress'), '__________________________')}</p>
+          <p>Р/с {fld(d.get('tenantAccount'), '_____________________________')}</p>
+          <p>Банк: {fld(d.get('tenantBank'), '____________________________')}</p>
+          <p>Тел.: {fld(d.get('tenantPhone'), '_____________________________')}</p>
+          <p style="margin-top:30px;border-top:1px solid #000;padding-top:4px;">Подпись ___________________ / {fld(d.get('tenantSignatory'), '___________')} /</p>
+        </td>
+      </tr>
+    </table>
+    """
+    return f"""<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8" /><title>Договор аренды техники — ООО ФАВОРИТ</title>
+<style>
+@page {{ size: A4; margin: 18mm; }}
+body {{ font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.5; color: #000; padding: 20px; max-width: 800px; margin: 0 auto; background: #fff; }}
+h1 {{ text-align: center; font-size: 16pt; margin-bottom: 8px; }}
+h2 {{ font-size: 13pt; margin-top: 18px; margin-bottom: 6px; }}
+p {{ margin: 4px 0; }}
+ul {{ padding-left: 20px; margin: 6px 0; }}
+table {{ border-collapse: collapse; }}
+td, th {{ border: 1px solid #999; padding: 6px; vertical-align: top; }}
+</style></head><body>{body}</body></html>"""
+
+
+def send_contract_email(d: dict) -> None:
+    now = datetime.now().strftime("%d.%m.%Y %H:%M")
+    contract_html = build_contract_html(d)
+
+    tenant = (d.get("tenantName") or "без имени").strip() or "без имени"
+    contract_num = (d.get("contractNumber") or "шаблон").strip() or "шаблон"
+    phone = d.get("tenantPhone") or "—"
+
+    email_html = f"""<!DOCTYPE html>
+<html><body style="margin:0;padding:20px;background:#f4f4f4;font-family:Arial,sans-serif;">
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:640px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.08);">
+  <tr><td style="padding:20px 24px;background:linear-gradient(135deg,#e8a820 0%,#c8850a 100%);color:#000;">
+    <div style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;">Новый заполненный договор</div>
+    <div style="font-size:22px;font-weight:900;margin-top:4px;">Договор № {esc(contract_num)}</div>
+    <div style="font-size:13px;opacity:0.8;margin-top:4px;">{now}</div>
+  </td></tr>
+  <tr><td style="padding:20px;">
+    <div style="font-size:13px;color:#888;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:6px;">Арендатор</div>
+    <div style="font-size:17px;color:#1a1a1a;font-weight:700;margin-bottom:14px;">{esc(tenant)}</div>
+    <table cellpadding="6" style="width:100%;border-collapse:collapse;font-size:14px;">
+      <tr><td style="color:#666;width:40%;">ИНН</td><td><b>{esc(d.get('tenantInn') or '—')}</b></td></tr>
+      <tr><td style="color:#666;">КПП</td><td>{esc(d.get('tenantKpp') or '—')}</td></tr>
+      <tr><td style="color:#666;">ОГРН</td><td>{esc(d.get('tenantOgrn') or '—')}</td></tr>
+      <tr><td style="color:#666;">Телефон</td><td><a href="tel:{esc(phone)}" style="color:#c8850a;font-weight:700;">{esc(phone)}</a></td></tr>
+      <tr><td style="color:#666;">Адрес</td><td>{esc(d.get('tenantAddress') or '—')}</td></tr>
+      <tr><td style="color:#666;">Подписант</td><td>{esc(d.get('tenantSignatory') or '—')}</td></tr>
+      <tr><td style="color:#666;">Расч. счёт</td><td>{esc(d.get('tenantAccount') or '—')}</td></tr>
+      <tr><td style="color:#666;">Банк</td><td>{esc(d.get('tenantBank') or '—')}</td></tr>
+    </table>
+  </td></tr>
+  <tr><td style="padding:14px 20px;background:#fff8e6;border-top:1px solid #f0e0b0;">
+    <div style="font-size:13px;color:#8a6d1a;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px;">Параметры аренды</div>
+    <div style="font-size:14px;line-height:1.6;color:#1a1a1a;">
+      <b>Техника:</b> {esc(d.get('technique') or '—')}<br/>
+      <b>Адрес работ:</b> {esc(d.get('workAddress') or '—')}<br/>
+      <b>Стоимость:</b> {esc(d.get('totalSum') or '—')}
+    </div>
+  </td></tr>
+  <tr><td style="padding:18px 20px;background:#fafafa;text-align:center;border-top:1px solid #eee;">
+    <div style="font-size:13px;color:#444;margin-bottom:10px;">К письму приложен <b>готовый договор</b> в формате HTML — открывается в любом браузере, можно распечатать или сохранить в PDF.</div>
+    <a href="tel:{esc(phone)}" style="display:inline-block;padding:10px 22px;background:linear-gradient(135deg,#f5d060 0%,#e8a820 50%,#c8850a 100%);color:#000;font-weight:900;text-decoration:none;border-radius:999px;font-size:14px;">📞 Перезвонить клиенту</a>
+  </td></tr>
+</table></body></html>"""
+
+    msg = MIMEMultipart("mixed")
+    msg["Subject"] = f"Договор аренды № {contract_num}: {tenant}"
+    msg["From"] = SENDER_EMAIL
+    msg["To"] = DIRECTOR_EMAIL
+
+    alt = MIMEMultipart("alternative")
+    text_body = (
+        f"Новый заполненный договор № {contract_num}\nВремя: {now}\n\n"
+        f"Арендатор: {tenant}\nИНН: {d.get('tenantInn') or '—'}\n"
+        f"Телефон: {phone}\nАдрес: {d.get('tenantAddress') or '—'}\n\n"
+        f"Техника: {d.get('technique') or '—'}\n"
+        f"Адрес работ: {d.get('workAddress') or '—'}\n"
+        f"Стоимость: {d.get('totalSum') or '—'}\n\n"
+        f"К письму приложен готовый договор."
+    )
+    alt.attach(MIMEText(text_body, "plain", "utf-8"))
+    alt.attach(MIMEText(email_html, "html", "utf-8"))
+    msg.attach(alt)
+
+    attachment = MIMEApplication(contract_html.encode("utf-8"), _subtype="html")
+    safe_tenant = "".join(ch if ch.isalnum() or ch in "-_" else "_" for ch in tenant)[:40]
+    filename = f"Dogovor-{contract_num}-{safe_tenant}.html"
+    attachment.add_header("Content-Disposition", "attachment", filename=filename)
+    msg.attach(attachment)
+
+    with smtplib.SMTP_SSL("smtp.mail.ru", 465) as smtp:
+        smtp.login(SENDER_EMAIL, os.environ["MAIL_PASSWORD"])
+        smtp.send_message(msg)
 
 
 def parse_comment(comment: str) -> dict:
@@ -168,6 +359,23 @@ def handler(event: dict, context) -> dict:
         }
 
     body = json.loads(event.get('body') or '{}')
+
+    # Ветка для отправки заполненного договора директору
+    if body.get('type') == 'contract':
+        try:
+            send_contract_email(body)
+        except Exception as e:
+            return {
+                'statusCode': 500,
+                'headers': {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+                'body': json.dumps({'error': f'Не удалось отправить письмо: {e}'}, ensure_ascii=False),
+            }
+        return {
+            'statusCode': 200,
+            'headers': {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+            'body': json.dumps({'success': True}, ensure_ascii=False),
+        }
+
     name = (body.get('name') or '').strip()
     phone = (body.get('phone') or '').strip()
     comment = (body.get('comment') or '').strip()

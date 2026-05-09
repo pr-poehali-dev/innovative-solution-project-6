@@ -64,6 +64,8 @@ const fld = (v: string, placeholder = "_______________________________") =>
 
 const ContractModal = ({ open, onClose }: ContractModalProps) => {
   const [data, setData] = useState<ContractData>(initial);
+  const [sending, setSending] = useState(false);
+  const [sendStatus, setSendStatus] = useState<"idle" | "success" | "error">("idle");
 
   useEffect(() => {
     if (!open) return;
@@ -231,6 +233,35 @@ ${buildHtml()}
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     } catch (e) {
       alert("Не удалось скачать договор. Попробуйте другой браузер.");
+    }
+  };
+
+  const handleSend = async () => {
+    if (sending) return;
+    if (!data.tenantName.trim() || !data.tenantPhone.trim()) {
+      alert("Заполните хотя бы наименование арендатора и телефон");
+      return;
+    }
+    setSending(true);
+    setSendStatus("idle");
+    try {
+      const res = await fetch(
+        "https://functions.poehali.dev/dc327032-aa41-4632-b107-a026d92ef031",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ type: "contract", ...data }),
+        }
+      );
+      if (res.ok) {
+        setSendStatus("success");
+      } else {
+        setSendStatus("error");
+      }
+    } catch {
+      setSendStatus("error");
+    } finally {
+      setSending(false);
     }
   };
 
@@ -425,11 +456,33 @@ ${buildHtml()}
           </div>
         </div>
 
+        {/* Статус отправки */}
+        {sendStatus !== "idle" && (
+          <div
+            className={`px-5 sm:px-7 py-3 text-sm font-semibold flex items-center gap-2 ${
+              sendStatus === "success"
+                ? "bg-emerald-500/10 border-t border-emerald-500/30 text-emerald-300"
+                : "bg-red-500/10 border-t border-red-500/30 text-red-300"
+            }`}
+          >
+            <Icon
+              name={sendStatus === "success" ? "CircleCheck" : "TriangleAlert"}
+              size={16}
+            />
+            {sendStatus === "success"
+              ? "Договор отправлен директору на Avrora.888@bk.ru. Скоро с вами свяжутся."
+              : "Не удалось отправить. Скачайте договор и отправьте вручную или позвоните."}
+          </div>
+        )}
+
         {/* Footer */}
-        <div className="flex flex-col sm:flex-row gap-2.5 px-5 sm:px-7 py-4 border-t border-accent/20 bg-gradient-to-r from-accent/5 to-transparent">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 px-5 sm:px-7 py-4 border-t border-accent/20 bg-gradient-to-r from-accent/5 to-transparent">
           <button
             type="button"
-            onClick={() => setData(initial())}
+            onClick={() => {
+              setData(initial());
+              setSendStatus("idle");
+            }}
             className="sm:flex-shrink-0 px-4 py-2.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-white text-sm font-semibold transition-colors"
           >
             Очистить
@@ -445,11 +498,20 @@ ${buildHtml()}
           <button
             type="button"
             onClick={handlePrint}
-            className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-black font-bold text-sm shadow-lg shadow-accent/30 active:scale-[0.98] transition-transform"
+            className="sm:flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-accent/40 bg-accent/10 hover:bg-accent/20 text-white text-sm font-semibold transition-colors"
+          >
+            <Icon name="Printer" size={16} className="text-accent" />
+            Печать / PDF
+          </button>
+          <button
+            type="button"
+            onClick={handleSend}
+            disabled={sending}
+            className="flex-1 min-w-[180px] inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-black font-bold text-sm shadow-lg shadow-accent/30 active:scale-[0.98] transition-transform disabled:opacity-60 disabled:cursor-wait"
             style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
           >
-            <Icon name="Printer" size={16} />
-            Печать / Сохранить PDF
+            <Icon name={sending ? "Loader2" : "Send"} size={16} className={sending ? "animate-spin" : ""} />
+            {sending ? "Отправляем..." : "Отправить директору"}
           </button>
         </div>
       </div>
