@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
@@ -211,6 +211,36 @@ const FleetSection = () => {
     setModalOpen(true);
   };
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.innerWidth < 1024) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const cards = document.querySelectorAll<HTMLElement>(".parallax-card");
+        const vh = window.innerHeight;
+        cards.forEach((card) => {
+          const img = card.querySelector<HTMLElement>(".parallax-img");
+          if (!img) return;
+          const rect = card.getBoundingClientRect();
+          if (rect.bottom < 0 || rect.top > vh) return;
+          const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
+          const offset = Math.max(-20, Math.min(20, progress * -25));
+          img.style.transform = `translate3d(0, ${offset}px, 0)`;
+        });
+        ticking = false;
+      });
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <section className="py-16 sm:py-32 px-4 sm:px-6 scroll-mt-20 sm:scroll-mt-24">
       <OrderModal
@@ -363,20 +393,20 @@ const FleetSection = () => {
                 <button
                   type="button"
                   onClick={() => setLightbox({ src: truck.image, alt: truck.alt, title: truck.title })}
-                  className="relative hidden lg:block w-full h-full min-h-[420px] overflow-hidden bg-black group/img"
+                  className="parallax-card relative hidden lg:block w-full h-full min-h-[420px] overflow-hidden bg-gradient-to-br from-zinc-900 via-black to-zinc-900 group/img"
                   aria-label={`Открыть фото ${truck.title} на весь экран`}
                 >
                   <img
                     src={truck.image}
                     alt={truck.alt}
-                    className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover/img:scale-[1.06]"
+                    className="parallax-img absolute inset-0 w-full h-full object-contain object-center p-3 transition-transform duration-300 ease-out will-change-transform"
                     loading="lazy"
                     decoding="async"
                     width="1200"
                     height="900"
                   />
                   {/* Лёгкое затемнение слева, чтобы плавно сливалось с инфо-блоком */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent pointer-events-none" />
                   <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg opacity-0 group-hover/img:opacity-100 transition-opacity">
                     <Icon name="Maximize2" size={16} className="text-white" />
                   </div>
