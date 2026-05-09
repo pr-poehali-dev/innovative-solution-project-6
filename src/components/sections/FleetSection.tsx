@@ -307,25 +307,15 @@ const FleetSection = () => {
             <div className={`relative grid gap-0 lg:items-stretch ${truck.image ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
               {truck.image && (
                 <div className="relative lg:hidden overflow-hidden bg-white/5">
-                  <button
-                    type="button"
-                    onClick={() => setLightbox({ src: truck.image, alt: truck.alt, title: truck.title })}
-                    className="block w-full group"
-                    aria-label={`Открыть фото ${truck.title} на весь экран`}
-                  >
-                    <img
-                      src={truck.image}
-                      alt={truck.alt}
-                      className="w-full object-contain h-80 sm:h-[420px] md:h-[520px] group-active:scale-[0.98] transition-transform"
-                      loading="lazy"
-                      decoding="async"
-                      width="800"
-                      height="600"
-                    />
-                    <div className="absolute top-3 right-3 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg">
-                      <Icon name="Maximize2" size={16} className="text-white" />
-                    </div>
-                  </button>
+                  <img
+                    src={truck.image}
+                    alt={truck.alt}
+                    className="w-full object-contain h-80 sm:h-[420px] md:h-[520px]"
+                    loading="lazy"
+                    decoding="async"
+                    width="800"
+                    height="600"
+                  />
                   {/* Информационный блок ПОД фото — больше не перекрывает машину */}
                   <div className="px-4 py-3 bg-gradient-to-b from-transparent to-black/40">
                     <div className="flex items-center gap-2 flex-wrap mb-2">
