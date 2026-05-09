@@ -360,17 +360,25 @@ const FleetSection = () => {
               </div>
 
               {truck.image && (
-                <div className="relative hidden lg:block" style={{ aspectRatio: "4/3" }}>
+                <button
+                  type="button"
+                  onClick={() => setLightbox({ src: truck.image, alt: truck.alt, title: truck.title })}
+                  className="relative hidden lg:block w-full h-full min-h-[420px] overflow-hidden bg-gradient-to-br from-zinc-900/40 to-black/40 group/img"
+                  aria-label={`Открыть фото ${truck.title} на весь экран`}
+                >
                   <img
                     src={truck.image}
                     alt={truck.alt}
-                    className="absolute inset-0 w-full h-full object-contain object-center"
+                    className="absolute inset-0 w-full h-full object-contain object-center p-4 transition-transform duration-500 group-hover/img:scale-[1.03]"
                     loading="lazy"
                     decoding="async"
                     width="1200"
                     height="900"
                   />
-                </div>
+                  <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg opacity-0 group-hover/img:opacity-100 transition-opacity">
+                    <Icon name="Maximize2" size={16} className="text-white" />
+                  </div>
+                </button>
               )}
             </div>
           </div>
