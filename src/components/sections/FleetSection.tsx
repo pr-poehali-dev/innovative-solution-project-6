@@ -258,7 +258,7 @@ const FleetSection = () => {
               </div>
             )}
             <div className="absolute inset-0 bg-gradient-to-r from-accent/10 via-transparent to-transparent pointer-events-none" />
-            <div className={`relative grid gap-0 ${truck.image ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
+            <div className={`relative grid gap-0 lg:items-stretch ${truck.image ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
               {truck.image && (
                 <div className="relative lg:hidden overflow-hidden bg-white/5">
                   <button
