@@ -142,7 +142,7 @@ const ReviewsSection = () => {
         {/* Шапка */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 sm:mb-16 gap-6">
           <div>
-            <div className="flex justify-center mb-4">
+            <div className="flex sm:justify-start justify-center mb-4">
               <SectionBadge>Отзывы</SectionBadge>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-black tracking-tighter">
@@ -186,53 +186,134 @@ const ReviewsSection = () => {
 
         {/* Карточки */}
         <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
-          {visible.map((review, i) => (
-            <div
-              key={`${active}-${i}`}
-              className={`flex flex-col justify-between p-6 sm:p-8 rounded-2xl border transition-all duration-300 ${
-                i === 0
-                  ? "border-accent/40 bg-accent/10 shadow-[0_0_30px_-5px_rgba(var(--accent-rgb),0.2)]"
-                  : "border-accent/10 bg-card/40 opacity-70"
-              }`}
-            >
-              {/* Цитата + текст */}
-              <div>
-                <div className="text-accent text-4xl font-serif leading-none mb-3 opacity-60">"</div>
-                <p className="text-white/85 text-sm sm:text-base leading-relaxed mb-5">{review.text}</p>
+          {visible.map((review, i) => {
+            const palette = [
+              {
+                accent: "from-cyan-400 to-teal-500",
+                accentText: "text-cyan-300",
+                accentBg: "bg-cyan-500/10",
+                accentBorder: "border-cyan-500/40",
+                cardBorder: "border-cyan-500/30",
+                glow: "rgba(34,211,238,0.15)",
+              },
+              {
+                accent: "from-amber-400 to-orange-500",
+                accentText: "text-amber-300",
+                accentBg: "bg-amber-500/10",
+                accentBorder: "border-amber-500/40",
+                cardBorder: "border-amber-500/30",
+                glow: "rgba(251,191,36,0.15)",
+              },
+              {
+                accent: "from-emerald-400 to-green-500",
+                accentText: "text-emerald-300",
+                accentBg: "bg-emerald-500/10",
+                accentBorder: "border-emerald-500/40",
+                cardBorder: "border-emerald-500/30",
+                glow: "rgba(16,185,129,0.15)",
+              },
+            ][i % 3];
 
-                {/* Ключевой момент */}
-                <div className="flex items-center gap-2 mb-6">
-                  <Icon name="CheckCircle" size={14} className="text-accent flex-shrink-0" />
-                  <span className="text-accent text-xs font-medium">{review.highlight}</span>
-                </div>
-              </div>
+            return (
+              <article
+                key={`${active}-${i}`}
+                className={`relative overflow-hidden flex flex-col justify-between p-5 sm:p-7 rounded-2xl border ${palette.cardBorder} bg-card/50 backdrop-blur-sm transition-all duration-300 hover:bg-card/70 hover:scale-[1.01]`}
+              >
+                {/* Декоративный градиент в углу */}
+                <div
+                  className="absolute -top-20 -right-20 w-48 h-48 rounded-full blur-3xl pointer-events-none"
+                  style={{ background: palette.glow }}
+                />
 
-              {/* Автор */}
-              <div className="border-t border-accent/10 pt-5 flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full border-2 border-accent/40 overflow-hidden flex-shrink-0 bg-accent/20">
-                  {review.photo
-                    ? <img src={review.photo} alt={review.name} className="w-full h-full object-cover" loading="lazy" decoding="async" width="56" height="56" />
-                    : <span className="w-full h-full flex items-center justify-center text-accent text-xs font-bold">{review.avatar}</span>
-                  }
+                {/* Огромная фоновая кавычка */}
+                <div
+                  className="absolute -bottom-8 right-2 text-[180px] font-serif leading-none text-white/[0.04] pointer-events-none select-none"
+                >
+                  "
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-bold text-white text-sm">{review.name}</p>
-                  <p className="text-muted-foreground text-xs mt-0.5 truncate">{review.company}</p>
-                </div>
-                <div className="flex gap-0.5">
-                  {Array.from({ length: review.rating }).map((_, j) => (
-                    <span key={j} className="text-yellow-400 text-sm drop-shadow-[0_0_4px_rgba(250,204,21,0.5)]">★</span>
-                  ))}
-                </div>
-              </div>
 
-              {/* Техника */}
-              <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent/10 rounded-full">
-                <Icon name="Truck" size={12} className="text-accent" />
-                <span className="text-accent text-xs">{review.service}</span>
-              </div>
-            </div>
-          ))}
+                <div className="relative">
+                  {/* Шапка: иконка + бейдж highlight */}
+                  <div className="flex items-start justify-between gap-2 mb-4">
+                    <div
+                      className={`w-12 h-12 rounded-xl ${palette.accentBg} border ${palette.accentBorder} flex items-center justify-center flex-shrink-0`}
+                    >
+                      <Icon name="Quote" size={20} className={palette.accentText} />
+                    </div>
+                    <div
+                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full ${palette.accentBg} border ${palette.accentBorder} ${palette.accentText} text-[10px] font-black tracking-widest text-right`}
+                    >
+                      <Icon name="CircleCheck" size={11} />
+                      <span className="line-clamp-1">{review.highlight}</span>
+                    </div>
+                  </div>
+
+                  {/* Звёзды */}
+                  <div className="flex gap-0.5 mb-3">
+                    {Array.from({ length: review.rating }).map((_, j) => (
+                      <span
+                        key={j}
+                        className="text-yellow-400 text-base drop-shadow-[0_0_4px_rgba(250,204,21,0.5)]"
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Текст отзыва */}
+                  <p className="text-white/90 text-sm sm:text-base leading-relaxed mb-4">
+                    {review.text}
+                  </p>
+
+                  {/* Разделитель */}
+                  <div
+                    className={`h-px mb-4 bg-gradient-to-r ${palette.accent} opacity-30`}
+                  />
+
+                  {/* Автор */}
+                  <div className="flex items-center gap-3 mb-3">
+                    <div
+                      className={`w-12 h-12 rounded-full border-2 ${palette.accentBorder} overflow-hidden flex-shrink-0 ${palette.accentBg}`}
+                    >
+                      {review.photo ? (
+                        <img
+                          src={review.photo}
+                          alt={review.name}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                          decoding="async"
+                          width="48"
+                          height="48"
+                        />
+                      ) : (
+                        <span
+                          className={`w-full h-full flex items-center justify-center ${palette.accentText} text-xs font-bold`}
+                        >
+                          {review.avatar}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-bold text-white text-sm leading-tight">{review.name}</p>
+                      <p className="text-muted-foreground text-xs mt-0.5 truncate">
+                        {review.company}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Техника */}
+                  <div
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full ${palette.accentBg} border ${palette.accentBorder}`}
+                  >
+                    <Icon name="Truck" size={12} className={palette.accentText} />
+                    <span className={`${palette.accentText} text-xs font-semibold`}>
+                      {review.service}
+                    </span>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         {/* Точки навигации */}
