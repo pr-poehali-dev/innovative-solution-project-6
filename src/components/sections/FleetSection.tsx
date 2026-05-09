@@ -418,27 +418,37 @@ const FleetSection = () => {
               </div>
 
               {truck.image && (
-                <button
-                  type="button"
+                <div
+                  role="button"
+                  tabIndex={0}
                   onClick={() => setLightbox({ src: truck.image, alt: truck.alt, title: truck.title })}
-                  className="parallax-card relative hidden lg:block w-full h-full min-h-[420px] overflow-hidden bg-gradient-to-br from-zinc-900 via-black to-zinc-900 group/img"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setLightbox({ src: truck.image, alt: truck.alt, title: truck.title });
+                    }
+                  }}
+                  className="parallax-card relative hidden lg:block w-full h-full min-h-[420px] overflow-hidden bg-gradient-to-br from-zinc-900 via-black to-zinc-900 group/img cursor-zoom-in z-10 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   aria-label={`Открыть фото ${truck.title} на весь экран`}
                 >
                   <img
                     src={truck.image}
                     alt={truck.alt}
-                    className="parallax-img absolute inset-0 w-full h-full object-contain object-center p-3 transition-transform duration-300 ease-out will-change-transform"
+                    className="parallax-img absolute inset-0 w-full h-full object-contain object-center p-3 transition-transform duration-300 ease-out will-change-transform pointer-events-none"
                     loading="lazy"
                     decoding="async"
                     width="1200"
                     height="900"
+                    draggable={false}
                   />
                   {/* Лёгкое затемнение слева, чтобы плавно сливалось с инфо-блоком */}
                   <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg opacity-0 group-hover/img:opacity-100 transition-opacity">
-                    <Icon name="Maximize2" size={16} className="text-white" />
+                  {/* Кнопка-индикатор увеличения — всегда видна, чётко показывает кликабельность */}
+                  <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-2 rounded-full bg-black/70 backdrop-blur-md border border-white/20 shadow-lg pointer-events-none transition-all duration-300 group-hover/img:bg-accent/90 group-hover/img:border-accent group-hover/img:scale-105">
+                    <Icon name="Maximize2" size={16} className="text-white group-hover/img:text-black transition-colors" />
+                    <span className="text-white text-xs font-bold group-hover/img:text-black transition-colors">Увеличить</span>
                   </div>
-                </button>
+                </div>
               )}
             </div>
           </div>
