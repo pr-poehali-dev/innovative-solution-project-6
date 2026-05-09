@@ -1,7 +1,9 @@
 import json
 import os
+import uuid
 import psycopg2
 import smtplib
+import boto3
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
@@ -124,6 +126,36 @@ td, th {{ border: 1px solid #999; padding: 6px; vertical-align: top; }}
 </style></head><body>{body}</body></html>"""
 
 
+def upload_contract_to_s3(contract_html: str, contract_num: str, tenant: str) -> str:
+    """Загружает HTML договора в S3 и возвращает публичную ссылку."""
+    try:
+        access_key = os.environ.get("AWS_ACCESS_KEY_ID")
+        secret_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
+        if not access_key or not secret_key:
+            return ""
+
+        s3 = boto3.client(
+            "s3",
+            endpoint_url="https://bucket.poehali.dev",
+            aws_access_key_id=access_key,
+            aws_secret_access_key=secret_key,
+        )
+        safe_tenant = "".join(ch if ch.isalnum() or ch in "-_" else "_" for ch in tenant)[:40]
+        safe_num = "".join(ch if ch.isalnum() or ch in "-_" else "_" for ch in contract_num)[:20]
+        key = f"contracts/{datetime.now().strftime('%Y%m%d')}-{safe_num}-{safe_tenant}-{uuid.uuid4().hex[:8]}.html"
+
+        s3.put_object(
+            Bucket="files",
+            Key=key,
+            Body=contract_html.encode("utf-8"),
+            ContentType="text/html; charset=utf-8",
+        )
+        return f"https://cdn.poehali.dev/projects/{access_key}/bucket/{key}"
+    except Exception as e:
+        print(f"S3 upload error: {e}")
+        return ""
+
+
 def send_contract_email(d: dict) -> None:
     now = datetime.now().strftime("%d.%m.%Y %H:%M")
     contract_html = build_contract_html(d)
@@ -131,6 +163,22 @@ def send_contract_email(d: dict) -> None:
     tenant = (d.get("tenantName") or "без имени").strip() or "без имени"
     contract_num = (d.get("contractNumber") or "шаблон").strip() or "шаблон"
     phone = d.get("tenantPhone") or "—"
+
+    # Загружаем договор в S3 для онлайн-просмотра
+    online_url = upload_contract_to_s3(contract_html, contract_num, tenant)
+
+    online_block = ""
+    online_text = ""
+    if online_url:
+        online_block = f"""
+  <tr><td style="padding:20px;background:#f0f9ff;border-top:1px solid #d0e8f5;text-align:center;">
+    <div style="font-size:12px;color:#0369a1;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:10px;">Открыть договор онлайн</div>
+    <a href="{esc(online_url)}" target="_blank" style="display:inline-block;padding:14px 30px;background:linear-gradient(135deg,#0ea5e9 0%,#0369a1 100%);color:#fff;font-weight:900;text-decoration:none;border-radius:999px;font-size:15px;box-shadow:0 4px 12px rgba(14,165,233,0.3);">
+      🔗 Посмотреть договор в браузере
+    </a>
+    <div style="font-size:11px;color:#666;margin-top:10px;">Открывается без скачивания · можно распечатать или сохранить в PDF</div>
+  </td></tr>"""
+        online_text = f"\n🔗 Открыть договор онлайн: {online_url}\n"
 
     email_html = f"""<!DOCTYPE html>
 <html><body style="margin:0;padding:20px;background:#f4f4f4;font-family:Arial,sans-serif;">
@@ -162,8 +210,9 @@ def send_contract_email(d: dict) -> None:
       <b>Стоимость:</b> {esc(d.get('totalSum') or '—')}
     </div>
   </td></tr>
+{online_block}
   <tr><td style="padding:18px 20px;background:#fafafa;text-align:center;border-top:1px solid #eee;">
-    <div style="font-size:13px;color:#444;margin-bottom:10px;">К письму приложен <b>готовый договор</b> в формате HTML — открывается в любом браузере, можно распечатать или сохранить в PDF.</div>
+    <div style="font-size:13px;color:#444;margin-bottom:10px;">Договор также приложен к письму в формате HTML — можно скачать, распечатать или сохранить в PDF.</div>
     <a href="tel:{esc(phone)}" style="display:inline-block;padding:10px 22px;background:linear-gradient(135deg,#f5d060 0%,#e8a820 50%,#c8850a 100%);color:#000;font-weight:900;text-decoration:none;border-radius:999px;font-size:14px;">📞 Перезвонить клиенту</a>
   </td></tr>
 </table></body></html>"""
@@ -180,8 +229,9 @@ def send_contract_email(d: dict) -> None:
         f"Телефон: {phone}\nАдрес: {d.get('tenantAddress') or '—'}\n\n"
         f"Техника: {d.get('technique') or '—'}\n"
         f"Адрес работ: {d.get('workAddress') or '—'}\n"
-        f"Стоимость: {d.get('totalSum') or '—'}\n\n"
-        f"К письму приложен готовый договор."
+        f"Стоимость: {d.get('totalSum') or '—'}\n"
+        f"{online_text}\n"
+        f"К письму также приложен готовый договор."
     )
     alt.attach(MIMEText(text_body, "plain", "utf-8"))
     alt.attach(MIMEText(email_html, "html", "utf-8"))
