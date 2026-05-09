@@ -371,6 +371,34 @@ const FleetSection = () => {
                   ))}
                 </div>
 
+                {/* Бейджи доверия */}
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-5 sm:mb-7">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[11px] sm:text-xs font-semibold">
+                    <Icon name="ShieldCheck" size={13} />
+                    На учёте в Ростехнадзоре
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-300 text-[11px] sm:text-xs font-semibold">
+                    <Icon name="FileCheck2" size={13} />
+                    Работа с НДС / ЭДО
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] sm:text-xs font-semibold">
+                    <Icon name="UserCheck" size={13} />
+                    Опытный машинист
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-300 text-[11px] sm:text-xs font-semibold">
+                    <Icon name="Wrench" size={13} />
+                    Тех. обслуживание ✓
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 text-[11px] sm:text-xs font-semibold">
+                    <Icon name="Zap" size={13} />
+                    Подача от 1 часа
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-[11px] sm:text-xs font-semibold">
+                    <Icon name="RefreshCw" size={13} />
+                    Замена за 3-5 ч
+                  </div>
+                </div>
+
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                   <button onClick={() => openModal(truck.title)} className="group inline-flex w-full sm:w-auto justify-center items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full font-semibold text-sm sm:text-base hover:shadow-xl hover:shadow-accent/40 transition-all">
                     Заказать
