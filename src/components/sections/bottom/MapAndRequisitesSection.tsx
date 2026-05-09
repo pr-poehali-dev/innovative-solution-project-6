@@ -1,7 +1,8 @@
+import { useState } from "react";
 import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import SectionBadge from "@/components/ui/SectionBadge";
-import DocumentsBlock, { openContractModal } from "@/components/ui/DocumentsBlock";
+import ContractModal from "@/components/ui/ContractModal";
 
 interface MapAndRequisitesSectionProps {
   copied: boolean;
@@ -27,6 +28,9 @@ const MapAndRequisitesSection = ({
   onDownloadPdf,
   onOpenEmailModal,
 }: MapAndRequisitesSectionProps) => {
+  const [contractOpen, setContractOpen] = useState(false);
+  const openContract = () => setContractOpen(true);
+
   return (
     <>
       {/* Map Section */}
@@ -147,7 +151,7 @@ const MapAndRequisitesSection = ({
                   На email
                 </button>
                 <button
-                  onClick={openContractModal}
+                  onClick={openContract}
                   className="hidden sm:inline-flex flex-1 sm:flex-none items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-black font-bold text-xs shadow-lg shadow-accent/30 active:scale-[0.98] transition-transform"
                   style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
                 >
@@ -174,10 +178,36 @@ const MapAndRequisitesSection = ({
               ))}
             </div>
 
-            {/* Скрытый держатель модалки договора (открывается через кнопку «Договор» сверху) */}
-            <DocumentsBlock />
+            {/* Большая кнопка договора — только на мобильном */}
+            <div className="sm:hidden mt-5 pt-5 border-t border-accent/20">
+              <div className="flex items-center gap-2 mb-3">
+                <Icon name="FileDown" size={14} className="text-accent" />
+                <h3 className="font-display font-black text-xs uppercase tracking-widest" style={{ color: "#e8a820" }}>
+                  Документы для клиентов
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={openContract}
+                className="w-full inline-flex items-center gap-3 px-4 py-3 rounded-2xl border-2 border-accent/50 bg-accent/10 active:bg-accent/20 transition-all text-left relative z-10"
+              >
+                <div className="w-10 h-10 rounded-xl bg-accent/20 border border-accent/40 flex items-center justify-center flex-shrink-0">
+                  <Icon name="FileText" size={16} className="text-accent" />
+                </div>
+                <div className="flex flex-col leading-tight min-w-0 flex-1">
+                  <span className="text-accent text-[10px] font-bold uppercase tracking-wider">Заполнить · Скачать · Отправить</span>
+                  <span className="text-white font-bold text-sm">Договор аренды техники</span>
+                </div>
+                <div className="flex-shrink-0 inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-accent text-black font-black text-xs">
+                  <Icon name="ArrowRight" size={12} />
+                  Открыть
+                </div>
+              </button>
+            </div>
 
           </div>
+
+          <ContractModal open={contractOpen} onClose={() => setContractOpen(false)} />
 
           {/* Карта */}
           <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden" style={{ minHeight: "300px", height: "300px" }}>
