@@ -47,7 +47,7 @@ const OfflineStatusDot = () => {
           <span className="relative w-1.5 h-1.5 rounded-full bg-amber-400" />
         </span>
         <Icon name="WifiOff" size={11} />
-        <span className="hidden sm:inline">Офлайн</span>
+        <span className="sm:hidden">Офлайн</span>
       </div>
     );
   }
@@ -60,7 +60,7 @@ const OfflineStatusDot = () => {
       <span className="relative flex w-1.5 h-1.5">
         <span className="relative w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_6px_rgba(74,222,128,0.8)]" />
       </span>
-      <span className="hidden sm:inline">Готово</span>
+      <span className="sm:hidden">Готово</span>
     </div>
   );
 };
