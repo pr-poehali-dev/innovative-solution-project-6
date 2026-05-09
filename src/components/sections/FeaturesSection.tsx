@@ -76,7 +76,7 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
             return (
               <div
                 key={i}
-                className={`group relative transition-all duration-700 hover:-translate-y-1 ${
+                className={`group relative transition-all duration-700 hover:-translate-y-1 lg:h-full lg:flex ${
                   isVisible
                     ? "opacity-100 translate-y-0 lg:translate-x-0"
                     : `opacity-0 translate-y-6 ${isLeft ? "lg:-translate-x-8" : "lg:translate-x-8"}`
@@ -94,10 +94,10 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
 
                 {/* Градиентная рамка */}
                 <div
-                  className="relative rounded-2xl p-[1.5px]"
+                  className="relative rounded-2xl p-[1.5px] lg:flex-1 lg:w-full"
                   style={{ background: `linear-gradient(135deg, ${s}0.9) 0%, ${s}0.25) 50%, ${s}0.8) 100%)` }}
                 >
-                  <div className="relative flex items-start gap-4 sm:gap-5 p-5 sm:p-7 rounded-2xl bg-gradient-to-br from-zinc-950 via-background to-black overflow-hidden">
+                  <div className="relative flex items-start gap-4 sm:gap-5 p-5 sm:p-7 rounded-2xl bg-gradient-to-br from-zinc-950 via-background to-black overflow-hidden lg:h-full">
                     {/* Внутреннее свечение в углу */}
                     <div
                       className="absolute -top-20 -right-20 w-48 h-48 rounded-full blur-3xl pointer-events-none group-hover:scale-125 transition-transform duration-700"
