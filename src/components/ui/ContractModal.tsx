@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Icon from "@/components/ui/icon";
 
 interface ContractModalProps {
@@ -273,9 +274,11 @@ ${buildHtml()}
     "w-full px-3 py-2 rounded-lg bg-background/60 border border-accent/20 focus:border-accent/60 focus:outline-none text-white text-sm transition-colors";
   const labelCls = "text-[11px] font-bold uppercase tracking-wider text-accent/80 mb-1 block";
 
-  return (
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
     <div
-      className="fixed inset-0 z-[300] flex items-center justify-center bg-black/80 backdrop-blur-sm p-3 sm:p-6"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-3 sm:p-6"
       onClick={onClose}
     >
       <div
@@ -516,7 +519,8 @@ ${buildHtml()}
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
