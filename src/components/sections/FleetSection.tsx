@@ -389,10 +389,18 @@ const FleetSection = () => {
 
                 {/* Бейджи доверия */}
                 <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-5 sm:mb-7">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[11px] sm:text-xs font-semibold">
-                    <Icon name="ShieldCheck" size={13} />
-                    На учёте в Ростехнадзоре
-                  </div>
+                  {[
+                    "faw-kmu-dongyoung",
+                    "kamaz-65115-hangil",
+                    "kamaz-43118-kanglim",
+                    "faw-j6-dongyang-1966",
+                    "hyundai-gold-kmu-8t",
+                  ].includes(truck.slug) && (
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[11px] sm:text-xs font-semibold">
+                      <Icon name="ShieldCheck" size={13} />
+                      На учёте в Ростехнадзоре
+                    </div>
+                  )}
                   <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-300 text-[11px] sm:text-xs font-semibold">
                     <Icon name="FileCheck2" size={13} />
                     Работа с НДС / ЭДО
