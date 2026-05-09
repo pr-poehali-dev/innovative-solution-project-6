@@ -1,6 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
 import ContractModal from "@/components/ui/ContractModal";
+
+const CONTRACT_OPEN_EVENT = "favorit:open-contract";
+
+export const openContractModal = () => {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent(CONTRACT_OPEN_EVENT));
+  }
+};
 
 const printDoc = (title: string, html: string) => {
   const win = window.open("", "_blank", "width=900,height=700");
@@ -169,21 +177,30 @@ const priceHtml = `
 const DocumentsBlock = () => {
   const [contractOpen, setContractOpen] = useState(false);
 
+  useEffect(() => {
+    const handler = () => setContractOpen(true);
+    window.addEventListener(CONTRACT_OPEN_EVENT, handler);
+    return () => window.removeEventListener(CONTRACT_OPEN_EVENT, handler);
+  }, []);
+
   return (
     <div className="grid grid-cols-1 gap-2.5 sm:gap-3">
       <button
         type="button"
         onClick={() => setContractOpen(true)}
-        className="w-full inline-flex items-center gap-3 px-4 py-3 rounded-2xl border border-accent/30 bg-accent/5 hover:bg-accent/15 hover:border-accent/60 transition-all text-left group"
+        className="w-full inline-flex items-center gap-3 px-4 py-3 rounded-2xl border-2 border-accent/50 bg-accent/10 hover:bg-accent/20 hover:border-accent transition-all text-left group cursor-pointer relative z-10"
       >
-        <div className="w-10 h-10 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/25 transition-colors">
+        <div className="w-10 h-10 rounded-xl bg-accent/20 border border-accent/40 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/30 transition-colors">
           <Icon name="FileText" size={16} className="text-accent" />
         </div>
         <div className="flex flex-col leading-tight min-w-0 flex-1">
-          <span className="text-accent/80 text-[10px] font-bold uppercase tracking-wider">PDF · Договор</span>
-          <span className="text-white font-bold text-sm">Договор аренды техники</span>
+          <span className="text-accent text-[10px] font-bold uppercase tracking-wider">Заполнить · Скачать · Отправить</span>
+          <span className="text-white font-bold text-sm sm:text-base">Договор аренды техники</span>
         </div>
-        <Icon name="Download" size={14} className="text-accent/60 group-hover:text-accent transition-colors flex-shrink-0" />
+        <div className="flex-shrink-0 inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-accent text-black font-black text-xs">
+          <Icon name="ArrowRight" size={12} />
+          Открыть
+        </div>
       </button>
 
       <ContractModal open={contractOpen} onClose={() => setContractOpen(false)} />

@@ -1,7 +1,7 @@
 import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import SectionBadge from "@/components/ui/SectionBadge";
-import DocumentsBlock from "@/components/ui/DocumentsBlock";
+import DocumentsBlock, { openContractModal } from "@/components/ui/DocumentsBlock";
 
 interface MapAndRequisitesSectionProps {
   copied: boolean;
@@ -145,6 +145,14 @@ const MapAndRequisitesSection = ({
                 >
                   <Icon name="Mail" size={14} className="text-accent" />
                   На email
+                </button>
+                <button
+                  onClick={openContractModal}
+                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-black font-bold text-xs shadow-lg shadow-accent/30 active:scale-[0.98] transition-transform"
+                  style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
+                >
+                  <Icon name="FileText" size={14} />
+                  Договор
                 </button>
               </div>
             </div>
