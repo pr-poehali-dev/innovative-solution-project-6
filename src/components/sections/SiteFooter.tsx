@@ -34,34 +34,47 @@ interface CollapsibleColumnProps {
   children: React.ReactNode;
 }
 
-const CollapsibleColumn = ({ icon, title, defaultOpen = false, children }: CollapsibleColumnProps) => {
-  const [open, setOpen] = useState(defaultOpen);
+const CollapsibleColumn = ({ icon, title, defaultOpen, children }: CollapsibleColumnProps) => {
+  const [open, setOpen] = useState(() => {
+    if (typeof defaultOpen === "boolean") return defaultOpen;
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(min-width: 768px)").matches;
+    }
+    return false;
+  });
   return (
     <div className="border-b border-accent/10 md:border-b-0 md:pb-0 pb-3">
-      {/* Кнопка — только на мобильных */}
+      {/* Кнопка-заголовок — теперь и на мобильных, и на десктопе */}
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="md:hidden w-full flex items-center justify-between py-3 text-left"
+        className="w-full flex items-center justify-between py-3 md:py-2 md:mb-2 text-left group"
         aria-expanded={open}
       >
-        <h3 className="font-display font-black text-sm uppercase tracking-widest flex items-center gap-2" style={{ color: "#e8a820" }}>
+        <h3
+          className="font-display font-black text-sm uppercase tracking-widest flex items-center gap-2 group-hover:text-white transition-colors"
+          style={{ color: "#e8a820" }}
+        >
           <Icon name={icon} size={14} />
           {title}
         </h3>
-        <Icon name={open ? "ChevronUp" : "ChevronDown"} size={16} className="text-accent/70" />
+        <Icon
+          name={open ? "ChevronUp" : "ChevronDown"}
+          size={16}
+          className="text-accent/70 group-hover:text-accent transition-all"
+        />
       </button>
-      {/* Статичный заголовок — на планшете и десктопе */}
-      <div className="hidden md:block mb-4">
-        <h3 className="font-display font-black text-sm uppercase tracking-widest flex items-center gap-2" style={{ color: "#e8a820" }}>
-          <Icon name={icon} size={14} />
-          {title}
-        </h3>
-        <div className="mt-2 h-px w-10 bg-gradient-to-r from-accent/80 to-transparent" />
-      </div>
-      {/* Контент */}
-      <div className={`${open ? "block" : "hidden"} md:block pb-3 md:pb-0`}>
-        {children}
+
+      {/* Декоративная полоска под заголовком — только на десктопе */}
+      <div className="hidden md:block mb-3 h-px w-10 bg-gradient-to-r from-accent/80 to-transparent" />
+
+      {/* Контент — теперь сворачиваемый на любом размере */}
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-out ${
+          open ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="pb-3 md:pb-0">{children}</div>
       </div>
     </div>
   );
