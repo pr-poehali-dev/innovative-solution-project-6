@@ -67,7 +67,7 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
           </h2>
         </div>
 
-        <div className="flex flex-col gap-4 sm:gap-5 max-w-3xl lg:max-w-6xl mx-auto">
+        <div className="flex flex-col gap-4 sm:gap-5 max-w-3xl mx-auto lg:max-w-6xl lg:grid lg:grid-cols-2 lg:gap-6">
           {features.map((item, i) => {
             const isVisible = visibleSections["features"];
             const c = item.color.main;
@@ -76,9 +76,7 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
             return (
               <div
                 key={i}
-                className={`group relative transition-all duration-700 hover:-translate-y-1 lg:w-[58%] ${
-                  isLeft ? "lg:mr-auto" : "lg:ml-auto"
-                } ${
+                className={`group relative transition-all duration-700 hover:-translate-y-1 ${
                   isVisible
                     ? "opacity-100 translate-y-0 lg:translate-x-0"
                     : `opacity-0 translate-y-6 ${isLeft ? "lg:-translate-x-8" : "lg:translate-x-8"}`
