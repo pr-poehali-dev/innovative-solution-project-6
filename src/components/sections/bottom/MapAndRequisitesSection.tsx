@@ -148,7 +148,7 @@ const MapAndRequisitesSection = ({
                 </button>
                 <button
                   onClick={openContractModal}
-                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-black font-bold text-xs shadow-lg shadow-accent/30 active:scale-[0.98] transition-transform"
+                  className="hidden sm:inline-flex flex-1 sm:flex-none items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-black font-bold text-xs shadow-lg shadow-accent/30 active:scale-[0.98] transition-transform"
                   style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
                 >
                   <Icon name="FileText" size={14} />

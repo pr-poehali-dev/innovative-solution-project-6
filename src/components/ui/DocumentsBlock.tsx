@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Icon from "@/components/ui/icon";
 import ContractModal from "@/components/ui/ContractModal";
 
 const CONTRACT_OPEN_EVENT = "favorit:open-contract";
@@ -183,7 +184,36 @@ const DocumentsBlock = () => {
   }, []);
 
   return (
-    <ContractModal open={contractOpen} onClose={() => setContractOpen(false)} />
+    <>
+      {/* Большая кнопка — только на мобильном */}
+      <div className="sm:hidden mt-5 pt-5 border-t border-accent/20">
+        <div className="flex items-center gap-2 mb-3">
+          <Icon name="FileDown" size={14} className="text-accent" />
+          <h3 className="font-display font-black text-xs uppercase tracking-widest" style={{ color: "#e8a820" }}>
+            Документы для клиентов
+          </h3>
+        </div>
+        <button
+          type="button"
+          onClick={() => setContractOpen(true)}
+          className="w-full inline-flex items-center gap-3 px-4 py-3 rounded-2xl border-2 border-accent/50 bg-accent/10 hover:bg-accent/20 hover:border-accent transition-all text-left group cursor-pointer relative z-10"
+        >
+          <div className="w-10 h-10 rounded-xl bg-accent/20 border border-accent/40 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/30 transition-colors">
+            <Icon name="FileText" size={16} className="text-accent" />
+          </div>
+          <div className="flex flex-col leading-tight min-w-0 flex-1">
+            <span className="text-accent text-[10px] font-bold uppercase tracking-wider">Заполнить · Скачать · Отправить</span>
+            <span className="text-white font-bold text-sm">Договор аренды техники</span>
+          </div>
+          <div className="flex-shrink-0 inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-accent text-black font-black text-xs">
+            <Icon name="ArrowRight" size={12} />
+            Открыть
+          </div>
+        </button>
+      </div>
+
+      <ContractModal open={contractOpen} onClose={() => setContractOpen(false)} />
+    </>
   );
 };
 
