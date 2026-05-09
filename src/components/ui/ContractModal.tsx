@@ -149,43 +149,89 @@ const ContractModal = ({ open, onClose }: ContractModalProps) => {
     </table>
   `;
 
-  const handlePrint = () => {
-    const html = buildHtml();
-    const win = window.open("", "_blank");
-    if (!win) {
-      alert("Браузер заблокировал открытие окна. Разрешите всплывающие окна и попробуйте снова.");
-      return;
-    }
-    win.document.open();
-    win.document.write(`<!DOCTYPE html>
+  const buildFullHtml = () => `<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="utf-8" />
 <title>Договор аренды техники — ООО ФАВОРИТ</title>
 <style>
   @page { size: A4; margin: 18mm; }
-  body { font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.5; color: #000; padding: 20px; max-width: 800px; margin: 0 auto; }
+  body { font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.5; color: #000; padding: 20px; max-width: 800px; margin: 0 auto; background: #fff; }
   h1 { text-align: center; font-size: 16pt; margin-bottom: 8px; }
   h2 { font-size: 13pt; margin-top: 18px; margin-bottom: 6px; }
   p { margin: 4px 0; }
   ul { padding-left: 20px; margin: 6px 0; }
   table { border-collapse: collapse; }
   td, th { border: 1px solid #999; padding: 6px; vertical-align: top; }
-  .actions { position: fixed; top: 12px; right: 12px; display: flex; gap: 8px; z-index: 100; }
-  .actions button { padding: 8px 14px; background: #e8a820; color: #000; border: 0; border-radius: 8px; font-weight: bold; cursor: pointer; font-family: inherit; }
+  .actions { position: fixed; top: 12px; right: 12px; display: flex; gap: 8px; z-index: 100; background: #fff; padding: 6px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .actions button { padding: 8px 14px; background: #e8a820; color: #000; border: 0; border-radius: 8px; font-weight: bold; cursor: pointer; font-family: inherit; font-size: 13px; }
   .actions button.secondary { background: #eee; color: #333; }
   @media print { .actions { display: none !important; } body { padding: 0; } }
 </style>
 </head>
 <body>
 <div class="actions">
-  <button onclick="window.print()">🖨 Печать / Сохранить PDF</button>
-  <button class="secondary" onclick="window.close()">Закрыть</button>
+  <button onclick="window.print()">Печать / PDF</button>
 </div>
-${html}
+${buildHtml()}
+<script>setTimeout(function(){ try { window.print(); } catch(e) {} }, 500);</script>
 </body>
-</html>`);
-    win.document.close();
+</html>`;
+
+  const handlePrint = () => {
+    // Способ 1: печать через скрытый iframe — работает везде, без popup-блокировки
+    try {
+      const existing = document.getElementById("contract-print-frame");
+      if (existing) existing.remove();
+
+      const iframe = document.createElement("iframe");
+      iframe.id = "contract-print-frame";
+      iframe.style.position = "fixed";
+      iframe.style.right = "0";
+      iframe.style.bottom = "0";
+      iframe.style.width = "0";
+      iframe.style.height = "0";
+      iframe.style.border = "0";
+      iframe.style.opacity = "0";
+      document.body.appendChild(iframe);
+
+      const doc = iframe.contentDocument || iframe.contentWindow?.document;
+      if (!doc) throw new Error("no iframe doc");
+
+      doc.open();
+      doc.write(buildFullHtml());
+      doc.close();
+
+      const trigger = () => {
+        try {
+          iframe.contentWindow?.focus();
+          iframe.contentWindow?.print();
+        } catch (e) {
+          /* fallback ниже */
+        }
+      };
+      // Дать время на загрузку шрифтов и таблиц
+      setTimeout(trigger, 500);
+    } catch (e) {
+      // Запасной способ: скачать как HTML-файл (открывается и печатается в PDF в любом браузере)
+      handleDownload();
+    }
+  };
+
+  const handleDownload = () => {
+    try {
+      const blob = new Blob([buildFullHtml()], { type: "text/html;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Договор-аренды-техники-${data.contractNumber || "шаблон"}.html`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } catch (e) {
+      alert("Не удалось скачать договор. Попробуйте другой браузер.");
+    }
   };
 
   const set = <K extends keyof ContractData>(key: K, value: ContractData[K]) => {
@@ -390,12 +436,20 @@ ${html}
           </button>
           <button
             type="button"
+            onClick={handleDownload}
+            className="sm:flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-accent/40 bg-accent/10 hover:bg-accent/20 text-white text-sm font-semibold transition-colors"
+          >
+            <Icon name="Download" size={16} className="text-accent" />
+            Скачать
+          </button>
+          <button
+            type="button"
             onClick={handlePrint}
             className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-black font-bold text-sm shadow-lg shadow-accent/30 active:scale-[0.98] transition-transform"
             style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
           >
-            <Icon name="Download" size={16} />
-            Скачать PDF / Печать
+            <Icon name="Printer" size={16} />
+            Печать / Сохранить PDF
           </button>
         </div>
       </div>
