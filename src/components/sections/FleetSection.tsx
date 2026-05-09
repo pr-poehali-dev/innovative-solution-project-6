@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
@@ -241,6 +242,21 @@ const FleetSection = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Закрытие лайтбокса по Escape + блокировка скролла
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+    };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [lightbox]);
+
   return (
     <section className="py-16 sm:py-32 px-4 sm:px-6 scroll-mt-20 sm:scroll-mt-24">
       <OrderModal
@@ -418,17 +434,16 @@ const FleetSection = () => {
               </div>
 
               {truck.image && (
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => setLightbox({ src: truck.image, alt: truck.alt, title: truck.title })}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setLightbox({ src: truck.image, alt: truck.alt, title: truck.title });
-                    }
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log("[Fleet] Open lightbox:", truck.title);
+                    setLightbox({ src: truck.image, alt: truck.alt, title: truck.title });
                   }}
-                  className="parallax-card relative hidden lg:block w-full h-full min-h-[420px] overflow-hidden bg-gradient-to-br from-zinc-900 via-black to-zinc-900 group/img cursor-zoom-in z-10 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  className="parallax-card relative hidden lg:block w-full h-full min-h-[420px] overflow-hidden bg-gradient-to-br from-zinc-900 via-black to-zinc-900 group/img cursor-zoom-in select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  style={{ zIndex: 5 }}
                   aria-label={`Открыть фото ${truck.title} на весь экран`}
                 >
                   <img
@@ -441,14 +456,12 @@ const FleetSection = () => {
                     height="900"
                     draggable={false}
                   />
-                  {/* Лёгкое затемнение слева, чтобы плавно сливалось с инфо-блоком */}
                   <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent pointer-events-none" />
-                  {/* Кнопка-индикатор увеличения — всегда видна, чётко показывает кликабельность */}
                   <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-2 rounded-full bg-black/70 backdrop-blur-md border border-white/20 shadow-lg pointer-events-none transition-all duration-300 group-hover/img:bg-accent/90 group-hover/img:border-accent group-hover/img:scale-105">
                     <Icon name="Maximize2" size={16} className="text-white group-hover/img:text-black transition-colors" />
                     <span className="text-white text-xs font-bold group-hover/img:text-black transition-colors">Увеличить</span>
                   </div>
-                </div>
+                </button>
               )}
             </div>
           </div>
@@ -476,33 +489,40 @@ const FleetSection = () => {
         </div>
       </div>
 
-      {lightbox && (
-        <div
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-sm p-4"
-          onClick={() => setLightbox(null)}
-        >
-          <button
-            type="button"
+      {lightbox &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 backdrop-blur-sm p-4"
             onClick={() => setLightbox(null)}
-            className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors z-10"
-            aria-label="Закрыть"
+            style={{ animation: "fadeIn 0.2s ease-out" }}
           >
-            <Icon name="X" size={20} className="text-white" />
-          </button>
-          <div className="absolute top-4 left-4 right-20 text-white/90 text-sm sm:text-base font-semibold truncate">
-            {lightbox.title}
-          </div>
-          <img
-            src={lightbox.src}
-            alt={lightbox.alt}
-            className="max-w-full max-h-full object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-          <div className="absolute bottom-4 left-0 right-0 text-center text-white/60 text-xs">
-            Нажмите вне фото, чтобы закрыть
-          </div>
-        </div>
-      )}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightbox(null);
+              }}
+              className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors z-10"
+              aria-label="Закрыть"
+            >
+              <Icon name="X" size={20} className="text-white" />
+            </button>
+            <div className="absolute top-4 left-4 right-20 text-white/90 text-sm sm:text-base font-semibold truncate">
+              {lightbox.title}
+            </div>
+            <img
+              src={lightbox.src}
+              alt={lightbox.alt}
+              className="max-w-full max-h-full object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <div className="absolute bottom-4 left-0 right-0 text-center text-white/60 text-xs">
+              Нажмите вне фото, чтобы закрыть
+            </div>
+          </div>,
+          document.body,
+        )}
     </section>
   );
 };
