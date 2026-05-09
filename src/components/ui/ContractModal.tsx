@@ -63,13 +63,39 @@ const initial = (): ContractData => ({
 const fld = (v: string, placeholder = "_______________________________") =>
   v && v.trim() ? v.trim() : placeholder;
 
+interface CalcSummary {
+  technique: string;
+  hours: number;
+  city: string;
+  withRigger: boolean;
+  totalSum: string;
+  workAddress: string;
+  savedAt: number;
+}
+
 const ContractModal = ({ open, onClose }: ContractModalProps) => {
   const [data, setData] = useState<ContractData>(initial);
   const [sending, setSending] = useState(false);
   const [sendStatus, setSendStatus] = useState<"idle" | "success" | "error">("idle");
+  const [calc, setCalc] = useState<CalcSummary | null>(null);
+  const [calcApplied, setCalcApplied] = useState(false);
 
   useEffect(() => {
     if (!open) return;
+    // Читаем расчёт из калькулятора
+    try {
+      const raw = localStorage.getItem("favorit:calc");
+      if (raw) {
+        const parsed = JSON.parse(raw) as CalcSummary;
+        // Берём только свежий расчёт (за последние 24 часа)
+        if (parsed && Date.now() - parsed.savedAt < 24 * 60 * 60 * 1000) {
+          setCalc(parsed);
+        }
+      }
+    } catch {
+      /* ignore */
+    }
+
     const onEsc = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", onEsc);
     document.body.style.overflow = "hidden";
@@ -78,6 +104,17 @@ const ContractModal = ({ open, onClose }: ContractModalProps) => {
       document.body.style.overflow = "";
     };
   }, [open, onClose]);
+
+  const applyCalc = () => {
+    if (!calc) return;
+    setData((prev) => ({
+      ...prev,
+      technique: calc.technique,
+      totalSum: calc.totalSum,
+      workAddress: prev.workAddress || calc.workAddress,
+    }));
+    setCalcApplied(true);
+  };
 
   if (!open) return null;
 
@@ -316,6 +353,37 @@ ${buildHtml()}
               Заполните поля — договор сформируется автоматически. Можно оставить пустыми, тогда останутся прочерки. Нажмите «Скачать PDF» — откроется готовый документ для печати или сохранения в PDF.
             </p>
           </div>
+
+          {/* Расчёт из калькулятора */}
+          {calc && (
+            <div className={`rounded-xl border p-4 mb-5 transition-all ${calcApplied ? "bg-emerald-500/10 border-emerald-500/30" : "bg-accent/10 border-accent/40"}`}>
+              <div className="flex items-start gap-3 flex-wrap">
+                <div className={`w-10 h-10 rounded-xl border flex items-center justify-center flex-shrink-0 ${calcApplied ? "bg-emerald-500/20 border-emerald-500/40" : "bg-accent/20 border-accent/40"}`}>
+                  <Icon name={calcApplied ? "CircleCheck" : "Calculator"} size={18} className={calcApplied ? "text-emerald-400" : "text-accent"} />
+                </div>
+                <div className="flex-1 min-w-[180px]">
+                  <div className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${calcApplied ? "text-emerald-400" : "text-accent"}`}>
+                    {calcApplied ? "Расчёт подставлен" : "Найден расчёт из калькулятора"}
+                  </div>
+                  <div className="text-white text-sm font-semibold leading-snug">
+                    {calc.technique} · {calc.hours} ч · {calc.city}{calc.withRigger ? " · со стропальщиком" : ""}
+                  </div>
+                  <div className="text-accent font-bold text-base mt-1">{calc.totalSum.split("(")[0].trim()}</div>
+                </div>
+                {!calcApplied && (
+                  <button
+                    type="button"
+                    onClick={applyCalc}
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-black font-bold text-xs shadow active:scale-[0.98] transition-transform"
+                    style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
+                  >
+                    <Icon name="Wand2" size={14} />
+                    Подставить
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
 
           <h3 className="font-display font-bold text-white text-sm mb-3 flex items-center gap-2">
             <Icon name="Building2" size={14} className="text-accent" />

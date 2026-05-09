@@ -46,6 +46,24 @@ const CalculatorSection = () => {
   const minPrice = Math.min(...trucks.map((t) => t.price));
   const maxPrice = Math.max(...trucks.map((t) => t.price));
 
+  // Сохраняем расчёт калькулятора для автоподстановки в договор
+  useEffect(() => {
+    try {
+      const summary = {
+        technique: truck.name,
+        hours,
+        city: cityLabel,
+        withRigger,
+        totalSum: `${finalTotal.toLocaleString("ru")} ₽ (${truck.name}, ${hours} ч, ${cityLabel}${withRigger ? ", со стропальщиком" : ""})`,
+        workAddress: cityLabel && cityLabel !== "Нижний Новгород" ? cityLabel : "",
+        savedAt: Date.now(),
+      };
+      localStorage.setItem("favorit:calc", JSON.stringify(summary));
+    } catch {
+      /* ignore */
+    }
+  }, [truck.name, hours, cityLabel, withRigger, finalTotal]);
+
   const stepsDone = [
     truck ? 1 : 0,
     hours > 4 || hours === 4 ? 1 : 0,
