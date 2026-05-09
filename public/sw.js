@@ -49,6 +49,54 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("message", (event) => {
   if (event.data === "SKIP_WAITING") self.skipWaiting();
+
+  if (event.data && event.data.type === "PRECACHE_ASSETS") {
+    const urls = Array.isArray(event.data.urls) ? event.data.urls : [];
+    const port = event.ports && event.ports[0];
+    const total = urls.length;
+    let done = 0;
+    let failed = 0;
+
+    const run = async () => {
+      const staticCache = await caches.open(STATIC_CACHE);
+      const imageCache = await caches.open(IMAGE_CACHE);
+      const runtimeCache = await caches.open(RUNTIME_CACHE);
+
+      const concurrency = 6;
+      let i = 0;
+
+      const worker = async () => {
+        while (i < urls.length) {
+          const url = urls[i++];
+          try {
+            const isImg = /\.(?:png|jpe?g|svg|gif|webp|avif|ico)(?:\?.*)?$/i.test(url);
+            const isStatic = /\.(?:js|css|woff2?|ttf|otf|webmanifest|json)(?:\?.*)?$/i.test(url);
+            const cache = isImg ? imageCache : isStatic ? staticCache : runtimeCache;
+            const req = new Request(url, { cache: "reload", credentials: "same-origin" });
+            const res = await fetch(req);
+            if (res && (res.status === 200 || res.type === "opaque")) {
+              await cache.put(req, res.clone());
+            } else {
+              failed++;
+            }
+          } catch (e) {
+            failed++;
+          } finally {
+            done++;
+            if (port) port.postMessage({ type: "progress", done, total, failed });
+          }
+        }
+      };
+
+      const workers = [];
+      for (let k = 0; k < Math.min(concurrency, total); k++) workers.push(worker());
+      await Promise.all(workers);
+
+      if (port) port.postMessage({ type: "done", done, total, failed });
+    };
+
+    event.waitUntil(run());
+  }
 });
 
 self.addEventListener("fetch", (event) => {

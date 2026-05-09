@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Icon from "@/components/ui/icon";
 
 const OfflineStatusDot = () => {
   const [ready, setReady] = useState(false);
@@ -39,28 +38,27 @@ const OfflineStatusDot = () => {
   if (!online) {
     return (
       <div
-        className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-400 text-[10px] font-bold uppercase tracking-wider"
-        title="Нет интернета — сайт продолжает работать из памяти"
+        className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-500/15 border border-amber-500/40"
+        title="Нет интернета — сайт работает из памяти"
+        aria-label="Нет интернета"
       >
-        <span className="relative flex w-1.5 h-1.5">
+        <span className="relative flex w-2 h-2">
           <span className="absolute inset-0 rounded-full bg-amber-400 animate-ping opacity-75" />
-          <span className="relative w-1.5 h-1.5 rounded-full bg-amber-400" />
+          <span className="relative w-2 h-2 rounded-full bg-amber-400" />
         </span>
-        <Icon name="WifiOff" size={11} />
-        <span className="sm:hidden">Офлайн</span>
       </div>
     );
   }
 
   return (
     <div
-      className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] font-bold uppercase tracking-wider"
-      title="Сайт сохранён — работает без интернета"
+      className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-500/10 border border-green-500/30"
+      title="Есть интернет — сайт сохранён и работает офлайн"
+      aria-label="Есть интернет"
     >
-      <span className="relative flex w-1.5 h-1.5">
-        <span className="relative w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_6px_rgba(74,222,128,0.8)]" />
+      <span className="relative flex w-2 h-2">
+        <span className="relative w-2 h-2 rounded-full bg-green-400 shadow-[0_0_6px_rgba(74,222,128,0.8)]" />
       </span>
-      <span className="sm:hidden">Готово</span>
     </div>
   );
 };
