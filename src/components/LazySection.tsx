@@ -15,9 +15,8 @@ const LazySection = ({ children, minHeight = "400px", rootMargin, id }: LazySect
     if (visible) return;
     const el = ref.current;
     if (!el) return;
-    // На мобильных — меньше предзагрузка (быстрее открытие), на десктопе — больше (плавнее скролл)
-    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-    const margin = rootMargin ?? (isMobile ? "120px" : "300px");
+    // Большой margin — секции успеют подгрузиться до того, как пользователь до них доскроллит
+    const margin = rootMargin ?? "800px";
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -28,7 +27,15 @@ const LazySection = ({ children, minHeight = "400px", rootMargin, id }: LazySect
       { rootMargin: margin }
     );
     observer.observe(el);
-    return () => observer.disconnect();
+
+    // Страховка: если за 3.5с секция так и не показалась (например, из-за content-visibility),
+    // принудительно загружаем её, чтобы пользователь не увидел пустоту
+    const fallback = window.setTimeout(() => setVisible(true), 3500);
+
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(fallback);
+    };
   }, [visible, rootMargin]);
 
   return (

@@ -27,17 +27,27 @@ export const useVisibleSections = (sectionIds: string[]) => {
     };
 
     // Пытаемся подключить — повторяем несколько раз с задержкой (вместо MutationObserver)
+    // 30 попыток × 300мс = 9 сек — хватит времени, чтобы все ленивые секции отрендерились
     const retry = (attemptsLeft: number) => {
       if (cancelled) return;
       sectionIds.forEach(attach);
       if (tracked.size < sectionIds.length && attemptsLeft > 0) {
-        setTimeout(() => retry(attemptsLeft - 1), 200);
+        setTimeout(() => retry(attemptsLeft - 1), 300);
       }
     };
-    retry(8);
+    retry(30);
+
+    // Страховка: помечаем все секции как видимые, чтобы анимации/контент точно показались
+    const fallback = window.setTimeout(() => {
+      if (cancelled) return;
+      const allVisible: Record<string, boolean> = {};
+      sectionIds.forEach((id) => { allVisible[id] = true; });
+      setVisibleSections((prev) => ({ ...allVisible, ...prev }));
+    }, 4000);
 
     return () => {
       cancelled = true;
+      window.clearTimeout(fallback);
       Object.values(observers).forEach((observer) => observer.disconnect());
     };
   }, [sectionIds]);
