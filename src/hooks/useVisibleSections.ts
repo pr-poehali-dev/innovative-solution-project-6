@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 
 export const useVisibleSections = (sectionIds: string[]) => {
-  const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
+  // Сразу помечаем все секции как видимые — иначе контент будет невидим до срабатывания observer'a
+  const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>(() =>
+    Object.fromEntries(sectionIds.map((id) => [id, true])),
+  );
 
   useEffect(() => {
     const observers: Record<string, IntersectionObserver> = {};

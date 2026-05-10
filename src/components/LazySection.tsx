@@ -36,7 +36,7 @@ const LazySection = ({ children, minHeight = "400px", rootMargin, id }: LazySect
       observer.disconnect();
       window.clearTimeout(fallback);
     };
-  }, [visible, rootMargin]);
+  }, [rootMargin]);
 
   return (
     <div

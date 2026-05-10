@@ -140,8 +140,7 @@ self.addEventListener("fetch", (event) => {
           .catch(() => null);
 
         if (shell) {
-          // Обновляем в фоне, отдаём кеш
-          networkUpdate;
+          // Обновляем в фоне (промис уже запущен выше), отдаём кеш
           return shell;
         }
         // Кеша нет (первая загрузка) — ждём сеть
