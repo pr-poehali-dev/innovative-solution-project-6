@@ -37,6 +37,8 @@ const ReviewCard = () => {
         background: "linear-gradient(135deg, #f0fdfa 0%, #ecfeff 50%, #f0fdfa 100%)",
       }}
     >
+      <meta name="robots" content="noindex, nofollow" />
+      <title>Карточка для отзыва — фаварит.рф</title>
       {/* Кнопки управления */}
       <div className="max-w-[520px] mx-auto mb-5 flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch">
         <button

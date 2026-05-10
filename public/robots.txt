@@ -4,22 +4,26 @@ Disallow: /api/
 Disallow: /admin/
 Disallow: /banner
 Disallow: /karta/
+Disallow: /review-card
 
 User-agent: Googlebot
 Allow: /
 Disallow: /api/
 Disallow: /admin/
+Disallow: /review-card
 
 User-agent: Yandex
 Allow: /
 Disallow: /api/
 Disallow: /admin/
+Disallow: /review-card
 Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&yclid&gclid&fbclid
 
 User-agent: Bingbot
 Allow: /
 Disallow: /api/
 Disallow: /admin/
+Disallow: /review-card
 
 User-agent: Twitterbot
 Allow: /
