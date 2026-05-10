@@ -22,6 +22,7 @@ const ReviewsPage = lazy(() => import("./pages/ReviewsPage"));
 const SitemapSourcePage = lazy(() => import("./pages/SitemapSourcePage"));
 const SeoLandingPage = lazy(() => import("./pages/SeoLandingPage"));
 const TruckCard = lazy(() => import("./pages/TruckCard"));
+const ReviewCard = lazy(() => import("./pages/ReviewCard"));
 const AdBanner = lazy(() => import("./pages/AdBanner"));
 const AdminReindex = lazy(() => import("./pages/AdminReindex"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
@@ -88,6 +89,7 @@ const App = () => (
               element={<SeoLandingPage slugOverride="arenda-manipulyatora-dzerzhinsk-bor-kstovo" />}
             />
             <Route path="/karta/faw-j6p-390" element={<TruckCard />} />
+            <Route path="/review-card" element={<ReviewCard />} />
             <Route path="/banner" element={<AdBanner />} />
             <Route path="/admin/reindex" element={<AdminReindex />} />
             <Route path="/privacy" element={<PrivacyPage />} />

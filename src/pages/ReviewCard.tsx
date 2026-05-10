@@ -1,0 +1,249 @@
+import { useState } from "react";
+import Icon from "@/components/ui/icon";
+
+const REVIEW_LINKS = [
+  {
+    name: "Яндекс Карты",
+    url: "https://yandex.ru/maps/org/favorit",
+    icon: "MapPin",
+    bg: "linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)",
+    color: "#b45309",
+    border: "rgba(180,83,9,0.45)",
+  },
+  {
+    name: "2ГИС",
+    url: "https://2gis.ru",
+    icon: "Map",
+    bg: "linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%)",
+    color: "#047857",
+    border: "rgba(4,120,87,0.45)",
+  },
+  {
+    name: "Google Maps",
+    url: "https://maps.google.com",
+    icon: "Globe",
+    bg: "linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)",
+    color: "#1d4ed8",
+    border: "rgba(29,78,216,0.45)",
+  },
+];
+
+const SHARE_TEXT =
+  "Здравствуйте! Спасибо, что выбрали ООО «ФАВОРИТ». Будем благодарны за честный отзыв о нашей работе — это очень помогает нам становиться лучше. Оставить отзыв можно на любой из площадок: фаварит.рф/review-card";
+
+const ReviewCard = () => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(SHARE_TEXT);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      alert("Не удалось скопировать. Скопируйте текст вручную.");
+    }
+  };
+
+  const wa = `https://wa.me/?text=${encodeURIComponent(SHARE_TEXT)}`;
+  const tg = `https://t.me/share/url?url=${encodeURIComponent(
+    "https://фаварит.рф/review-card",
+  )}&text=${encodeURIComponent(SHARE_TEXT)}`;
+
+  return (
+    <div
+      className="min-h-screen py-6 px-4"
+      style={{
+        background: "linear-gradient(135deg, #f0fdfa 0%, #ecfeff 50%, #f0fdfa 100%)",
+      }}
+    >
+      {/* Кнопки управления */}
+      <div className="max-w-[640px] mx-auto mb-5 flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch">
+        <button
+          onClick={handleCopy}
+          className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-white text-sm shadow-xl"
+          style={{
+            background:
+              "linear-gradient(135deg, #14b8a6 0%, #0d9488 50%, #0f766e 100%)",
+            boxShadow: "0 8px 24px rgba(13,148,136,0.4)",
+          }}
+        >
+          <Icon name={copied ? "Check" : "Copy"} size={16} />
+          {copied ? "Скопировано!" : "Скопировать текст"}
+        </button>
+        <a
+          href={wa}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-white text-sm shadow-sm"
+          style={{ background: "#25D366" }}
+        >
+          <Icon name="MessageCircle" size={16} />
+          WhatsApp
+        </a>
+        <a
+          href={tg}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-white text-sm shadow-sm"
+          style={{ background: "#229ED9" }}
+        >
+          <Icon name="Send" size={16} />
+          Telegram
+        </a>
+        <a
+          href="/"
+          className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-slate-700 text-sm bg-white border border-slate-200 hover:bg-slate-50 shadow-sm"
+        >
+          <Icon name="ArrowLeft" size={16} />
+          На сайт
+        </a>
+      </div>
+
+      {/* Превью карточки */}
+      <div
+        className="max-w-[640px] mx-auto rounded-2xl overflow-hidden border-2"
+        style={{
+          borderColor: "rgba(13,148,136,0.55)",
+          background: "linear-gradient(135deg, #f0fdfa 0%, #f8fafc 50%, #f0fdfa 100%)",
+          boxShadow: "0 20px 60px rgba(13,148,136,0.15)",
+        }}
+      >
+        {/* Шапка */}
+        <div className="px-7 pt-7 flex items-start justify-between">
+          <div>
+            <div className="text-[11px] font-black tracking-wider text-teal-700">
+              ООО «ФАВОРИТ»
+            </div>
+            <div className="text-[11px] text-slate-500 mt-1">
+              аренда манипуляторов · Нижний Новгород
+            </div>
+          </div>
+          <div className="text-right">
+            <div className="text-[11px] text-slate-500">Сайт</div>
+            <div className="text-[14px] font-bold text-amber-700 mt-1">фаварит.рф</div>
+          </div>
+        </div>
+
+        <div className="mx-7 mt-4 border-t" style={{ borderColor: "rgba(13,148,136,0.3)" }} />
+
+        {/* Бейдж */}
+        <div className="flex justify-center mt-5">
+          <div
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-bold tracking-wider"
+            style={{
+              background: "rgba(45,212,191,0.2)",
+              border: "1px solid rgba(13,148,136,0.5)",
+              color: "#0d9488",
+            }}
+          >
+            <Icon name="Star" size={12} />
+            СПАСИБО ЗА ВАШ ВЫБОР
+          </div>
+        </div>
+
+        {/* Заголовок */}
+        <h1 className="text-center font-black text-slate-900 mt-5 px-6 leading-tight" style={{ fontSize: "26px" }}>
+          Поделитесь впечатлением
+          <br />
+          о нашей работе
+        </h1>
+
+        {/* Текст благодарности */}
+        <div className="px-7 mt-4 text-center">
+          <p className="text-[14px] text-slate-600 leading-relaxed">
+            Нам важно ваше мнение! Честный отзыв на любой из площадок ниже —
+            лучшая благодарность для нашей команды и помощь другим клиентам в выборе.
+          </p>
+        </div>
+
+        {/* Иллюстрация-эмодзи */}
+        <div className="flex justify-center gap-2 mt-5 text-3xl">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <span key={i} role="img" aria-label="star">
+              ⭐
+            </span>
+          ))}
+        </div>
+
+        {/* Площадки */}
+        <div className="px-7 mt-6 grid gap-2.5">
+          {REVIEW_LINKS.map((link) => (
+            <a
+              key={link.name}
+              href={link.url}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center justify-between px-5 py-4 rounded-xl border-2 transition-transform active:scale-[0.98] hover:scale-[1.01]"
+              style={{
+                background: link.bg,
+                borderColor: link.border,
+              }}
+            >
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center bg-white/70 shadow-sm"
+                  style={{ color: link.color }}
+                >
+                  <Icon name={link.icon} size={20} />
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold tracking-wider uppercase" style={{ color: link.color }}>
+                    Оставить отзыв
+                  </div>
+                  <div className="text-[15px] font-black" style={{ color: link.color }}>
+                    {link.name}
+                  </div>
+                </div>
+              </div>
+              <Icon name="ArrowRight" size={20} style={{ color: link.color }} />
+            </a>
+          ))}
+        </div>
+
+        {/* Контакты */}
+        <div className="mx-7 my-6 border-t pt-5" style={{ borderColor: "rgba(13,148,136,0.3)" }}>
+          <div className="grid grid-cols-2 gap-2.5">
+            <div
+              className="rounded-xl px-4 py-3 border"
+              style={{ background: "rgba(252,211,77,0.25)", borderColor: "rgba(180,83,9,0.5)" }}
+            >
+              <div className="text-[9px] font-bold tracking-wider text-amber-900">ДИРЕКТОР</div>
+              <a
+                href="tel:+79601690990"
+                className="block mt-1 text-[15px] font-bold text-amber-700"
+              >
+                +7 960 169-09-90
+              </a>
+            </div>
+            <div
+              className="rounded-xl px-4 py-3 border"
+              style={{ background: "rgba(45,212,191,0.25)", borderColor: "rgba(13,148,136,0.5)" }}
+            >
+              <div className="text-[9px] font-bold tracking-wider text-teal-800">ВОДИТЕЛЬ</div>
+              <a
+                href="tel:+79601883084"
+                className="block mt-1 text-[15px] font-bold text-slate-900"
+              >
+                +7 960 188-30-84
+              </a>
+            </div>
+          </div>
+
+          <div
+            className="mt-2.5 rounded-xl px-4 py-2.5 border flex items-center justify-between"
+            style={{ background: "rgba(45,212,191,0.18)", borderColor: "rgba(13,148,136,0.4)" }}
+          >
+            <span className="text-[11px] font-medium text-slate-600">Подробнее на сайте:</span>
+            <span className="text-[13px] font-bold text-amber-700">фаварит.рф</span>
+          </div>
+        </div>
+      </div>
+
+      <p className="max-w-[640px] mx-auto mt-4 text-center text-xs text-slate-500">
+        Откройте эту страницу на телефоне клиента или отправьте ссылку через WhatsApp / Telegram
+      </p>
+    </div>
+  );
+};
+
+export default ReviewCard;
