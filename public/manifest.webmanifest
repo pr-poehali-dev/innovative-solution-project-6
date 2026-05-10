@@ -19,12 +19,6 @@
       "sizes": "any",
       "type": "image/jpeg",
       "purpose": "any"
-    },
-    {
-      "src": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/b1f60523-ffa0-4e13-8530-464c3309f977.jpg",
-      "sizes": "any",
-      "type": "image/jpeg",
-      "purpose": "maskable"
     }
   ],
   "shortcuts": [
