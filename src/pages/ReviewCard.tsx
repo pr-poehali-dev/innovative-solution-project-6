@@ -54,7 +54,7 @@ const ReviewCard = () => {
           style={{ background: "#25D366" }}
         >
           <Icon name="MessageCircle" size={16} />
-          WhatsApp
+          Ватсап
         </a>
         <a
           href={tg}
@@ -64,7 +64,7 @@ const ReviewCard = () => {
           style={{ background: "#229ED9" }}
         >
           <Icon name="Send" size={16} />
-          Telegram
+          Телеграм
         </a>
         <a
           href="/"
