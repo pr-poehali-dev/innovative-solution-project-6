@@ -29,6 +29,7 @@ const sections = [
   { href: "/#usecases", label: "Виды работ" },
   { href: "/#pricing", label: "Тарифы" },
   { href: "/otzyvy", label: "Отзывы" },
+  { href: "/review-card", label: "Оставить отзыв" },
   { href: "/blog", label: "Блог" },
 ];
 
