@@ -174,15 +174,15 @@ const SeoLandingPage = ({ slugOverride }: SeoLandingPageProps) => {
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3">
-            <PhoneButton size="lg" />
+          <div className="flex flex-col sm:flex-row gap-3 sm:items-stretch">
+            <PhoneButton size="lg" className="w-full sm:w-auto" />
             <button
               type="button"
               onClick={() => setCallbackOpen(true)}
-              className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl border border-accent/40 bg-accent/5 hover:bg-accent/15 transition-all text-white font-semibold"
+              className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl border border-accent/40 bg-accent/5 hover:bg-accent/15 transition-all text-white font-semibold text-base sm:text-base whitespace-nowrap"
             >
               <Icon name="MessageCircle" size={18} className="text-accent" />
-              Заказать обратный звонок
+              Заказать звонок
             </button>
           </div>
         </div>
@@ -243,12 +243,12 @@ const SeoLandingPage = ({ slugOverride }: SeoLandingPageProps) => {
           <p className="text-muted-foreground text-sm sm:text-base mb-6 max-w-2xl mx-auto">
             Позвоните или закажите звонок — менеджер уточнит задачу, подберёт оптимальную машину и назовёт точную стоимость
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <PhoneButton size="lg" />
+          <div className="flex flex-col sm:flex-row gap-3 justify-center sm:items-stretch">
+            <PhoneButton size="lg" className="w-full sm:w-auto" />
             <button
               type="button"
               onClick={() => setCallbackOpen(true)}
-              className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl border border-accent/40 bg-black/30 hover:bg-accent/10 transition-all text-white font-semibold"
+              className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl border border-accent/40 bg-black/30 hover:bg-accent/10 transition-all text-white font-semibold text-base whitespace-nowrap"
             >
               <Icon name="Phone" size={18} className="text-accent" />
               Заказать звонок

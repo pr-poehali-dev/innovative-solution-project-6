@@ -28,7 +28,7 @@ const PhoneButton = ({ className = "", size = "md", iconOnly = false }: PhoneBut
   const sizeClasses = {
     sm: "px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm gap-1.5 sm:gap-2 whitespace-nowrap",
     md: "px-5 py-2.5 text-sm gap-2 whitespace-nowrap",
-    lg: "px-5 sm:px-14 py-4 sm:py-6 text-lg sm:text-3xl gap-2 sm:gap-4 whitespace-nowrap",
+    lg: "px-5 sm:px-14 py-4 sm:py-6 text-base sm:text-3xl gap-2 sm:gap-4 whitespace-nowrap",
   };
 
   if (iconOnly) {
