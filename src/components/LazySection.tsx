@@ -7,7 +7,7 @@ interface LazySectionProps {
   id?: string;
 }
 
-const LazySection = ({ children, minHeight = "400px", rootMargin = "300px", id }: LazySectionProps) => {
+const LazySection = ({ children, minHeight = "400px", rootMargin, id }: LazySectionProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -15,6 +15,9 @@ const LazySection = ({ children, minHeight = "400px", rootMargin = "300px", id }
     if (visible) return;
     const el = ref.current;
     if (!el) return;
+    // На мобильных — меньше предзагрузка (быстрее открытие), на десктопе — больше (плавнее скролл)
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const margin = rootMargin ?? (isMobile ? "120px" : "300px");
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -22,7 +25,7 @@ const LazySection = ({ children, minHeight = "400px", rootMargin = "300px", id }
           observer.disconnect();
         }
       },
-      { rootMargin }
+      { rootMargin: margin }
     );
     observer.observe(el);
     return () => observer.disconnect();

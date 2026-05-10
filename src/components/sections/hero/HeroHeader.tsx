@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
-import InstallAppButton from "@/components/ui/InstallAppButton";
 import OfflineStatusDot from "@/components/ui/OfflineStatusDot";
 import { navLinks } from "./heroData";
 
@@ -67,7 +66,6 @@ const HeroHeader = () => {
               </a>
             ))}
             <div className="mt-2 pt-3 border-t border-accent/10 flex flex-col gap-2" onClick={() => setMenuOpen(false)}>
-              <InstallAppButton className="w-full !justify-center !py-3 !text-sm" />
               <PhoneButton size="sm" className="w-full justify-center rounded-xl" />
             </div>
           </div>

@@ -6,6 +6,7 @@ export const useVisibleSections = (sectionIds: string[]) => {
   useEffect(() => {
     const observers: Record<string, IntersectionObserver> = {};
     const tracked = new Set<string>();
+    let cancelled = false;
 
     const attach = (id: string) => {
       if (tracked.has(id)) return;
@@ -25,15 +26,18 @@ export const useVisibleSections = (sectionIds: string[]) => {
       observers[id].observe(element);
     };
 
-    sectionIds.forEach(attach);
-
-    const mo = new MutationObserver(() => {
+    // Пытаемся подключить — повторяем несколько раз с задержкой (вместо MutationObserver)
+    const retry = (attemptsLeft: number) => {
+      if (cancelled) return;
       sectionIds.forEach(attach);
-    });
-    mo.observe(document.body, { childList: true, subtree: true });
+      if (tracked.size < sectionIds.length && attemptsLeft > 0) {
+        setTimeout(() => retry(attemptsLeft - 1), 200);
+      }
+    };
+    retry(8);
 
     return () => {
-      mo.disconnect();
+      cancelled = true;
       Object.values(observers).forEach((observer) => observer.disconnect());
     };
   }, [sectionIds]);

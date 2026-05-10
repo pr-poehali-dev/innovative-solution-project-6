@@ -48,13 +48,15 @@ requestAnimationFrame(() => {
   }
 });
 
-// Прогрев всех страниц для офлайн-режима — после загрузки главной
-const prewarmRoutes = () => {
-  const idle = (cb: () => void) => {
-    const w = window as unknown as { requestIdleCallback?: (cb: () => void) => void };
-    if (w.requestIdleCallback) w.requestIdleCallback(cb);
-    else setTimeout(cb, 2000);
-  };
+// Откладываем тяжёлые задачи на idle, чтобы не мешать первой отрисовке
+const idle = (cb: () => void, delay = 2500) => {
+  const w = window as unknown as { requestIdleCallback?: (cb: () => void) => void };
+  if (w.requestIdleCallback) w.requestIdleCallback(cb);
+  else setTimeout(cb, delay);
+};
+
+const runDeferred = () => {
+  // Прогрев страниц (для офлайн)
   idle(() => {
     Promise.all([
       import("./pages/TruckPage"),
@@ -67,38 +69,38 @@ const prewarmRoutes = () => {
       import("./pages/NotFound"),
     ]).catch(() => {});
   });
+
+  // Service Worker — регистрируем сильно позже, чтобы не блокировать первую отрисовку
+  if ("serviceWorker" in navigator) {
+    idle(() => {
+      navigator.serviceWorker
+        .register("/sw.js")
+        .then((reg) => {
+          setInterval(() => reg.update().catch(() => {}), 60_000);
+          reg.addEventListener("updatefound", () => {
+            const sw = reg.installing;
+            if (!sw) return;
+            sw.addEventListener("statechange", () => {
+              if (sw.state === "installed" && navigator.serviceWorker.controller) {
+                sw.postMessage("SKIP_WAITING");
+              }
+            });
+          });
+        })
+        .catch(() => {});
+
+      let reloading = false;
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (reloading) return;
+        reloading = true;
+        window.location.reload();
+      });
+    }, 4000);
+  }
 };
 
 if (document.readyState === "complete") {
-  prewarmRoutes();
+  runDeferred();
 } else {
-  window.addEventListener("load", prewarmRoutes, { once: true });
-}
-
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("/sw.js")
-      .then((reg) => {
-        // Проверяем обновления каждые 60 секунд
-        setInterval(() => reg.update().catch(() => {}), 60_000);
-        reg.addEventListener("updatefound", () => {
-          const sw = reg.installing;
-          if (!sw) return;
-          sw.addEventListener("statechange", () => {
-            if (sw.state === "installed" && navigator.serviceWorker.controller) {
-              sw.postMessage("SKIP_WAITING");
-            }
-          });
-        });
-      })
-      .catch(() => {});
-
-    let reloading = false;
-    navigator.serviceWorker.addEventListener("controllerchange", () => {
-      if (reloading) return;
-      reloading = true;
-      window.location.reload();
-    });
-  });
+  window.addEventListener("load", runDeferred, { once: true });
 }
