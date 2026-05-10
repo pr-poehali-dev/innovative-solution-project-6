@@ -114,28 +114,31 @@ export default function OrderModal({ open, onClose, truckName, calcSummary, subm
             )}
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 mt-3">
-              <p className="text-[11px] text-white/60 mb-1 leading-snug text-center">
-                Перезвоним за 15 минут · уточним детали · согласуем цену
-              </p>
-              <div className="relative">
-                <Icon name="User" size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
-                <input
-                  type="text"
-                  placeholder="Имя или компания"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  required
-                  className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
-                />
+              <div className="mb-2 px-3 py-2 rounded-lg bg-accent/10 border border-accent/30 text-center">
+                <p className="text-accent font-bold text-sm">
+                  Введите телефон — менеджер перезвонит за 15 минут
+                </p>
               </div>
               <div className="relative">
                 <Icon name="Phone" size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
                 <input
                   type="tel"
-                  placeholder="Телефон +7 (___) ___-__-__"
+                  inputMode="tel"
+                  autoFocus
+                  placeholder="Ваш телефон +7 ___ ___-__-__"
                   value={phone}
                   onChange={e => setPhone(e.target.value)}
                   required
+                  className="w-full bg-white/[0.07] border-2 border-accent/40 rounded-lg pl-9 pr-3 py-3 text-white placeholder:text-white/50 text-base focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
+                />
+              </div>
+              <div className="relative">
+                <Icon name="User" size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
+                <input
+                  type="text"
+                  placeholder="Имя (необязательно)"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
                   className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
                 />
               </div>
