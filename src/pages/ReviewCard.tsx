@@ -1,35 +1,13 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
-const REVIEW_LINKS = [
-  {
-    name: "Яндекс Карты",
-    url: "https://yandex.ru/maps/org/favorit",
-    icon: "MapPin",
-    bg: "linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)",
-    color: "#b45309",
-    border: "rgba(180,83,9,0.45)",
-  },
-  {
-    name: "2ГИС",
-    url: "https://2gis.ru",
-    icon: "Map",
-    bg: "linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%)",
-    color: "#047857",
-    border: "rgba(4,120,87,0.45)",
-  },
-  {
-    name: "Google Maps",
-    url: "https://maps.google.com",
-    icon: "Globe",
-    bg: "linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)",
-    color: "#1d4ed8",
-    border: "rgba(29,78,216,0.45)",
-  },
-];
+const YANDEX_URL = "https://yandex.ru/search/?text=фаварит.рф+отзывы";
+const PHONE_DISPLAY = "+7 960 188-30-84";
+const PHONE_TEL = "+79601883084";
 
 const SHARE_TEXT =
-  "Здравствуйте! Спасибо, что выбрали ООО «ФАВОРИТ». Будем благодарны за честный отзыв о нашей работе — это очень помогает нам становиться лучше. Оставить отзыв можно на любой из площадок: фаварит.рф/review-card";
+  "Здравствуйте! Спасибо, что выбрали ООО «ФАВОРИТ». Будем благодарны за честный отзыв о нашей работе. Оставить отзыв на Яндексе: " +
+  YANDEX_URL;
 
 const ReviewCard = () => {
   const [copied, setCopied] = useState(false);
@@ -45,9 +23,7 @@ const ReviewCard = () => {
   };
 
   const wa = `https://wa.me/?text=${encodeURIComponent(SHARE_TEXT)}`;
-  const tg = `https://t.me/share/url?url=${encodeURIComponent(
-    "https://фаварит.рф/review-card",
-  )}&text=${encodeURIComponent(SHARE_TEXT)}`;
+  const tg = `https://t.me/share/url?url=${encodeURIComponent(YANDEX_URL)}&text=${encodeURIComponent(SHARE_TEXT)}`;
 
   return (
     <div
@@ -57,7 +33,7 @@ const ReviewCard = () => {
       }}
     >
       {/* Кнопки управления */}
-      <div className="max-w-[640px] mx-auto mb-5 flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch">
+      <div className="max-w-[520px] mx-auto mb-5 flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch">
         <button
           onClick={handleCopy}
           className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-white text-sm shadow-xl"
@@ -101,7 +77,7 @@ const ReviewCard = () => {
 
       {/* Превью карточки */}
       <div
-        className="max-w-[640px] mx-auto rounded-2xl overflow-hidden border-2"
+        className="max-w-[520px] mx-auto rounded-2xl overflow-hidden border-2"
         style={{
           borderColor: "rgba(13,148,136,0.55)",
           background: "linear-gradient(135deg, #f0fdfa 0%, #f8fafc 50%, #f0fdfa 100%)",
@@ -127,7 +103,7 @@ const ReviewCard = () => {
         <div className="mx-7 mt-4 border-t" style={{ borderColor: "rgba(13,148,136,0.3)" }} />
 
         {/* Бейдж */}
-        <div className="flex justify-center mt-5">
+        <div className="flex justify-center mt-6">
           <div
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-bold tracking-wider"
             style={{
@@ -142,21 +118,23 @@ const ReviewCard = () => {
         </div>
 
         {/* Заголовок */}
-        <h1 className="text-center font-black text-slate-900 mt-5 px-6 leading-tight" style={{ fontSize: "26px" }}>
-          Поделитесь впечатлением
-          <br />
-          о нашей работе
+        <h1
+          className="text-center font-black text-slate-900 mt-5 px-6 leading-tight"
+          style={{ fontSize: "26px" }}
+        >
+          Оставьте отзыв
+          <br />о нашей работе
         </h1>
 
         {/* Текст благодарности */}
         <div className="px-7 mt-4 text-center">
           <p className="text-[14px] text-slate-600 leading-relaxed">
-            Нам важно ваше мнение! Честный отзыв на любой из площадок ниже —
-            лучшая благодарность для нашей команды и помощь другим клиентам в выборе.
+            Ваш честный отзыв — лучшая благодарность для нашей команды
+            и помощь другим клиентам в выборе.
           </p>
         </div>
 
-        {/* Иллюстрация-эмодзи */}
+        {/* Звёзды */}
         <div className="flex justify-center gap-2 mt-5 text-3xl">
           {[1, 2, 3, 4, 5].map((i) => (
             <span key={i} role="img" aria-label="star">
@@ -165,82 +143,90 @@ const ReviewCard = () => {
           ))}
         </div>
 
-        {/* Площадки */}
-        <div className="px-7 mt-6 grid gap-2.5">
-          {REVIEW_LINKS.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center justify-between px-5 py-4 rounded-xl border-2 transition-transform active:scale-[0.98] hover:scale-[1.01]"
-              style={{
-                background: link.bg,
-                borderColor: link.border,
-              }}
-            >
-              <div className="flex items-center gap-3">
+        {/* Кнопка Яндекс */}
+        <div className="px-7 mt-6">
+          <a
+            href={YANDEX_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-between px-5 py-4 rounded-xl border-2 transition-transform active:scale-[0.98] hover:scale-[1.01]"
+            style={{
+              background: "linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)",
+              borderColor: "rgba(180,83,9,0.45)",
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <div
+                className="w-11 h-11 rounded-full flex items-center justify-center bg-white/80 shadow-sm"
+                style={{ color: "#b45309" }}
+              >
+                <Icon name="Star" size={22} />
+              </div>
+              <div>
                 <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center bg-white/70 shadow-sm"
-                  style={{ color: link.color }}
+                  className="text-[10px] font-bold tracking-wider uppercase"
+                  style={{ color: "#b45309" }}
                 >
-                  <Icon name={link.icon} size={20} />
+                  Оставить отзыв
                 </div>
-                <div>
-                  <div className="text-[10px] font-bold tracking-wider uppercase" style={{ color: link.color }}>
-                    Оставить отзыв
-                  </div>
-                  <div className="text-[15px] font-black" style={{ color: link.color }}>
-                    {link.name}
-                  </div>
+                <div className="text-[16px] font-black" style={{ color: "#b45309" }}>
+                  на Яндексе
                 </div>
               </div>
-              <Icon name="ArrowRight" size={20} style={{ color: link.color }} />
-            </a>
-          ))}
+            </div>
+            <Icon name="ArrowRight" size={22} style={{ color: "#b45309" }} />
+          </a>
+          <p className="text-center text-[11px] text-slate-500 mt-2">
+            Откроется поиск Яндекса по запросу «фаварит.рф»
+          </p>
         </div>
 
-        {/* Контакты */}
-        <div className="mx-7 my-6 border-t pt-5" style={{ borderColor: "rgba(13,148,136,0.3)" }}>
-          <div className="grid grid-cols-2 gap-2.5">
-            <div
-              className="rounded-xl px-4 py-3 border"
-              style={{ background: "rgba(252,211,77,0.25)", borderColor: "rgba(180,83,9,0.5)" }}
-            >
-              <div className="text-[9px] font-bold tracking-wider text-amber-900">ДИРЕКТОР</div>
-              <a
-                href="tel:+79601690990"
-                className="block mt-1 text-[15px] font-bold text-amber-700"
-              >
-                +7 960 169-09-90
-              </a>
+        {/* Контакт */}
+        <div
+          className="mx-7 my-6 border-t pt-5"
+          style={{ borderColor: "rgba(13,148,136,0.3)" }}
+        >
+          <a
+            href={`tel:${PHONE_TEL}`}
+            className="flex items-center justify-between rounded-xl px-5 py-4 border"
+            style={{
+              background: "rgba(45,212,191,0.25)",
+              borderColor: "rgba(13,148,136,0.5)",
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white/80 shadow-sm text-teal-700">
+                <Icon name="Phone" size={18} />
+              </div>
+              <div>
+                <div className="text-[10px] font-bold tracking-wider text-teal-800 uppercase">
+                  Связаться с нами
+                </div>
+                <div className="text-[16px] font-black text-slate-900">
+                  {PHONE_DISPLAY}
+                </div>
+              </div>
             </div>
-            <div
-              className="rounded-xl px-4 py-3 border"
-              style={{ background: "rgba(45,212,191,0.25)", borderColor: "rgba(13,148,136,0.5)" }}
-            >
-              <div className="text-[9px] font-bold tracking-wider text-teal-800">ВОДИТЕЛЬ</div>
-              <a
-                href="tel:+79601883084"
-                className="block mt-1 text-[15px] font-bold text-slate-900"
-              >
-                +7 960 188-30-84
-              </a>
-            </div>
-          </div>
+            <Icon name="ArrowRight" size={20} className="text-teal-700" />
+          </a>
 
           <div
-            className="mt-2.5 rounded-xl px-4 py-2.5 border flex items-center justify-between"
-            style={{ background: "rgba(45,212,191,0.18)", borderColor: "rgba(13,148,136,0.4)" }}
+            className="mt-3 rounded-xl px-4 py-2.5 border flex items-center justify-between"
+            style={{
+              background: "rgba(45,212,191,0.18)",
+              borderColor: "rgba(13,148,136,0.4)",
+            }}
           >
-            <span className="text-[11px] font-medium text-slate-600">Подробнее на сайте:</span>
+            <span className="text-[11px] font-medium text-slate-600">
+              Подробнее на сайте:
+            </span>
             <span className="text-[13px] font-bold text-amber-700">фаварит.рф</span>
           </div>
         </div>
       </div>
 
-      <p className="max-w-[640px] mx-auto mt-4 text-center text-xs text-slate-500">
-        Откройте эту страницу на телефоне клиента или отправьте ссылку через WhatsApp / Telegram
+      <p className="max-w-[520px] mx-auto mt-4 text-center text-xs text-slate-500">
+        Откройте на телефоне клиента или отправьте через WhatsApp / Telegram
       </p>
     </div>
   );
