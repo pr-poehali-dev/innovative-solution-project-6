@@ -1,4 +1,5 @@
 {
+  "id": "/?source=pwa",
   "name": "ООО Фаворит — аренда манипуляторов",
   "short_name": "Фаворит",
   "description": "Аренда манипуляторов с КМУ в Нижнем Новгороде. От 1500 ₽/час, подача за 1 час, работаем 24/7.",
@@ -11,22 +12,17 @@
   "lang": "ru",
   "dir": "ltr",
   "categories": ["business", "productivity"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/apple-icon.png",
-      "sizes": "192x192",
+      "sizes": "any",
       "type": "image/png",
       "purpose": "any"
     },
     {
       "src": "/apple-icon.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/apple-icon.png",
-      "sizes": "512x512",
+      "sizes": "any",
       "type": "image/png",
       "purpose": "maskable"
     }

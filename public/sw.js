@@ -1,5 +1,5 @@
-/* Service Worker — Фаворит PWA v3 (Cache First, мгновенная работа без интернета) */
-const CACHE_VERSION = "v3";
+/* Service Worker — Фаворит PWA v4 (Cache First, мгновенная работа без интернета) */
+const CACHE_VERSION = "v4";
 const STATIC_CACHE = `favorit-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `favorit-runtime-${CACHE_VERSION}`;
 const IMAGE_CACHE = `favorit-images-${CACHE_VERSION}`;
