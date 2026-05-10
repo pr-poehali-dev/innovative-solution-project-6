@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
+import { useReviewCardDownload } from "./reviewCard/useReviewCardDownload";
 
 const YANDEX_URL = "https://yandex.ru/search/?text=фаварит.рф+отзывы";
 const PHONE_DISPLAY = "+7 960 188-30-84";
@@ -11,6 +12,10 @@ const SHARE_TEXT =
 
 const ReviewCard = () => {
   const [copied, setCopied] = useState(false);
+  const { downloading, handleDownload } = useReviewCardDownload({
+    yandexUrl: YANDEX_URL,
+    phoneDisplay: PHONE_DISPLAY,
+  });
 
   const handleCopy = async () => {
     try {
@@ -35,13 +40,30 @@ const ReviewCard = () => {
       {/* Кнопки управления */}
       <div className="max-w-[520px] mx-auto mb-5 flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch">
         <button
-          onClick={handleCopy}
-          className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-white text-sm shadow-xl"
+          onClick={handleDownload}
+          disabled={downloading}
+          className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-white text-sm shadow-xl disabled:opacity-60"
           style={{
             background:
               "linear-gradient(135deg, #14b8a6 0%, #0d9488 50%, #0f766e 100%)",
             boxShadow: "0 8px 24px rgba(13,148,136,0.4)",
           }}
+        >
+          {downloading ? (
+            <>
+              <Icon name="Loader2" size={16} className="animate-spin" />
+              Готовлю файл...
+            </>
+          ) : (
+            <>
+              <Icon name="Download" size={16} />
+              Скачать как картинку
+            </>
+          )}
+        </button>
+        <button
+          onClick={handleCopy}
+          className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-slate-700 text-sm bg-white border border-slate-200 hover:bg-slate-50 shadow-sm"
         >
           <Icon name={copied ? "Check" : "Copy"} size={16} />
           {copied ? "Скопировано!" : "Скопировать текст"}
