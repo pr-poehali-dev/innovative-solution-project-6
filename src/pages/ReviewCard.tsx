@@ -68,7 +68,7 @@ const ReviewCard = () => {
           className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-slate-700 text-sm bg-white border border-slate-200 hover:bg-slate-50 shadow-sm"
         >
           <Icon name={copied ? "Check" : "Copy"} size={16} />
-          {copied ? "Скопировано!" : "Скопировать текст"}
+          {copied ? "Скопировано ✓" : "Скопировать текст"}
         </button>
         <a
           href={wa}

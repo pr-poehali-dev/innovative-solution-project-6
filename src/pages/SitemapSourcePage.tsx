@@ -77,7 +77,7 @@ const SitemapSourcePage = () => {
             className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent text-black font-bold text-sm hover:opacity-90 transition-opacity"
           >
             <Icon name={copied ? "Check" : "Copy"} size={16} />
-            {copied ? "Скопировано!" : "Скопировать XML"}
+            {copied ? "Скопировано ✓" : "Скопировать XML"}
           </button>
           <button
             type="button"

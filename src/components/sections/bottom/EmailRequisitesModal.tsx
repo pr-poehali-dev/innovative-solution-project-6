@@ -74,7 +74,7 @@ const EmailRequisitesModal = ({
         {emailStatus === "success" && (
           <div className="flex items-center gap-2 mb-3 px-3 py-2 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-xs">
             <Icon name="CheckCircle2" size={14} />
-            Письмо отправлено! Проверьте почту.
+            Письмо отправлено — проверьте почту.
           </div>
         )}
 

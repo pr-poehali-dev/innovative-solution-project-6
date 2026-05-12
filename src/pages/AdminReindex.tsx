@@ -113,7 +113,7 @@ const AdminReindex = () => {
             <div className="flex items-center gap-2 mb-2">
               <Icon name={result.ok ? "CheckCircle2" : "XCircle"} size={22} />
               <span className="font-semibold">
-                {result.ok ? "Готово!" : "Ошибка"}
+                {result.ok ? "Готово ✓" : "Ошибка"}
               </span>
             </div>
             <p className="text-sm">

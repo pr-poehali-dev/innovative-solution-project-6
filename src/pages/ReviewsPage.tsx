@@ -265,7 +265,7 @@ const ReviewsPage = () => {
                   Для наших клиентов
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-black text-white mb-3">
-                  Работали с нами? <span className="text-accent">Оставьте отзыв!</span>
+                  Работали с нами? <span className="text-accent">Оставьте отзыв.</span>
                 </h2>
                 <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-5 max-w-2xl">
                   Ваш отзыв на Яндекс.Картах — это главная награда для нашей команды. Он помогает другим клиентам сделать правильный выбор, а нам — стать ещё лучше.

@@ -98,7 +98,7 @@ const CallbackModal = ({ open, onClose }: CallbackModalProps) => {
             <div className="w-16 h-16 rounded-full bg-green-500/15 border border-green-500/40 flex items-center justify-center mx-auto mb-3">
               <Icon name="Check" size={28} className="text-green-400" />
             </div>
-            <p className="text-white font-bold text-base mb-1">Заявка принята!</p>
+            <p className="text-white font-bold text-base mb-1 flex items-center justify-center gap-1.5">Заявка принята <Icon name="Sparkles" size={14} className="text-accent" /></p>
             <p className="text-muted-foreground text-sm">Перезвоним в ближайшее время</p>
           </div>
         ) : (

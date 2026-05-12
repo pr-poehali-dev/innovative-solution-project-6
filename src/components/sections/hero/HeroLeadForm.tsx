@@ -49,7 +49,7 @@ const HeroLeadForm = () => {
             <Icon name="CheckCircle" size={22} className="text-accent" />
           </div>
           <div>
-            <p className="font-black text-white text-base">Заявка принята!</p>
+            <p className="font-black text-white text-base flex items-center gap-1.5">Заявка принята <Icon name="Sparkles" size={16} className="text-accent" /></p>
             <p className="text-xs text-white/70">Перезвоним в ближайшие 5 минут.</p>
           </div>
         </div>

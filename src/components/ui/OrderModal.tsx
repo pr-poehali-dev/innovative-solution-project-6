@@ -87,7 +87,7 @@ export default function OrderModal({ open, onClose, truckName, calcSummary, subm
             <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
               <Icon name="CheckCircle" size={32} className="text-green-400" />
             </div>
-            <h3 className="text-2xl font-black mb-2">Заявка принята!</h3>
+            <h3 className="text-2xl font-black mb-2 flex items-center justify-center gap-2">Заявка принята <Icon name="Sparkles" size={20} className="text-accent" /></h3>
             <p className="text-muted-foreground mb-6">Перезвоним в течение 15 минут.</p>
             <button
               onClick={onClose}
