@@ -72,86 +72,257 @@ const FaqSection = () => {
   };
 
   return (
-    <section className="py-12 sm:py-20 px-4 sm:px-6">
+    <section className="relative py-12 sm:py-24 px-4 sm:px-6 overflow-hidden">
       <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8 sm:mb-12">
+
+      {/* Декоративные световые пятна */}
+      <div className="hidden lg:block absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-accent/10 blur-[120px] pointer-events-none animate-pulse" />
+      <div
+        className="hidden lg:block absolute top-2/3 -right-32 w-96 h-96 rounded-full bg-amber-500/10 blur-[120px] pointer-events-none animate-pulse"
+        style={{ animationDelay: "1.5s" }}
+      />
+
+      <div className="relative max-w-4xl mx-auto">
+        <div className="text-center mb-8 sm:mb-14">
           <div className="flex justify-center mb-4">
             <SectionBadge>Частые вопросы</SectionBadge>
           </div>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-display font-black tracking-tighter mb-4">
+          <h2 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mb-3 sm:mb-6">
             <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
               Отвечаем на вопросы об аренде манипулятора
             </span>
           </h2>
-          <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">
             Собрали ответы на самые частые вопросы клиентов об услугах манипулятора в Нижнем Новгороде
           </p>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-3 sm:space-y-4">
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i;
+            const number = String(i + 1).padStart(2, "0");
             return (
               <div
                 key={i}
-                className={`rounded-2xl border transition-all duration-300 ${
-                  isOpen
-                    ? "border-accent/50 bg-accent/5 shadow-lg shadow-accent/10"
-                    : "border-accent/15 bg-card/40 hover:border-accent/30"
-                }`}
+                className="group relative"
               >
-                <button
-                  onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between gap-4 p-4 sm:p-5 text-left"
-                  aria-expanded={isOpen}
-                >
-                  <div className="flex items-start gap-3 flex-1 min-w-0">
-                    <div
-                      className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
-                        isOpen ? "bg-accent/20 border border-accent/40" : "bg-white/5 border border-white/10"
-                      }`}
-                    >
-                      <Icon name="HelpCircle" size={16} className={isOpen ? "text-accent" : "text-white/60"} />
-                    </div>
-                    <h3 className="font-display font-bold text-sm sm:text-base text-white leading-snug pt-1">
-                      {faq.question}
-                    </h3>
-                  </div>
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
-                      isOpen ? "bg-accent text-black rotate-180" : "bg-white/5 text-white/60"
-                    }`}
-                  >
-                    <Icon name="ChevronDown" size={16} />
-                  </div>
-                </button>
+                {/* Внешнее свечение при открытии */}
                 {isOpen && (
-                  <div className="px-4 pb-4 sm:px-5 sm:pb-5 animate-in fade-in slide-in-from-top-1 duration-300">
-                    <div className="pl-11 sm:pl-12">
-                      <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                        {faq.answer}
-                      </p>
+                  <div
+                    className="absolute -inset-0.5 rounded-2xl pointer-events-none opacity-70 emerald-pulse"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, #5eead4 0%, rgba(94,234,212,0.4) 50%, #fbbf24 100%)",
+                    }}
+                  />
+                )}
+
+                {/* Градиентная рамка */}
+                <div
+                  className="relative rounded-2xl p-[1.5px] transition-all duration-300"
+                  style={{
+                    background: isOpen
+                      ? "linear-gradient(135deg, rgba(94,234,212,0.9) 0%, rgba(94,234,212,0.25) 50%, rgba(251,191,36,0.8) 100%)"
+                      : "linear-gradient(135deg, rgba(94,234,212,0.25) 0%, rgba(255,255,255,0.06) 50%, rgba(94,234,212,0.15) 100%)",
+                  }}
+                >
+                  <div className="relative rounded-2xl bg-gradient-to-br from-zinc-950 via-background to-black overflow-hidden">
+                    {/* Внутреннее свечение в углу */}
+                    <div
+                      className="absolute -top-20 -right-20 w-48 h-48 rounded-full blur-3xl pointer-events-none transition-opacity duration-500"
+                      style={{
+                        background: "rgba(94,234,212,0.18)",
+                        opacity: isOpen ? 1 : 0.4,
+                      }}
+                    />
+
+                    {/* Большой номер на фоне */}
+                    <div
+                      className="absolute -bottom-8 -right-2 font-display font-black text-[140px] leading-none pointer-events-none select-none transition-opacity duration-500"
+                      style={{
+                        color: "#5eead4",
+                        opacity: isOpen ? 0.14 : 0.06,
+                      }}
+                    >
+                      {number}
+                    </div>
+
+                    <button
+                      onClick={() => setOpenIndex(isOpen ? null : i)}
+                      className="relative w-full flex items-center justify-between gap-3 sm:gap-5 p-4 sm:p-6 text-left"
+                      aria-expanded={isOpen}
+                    >
+                      <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                        {/* Номер вопроса */}
+                        <div className="relative flex-shrink-0">
+                          <div
+                            className="absolute inset-0 rounded-xl blur-md opacity-60 transition-opacity duration-500"
+                            style={{
+                              background:
+                                "radial-gradient(circle, rgba(94,234,212,0.5) 0%, transparent 70%)",
+                              opacity: isOpen ? 1 : 0.4,
+                            }}
+                          />
+                          <div
+                            className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center transition-all duration-500"
+                            style={{
+                              background: isOpen
+                                ? "linear-gradient(135deg, rgba(94,234,212,0.28) 0%, rgba(94,234,212,0.12) 100%)"
+                                : "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)",
+                              border: isOpen
+                                ? "1.5px solid rgba(94,234,212,0.55)"
+                                : "1.5px solid rgba(255,255,255,0.1)",
+                              boxShadow: isOpen
+                                ? "inset 0 1px 0 rgba(255,255,255,0.15), 0 4px 14px rgba(94,234,212,0.3)"
+                                : "inset 0 1px 0 rgba(255,255,255,0.05)",
+                            }}
+                          >
+                            <span
+                              className="font-display font-black text-sm sm:text-base"
+                              style={{ color: isOpen ? "#5eead4" : "rgba(255,255,255,0.5)" }}
+                            >
+                              {number}
+                            </span>
+                          </div>
+                        </div>
+
+                        <h3
+                          className="font-display font-bold text-sm sm:text-base lg:text-lg leading-snug transition-colors duration-300"
+                          style={{
+                            color: isOpen ? "#fff" : "rgba(255,255,255,0.92)",
+                          }}
+                        >
+                          {faq.question}
+                        </h3>
+                      </div>
+
+                      {/* Стрелка раскрытия */}
+                      <div
+                        className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300"
+                        style={{
+                          background: isOpen
+                            ? "linear-gradient(135deg, #5eead4 0%, #2dd4bf 100%)"
+                            : "rgba(255,255,255,0.06)",
+                          color: isOpen ? "#0a0a0a" : "rgba(255,255,255,0.6)",
+                          border: isOpen ? "none" : "1px solid rgba(255,255,255,0.1)",
+                          transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                          boxShadow: isOpen ? "0 4px 14px rgba(94,234,212,0.4)" : "none",
+                        }}
+                      >
+                        <Icon name="ChevronDown" size={18} />
+                      </div>
+                    </button>
+
+                    {/* Ответ */}
+                    <div
+                      className="grid transition-all duration-500 ease-out"
+                      style={{
+                        gridTemplateRows: isOpen ? "1fr" : "0fr",
+                      }}
+                    >
+                      <div className="overflow-hidden">
+                        <div className="relative px-4 pb-5 sm:px-6 sm:pb-6">
+                          {/* Разделительная линия */}
+                          <div
+                            className="h-px w-full mb-4 rounded-full"
+                            style={{
+                              background:
+                                "linear-gradient(90deg, transparent 0%, rgba(94,234,212,0.4) 50%, transparent 100%)",
+                            }}
+                          />
+                          <div className="pl-[52px] sm:pl-[64px]">
+                            <p className="text-muted-foreground text-sm sm:text-base lg:text-[15px] leading-relaxed">
+                              {faq.answer}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                )}
+                </div>
               </div>
             );
           })}
         </div>
 
-        <div className="mt-8 sm:mt-10 text-center p-5 sm:p-6 rounded-2xl border border-accent/30 bg-gradient-to-r from-accent/10 to-transparent">
-          <p className="text-white text-sm sm:text-base mb-3">
-            Не нашли ответ на свой вопрос?
-          </p>
-          <a
-            href="tel:+79601883084"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm shadow-lg shadow-accent/30"
-            style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)", color: "#111" }}
+        {/* Блок «Не нашли ответ» */}
+        <div className="relative mt-8 sm:mt-12 group">
+          <div
+            className="absolute -inset-0.5 rounded-2xl pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity duration-500 emerald-pulse"
+            style={{
+              background:
+                "linear-gradient(135deg, #fbbf24 0%, rgba(251,191,36,0.4) 50%, #5eead4 100%)",
+            }}
+          />
+          <div
+            className="relative rounded-2xl p-[1.5px]"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(251,191,36,0.9) 0%, rgba(251,191,36,0.25) 50%, rgba(94,234,212,0.7) 100%)",
+            }}
           >
-            <Icon name="Phone" size={16} />
-            Позвонить: +7 960 188-30-84
-          </a>
+            <div className="relative rounded-2xl bg-gradient-to-br from-zinc-950 via-background to-black p-6 sm:p-8 text-center overflow-hidden">
+              <div
+                className="absolute -top-20 -right-20 w-48 h-48 rounded-full blur-3xl pointer-events-none"
+                style={{ background: "rgba(251,191,36,0.18)" }}
+              />
+              <div
+                className="absolute -bottom-20 -left-20 w-48 h-48 rounded-full blur-3xl pointer-events-none"
+                style={{ background: "rgba(94,234,212,0.15)" }}
+              />
+
+              <div className="relative">
+                <div className="flex justify-center mb-3">
+                  <div
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(251,191,36,0.28) 0%, rgba(251,191,36,0.12) 100%)",
+                      border: "1.5px solid rgba(251,191,36,0.55)",
+                      boxShadow:
+                        "inset 0 1px 0 rgba(255,255,255,0.15), 0 4px 14px rgba(251,191,36,0.3)",
+                    }}
+                  >
+                    <Icon name="MessageCircleQuestion" size={22} style={{ color: "#fbbf24" }} />
+                  </div>
+                </div>
+                <h3 className="font-display font-black text-lg sm:text-2xl text-white mb-2">
+                  Не нашли ответ на свой вопрос?
+                </h3>
+                <p className="text-muted-foreground text-sm sm:text-base mb-5 max-w-md mx-auto">
+                  Позвоните — диспетчер ответит на любые вопросы и поможет подобрать технику
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                  <a
+                    href="tel:+79601883084"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-sm sm:text-base shadow-lg shadow-amber-500/30 hover:scale-105 transition-transform duration-300"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
+                      color: "#111",
+                    }}
+                  >
+                    <Icon name="Phone" size={18} />
+                    +7 960 188-30-84
+                  </a>
+                  <a
+                    href="https://wa.me/79601883084"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-sm sm:text-base border transition-all duration-300 hover:scale-105"
+                    style={{
+                      color: "#5eead4",
+                      borderColor: "rgba(94,234,212,0.4)",
+                      background: "rgba(94,234,212,0.08)",
+                    }}
+                  >
+                    <Icon name="MessageCircle" size={18} />
+                    Написать в WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
