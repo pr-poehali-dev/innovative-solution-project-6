@@ -24,23 +24,57 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
           Оставьте заявку или позвоните — мы подберём правильный манипулятор с платформой необходимых габаритов и нужной грузоподъёмностью под вашу задачу.
         </p>
 
-        {/* Ключевые условия: цена · мин. заказ · оператор */}
-        <div className="flex flex-wrap gap-1.5 sm:gap-3 mb-3 sm:mb-8 max-w-xl">
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-accent/40 bg-accent/10 text-white text-xs sm:text-sm">
-            <Icon name="Wallet" size={14} className="text-accent" />
-            <span className="font-semibold">от 1500 ₽/час</span>
+        {/* Крупный ценовой блок — для конверсии и качества рекламы */}
+        <div className="inline-flex items-center gap-3 sm:gap-4 mb-3 sm:mb-6 px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl border-2 border-accent/50 bg-black/60 backdrop-blur-sm shadow-[0_8px_30px_rgba(245,214,128,0.25)]">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+            style={{
+              background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 12px rgba(245,214,128,0.4)",
+            }}
+          >
+            <Icon name="Wallet" size={20} className="text-black" />
           </div>
+          <div className="flex flex-col">
+            <span className="text-[10px] sm:text-xs uppercase tracking-wider text-white/60 font-semibold">Цена с оператором</span>
+            <span className="text-lg sm:text-2xl font-display font-black text-white leading-none">
+              от <span className="text-accent">1 500 ₽</span>/час
+            </span>
+          </div>
+        </div>
+
+        {/* Ключевые условия */}
+        <div className="flex flex-wrap gap-1.5 sm:gap-3 mb-3 sm:mb-6 max-w-xl">
           <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-white/15 bg-white/5 text-white text-xs sm:text-sm">
             <Icon name="Clock" size={14} className="text-accent" />
+            <span>Подача от <span className="font-semibold">1 часа</span></span>
+          </div>
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-white/15 bg-white/5 text-white text-xs sm:text-sm">
+            <Icon name="Calendar" size={14} className="text-accent" />
             <span>Мин. заказ — <span className="font-semibold">4 часа</span></span>
           </div>
           <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-white/15 bg-white/5 text-white text-xs sm:text-sm">
             <Icon name="UserCheck" size={14} className="text-accent" />
             <span>Оператор включён</span>
           </div>
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-white/15 bg-white/5 text-white text-xs sm:text-sm">
+            <Icon name="FileCheck" size={14} className="text-accent" />
+            <span>Работаем с НДС</span>
+          </div>
         </div>
 
-        <div className="flex gap-3 sm:gap-4 mb-4 sm:mb-12 flex-col sm:flex-row">
+        <div className="flex gap-3 sm:gap-4 mb-4 sm:mb-10 flex-col sm:flex-row">
+          <a
+            href="tel:+79601883084"
+            className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-lg shadow-[0_10px_30px_rgba(245,214,128,0.4)] hover:scale-[1.03] transition-all duration-300 relative overflow-hidden"
+            style={{
+              background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
+              color: "#111",
+            }}
+          >
+            <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <Icon name="Phone" size={18} className="sm:!w-5 sm:!h-5 relative" />
+            <span className="relative">Позвонить: +7 960 188-30-84</span>
+          </a>
           <a
             href="#fleet"
             onClick={(e) => {
@@ -52,7 +86,7 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
                 history.replaceState(null, "", "#fleet");
               }
             }}
-            className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-4 border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all font-medium text-sm sm:text-lg text-white text-center cursor-pointer"
+            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border border-accent/40 rounded-full hover:border-accent/70 hover:bg-accent/10 transition-all font-medium text-sm sm:text-lg text-white text-center cursor-pointer"
           >
             Посмотреть технику
           </a>
