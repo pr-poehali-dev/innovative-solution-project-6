@@ -8,6 +8,7 @@ import { trucks } from "./truck/trucksData";
 import TruckSeo from "./truck/TruckSeo";
 import TruckHero, { TruckHeader } from "./truck/TruckHero";
 import TruckContent from "./truck/TruckContent";
+import SimilarTrucks from "./truck/SimilarTrucks";
 
 export default function TruckPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -56,6 +57,8 @@ export default function TruckPage() {
         </section>
 
         <TruckContent truck={truck} slug={slug!} />
+
+        <SimilarTrucks currentSlug={slug!} />
       </main>
       <SiteFooter />
     </div>
