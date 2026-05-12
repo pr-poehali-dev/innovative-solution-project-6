@@ -8,6 +8,7 @@ import StructuredData from "@/components/seo/StructuredData";
 import { useVisibleSections } from "@/hooks/useVisibleSections";
 
 const FleetSection = lazy(() => import("@/components/sections/FleetSection"));
+const PopularTechSection = lazy(() => import("@/components/sections/PopularTechSection"));
 const BottomSections = lazy(() => import("@/components/sections/BottomSections"));
 const ReviewsSection = lazy(() => import("@/components/sections/ReviewsSection"));
 const GallerySection = lazy(() => import("@/components/sections/GallerySection"));
@@ -32,6 +33,7 @@ const Index = () => {
       <HeroSection visibleSections={visibleSections} />
       <TrustBarSection />
       <FeaturesSection visibleSections={visibleSections} />
+      <LazySection><PopularTechSection /></LazySection>
       <LazySection id="fleet"><FleetSection /></LazySection>
       <LazySection><UseCasesSection /></LazySection>
       <LazySection><CalculatorSection /></LazySection>
