@@ -100,7 +100,6 @@ const FaqSection = () => {
         <div className="space-y-3 sm:space-y-4">
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i;
-            const number = String(i + 1).padStart(2, "0");
             return (
               <div
                 key={i}
@@ -136,17 +135,6 @@ const FaqSection = () => {
                       }}
                     />
 
-                    {/* Большой номер на фоне */}
-                    <div
-                      className="absolute -bottom-8 -right-2 font-display font-black text-[140px] leading-none pointer-events-none select-none transition-opacity duration-500"
-                      style={{
-                        color: "#5eead4",
-                        opacity: isOpen ? 0.14 : 0.06,
-                      }}
-                    >
-                      {number}
-                    </div>
-
                     <button
                       onClick={() => setOpenIndex(isOpen ? null : i)}
                       className="relative w-full flex items-center justify-between gap-3 sm:gap-5 p-4 sm:p-6 text-left"
@@ -177,12 +165,11 @@ const FaqSection = () => {
                                 : "inset 0 1px 0 rgba(255,255,255,0.05)",
                             }}
                           >
-                            <span
-                              className="font-display font-black text-sm sm:text-base"
+                            <Icon
+                              name="HelpCircle"
+                              size={18}
                               style={{ color: isOpen ? "#5eead4" : "rgba(255,255,255,0.5)" }}
-                            >
-                              {number}
-                            </span>
+                            />
                           </div>
                         </div>
 
@@ -292,7 +279,7 @@ const FaqSection = () => {
                 <p className="text-muted-foreground text-sm sm:text-base mb-5 max-w-md mx-auto">
                   Позвоните — диспетчер ответит на любые вопросы и поможет подобрать технику
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                <div className="flex justify-center items-center">
                   <a
                     href="tel:+79601883084"
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-sm sm:text-base shadow-lg shadow-amber-500/30 hover:scale-105 transition-transform duration-300"
@@ -304,20 +291,6 @@ const FaqSection = () => {
                   >
                     <Icon name="Phone" size={18} />
                     +7 960 188-30-84
-                  </a>
-                  <a
-                    href="https://wa.me/79601883084"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-sm sm:text-base border transition-all duration-300 hover:scale-105"
-                    style={{
-                      color: "#5eead4",
-                      borderColor: "rgba(94,234,212,0.4)",
-                      background: "rgba(94,234,212,0.08)",
-                    }}
-                  >
-                    <Icon name="MessageCircle" size={18} />
-                    Написать в WhatsApp
                   </a>
                 </div>
               </div>
