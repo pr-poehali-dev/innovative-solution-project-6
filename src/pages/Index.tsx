@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import HeroSection from "@/components/sections/HeroSection";
+import TrustBarSection from "@/components/sections/TrustBarSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import LazySection from "@/components/LazySection";
 import SeoMeta from "@/components/seo/SeoMeta";
@@ -28,6 +29,7 @@ const Index = () => {
       <SeoMeta />
       <StructuredData />
       <HeroSection visibleSections={visibleSections} />
+      <TrustBarSection />
       <FeaturesSection visibleSections={visibleSections} />
       <LazySection id="fleet"><FleetSection /></LazySection>
       <LazySection><UseCasesSection /></LazySection>
