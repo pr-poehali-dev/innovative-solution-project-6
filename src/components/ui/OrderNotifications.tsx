@@ -14,6 +14,10 @@ const notifications = [
   { name: "Виктор", district: "Ленинский район", truck: "манипулятор 5 тонн", time: "1 час назад" },
 ];
 
+const FIRST_DELAY = 30000;
+const SHOW_DURATION = 7000;
+const INTERVAL = 75000;
+
 const OrderNotifications = () => {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -22,18 +26,24 @@ const OrderNotifications = () => {
   useEffect(() => {
     if (closed) return;
 
-    const firstShow = setTimeout(() => setVisible(true), 8000);
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
+    const showOnce = () => {
+      setVisible(true);
+      const hideTimer = setTimeout(() => setVisible(false), SHOW_DURATION);
+      timers.push(hideTimer);
+    };
+
+    const firstTimer = setTimeout(showOnce, FIRST_DELAY);
+    timers.push(firstTimer);
 
     const cycle = setInterval(() => {
-      setVisible(false);
-      setTimeout(() => {
-        setIndex((prev) => (prev + 1) % notifications.length);
-        setVisible(true);
-      }, 600);
-    }, 14000);
+      setIndex((prev) => (prev + 1) % notifications.length);
+      showOnce();
+    }, INTERVAL);
 
     return () => {
-      clearTimeout(firstShow);
+      timers.forEach(clearTimeout);
       clearInterval(cycle);
     };
   }, [closed]);
@@ -44,7 +54,7 @@ const OrderNotifications = () => {
 
   return (
     <div
-      className={`fixed left-3 sm:left-6 bottom-3 sm:bottom-6 z-40 max-w-[calc(100vw-1.5rem)] sm:max-w-sm transition-all duration-500 ${
+      className={`fixed right-3 sm:right-6 bottom-20 sm:bottom-6 z-40 max-w-[calc(100vw-1.5rem)] sm:max-w-sm transition-all duration-500 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
       }`}
     >
