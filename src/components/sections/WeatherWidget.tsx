@@ -5,7 +5,7 @@ type Weather = {
   temp: number;
   code: number;
   wind: number;
-  daily: { day: string; tMin: number; tMax: number; code: number }[];
+  daily: { day: string; tMin: number; tMax: number; code: number; weekend: boolean }[];
 };
 
 const codeToEmoji = (code: number): { emoji: string; label: string } => {
@@ -51,12 +51,16 @@ const WeatherWidget = () => {
     fetch(url)
       .then((r) => r.json())
       .then((data) => {
-        const daily = (data.daily?.time || []).map((t: string, i: number) => ({
-          day: dayName(t),
-          tMin: Math.round(data.daily.temperature_2m_min[i]),
-          tMax: Math.round(data.daily.temperature_2m_max[i]),
-          code: data.daily.weather_code[i],
-        }));
+        const daily = (data.daily?.time || []).map((t: string, i: number) => {
+          const dow = new Date(t).getDay();
+          return {
+            day: dayName(t),
+            tMin: Math.round(data.daily.temperature_2m_min[i]),
+            tMax: Math.round(data.daily.temperature_2m_max[i]),
+            code: data.daily.weather_code[i],
+            weekend: dow === 0 || dow === 6,
+          };
+        });
         setW({
           temp: Math.round(data.current.temperature_2m),
           code: data.current.weather_code,
@@ -129,11 +133,19 @@ const WeatherWidget = () => {
                 {w.daily.slice(0, 3).map((d, i) => {
                   const ic = codeToEmoji(d.code);
                   return (
-                    <div key={i} className="flex flex-col items-center gap-0.5 py-2 px-1">
-                      <div className="text-[10px] font-semibold text-white/60 uppercase">{d.day}</div>
+                    <div
+                      key={i}
+                      className={`relative flex flex-col items-center gap-0.5 py-2 px-1 ${
+                        d.weekend ? "bg-accent/[0.08]" : ""
+                      }`}
+                    >
+                      {d.weekend && (
+                        <Icon name="Star" size={8} className="absolute top-1 right-1 text-accent fill-accent" />
+                      )}
+                      <div className={`text-[10px] font-semibold uppercase ${d.weekend ? "text-accent" : "text-white/60"}`}>{d.day}</div>
                       <span className="text-xl leading-none">{ic.emoji}</span>
                       <div className="text-[11px] text-white leading-none">
-                        <span className="font-bold">{d.tMax > 0 ? "+" : ""}{d.tMax}°</span>
+                        <span className={`font-bold ${d.weekend ? "text-accent" : ""}`}>{d.tMax > 0 ? "+" : ""}{d.tMax}°</span>
                         <span className="text-white/40"> {d.tMin > 0 ? "+" : ""}{d.tMin}°</span>
                       </div>
                     </div>
@@ -145,11 +157,16 @@ const WeatherWidget = () => {
                 {w.daily.slice(0, 7).map((d, i) => {
                   const ic = codeToEmoji(d.code);
                   return (
-                    <div key={i} className="flex flex-col items-center gap-0.5 py-2 px-0.5">
-                      <div className="text-[9px] font-semibold text-white/60 uppercase">{d.day}</div>
+                    <div
+                      key={i}
+                      className={`relative flex flex-col items-center gap-0.5 py-2 px-0.5 ${
+                        d.weekend ? "bg-accent/[0.08]" : ""
+                      }`}
+                    >
+                      <div className={`text-[9px] font-semibold uppercase ${d.weekend ? "text-accent" : "text-white/60"}`}>{d.day}</div>
                       <span className="text-base leading-none">{ic.emoji}</span>
                       <div className="text-[9px] text-white leading-none text-center">
-                        <div className="font-bold">{d.tMax > 0 ? "+" : ""}{d.tMax}°</div>
+                        <div className={`font-bold ${d.weekend ? "text-accent" : ""}`}>{d.tMax > 0 ? "+" : ""}{d.tMax}°</div>
                         <div className="text-white/40">{d.tMin > 0 ? "+" : ""}{d.tMin}°</div>
                       </div>
                     </div>
@@ -221,9 +238,19 @@ const WeatherWidget = () => {
                     return (
                       <div
                         key={i}
-                        className="flex flex-col items-center justify-center gap-1.5 p-2 sm:p-3 rounded-xl bg-white/5 border border-white/10 hover:border-accent/30 hover:bg-white/[0.07] transition-colors"
+                        className={`relative flex flex-col items-center justify-center gap-1.5 p-2 sm:p-3 rounded-xl border transition-colors ${
+                          d.weekend
+                            ? "bg-gradient-to-br from-accent/15 to-accent/5 border-accent/40 hover:border-accent/60"
+                            : "bg-white/5 border-white/10 hover:border-accent/30 hover:bg-white/[0.07]"
+                        }`}
                       >
-                        <div className="text-[10px] sm:text-xs font-semibold text-white/70 uppercase tracking-wide">{d.day}</div>
+                        {d.weekend && (
+                          <span className="absolute top-1.5 right-1.5 inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-accent/20 border border-accent/40 text-accent text-[8px] font-bold uppercase tracking-wider leading-none">
+                            <Icon name="Star" size={8} className="fill-accent" />
+                            вых
+                          </span>
+                        )}
+                        <div className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wide ${d.weekend ? "text-accent" : "text-white/70"}`}>{d.day}</div>
                         <span className={`leading-none ${range === 3 ? "text-3xl" : "text-2xl"}`}>{ic.emoji}</span>
                         <div className={`text-white leading-tight text-center ${range === 3 ? "text-sm" : "text-xs"}`}>
                           <span className="font-bold text-accent">{d.tMax > 0 ? "+" : ""}{d.tMax}°</span>
