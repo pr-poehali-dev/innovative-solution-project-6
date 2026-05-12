@@ -43,10 +43,11 @@ const dayName = (iso: string, short = false) => {
 const WeatherWidget = () => {
   const [w, setW] = useState<Weather | null>(null);
   const [err, setErr] = useState(false);
+  const [range, setRange] = useState<3 | 7>(3);
 
   useEffect(() => {
     const url =
-      "https://api.open-meteo.com/v1/forecast?latitude=56.3287&longitude=44.002&current=temperature_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Europe%2FMoscow&forecast_days=4";
+      "https://api.open-meteo.com/v1/forecast?latitude=56.3287&longitude=44.002&current=temperature_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Europe%2FMoscow&forecast_days=7";
     fetch(url)
       .then((r) => r.json())
       .then((data) => {
@@ -101,21 +102,61 @@ const WeatherWidget = () => {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-4 divide-x divide-white/10">
-              {w.daily.slice(0, 4).map((d, i) => {
-                const ic = codeToEmoji(d.code);
-                return (
-                  <div key={i} className="flex flex-col items-center gap-0.5 py-2 px-1">
-                    <div className="text-[9px] font-semibold text-white/60 uppercase">{d.day}</div>
-                    <span className="text-lg leading-none">{ic.emoji}</span>
-                    <div className="text-[10px] text-white leading-none">
-                      <span className="font-bold">{d.tMax > 0 ? "+" : ""}{d.tMax}°</span>
-                      <span className="text-white/40"> {d.tMin > 0 ? "+" : ""}{d.tMin}°</span>
-                    </div>
-                  </div>
-                );
-              })}
+            {/* Переключатель 3/7 на мобиле */}
+            <div className="flex items-center justify-between px-3 py-1.5 border-b border-white/5 bg-black/20">
+              <span className="text-[9px] uppercase tracking-wider text-white/50 font-semibold">Прогноз</span>
+              <div className="inline-flex p-0.5 rounded-md bg-white/5 border border-white/10">
+                <button
+                  onClick={() => setRange(3)}
+                  className={`px-2 py-0.5 text-[10px] font-bold rounded transition-colors ${
+                    range === 3 ? "bg-accent text-black" : "text-white/60"
+                  }`}
+                >
+                  3 дня
+                </button>
+                <button
+                  onClick={() => setRange(7)}
+                  className={`px-2 py-0.5 text-[10px] font-bold rounded transition-colors ${
+                    range === 7 ? "bg-accent text-black" : "text-white/60"
+                  }`}
+                >
+                  7 дней
+                </button>
+              </div>
             </div>
+            {range === 3 ? (
+              <div className="grid grid-cols-3 divide-x divide-white/10">
+                {w.daily.slice(0, 3).map((d, i) => {
+                  const ic = codeToEmoji(d.code);
+                  return (
+                    <div key={i} className="flex flex-col items-center gap-0.5 py-2 px-1">
+                      <div className="text-[10px] font-semibold text-white/60 uppercase">{d.day}</div>
+                      <span className="text-xl leading-none">{ic.emoji}</span>
+                      <div className="text-[11px] text-white leading-none">
+                        <span className="font-bold">{d.tMax > 0 ? "+" : ""}{d.tMax}°</span>
+                        <span className="text-white/40"> {d.tMin > 0 ? "+" : ""}{d.tMin}°</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="grid grid-cols-7 divide-x divide-white/10">
+                {w.daily.slice(0, 7).map((d, i) => {
+                  const ic = codeToEmoji(d.code);
+                  return (
+                    <div key={i} className="flex flex-col items-center gap-0.5 py-2 px-0.5">
+                      <div className="text-[9px] font-semibold text-white/60 uppercase">{d.day}</div>
+                      <span className="text-base leading-none">{ic.emoji}</span>
+                      <div className="text-[9px] text-white leading-none text-center">
+                        <div className="font-bold">{d.tMax > 0 ? "+" : ""}{d.tMax}°</div>
+                        <div className="text-white/40">{d.tMin > 0 ? "+" : ""}{d.tMin}°</div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
             <div
               className={`flex items-center justify-center gap-1.5 px-3 py-1.5 ${
                 advice.tone === "warn"
@@ -152,23 +193,46 @@ const WeatherWidget = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-4 gap-3">
-                {w.daily.slice(0, 4).map((d, i) => {
-                  const ic = codeToEmoji(d.code);
-                  return (
-                    <div
-                      key={i}
-                      className="flex flex-col items-center justify-center gap-1.5 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-accent/30 hover:bg-white/[0.07] transition-colors"
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs uppercase tracking-wider text-white/60 font-semibold">Прогноз погоды</span>
+                  <div className="inline-flex p-1 rounded-lg bg-white/5 border border-white/10">
+                    <button
+                      onClick={() => setRange(3)}
+                      className={`px-3 py-1 text-xs font-bold rounded-md transition-colors ${
+                        range === 3 ? "bg-accent text-black shadow" : "text-white/60 hover:text-white"
+                      }`}
                     >
-                      <div className="text-xs font-semibold text-white/70 uppercase tracking-wide">{d.day}</div>
-                      <span className="text-3xl leading-none">{ic.emoji}</span>
-                      <div className="text-sm text-white leading-tight text-center">
-                        <span className="font-bold text-accent">{d.tMax > 0 ? "+" : ""}{d.tMax}°</span>
-                        <span className="text-white/40"> / {d.tMin > 0 ? "+" : ""}{d.tMin}°</span>
+                      3 дня
+                    </button>
+                    <button
+                      onClick={() => setRange(7)}
+                      className={`px-3 py-1 text-xs font-bold rounded-md transition-colors ${
+                        range === 7 ? "bg-accent text-black shadow" : "text-white/60 hover:text-white"
+                      }`}
+                    >
+                      7 дней
+                    </button>
+                  </div>
+                </div>
+                <div className={`grid gap-2 sm:gap-3 ${range === 3 ? "grid-cols-3" : "grid-cols-7"}`}>
+                  {w.daily.slice(0, range).map((d, i) => {
+                    const ic = codeToEmoji(d.code);
+                    return (
+                      <div
+                        key={i}
+                        className="flex flex-col items-center justify-center gap-1.5 p-2 sm:p-3 rounded-xl bg-white/5 border border-white/10 hover:border-accent/30 hover:bg-white/[0.07] transition-colors"
+                      >
+                        <div className="text-[10px] sm:text-xs font-semibold text-white/70 uppercase tracking-wide">{d.day}</div>
+                        <span className={`leading-none ${range === 3 ? "text-3xl" : "text-2xl"}`}>{ic.emoji}</span>
+                        <div className={`text-white leading-tight text-center ${range === 3 ? "text-sm" : "text-xs"}`}>
+                          <span className="font-bold text-accent">{d.tMax > 0 ? "+" : ""}{d.tMax}°</span>
+                          <span className="text-white/40"> / {d.tMin > 0 ? "+" : ""}{d.tMin}°</span>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
