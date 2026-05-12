@@ -11,6 +11,7 @@ const Sonner = lazy(() =>
 );
 const ScrollToTop = lazy(() => import("@/components/ScrollToTop"));
 const FloatingCallButton = lazy(() => import("@/components/ui/FloatingCallButton"));
+const OrderNotifications = lazy(() => import("@/components/ui/OrderNotifications"));
 
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -36,6 +37,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <FloatingCallButton />
+        <OrderNotifications />
       </Suspense>
       <div className="fixed inset-0 -z-10 bg-background">
         <div className="absolute inset-0 bg-grid opacity-100" />
