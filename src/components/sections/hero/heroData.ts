@@ -30,6 +30,6 @@ export const navLinks = [
   { href: "#fleet", label: "Техника" },
   { href: "#usecases", label: "Услуги" },
   { href: "#how", label: "Как это работает" },
-  { href: "#pricing", label: "Тарифы" },
+  { href: "#pricing", label: "Асфальтирование" },
   { href: "/blog", label: "Блог" },
 ];
