@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import SiteFooter from "@/components/sections/SiteFooter";
+import AsphaltCalculator from "@/components/AsphaltCalculator";
 
 const ASPHALT_IMG =
   "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/78ce7324-bf4d-4f95-9518-8178c0fcaa2a.jpg";
@@ -298,11 +299,11 @@ const AsfaltirovaniePage = () => {
                 <span className="relative text-base sm:text-lg">{PHONE}</span>
               </a>
               <a
-                href="#price"
+                href="#calculator"
                 className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-bold bg-white/5 border border-accent/30 text-white hover:bg-accent/10 transition-all"
               >
-                <Icon name="ListChecks" size={18} />
-                Смотреть прайс
+                <Icon name="Calculator" size={18} />
+                Рассчитать стоимость
               </a>
             </div>
 
@@ -461,6 +462,9 @@ const AsfaltirovaniePage = () => {
           </div>
         </div>
       </section>
+
+      {/* Calculator */}
+      <AsphaltCalculator />
 
       {/* Stages */}
       <section className="px-4 sm:px-6 py-12 sm:py-20">
