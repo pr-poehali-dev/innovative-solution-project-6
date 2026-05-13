@@ -257,19 +257,19 @@ const AsfaltirovaniePage = () => {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <img
-            src={ASPHALT_IMG}
-            alt="Асфальтирование Нижний Новгород"
-            className="w-full h-full object-cover opacity-90"
-            loading="eager"
-          />
-          {/* Затемнение слева под текстом, справа фото остаётся ярким */}
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/30 sm:to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+        {/* Фото работ — отдельным блоком сверху, без затемнений */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6">
+          <div className="rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-accent/30 shadow-2xl shadow-black/40">
+            <img
+              src={ASPHALT_IMG}
+              alt="Асфальтирование Нижний Новгород — наши работы"
+              className="w-full h-auto object-cover"
+              loading="eager"
+            />
+          </div>
         </div>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-20 relative">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 relative">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-600/20 border border-red-500/40 mb-4">
               <span className="text-base animate-pulse">🔥</span>
