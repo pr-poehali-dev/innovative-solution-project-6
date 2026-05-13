@@ -27,7 +27,7 @@ const plans = [
     ],
     bonuses: [
       { icon: "Gift", text: "+1 час бесплатно при заказе от 8 часов" },
-      { icon: "FileCheck", text: "Документы для отчётности — в подарок" },
+      { icon: "FileCheck", text: "Документы для отчётности" },
     ],
     badge: "ХИТ",
     badgeColor: "bg-red-500",
@@ -49,9 +49,7 @@ const plans = [
       { icon: "FileCheck", text: "Все закрывающие документы" },
       { icon: "TrendingDown", text: "Скидки до 25% при объёме" },
     ],
-    bonuses: [
-      { icon: "Calendar", text: "Отсрочка платежа до 14 дней" },
-    ],
+    bonuses: [],
     badge: "ПРЕМИУМ",
     badgeColor: "bg-gradient-to-r from-amber-400 to-yellow-600",
     highlight: true,
