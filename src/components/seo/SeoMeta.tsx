@@ -17,6 +17,10 @@ const SeoMeta = () => {
       <meta name="twitter:title" content="Аренда манипулятора в Нижнем Новгороде — ООО Фаворит" />
       <meta name="twitter:description" content="Аренда манипулятора с КМУ от 2200 ₽/час. Подача от 1 часа. +7 960 188-30-84" />
       <meta name="twitter:image" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
+      <meta name="geo.region" content="RU-NIZ" />
+      <meta name="geo.placename" content="Нижний Новгород" />
+      <meta name="geo.position" content="56.326797;44.006516" />
+      <meta name="ICBM" content="56.326797, 44.006516" />
       <meta name="google-site-verification" content="6TvMJWGLCEZfJBzJN2nd_HcZ-lGUr7QxdY92N2ELrg0" />
     </>
   );

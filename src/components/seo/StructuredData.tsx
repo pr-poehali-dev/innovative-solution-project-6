@@ -15,10 +15,10 @@ const StructuredData = () => {
     "logo": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "6-й микрорайон, д. 2, офис 13",
-      "addressLocality": "Кстово",
+      "streetAddress": "Шуваловский проезд, 7",
+      "addressLocality": "Нижний Новгород",
       "addressRegion": "Нижегородская область",
-      "postalCode": "607657",
+      "postalCode": "603035",
       "addressCountry": "RU"
     },
     "vatID": "5250077990",
@@ -34,8 +34,8 @@ const StructuredData = () => {
     "priceRange": "1500-3500 RUB",
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 56.270596,
-      "longitude": 43.848988
+      "latitude": 56.326797,
+      "longitude": 44.006516
     },
     "openingHoursSpecification": [{
       "@type": "OpeningHoursSpecification",

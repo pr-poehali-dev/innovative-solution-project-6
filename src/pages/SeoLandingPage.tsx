@@ -98,6 +98,18 @@ const SeoLandingPage = ({ slugOverride }: SeoLandingPageProps) => {
       <meta name="twitter:description" content={data.metaDescription} />
       <meta name="twitter:image" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
       <link rel="canonical" href={canonicalUrl} />
+      <meta
+        name="robots"
+        content={
+          data.slug === "arenda-manipulyatora-dzerzhinsk-bor-kstovo"
+            ? "noindex, follow"
+            : "index, follow, max-image-preview:large, max-snippet:-1"
+        }
+      />
+      <meta name="geo.region" content="RU-NIZ" />
+      <meta name="geo.placename" content="Нижний Новгород" />
+      <meta name="geo.position" content="56.326797;44.006516" />
+      <meta name="ICBM" content="56.326797, 44.006516" />
       <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
       <script type="application/ld+json">{JSON.stringify(serviceJsonLd)}</script>
 

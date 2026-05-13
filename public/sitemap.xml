@@ -55,12 +55,6 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://фаварит.рф/arenda-manipulyatora-dzerzhinsk-bor-kstovo</loc>
-    <lastmod>2026-05-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://фаварит.рф/tehnika/faw-kmu-dongyoung</loc>
     <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
@@ -98,57 +92,9 @@
   </url>
   <url>
     <loc>https://фаварит.рф/gorod/nizhny-novgorod</loc>
-    <lastmod>2026-05-03</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://фаварит.рф/gorod/kstovo</loc>
-    <lastmod>2026-05-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://фаварит.рф/gorod/dzerzhinsk</loc>
-    <lastmod>2026-05-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://фаварит.рф/gorod/bor</loc>
-    <lastmod>2026-05-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://фаварит.рф/gorod/bogorodsk</loc>
-    <lastmod>2026-05-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://фаварит.рф/gorod/arzamas</loc>
-    <lastmod>2026-05-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://фаварит.рф/gorod/pavlovo</loc>
-    <lastmod>2026-05-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://фаварит.рф/gorod/balakhna</loc>
-    <lastmod>2026-05-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://фаварит.рф/gorod/gorodets</loc>
-    <lastmod>2026-05-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://фаварит.рф/blog</loc>

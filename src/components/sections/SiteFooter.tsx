@@ -24,7 +24,6 @@ const sections = [
   { href: "/arenda-manipulyatora-3-tonny", label: "Манипулятор 3 тонны" },
   { href: "/arenda-manipulyatora-5-tonn", label: "Манипулятор 5 тонн" },
   { href: "/arenda-manipulyatora-7-tonn", label: "Манипулятор 7 тонн" },
-  { href: "/arenda-manipulyatora-dzerzhinsk-bor-kstovo", label: "Дзержинск, Бор, Кстово" },
   { href: "/#fleet", label: "Наша техника" },
   { href: "/#usecases", label: "Виды работ" },
   { href: "/#pricing", label: "Тарифы" },
@@ -197,16 +196,24 @@ const SiteFooter = () => {
               {cities.length} городов области
             </div>
             <div className="flex flex-wrap gap-1 sm:gap-1.5">
-              {cities.map((c) => (
-                <Link
-                  key={c.slug}
-                  to={`/gorod/${c.slug}`}
-                  title={`Манипулятор в ${c.nameIn}`}
-                  className="inline-flex items-center px-2 py-0.5 rounded-full bg-accent/[0.06] border border-accent/20 text-[11px] sm:text-xs text-white/80 hover:bg-accent/15 hover:border-accent/50 hover:text-accent transition-all"
-                >
-                  {c.name}
-                </Link>
-              ))}
+              {cities.map((c) => {
+                const isMain = c.slug === "nizhny-novgorod";
+                return (
+                  <Link
+                    key={c.slug}
+                    to={`/gorod/${c.slug}`}
+                    title={`Манипулятор в ${c.nameIn}`}
+                    rel={isMain ? undefined : "nofollow"}
+                    className={`inline-flex items-center px-2 py-0.5 rounded-full border text-[11px] sm:text-xs transition-all ${
+                      isMain
+                        ? "bg-accent/15 border-accent/50 text-accent font-bold hover:bg-accent/25"
+                        : "bg-accent/[0.06] border-accent/20 text-white/80 hover:bg-accent/15 hover:border-accent/50 hover:text-accent"
+                    }`}
+                  >
+                    {c.name}
+                  </Link>
+                );
+              })}
             </div>
           </CollapsibleColumn>
 

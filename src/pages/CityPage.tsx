@@ -66,7 +66,8 @@ const CityPage = () => {
       url: "https://фаварит.рф/",
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Кстово",
+        streetAddress: "Шуваловский проезд, 7",
+        addressLocality: "Нижний Новгород",
         addressRegion: "Нижегородская область",
         addressCountry: "RU",
       },
@@ -113,9 +114,18 @@ const CityPage = () => {
       <meta name="twitter:title" content={ogTitle} />
       <meta name="twitter:description" content={ogDescription} />
       <meta name="twitter:image" content="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg" />
-      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+      <meta
+        name="robots"
+        content={
+          city.slug === "nizhny-novgorod"
+            ? "index, follow, max-image-preview:large, max-snippet:-1"
+            : "noindex, follow"
+        }
+      />
       <meta name="geo.region" content="RU-NIZ" />
-      <meta name="geo.placename" content={city.name} />
+      <meta name="geo.placename" content="Нижний Новгород" />
+      <meta name="geo.position" content="56.326797;44.006516" />
+      <meta name="ICBM" content="56.326797, 44.006516" />
       <link rel="canonical" href={cityUrl} />
       <script type="application/ld+json">{JSON.stringify(breadcrumbsLd)}</script>
       <script type="application/ld+json">{JSON.stringify(serviceLd)}</script>
