@@ -29,6 +29,7 @@ const AdBanner = lazy(() => import("./pages/AdBanner"));
 const AdminReindex = lazy(() => import("./pages/AdminReindex"));
 const SeoDashboard = lazy(() => import("./pages/SeoDashboard"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
+const AsfaltirovaniePage = lazy(() => import("./pages/AsfaltirovaniePage"));
 
 const queryClient = new QueryClient();
 
@@ -99,6 +100,8 @@ const App = () => (
             <Route path="/admin/reindex" element={<AdminReindex />} />
             <Route path="/seo" element={<SeoDashboard />} />
             <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/asfaltirovanie" element={<AsfaltirovaniePage />} />
+            <Route path="/asfaltirovanie-nizhny-novgorod" element={<AsfaltirovaniePage />} />
             <Route path="/presentation" element={<Navigate to="/" replace />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
