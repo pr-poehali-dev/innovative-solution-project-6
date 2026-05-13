@@ -13,7 +13,7 @@ const StructuredData = () => {
     "url": "https://фаварит.рф",
     "telephone": ["+79601883084", "+79601690990"],
     "email": "960188@list.ru",
-    "image": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg",
+    "image": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/d239fd05-a0c5-44a2-9cbb-e19192bf07a9.jpg",
     "logo": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp",
     "address": {
       "@type": "PostalAddress",
@@ -73,7 +73,7 @@ const StructuredData = () => {
     "serviceType": "Аренда манипулятора с КМУ",
     "name": "Аренда манипулятора в Нижнем Новгороде",
     "description": "Аренда манипуляторов с КМУ от 1500 ₽/час в Нижнем Новгороде и Нижегородской области. Подача за 60 минут, без выходных. 15 единиц техники: 3-17 т, стрела до 23 м, люлька, бур.",
-    "image": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/080c960a-deba-4a1e-bd38-56544f276a69.jpg",
+    "image": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/d239fd05-a0c5-44a2-9cbb-e19192bf07a9.jpg",
     "url": "https://фаварит.рф",
     "provider": { "@id": "https://фаварит.рф/#organization" },
     "areaServed": [
