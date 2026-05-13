@@ -59,8 +59,8 @@ const PricingAndCtaSection = ({ visibleSections, onOpenModal }: PricingAndCtaSec
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/30 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-zinc-900/95" />
+                  {/* Gradient overlay — лёгкий, чтобы фото было хорошо видно */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/70 via-zinc-900/10 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-zinc-900/40" />
 
                   {/* Floating badge on image */}
                   <div className="absolute top-4 left-4 sm:top-6 sm:left-6">

@@ -261,10 +261,12 @@ const AsfaltirovaniePage = () => {
           <img
             src={ASPHALT_IMG}
             alt="Асфальтирование Нижний Новгород"
-            className="w-full h-full object-cover opacity-30"
+            className="w-full h-full object-cover opacity-90"
             loading="eager"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background" />
+          {/* Затемнение слева под текстом, справа фото остаётся ярким */}
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/30 sm:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-20 relative">
