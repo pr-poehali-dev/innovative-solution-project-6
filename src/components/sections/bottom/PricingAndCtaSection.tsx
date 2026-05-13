@@ -11,21 +11,28 @@ const plans = [
   {
     name: "Почасовая аренда",
     subtitle: "Идеально для разовых работ",
-    price: "1 800",
+    price: "1 500",
     priceUnit: "₽/час",
     pricePrefix: "от",
     oldPrice: "2 500 ₽",
+    discountLabel: "-40%",
     features: [
       { icon: "Truck", text: "Манипулятор от 5 до 20 тонн" },
       { icon: "Package", text: "КМУ от 3 до 8 тонн" },
-      { icon: "UserCheck", text: "Опытный оператор в стоимости" },
-      { icon: "Clock", text: "Минимальный заказ — 4 часа" },
-      { icon: "Zap", text: "Подача в течение 1 часа" },
+      { icon: "UserCheck", text: "Опытный оператор включён в цену" },
+      { icon: "Fuel", text: "Топливо и подача — бесплатно по городу" },
+      { icon: "Zap", text: "Подача за 60 минут, 24/7" },
+      { icon: "ShieldCheck", text: "Страхование груза до 500 000 ₽" },
+      { icon: "BadgePercent", text: "Скидка 10% на второй заказ" },
+    ],
+    bonuses: [
+      { icon: "Gift", text: "+1 час бесплатно при заказе от 8 часов" },
+      { icon: "FileCheck", text: "Документы для отчётности — в подарок" },
     ],
     badge: "ХИТ",
     badgeColor: "bg-red-500",
     highlight: false,
-    buttonText: "Заказать технику",
+    buttonText: "Заказать со скидкой",
   },
   {
     name: "Корпоративный",
@@ -34,11 +41,16 @@ const plans = [
     priceUnit: "",
     pricePrefix: "",
     oldPrice: "",
+    discountLabel: "",
     features: [
       { icon: "Truck", text: "Техника от 5 до 20 тонн" },
       { icon: "Rocket", text: "Приоритетная подача 24/7" },
       { icon: "Headphones", text: "Персональный менеджер" },
       { icon: "FileCheck", text: "Все закрывающие документы" },
+      { icon: "TrendingDown", text: "Скидки до 25% при объёме" },
+    ],
+    bonuses: [
+      { icon: "Calendar", text: "Отсрочка платежа до 14 дней" },
     ],
     badge: "ПРЕМИУМ",
     badgeColor: "bg-gradient-to-r from-amber-400 to-yellow-600",
@@ -119,10 +131,16 @@ const PricingAndCtaSection = ({ visibleSections, onOpenModal }: PricingAndCtaSec
                       {/* Price */}
                       <div className="mb-5 sm:mb-8">
                         {plan.oldPrice && (
-                          <div className="flex items-center gap-2 mb-1">
+                          <div className="flex items-center gap-2 mb-1 flex-wrap">
                             <span className="text-sm text-muted-foreground line-through">{plan.oldPrice}</span>
-                            <span className="px-2 py-0.5 bg-red-500/20 border border-red-500/40 rounded text-red-400 text-[10px] font-black">
-                              -28%
+                            {plan.discountLabel && (
+                              <span className="px-2 py-0.5 bg-red-500/20 border border-red-500/40 rounded text-red-400 text-[10px] font-black animate-pulse">
+                                {plan.discountLabel}
+                              </span>
+                            )}
+                            <span className="px-2 py-0.5 bg-emerald-500/15 border border-emerald-500/40 rounded text-emerald-400 text-[10px] font-black inline-flex items-center gap-1">
+                              <Icon name="Flame" size={10} />
+                              ВЫГОДА
                             </span>
                           </div>
                         )}
@@ -143,9 +161,15 @@ const PricingAndCtaSection = ({ visibleSections, onOpenModal }: PricingAndCtaSec
                             <span className="text-base sm:text-xl text-accent font-bold">{plan.priceUnit}</span>
                           )}
                         </div>
+                        {!plan.highlight && (
+                          <p className="text-[11px] sm:text-xs text-muted-foreground mt-2 flex items-center gap-1.5">
+                            <Icon name="Info" size={11} className="text-accent flex-shrink-0" />
+                            Оплачивается только фактическое время работы
+                          </p>
+                        )}
                       </div>
 
-                      <ul className="space-y-2.5 sm:space-y-3.5 mb-5 sm:mb-10">
+                      <ul className="space-y-2.5 sm:space-y-3 mb-4 sm:mb-5">
                         {plan.features.map((f, j) => (
                           <li key={j} className="flex gap-2.5 sm:gap-3 items-start">
                             <div
@@ -163,6 +187,41 @@ const PricingAndCtaSection = ({ visibleSections, onOpenModal }: PricingAndCtaSec
                           </li>
                         ))}
                       </ul>
+
+                      {plan.bonuses && plan.bonuses.length > 0 && (
+                        <div
+                          className={`mb-5 sm:mb-8 p-3 sm:p-3.5 rounded-xl border-2 border-dashed ${
+                            plan.highlight
+                              ? "border-amber-400/40 bg-amber-400/5"
+                              : "border-emerald-500/40 bg-emerald-500/5"
+                          }`}
+                        >
+                          <div
+                            className={`text-[10px] sm:text-xs font-black uppercase tracking-wider mb-2 flex items-center gap-1.5 ${
+                              plan.highlight ? "text-amber-400" : "text-emerald-400"
+                            }`}
+                          >
+                            <Icon name="Gift" size={12} />
+                            Бонусы клиентам
+                          </div>
+                          <ul className="space-y-1.5">
+                            {plan.bonuses.map((b, k) => (
+                              <li key={k} className="flex gap-2 items-start">
+                                <Icon
+                                  name={b.icon}
+                                  size={13}
+                                  className={`flex-shrink-0 mt-0.5 ${
+                                    plan.highlight ? "text-amber-300" : "text-emerald-400"
+                                  }`}
+                                />
+                                <span className="text-foreground/95 text-xs sm:text-[13px] font-medium leading-snug">
+                                  {b.text}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                     <button
                       onClick={onOpenModal}
