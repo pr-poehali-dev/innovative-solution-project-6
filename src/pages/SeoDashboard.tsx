@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import PositionTracker from "@/components/seo-dashboard/PositionTracker";
 
 const SITE_ORIGIN = "https://фаварит.рф";
 const SITE_PUNY = "https://xn--80aafz3bni.xn--p1ai";
@@ -243,6 +244,11 @@ const SeoDashboard = () => {
             </div>
           </div>
         </Link>
+
+        {/* Position Tracker */}
+        <div className="mb-8">
+          <PositionTracker />
+        </div>
 
         {/* Sections */}
         <div className="space-y-6">
