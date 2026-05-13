@@ -18,17 +18,44 @@ const FIRST_DELAY = 30000;
 const SHOW_DURATION = 7000;
 const INTERVAL = 75000;
 
+const WORK_START_HOUR = 8;
+const WORK_END_HOUR = 20;
+
+const isWorkingTime = () => {
+  const now = new Date();
+  const nnHour = Number(
+    new Intl.DateTimeFormat("ru-RU", {
+      timeZone: "Europe/Moscow",
+      hour: "2-digit",
+      hour12: false,
+    }).format(now),
+  );
+  return nnHour >= WORK_START_HOUR && nnHour < WORK_END_HOUR;
+};
+
 const OrderNotifications = () => {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(false);
   const [closed, setClosed] = useState(false);
+  const [working, setWorking] = useState(() => isWorkingTime());
 
   useEffect(() => {
-    if (closed) return;
+    const check = setInterval(() => {
+      setWorking(isWorkingTime());
+    }, 60000);
+    return () => clearInterval(check);
+  }, []);
+
+  useEffect(() => {
+    if (closed || !working) {
+      setVisible(false);
+      return;
+    }
 
     const timers: ReturnType<typeof setTimeout>[] = [];
 
     const showOnce = () => {
+      if (!isWorkingTime()) return;
       setVisible(true);
       const hideTimer = setTimeout(() => setVisible(false), SHOW_DURATION);
       timers.push(hideTimer);
@@ -46,9 +73,9 @@ const OrderNotifications = () => {
       timers.forEach(clearTimeout);
       clearInterval(cycle);
     };
-  }, [closed]);
+  }, [closed, working]);
 
-  if (closed) return null;
+  if (closed || !working) return null;
 
   const n = notifications[index];
 
