@@ -16,7 +16,7 @@ def fetch_sitemap_urls() -> list:
     return re.findall(r'<loc>([^<]+)</loc>', xml)
 
 
-def send_to_yandex(urls: list) -> dict:
+def _send_indexnow(endpoint: str, urls: list) -> dict:
     payload = {
         'host': HOST,
         'key': INDEXNOW_KEY,
@@ -24,7 +24,7 @@ def send_to_yandex(urls: list) -> dict:
         'urlList': urls
     }
     req = urllib.request.Request(
-        'https://yandex.com/indexnow',
+        endpoint,
         data=json.dumps(payload).encode('utf-8'),
         headers={'Content-Type': 'application/json; charset=utf-8'},
         method='POST'
@@ -34,13 +34,28 @@ def send_to_yandex(urls: list) -> dict:
             return {'status': resp.status, 'body': resp.read().decode('utf-8', errors='ignore')}
     except urllib.error.HTTPError as e:
         return {'status': e.code, 'body': e.read().decode('utf-8', errors='ignore')}
+    except Exception as e:
+        return {'status': 0, 'body': str(e)}
+
+
+def send_to_yandex(urls: list) -> dict:
+    return _send_indexnow('https://yandex.com/indexnow', urls)
+
+
+def send_to_bing(urls: list) -> dict:
+    return _send_indexnow('https://www.bing.com/indexnow', urls)
+
+
+def send_to_indexnow_org(urls: list) -> dict:
+    return _send_indexnow('https://api.indexnow.org/indexnow', urls)
 
 
 def handler(event: dict, context) -> dict:
     '''
-    Отправка URL в IndexNow (Яндекс).
+    Отправка URL в IndexNow для Яндекса, Bing и общего пула IndexNow.org.
     POST { "urls": ["..."] } — отправить конкретные URL.
     POST { "all": true } — прочитать sitemap.xml и отправить все URL разом.
+    Bing IndexNow используется Bing/Yahoo/DuckDuckGo/Ecosia.
     '''
     method = event.get('httpMethod', 'GET')
 
@@ -86,22 +101,27 @@ def handler(event: dict, context) -> dict:
             'body': json.dumps({'error': 'urls required'})
         }
 
-    try:
-        result = send_to_yandex(urls)
-    except Exception as e:
-        return {
-            'statusCode': 500,
-            'headers': cors_headers,
-            'body': json.dumps({'error': str(e)})
-        }
+    yandex_result = send_to_yandex(urls)
+    bing_result = send_to_bing(urls)
+    org_result = send_to_indexnow_org(urls)
+
+    any_ok = (
+        yandex_result['status'] in (200, 202)
+        or bing_result['status'] in (200, 202)
+        or org_result['status'] in (200, 202)
+    )
 
     return {
         'statusCode': 200,
         'headers': {**cors_headers, 'Content-Type': 'application/json'},
         'body': json.dumps({
-            'success': result['status'] in (200, 202),
-            'yandex_status': result['status'],
+            'success': any_ok,
+            'yandex_status': yandex_result['status'],
+            'bing_status': bing_result['status'],
+            'indexnow_org_status': org_result['status'],
             'sent_urls': len(urls),
-            'response': result['body']
+            'response': yandex_result['body'],
+            'bing_response': bing_result['body'],
+            'indexnow_org_response': org_result['body']
         })
     }

@@ -4,55 +4,54 @@ import Icon from "@/components/ui/icon";
 const INDEXNOW_URL = "https://functions.poehali.dev/20b064f2-7534-47ab-8a1e-ff6e58aee9b9";
 
 const AdminReindex = () => {
+  type ReindexResult = {
+    ok: boolean;
+    sent: number;
+    yandex: number;
+    bing: number;
+    indexnowOrg: number;
+    raw: string;
+  };
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<null | { ok: boolean; sent: number; status: number; raw: string }>(null);
+  const [result, setResult] = useState<ReindexResult | null>(null);
   const [customUrl, setCustomUrl] = useState("");
 
-  const sendAll = async () => {
+  const performRequest = async (body: Record<string, unknown>) => {
     setLoading(true);
     setResult(null);
     try {
       const r = await fetch(INDEXNOW_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ all: true }),
+        body: JSON.stringify(body),
       });
       const data = await r.json();
       setResult({
         ok: !!data.success,
         sent: data.sent_urls || 0,
-        status: data.yandex_status || r.status,
-        raw: data.response || JSON.stringify(data),
+        yandex: data.yandex_status || 0,
+        bing: data.bing_status || 0,
+        indexnowOrg: data.indexnow_org_status || 0,
+        raw: JSON.stringify(data, null, 2),
       });
     } catch (e: unknown) {
-      setResult({ ok: false, sent: 0, status: 0, raw: String(e) });
+      setResult({
+        ok: false,
+        sent: 0,
+        yandex: 0,
+        bing: 0,
+        indexnowOrg: 0,
+        raw: String(e),
+      });
     } finally {
       setLoading(false);
     }
   };
 
-  const sendOne = async () => {
+  const sendAll = () => performRequest({ all: true });
+  const sendOne = () => {
     if (!customUrl.trim()) return;
-    setLoading(true);
-    setResult(null);
-    try {
-      const r = await fetch(INDEXNOW_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ urls: [customUrl.trim()] }),
-      });
-      const data = await r.json();
-      setResult({
-        ok: !!data.success,
-        sent: data.sent_urls || 0,
-        status: data.yandex_status || r.status,
-        raw: data.response || JSON.stringify(data),
-      });
-    } catch (e: unknown) {
-      setResult({ ok: false, sent: 0, status: 0, raw: String(e) });
-    } finally {
-      setLoading(false);
-    }
+    performRequest({ urls: [customUrl.trim()] });
   };
 
   return (
@@ -110,19 +109,56 @@ const AdminReindex = () => {
               result.ok ? "bg-green-500/10 border-green-500/30" : "bg-red-500/10 border-red-500/30"
             }`}
           >
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-3">
               <Icon name={result.ok ? "CheckCircle2" : "XCircle"} size={22} />
               <span className="font-semibold">
                 {result.ok ? "Готово ✓" : "Ошибка"}
               </span>
             </div>
-            <p className="text-sm">
+            <p className="text-sm mb-3">
               Отправлено URL: <strong>{result.sent}</strong>
-              <br />
-              Статус Яндекса: <strong>{result.status}</strong>
-              {result.ok && " (принято в обработку)"}
             </p>
-            <pre className="text-xs mt-3 p-3 bg-background/50 rounded overflow-auto">{result.raw}</pre>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-3">
+              <div className="rounded-lg p-3 bg-background/50 border">
+                <div className="text-xs text-muted-foreground mb-1">Яндекс</div>
+                <div className="font-mono font-bold flex items-center gap-1.5">
+                  <Icon
+                    name={[200, 202].includes(result.yandex) ? "CheckCircle2" : "AlertCircle"}
+                    size={14}
+                    className={[200, 202].includes(result.yandex) ? "text-green-500" : "text-amber-500"}
+                  />
+                  {result.yandex || "—"}
+                </div>
+              </div>
+              <div className="rounded-lg p-3 bg-background/50 border">
+                <div className="text-xs text-muted-foreground mb-1">Bing</div>
+                <div className="font-mono font-bold flex items-center gap-1.5">
+                  <Icon
+                    name={[200, 202].includes(result.bing) ? "CheckCircle2" : "AlertCircle"}
+                    size={14}
+                    className={[200, 202].includes(result.bing) ? "text-green-500" : "text-amber-500"}
+                  />
+                  {result.bing || "—"}
+                </div>
+              </div>
+              <div className="rounded-lg p-3 bg-background/50 border">
+                <div className="text-xs text-muted-foreground mb-1">IndexNow.org</div>
+                <div className="font-mono font-bold flex items-center gap-1.5">
+                  <Icon
+                    name={[200, 202].includes(result.indexnowOrg) ? "CheckCircle2" : "AlertCircle"}
+                    size={14}
+                    className={[200, 202].includes(result.indexnowOrg) ? "text-green-500" : "text-amber-500"}
+                  />
+                  {result.indexnowOrg || "—"}
+                </div>
+              </div>
+            </div>
+            <details className="text-xs">
+              <summary className="cursor-pointer text-muted-foreground hover:text-foreground">
+                Полный ответ сервера
+              </summary>
+              <pre className="text-xs mt-2 p-3 bg-background/50 rounded overflow-auto">{result.raw}</pre>
+            </details>
           </div>
         )}
 
