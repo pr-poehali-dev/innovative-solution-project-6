@@ -1,20 +1,12 @@
 import PhoneButton from "@/components/ui/PhoneButton";
 import SectionBadge from "@/components/ui/SectionBadge";
 import Icon from "@/components/ui/icon";
+import AsphaltMiniCalc from "@/components/AsphaltMiniCalc";
 
 interface PricingAndCtaSectionProps {
   visibleSections: Record<string, boolean>;
   onOpenModal: () => void;
 }
-
-const asphaltFeatures = [
-  { icon: "Truck", text: "Своя техника и асфальт" },
-  { icon: "Ruler", text: "От 50 м² до промышленных объёмов" },
-  { icon: "ShieldCheck", text: "Гарантия на покрытие до 3 лет" },
-  { icon: "Clock", text: "Сжатые сроки — от 1 дня" },
-  { icon: "FileCheck", text: "Договор и закрывающие документы" },
-  { icon: "Wallet", text: "Нал / безнал / карта" },
-];
 
 const asphaltServices = [
   "Дворы и парковки",
@@ -112,67 +104,47 @@ const PricingAndCtaSection = ({ visibleSections, onOpenModal }: PricingAndCtaSec
                       </div>
                     </div>
 
-                    <p className="text-sm sm:text-base text-muted-foreground mb-5 sm:mb-6 leading-relaxed">
-                      Выполняем полный цикл работ: подготовка основания, укладка асфальтобетонной смеси, уплотнение катком. Работаем по ГОСТ.
+                    <p className="text-sm sm:text-base text-muted-foreground mb-4 leading-relaxed">
+                      Полный цикл работ по ГОСТ: подготовка основания, укладка асфальта, уплотнение катком. Гарантия до 3 лет.
                     </p>
 
                     {/* Services pills */}
-                    <div className="flex flex-wrap gap-2 mb-5 sm:mb-6">
+                    <div className="flex flex-wrap gap-1.5 mb-4">
                       {asphaltServices.map((s, i) => (
                         <span
                           key={i}
-                          className="px-3 py-1.5 rounded-full bg-accent/10 border border-accent/30 text-xs sm:text-sm text-white/90 font-medium"
+                          className="px-2.5 py-1 rounded-full bg-accent/10 border border-accent/30 text-[11px] sm:text-xs text-white/90 font-medium"
                         >
                           {s}
                         </span>
                       ))}
                     </div>
+                  </div>
 
-                    {/* Features grid */}
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mb-6 sm:mb-8">
-                      {asphaltFeatures.map((f, i) => (
-                        <li key={i} className="flex gap-2.5 items-start">
-                          <div className="flex-shrink-0 w-6 h-6 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center mt-0.5">
-                            <Icon name={f.icon} size={13} className="text-accent" />
-                          </div>
-                          <span className="text-xs sm:text-sm text-white/85 leading-snug">
-                            {f.text}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
+                  {/* Calculator */}
+                  <div className="mb-3">
+                    <AsphaltMiniCalc />
                   </div>
 
                   {/* CTA */}
-                  <div className="space-y-3">
-                    <a
-                      href="tel:+79601690990"
-                      className="group/btn relative flex items-center justify-center gap-3 w-full px-5 py-4 sm:py-5 rounded-2xl font-black bg-gradient-to-r from-accent via-accent to-amber-500 text-black overflow-hidden transition-all hover:shadow-2xl hover:shadow-accent/40"
-                    >
-                      <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
-                      <Icon name="Phone" size={20} className="relative animate-pulse" />
-                      <span className="relative text-base sm:text-xl tracking-tight">
-                        +7 (960) 169-09-90
-                      </span>
-                    </a>
-
+                  <div className="space-y-2">
                     <button
                       onClick={onOpenModal}
-                      className="group/btn flex items-center justify-center gap-2 w-full px-5 py-3 sm:py-3.5 rounded-2xl font-bold bg-white/5 border border-accent/30 text-white hover:bg-accent/10 hover:border-accent/60 transition-all text-sm sm:text-base"
+                      className="group/btn flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl font-bold bg-white/5 border border-accent/30 text-white hover:bg-accent/10 hover:border-accent/60 transition-all text-xs sm:text-sm"
                     >
-                      <Icon name="MessageSquare" size={16} />
-                      <span>Получить расчёт стоимости</span>
+                      <Icon name="MessageSquare" size={14} />
+                      <span>Заказать выезд замерщика</span>
                       <Icon
                         name="ArrowRight"
-                        size={16}
+                        size={14}
                         className="group-hover/btn:translate-x-1 transition-transform"
                       />
                     </button>
 
                     <div className="flex items-center justify-center gap-2 pt-1">
                       <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      <p className="text-[11px] sm:text-xs text-muted-foreground">
-                        Бесплатный выезд замерщика · Расчёт за 15 минут
+                      <p className="text-[10px] sm:text-[11px] text-muted-foreground">
+                        Бесплатный замер · Расчёт сметы за 15 минут
                       </p>
                     </div>
                   </div>
