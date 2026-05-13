@@ -84,18 +84,21 @@ const HeroLeadForm = () => {
                     value={name}
                     onChange={e => setName(e.target.value)}
                     required
-                    className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
+                    autoComplete="name"
+                    className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 h-11 sm:h-10 text-white placeholder:text-white/50 text-base sm:text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
                   />
                 </div>
                 <div className="relative flex-1">
                   <Icon name="Phone" size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
                   <input
                     type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
                     placeholder="Телефон +7 (___) ___-__-__"
                     value={phone}
                     onChange={e => setPhone(e.target.value)}
                     required
-                    className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
+                    className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 h-11 sm:h-10 text-base sm:text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
                   />
                 </div>
               </div>
@@ -107,7 +110,7 @@ const HeroLeadForm = () => {
                     placeholder="Откуда (адрес погрузки)"
                     value={fromAddr}
                     onChange={e => setFromAddr(e.target.value)}
-                    className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
+                    className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 h-11 sm:h-10 text-base sm:text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
                   />
                 </div>
                 <div className="relative flex-1">
@@ -117,7 +120,7 @@ const HeroLeadForm = () => {
                     placeholder="Куда (адрес разгрузки)"
                     value={toAddr}
                     onChange={e => setToAddr(e.target.value)}
-                    className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
+                    className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 h-11 sm:h-10 text-base sm:text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
                   />
                 </div>
               </div>
@@ -128,14 +131,14 @@ const HeroLeadForm = () => {
                   placeholder="Что везём (груз, вес, размеры, подъездные пути для техники)"
                   value={cargo}
                   onChange={e => setCargo(e.target.value)}
-                  className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-2.5 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all resize-none leading-snug"
+                  className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-3 sm:py-2.5 text-base sm:text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all resize-none leading-snug"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="group relative mt-0.5 w-full px-5 py-3 rounded-lg font-black text-sm sm:text-base flex items-center gap-2 justify-center transition-all disabled:opacity-60 active:scale-[0.98] overflow-hidden"
+                className="group relative mt-0.5 w-full px-5 h-12 sm:h-11 rounded-lg font-black text-base sm:text-base flex items-center gap-2 justify-center transition-all disabled:opacity-60 active:scale-[0.98] overflow-hidden"
                 style={{
                   background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
                   color: "#000",

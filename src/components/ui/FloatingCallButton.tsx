@@ -8,7 +8,7 @@ const FloatingCallButton = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 300);
+    const onScroll = () => setVisible(window.scrollY > 150);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -18,7 +18,7 @@ const FloatingCallButton = () => {
     <a
       href={PHONE_HREF}
       aria-label={`Позвонить ${PHONE}`}
-      className={`md:hidden fixed bottom-4 right-4 z-40 w-12 h-12 rounded-full shadow-xl shadow-accent/40 active:scale-90 flex items-center justify-center transition-all duration-300 ${
+      className={`md:hidden fixed bottom-5 right-4 z-40 w-14 h-14 rounded-full shadow-xl shadow-accent/50 active:scale-90 flex items-center justify-center transition-all duration-300 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
       }`}
       style={{
@@ -26,7 +26,7 @@ const FloatingCallButton = () => {
       }}
     >
       <span className="absolute inset-0 rounded-full bg-accent/40 animate-ping" />
-      <Icon name="Phone" size={20} className="relative text-black" />
+      <Icon name="Phone" size={24} className="relative text-black" strokeWidth={2.5} />
     </a>
   );
 };
