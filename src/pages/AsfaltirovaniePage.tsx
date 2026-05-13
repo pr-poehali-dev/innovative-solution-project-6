@@ -257,16 +257,14 @@ const AsfaltirovaniePage = () => {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        {/* Фото работ — отдельным блоком сверху, без затемнений */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6">
-          <div className="rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-accent/30 shadow-2xl shadow-black/40">
-            <img
-              src={ASPHALT_IMG}
-              alt="Асфальтирование Нижний Новгород — наши работы"
-              className="w-full h-auto object-cover"
-              loading="eager"
-            />
-          </div>
+        {/* Фото работ — на всю ширину экрана, без затемнений */}
+        <div className="w-full">
+          <img
+            src={ASPHALT_IMG}
+            alt="Асфальтирование Нижний Новгород — наши работы"
+            className="block w-screen max-w-full h-auto object-cover"
+            loading="eager"
+          />
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 relative">
