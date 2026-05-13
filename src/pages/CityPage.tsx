@@ -10,6 +10,16 @@ import LazySection from "@/components/LazySection";
 import { useState } from "react";
 import { getCityBySlug, cities } from "@/data/cities";
 
+const INDEXED_CITIES = [
+  "nizhny-novgorod",
+  "dzerzhinsk",
+  "bogorodsk",
+  "kstovo",
+  "bor",
+  "gorodets",
+  "balakhna",
+];
+
 const FleetSection = lazy(() => import("@/components/sections/FleetSection"));
 const FaqSection = lazy(() => import("@/components/sections/FaqSection"));
 const ReviewsSection = lazy(() => import("@/components/sections/ReviewsSection"));
@@ -117,13 +127,13 @@ const CityPage = () => {
       <meta
         name="robots"
         content={
-          city.slug === "nizhny-novgorod"
+          INDEXED_CITIES.includes(city.slug)
             ? "index, follow, max-image-preview:large, max-snippet:-1"
             : "noindex, follow"
         }
       />
       <meta name="geo.region" content="RU-NIZ" />
-      <meta name="geo.placename" content="Нижний Новгород" />
+      <meta name="geo.placename" content={city.name} />
       <meta name="geo.position" content="56.326797;44.006516" />
       <meta name="ICBM" content="56.326797, 44.006516" />
       <link rel="canonical" href={cityUrl} />
