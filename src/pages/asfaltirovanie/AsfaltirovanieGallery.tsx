@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 
 type Category = "yards" | "parking" | "roads" | "process";
@@ -111,6 +111,33 @@ const tabs: Tab[] = [
 const AsfaltirovanieGallery = () => {
   const [active, setActive] = useState<number | null>(null);
   const [tab, setTab] = useState<Tab["id"]>("all");
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const [swipeOffset, setSwipeOffset] = useState(0);
+
+  const goPrev = () =>
+    setActive((p) => (p === null ? 0 : (p - 1 + works.length) % works.length));
+  const goNext = () =>
+    setActive((p) => (p === null ? 0 : (p + 1) % works.length));
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    touchStart.current = { x: t.clientX, y: t.clientY };
+    setSwipeOffset(0);
+  };
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (!touchStart.current) return;
+    const t = e.touches[0];
+    const dx = t.clientX - touchStart.current.x;
+    const dy = t.clientY - touchStart.current.y;
+    if (Math.abs(dx) > Math.abs(dy)) setSwipeOffset(dx);
+  };
+  const onTouchEnd = () => {
+    if (!touchStart.current) return;
+    if (swipeOffset > 60) goPrev();
+    else if (swipeOffset < -60) goNext();
+    setSwipeOffset(0);
+    touchStart.current = null;
+  };
 
   const filtered = useMemo(
     () => (tab === "all" ? works : works.filter((w) => w.category === tab)),
@@ -123,12 +150,8 @@ const AsfaltirovanieGallery = () => {
     document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setActive(null);
-      if (e.key === "ArrowLeft")
-        setActive((p) =>
-          p === null ? 0 : (p - 1 + works.length) % works.length,
-        );
-      if (e.key === "ArrowRight")
-        setActive((p) => (p === null ? 0 : (p + 1) % works.length));
+      if (e.key === "ArrowLeft") goPrev();
+      if (e.key === "ArrowRight") goNext();
     };
     window.addEventListener("keydown", onKey);
     return () => {
@@ -231,16 +254,25 @@ const AsfaltirovanieGallery = () => {
 
       {active !== null && (
         <div
-          className="fixed inset-0 z-[100] bg-black flex items-center justify-center animate-in fade-in"
+          className="fixed inset-0 z-[100] bg-black flex items-center justify-center animate-in fade-in overflow-hidden touch-none"
           style={{ width: "100vw", height: "100dvh" }}
           onClick={() => setActive(null)}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
         >
           <img
             src={works[active].src}
             alt={works[active].title}
             onClick={(e) => e.stopPropagation()}
             className="absolute inset-0 w-full h-full object-contain select-none"
-            style={{ width: "100vw", height: "100dvh" }}
+            style={{
+              width: "100vw",
+              height: "100dvh",
+              transform: `translateX(${swipeOffset}px)`,
+              transition: swipeOffset === 0 ? "transform 0.25s ease" : "none",
+              opacity: 1 - Math.min(Math.abs(swipeOffset) / 400, 0.4),
+            }}
             draggable={false}
           />
 
@@ -260,9 +292,7 @@ const AsfaltirovanieGallery = () => {
             type="button"
             onClick={(e) => {
               e.stopPropagation();
-              setActive((p) =>
-                p === null ? 0 : (p - 1 + works.length) % works.length,
-              );
+              goPrev();
             }}
             className="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/80 active:scale-95 flex items-center justify-center text-white transition backdrop-blur"
             aria-label="Предыдущее"
@@ -273,13 +303,16 @@ const AsfaltirovanieGallery = () => {
             type="button"
             onClick={(e) => {
               e.stopPropagation();
-              setActive((p) => (p === null ? 0 : (p + 1) % works.length));
+              goNext();
             }}
             className="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/80 active:scale-95 flex items-center justify-center text-white transition backdrop-blur"
             aria-label="Следующее"
           >
             <Icon name="ChevronRight" size={26} />
           </button>
+          <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 backdrop-blur text-white text-xs sm:text-sm font-bold">
+            {active + 1} / {works.length}
+          </div>
 
           <div
             className="absolute left-0 right-0 bottom-0 px-4 py-3 sm:py-4 text-center text-white bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none"
