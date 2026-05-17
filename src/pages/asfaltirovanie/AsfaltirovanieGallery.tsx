@@ -97,6 +97,48 @@ const works: Work[] = [
     location: "Кстово",
     category: "process",
   },
+  {
+    src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/7ceb564a-ef83-4851-aacf-53ec697f5cf0.jpg",
+    title: "Въезд на склад",
+    area: "1 800 м²",
+    location: "Нижний Новгород",
+    category: "parking",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/1b9492fb-2211-4904-9723-77b565a24288.jpg",
+    title: "Бизнес-центр",
+    area: "2 200 м²",
+    location: "Нижний Новгород",
+    category: "parking",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/d281dfbf-0182-4518-8225-186e2f70d5b6.jpg",
+    title: "Фрезерование покрытия",
+    area: "процесс работ",
+    location: "Дзержинск",
+    category: "process",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/d752ff1f-eb8d-485f-aa9e-0f725d80eb7f.jpg",
+    title: "Детская площадка",
+    area: "640 м²",
+    location: "Нижний Новгород",
+    category: "yards",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/e6fbb1ad-d82f-4739-ac4f-65895b67a6df.jpg",
+    title: "Парковка ТРЦ",
+    area: "6 400 м²",
+    location: "Нижний Новгород",
+    category: "parking",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/c7d71515-29dd-4287-87a3-d0ad947f0588.jpg",
+    title: "Участок дороги",
+    area: "3 100 м²",
+    location: "Богородск",
+    category: "roads",
+  },
 ];
 
 type Tab = { id: "all" | Category; label: string; icon: string };
