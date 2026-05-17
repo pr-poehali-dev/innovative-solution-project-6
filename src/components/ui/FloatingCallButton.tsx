@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
 
-const PHONE = "+7 960 188-30-84";
-const PHONE_HREF = "tel:+79601883084";
+const PHONE = "+7 (960) 169-09-90";
+const PHONE_HREF = "tel:+79601690990";
 
 const FloatingCallButton = () => {
   const [visible, setVisible] = useState(false);
