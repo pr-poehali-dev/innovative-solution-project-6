@@ -38,6 +38,42 @@ const works = [
     area: "180 м²",
     location: "Нижегородская обл.",
   },
+  {
+    src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/9a4ce060-8f23-43d3-9969-ac89ac70fd0d.jpg",
+    title: "Школьная территория",
+    area: "1 500 м²",
+    location: "Нижний Новгород",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/6af5003a-b34d-43b1-8c9d-56940fb7314d.jpg",
+    title: "Парковка супермаркета",
+    area: "2 800 м²",
+    location: "Арзамас",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/6246b3ce-7192-48ca-b459-a04121f251f4.jpg",
+    title: "Укладка асфальта",
+    area: "процесс работ",
+    location: "Нижний Новгород",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/ad14ffca-4c80-43db-931f-bb0041da5d53.jpg",
+    title: "Загородная дорога",
+    area: "5 200 м²",
+    location: "Городец",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/62518e7d-e4bc-4826-be58-11a8633260e0.jpg",
+    title: "Дорожки в парке",
+    area: "960 м²",
+    location: "Нижний Новгород",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/3d013303-4160-4174-a961-b7fd129023dd.jpg",
+    title: "Укатка катком",
+    area: "процесс работ",
+    location: "Кстово",
+  },
 ];
 
 const AsfaltirovanieGallery = () => {
