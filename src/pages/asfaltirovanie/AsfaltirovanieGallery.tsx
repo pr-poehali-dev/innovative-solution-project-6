@@ -1,83 +1,121 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Icon from "@/components/ui/icon";
 
-const works = [
+type Category = "yards" | "parking" | "roads" | "process";
+
+type Work = {
+  src: string;
+  title: string;
+  area: string;
+  location: string;
+  category: Category;
+};
+
+const works: Work[] = [
   {
     src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/3ff228ce-886a-4efa-bac4-e98976c379a1.jpg",
     title: "Двор жилого дома",
     area: "1 200 м²",
     location: "Нижний Новгород",
+    category: "yards",
   },
   {
     src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/44daedbe-8ea1-468e-af86-b1778e5f5de9.jpg",
     title: "Парковка ТЦ",
     area: "3 500 м²",
     location: "Дзержинск",
+    category: "parking",
   },
   {
     src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/0efa338f-3a1c-4595-8a6d-a47d7161ff3f.jpg",
     title: "Дворовая территория",
     area: "850 м²",
     location: "Нижний Новгород",
+    category: "yards",
   },
   {
     src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/9e903a42-a5d3-4875-8217-d4d8b30166c0.jpg",
     title: "Ямочный ремонт",
     area: "420 м²",
     location: "Кстово",
+    category: "roads",
   },
   {
     src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/cf9bf1c6-f980-427b-8dcc-74d7647ea7b9.jpg",
     title: "Промышленная площадка",
     area: "8 700 м²",
     location: "Богородск",
+    category: "parking",
   },
   {
     src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/9108011f-75c5-4231-a104-f0eb06943729.jpg",
     title: "Подъезд к коттеджу",
     area: "180 м²",
     location: "Нижегородская обл.",
+    category: "yards",
   },
   {
     src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/9a4ce060-8f23-43d3-9969-ac89ac70fd0d.jpg",
     title: "Школьная территория",
     area: "1 500 м²",
     location: "Нижний Новгород",
+    category: "yards",
   },
   {
     src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/6af5003a-b34d-43b1-8c9d-56940fb7314d.jpg",
     title: "Парковка супермаркета",
     area: "2 800 м²",
     location: "Арзамас",
+    category: "parking",
   },
   {
     src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/6246b3ce-7192-48ca-b459-a04121f251f4.jpg",
     title: "Укладка асфальта",
     area: "процесс работ",
     location: "Нижний Новгород",
+    category: "process",
   },
   {
     src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/ad14ffca-4c80-43db-931f-bb0041da5d53.jpg",
     title: "Загородная дорога",
     area: "5 200 м²",
     location: "Городец",
+    category: "roads",
   },
   {
     src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/62518e7d-e4bc-4826-be58-11a8633260e0.jpg",
     title: "Дорожки в парке",
     area: "960 м²",
     location: "Нижний Новгород",
+    category: "roads",
   },
   {
     src: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/3d013303-4160-4174-a961-b7fd129023dd.jpg",
     title: "Укатка катком",
     area: "процесс работ",
     location: "Кстово",
+    category: "process",
   },
+];
+
+type Tab = { id: "all" | Category; label: string; icon: string };
+
+const tabs: Tab[] = [
+  { id: "all", label: "Все работы", icon: "LayoutGrid" },
+  { id: "yards", label: "Дворы", icon: "Home" },
+  { id: "parking", label: "Парковки", icon: "Car" },
+  { id: "roads", label: "Дороги", icon: "Milestone" },
+  { id: "process", label: "Процесс работ", icon: "HardHat" },
 ];
 
 const AsfaltirovanieGallery = () => {
   const [active, setActive] = useState<number | null>(null);
+  const [tab, setTab] = useState<Tab["id"]>("all");
+
+  const filtered = useMemo(
+    () => (tab === "all" ? works : works.filter((w) => w.category === tab)),
+    [tab],
+  );
 
   return (
     <section className="relative z-10 px-4 sm:px-6 py-12 sm:py-20">
@@ -87,47 +125,88 @@ const AsfaltirovanieGallery = () => {
             Наши работы
           </span>
         </h2>
-        <p className="text-center text-slate-600 mb-8 sm:mb-12 text-sm sm:text-base">
+        <p className="text-center text-slate-600 mb-6 sm:mb-8 text-sm sm:text-base">
           Фото готовых объектов в Нижнем Новгороде и области
         </p>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
-          {works.map((w, i) => (
-            <button
-              type="button"
-              key={i}
-              onClick={() => setActive(i)}
-              className="group relative overflow-hidden rounded-2xl bg-white border border-amber-200 shadow-lg shadow-amber-200/30 hover:shadow-xl hover:shadow-amber-300/50 hover:-translate-y-1 transition-all text-left"
-            >
-              <div className="aspect-[4/3] overflow-hidden">
-                <img
-                  src={w.src}
-                  alt={`${w.title} — ${w.location}`}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white">
-                <div className="font-bold text-sm sm:text-base drop-shadow">
-                  {w.title}
-                </div>
-                <div className="flex items-center gap-2 text-xs sm:text-sm opacity-90 mt-0.5">
-                  <span className="inline-flex items-center gap-1">
-                    <Icon name="Ruler" size={12} />
-                    {w.area}
-                  </span>
-                  <span className="inline-flex items-center gap-1">
-                    <Icon name="MapPin" size={12} />
-                    {w.location}
-                  </span>
-                </div>
-              </div>
-              <div className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/90 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <Icon name="ZoomIn" size={16} className="text-amber-600" />
-              </div>
-            </button>
-          ))}
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-10">
+          {tabs.map((t) => {
+            const isActive = tab === t.id;
+            const count =
+              t.id === "all"
+                ? works.length
+                : works.filter((w) => w.category === t.id).length;
+            return (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => setTab(t.id)}
+                className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all ${
+                  isActive
+                    ? "bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/40 scale-105"
+                    : "bg-white/80 text-slate-700 border border-amber-200 hover:bg-amber-50 hover:border-amber-400"
+                }`}
+              >
+                <Icon name={t.icon} size={14} />
+                <span>{t.label}</span>
+                <span
+                  className={`text-[10px] sm:text-xs px-1.5 py-0.5 rounded-full ${
+                    isActive ? "bg-white/25" : "bg-amber-100 text-amber-700"
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
         </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
+          {filtered.map((w) => {
+            const i = works.indexOf(w);
+            return (
+              <button
+                type="button"
+                key={w.src}
+                onClick={() => setActive(i)}
+                className="group relative overflow-hidden rounded-2xl bg-white border border-amber-200 shadow-lg shadow-amber-200/30 hover:shadow-xl hover:shadow-amber-300/50 hover:-translate-y-1 transition-all text-left"
+              >
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={w.src}
+                    alt={`${w.title} — ${w.location}`}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white">
+                  <div className="font-bold text-sm sm:text-base drop-shadow">
+                    {w.title}
+                  </div>
+                  <div className="flex items-center gap-2 text-xs sm:text-sm opacity-90 mt-0.5">
+                    <span className="inline-flex items-center gap-1">
+                      <Icon name="Ruler" size={12} />
+                      {w.area}
+                    </span>
+                    <span className="inline-flex items-center gap-1">
+                      <Icon name="MapPin" size={12} />
+                      {w.location}
+                    </span>
+                  </div>
+                </div>
+                <div className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/90 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Icon name="ZoomIn" size={16} className="text-amber-600" />
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        {filtered.length === 0 && (
+          <div className="text-center text-slate-500 py-10">
+            В этой категории пока нет фото
+          </div>
+        )}
       </div>
 
       {active !== null && (
@@ -147,7 +226,9 @@ const AsfaltirovanieGallery = () => {
             type="button"
             onClick={(e) => {
               e.stopPropagation();
-              setActive((p) => (p === null ? 0 : (p - 1 + works.length) % works.length));
+              setActive((p) =>
+                p === null ? 0 : (p - 1 + works.length) % works.length,
+              );
             }}
             className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"
             aria-label="Предыдущее"
