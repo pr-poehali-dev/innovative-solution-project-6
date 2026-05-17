@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 
 type Category = "yards" | "parking" | "roads" | "process";
@@ -111,45 +111,24 @@ const tabs: Tab[] = [
 const AsfaltirovanieGallery = () => {
   const [active, setActive] = useState<number | null>(null);
   const [tab, setTab] = useState<Tab["id"]>("all");
-  const touchStart = useRef<{ x: number; y: number } | null>(null);
-  const [swipeOffset, setSwipeOffset] = useState(0);
-
-  const goPrev = () =>
-    setActive((p) => (p === null ? 0 : (p - 1 + works.length) % works.length));
-  const goNext = () =>
-    setActive((p) => (p === null ? 0 : (p + 1) % works.length));
-
-  const onTouchStart = (e: React.TouchEvent) => {
-    const t = e.touches[0];
-    touchStart.current = { x: t.clientX, y: t.clientY };
-    setSwipeOffset(0);
-  };
-  const onTouchMove = (e: React.TouchEvent) => {
-    if (!touchStart.current) return;
-    const t = e.touches[0];
-    const dx = t.clientX - touchStart.current.x;
-    const dy = t.clientY - touchStart.current.y;
-    if (Math.abs(dx) > Math.abs(dy)) setSwipeOffset(dx);
-  };
-  const onTouchEnd = () => {
-    if (!touchStart.current) return;
-    if (swipeOffset > 60) goPrev();
-    else if (swipeOffset < -60) goNext();
-    setSwipeOffset(0);
-    touchStart.current = null;
-  };
 
   const filtered = useMemo(
     () => (tab === "all" ? works : works.filter((w) => w.category === tab)),
     [tab],
   );
 
+  const goPrev = () =>
+    setActive((p) => (p === null ? 0 : (p - 1 + works.length) % works.length));
+  const goNext = () =>
+    setActive((p) => (p === null ? 0 : (p + 1) % works.length));
+  const close = () => setActive(null);
+
   useEffect(() => {
     if (active === null) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setActive(null);
+      if (e.key === "Escape") close();
       if (e.key === "ArrowLeft") goPrev();
       if (e.key === "ArrowRight") goNext();
     };
@@ -208,21 +187,26 @@ const AsfaltirovanieGallery = () => {
           {filtered.map((w) => {
             const i = works.indexOf(w);
             return (
-              <button
-                type="button"
+              <div
                 key={w.src}
+                role="button"
+                tabIndex={0}
                 onClick={() => setActive(i)}
-                className="group relative overflow-hidden rounded-2xl bg-white border border-amber-200 shadow-lg shadow-amber-200/30 sm:hover:shadow-xl sm:hover:shadow-amber-300/50 sm:hover:-translate-y-1 active:scale-95 transition-all text-left cursor-pointer"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") setActive(i);
+                }}
+                className="group relative overflow-hidden rounded-2xl bg-white border border-amber-200 shadow-lg shadow-amber-200/30 sm:hover:shadow-xl sm:hover:shadow-amber-300/50 sm:hover:-translate-y-1 active:scale-[0.97] transition-all cursor-pointer select-none"
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
                     src={w.src}
                     alt={`${w.title} — ${w.location}`}
                     loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    draggable={false}
+                    className="w-full h-full object-cover sm:group-hover:scale-110 transition-transform duration-500 pointer-events-none"
                   />
                 </div>
-                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white">
+                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white pointer-events-none">
                   <div className="font-bold text-sm sm:text-base drop-shadow">
                     {w.title}
                   </div>
@@ -237,10 +221,7 @@ const AsfaltirovanieGallery = () => {
                     </span>
                   </div>
                 </div>
-                <div className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/90 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Icon name="ZoomIn" size={16} className="text-amber-600" />
-                </div>
-              </button>
+              </div>
             );
           })}
         </div>
@@ -254,68 +235,48 @@ const AsfaltirovanieGallery = () => {
 
       {active !== null && (
         <div
-          className="fixed inset-0 z-[100] bg-black animate-in fade-in overflow-hidden"
-          style={{ width: "100vw", height: "100dvh" }}
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
+          className="fixed inset-0 bg-black"
+          style={{ zIndex: 9999 }}
+          role="dialog"
         >
           <img
             src={works[active].src}
             alt={works[active].title}
-            className="absolute inset-0 w-full h-full object-contain select-none pointer-events-none"
-            style={{
-              width: "100vw",
-              height: "100dvh",
-              transform: `translateX(${swipeOffset}px)`,
-              transition: swipeOffset === 0 ? "transform 0.25s ease" : "none",
-              opacity: 1 - Math.min(Math.abs(swipeOffset) / 400, 0.4),
-            }}
             draggable={false}
+            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
           />
 
           <button
             type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setActive(null);
-            }}
-            className="absolute top-3 right-3 sm:top-5 sm:right-5 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/80 active:scale-95 flex items-center justify-center text-white transition backdrop-blur"
+            onClick={close}
+            className="absolute top-3 right-3 sm:top-5 sm:right-5 w-12 h-12 rounded-full bg-black/70 active:bg-black/90 flex items-center justify-center text-white shadow-lg"
             aria-label="Закрыть"
           >
-            <Icon name="X" size={24} />
+            <Icon name="X" size={26} />
           </button>
 
           <button
             type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              goPrev();
-            }}
-            className="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/80 active:scale-95 flex items-center justify-center text-white transition backdrop-blur"
+            onClick={goPrev}
+            className="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/70 active:bg-black/90 flex items-center justify-center text-white shadow-lg"
             aria-label="Предыдущее"
           >
-            <Icon name="ChevronLeft" size={26} />
+            <Icon name="ChevronLeft" size={28} />
           </button>
           <button
             type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              goNext();
-            }}
-            className="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/80 active:scale-95 flex items-center justify-center text-white transition backdrop-blur"
+            onClick={goNext}
+            className="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/70 active:bg-black/90 flex items-center justify-center text-white shadow-lg"
             aria-label="Следующее"
           >
-            <Icon name="ChevronRight" size={26} />
+            <Icon name="ChevronRight" size={28} />
           </button>
-          <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 backdrop-blur text-white text-xs sm:text-sm font-bold">
+
+          <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/70 text-white text-xs sm:text-sm font-bold">
             {active + 1} / {works.length}
           </div>
 
-          <div
-            className="absolute left-0 right-0 bottom-0 px-4 py-3 sm:py-4 text-center text-white bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="absolute left-0 right-0 bottom-0 px-4 py-3 sm:py-4 text-center text-white bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none">
             <div className="font-bold text-base sm:text-lg drop-shadow">
               {works[active].title}
             </div>
