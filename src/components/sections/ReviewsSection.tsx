@@ -441,14 +441,35 @@ const ReviewsSection = () => {
                     </div>
                   </div>
 
-                  {/* Техника */}
-                  <div
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full ${palette.accentBg} border ${palette.accentBorder}`}
-                  >
-                    <Icon name="Truck" size={12} className={palette.accentText} />
-                    <span className={`${palette.accentText} text-xs font-semibold`}>
-                      {review.service}
-                    </span>
+                  {/* Услуга + категория */}
+                  <div className="flex flex-wrap items-center gap-2">
+                    {(() => {
+                      const cat = getCategory(review);
+                      const isAsphalt = cat === "asphalt";
+                      return (
+                        <span
+                          className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black tracking-widest uppercase ${
+                            isAsphalt
+                              ? "bg-amber-500/15 border border-amber-400/50 text-amber-300"
+                              : "bg-cyan-500/15 border border-cyan-400/50 text-cyan-300"
+                          }`}
+                        >
+                          <Icon
+                            name={isAsphalt ? "Sparkles" : "Truck"}
+                            size={11}
+                          />
+                          {isAsphalt ? "Асфальтирование" : "Манипулятор"}
+                        </span>
+                      );
+                    })()}
+                    <div
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full ${palette.accentBg} border ${palette.accentBorder}`}
+                    >
+                      <Icon name="Wrench" size={12} className={palette.accentText} />
+                      <span className={`${palette.accentText} text-xs font-semibold`}>
+                        {review.service}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </article>
