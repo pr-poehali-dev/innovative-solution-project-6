@@ -4,6 +4,7 @@ import AsphaltCalculator from "@/components/AsphaltCalculator";
 import AsfaltirovanieHero from "./asfaltirovanie/AsfaltirovanieHero";
 import AsfaltirovanieBenefitsAndPrice from "./asfaltirovanie/AsfaltirovanieBenefitsAndPrice";
 import AsfaltirovanieStagesAndObjects from "./asfaltirovanie/AsfaltirovanieStagesAndObjects";
+import AsfaltirovanieGallery from "./asfaltirovanie/AsfaltirovanieGallery";
 import AsfaltirovanieFaqAndCta from "./asfaltirovanie/AsfaltirovanieFaqAndCta";
 import { faq } from "./asfaltirovanie/asfaltirovanieData";
 
@@ -99,6 +100,8 @@ const AsfaltirovaniePage = () => {
       </div>
 
       <AsfaltirovanieStagesAndObjects />
+
+      <AsfaltirovanieGallery />
 
       <AsfaltirovanieFaqAndCta />
 
