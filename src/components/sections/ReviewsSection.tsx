@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import SectionBadge from "@/components/ui/SectionBadge";
 
@@ -446,20 +447,31 @@ const ReviewsSection = () => {
                     {(() => {
                       const cat = getCategory(review);
                       const isAsphalt = cat === "asphalt";
-                      return (
-                        <span
-                          className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black tracking-widest uppercase ${
-                            isAsphalt
-                              ? "bg-amber-500/15 border border-amber-400/50 text-amber-300"
-                              : "bg-cyan-500/15 border border-cyan-400/50 text-cyan-300"
-                          }`}
-                        >
+                      const badgeClass = `inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black tracking-widest uppercase transition-all ${
+                        isAsphalt
+                          ? "bg-amber-500/15 border border-amber-400/50 text-amber-300 hover:bg-amber-500/30 hover:border-amber-300 hover:scale-105 cursor-pointer"
+                          : "bg-cyan-500/15 border border-cyan-400/50 text-cyan-300"
+                      }`;
+                      const inner = (
+                        <>
                           <Icon
                             name={isAsphalt ? "Sparkles" : "Truck"}
                             size={11}
                           />
                           {isAsphalt ? "Асфальтирование" : "Манипулятор"}
-                        </span>
+                          {isAsphalt && <Icon name="ArrowRight" size={10} />}
+                        </>
+                      );
+                      return isAsphalt ? (
+                        <Link
+                          to="/asfaltirovanie"
+                          className={badgeClass}
+                          aria-label="Перейти к услуге асфальтирования"
+                        >
+                          {inner}
+                        </Link>
+                      ) : (
+                        <span className={badgeClass}>{inner}</span>
                       );
                     })()}
                     <div
