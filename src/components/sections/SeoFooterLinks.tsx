@@ -57,6 +57,20 @@ const linkGroups: LinkGroup[] = [
       { label: "Работа по договору" },
     ],
   },
+  {
+    title: "Асфальтирование",
+    icon: "Sparkles",
+    links: [
+      { label: "Асфальтирование в Нижнем Новгороде", to: "/asfaltirovanie" },
+      { label: "Асфальтирование Нижегородской области", to: "/asfaltirovanie-nizhny-novgorod" },
+      { label: "Укладка асфальта под ключ", to: "/asfaltirovanie" },
+      { label: "Асфальтирование дворов", to: "/asfaltirovanie" },
+      { label: "Асфальтирование парковок", to: "/asfaltirovanie" },
+      { label: "Ямочный ремонт асфальта", to: "/asfaltirovanie" },
+      { label: "Асфальтирование цена за м²", to: "/asfaltirovanie" },
+      { label: "Калькулятор асфальтирования", to: "/asfaltirovanie" },
+    ],
+  },
 ];
 
 const SeoFooterLinks = () => {
