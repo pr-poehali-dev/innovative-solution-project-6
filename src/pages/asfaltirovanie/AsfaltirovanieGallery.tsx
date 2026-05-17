@@ -212,7 +212,7 @@ const AsfaltirovanieGallery = () => {
                 type="button"
                 key={w.src}
                 onClick={() => setActive(i)}
-                className="group relative overflow-hidden rounded-2xl bg-white border border-amber-200 shadow-lg shadow-amber-200/30 hover:shadow-xl hover:shadow-amber-300/50 hover:-translate-y-1 transition-all text-left"
+                className="group relative overflow-hidden rounded-2xl bg-white border border-amber-200 shadow-lg shadow-amber-200/30 sm:hover:shadow-xl sm:hover:shadow-amber-300/50 sm:hover:-translate-y-1 active:scale-95 transition-all text-left cursor-pointer"
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
@@ -254,9 +254,8 @@ const AsfaltirovanieGallery = () => {
 
       {active !== null && (
         <div
-          className="fixed inset-0 z-[100] bg-black flex items-center justify-center animate-in fade-in overflow-hidden touch-none"
+          className="fixed inset-0 z-[100] bg-black animate-in fade-in overflow-hidden"
           style={{ width: "100vw", height: "100dvh" }}
-          onClick={() => setActive(null)}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
@@ -264,8 +263,7 @@ const AsfaltirovanieGallery = () => {
           <img
             src={works[active].src}
             alt={works[active].title}
-            onClick={(e) => e.stopPropagation()}
-            className="absolute inset-0 w-full h-full object-contain select-none"
+            className="absolute inset-0 w-full h-full object-contain select-none pointer-events-none"
             style={{
               width: "100vw",
               height: "100dvh",
