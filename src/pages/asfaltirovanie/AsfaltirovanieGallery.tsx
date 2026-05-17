@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Icon from "@/components/ui/icon";
 
 type Category = "yards" | "parking" | "roads" | "process";
@@ -233,59 +234,62 @@ const AsfaltirovanieGallery = () => {
         )}
       </div>
 
-      {active !== null && (
-        <div
-          className="fixed inset-0 bg-black"
-          style={{ zIndex: 9999 }}
-          role="dialog"
-        >
-          <img
-            src={works[active].src}
-            alt={works[active].title}
-            draggable={false}
-            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
-          />
-
-          <button
-            type="button"
-            onClick={close}
-            className="absolute top-3 right-3 sm:top-5 sm:right-5 w-12 h-12 rounded-full bg-black/70 active:bg-black/90 flex items-center justify-center text-white shadow-lg"
-            aria-label="Закрыть"
+      {active !== null &&
+        createPortal(
+          <div
+            className="fixed inset-0 bg-black flex items-center justify-center"
+            style={{ zIndex: 99999 }}
+            role="dialog"
           >
-            <Icon name="X" size={26} />
-          </button>
+            <img
+              src={works[active].src}
+              alt={works[active].title}
+              draggable={false}
+              className="max-w-full max-h-full object-contain select-none"
+              style={{ width: "auto", height: "auto" }}
+            />
 
-          <button
-            type="button"
-            onClick={goPrev}
-            className="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/70 active:bg-black/90 flex items-center justify-center text-white shadow-lg"
-            aria-label="Предыдущее"
-          >
-            <Icon name="ChevronLeft" size={28} />
-          </button>
-          <button
-            type="button"
-            onClick={goNext}
-            className="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/70 active:bg-black/90 flex items-center justify-center text-white shadow-lg"
-            aria-label="Следующее"
-          >
-            <Icon name="ChevronRight" size={28} />
-          </button>
+            <button
+              type="button"
+              onClick={close}
+              className="absolute top-3 right-3 sm:top-5 sm:right-5 w-12 h-12 rounded-full bg-black/70 active:bg-black/90 flex items-center justify-center text-white shadow-lg"
+              aria-label="Закрыть"
+            >
+              <Icon name="X" size={26} />
+            </button>
 
-          <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/70 text-white text-xs sm:text-sm font-bold">
-            {active + 1} / {works.length}
-          </div>
+            <button
+              type="button"
+              onClick={goPrev}
+              className="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/70 active:bg-black/90 flex items-center justify-center text-white shadow-lg"
+              aria-label="Предыдущее"
+            >
+              <Icon name="ChevronLeft" size={28} />
+            </button>
+            <button
+              type="button"
+              onClick={goNext}
+              className="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/70 active:bg-black/90 flex items-center justify-center text-white shadow-lg"
+              aria-label="Следующее"
+            >
+              <Icon name="ChevronRight" size={28} />
+            </button>
 
-          <div className="absolute left-0 right-0 bottom-0 px-4 py-3 sm:py-4 text-center text-white bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none">
-            <div className="font-bold text-base sm:text-lg drop-shadow">
-              {works[active].title}
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/70 text-white text-xs sm:text-sm font-bold">
+              {active + 1} / {works.length}
             </div>
-            <div className="text-xs sm:text-sm opacity-90 mt-0.5">
-              {works[active].area} · {works[active].location}
+
+            <div className="absolute left-0 right-0 bottom-0 px-4 py-3 sm:py-4 text-center text-white bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none">
+              <div className="font-bold text-base sm:text-lg drop-shadow">
+                {works[active].title}
+              </div>
+              <div className="text-xs sm:text-sm opacity-90 mt-0.5">
+                {works[active].area} · {works[active].location}
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body,
+        )}
     </section>
   );
 };
