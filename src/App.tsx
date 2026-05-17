@@ -102,6 +102,17 @@ const App = () => (
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/asfaltirovanie" element={<AsfaltirovaniePage />} />
             <Route path="/asfaltirovanie-nizhny-novgorod" element={<AsfaltirovaniePage />} />
+            <Route path="/asfaltirovanie-dvorov" element={<AsfaltirovaniePage />} />
+            <Route path="/asfaltirovanie-parkovok" element={<AsfaltirovaniePage />} />
+            <Route path="/asfaltirovanie-dorog" element={<AsfaltirovaniePage />} />
+            <Route path="/ukladka-asfalta" element={<AsfaltirovaniePage />} />
+            <Route path="/yamochnyy-remont" element={<AsfaltirovaniePage />} />
+            <Route path="/asfaltirovanie-pod-klyuch" element={<AsfaltirovaniePage />} />
+            <Route path="/asfaltirovanie-cena" element={<AsfaltirovaniePage />} />
+            <Route path="/asfaltirovanie-dzerzhinsk" element={<AsfaltirovaniePage />} />
+            <Route path="/asfaltirovanie-kstovo" element={<AsfaltirovaniePage />} />
+            <Route path="/asfaltirovanie-arzamas" element={<AsfaltirovaniePage />} />
+            <Route path="/asfaltirovanie-bogorodsk" element={<AsfaltirovaniePage />} />
             <Route path="/presentation" element={<Navigate to="/" replace />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
