@@ -5,6 +5,7 @@ import AsfaltirovanieHero from "./asfaltirovanie/AsfaltirovanieHero";
 import AsfaltirovanieBenefitsAndPrice from "./asfaltirovanie/AsfaltirovanieBenefitsAndPrice";
 import AsfaltirovanieStagesAndObjects from "./asfaltirovanie/AsfaltirovanieStagesAndObjects";
 import AsfaltirovanieGallery from "./asfaltirovanie/AsfaltirovanieGallery";
+import AsfaltirovanieReviews from "./asfaltirovanie/AsfaltirovanieReviews";
 import AsfaltirovanieFaqAndCta from "./asfaltirovanie/AsfaltirovanieFaqAndCta";
 import { faq } from "./asfaltirovanie/asfaltirovanieData";
 
@@ -102,6 +103,8 @@ const AsfaltirovaniePage = () => {
       <AsfaltirovanieStagesAndObjects />
 
       <AsfaltirovanieGallery />
+
+      <AsfaltirovanieReviews />
 
       <AsfaltirovanieFaqAndCta />
 
