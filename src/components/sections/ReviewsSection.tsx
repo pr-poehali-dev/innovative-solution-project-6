@@ -155,19 +155,38 @@ const reviews = [
   },
 ];
 
+type FilterId = "all" | "manipulator" | "asphalt";
+
+const getCategory = (r: (typeof reviews)[number]): "manipulator" | "asphalt" => {
+  const txt = `${r.service} ${r.text} ${r.highlight}`.toLowerCase();
+  return txt.includes("асфальт") || txt.includes("парковк") || txt.includes("двор")
+    ? "asphalt"
+    : "manipulator";
+};
+
+const filters: { id: FilterId; label: string; icon: string }[] = [
+  { id: "all", label: "Все", icon: "LayoutGrid" },
+  { id: "manipulator", label: "Манипулятор", icon: "Truck" },
+  { id: "asphalt", label: "Асфальтирование", icon: "Sparkles" },
+];
+
 const ReviewsSection = () => {
   const [active, setActive] = useState(0);
+  const [filter, setFilter] = useState<FilterId>("all");
   const [swipeDelta, setSwipeDelta] = useState(0);
   const startX = useRef<number | null>(null);
   const startY = useRef<number | null>(null);
   const isSwiping = useRef(false);
 
+  const filtered =
+    filter === "all" ? reviews : reviews.filter((r) => getCategory(r) === filter);
+
   const step = 3;
-  const pages = Math.ceil(reviews.length / step);
+  const pages = Math.max(1, Math.ceil(filtered.length / step));
   const prev = () => setActive((p) => (p - 1 + pages) % pages);
   const next = () => setActive((p) => (p + 1) % pages);
 
-  const visible = reviews.slice(active * step, active * step + step);
+  const visible = filtered.slice(active * step, active * step + step);
 
   const onTouchStart = (e: React.TouchEvent) => {
     startX.current = e.touches[0].clientX;
@@ -232,6 +251,41 @@ const ReviewsSection = () => {
             <p className="text-muted-foreground text-base sm:text-lg mt-3 max-w-xl">
               Более 5 000 выполненных заказов — работаем с частными лицами, ИП и крупными предприятиями
             </p>
+
+            <div className="flex flex-wrap gap-2 mt-5">
+              {filters.map((f) => {
+                const isActive = filter === f.id;
+                const count =
+                  f.id === "all"
+                    ? reviews.length
+                    : reviews.filter((r) => getCategory(r) === f.id).length;
+                return (
+                  <button
+                    key={f.id}
+                    type="button"
+                    onClick={() => {
+                      setFilter(f.id);
+                      setActive(0);
+                    }}
+                    className={`inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all ${
+                      isActive
+                        ? "bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/30 scale-105"
+                        : "bg-white/5 text-white/80 border border-accent/20 hover:bg-white/10 hover:border-accent/40"
+                    }`}
+                  >
+                    <Icon name={f.icon} size={14} />
+                    <span>{f.label}</span>
+                    <span
+                      className={`text-[10px] sm:text-xs px-1.5 py-0.5 rounded-full ${
+                        isActive ? "bg-white/25" : "bg-accent/20 text-accent"
+                      }`}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Счётчик + кнопки */}
