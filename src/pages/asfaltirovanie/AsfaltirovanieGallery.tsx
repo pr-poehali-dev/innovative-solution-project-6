@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 
 type Category = "yards" | "parking" | "roads" | "process";
@@ -117,6 +117,26 @@ const AsfaltirovanieGallery = () => {
     [tab],
   );
 
+  useEffect(() => {
+    if (active === null) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActive(null);
+      if (e.key === "ArrowLeft")
+        setActive((p) =>
+          p === null ? 0 : (p - 1 + works.length) % works.length,
+        );
+      if (e.key === "ArrowRight")
+        setActive((p) => (p === null ? 0 : (p + 1) % works.length));
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [active]);
+
   return (
     <section className="relative z-10 px-4 sm:px-6 py-12 sm:py-20">
       <div className="max-w-6xl mx-auto">
@@ -211,17 +231,31 @@ const AsfaltirovanieGallery = () => {
 
       {active !== null && (
         <div
-          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in"
+          className="fixed inset-0 z-[100] bg-black flex items-center justify-center animate-in fade-in"
+          style={{ width: "100vw", height: "100dvh" }}
           onClick={() => setActive(null)}
         >
+          <img
+            src={works[active].src}
+            alt={works[active].title}
+            onClick={(e) => e.stopPropagation()}
+            className="absolute inset-0 w-full h-full object-contain select-none"
+            style={{ width: "100vw", height: "100dvh" }}
+            draggable={false}
+          />
+
           <button
             type="button"
-            onClick={() => setActive(null)}
-            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"
+            onClick={(e) => {
+              e.stopPropagation();
+              setActive(null);
+            }}
+            className="absolute top-3 right-3 sm:top-5 sm:right-5 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/80 active:scale-95 flex items-center justify-center text-white transition backdrop-blur"
             aria-label="Закрыть"
           >
-            <Icon name="X" size={22} />
+            <Icon name="X" size={24} />
           </button>
+
           <button
             type="button"
             onClick={(e) => {
@@ -230,10 +264,10 @@ const AsfaltirovanieGallery = () => {
                 p === null ? 0 : (p - 1 + works.length) % works.length,
               );
             }}
-            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"
+            className="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/80 active:scale-95 flex items-center justify-center text-white transition backdrop-blur"
             aria-label="Предыдущее"
           >
-            <Icon name="ChevronLeft" size={24} />
+            <Icon name="ChevronLeft" size={26} />
           </button>
           <button
             type="button"
@@ -241,25 +275,21 @@ const AsfaltirovanieGallery = () => {
               e.stopPropagation();
               setActive((p) => (p === null ? 0 : (p + 1) % works.length));
             }}
-            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"
+            className="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/80 active:scale-95 flex items-center justify-center text-white transition backdrop-blur"
             aria-label="Следующее"
           >
-            <Icon name="ChevronRight" size={24} />
+            <Icon name="ChevronRight" size={26} />
           </button>
+
           <div
-            className="max-w-4xl w-full"
+            className="absolute left-0 right-0 bottom-0 px-4 py-3 sm:py-4 text-center text-white bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
-              src={works[active].src}
-              alt={works[active].title}
-              className="w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl"
-            />
-            <div className="mt-4 text-center text-white">
-              <div className="font-bold text-lg">{works[active].title}</div>
-              <div className="text-sm opacity-80 mt-1">
-                {works[active].area} · {works[active].location}
-              </div>
+            <div className="font-bold text-base sm:text-lg drop-shadow">
+              {works[active].title}
+            </div>
+            <div className="text-xs sm:text-sm opacity-90 mt-0.5">
+              {works[active].area} · {works[active].location}
             </div>
           </div>
         </div>
