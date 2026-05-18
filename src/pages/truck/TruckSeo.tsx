@@ -106,13 +106,13 @@ export default function TruckSeo({ truck, slug }: TruckSeoProps) {
                 "@type": "QuantitativeValue",
                 "minValue": 0,
                 "maxValue": 1,
-                "unitCode": "HUR"
+                "unitCode": "DAY"
               },
               "transitTime": {
                 "@type": "QuantitativeValue",
                 "minValue": 0,
-                "maxValue": 2,
-                "unitCode": "HUR"
+                "maxValue": 1,
+                "unitCode": "DAY"
               }
             }
           },

@@ -188,7 +188,40 @@ const StructuredData = () => {
               "@type": "City",
               "name": "Нижний Новгород"
             },
-            "seller": { "@id": "https://фаварит.рф/#organization" }
+            "seller": { "@id": "https://фаварит.рф/#organization" },
+            "shippingDetails": {
+              "@type": "OfferShippingDetails",
+              "shippingRate": {
+                "@type": "MonetaryAmount",
+                "value": "0",
+                "currency": "RUB"
+              },
+              "shippingDestination": {
+                "@type": "DefinedRegion",
+                "addressCountry": "RU",
+                "addressRegion": "Нижегородская область"
+              },
+              "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": {
+                  "@type": "QuantitativeValue",
+                  "minValue": 0,
+                  "maxValue": 1,
+                  "unitCode": "DAY"
+                },
+                "transitTime": {
+                  "@type": "QuantitativeValue",
+                  "minValue": 0,
+                  "maxValue": 1,
+                  "unitCode": "DAY"
+                }
+              }
+            },
+            "hasMerchantReturnPolicy": {
+              "@type": "MerchantReturnPolicy",
+              "applicableCountry": "RU",
+              "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+            }
           }
         }
       };
