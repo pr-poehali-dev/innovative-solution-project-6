@@ -47,23 +47,46 @@ const AsphaltSeoText = () => {
       }}
     >
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs sm:text-sm font-bold mb-4">
-            <Icon name="Info" size={14} />
-            Информация об услугах
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 mb-10 sm:mb-14 items-stretch">
+          {/* Информация об услугах */}
+          <div className="p-6 sm:p-8 rounded-2xl bg-white/5 border border-amber-500/20 flex flex-col justify-center text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs sm:text-sm font-bold mb-4 self-center lg:self-start">
+              <Icon name="Info" size={14} />
+              Информация об услугах
+            </div>
+            <h2 className="font-display font-black text-2xl sm:text-4xl tracking-tighter mb-3">
+              <span className="bg-gradient-to-r from-amber-200 via-amber-300 to-orange-400 bg-clip-text text-transparent">
+                Асфальтирование в Нижнем Новгороде и области
+              </span>
+            </h2>
+            <p className="text-amber-100/70 text-sm sm:text-base leading-relaxed">
+              ООО «Фаворит» выполняет асфальтирование любых объектов — от частного двора до промышленной площадки в 10 000 м². Работаем по Нижнему Новгороду, Дзержинску, Кстово, Арзамасу, Богородску, Городцу и всей Нижегородской области.
+            </p>
           </div>
-          <h2 className="font-display font-black text-2xl sm:text-4xl tracking-tighter mb-3">
-            <span className="bg-gradient-to-r from-amber-200 via-amber-300 to-orange-400 bg-clip-text text-transparent">
-              Асфальтирование в Нижнем Новгороде и области
-            </span>
-          </h2>
-          <p className="text-amber-100/70 text-sm sm:text-base max-w-3xl mx-auto leading-relaxed">
-            ООО «Фаворит» выполняет асфальтирование любых объектов — от частного двора до промышленной площадки в 10 000 м². Работаем по Нижнему Новгороду, Дзержинску, Кстово, Арзамасу, Богородску, Городцу и всей Нижегородской области.
-          </p>
+
+          {/* Новая услуга — асфальтирование под ключ */}
+          <Link
+            to="/asfaltirovanie"
+            className="group p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-amber-500/15 to-orange-500/10 border-2 border-amber-400/40 hover:border-amber-300 hover:from-amber-500/25 hover:to-orange-500/20 transition-all flex flex-col justify-center"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-white text-[10px] sm:text-xs font-black uppercase tracking-wider mb-4 self-start shadow-lg shadow-amber-500/40">
+              <Icon name="Sparkles" size={12} />
+              Новая услуга
+            </div>
+            <h3 className="font-display font-black text-xl sm:text-3xl tracking-tighter text-amber-100 mb-3 group-hover:text-amber-200 transition">
+              Асфальтирование под ключ
+            </h3>
+            <p className="text-amber-100/75 text-sm sm:text-base leading-relaxed mb-4">
+              Полный цикл работ: геодезия и замеры, демонтаж старого покрытия, подготовка основания, отсыпка щебня и песка, укладка асфальтобетона горячим способом, укатка катком. Асфальт марки М2 и М3 по ГОСТ 9128-2013.
+            </p>
+            <div className="inline-flex items-center gap-1 text-sm font-bold text-amber-400 group-hover:gap-2 transition-all">
+              Подробнее <Icon name="ArrowRight" size={14} />
+            </div>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 mb-8 sm:mb-12">
-          {services.map((s, i) => (
+          {services.slice(1).map((s, i) => (
             <Link
               key={i}
               to="/asfaltirovanie"
