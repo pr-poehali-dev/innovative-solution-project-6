@@ -94,6 +94,38 @@ const App = () => (
               path="/arenda-manipulyatora-dzerzhinsk-bor-kstovo"
               element={<SeoLandingPage slugOverride="arenda-manipulyatora-dzerzhinsk-bor-kstovo" />}
             />
+            <Route
+              path="/arenda-manipulyatora-avtozavodskiy-rayon-nn"
+              element={<SeoLandingPage slugOverride="arenda-manipulyatora-avtozavodskiy-rayon-nn" />}
+            />
+            <Route
+              path="/arenda-manipulyatora-sormovskiy-rayon-nn"
+              element={<SeoLandingPage slugOverride="arenda-manipulyatora-sormovskiy-rayon-nn" />}
+            />
+            <Route
+              path="/arenda-manipulyatora-kanavinskiy-rayon-nn"
+              element={<SeoLandingPage slugOverride="arenda-manipulyatora-kanavinskiy-rayon-nn" />}
+            />
+            <Route
+              path="/arenda-manipulyatora-moskovskiy-rayon-nn"
+              element={<SeoLandingPage slugOverride="arenda-manipulyatora-moskovskiy-rayon-nn" />}
+            />
+            <Route
+              path="/arenda-manipulyatora-leninskiy-rayon-nn"
+              element={<SeoLandingPage slugOverride="arenda-manipulyatora-leninskiy-rayon-nn" />}
+            />
+            <Route
+              path="/arenda-manipulyatora-nizhegorodskiy-rayon-nn"
+              element={<SeoLandingPage slugOverride="arenda-manipulyatora-nizhegorodskiy-rayon-nn" />}
+            />
+            <Route
+              path="/arenda-manipulyatora-sovetskiy-rayon-nn"
+              element={<SeoLandingPage slugOverride="arenda-manipulyatora-sovetskiy-rayon-nn" />}
+            />
+            <Route
+              path="/arenda-manipulyatora-priokskiy-rayon-nn"
+              element={<SeoLandingPage slugOverride="arenda-manipulyatora-priokskiy-rayon-nn" />}
+            />
             <Route path="/karta/faw-j6p-390" element={<TruckCard />} />
             <Route path="/review-card" element={<ReviewCard />} />
             <Route path="/banner" element={<AdBanner />} />
