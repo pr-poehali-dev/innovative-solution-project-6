@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 import SectionBadge from "@/components/ui/SectionBadge";
 import OrderModal from "@/components/ui/OrderModal";
@@ -66,6 +66,9 @@ const photos = [
 const GallerySection = () => {
   const [active, setActive] = useState<number | null>(null);
   const [orderPhoto, setOrderPhoto] = useState<(typeof photos)[number] | null>(null);
+  const [dragX, setDragX] = useState(0);
+  const startXRef = useRef<number | null>(null);
+  const isDraggingRef = useRef(false);
 
   const prev = () => setActive((p) => (p !== null ? (p - 1 + photos.length) % photos.length : 0));
   const next = () => setActive((p) => (p !== null ? (p + 1) % photos.length : 0));
@@ -79,6 +82,42 @@ const GallerySection = () => {
       e.preventDefault();
     }
     setOrderPhoto(photo);
+  };
+
+  useEffect(() => {
+    if (active === null) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActive(null);
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [active]);
+
+  const onDragStart = (clientX: number) => {
+    startXRef.current = clientX;
+    isDraggingRef.current = true;
+    setDragX(0);
+  };
+  const onDragMove = (clientX: number) => {
+    if (!isDraggingRef.current || startXRef.current === null) return;
+    setDragX(clientX - startXRef.current);
+  };
+  const onDragEnd = () => {
+    if (!isDraggingRef.current) return;
+    const dx = dragX;
+    isDraggingRef.current = false;
+    startXRef.current = null;
+    const threshold = 60;
+    if (dx > threshold) prev();
+    else if (dx < -threshold) next();
+    setDragX(0);
   };
 
   return (
@@ -135,18 +174,29 @@ const GallerySection = () => {
         </div>
       </div>
 
-      {/* Lightbox — фото на весь экран */}
+      {/* Lightbox — фото на весь экран со свайпом */}
       {active !== null && (
         <div
-          className="fixed inset-0 bg-black z-50 flex items-center justify-center"
+          className="fixed inset-0 bg-black z-50 flex items-center justify-center touch-pan-y select-none overscroll-contain"
           onClick={() => setActive(null)}
+          onTouchStart={(e) => onDragStart(e.touches[0].clientX)}
+          onTouchMove={(e) => onDragMove(e.touches[0].clientX)}
+          onTouchEnd={onDragEnd}
+          onMouseDown={(e) => onDragStart(e.clientX)}
+          onMouseMove={(e) => isDraggingRef.current && onDragMove(e.clientX)}
+          onMouseUp={onDragEnd}
+          onMouseLeave={onDragEnd}
         >
           <img
             src={photos[active].url}
             alt={photos[active].caption}
             draggable={false}
             onClick={(e) => e.stopPropagation()}
-            className="w-screen h-screen object-contain select-none"
+            style={{
+              transform: `translateX(${dragX}px)`,
+              transition: isDraggingRef.current ? "none" : "transform 0.3s ease-out",
+            }}
+            className="w-screen h-screen object-contain select-none pointer-events-none"
             decoding="async"
           />
 
