@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Icon from "@/components/ui/icon";
 import SectionBadge from "@/components/ui/SectionBadge";
 import OrderModal from "@/components/ui/OrderModal";
@@ -174,75 +175,91 @@ const GallerySection = () => {
         </div>
       </div>
 
-      {/* Lightbox — фото на весь экран со свайпом */}
-      {active !== null && (
-        <div
-          className="fixed inset-0 bg-black z-50 flex items-center justify-center touch-pan-y select-none overscroll-contain"
-          onClick={() => setActive(null)}
-          onTouchStart={(e) => onDragStart(e.touches[0].clientX)}
-          onTouchMove={(e) => onDragMove(e.touches[0].clientX)}
-          onTouchEnd={onDragEnd}
-          onMouseDown={(e) => onDragStart(e.clientX)}
-          onMouseMove={(e) => isDraggingRef.current && onDragMove(e.clientX)}
-          onMouseUp={onDragEnd}
-          onMouseLeave={onDragEnd}
-        >
-          <img
-            src={photos[active].url}
-            alt={photos[active].caption}
-            draggable={false}
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              transform: `translateX(${dragX}px)`,
-              transition: isDraggingRef.current ? "none" : "transform 0.3s ease-out",
-            }}
-            className="w-screen h-screen object-contain select-none pointer-events-none"
-            decoding="async"
-          />
-
-          <button
-            className="absolute top-3 right-3 sm:top-5 sm:right-5 w-12 h-12 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center transition-colors shadow-lg z-10"
-            onClick={(e) => { e.stopPropagation(); setActive(null); }}
-            aria-label="Закрыть"
+      {/* Lightbox — фото на весь экран со свайпом (через portal) */}
+      {active !== null &&
+        createPortal(
+          <div
+            className="fixed inset-0 bg-black flex items-center justify-center overscroll-contain"
+            style={{ zIndex: 99999 }}
+            role="dialog"
+            onClick={() => setActive(null)}
+            onTouchStart={(e) => onDragStart(e.touches[0].clientX)}
+            onTouchMove={(e) => onDragMove(e.touches[0].clientX)}
+            onTouchEnd={onDragEnd}
           >
-            <Icon name="X" size={24} className="text-white" />
-          </button>
+            <img
+              src={photos[active].url}
+              alt={photos[active].caption}
+              draggable={false}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                transform: `translateX(${dragX}px)`,
+                transition: dragX === 0 ? "transform 0.25s ease-out" : "none",
+                width: "auto",
+                height: "auto",
+                maxWidth: "100vw",
+                maxHeight: "100vh",
+              }}
+              className="object-contain select-none"
+              decoding="async"
+            />
 
-          <button
-            className="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center transition-colors shadow-lg z-10"
-            onClick={(e) => { e.stopPropagation(); prev(); }}
-            aria-label="Предыдущее"
-          >
-            <Icon name="ChevronLeft" size={26} className="text-white" />
-          </button>
-
-          <button
-            className="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center transition-colors shadow-lg z-10"
-            onClick={(e) => { e.stopPropagation(); next(); }}
-            aria-label="Следующее"
-          >
-            <Icon name="ChevronRight" size={26} className="text-white" />
-          </button>
-
-          <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/70 text-white text-xs sm:text-sm font-bold z-10">
-            {active + 1} / {photos.length}
-          </div>
-
-          <div className="absolute left-0 right-0 bottom-0 px-4 py-4 sm:py-5 text-center bg-gradient-to-t from-black/90 via-black/60 to-transparent z-10">
-            <p className="text-white text-sm sm:text-base font-semibold drop-shadow mb-3">
-              {photos[active].caption}
-            </p>
             <button
               type="button"
-              onClick={(e) => openOrder(photos[active], e)}
-              className="inline-flex items-center gap-2 px-5 sm:px-7 py-3 rounded-xl text-sm sm:text-base font-bold bg-gradient-to-r from-accent to-accent/80 text-black shadow-xl shadow-accent/40 hover:shadow-2xl hover:shadow-accent/60 hover:scale-105 active:scale-95 transition-all"
+              className="absolute top-3 right-3 sm:top-5 sm:right-5 w-12 h-12 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center transition-colors shadow-lg"
+              onClick={(e) => {
+                e.stopPropagation();
+                setActive(null);
+              }}
+              aria-label="Закрыть"
             >
-              <Icon name="Sparkles" size={18} />
-              Хочу такую же
+              <Icon name="X" size={24} className="text-white" />
             </button>
-          </div>
-        </div>
-      )}
+
+            <button
+              type="button"
+              className="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center transition-colors shadow-lg"
+              onClick={(e) => {
+                e.stopPropagation();
+                prev();
+              }}
+              aria-label="Предыдущее"
+            >
+              <Icon name="ChevronLeft" size={26} className="text-white" />
+            </button>
+
+            <button
+              type="button"
+              className="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center transition-colors shadow-lg"
+              onClick={(e) => {
+                e.stopPropagation();
+                next();
+              }}
+              aria-label="Следующее"
+            >
+              <Icon name="ChevronRight" size={26} className="text-white" />
+            </button>
+
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/70 text-white text-xs sm:text-sm font-bold">
+              {active + 1} / {photos.length}
+            </div>
+
+            <div className="absolute left-0 right-0 bottom-0 px-4 py-4 sm:py-5 text-center bg-gradient-to-t from-black/90 via-black/60 to-transparent">
+              <p className="text-white text-sm sm:text-base font-semibold drop-shadow mb-3 pointer-events-none">
+                {photos[active].caption}
+              </p>
+              <button
+                type="button"
+                onClick={(e) => openOrder(photos[active], e)}
+                className="inline-flex items-center gap-2 px-5 sm:px-7 py-3 rounded-xl text-sm sm:text-base font-bold bg-gradient-to-r from-accent to-accent/80 text-black shadow-xl shadow-accent/40 hover:shadow-2xl hover:shadow-accent/60 hover:scale-105 active:scale-95 transition-all"
+              >
+                <Icon name="Sparkles" size={18} />
+                Хочу такую же
+              </button>
+            </div>
+          </div>,
+          document.body,
+        )}
 
       <OrderModal
         open={orderPhoto !== null}
