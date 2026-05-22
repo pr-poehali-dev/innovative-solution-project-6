@@ -132,7 +132,7 @@ const OrderNotifications = () => {
 
   return (
     <div
-      className={`fixed right-3 sm:right-6 bottom-20 sm:bottom-6 z-40 max-w-[calc(100vw-1.5rem)] sm:max-w-sm transition-all duration-500 ${
+      className={`fixed right-3 sm:right-6 bottom-20 sm:bottom-6 z-40 max-w-[calc(100vw-1.5rem)] sm:max-w-sm transition-all duration-500 floating-mobile-notif ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
       }`}
     >

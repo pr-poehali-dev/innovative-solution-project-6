@@ -18,7 +18,7 @@ const FloatingCallButton = () => {
     <a
       href={PHONE_HREF}
       aria-label={`Позвонить ${PHONE}`}
-      className={`md:hidden fixed bottom-5 right-4 z-40 w-14 h-14 rounded-full shadow-xl shadow-accent/50 active:scale-90 flex items-center justify-center transition-all duration-300 ${
+      className={`md:hidden fixed bottom-5 right-4 z-40 w-14 h-14 rounded-full shadow-xl shadow-accent/50 active:scale-90 flex items-center justify-center transition-all duration-300 floating-mobile-fab ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
       }`}
       style={{

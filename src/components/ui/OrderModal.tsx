@@ -22,9 +22,11 @@ export default function OrderModal({ open, onClose, truckName, calcSummary, subm
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
+      document.body.classList.add("modal-open");
       reachGoal("order_modal_open", { truck: truckName });
     } else {
       document.body.style.overflow = "";
+      document.body.classList.remove("modal-open");
       setTimeout(() => {
         setName("");
         setPhone("");
@@ -32,7 +34,10 @@ export default function OrderModal({ open, onClose, truckName, calcSummary, subm
         setStatus("idle");
       }, 300);
     }
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+      document.body.classList.remove("modal-open");
+    };
   }, [open]);
 
   useEffect(() => {
@@ -69,7 +74,8 @@ export default function OrderModal({ open, onClose, truckName, calcSummary, subm
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      className="fixed inset-0 flex items-center justify-center p-4"
+      style={{ zIndex: 999999 }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />

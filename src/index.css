@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Скрываем плавающие кнопки когда открыта модалка */
+body.modal-open .floating-mobile-fab,
+body.modal-open .floating-mobile-notif {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
 @layer base {
   :root {
     /* Lighter dark theme */
