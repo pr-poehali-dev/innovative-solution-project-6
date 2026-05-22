@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 import SectionBadge from "@/components/ui/SectionBadge";
+import OrderModal from "@/components/ui/OrderModal";
 
 const photos = [
   {
@@ -64,9 +65,21 @@ const photos = [
 
 const GallerySection = () => {
   const [active, setActive] = useState<number | null>(null);
+  const [orderPhoto, setOrderPhoto] = useState<(typeof photos)[number] | null>(null);
 
   const prev = () => setActive((p) => (p !== null ? (p - 1 + photos.length) % photos.length : 0));
   const next = () => setActive((p) => (p !== null ? (p + 1) % photos.length : 0));
+
+  const openOrder = (
+    photo: (typeof photos)[number],
+    e?: React.MouseEvent | React.KeyboardEvent,
+  ) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+    setOrderPhoto(photo);
+  };
 
   return (
     <section className="py-16 sm:py-32 px-4 sm:px-6">
@@ -104,10 +117,18 @@ const GallerySection = () => {
                 height="600"
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent sm:from-black/0 sm:via-transparent group-hover:from-black/70 group-hover:via-black/20 transition-all duration-300 flex items-end p-3 sm:p-5">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent sm:from-black/0 sm:via-transparent group-hover:from-black/80 group-hover:via-black/30 transition-all duration-300 flex flex-col justify-end p-3 sm:p-5 gap-2">
                 <p className="text-white text-xs sm:text-sm font-semibold sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300 sm:translate-y-2 group-hover:translate-y-0 line-clamp-2 drop-shadow-md">
                   {photo.caption}
                 </p>
+                <button
+                  type="button"
+                  onClick={(e) => openOrder(photo, e)}
+                  className="self-start inline-flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-bold bg-gradient-to-r from-accent to-accent/80 text-black shadow-lg shadow-accent/30 hover:shadow-xl hover:shadow-accent/50 active:scale-95 transition-all sm:opacity-0 sm:translate-y-1 sm:group-hover:opacity-100 sm:group-hover:translate-y-0"
+                >
+                  <Icon name="Sparkles" size={14} />
+                  Хочу такую же
+                </button>
               </div>
             </div>
           ))}
@@ -142,8 +163,18 @@ const GallerySection = () => {
               loading="lazy"
               decoding="async"
             />
-            <p className="text-center text-white/70 mt-4 text-sm">{photos[active].caption}</p>
+            <p className="text-center text-white/80 mt-4 text-sm">{photos[active].caption}</p>
             <p className="text-center text-accent/50 text-xs mt-1">{active + 1} / {photos.length}</p>
+            <div className="flex justify-center mt-4">
+              <button
+                type="button"
+                onClick={(e) => openOrder(photos[active], e)}
+                className="inline-flex items-center gap-2 px-5 sm:px-7 py-3 rounded-xl text-sm sm:text-base font-bold bg-gradient-to-r from-accent to-accent/80 text-black shadow-xl shadow-accent/40 hover:shadow-2xl hover:shadow-accent/60 hover:scale-105 active:scale-95 transition-all"
+              >
+                <Icon name="Sparkles" size={18} />
+                Хочу такую же
+              </button>
+            </div>
           </div>
 
           <button
@@ -154,6 +185,14 @@ const GallerySection = () => {
           </button>
         </div>
       )}
+
+      <OrderModal
+        open={orderPhoto !== null}
+        onClose={() => setOrderPhoto(null)}
+        title="Хочу такую же работу"
+        truckName={orderPhoto ? orderPhoto.caption : undefined}
+        submitLabel="Рассчитать стоимость"
+      />
     </section>
   );
 };
