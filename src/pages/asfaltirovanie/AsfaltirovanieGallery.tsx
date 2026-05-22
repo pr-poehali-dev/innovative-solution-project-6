@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Icon from "@/components/ui/icon";
+import OrderModal from "@/components/ui/OrderModal";
 
 type Category = "yards" | "parking" | "roads" | "process";
 
@@ -154,6 +155,15 @@ const tabs: Tab[] = [
 const AsfaltirovanieGallery = () => {
   const [active, setActive] = useState<number | null>(null);
   const [tab, setTab] = useState<Tab["id"]>("all");
+  const [orderWork, setOrderWork] = useState<Work | null>(null);
+
+  const openOrder = (w: Work, e?: React.MouseEvent | React.KeyboardEvent) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+    setOrderWork(w);
+  };
 
   const filtered = useMemo(
     () => (tab === "all" ? works : works.filter((w) => w.category === tab)),
@@ -249,11 +259,11 @@ const AsfaltirovanieGallery = () => {
                     className="w-full h-full object-cover sm:group-hover:scale-110 transition-transform duration-500 pointer-events-none"
                   />
                 </div>
-                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white pointer-events-none">
-                  <div className="font-bold text-sm sm:text-base drop-shadow">
+                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-black/85 via-black/50 to-transparent text-white">
+                  <div className="font-bold text-sm sm:text-base drop-shadow pointer-events-none">
                     {w.title}
                   </div>
-                  <div className="flex items-center gap-2 text-xs sm:text-sm opacity-90 mt-0.5">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm opacity-90 mt-0.5 pointer-events-none">
                     <span className="inline-flex items-center gap-1">
                       <Icon name="Ruler" size={12} />
                       {w.area}
@@ -263,6 +273,17 @@ const AsfaltirovanieGallery = () => {
                       {w.location}
                     </span>
                   </div>
+                  <button
+                    type="button"
+                    onClick={(e) => openOrder(w, e)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") openOrder(w, e);
+                    }}
+                    className="mt-2 sm:mt-3 w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/40 hover:shadow-xl hover:shadow-amber-500/60 active:scale-[0.97] transition-all sm:opacity-0 sm:translate-y-1 sm:group-hover:opacity-100 sm:group-hover:translate-y-0"
+                  >
+                    <Icon name="Sparkles" size={14} />
+                    Хочу такую же
+                  </button>
                 </div>
               </div>
             );
@@ -321,17 +342,36 @@ const AsfaltirovanieGallery = () => {
               {active + 1} / {works.length}
             </div>
 
-            <div className="absolute left-0 right-0 bottom-0 px-4 py-3 sm:py-4 text-center text-white bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none">
-              <div className="font-bold text-base sm:text-lg drop-shadow">
+            <div className="absolute left-0 right-0 bottom-0 px-4 py-4 sm:py-5 text-center text-white bg-gradient-to-t from-black/90 via-black/60 to-transparent">
+              <div className="font-bold text-base sm:text-lg drop-shadow pointer-events-none">
                 {works[active].title}
               </div>
-              <div className="text-xs sm:text-sm opacity-90 mt-0.5">
+              <div className="text-xs sm:text-sm opacity-90 mt-0.5 mb-3 pointer-events-none">
                 {works[active].area} · {works[active].location}
               </div>
+              <button
+                type="button"
+                onClick={(e) => openOrder(works[active], e)}
+                className="inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-3 rounded-xl text-sm sm:text-base font-bold bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-white shadow-xl shadow-amber-500/50 hover:shadow-2xl hover:shadow-amber-500/70 hover:scale-105 active:scale-95 transition-all"
+              >
+                <Icon name="Sparkles" size={18} />
+                Хочу такую же
+              </button>
             </div>
           </div>,
           document.body,
         )}
+
+      <OrderModal
+        open={orderWork !== null}
+        onClose={() => setOrderWork(null)}
+        title="Хочу такую же работу"
+        truckName={orderWork ? orderWork.title : undefined}
+        calcSummary={
+          orderWork ? `${orderWork.area} · ${orderWork.location}` : undefined
+        }
+        submitLabel="Рассчитать стоимость"
+      />
     </section>
   );
 };
