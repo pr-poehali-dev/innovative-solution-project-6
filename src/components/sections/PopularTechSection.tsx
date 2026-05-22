@@ -81,6 +81,9 @@ const PopularTechSection = () => {
                   src={it.image}
                   alt={it.alt}
                   loading="lazy"
+                  decoding="async"
+                  width="800"
+                  height="600"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div

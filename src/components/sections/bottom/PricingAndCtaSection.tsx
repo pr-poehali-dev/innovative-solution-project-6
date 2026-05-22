@@ -71,6 +71,9 @@ const PricingAndCtaSection = ({ visibleSections, onOpenModal }: PricingAndCtaSec
                     alt="Асфальтирование дорог и площадок"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
+                    decoding="async"
+                    width="1200"
+                    height="800"
                   />
 
                   {/* Floating badge on image */}

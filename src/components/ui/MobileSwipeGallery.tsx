@@ -63,20 +63,29 @@ const MobileSwipeGallery = ({
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        {images.map((src, i) => (
-          <div key={i} className="flex-shrink-0 w-full h-full flex items-center justify-center">
-            <img
-              src={src}
-              alt={`${alt} — фото ${i + 1}`}
-              className={`w-full select-none pointer-events-none ${imgClassName}`}
-              loading={i === 0 ? "eager" : "lazy"}
-              decoding="async"
-              draggable={false}
-              width="800"
-              height="600"
-            />
-          </div>
-        ))}
+        {images.map((src, i) => {
+          // Рендерим картинки только в окне ±1 от текущего слайда —
+          // экономит память и трафик на мобиле, когда карточек 10+
+          const shouldRender = Math.abs(i - index) <= 1;
+          return (
+            <div key={i} className="flex-shrink-0 w-full h-full flex items-center justify-center">
+              {shouldRender ? (
+                <img
+                  src={src}
+                  alt={`${alt} — фото ${i + 1}`}
+                  className={`w-full select-none pointer-events-none ${imgClassName}`}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  draggable={false}
+                  width="800"
+                  height="600"
+                />
+              ) : (
+                <div className={`w-full ${imgClassName}`} aria-hidden="true" />
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {total > 1 && (
