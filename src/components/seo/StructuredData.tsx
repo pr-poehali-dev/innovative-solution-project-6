@@ -11,8 +11,31 @@ const StructuredData = () => {
     "alternateName": ["ООО Фаворит", "фаварит.рф", "Фаворит Нижний Новгород", "ООО «ФАВОРИТ»"],
     "legalName": "Общество с ограниченной ответственностью «ФАВОРИТ»",
     "url": "https://фаварит.рф",
-    "telephone": ["+79601883084", "+79601690990"],
+    "telephone": "+7-960-188-30-84",
     "email": "960188@list.ru",
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+7-960-188-30-84",
+        "contactType": "customer service",
+        "areaServed": "RU",
+        "availableLanguage": ["Russian"],
+        "contactOption": "TollFree",
+        "hoursAvailable": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      },
+      {
+        "@type": "ContactPoint",
+        "telephone": "+7-960-169-09-90",
+        "contactType": "sales",
+        "areaServed": "RU",
+        "availableLanguage": ["Russian"]
+      }
+    ],
     "image": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/d239fd05-a0c5-44a2-9cbb-e19192bf07a9.jpg",
     "logo": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp",
     "address": {
