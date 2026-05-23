@@ -1,7 +1,30 @@
 import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
 import { SUBMIT_URL } from "./heroData";
+
+const MAX_FILES = 5;
+const MAX_FILE_SIZE = 25 * 1024 * 1024; // 25 МБ
+
+type MediaItem = {
+  id: string;
+  file: File;
+  previewUrl: string;
+  kind: "image" | "video";
+};
+
+const fileToBase64 = (file: File): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      // result имеет вид "data:<mime>;base64,XXXX" — отрезаем префикс
+      const comma = result.indexOf(",");
+      resolve(comma >= 0 ? result.slice(comma + 1) : result);
+    };
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
 
 const HeroLeadForm = () => {
   const [name, setName] = useState("");
@@ -9,7 +32,60 @@ const HeroLeadForm = () => {
   const [cargo, setCargo] = useState("");
   const [fromAddr, setFromAddr] = useState("");
   const [toAddr, setToAddr] = useState("");
+  const [media, setMedia] = useState<MediaItem[]>([]);
+  const [mediaError, setMediaError] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleFilesPicked = (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    setMediaError("");
+    const next: MediaItem[] = [...media];
+    for (const file of Array.from(files)) {
+      if (next.length >= MAX_FILES) {
+        setMediaError(`Можно прикрепить не больше ${MAX_FILES} файлов`);
+        break;
+      }
+      if (file.size > MAX_FILE_SIZE) {
+        setMediaError(`Файл "${file.name}" больше 25 МБ — уменьшите его или отправьте отдельно`);
+        continue;
+      }
+      const isImage = file.type.startsWith("image/");
+      const isVideo = file.type.startsWith("video/");
+      if (!isImage && !isVideo) {
+        setMediaError("Можно прикреплять только фото или видео");
+        continue;
+      }
+      next.push({
+        id: `${file.name}-${file.size}-${file.lastModified}-${Math.random().toString(36).slice(2, 7)}`,
+        file,
+        previewUrl: URL.createObjectURL(file),
+        kind: isVideo ? "video" : "image",
+      });
+    }
+    setMedia(next);
+  };
+
+  const removeMedia = (id: string) => {
+    setMedia((prev) => {
+      const target = prev.find((m) => m.id === id);
+      if (target) URL.revokeObjectURL(target.previewUrl);
+      return prev.filter((m) => m.id !== id);
+    });
+    setMediaError("");
+  };
+
+  const resetForm = () => {
+    media.forEach((m) => URL.revokeObjectURL(m.previewUrl));
+    setName("");
+    setPhone("");
+    setCargo("");
+    setFromAddr("");
+    setToAddr("");
+    setMedia([]);
+    setMediaError("");
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,18 +97,28 @@ const HeroLeadForm = () => {
         fromAddr && `Откуда: ${fromAddr}`,
         toAddr && `Куда: ${toAddr}`,
       ].filter(Boolean);
+
+      const encodedMedia = await Promise.all(
+        media.map(async (m) => ({
+          name: m.file.name,
+          mime: m.file.type,
+          data: await fileToBase64(m.file),
+        }))
+      );
+
       const res = await fetch(SUBMIT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, comment: commentParts.join(" · ") }),
+        body: JSON.stringify({
+          name,
+          phone,
+          comment: commentParts.join(" · "),
+          media: encodedMedia,
+        }),
       });
       if (res.ok) {
         setStatus("success");
-        setName("");
-        setPhone("");
-        setCargo("");
-        setFromAddr("");
-        setToAddr("");
+        resetForm();
       } else {
         setStatus("error");
       }
@@ -133,6 +219,68 @@ const HeroLeadForm = () => {
                   onChange={e => setCargo(e.target.value)}
                   className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-3 sm:py-2.5 text-base sm:text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all resize-none leading-snug"
                 />
+              </div>
+
+              {/* Прикрепить фото/видео объекта */}
+              <div className="flex flex-col gap-1.5">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*,video/*"
+                  multiple
+                  onChange={(e) => handleFilesPicked(e.target.files)}
+                  className="hidden"
+                />
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="w-full flex items-center justify-center gap-2 h-11 sm:h-10 rounded-lg border border-dashed border-accent/50 bg-white/[0.04] text-accent text-sm font-semibold hover:bg-accent/10 hover:border-accent transition-all active:scale-[0.99]"
+                >
+                  <Icon name="Paperclip" size={16} />
+                  <span>
+                    {media.length > 0
+                      ? `Прикреплено ${media.length} из ${MAX_FILES}`
+                      : "Прикрепить фото или видео объекта"}
+                  </span>
+                </button>
+
+                {media.length > 0 && (
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-1.5">
+                    {media.map((m) => (
+                      <div
+                        key={m.id}
+                        className="relative aspect-square rounded-lg overflow-hidden border border-white/20 bg-black/40 group/media"
+                      >
+                        {m.kind === "image" ? (
+                          <img src={m.previewUrl} alt={m.file.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full flex flex-col items-center justify-center text-white/80 bg-gradient-to-br from-zinc-800 to-black">
+                            <Icon name="Video" size={22} className="text-accent" />
+                            <span className="text-[9px] mt-1 px-1 line-clamp-1">{m.file.name}</span>
+                          </div>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => removeMedia(m.id)}
+                          aria-label="Удалить файл"
+                          className="absolute top-1 right-1 w-6 h-6 rounded-full bg-black/70 backdrop-blur-sm border border-white/30 text-white flex items-center justify-center hover:bg-red-500 transition-colors"
+                        >
+                          <Icon name="X" size={12} />
+                        </button>
+                        <div className="absolute bottom-0 left-0 right-0 px-1.5 py-0.5 bg-black/60 text-white text-[9px] font-medium uppercase tracking-wider">
+                          {m.kind === "video" ? "Видео" : "Фото"}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {mediaError && (
+                  <p className="text-amber-400 text-[11px] leading-snug">{mediaError}</p>
+                )}
+                <p className="text-[10px] text-white/40 leading-snug text-center">
+                  До {MAX_FILES} файлов, по 25 МБ. Помогает точнее рассчитать цену
+                </p>
               </div>
 
               <button

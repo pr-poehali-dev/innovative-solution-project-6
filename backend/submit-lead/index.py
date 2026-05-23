@@ -1,5 +1,7 @@
 import json
 import os
+import re
+import base64
 import uuid
 import psycopg2
 import smtplib
@@ -8,6 +10,94 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 from datetime import datetime
+
+
+MAX_MEDIA_FILES = 5
+MAX_MEDIA_BYTES = 25 * 1024 * 1024  # 25 МБ на файл
+
+_EXT_BY_MIME = {
+    "image/jpeg": "jpg",
+    "image/jpg": "jpg",
+    "image/png": "png",
+    "image/webp": "webp",
+    "image/gif": "gif",
+    "image/heic": "heic",
+    "image/heif": "heif",
+    "video/mp4": "mp4",
+    "video/quicktime": "mov",
+    "video/webm": "webm",
+    "video/x-matroska": "mkv",
+    "video/3gpp": "3gp",
+}
+
+
+def upload_lead_media(media_list, lead_id: int) -> list[dict]:
+    """Загружает фото/видео клиента в S3, возвращает список словарей {url, name, kind}."""
+    if not media_list:
+        return []
+    access_key = os.environ.get("AWS_ACCESS_KEY_ID")
+    secret_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
+    if not access_key or not secret_key:
+        return []
+
+    s3 = boto3.client(
+        "s3",
+        endpoint_url="https://bucket.poehali.dev",
+        aws_access_key_id=access_key,
+        aws_secret_access_key=secret_key,
+    )
+
+    uploaded: list[dict] = []
+    for idx, item in enumerate(media_list[:MAX_MEDIA_FILES]):
+        if not isinstance(item, dict):
+            continue
+        data_b64 = item.get("data") or ""
+        mime = (item.get("mime") or "").lower().strip()
+        orig_name = (item.get("name") or "").strip()
+
+        if "," in data_b64 and data_b64.lstrip().startswith("data:"):
+            header, data_b64 = data_b64.split(",", 1)
+            m = re.match(r"data:([^;]+);base64", header)
+            if m and not mime:
+                mime = m.group(1).lower()
+
+        try:
+            raw = base64.b64decode(data_b64, validate=False)
+        except Exception:
+            continue
+        if not raw or len(raw) > MAX_MEDIA_BYTES:
+            continue
+
+        if not mime:
+            mime = "application/octet-stream"
+        kind = "video" if mime.startswith("video/") else ("image" if mime.startswith("image/") else "file")
+        ext = _EXT_BY_MIME.get(mime)
+        if not ext:
+            if "." in orig_name:
+                ext = orig_name.rsplit(".", 1)[-1].lower()[:5] or "bin"
+            else:
+                ext = "bin"
+        safe_name = re.sub(r"[^a-zA-Z0-9._-]", "_", orig_name)[:50] or f"file_{idx + 1}"
+        key = f"leads/{datetime.now().strftime('%Y%m%d')}/{lead_id}-{idx + 1}-{uuid.uuid4().hex[:8]}.{ext}"
+
+        try:
+            s3.put_object(
+                Bucket="files",
+                Key=key,
+                Body=raw,
+                ContentType=mime,
+            )
+            uploaded.append({
+                "url": f"https://cdn.poehali.dev/projects/{access_key}/bucket/{key}",
+                "name": safe_name,
+                "kind": kind,
+                "size": len(raw),
+            })
+        except Exception as e:
+            print(f"Media upload error: {e}")
+            continue
+
+    return uploaded
 
 
 DIRECTOR_EMAIL = "Avrora.888@bk.ru"
@@ -269,7 +359,56 @@ def parse_comment(comment: str) -> dict:
     return parts
 
 
-def build_email_body(name: str, phone: str, comment: str, lead_id: int) -> tuple[str, str]:
+def build_media_blocks(media: list[dict]) -> tuple[str, str]:
+    """Возвращает (text, html) блоки со ссылками на прикреплённые фото/видео клиента."""
+    if not media:
+        return "", ""
+
+    def fmt_size(n: int) -> str:
+        if n >= 1024 * 1024:
+            return f"{n / (1024 * 1024):.1f} МБ"
+        if n >= 1024:
+            return f"{n / 1024:.0f} КБ"
+        return f"{n} Б"
+
+    items_html = []
+    items_text = []
+    for i, m in enumerate(media, 1):
+        url = m.get("url") or ""
+        kind = m.get("kind") or "file"
+        name = m.get("name") or f"файл {i}"
+        size = fmt_size(m.get("size") or 0)
+        icon = "🎬" if kind == "video" else "📷"
+        items_text.append(f"  {i}. {icon} {name} ({size}) — {url}")
+
+        preview_html = ""
+        if kind == "image" and url:
+            preview_html = (
+                f'<a href="{url}" target="_blank" style="display:block;margin-bottom:6px;">'
+                f'<img src="{url}" alt="" style="max-width:280px;max-height:200px;border-radius:8px;border:1px solid #e0e0e0;display:block;" />'
+                f'</a>'
+            )
+        items_html.append(
+            '<div style="margin-bottom:10px;padding:10px;background:#fff;border:1px solid #e8e8e8;border-radius:8px;">'
+            f'{preview_html}'
+            f'<div style="font-size:13px;color:#1a1a1a;"><b>{icon} {name}</b> <span style="color:#888;">· {size}</span></div>'
+            f'<a href="{url}" target="_blank" style="font-size:12px;color:#0369a1;word-break:break-all;">{url}</a>'
+            '</div>'
+        )
+
+    text_block = "\n📎 Прикреплённые файлы:\n" + "\n".join(items_text) + "\n"
+    html_block = (
+        '<tr><td style="padding:14px 20px;background:#f5f5f5;border-left:4px solid #10b981;">'
+        '<div style="font-size:12px;color:#065f46;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:10px;">'
+        '📎 Файлы от клиента (фото / видео объекта)'
+        '</div>'
+        + "".join(items_html) +
+        '</td></tr>'
+    )
+    return text_block, html_block
+
+
+def build_email_body(name: str, phone: str, comment: str, lead_id: int, media: list[dict] | None = None) -> tuple[str, str]:
     """Формирует plain text и HTML версии письма."""
     now = datetime.now().strftime("%d.%m.%Y %H:%M")
     phone_digits = "".join(ch for ch in phone if ch.isdigit())
@@ -319,13 +458,16 @@ def build_email_body(name: str, phone: str, comment: str, lead_id: int) -> tuple
             f"  Куда:   {to_addr or '—'}\n"
         )
 
+    media_text_block, media_html_block = build_media_blocks(media or [])
+
     text_body = (
         f"Новая заявка #{lead_id}\n"
         f"Время: {now}\n\n"
         f"👤 Имя: {name}\n"
         f"📞 Телефон: {phone}\n"
         f"{cargo_line_txt}"
-        f"{route_line_txt}\n"
+        f"{route_line_txt}"
+        f"{media_text_block}\n"
         f"Перезвоните клиенту как можно скорее."
     )
 
@@ -354,6 +496,7 @@ def build_email_body(name: str, phone: str, comment: str, lead_id: int) -> tuple
         </tr>
         {cargo_block_html}
         {route_block_html}
+        {media_html_block}
         <tr>
           <td style="padding:20px;background:#fafafa;text-align:center;">
             <a href="tel:{tel_link}" style="display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#f5d060 0%,#e8a820 50%,#c8850a 100%);color:#000;font-weight:900;text-decoration:none;border-radius:999px;font-size:15px;">
@@ -370,20 +513,21 @@ def build_email_body(name: str, phone: str, comment: str, lead_id: int) -> tuple
     return text_body, html_body
 
 
-def send_email(name: str, phone: str, comment: str, lead_id: int):
+def send_email(name: str, phone: str, comment: str, lead_id: int, media: list[dict] | None = None):
     msg = MIMEMultipart("alternative")
 
     # Тема письма включает тип груза, если указан
+    media_mark = f" +{len(media)}📎" if media else ""
     if comment:
         short_cargo = comment[:40] + ("…" if len(comment) > 40 else "")
-        msg["Subject"] = f"Заявка #{lead_id}: {name} — {short_cargo}"
+        msg["Subject"] = f"Заявка #{lead_id}: {name} — {short_cargo}{media_mark}"
     else:
-        msg["Subject"] = f"Заявка #{lead_id}: {name} — {phone}"
+        msg["Subject"] = f"Заявка #{lead_id}: {name} — {phone}{media_mark}"
 
     msg["From"] = "960188@list.ru"
     msg["To"] = "960188@list.ru"
 
-    text_body, html_body = build_email_body(name, phone, comment, lead_id)
+    text_body, html_body = build_email_body(name, phone, comment, lead_id, media)
 
     msg.attach(MIMEText(text_body, "plain", "utf-8"))
     msg.attach(MIMEText(html_body, "html", "utf-8"))
@@ -429,6 +573,9 @@ def handler(event: dict, context) -> dict:
     name = (body.get('name') or '').strip()
     phone = (body.get('phone') or '').strip()
     comment = (body.get('comment') or '').strip()
+    media_raw = body.get('media') or []
+    if not isinstance(media_raw, list):
+        media_raw = []
 
     if not name or not phone:
         return {
@@ -448,13 +595,23 @@ def handler(event: dict, context) -> dict:
     cur.close()
     conn.close()
 
+    uploaded_media: list[dict] = []
     try:
-        send_email(name, phone, comment, lead_id)
+        uploaded_media = upload_lead_media(media_raw, lead_id)
+    except Exception as e:
+        print(f"Media upload error: {e}")
+
+    try:
+        send_email(name, phone, comment, lead_id, uploaded_media)
     except Exception as e:
         print(f"Email send error: {e}")
 
     return {
         'statusCode': 200,
         'headers': {'Access-Control-Allow-Origin': '*'},
-        'body': json.dumps({'success': True, 'id': lead_id}, ensure_ascii=False)
+        'body': json.dumps({
+            'success': True,
+            'id': lead_id,
+            'media': [{'url': m['url'], 'name': m['name'], 'kind': m['kind']} for m in uploaded_media],
+        }, ensure_ascii=False)
     }
