@@ -4,7 +4,7 @@ import Icon from "@/components/ui/icon";
 import { SUBMIT_URL } from "./heroData";
 
 const MAX_FILES = 5;
-const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 МБ на файл (видео могут быть тяжёлыми)
+const MAX_FILE_SIZE = 500 * 1024 * 1024; // 500 МБ на файл — для длинных видео с телефона
 const IMAGE_MAX_DIMENSION = 1920; // макс. сторона при сжатии фото
 const IMAGE_QUALITY = 0.82;
 const IMAGE_COMPRESS_THRESHOLD = 800 * 1024; // фото меньше 800 КБ не сжимаем
@@ -262,7 +262,7 @@ const HeroLeadForm = () => {
         break;
       }
       if (file.size > MAX_FILE_SIZE) {
-        setMediaError(`Файл "${file.name}" больше 50 МБ — уменьшите его или отправьте отдельно`);
+        setMediaError(`Файл "${file.name}" больше 500 МБ — уменьшите его или отправьте отдельно`);
         continue;
       }
       const isImage = file.type.startsWith("image/");
@@ -552,7 +552,7 @@ const HeroLeadForm = () => {
                   <p className="text-amber-400 text-[11px] leading-snug">{mediaError}</p>
                 )}
                 <p className="text-[10px] text-white/40 leading-snug text-center">
-                  До {MAX_FILES} файлов, по 50 МБ. Фото сжимаются автоматически — заявка отправится быстрее.
+                  До {MAX_FILES} файлов, по 500 МБ. Фото сжимаются автоматически — заявка отправится быстрее.
                 </p>
               </div>
 
