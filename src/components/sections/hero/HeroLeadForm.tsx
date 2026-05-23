@@ -4,13 +4,16 @@ import Icon from "@/components/ui/icon";
 import { SUBMIT_URL } from "./heroData";
 
 const MAX_FILES = 5;
-const MAX_FILE_SIZE = 25 * 1024 * 1024; // 25 МБ
+const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 МБ на файл (видео могут быть тяжёлыми)
 
 type MediaItem = {
   id: string;
   file: File;
   previewUrl: string;
   kind: "image" | "video";
+  uploadStatus: "pending" | "uploading" | "done" | "error";
+  uploadedUrl?: string;
+  errorText?: string;
 };
 
 const fileToBase64 = (file: File): Promise<string> =>
@@ -37,17 +40,59 @@ const HeroLeadForm = () => {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  const uploadOne = async (item: MediaItem) => {
+    setMedia((prev) =>
+      prev.map((x) => (x.id === item.id ? { ...x, uploadStatus: "uploading", errorText: undefined } : x))
+    );
+    try {
+      const dataB64 = await fileToBase64(item.file);
+      const res = await fetch(SUBMIT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "upload-media",
+          filename: item.file.name,
+          mime: item.file.type,
+          data: dataB64,
+        }),
+      });
+      const json = await res.json().catch(() => ({} as { url?: string; error?: string }));
+      if (res.ok && json.url) {
+        setMedia((prev) =>
+          prev.map((x) => (x.id === item.id ? { ...x, uploadStatus: "done", uploadedUrl: json.url } : x))
+        );
+      } else {
+        setMedia((prev) =>
+          prev.map((x) =>
+            x.id === item.id
+              ? { ...x, uploadStatus: "error", errorText: json.error || "Не удалось загрузить" }
+              : x
+          )
+        );
+      }
+    } catch {
+      setMedia((prev) =>
+        prev.map((x) =>
+          x.id === item.id
+            ? { ...x, uploadStatus: "error", errorText: "Сбой сети при загрузке" }
+            : x
+        )
+      );
+    }
+  };
+
   const handleFilesPicked = (files: FileList | null) => {
     if (!files || files.length === 0) return;
     setMediaError("");
     const next: MediaItem[] = [...media];
+    const justAdded: MediaItem[] = [];
     for (const file of Array.from(files)) {
       if (next.length >= MAX_FILES) {
         setMediaError(`Можно прикрепить не больше ${MAX_FILES} файлов`);
         break;
       }
       if (file.size > MAX_FILE_SIZE) {
-        setMediaError(`Файл "${file.name}" больше 25 МБ — уменьшите его или отправьте отдельно`);
+        setMediaError(`Файл "${file.name}" больше 50 МБ — уменьшите его или отправьте отдельно`);
         continue;
       }
       const isImage = file.type.startsWith("image/");
@@ -56,14 +101,26 @@ const HeroLeadForm = () => {
         setMediaError("Можно прикреплять только фото или видео");
         continue;
       }
-      next.push({
+      const item: MediaItem = {
         id: `${file.name}-${file.size}-${file.lastModified}-${Math.random().toString(36).slice(2, 7)}`,
         file,
         previewUrl: URL.createObjectURL(file),
         kind: isVideo ? "video" : "image",
-      });
+        uploadStatus: "pending",
+      };
+      next.push(item);
+      justAdded.push(item);
     }
     setMedia(next);
+    // Сразу запускаем фоновую загрузку каждого файла по одному
+    justAdded.forEach((it) => {
+      void uploadOne(it);
+    });
+  };
+
+  const retryUpload = (id: string) => {
+    const item = media.find((m) => m.id === id);
+    if (item) void uploadOne(item);
   };
 
   const removeMedia = (id: string) => {
@@ -90,7 +147,15 @@ const HeroLeadForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !phone.trim()) return;
+
+    const stillUploading = media.some((m) => m.uploadStatus === "uploading" || m.uploadStatus === "pending");
+    if (stillUploading) {
+      setMediaError("Дождитесь окончания загрузки файлов");
+      return;
+    }
+
     setStatus("loading");
+    setMediaError("");
     try {
       const commentParts = [
         cargo && `Груз: ${cargo}`,
@@ -98,13 +163,16 @@ const HeroLeadForm = () => {
         toAddr && `Куда: ${toAddr}`,
       ].filter(Boolean);
 
-      const encodedMedia = await Promise.all(
-        media.map(async (m) => ({
+      // К форме прикрепляем только успешно загруженные файлы — ссылки уже в S3
+      const mediaPayload = media
+        .filter((m) => m.uploadStatus === "done" && m.uploadedUrl)
+        .map((m) => ({
+          url: m.uploadedUrl,
           name: m.file.name,
           mime: m.file.type,
-          data: await fileToBase64(m.file),
-        }))
-      );
+          kind: m.kind,
+          size: m.file.size,
+        }));
 
       const res = await fetch(SUBMIT_URL, {
         method: "POST",
@@ -113,7 +181,7 @@ const HeroLeadForm = () => {
           name,
           phone,
           comment: commentParts.join(" · "),
-          media: encodedMedia,
+          media: mediaPayload,
         }),
       });
       if (res.ok) {
@@ -259,6 +327,31 @@ const HeroLeadForm = () => {
                             <span className="text-[9px] mt-1 px-1 line-clamp-1">{m.file.name}</span>
                           </div>
                         )}
+
+                        {/* Оверлей статуса загрузки */}
+                        {m.uploadStatus === "uploading" && (
+                          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 text-white">
+                            <Icon name="Loader2" size={20} className="animate-spin text-accent" />
+                            <span className="text-[9px] mt-1 uppercase tracking-wider">Загрузка</span>
+                          </div>
+                        )}
+                        {m.uploadStatus === "error" && (
+                          <button
+                            type="button"
+                            onClick={() => retryUpload(m.id)}
+                            className="absolute inset-0 flex flex-col items-center justify-center bg-red-900/85 text-white hover:bg-red-800/90 transition-colors p-1"
+                            title={m.errorText || "Ошибка"}
+                          >
+                            <Icon name="RotateCw" size={18} />
+                            <span className="text-[9px] mt-1 uppercase tracking-wider">Повторить</span>
+                          </button>
+                        )}
+                        {m.uploadStatus === "done" && (
+                          <div className="absolute top-1 left-1 w-5 h-5 rounded-full bg-emerald-500/95 border border-white/40 flex items-center justify-center">
+                            <Icon name="Check" size={12} className="text-white" />
+                          </div>
+                        )}
+
                         <button
                           type="button"
                           onClick={() => removeMedia(m.id)}
@@ -279,7 +372,7 @@ const HeroLeadForm = () => {
                   <p className="text-amber-400 text-[11px] leading-snug">{mediaError}</p>
                 )}
                 <p className="text-[10px] text-white/40 leading-snug text-center">
-                  До {MAX_FILES} файлов, по 25 МБ. Помогает точнее рассчитать цену
+                  До {MAX_FILES} файлов, по 50 МБ. Загружаются сразу — отправите, когда все будут готовы.
                 </p>
               </div>
 

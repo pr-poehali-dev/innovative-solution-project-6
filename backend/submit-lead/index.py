@@ -554,6 +554,34 @@ def handler(event: dict, context) -> dict:
 
     body = json.loads(event.get('body') or '{}')
 
+    # Ветка для одиночной загрузки файла (фото/видео) — фронт грузит файлы по одному,
+    # чтобы не упереться в лимит размера body шлюза
+    if body.get('type') == 'upload-media':
+        single = {
+            'data': body.get('data') or '',
+            'mime': body.get('mime') or '',
+            'name': body.get('filename') or body.get('name') or '',
+        }
+        uploaded = upload_lead_media([single], lead_id=int(datetime.now().timestamp()))
+        if not uploaded:
+            return {
+                'statusCode': 400,
+                'headers': {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+                'body': json.dumps({'error': 'Не удалось загрузить файл'}, ensure_ascii=False),
+            }
+        m = uploaded[0]
+        return {
+            'statusCode': 200,
+            'headers': {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+            'body': json.dumps({
+                'success': True,
+                'url': m['url'],
+                'name': m['name'],
+                'kind': m['kind'],
+                'size': m['size'],
+            }, ensure_ascii=False),
+        }
+
     # Ветка для отправки заполненного договора директору
     if body.get('type') == 'contract':
         try:
@@ -595,9 +623,25 @@ def handler(event: dict, context) -> dict:
     cur.close()
     conn.close()
 
-    uploaded_media: list[dict] = []
+    # Разделяем уже-загруженные файлы (с готовым url) и сырые base64
+    pre_uploaded: list[dict] = []
+    to_upload: list[dict] = []
+    for m in media_raw:
+        if not isinstance(m, dict):
+            continue
+        if m.get('url'):
+            pre_uploaded.append({
+                'url': m.get('url'),
+                'name': m.get('name') or 'файл',
+                'kind': m.get('kind') or ('video' if (m.get('mime') or '').startswith('video/') else 'image'),
+                'size': int(m.get('size') or 0),
+            })
+        elif m.get('data'):
+            to_upload.append(m)
+
+    uploaded_media: list[dict] = list(pre_uploaded)
     try:
-        uploaded_media = upload_lead_media(media_raw, lead_id)
+        uploaded_media.extend(upload_lead_media(to_upload, lead_id))
     except Exception as e:
         print(f"Media upload error: {e}")
 
