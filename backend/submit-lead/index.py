@@ -31,6 +31,105 @@ _EXT_BY_MIME = {
 }
 
 
+def _make_s3():
+    access_key = os.environ.get("AWS_ACCESS_KEY_ID")
+    secret_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
+    if not access_key or not secret_key:
+        return None, None
+    s3 = boto3.client(
+        "s3",
+        endpoint_url="https://bucket.poehali.dev",
+        aws_access_key_id=access_key,
+        aws_secret_access_key=secret_key,
+    )
+    return s3, access_key
+
+
+def _ext_from_mime_or_name(mime: str, name: str) -> str:
+    ext = _EXT_BY_MIME.get((mime or "").lower())
+    if ext:
+        return ext
+    if "." in (name or ""):
+        return name.rsplit(".", 1)[-1].lower()[:5] or "bin"
+    return "bin"
+
+
+def start_chunked_upload(filename: str, mime: str, lead_id: int) -> dict:
+    """Открывает Multipart Upload и возвращает ключ S3 + uploadId."""
+    s3, access_key = _make_s3()
+    if not s3:
+        return {"error": "S3 не настроен"}
+    ext = _ext_from_mime_or_name(mime, filename)
+    safe_name = re.sub(r"[^a-zA-Z0-9._-]", "_", filename or "")[:50] or "file"
+    key = f"leads/{datetime.now().strftime('%Y%m%d')}/{lead_id}-{uuid.uuid4().hex[:10]}.{ext}"
+    try:
+        resp = s3.create_multipart_upload(
+            Bucket="files",
+            Key=key,
+            ContentType=mime or "application/octet-stream",
+        )
+        return {"key": key, "uploadId": resp["UploadId"], "safe_name": safe_name, "access_key": access_key}
+    except Exception as e:
+        return {"error": f"Не удалось открыть загрузку: {e}"}
+
+
+def upload_chunk(key: str, upload_id: str, part_number: int, data_b64: str) -> dict:
+    """Загружает одну часть multipart upload."""
+    s3, _ = _make_s3()
+    if not s3:
+        return {"error": "S3 не настроен"}
+    try:
+        raw = base64.b64decode(data_b64 or "", validate=False)
+    except Exception:
+        return {"error": "Битый base64"}
+    if not raw:
+        return {"error": "Пустой чанк"}
+    try:
+        resp = s3.upload_part(
+            Bucket="files",
+            Key=key,
+            PartNumber=part_number,
+            UploadId=upload_id,
+            Body=raw,
+        )
+        return {"etag": resp["ETag"], "size": len(raw)}
+    except Exception as e:
+        return {"error": f"Сбой чанка #{part_number}: {e}"}
+
+
+def finish_chunked_upload(key: str, upload_id: str, parts: list, mime: str, filename: str) -> dict:
+    """Завершает multipart upload и возвращает публичный URL."""
+    s3, access_key = _make_s3()
+    if not s3 or not access_key:
+        return {"error": "S3 не настроен"}
+    # parts: [{"PartNumber": 1, "ETag": "..."}, ...]
+    try:
+        norm_parts = sorted(
+            [{"PartNumber": int(p["PartNumber"]), "ETag": p["ETag"]} for p in parts],
+            key=lambda x: x["PartNumber"],
+        )
+        s3.complete_multipart_upload(
+            Bucket="files",
+            Key=key,
+            UploadId=upload_id,
+            MultipartUpload={"Parts": norm_parts},
+        )
+        kind = "video" if (mime or "").startswith("video/") else (
+            "image" if (mime or "").startswith("image/") else "file"
+        )
+        return {
+            "url": f"https://cdn.poehali.dev/projects/{access_key}/bucket/{key}",
+            "name": filename or key.rsplit("/", 1)[-1],
+            "kind": kind,
+        }
+    except Exception as e:
+        try:
+            s3.abort_multipart_upload(Bucket="files", Key=key, UploadId=upload_id)
+        except Exception:
+            pass
+        return {"error": f"Не удалось собрать файл: {e}"}
+
+
 def upload_lead_media(media_list, lead_id: int) -> list[dict]:
     """Загружает фото/видео клиента в S3, возвращает список словарей {url, name, kind}."""
     if not media_list:
@@ -553,6 +652,50 @@ def handler(event: dict, context) -> dict:
         }
 
     body = json.loads(event.get('body') or '{}')
+
+    # Чанковая загрузка тяжёлых файлов (видео) через S3 Multipart Upload —
+    # позволяет грузить большие файлы кусками по 2-3 МБ
+    if body.get('type') == 'chunk-start':
+        result = start_chunked_upload(
+            filename=body.get('filename') or 'file',
+            mime=body.get('mime') or '',
+            lead_id=int(datetime.now().timestamp()),
+        )
+        status_code = 400 if result.get('error') else 200
+        return {
+            'statusCode': status_code,
+            'headers': {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+            'body': json.dumps(result, ensure_ascii=False),
+        }
+
+    if body.get('type') == 'chunk-part':
+        result = upload_chunk(
+            key=body.get('key') or '',
+            upload_id=body.get('uploadId') or '',
+            part_number=int(body.get('partNumber') or 0),
+            data_b64=body.get('data') or '',
+        )
+        status_code = 400 if result.get('error') else 200
+        return {
+            'statusCode': status_code,
+            'headers': {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+            'body': json.dumps(result, ensure_ascii=False),
+        }
+
+    if body.get('type') == 'chunk-finish':
+        result = finish_chunked_upload(
+            key=body.get('key') or '',
+            upload_id=body.get('uploadId') or '',
+            parts=body.get('parts') or [],
+            mime=body.get('mime') or '',
+            filename=body.get('filename') or '',
+        )
+        status_code = 400 if result.get('error') else 200
+        return {
+            'statusCode': status_code,
+            'headers': {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+            'body': json.dumps(result, ensure_ascii=False),
+        }
 
     # Ветка для одиночной загрузки файла (фото/видео) — фронт грузит файлы по одному,
     # чтобы не упереться в лимит размера body шлюза

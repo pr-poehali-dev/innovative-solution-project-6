@@ -19,6 +19,7 @@ type MediaItem = {
   errorText?: string;
   originalSize?: number;
   finalSize?: number;
+  uploadProgress?: number;
 };
 
 const fileToBase64 = (file: File | Blob): Promise<string> =>
@@ -108,6 +109,104 @@ const HeroLeadForm = () => {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  /**
+   * Загрузка файла одним запросом (для маленьких файлов и фото).
+   * Возвращает URL или null.
+   */
+  const uploadSingle = async (file: File): Promise<string | null> => {
+    const dataB64 = await fileToBase64(file);
+    const res = await fetch(SUBMIT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: "upload-media",
+        filename: file.name,
+        mime: file.type,
+        data: dataB64,
+      }),
+    });
+    const json = (await res.json().catch(() => ({}))) as { url?: string; error?: string };
+    if (res.ok && json.url) return json.url;
+    throw new Error(json.error || "Ошибка загрузки");
+  };
+
+  /**
+   * Чанковая загрузка через S3 Multipart Upload (для тяжёлых видео).
+   * Режет файл на куски ~2.5 МБ и шлёт по одному.
+   */
+  const uploadChunked = async (
+    file: File,
+    onProgress: (percent: number) => void
+  ): Promise<string | null> => {
+    const CHUNK_SIZE = 2_500_000; // ~2.5 МБ бинарных = ~3.4 МБ base64
+
+    // 1. Открываем загрузку
+    const startRes = await fetch(SUBMIT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: "chunk-start",
+        filename: file.name,
+        mime: file.type,
+      }),
+    });
+    const startJson = (await startRes.json().catch(() => ({}))) as {
+      key?: string;
+      uploadId?: string;
+      error?: string;
+    };
+    if (!startRes.ok || !startJson.key || !startJson.uploadId) {
+      throw new Error(startJson.error || "Не удалось начать загрузку");
+    }
+    const { key, uploadId } = startJson;
+
+    // 2. Грузим чанки последовательно
+    const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+    const parts: { PartNumber: number; ETag: string }[] = [];
+    for (let i = 0; i < totalChunks; i++) {
+      const start = i * CHUNK_SIZE;
+      const end = Math.min(start + CHUNK_SIZE, file.size);
+      const blob = file.slice(start, end);
+      const b64 = await fileToBase64(blob);
+      const partRes = await fetch(SUBMIT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "chunk-part",
+          key,
+          uploadId,
+          partNumber: i + 1,
+          data: b64,
+        }),
+      });
+      const partJson = (await partRes.json().catch(() => ({}))) as { etag?: string; error?: string };
+      if (!partRes.ok || !partJson.etag) {
+        throw new Error(partJson.error || `Сбой части ${i + 1}/${totalChunks}`);
+      }
+      parts.push({ PartNumber: i + 1, ETag: partJson.etag });
+      onProgress(Math.round(((i + 1) / totalChunks) * 100));
+    }
+
+    // 3. Завершаем загрузку
+    const finishRes = await fetch(SUBMIT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: "chunk-finish",
+        key,
+        uploadId,
+        parts,
+        mime: file.type,
+        filename: file.name,
+      }),
+    });
+    const finishJson = (await finishRes.json().catch(() => ({}))) as { url?: string; error?: string };
+    if (!finishRes.ok || !finishJson.url) {
+      throw new Error(finishJson.error || "Не удалось собрать файл");
+    }
+    return finishJson.url;
+  };
+
   const uploadOne = async (item: MediaItem) => {
     setMedia((prev) =>
       prev.map((x) => (x.id === item.id ? { ...x, uploadStatus: "uploading", errorText: undefined } : x))
@@ -115,41 +214,42 @@ const HeroLeadForm = () => {
     try {
       // Сжимаем фото перед загрузкой (видео не трогаем)
       const fileForUpload = item.kind === "image" ? await compressImage(item.file) : item.file;
-      const dataB64 = await fileToBase64(fileForUpload);
-      const res = await fetch(SUBMIT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: "upload-media",
-          filename: fileForUpload.name,
-          mime: fileForUpload.type,
-          data: dataB64,
-        }),
-      });
-      const json = await res.json().catch(() => ({} as { url?: string; error?: string }));
-      if (res.ok && json.url) {
+
+      // Файлы >3 МБ грузим чанками (не упрёмся в лимит body шлюза)
+      const HEAVY_THRESHOLD = 3 * 1024 * 1024;
+      let url: string | null;
+      if (fileForUpload.size > HEAVY_THRESHOLD) {
+        url = await uploadChunked(fileForUpload, (percent) => {
+          setMedia((prev) =>
+            prev.map((x) => (x.id === item.id ? { ...x, uploadProgress: percent } : x))
+          );
+        });
+      } else {
+        url = await uploadSingle(fileForUpload);
+      }
+
+      if (url) {
         setMedia((prev) =>
           prev.map((x) =>
             x.id === item.id
-              ? { ...x, uploadStatus: "done", uploadedUrl: json.url, finalSize: fileForUpload.size }
+              ? {
+                  ...x,
+                  uploadStatus: "done",
+                  uploadedUrl: url || undefined,
+                  finalSize: fileForUpload.size,
+                  uploadProgress: 100,
+                }
               : x
           )
         );
       } else {
-        setMedia((prev) =>
-          prev.map((x) =>
-            x.id === item.id
-              ? { ...x, uploadStatus: "error", errorText: json.error || "Не удалось загрузить" }
-              : x
-          )
-        );
+        throw new Error("Пустой ответ сервера");
       }
-    } catch {
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "Сбой сети при загрузке";
       setMedia((prev) =>
         prev.map((x) =>
-          x.id === item.id
-            ? { ...x, uploadStatus: "error", errorText: "Сбой сети при загрузке" }
-            : x
+          x.id === item.id ? { ...x, uploadStatus: "error", errorText: msg } : x
         )
       );
     }
@@ -405,9 +505,11 @@ const HeroLeadForm = () => {
 
                         {/* Оверлей статуса загрузки */}
                         {m.uploadStatus === "uploading" && (
-                          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 text-white">
+                          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/75 text-white">
                             <Icon name="Loader2" size={20} className="animate-spin text-accent" />
-                            <span className="text-[9px] mt-1 uppercase tracking-wider">Загрузка</span>
+                            <span className="text-[10px] mt-1 uppercase tracking-wider font-bold">
+                              {typeof m.uploadProgress === "number" ? `${m.uploadProgress}%` : "Загрузка"}
+                            </span>
                           </div>
                         )}
                         {m.uploadStatus === "error" && (
