@@ -513,9 +513,9 @@ def build_media_blocks(media: list[dict]) -> tuple[str, str]:
 
     text_block = "\n📎 Прикреплённые файлы:\n" + "\n".join(items_text) + "\n"
     html_block = (
-        '<tr><td style="padding:14px 20px;background:#f5f5f5;border-left:4px solid #10b981;">'
-        '<div style="font-size:12px;color:#065f46;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:10px;">'
-        '📎 Файлы от клиента (фото / видео объекта)'
+        '<tr><td style="padding:18px 22px;background:#fffbeb;border-left:4px solid #e8a820;border-top:1px solid #f0e7c4;">'
+        '<div style="font-size:11px;color:#8a6d1a;text-transform:uppercase;letter-spacing:1.8px;font-weight:800;margin-bottom:12px;">'
+        '📎 Файлы от клиента (фото / видео груза)'
         '</div>'
         + "".join(items_html) +
         '</td></tr>'
@@ -534,44 +534,12 @@ def build_email_body(name: str, phone: str, comment: str, lead_id: int, media: l
     from_addr = parsed["from"]
     to_addr = parsed["to"]
 
-    cargo_line_txt = ""
-    cargo_block_html = ""
-    if cargo_text:
-        cargo_line_txt = f"\n📦 Что перевозим:\n{cargo_text}\n"
-        cargo_block_html = (
-            '<tr><td style="padding:14px 20px;background:#fff8e6;border-left:4px solid #e8a820;">'
-            '<div style="font-size:12px;color:#8a6d1a;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:6px;">'
-            '📦 Что перевозим / нюансы'
-            '</div>'
-            f'<div style="font-size:16px;color:#1a1a1a;line-height:1.5;font-weight:500;">{cargo_text}</div>'
-            '</td></tr>'
-        )
-    else:
-        cargo_block_html = (
-            '<tr><td style="padding:12px 20px;background:#f5f5f5;color:#888;font-size:13px;font-style:italic;">'
-            'Груз не указан — уточните у клиента'
-            '</td></tr>'
-        )
-
-    route_block_html = ""
-    route_line_txt = ""
-    if from_addr or to_addr:
-        from_html = from_addr or '<span style="color:#aaa;">—</span>'
-        to_html = to_addr or '<span style="color:#aaa;">—</span>'
-        route_block_html = (
-            '<tr><td style="padding:14px 20px;background:#f0f9ff;border-left:4px solid #0ea5e9;">'
-            '<div style="font-size:12px;color:#0369a1;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px;">'
-            '🗺 Маршрут'
-            '</div>'
-            f'<div style="font-size:14px;color:#1a1a1a;line-height:1.6;"><b>Откуда:</b> {from_html}</div>'
-            f'<div style="font-size:14px;color:#1a1a1a;line-height:1.6;"><b>Куда:</b> {to_html}</div>'
-            '</td></tr>'
-        )
-        route_line_txt = (
-            f"\n🗺 Маршрут:\n"
-            f"  Откуда: {from_addr or '—'}\n"
-            f"  Куда:   {to_addr or '—'}\n"
-        )
+    # Текстовые версии блоков (для plain text-копии письма)
+    cargo_line_txt = f"\n📦 Что перевозим:\n{cargo_text}\n" if cargo_text else ""
+    route_line_txt = (
+        f"\n🗺 Маршрут:\n  Откуда: {from_addr or '—'}\n  Куда:   {to_addr or '—'}\n"
+        if (from_addr or to_addr) else ""
+    )
 
     media_text_block, media_html_block = build_media_blocks(media or [])
 
@@ -586,44 +554,141 @@ def build_email_body(name: str, phone: str, comment: str, lead_id: int, media: l
         f"Перезвоните клиенту как можно скорее."
     )
 
-    html_body = f"""
-    <!DOCTYPE html>
-    <html>
-    <head><meta charset="utf-8"></head>
-    <body style="margin:0;padding:20px;background:#f4f4f4;font-family:Arial,sans-serif;">
-      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.08);">
+    # Короткое превью для inbox (Apple Mail, Gmail) — показывает имя+телефон ещё до открытия
+    preview_text = f"{name} · {phone}"
+    if cargo_text:
+        preview_text += f" · {cargo_text[:60]}"
+    sms_link = f"sms:{tel_link}"
+    wa_digits = phone_digits if phone_digits else ""
+    wa_link = f"https://wa.me/{wa_digits}" if wa_digits else ""
+
+    wa_button_html = ""
+    if wa_link:
+        wa_button_html = (
+            f'<a href="{wa_link}" target="_blank" '
+            'style="display:inline-block;padding:12px 22px;margin:4px 6px;background:#25D366;color:#fff;'
+            'font-weight:800;text-decoration:none;border-radius:999px;font-size:14px;">'
+            '💬 WhatsApp</a>'
+        )
+
+    html_body = f"""<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Заявка #{lead_id}</title>
+</head>
+<body style="margin:0;padding:0;background:#0f1115;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;">
+  <!-- pre-header (виден в превью inbox, но скрыт в самом письме) -->
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
+    {preview_text}
+  </div>
+
+  <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#0f1115;padding:24px 12px;">
+    <tr><td align="center">
+      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:620px;background:#15181f;border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.5);border:1px solid #232733;">
+
+        <!-- Бренд-полоска -->
         <tr>
-          <td style="padding:20px 24px;background:linear-gradient(135deg,#e8a820 0%,#c8850a 100%);color:#000;">
-            <div style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;">Новая заявка с сайта</div>
-            <div style="font-size:22px;font-weight:900;margin-top:4px;">Заявка #{lead_id}</div>
-            <div style="font-size:13px;opacity:0.8;margin-top:4px;">{now}</div>
+          <td style="background:linear-gradient(90deg,#f5d060 0%,#e8a820 50%,#c8850a 100%);height:5px;line-height:5px;font-size:1px;">&nbsp;</td>
+        </tr>
+
+        <!-- Шапка: бренд + лейбл "Новая заявка с сайта" -->
+        <tr>
+          <td style="padding:24px 28px 18px 28px;background:linear-gradient(180deg,#1a1d26 0%,#15181f 100%);">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td>
+                  <div style="font-size:11px;color:#e8a820;text-transform:uppercase;letter-spacing:2.5px;font-weight:800;">
+                    ФАВОРИТ НН · Грузоперевозки
+                  </div>
+                  <div style="font-size:11px;color:#9098a8;margin-top:6px;letter-spacing:1px;text-transform:uppercase;">
+                    Новая заявка с сайта
+                  </div>
+                </td>
+                <td align="right" style="vertical-align:top;">
+                  <div style="display:inline-block;padding:6px 12px;background:#e8a820;color:#0f1115;font-size:13px;font-weight:900;border-radius:999px;letter-spacing:0.5px;">
+                    #{lead_id}
+                  </div>
+                  <div style="font-size:11px;color:#6b7280;margin-top:6px;">{now}</div>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
+
+        <!-- Имя и телефон крупно -->
         <tr>
-          <td style="padding:20px;">
-            <div style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:4px;">👤 Имя</div>
-            <div style="font-size:18px;color:#1a1a1a;font-weight:700;margin-bottom:18px;">{name}</div>
-            <div style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:4px;">📞 Телефон</div>
-            <div style="font-size:20px;margin-bottom:6px;">
-              <a href="tel:{tel_link}" style="color:#c8850a;font-weight:800;text-decoration:none;">{phone}</a>
+          <td style="padding:22px 28px 8px 28px;background:#15181f;">
+            <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:1.8px;font-weight:700;margin-bottom:6px;">👤 Клиент</div>
+            <div style="font-size:22px;color:#fff;font-weight:800;margin-bottom:20px;">{name}</div>
+
+            <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:1.8px;font-weight:700;margin-bottom:6px;">📞 Телефон</div>
+            <div style="font-size:26px;margin-bottom:14px;">
+              <a href="tel:{tel_link}" style="color:#f5d060;font-weight:900;text-decoration:none;">{phone}</a>
+            </div>
+            <div style="margin-bottom:8px;">
+              <a href="tel:{tel_link}" style="display:inline-block;padding:10px 18px;margin:4px 6px 4px 0;background:linear-gradient(135deg,#f5d060 0%,#e8a820 50%,#c8850a 100%);color:#0f1115;font-weight:900;text-decoration:none;border-radius:999px;font-size:14px;">📞 Позвонить</a>
+              <a href="{sms_link}" style="display:inline-block;padding:10px 18px;margin:4px 6px 4px 0;background:#262b38;color:#f5d060;font-weight:800;text-decoration:none;border-radius:999px;font-size:14px;border:1px solid #3a4054;">✉ SMS</a>
+              {wa_button_html}
             </div>
           </td>
         </tr>
-        {cargo_block_html}
-        {route_block_html}
-        {media_html_block}
+
+        <!-- Блок груза (на тёмном фоне) -->
+        {("<tr><td style='padding:0 28px 4px 28px;background:#15181f;'><div style='padding:16px 18px;background:#1f1a0e;border:1px solid #3a2f12;border-left:4px solid #e8a820;border-radius:10px;'>"
+          "<div style='font-size:11px;color:#e8a820;text-transform:uppercase;letter-spacing:1.8px;font-weight:800;margin-bottom:8px;'>📦 Что перевозим / нюансы</div>"
+          f"<div style='font-size:15px;color:#f3f4f6;line-height:1.55;font-weight:500;'>{cargo_text}</div>"
+          "</div></td></tr>") if cargo_text else
+         "<tr><td style='padding:0 28px 4px 28px;background:#15181f;'><div style='padding:12px 16px;background:#1a1d26;border:1px dashed #3a4054;border-radius:10px;color:#9098a8;font-size:13px;font-style:italic;'>Груз не указан — уточните у клиента</div></td></tr>"}
+
+        <!-- Блок маршрута -->
+        {("<tr><td style='padding:10px 28px 4px 28px;background:#15181f;'><div style='padding:16px 18px;background:#0e1922;border:1px solid #15324a;border-left:4px solid #38bdf8;border-radius:10px;'>"
+          "<div style='font-size:11px;color:#7dd3fc;text-transform:uppercase;letter-spacing:1.8px;font-weight:800;margin-bottom:10px;'>🗺 Маршрут</div>"
+          f"<div style='font-size:14px;color:#f3f4f6;line-height:1.7;'><span style='color:#7dd3fc;font-weight:700;'>Откуда:</span> {from_addr or '<span style=color:#6b7280>—</span>'}</div>"
+          f"<div style='font-size:14px;color:#f3f4f6;line-height:1.7;'><span style='color:#7dd3fc;font-weight:700;'>Куда:</span> &nbsp;&nbsp;&nbsp;{to_addr or '<span style=color:#6b7280>—</span>'}</div>"
+          "</div></td></tr>") if (from_addr or to_addr) else ""}
+
+        <!-- Файлы клиента (фото/видео) -->
+        {("<tr><td style='padding:10px 28px 4px 28px;background:#15181f;'><div style='padding:16px 18px;background:#0f1115;border:1px solid #232733;border-radius:10px;'>"
+          "<div style='font-size:11px;color:#e8a820;text-transform:uppercase;letter-spacing:1.8px;font-weight:800;margin-bottom:12px;'>📎 Файлы от клиента</div>"
+          + media_html_block.replace('<tr><td style="padding:18px 22px;background:#fffbeb;border-left:4px solid #e8a820;border-top:1px solid #f0e7c4;">', '').replace('<div style="font-size:11px;color:#8a6d1a;text-transform:uppercase;letter-spacing:1.8px;font-weight:800;margin-bottom:12px;">📎 Файлы от клиента (фото / видео груза)</div>', '').replace('</td></tr>', '').replace('background:#fff;border:1px solid #e8e8e8', 'background:#1a1d26;border:1px solid #2a2f3d')
+            if media_html_block else "<div style='color:#6b7280;font-size:13px;font-style:italic;'>Клиент не приложил файлы</div>"
+          + "</div></td></tr>") if media_html_block else ""}
+
+        <!-- CTA: большая кнопка перезвонить -->
         <tr>
-          <td style="padding:20px;background:#fafafa;text-align:center;">
-            <a href="tel:{tel_link}" style="display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#f5d060 0%,#e8a820 50%,#c8850a 100%);color:#000;font-weight:900;text-decoration:none;border-radius:999px;font-size:15px;">
+          <td style="padding:22px 28px 12px 28px;background:#15181f;text-align:center;">
+            <a href="tel:{tel_link}" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#f5d060 0%,#e8a820 50%,#c8850a 100%);color:#0f1115;font-weight:900;text-decoration:none;border-radius:999px;font-size:16px;box-shadow:0 6px 20px rgba(232,168,32,0.35);">
               📞 Перезвонить клиенту
             </a>
-            <div style="font-size:12px;color:#888;margin-top:12px;">Письмо отправлено автоматически с сайта Фаворит НН</div>
+            <div style="font-size:12px;color:#9098a8;margin-top:14px;line-height:1.5;">
+              Перезвоните в течение 5 минут — клиент сейчас выбирает перевозчика.
+            </div>
           </td>
         </tr>
+
+        <!-- Футер с подписью бренда -->
+        <tr>
+          <td style="padding:18px 28px;background:#0f1115;border-top:1px solid #232733;text-align:center;">
+            <div style="font-size:11px;color:#e8a820;text-transform:uppercase;letter-spacing:2px;font-weight:800;margin-bottom:4px;">ФАВОРИТ НН</div>
+            <div style="font-size:11px;color:#6b7280;line-height:1.5;">
+              Это автоматическое уведомление с сайта favorit-nn.ru<br>
+              Заявка №{lead_id} · {now}
+            </div>
+          </td>
+        </tr>
+
+        <!-- Нижняя бренд-полоска -->
+        <tr>
+          <td style="background:linear-gradient(90deg,#c8850a 0%,#e8a820 50%,#f5d060 100%);height:4px;line-height:4px;font-size:1px;">&nbsp;</td>
+        </tr>
+
       </table>
-    </body>
-    </html>
-    """
+    </td></tr>
+  </table>
+</body>
+</html>"""
 
     return text_body, html_body
 
