@@ -5,6 +5,9 @@ import { SUBMIT_URL } from "./heroData";
 
 const MAX_FILES = 5;
 const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 МБ на файл (видео могут быть тяжёлыми)
+const IMAGE_MAX_DIMENSION = 1920; // макс. сторона при сжатии фото
+const IMAGE_QUALITY = 0.82;
+const IMAGE_COMPRESS_THRESHOLD = 800 * 1024; // фото меньше 800 КБ не сжимаем
 
 type MediaItem = {
   id: string;
@@ -14,9 +17,11 @@ type MediaItem = {
   uploadStatus: "pending" | "uploading" | "done" | "error";
   uploadedUrl?: string;
   errorText?: string;
+  originalSize?: number;
+  finalSize?: number;
 };
 
-const fileToBase64 = (file: File): Promise<string> =>
+const fileToBase64 = (file: File | Blob): Promise<string> =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => {
@@ -27,6 +32,69 @@ const fileToBase64 = (file: File): Promise<string> =>
     };
     reader.onerror = () => reject(reader.error);
     reader.readAsDataURL(file);
+  });
+
+/**
+ * Сжимает фото в браузере: уменьшает размер до IMAGE_MAX_DIMENSION
+ * по большей стороне и конвертирует в JPEG. Видео не трогает.
+ * Если что-то пошло не так — возвращает исходный файл.
+ */
+const compressImage = (file: File): Promise<File> =>
+  new Promise((resolve) => {
+    if (!file.type.startsWith("image/")) {
+      resolve(file);
+      return;
+    }
+    // Не сжимаем мелкие файлы и анимированные GIF
+    if (file.size < IMAGE_COMPRESS_THRESHOLD || file.type === "image/gif") {
+      resolve(file);
+      return;
+    }
+
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const { width, height } = img;
+        const maxSide = Math.max(width, height);
+        const scale = maxSide > IMAGE_MAX_DIMENSION ? IMAGE_MAX_DIMENSION / maxSide : 1;
+        const targetW = Math.round(width * scale);
+        const targetH = Math.round(height * scale);
+
+        const canvas = document.createElement("canvas");
+        canvas.width = targetW;
+        canvas.height = targetH;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          URL.revokeObjectURL(url);
+          resolve(file);
+          return;
+        }
+        ctx.drawImage(img, 0, 0, targetW, targetH);
+        canvas.toBlob(
+          (blob) => {
+            URL.revokeObjectURL(url);
+            if (!blob || blob.size >= file.size) {
+              // если после сжатия стало больше — оставляем оригинал
+              resolve(file);
+              return;
+            }
+            const newName = file.name.replace(/\.(png|webp|heic|heif|bmp|tiff?|jpeg|jpg)$/i, "") + ".jpg";
+            resolve(new File([blob], newName, { type: "image/jpeg", lastModified: Date.now() }));
+          },
+          "image/jpeg",
+          IMAGE_QUALITY
+        );
+      } catch {
+        URL.revokeObjectURL(url);
+        resolve(file);
+      }
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      resolve(file);
+    };
+    img.src = url;
   });
 
 const HeroLeadForm = () => {
@@ -45,21 +113,27 @@ const HeroLeadForm = () => {
       prev.map((x) => (x.id === item.id ? { ...x, uploadStatus: "uploading", errorText: undefined } : x))
     );
     try {
-      const dataB64 = await fileToBase64(item.file);
+      // Сжимаем фото перед загрузкой (видео не трогаем)
+      const fileForUpload = item.kind === "image" ? await compressImage(item.file) : item.file;
+      const dataB64 = await fileToBase64(fileForUpload);
       const res = await fetch(SUBMIT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "upload-media",
-          filename: item.file.name,
-          mime: item.file.type,
+          filename: fileForUpload.name,
+          mime: fileForUpload.type,
           data: dataB64,
         }),
       });
       const json = await res.json().catch(() => ({} as { url?: string; error?: string }));
       if (res.ok && json.url) {
         setMedia((prev) =>
-          prev.map((x) => (x.id === item.id ? { ...x, uploadStatus: "done", uploadedUrl: json.url } : x))
+          prev.map((x) =>
+            x.id === item.id
+              ? { ...x, uploadStatus: "done", uploadedUrl: json.url, finalSize: fileForUpload.size }
+              : x
+          )
         );
       } else {
         setMedia((prev) =>
@@ -107,6 +181,7 @@ const HeroLeadForm = () => {
         previewUrl: URL.createObjectURL(file),
         kind: isVideo ? "video" : "image",
         uploadStatus: "pending",
+        originalSize: file.size,
       };
       next.push(item);
       justAdded.push(item);
@@ -347,9 +422,16 @@ const HeroLeadForm = () => {
                           </button>
                         )}
                         {m.uploadStatus === "done" && (
-                          <div className="absolute top-1 left-1 w-5 h-5 rounded-full bg-emerald-500/95 border border-white/40 flex items-center justify-center">
-                            <Icon name="Check" size={12} className="text-white" />
-                          </div>
+                          <>
+                            <div className="absolute top-1 left-1 w-5 h-5 rounded-full bg-emerald-500/95 border border-white/40 flex items-center justify-center">
+                              <Icon name="Check" size={12} className="text-white" />
+                            </div>
+                            {m.kind === "image" && m.originalSize && m.finalSize && m.finalSize < m.originalSize * 0.9 && (
+                              <div className="absolute top-1 left-7 px-1.5 py-0.5 rounded-full bg-accent/95 text-black text-[9px] font-black uppercase tracking-wider shadow">
+                                −{Math.round((1 - m.finalSize / m.originalSize) * 100)}%
+                              </div>
+                            )}
+                          </>
                         )}
 
                         <button
@@ -372,7 +454,7 @@ const HeroLeadForm = () => {
                   <p className="text-amber-400 text-[11px] leading-snug">{mediaError}</p>
                 )}
                 <p className="text-[10px] text-white/40 leading-snug text-center">
-                  До {MAX_FILES} файлов, по 50 МБ. Загружаются сразу — отправите, когда все будут готовы.
+                  До {MAX_FILES} файлов, по 50 МБ. Фото сжимаются автоматически — заявка отправится быстрее.
                 </p>
               </div>
 
