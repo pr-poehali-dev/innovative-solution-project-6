@@ -55,78 +55,94 @@ def _ext_from_mime_or_name(mime: str, name: str) -> str:
 
 
 def start_chunked_upload(filename: str, mime: str, lead_id: int) -> dict:
-    """Открывает Multipart Upload и возвращает ключ S3 + uploadId."""
+    """Резервирует session_id для чанковой загрузки. Реального файла ещё нет —
+    каждый чанк сохранится как отдельная часть в S3, а в конце мы их склеим."""
     s3, access_key = _make_s3()
-    if not s3:
+    if not s3 or not access_key:
         return {"error": "S3 не настроен"}
-    ext = _ext_from_mime_or_name(mime, filename)
+    session_id = f"{lead_id}-{uuid.uuid4().hex[:10]}"
     safe_name = re.sub(r"[^a-zA-Z0-9._-]", "_", filename or "")[:50] or "file"
-    key = f"leads/{datetime.now().strftime('%Y%m%d')}/{lead_id}-{uuid.uuid4().hex[:10]}.{ext}"
-    try:
-        resp = s3.create_multipart_upload(
-            Bucket="files",
-            Key=key,
-            ContentType=mime or "application/octet-stream",
-        )
-        return {"key": key, "uploadId": resp["UploadId"], "safe_name": safe_name, "access_key": access_key}
-    except Exception as e:
-        return {"error": f"Не удалось открыть загрузку: {e}"}
+    return {
+        "sessionId": session_id,
+        "safe_name": safe_name,
+    }
 
 
-def upload_chunk(key: str, upload_id: str, part_number: int, data_b64: str) -> dict:
-    """Загружает одну часть multipart upload."""
+def upload_chunk(session_id: str, part_number: int, data_b64: str) -> dict:
+    """Сохраняет одну часть в S3 как самостоятельный объект."""
     s3, _ = _make_s3()
     if not s3:
         return {"error": "S3 не настроен"}
+    if not session_id:
+        return {"error": "Не указан sessionId"}
     try:
         raw = base64.b64decode(data_b64 or "", validate=False)
     except Exception:
         return {"error": "Битый base64"}
     if not raw:
         return {"error": "Пустой чанк"}
+
+    part_key = f"leads/_chunks/{session_id}/part-{int(part_number):05d}.bin"
     try:
-        resp = s3.upload_part(
+        s3.put_object(
             Bucket="files",
-            Key=key,
-            PartNumber=part_number,
-            UploadId=upload_id,
+            Key=part_key,
             Body=raw,
+            ContentType="application/octet-stream",
         )
-        return {"etag": resp["ETag"], "size": len(raw)}
+        return {"ok": True, "size": len(raw), "partNumber": int(part_number)}
     except Exception as e:
         return {"error": f"Сбой чанка #{part_number}: {e}"}
 
 
-def finish_chunked_upload(key: str, upload_id: str, parts: list, mime: str, filename: str) -> dict:
-    """Завершает multipart upload и возвращает публичный URL."""
+def finish_chunked_upload(session_id: str, total_parts: int, mime: str, filename: str, lead_id_hint: int = 0) -> dict:
+    """Скачивает все части из S3, склеивает их в один объект и удаляет временные части."""
     s3, access_key = _make_s3()
     if not s3 or not access_key:
         return {"error": "S3 не настроен"}
-    # parts: [{"PartNumber": 1, "ETag": "..."}, ...]
+    if not session_id or total_parts <= 0:
+        return {"error": "Неверные параметры финиша"}
+
     try:
-        norm_parts = sorted(
-            [{"PartNumber": int(p["PartNumber"]), "ETag": p["ETag"]} for p in parts],
-            key=lambda x: x["PartNumber"],
-        )
-        s3.complete_multipart_upload(
+        # Собираем все чанки в память (для 50 МБ это ок, лямбда имеет 256 МБ)
+        combined = bytearray()
+        for i in range(1, total_parts + 1):
+            part_key = f"leads/_chunks/{session_id}/part-{i:05d}.bin"
+            try:
+                obj = s3.get_object(Bucket="files", Key=part_key)
+                combined.extend(obj["Body"].read())
+            except Exception as e:
+                return {"error": f"Не удалось прочитать часть {i}: {e}"}
+
+        ext = _ext_from_mime_or_name(mime, filename)
+        ts = datetime.now().strftime("%Y%m%d")
+        lead_id_part = lead_id_hint or int(datetime.now().timestamp())
+        final_key = f"leads/{ts}/{lead_id_part}-{uuid.uuid4().hex[:8]}.{ext}"
+
+        s3.put_object(
             Bucket="files",
-            Key=key,
-            UploadId=upload_id,
-            MultipartUpload={"Parts": norm_parts},
+            Key=final_key,
+            Body=bytes(combined),
+            ContentType=mime or "application/octet-stream",
         )
+
+        # Удаляем временные части (не критично если не получится)
+        try:
+            objs = [{"Key": f"leads/_chunks/{session_id}/part-{i:05d}.bin"} for i in range(1, total_parts + 1)]
+            s3.delete_objects(Bucket="files", Delete={"Objects": objs, "Quiet": True})
+        except Exception:
+            pass
+
         kind = "video" if (mime or "").startswith("video/") else (
             "image" if (mime or "").startswith("image/") else "file"
         )
         return {
-            "url": f"https://cdn.poehali.dev/projects/{access_key}/bucket/{key}",
-            "name": filename or key.rsplit("/", 1)[-1],
+            "url": f"https://cdn.poehali.dev/projects/{access_key}/bucket/{final_key}",
+            "name": filename or final_key.rsplit("/", 1)[-1],
             "kind": kind,
+            "size": len(combined),
         }
     except Exception as e:
-        try:
-            s3.abort_multipart_upload(Bucket="files", Key=key, UploadId=upload_id)
-        except Exception:
-            pass
         return {"error": f"Не удалось собрать файл: {e}"}
 
 
@@ -653,8 +669,8 @@ def handler(event: dict, context) -> dict:
 
     body = json.loads(event.get('body') or '{}')
 
-    # Чанковая загрузка тяжёлых файлов (видео) через S3 Multipart Upload —
-    # позволяет грузить большие файлы кусками по 2-3 МБ
+    # Чанковая загрузка тяжёлых файлов (видео) — фронт режет файл на куски ~2 МБ,
+    # каждый кусок сохраняем как отдельный объект в S3, на финише склеиваем
     if body.get('type') == 'chunk-start':
         result = start_chunked_upload(
             filename=body.get('filename') or 'file',
@@ -670,8 +686,7 @@ def handler(event: dict, context) -> dict:
 
     if body.get('type') == 'chunk-part':
         result = upload_chunk(
-            key=body.get('key') or '',
-            upload_id=body.get('uploadId') or '',
+            session_id=body.get('sessionId') or '',
             part_number=int(body.get('partNumber') or 0),
             data_b64=body.get('data') or '',
         )
@@ -684,9 +699,8 @@ def handler(event: dict, context) -> dict:
 
     if body.get('type') == 'chunk-finish':
         result = finish_chunked_upload(
-            key=body.get('key') or '',
-            upload_id=body.get('uploadId') or '',
-            parts=body.get('parts') or [],
+            session_id=body.get('sessionId') or '',
+            total_parts=int(body.get('totalParts') or 0),
             mime=body.get('mime') or '',
             filename=body.get('filename') or '',
         )

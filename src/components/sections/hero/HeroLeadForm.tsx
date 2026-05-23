@@ -131,16 +131,16 @@ const HeroLeadForm = () => {
   };
 
   /**
-   * Чанковая загрузка через S3 Multipart Upload (для тяжёлых видео).
-   * Режет файл на куски ~2.5 МБ и шлёт по одному.
+   * Чанковая загрузка тяжёлых файлов (видео). Режет файл на куски ~1.5 МБ
+   * и шлёт каждый отдельным запросом — обходит лимит шлюза на размер body.
    */
   const uploadChunked = async (
     file: File,
     onProgress: (percent: number) => void
   ): Promise<string | null> => {
-    const CHUNK_SIZE = 2_500_000; // ~2.5 МБ бинарных = ~3.4 МБ base64
+    const CHUNK_SIZE = 1_500_000; // ~1.5 МБ бинарных = ~2 МБ base64 — стабильно проходит шлюз
 
-    // 1. Открываем загрузку
+    // 1. Резервируем сессию
     const startRes = await fetch(SUBMIT_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -151,18 +151,16 @@ const HeroLeadForm = () => {
       }),
     });
     const startJson = (await startRes.json().catch(() => ({}))) as {
-      key?: string;
-      uploadId?: string;
+      sessionId?: string;
       error?: string;
     };
-    if (!startRes.ok || !startJson.key || !startJson.uploadId) {
+    if (!startRes.ok || !startJson.sessionId) {
       throw new Error(startJson.error || "Не удалось начать загрузку");
     }
-    const { key, uploadId } = startJson;
+    const sessionId = startJson.sessionId;
 
     // 2. Грузим чанки последовательно
     const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
-    const parts: { PartNumber: number; ETag: string }[] = [];
     for (let i = 0; i < totalChunks; i++) {
       const start = i * CHUNK_SIZE;
       const end = Math.min(start + CHUNK_SIZE, file.size);
@@ -173,29 +171,26 @@ const HeroLeadForm = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "chunk-part",
-          key,
-          uploadId,
+          sessionId,
           partNumber: i + 1,
           data: b64,
         }),
       });
-      const partJson = (await partRes.json().catch(() => ({}))) as { etag?: string; error?: string };
-      if (!partRes.ok || !partJson.etag) {
+      const partJson = (await partRes.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+      if (!partRes.ok || !partJson.ok) {
         throw new Error(partJson.error || `Сбой части ${i + 1}/${totalChunks}`);
       }
-      parts.push({ PartNumber: i + 1, ETag: partJson.etag });
       onProgress(Math.round(((i + 1) / totalChunks) * 100));
     }
 
-    // 3. Завершаем загрузку
+    // 3. Финиш — сервер склеит чанки в один файл
     const finishRes = await fetch(SUBMIT_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         type: "chunk-finish",
-        key,
-        uploadId,
-        parts,
+        sessionId,
+        totalParts: totalChunks,
         mime: file.type,
         filename: file.name,
       }),
@@ -215,10 +210,11 @@ const HeroLeadForm = () => {
       // Сжимаем фото перед загрузкой (видео не трогаем)
       const fileForUpload = item.kind === "image" ? await compressImage(item.file) : item.file;
 
-      // Файлы >3 МБ грузим чанками (не упрёмся в лимит body шлюза)
-      const HEAVY_THRESHOLD = 3 * 1024 * 1024;
+      // Файлы >2 МБ грузим чанками (не упрёмся в лимит body шлюза).
+      // Видео всегда идут чанками независимо от размера.
+      const HEAVY_THRESHOLD = 2 * 1024 * 1024;
       let url: string | null;
-      if (fileForUpload.size > HEAVY_THRESHOLD) {
+      if (item.kind === "video" || fileForUpload.size > HEAVY_THRESHOLD) {
         url = await uploadChunked(fileForUpload, (percent) => {
           setMedia((prev) =>
             prev.map((x) => (x.id === item.id ? { ...x, uploadProgress: percent } : x))
