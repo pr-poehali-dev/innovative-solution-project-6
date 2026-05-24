@@ -90,12 +90,12 @@ const AsphaltPromoSection = () => {
             <span className="relative">Перейти к асфальтированию</span>
           </Link>
           <a
-            href="tel:+79601883084"
+            href="tel:+79601690990"
             onClick={() => reachGoal("phone_click", { source: "asphalt_promo" })}
             className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-bold border-2 border-amber-400/50 text-amber-300 text-sm sm:text-base hover:bg-amber-400/10 hover:border-amber-400 transition-all"
           >
             <Icon name="Phone" size={18} />
-            Позвонить +7 960 188-30-84
+            Позвонить +7 (960) 169-09-90
           </a>
         </div>
 
