@@ -371,6 +371,84 @@ const StructuredData = () => {
     }
   };
 
+  // Быстрые ссылки в выдаче поисковиков (Яндекс / Google sitelinks)
+  const siteNavigation = [
+    {
+      "@context": "https://schema.org",
+      "@type": "SiteNavigationElement",
+      "@id": "https://фаварит.рф/#nav-fleet",
+      "name": "Парк техники",
+      "description": "15 единиц манипуляторов от 3 до 17 тонн с люлькой и буром",
+      "url": "https://фаварит.рф/#fleet"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SiteNavigationElement",
+      "@id": "https://фаварит.рф/#nav-prices",
+      "name": "Цены",
+      "description": "Стоимость аренды манипулятора от 1500 ₽/час с НДС",
+      "url": "https://фаварит.рф/#pricing"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SiteNavigationElement",
+      "@id": "https://фаварит.рф/#nav-calc",
+      "name": "Калькулятор",
+      "description": "Рассчитать стоимость аренды онлайн за 1 минуту",
+      "url": "https://фаварит.рф/#calculator"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SiteNavigationElement",
+      "@id": "https://фаварит.рф/#nav-reviews",
+      "name": "Отзывы",
+      "description": "Реальные отзывы клиентов о работе ООО «Фаворит»",
+      "url": "https://фаварит.рф/otzyvy"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SiteNavigationElement",
+      "@id": "https://фаварит.рф/#nav-asphalt",
+      "name": "Асфальтирование",
+      "description": "Асфальтирование под ключ от 450 ₽/м² в Нижнем Новгороде",
+      "url": "https://фаварит.рф/asfaltirovanie"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SiteNavigationElement",
+      "@id": "https://фаварит.рф/#nav-blog",
+      "name": "Блог",
+      "description": "Полезные статьи об аренде манипуляторов и спецтехники",
+      "url": "https://фаварит.рф/blog"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SiteNavigationElement",
+      "@id": "https://фаварит.рф/#nav-contacts",
+      "name": "Контакты",
+      "description": "Телефон +7 (960) 188-30-84, адрес, схема проезда",
+      "url": "https://фаварит.рф/#contacts"
+    }
+  ];
+
+  // Расширенная разметка WebSite с поиском по сайту (sitelinks searchbox)
+  const websiteWithSearch = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://фаварит.рф/#website-search",
+    "url": "https://фаварит.рф/",
+    "name": "Фаворит — аренда манипулятора в Нижнем Новгороде",
+    "alternateName": "ООО Фаворит",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://фаварит.рф/?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  };
+
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(localBusiness)}</script>
@@ -380,6 +458,8 @@ const StructuredData = () => {
       <script type="application/ld+json">{JSON.stringify(breadcrumbs)}</script>
       <script type="application/ld+json">{JSON.stringify(itemList)}</script>
       <script type="application/ld+json">{JSON.stringify(website)}</script>
+      <script type="application/ld+json">{JSON.stringify(websiteWithSearch)}</script>
+      <script type="application/ld+json">{JSON.stringify(siteNavigation)}</script>
     </>
   );
 };
