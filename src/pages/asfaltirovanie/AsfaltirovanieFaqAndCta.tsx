@@ -1,5 +1,6 @@
 import Icon from "@/components/ui/icon";
 import { faq, PHONE, PHONE_TEL } from "./asfaltirovanieData";
+import { reachGoal } from "@/lib/metrika";
 
 const AsfaltirovanieFaqAndCta = () => {
   return (
@@ -61,6 +62,7 @@ const AsfaltirovanieFaqAndCta = () => {
 
               <a
                 href={PHONE_TEL}
+                onClick={() => reachGoal("phone_click", { source: "asphalt_landing_cta" })}
                 className="group inline-flex items-center justify-center gap-3 px-6 sm:px-10 py-4 sm:py-5 rounded-2xl font-black bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-white overflow-hidden hover:shadow-2xl hover:shadow-amber-500/50 hover:scale-105 transition-all relative"
               >
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />

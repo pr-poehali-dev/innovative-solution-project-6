@@ -1,8 +1,8 @@
 export const ASPHALT_IMG =
   "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/78ce7324-bf4d-4f95-9518-8178c0fcaa2a.jpg";
 
-export const PHONE = "+7 (960) 169-09-90";
-export const PHONE_TEL = "tel:+79601690990";
+export const PHONE = "+7 960 188-30-84";
+export const PHONE_TEL = "tel:+79601883084";
 
 export const priceList = [
   {

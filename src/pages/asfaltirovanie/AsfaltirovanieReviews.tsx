@@ -1,4 +1,5 @@
 import Icon from "@/components/ui/icon";
+import { reachGoal } from "@/lib/metrika";
 
 const reviews = [
   {
@@ -143,11 +144,12 @@ const AsfaltirovanieReviews = () => {
             Хотите оказаться в этом списке? Закажите выезд замерщика — бесплатно
           </div>
           <a
-            href="tel:+79601690990"
+            href="tel:+79601883084"
+            onClick={() => reachGoal("phone_click", { source: "asphalt_landing_reviews" })}
             className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-white font-bold text-sm shadow-lg shadow-amber-500/40 hover:shadow-xl hover:scale-105 transition-all whitespace-nowrap"
           >
             <Icon name="Phone" size={16} />
-            +7 (960) 169-09-90
+            +7 960 188-30-84
           </a>
         </div>
       </div>

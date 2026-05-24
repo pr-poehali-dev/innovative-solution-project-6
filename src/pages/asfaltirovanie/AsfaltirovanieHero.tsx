@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { ASPHALT_IMG, PHONE, PHONE_TEL } from "./asfaltirovanieData";
+import { reachGoal } from "@/lib/metrika";
 
 const AsfaltirovanieHero = () => {
   return (
@@ -17,6 +18,7 @@ const AsfaltirovanieHero = () => {
           </Link>
           <a
             href={PHONE_TEL}
+            onClick={() => reachGoal("phone_click", { source: "asphalt_landing_header" })}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-amber-500/30 hover:shadow-xl hover:shadow-amber-500/50 hover:scale-105 transition-all"
           >
             <Icon name="Phone" size={14} />
@@ -82,6 +84,7 @@ const AsfaltirovanieHero = () => {
               <div className="flex flex-row gap-2 sm:gap-3">
                 <a
                   href={PHONE_TEL}
+                  onClick={() => reachGoal("phone_click", { source: "asphalt_landing_hero" })}
                   className="group relative inline-flex items-center justify-center gap-1.5 sm:gap-3 px-3 sm:px-6 py-2.5 sm:py-4 rounded-xl sm:rounded-2xl font-black bg-gradient-to-r from-amber-300 via-amber-400 to-orange-500 text-white overflow-hidden hover:shadow-2xl hover:shadow-amber-500/60 transition-all text-xs sm:text-lg flex-shrink-0 drop-shadow"
                 >
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />

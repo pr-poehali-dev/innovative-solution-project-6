@@ -1,5 +1,6 @@
 import Icon from "@/components/ui/icon";
 import { benefits, priceList, PHONE, PHONE_TEL } from "./asfaltirovanieData";
+import { reachGoal } from "@/lib/metrika";
 
 const AsfaltirovanieBenefitsAndPrice = () => {
   return (
@@ -132,6 +133,7 @@ const AsfaltirovanieBenefitsAndPrice = () => {
               </div>
               <a
                 href={PHONE_TEL}
+                onClick={() => reachGoal("phone_click", { source: "asphalt_landing_price" })}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-white font-bold text-sm shadow-lg shadow-amber-500/40 hover:shadow-xl hover:scale-105 transition-all whitespace-nowrap"
               >
                 <Icon name="Phone" size={16} />
