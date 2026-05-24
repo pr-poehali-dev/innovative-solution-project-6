@@ -1,25 +1,38 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { reachGoal } from "@/lib/metrika";
 
 const PHONE = "+7 960 188-30-84";
 const PHONE_HREF = "tel:+79601883084";
 
+const isAsphaltPath = (path: string) =>
+  path.includes("asfalt") || path.includes("ukladka-asfalta") || path.includes("yamochnyy-remont");
+
 const FloatingCallButton = () => {
   const [visible, setVisible] = useState(false);
-  const { pathname } = useLocation();
+  const [hideOnRoute, setHideOnRoute] = useState(() =>
+    typeof window !== "undefined" ? isAsphaltPath(window.location.pathname) : false,
+  );
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 150);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    // Следим за сменой URL без useLocation — компонент рендерится вне Router
+    const onRouteChange = () => setHideOnRoute(isAsphaltPath(window.location.pathname));
+    window.addEventListener("popstate", onRouteChange);
+    const interval = window.setInterval(onRouteChange, 500);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("popstate", onRouteChange);
+      window.clearInterval(interval);
+    };
   }, []);
 
-  // На страницах асфальтирования у нас уже есть собственная крупная кнопка «Позвонить»
-  // в шапке — плавающую кнопку прячем, чтобы не дублировать.
-  if (pathname.includes("asfalt") || pathname.includes("ukladka-asfalta") || pathname.includes("yamochnyy-remont")) {
+  // На страницах асфальтирования у нас уже есть своя кнопка «Позвонить» — не дублируем.
+  if (hideOnRoute) {
     return null;
   }
 
