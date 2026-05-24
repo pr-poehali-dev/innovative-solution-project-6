@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { reachGoal } from "@/lib/metrika";
 
@@ -7,6 +8,7 @@ const PHONE_HREF = "tel:+79601883084";
 
 const FloatingCallButton = () => {
   const [visible, setVisible] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 150);
@@ -14,6 +16,12 @@ const FloatingCallButton = () => {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // На страницах асфальтирования у нас уже есть собственная крупная кнопка «Позвонить»
+  // в шапке — плавающую кнопку прячем, чтобы не дублировать.
+  if (pathname.includes("asfalt") || pathname.includes("ukladka-asfalta") || pathname.includes("yamochnyy-remont")) {
+    return null;
+  }
 
   return (
     <a
