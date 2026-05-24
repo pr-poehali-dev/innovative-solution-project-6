@@ -8,6 +8,7 @@ import AsfaltirovanieStagesAndObjects from "./asfaltirovanie/AsfaltirovanieStage
 import AsfaltirovanieGallery from "./asfaltirovanie/AsfaltirovanieGallery";
 import AsfaltirovanieReviews from "./asfaltirovanie/AsfaltirovanieReviews";
 import AsfaltirovanieFaqAndCta from "./asfaltirovanie/AsfaltirovanieFaqAndCta";
+import AsfaltirovanieStickyCall from "./asfaltirovanie/AsfaltirovanieStickyCall";
 import { faq } from "./asfaltirovanie/asfaltirovanieData";
 
 const SLUG_META: Record<string, { title: string; description: string; keywords: string }> = {
@@ -215,6 +216,8 @@ const AsfaltirovaniePage = () => {
       <AsfaltirovanieFaqAndCta />
 
       <SiteFooter />
+
+      <AsfaltirovanieStickyCall />
     </div>
   );
 };
