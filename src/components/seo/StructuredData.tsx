@@ -256,15 +256,126 @@ const StructuredData = () => {
     "@type": "WebSite",
     "@id": "https://фаварит.рф/#website",
     "url": "https://фаварит.рф",
-    "name": "Фаворит — аренда манипулятора в Нижнем Новгороде",
+    "name": "Фаворит — аренда манипулятора и асфальтирование в Нижнем Новгороде",
     "publisher": { "@id": "https://фаварит.рф/#organization" },
     "inLanguage": "ru-RU"
+  };
+
+  const asphaltService = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://фаварит.рф/#asphalt-service",
+    "serviceType": "Асфальтирование под ключ",
+    "name": "Асфальтирование в Нижнем Новгороде и Нижегородской области",
+    "description": "Асфальтирование под ключ от 450 ₽/м² в Нижнем Новгороде. Укладка асфальта на дворах, парковках, дорогах, промышленных площадках. Ямочный ремонт. Своя техника: асфальтоукладчики, катки, фрезы, самосвалы. Работа по ГОСТ 9128-2013, гарантия до 3 лет, договор с НДС.",
+    "image": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/d239fd05-a0c5-44a2-9cbb-e19192bf07a9.jpg",
+    "url": "https://фаварит.рф/#asfaltirovanie-promo",
+    "provider": { "@id": "https://фаварит.рф/#organization" },
+    "areaServed": [
+      { "@type": "City", "name": "Нижний Новгород" },
+      { "@type": "City", "name": "Дзержинск" },
+      { "@type": "City", "name": "Кстово" },
+      { "@type": "City", "name": "Арзамас" },
+      { "@type": "City", "name": "Богородск" },
+      { "@type": "City", "name": "Городец" },
+      { "@type": "AdministrativeArea", "name": "Нижегородская область" }
+    ],
+    "category": "Дорожно-строительные работы",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": String(reviews.length),
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Услуги асфальтирования",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "Асфальтирование двора",
+          "priceCurrency": "RUB",
+          "price": "650",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "650",
+            "priceCurrency": "RUB",
+            "unitText": "м²"
+          },
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Асфальтирование парковки",
+          "priceCurrency": "RUB",
+          "price": "550",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "550",
+            "priceCurrency": "RUB",
+            "unitText": "м²"
+          },
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Асфальтирование дороги",
+          "priceCurrency": "RUB",
+          "price": "480",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "480",
+            "priceCurrency": "RUB",
+            "unitText": "м²"
+          },
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Промышленная площадка",
+          "priceCurrency": "RUB",
+          "price": "450",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "450",
+            "priceCurrency": "RUB",
+            "unitText": "м²"
+          },
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Ямочный ремонт асфальта",
+          "priceCurrency": "RUB",
+          "price": "850",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "850",
+            "priceCurrency": "RUB",
+            "unitText": "м²"
+          },
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "url": "https://фаварит.рф/#asfaltirovanie-promo",
+      "priceCurrency": "RUB",
+      "lowPrice": "450",
+      "highPrice": "850",
+      "offerCount": "5",
+      "availability": "https://schema.org/InStock",
+      "seller": { "@id": "https://фаварит.рф/#organization" }
+    }
   };
 
   return (
     <>
       <script type="application/ld+json">{JSON.stringify(localBusiness)}</script>
       <script type="application/ld+json">{JSON.stringify(service)}</script>
+      <script type="application/ld+json">{JSON.stringify(asphaltService)}</script>
       <script type="application/ld+json">{JSON.stringify(faqPage)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbs)}</script>
       <script type="application/ld+json">{JSON.stringify(itemList)}</script>

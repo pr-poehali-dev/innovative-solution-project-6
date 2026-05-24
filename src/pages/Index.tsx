@@ -37,18 +37,14 @@ const Index = () => {
       <LazySection><PopularTechSection /></LazySection>
       <LazySection id="fleet"><FleetSection /></LazySection>
       <LazySection><UseCasesSection /></LazySection>
-      <div className="hidden md:block">
-        <LazySection><AsphaltPromoSection /></LazySection>
-      </div>
+      <LazySection><AsphaltPromoSection /></LazySection>
       <LazySection><CalculatorSection /></LazySection>
       <LazySection><WeatherWidget /></LazySection>
       <LazySection><GallerySection /></LazySection>
       <LazySection><ClientsSection /></LazySection>
       <LazySection><ReviewsSection /></LazySection>
       <LazySection><SeoTextSection /></LazySection>
-      <div className="hidden md:block">
-        <LazySection><AsphaltSeoText /></LazySection>
-      </div>
+      <LazySection><AsphaltSeoText /></LazySection>
       <LazySection><FaqSection /></LazySection>
       <LazySection><BottomSections visibleSections={visibleSections} /></LazySection>
       <LazySection><SeoFooterLinks /></LazySection>
