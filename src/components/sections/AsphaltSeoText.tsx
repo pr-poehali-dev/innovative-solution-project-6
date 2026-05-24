@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import { reachGoal } from "@/lib/metrika";
 
 const priceList = [
   { type: "Асфальтирование двора (от 500 м²)", price: "от 650 ₽/м²" },
@@ -126,11 +127,12 @@ const AsphaltSeoText = () => {
             Рассчитать стоимость
           </Link>
           <a
-            href="tel:+79601690990"
+            href="tel:+79601883084"
+            onClick={() => reachGoal("phone_click", { source: "asphalt_seo" })}
             className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-bold border-2 border-amber-400/50 text-amber-300 text-sm sm:text-base hover:bg-amber-400/10 transition-all"
           >
             <Icon name="Phone" size={18} />
-            +7 (960) 169-09-90
+            Позвонить +7 960 188-30-84
           </a>
         </div>
 
@@ -141,7 +143,7 @@ const AsphaltSeoText = () => {
           <h3>Асфальтирование Дзержинск Кстово Арзамас Богородск</h3>
           <p>
             Заказать асфальтирование в Нижнем Новгороде у компании ООО «Фаворит» можно по
-            телефону +7 (960) 169-09-90. Выполняем укладку асфальта, асфальтирование
+            телефону +7 960 188-30-84. Выполняем укладку асфальта, асфальтирование
             дворов, парковок, дорог, ямочный ремонт. Гарантия до 3 лет. Работаем
             круглогодично в сезон, безналичный расчёт с НДС, договор, ЭДО для юр. лиц.
             Бесплатный выезд замерщика и просчёт сметы.
