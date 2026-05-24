@@ -92,6 +92,55 @@ const SiteFooter = () => {
       <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
 
+      {/* Быстрые ссылки — дубль микроразметки SiteNavigationElement для поисковиков */}
+      <nav
+        aria-label="Быстрые ссылки сайта"
+        className="border-b border-accent/15 bg-black/30"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
+          <h2 className="text-[11px] sm:text-xs uppercase tracking-widest text-accent font-black mb-3 sm:mb-4 flex items-center gap-2">
+            <Icon name="Compass" size={14} />
+            Быстрая навигация
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2 sm:gap-3">
+            {[
+              { href: "/#fleet", icon: "Truck", title: "Парк техники", desc: "15 машин 3–17 т" },
+              { href: "/#pricing", icon: "BadgeRussianRuble", title: "Цены", desc: "От 1500 ₽/час" },
+              { href: "/#calculator", icon: "Calculator", title: "Калькулятор", desc: "Расчёт за минуту" },
+              { href: "/otzyvy", icon: "Star", title: "Отзывы", desc: "Реальные клиенты" },
+              { href: "/asfaltirovanie", icon: "Hammer", title: "Асфальтирование", desc: "От 450 ₽/м²" },
+              { href: "/blog", icon: "BookOpen", title: "Блог", desc: "Полезные статьи" },
+              { href: "#contacts", icon: "Phone", title: "Контакты", desc: "+7 960 188-30-84" },
+            ].map((item) => {
+              const isExternal = item.href.startsWith("/") && !item.href.startsWith("/#");
+              const content = (
+                <>
+                  <div className="w-9 h-9 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-2 group-hover:bg-accent/25 group-hover:border-accent/60 transition-all">
+                    <Icon name={item.icon} size={16} className="text-accent" />
+                  </div>
+                  <div className="font-black text-white text-xs sm:text-sm leading-tight mb-0.5 group-hover:text-accent transition-colors">
+                    {item.title}
+                  </div>
+                  <div className="text-[10px] sm:text-[11px] text-white/55 leading-snug">
+                    {item.desc}
+                  </div>
+                </>
+              );
+              const cls = "group block p-3 rounded-2xl border border-accent/15 bg-white/[0.03] hover:bg-white/[0.06] hover:border-accent/40 transition-all active:scale-[0.98]";
+              return isExternal ? (
+                <Link key={item.href} to={item.href} className={cls}>
+                  {content}
+                </Link>
+              ) : (
+                <a key={item.href} href={item.href} className={cls}>
+                  {content}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </nav>
+
       {/* Верхний блок с колонками */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10 xl:gap-12">
