@@ -1,5 +1,6 @@
 import Icon from "@/components/ui/icon";
 import { openDownloadModal } from "@/components/ui/OfflineDownloadModal";
+import { useInstallPrompt } from "@/hooks/useInstallPrompt";
 
 const miniReviews = [
   { name: "Андрей С.", text: "Приехали через 40 минут, всё чётко", rating: 5 },
@@ -7,10 +8,18 @@ const miniReviews = [
 ];
 
 const TrustBarSection = () => {
+  const { installed } = useInstallPrompt();
+
   return (
     <section className="relative py-3 sm:py-10 border-y border-white/10 bg-black/40 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-2 sm:px-6">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-6">
+        <div
+          className={`grid gap-1.5 sm:gap-6 ${
+            installed
+              ? "grid-cols-3"
+              : "grid-cols-2 sm:grid-cols-4"
+          }`}
+        >
           {/* Рейтинг Яндекс */}
           <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-start gap-1 sm:gap-3 p-2 sm:p-4 rounded-lg sm:rounded-xl border border-white/10 bg-white/5 text-center sm:text-left">
             <div className="flex-shrink-0 w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-red-500/15 flex items-center justify-center">
@@ -46,7 +55,8 @@ const TrustBarSection = () => {
             </div>
           ))}
 
-          {/* Скачать сайт — работает офлайн */}
+          {/* Скачать сайт — работает офлайн (прячем, если уже установлено) */}
+          {!installed && (
           <button
             type="button"
             onClick={openDownloadModal}
@@ -69,6 +79,7 @@ const TrustBarSection = () => {
               </div>
             </div>
           </button>
+          )}
         </div>
       </div>
     </section>
