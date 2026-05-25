@@ -147,9 +147,6 @@ const App = () => (
             <Route path="/asfaltirovanie-kstovo" element={<AsfaltirovaniePage />} />
             <Route path="/asfaltirovanie-arzamas" element={<AsfaltirovaniePage />} />
             <Route path="/asfaltirovanie-bogorodsk" element={<AsfaltirovaniePage />} />
-            <Route path="/vizitka" element={<BusinessCard />} />
-            <Route path="/card" element={<BusinessCard />} />
-            <Route path="/vizitka/print" element={<BusinessCardPrint />} />
             <Route path="/presentation" element={<Navigate to="/" replace />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
