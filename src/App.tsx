@@ -31,8 +31,6 @@ const AdminReindex = lazy(() => import("./pages/AdminReindex"));
 const SeoDashboard = lazy(() => import("./pages/SeoDashboard"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const AsfaltirovaniePage = lazy(() => import("./pages/AsfaltirovaniePage"));
-const BusinessCard = lazy(() => import("./pages/BusinessCard"));
-const BusinessCardPrint = lazy(() => import("./pages/BusinessCardPrint"));
 
 const queryClient = new QueryClient();
 
