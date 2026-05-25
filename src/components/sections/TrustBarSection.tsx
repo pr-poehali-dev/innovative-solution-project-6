@@ -1,4 +1,5 @@
 import Icon from "@/components/ui/icon";
+import { openDownloadModal } from "@/components/ui/OfflineDownloadModal";
 
 const miniReviews = [
   { name: "Андрей С.", text: "Приехали через 40 минут, всё чётко", rating: 5 },
@@ -9,7 +10,7 @@ const TrustBarSection = () => {
   return (
     <section className="relative py-3 sm:py-10 border-y border-white/10 bg-black/40 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-2 sm:px-6">
-        <div className="grid grid-cols-3 gap-1.5 sm:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-6">
           {/* Рейтинг Яндекс */}
           <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-start gap-1 sm:gap-3 p-2 sm:p-4 rounded-lg sm:rounded-xl border border-white/10 bg-white/5 text-center sm:text-left">
             <div className="flex-shrink-0 w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-red-500/15 flex items-center justify-center">
@@ -44,6 +45,30 @@ const TrustBarSection = () => {
               </div>
             </div>
           ))}
+
+          {/* Скачать сайт — работает офлайн */}
+          <button
+            type="button"
+            onClick={openDownloadModal}
+            aria-label="Скачать сайт — работает без интернета"
+            className="group relative flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-start gap-1 sm:gap-3 p-2 sm:p-4 rounded-lg sm:rounded-xl border border-accent/40 bg-accent/10 hover:bg-accent/20 hover:border-accent/70 transition-all text-center sm:text-left active:scale-[0.98] overflow-hidden col-span-2 sm:col-span-1"
+          >
+            <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-accent/20 to-transparent pointer-events-none" />
+            <div
+              className="relative flex-shrink-0 w-7 h-7 sm:w-10 sm:h-10 rounded-full flex items-center justify-center"
+              style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
+            >
+              <Icon name="Download" size={14} className="text-black sm:!w-[18px] sm:!h-[18px]" strokeWidth={2.5} />
+            </div>
+            <div className="relative min-w-0">
+              <div className="text-[11px] sm:text-sm font-black text-white leading-tight">
+                Скачать сайт
+              </div>
+              <div className="text-[9px] sm:text-[11px] text-accent/90 mt-0.5 leading-tight font-bold">
+                Работает без интернета
+              </div>
+            </div>
+          </button>
         </div>
       </div>
     </section>
