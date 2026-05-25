@@ -32,6 +32,7 @@ const SeoDashboard = lazy(() => import("./pages/SeoDashboard"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const AsfaltirovaniePage = lazy(() => import("./pages/AsfaltirovaniePage"));
 const BusinessCard = lazy(() => import("./pages/BusinessCard"));
+const BusinessCardPrint = lazy(() => import("./pages/BusinessCardPrint"));
 
 const queryClient = new QueryClient();
 
@@ -150,6 +151,7 @@ const App = () => (
             <Route path="/asfaltirovanie-bogorodsk" element={<AsfaltirovaniePage />} />
             <Route path="/vizitka" element={<BusinessCard />} />
             <Route path="/card" element={<BusinessCard />} />
+            <Route path="/vizitka/print" element={<BusinessCardPrint />} />
             <Route path="/presentation" element={<Navigate to="/" replace />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
