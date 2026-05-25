@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import { toPng } from "html-to-image";
 import Icon from "@/components/ui/icon";
 
 const TRUCK_BG =
@@ -8,12 +9,67 @@ const LOGO =
   "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp";
 
 const BusinessCardPrint = () => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [downloading, setDownloading] = useState(false);
+  const [downloadError, setDownloadError] = useState("");
+
   useEffect(() => {
     document.title = "Визитка для печати 90×50 мм — ООО «Фаворит»";
   }, []);
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleDownloadPng = async () => {
+    if (!cardRef.current) return;
+    setDownloading(true);
+    setDownloadError("");
+    try {
+      // Высокое разрешение — для печати и для красоты в галерее телефона
+      const dataUrl = await toPng(cardRef.current, {
+        pixelRatio: 4,
+        cacheBust: true,
+        backgroundColor: "#ffffff",
+      });
+
+      // Если устройство поддерживает Web Share API + файлы — открываем нативное меню «Сохранить в фото»
+      try {
+        const res = await fetch(dataUrl);
+        const blob = await res.blob();
+        const file = new File([blob], "favorit-vizitka.png", { type: "image/png" });
+
+        const navAny = navigator as Navigator & {
+          canShare?: (data: { files: File[] }) => boolean;
+          share?: (data: { files?: File[]; title?: string; text?: string }) => Promise<void>;
+        };
+
+        if (navAny.canShare && navAny.share && navAny.canShare({ files: [file] })) {
+          await navAny.share({
+            files: [file],
+            title: "Визитка ООО Фаворит",
+            text: "Аренда манипулятора +7 (960) 188-30-84",
+          });
+          setDownloading(false);
+          return;
+        }
+      } catch {
+        // ничего страшного — упадём на обычную загрузку файлом
+      }
+
+      // Обычное скачивание (десктоп и старые мобильные браузеры)
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = "favorit-vizitka.png";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "Не удалось сохранить";
+      setDownloadError(msg);
+    } finally {
+      setDownloading(false);
+    }
   };
 
   return (
@@ -52,27 +108,60 @@ const BusinessCardPrint = () => {
         }}
       >
         {/* Панель управления (только на экране) */}
-        <div className="print-hide w-full max-w-2xl flex flex-col sm:flex-row items-center gap-3">
-          <a
-            href="/vizitka"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border border-accent/40 bg-white/[0.04] text-accent text-sm font-bold hover:bg-accent/10 transition-all"
-          >
-            <Icon name="ArrowLeft" size={14} />
-            К онлайн-визитке
-          </a>
-          <button
-            type="button"
-            onClick={handlePrint}
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-black text-black text-sm shadow-xl shadow-amber-500/40 active:scale-[0.98] transition-transform"
-            style={{
-              background:
-                "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
-              fontFamily: "'Cinzel', serif",
-            }}
-          >
-            <Icon name="Printer" size={16} />
-            Распечатать визитку
-          </button>
+        <div className="print-hide w-full max-w-2xl flex flex-col gap-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
+            <a
+              href="/vizitka"
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl border border-accent/40 bg-white/[0.04] text-accent text-sm font-bold hover:bg-accent/10 transition-all"
+            >
+              <Icon name="ArrowLeft" size={14} />
+              К онлайн-визитке
+            </a>
+
+            <button
+              type="button"
+              onClick={handleDownloadPng}
+              disabled={downloading}
+              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-black text-black text-sm shadow-xl shadow-amber-500/40 active:scale-[0.98] transition-transform disabled:opacity-60"
+              style={{
+                background:
+                  "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
+                fontFamily: "'Cinzel', serif",
+              }}
+            >
+              {downloading ? (
+                <>
+                  <Icon name="Loader2" size={16} className="animate-spin" />
+                  Готовлю картинку…
+                </>
+              ) : (
+                <>
+                  <Icon name="Download" size={16} />
+                  Скачать на телефон
+                </>
+              )}
+            </button>
+
+            <button
+              type="button"
+              onClick={handlePrint}
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-accent/40 bg-white/[0.04] text-accent text-sm font-bold hover:bg-accent/10 transition-all"
+            >
+              <Icon name="Printer" size={16} />
+              Распечатать
+            </button>
+          </div>
+
+          {downloadError && (
+            <p className="text-red-400 text-xs text-center">
+              Ошибка: {downloadError}. Попробуйте ещё раз или сделайте скриншот.
+            </p>
+          )}
+
+          <p className="text-white/55 text-[11px] text-center leading-snug">
+            На iPhone и Android откроется меню «Поделиться» — выберите «Сохранить в фото».
+            На компьютере картинка сохранится в папку «Загрузки».
+          </p>
         </div>
 
         {/* Инструкция для типографии (только на экране) */}
@@ -91,6 +180,7 @@ const BusinessCardPrint = () => {
 
         {/* САМА ВИЗИТКА — точные размеры в миллиметрах */}
         <div
+          ref={cardRef}
           className="print-card relative bg-white"
           style={{
             width: "94mm",
