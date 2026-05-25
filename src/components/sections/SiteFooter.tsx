@@ -95,44 +95,99 @@ const SiteFooter = () => {
       {/* Быстрые ссылки — дубль микроразметки SiteNavigationElement для поисковиков */}
       <nav
         aria-label="Быстрые ссылки сайта"
-        className="border-b border-accent/15 bg-black/30"
+        className="border-b border-accent/15 relative overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(20,12,4,0.6) 0%, rgba(0,0,0,0.4) 50%, rgba(20,12,4,0.6) 100%)",
+        }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
-          <h2 className="text-[11px] sm:text-xs uppercase tracking-widest text-accent font-black mb-3 sm:mb-4 flex items-center gap-2">
-            <Icon name="Compass" size={14} />
-            Быстрая навигация
-          </h2>
+        <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-accent/8 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-20 -right-20 w-64 h-64 rounded-full bg-accent/8 blur-3xl pointer-events-none" />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-7">
+          <div className="flex items-center justify-between mb-4 sm:mb-5">
+            <h2 className="text-[11px] sm:text-xs uppercase tracking-widest text-accent font-black flex items-center gap-2">
+              <Icon name="Compass" size={14} className="text-accent" />
+              Быстрая навигация
+            </h2>
+            <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/30 text-[10px] text-accent/90 font-bold uppercase tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              7 разделов
+            </div>
+          </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2 sm:gap-3">
             {[
-              { href: "/#fleet", icon: "Truck", title: "Парк техники", desc: "15 машин 3–17 т" },
-              { href: "/#pricing", icon: "BadgeRussianRuble", title: "Цены", desc: "От 1500 ₽/час" },
-              { href: "/#calculator", icon: "Calculator", title: "Калькулятор", desc: "Расчёт за минуту" },
-              { href: "/otzyvy", icon: "Star", title: "Отзывы", desc: "Реальные клиенты" },
-              { href: "/asfaltirovanie", icon: "Hammer", title: "Асфальтирование", desc: "От 450 ₽/м²" },
-              { href: "/blog", icon: "BookOpen", title: "Блог", desc: "Полезные статьи" },
-              { href: "#contacts", icon: "Phone", title: "Контакты", desc: "+7 960 188-30-84" },
+              { href: "/#fleet", icon: "Truck", title: "Парк техники", desc: "15 машин 3–17 т", badge: "ТОП" },
+              { href: "/#pricing", icon: "BadgeRussianRuble", title: "Цены", desc: "От 1500 ₽/час", badge: null },
+              { href: "/#calculator", icon: "Calculator", title: "Калькулятор", desc: "Расчёт за минуту", badge: null },
+              { href: "/otzyvy", icon: "Star", title: "Отзывы", desc: "4.9 на Я.Картах", badge: null },
+              { href: "/asfaltirovanie", icon: "Hammer", title: "Асфальтирование", desc: "От 450 ₽/м²", badge: "NEW" },
+              { href: "/blog", icon: "BookOpen", title: "Блог", desc: "Полезные статьи", badge: null },
+              { href: "#contacts", icon: "Phone", title: "Контакты", desc: "+7 960 188-30-84", badge: null },
             ].map((item) => {
               const isExternal = item.href.startsWith("/") && !item.href.startsWith("/#");
               const content = (
                 <>
-                  <div className="w-9 h-9 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-2 group-hover:bg-accent/25 group-hover:border-accent/60 transition-all">
-                    <Icon name={item.icon} size={16} className="text-accent" />
-                  </div>
-                  <div className="font-black text-white text-xs sm:text-sm leading-tight mb-0.5 group-hover:text-accent transition-colors">
-                    {item.title}
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] text-white/55 leading-snug">
-                    {item.desc}
+                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-accent/20 to-transparent pointer-events-none rounded-2xl" />
+                  <span className="absolute -top-6 -right-6 w-16 h-16 rounded-full bg-accent/15 blur-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                  {item.badge && (
+                    <span
+                      className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded-full text-[8px] font-black text-black tracking-wider z-10"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
+                      }}
+                    >
+                      {item.badge}
+                    </span>
+                  )}
+
+                  <div className="relative flex items-center gap-2.5 sm:flex-col sm:items-start sm:gap-2.5">
+                    <div
+                      className="flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center shadow-lg"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
+                        boxShadow:
+                          "inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 12px rgba(232,168,32,0.25)",
+                      }}
+                    >
+                      <Icon
+                        name={item.icon}
+                        size={18}
+                        className="text-black"
+                        strokeWidth={2.5}
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-black text-white text-[13px] sm:text-sm leading-tight mb-0.5 group-hover:text-accent transition-colors truncate">
+                        {item.title}
+                      </div>
+                      <div className="text-[10px] sm:text-[11px] text-white/65 leading-snug font-medium truncate">
+                        {item.desc}
+                      </div>
+                    </div>
+                    <Icon
+                      name="ChevronRight"
+                      size={14}
+                      className="text-accent/40 group-hover:text-accent group-hover:translate-x-0.5 transition-all sm:hidden flex-shrink-0"
+                    />
                   </div>
                 </>
               );
-              const cls = "group block p-3 rounded-2xl border border-accent/15 bg-white/[0.03] hover:bg-white/[0.06] hover:border-accent/40 transition-all active:scale-[0.98]";
+              const cls =
+                "group relative block p-3 sm:p-3.5 rounded-2xl border border-accent/20 hover:border-accent/60 transition-all active:scale-[0.97] overflow-hidden shadow-lg shadow-black/20";
+              const style = {
+                background:
+                  "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(232,168,32,0.05) 50%, rgba(255,255,255,0.04) 100%)",
+              };
               return isExternal ? (
-                <Link key={item.href} to={item.href} className={cls}>
+                <Link key={item.href} to={item.href} className={cls} style={style}>
                   {content}
                 </Link>
               ) : (
-                <a key={item.href} href={item.href} className={cls}>
+                <a key={item.href} href={item.href} className={cls} style={style}>
                   {content}
                 </a>
               );
