@@ -15,13 +15,15 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
             Аренда манипуляторов в Нижнем Новгороде
           </span>
         </div>
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black leading-tight mb-2 sm:mb-8 tracking-tighter drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]">
-          <span className="bg-gradient-to-br from-white via-white to-accent/40 bg-clip-text text-transparent">Манипуляторы </span>
-          <span className="text-accent">в аренду </span>
-          <span className="text-white/90">в Нижнем Новгороде</span>
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black leading-tight mb-2 sm:mb-5 tracking-tighter drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]">
+          <span className="bg-gradient-to-br from-white via-white to-accent/40 bg-clip-text text-transparent">Аренда манипулятора </span>
+          <span className="text-accent">в Нижнем Новгороде</span>
         </h1>
-        <p className="text-sm sm:text-xl text-white leading-snug sm:leading-relaxed mb-3 sm:mb-7 max-w-full sm:max-w-xl font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-          Оставьте заявку или позвоните — мы подберём правильный манипулятор с платформой необходимых габаритов и нужной грузоподъёмностью под вашу задачу.
+        <p className="text-base sm:text-2xl font-display font-bold text-white/95 leading-snug mb-2 sm:mb-5 max-w-full sm:max-w-xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+          Услуги манипулятора с оператором — <span className="text-accent">от 1 500 ₽/час</span>
+        </p>
+        <p className="text-sm sm:text-lg text-white/85 leading-snug sm:leading-relaxed mb-3 sm:mb-7 max-w-full sm:max-w-xl font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+          Оставьте заявку или позвоните — подберём манипулятор с платформой нужных габаритов и грузоподъёмностью под вашу задачу. Подача за 60 минут, работаем 24/7 по Нижнему Новгороду и области.
         </p>
 
         {/* Крупный ценовой блок — для конверсии и качества рекламы */}
