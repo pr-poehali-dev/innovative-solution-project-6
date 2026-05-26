@@ -99,11 +99,56 @@ const BlogArticle = () => {
 
   const related = articles.filter((a) => a.slug !== article.slug).slice(0, 3);
 
+  // JSON-LD: BlogPosting для статей блога — повышает CTR в Яндексе и Google
+  const articleUrl = `https://фаварит.рф/blog/${article.slug}`;
+  const blogPostingLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${articleUrl}#article`,
+    "mainEntityOfPage": { "@type": "WebPage", "@id": articleUrl },
+    "headline": article.seoTitle,
+    "description": article.seoDesc,
+    "image": article.cover || "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/d239fd05-a0c5-44a2-9cbb-e19192bf07a9.jpg",
+    "datePublished": article.date,
+    "dateModified": article.date,
+    "author": {
+      "@type": "Organization",
+      "name": "ООО «ФАВОРИТ»",
+      "url": "https://фаварит.рф",
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Фаворит — аренда манипуляторов в Нижнем Новгороде",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp",
+      },
+    },
+    "keywords": article.seoKeywords,
+    "inLanguage": "ru-RU",
+    "isAccessibleForFree": true,
+  };
+
+  const breadcrumbsLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://фаварит.рф/" },
+      { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://фаварит.рф/blog" },
+      { "@type": "ListItem", "position": 3, "name": article.title, "item": articleUrl },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-background page-enter">
       <title>{article.seoTitle}</title>
       <meta name="description" content={article.seoDesc} />
       <meta name="keywords" content={article.seoKeywords} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsLd) }} />
+      <meta property="og:type" content="article" />
+      <meta property="article:published_time" content={article.date} />
+      <meta property="article:author" content="ООО Фаворит" />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="фаварит.рф" />
       <meta property="og:title" content={article.seoTitle} />
