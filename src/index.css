@@ -96,6 +96,31 @@
   }
 }
 
+@keyframes gear-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes warning-tape-scroll {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 56px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="gear-spin"],
+  [style*="warning-tape-scroll"] {
+    animation: none !important;
+  }
+}
+
 .divider-shimmer {
   animation: divider-shimmer 4s ease-in-out infinite;
 }

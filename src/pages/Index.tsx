@@ -38,15 +38,15 @@ const Index = () => {
 
       <SectionDivider variant="aurora" />
 
-      {/* Зона преимуществ — spotlight (важно) */}
-      <SectionBackdrop tone="spotlight" pattern="dots">
+      {/* Преимущества — спотлайт с шестерёнками (механика работы) */}
+      <SectionBackdrop tone="spotlight" pattern="gears">
         <FeaturesSection visibleSections={visibleSections} />
       </SectionBackdrop>
 
       <SectionDivider variant="neon" />
 
-      {/* Зона техники — tech-фон с сеткой */}
-      <SectionBackdrop tone="tech" pattern="grid">
+      {/* Зона техники — силуэт крана-манипулятора на фоне */}
+      <SectionBackdrop tone="tech" pattern="crane">
         <LazySection><PopularTechSection /></LazySection>
         <SectionDivider variant="crane" />
         <LazySection id="fleet"><FleetSection /></LazySection>
@@ -54,8 +54,8 @@ const Index = () => {
 
       <SectionDivider variant="circuit" />
 
-      {/* Зона применения + асфальт — тёплая */}
-      <SectionBackdrop tone="warm" pattern="diagonal">
+      {/* Применение + асфальт — следы протекторов (грузовая техника) */}
+      <SectionBackdrop tone="warm" pattern="tracks">
         <LazySection><UseCasesSection /></LazySection>
         <SectionDivider variant="wave" />
         <LazySection><AsphaltPromoSection /></LazySection>
@@ -63,8 +63,8 @@ const Index = () => {
 
       <SectionDivider variant="particles" />
 
-      {/* Зона калькулятора + погода — deep */}
-      <SectionBackdrop tone="deep" pattern="grid">
+      {/* Калькулятор + погода — чертёж со схемой (инженерный расчёт) */}
+      <SectionBackdrop tone="deep" pattern="blueprint">
         <LazySection><CalculatorSection /></LazySection>
         <SectionDivider variant="blueprint" />
         <LazySection><WeatherWidget /></LazySection>
@@ -72,8 +72,8 @@ const Index = () => {
 
       <SectionDivider variant="wave" flip />
 
-      {/* Зона визуала — soft (галерея + клиенты) */}
-      <SectionBackdrop tone="soft" pattern="dots">
+      {/* Галерея + клиенты — контейнеры со стропами (груз / работа) */}
+      <SectionBackdrop tone="soft" pattern="cargo">
         <LazySection><GallerySection /></LazySection>
         <SectionDivider variant="stripes" />
         <LazySection><ClientsSection /></LazySection>
@@ -81,15 +81,15 @@ const Index = () => {
 
       <SectionDivider variant="aurora" />
 
-      {/* Отзывы — spotlight (выделяем) */}
-      <SectionBackdrop tone="spotlight" pattern="dots">
+      {/* Отзывы — заклёпки на металле (надёжно) */}
+      <SectionBackdrop tone="spotlight" pattern="rivets">
         <LazySection><ReviewsSection /></LazySection>
       </SectionBackdrop>
 
       <SectionDivider variant="diamond" />
 
-      {/* Зона текста — deep */}
-      <SectionBackdrop tone="deep" pattern="diagonal">
+      {/* SEO-текст — трубы / арматура (стройка) */}
+      <SectionBackdrop tone="deep" pattern="pipes">
         <LazySection><SeoTextSection /></LazySection>
         <SectionDivider variant="particles" />
         <LazySection><AsphaltSeoText /></LazySection>
@@ -97,8 +97,8 @@ const Index = () => {
 
       <SectionDivider variant="neon" />
 
-      {/* FAQ — warm (тёплый, чтобы привлечь внимание) */}
-      <SectionBackdrop tone="warm" pattern="dots">
+      {/* FAQ — знаки стройки + жёлтая лента (внимание) */}
+      <SectionBackdrop tone="warm" pattern="warning">
         <LazySection><FaqSection /></LazySection>
       </SectionBackdrop>
 
