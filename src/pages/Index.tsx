@@ -34,31 +34,31 @@ const Index = () => {
       <StructuredData />
       <HeroSection visibleSections={visibleSections} />
       <TrustBarSection />
-      <SectionDivider variant="glow" />
+      <SectionDivider variant="aurora" />
       <FeaturesSection visibleSections={visibleSections} />
-      <SectionDivider variant="diamond" />
+      <SectionDivider variant="neon" />
       <LazySection><PopularTechSection /></LazySection>
       <SectionDivider variant="crane" />
       <LazySection id="fleet"><FleetSection /></LazySection>
-      <SectionDivider variant="stripes" />
+      <SectionDivider variant="circuit" />
       <LazySection><UseCasesSection /></LazySection>
       <SectionDivider variant="wave" />
       <LazySection><AsphaltPromoSection /></LazySection>
-      <SectionDivider variant="glow" />
+      <SectionDivider variant="particles" />
       <LazySection><CalculatorSection /></LazySection>
-      <SectionDivider variant="diamond" />
+      <SectionDivider variant="blueprint" />
       <LazySection><WeatherWidget /></LazySection>
       <SectionDivider variant="wave" flip />
       <LazySection><GallerySection /></LazySection>
       <SectionDivider variant="stripes" />
       <LazySection><ClientsSection /></LazySection>
-      <SectionDivider variant="glow" />
+      <SectionDivider variant="aurora" />
       <LazySection><ReviewsSection /></LazySection>
-      <SectionDivider variant="crane" />
-      <LazySection><SeoTextSection /></LazySection>
       <SectionDivider variant="diamond" />
+      <LazySection><SeoTextSection /></LazySection>
+      <SectionDivider variant="particles" />
       <LazySection><AsphaltSeoText /></LazySection>
-      <SectionDivider variant="wave" />
+      <SectionDivider variant="neon" />
       <LazySection><FaqSection /></LazySection>
       <SectionDivider variant="glow" />
       <LazySection><BottomSections visibleSections={visibleSections} /></LazySection>

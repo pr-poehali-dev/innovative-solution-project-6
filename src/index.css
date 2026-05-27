@@ -2,6 +2,138 @@
 @tailwind components;
 @tailwind utilities;
 
+/* === ANIMATIONS для SectionDivider === */
+@keyframes divider-shimmer {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes divider-pulse-ring {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.4);
+    opacity: 0;
+  }
+}
+
+@keyframes divider-rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes divider-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+}
+
+@keyframes divider-spark {
+  0%,
+  100% {
+    opacity: 0.2;
+    box-shadow: 0 0 4px rgba(245, 208, 96, 0.4);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 16px rgba(245, 208, 96, 0.9);
+  }
+}
+
+@keyframes divider-line-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes divider-drift {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  10%,
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+}
+
+@keyframes divider-tape-scroll {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 56px 0;
+  }
+}
+
+.divider-shimmer {
+  animation: divider-shimmer 4s ease-in-out infinite;
+}
+.divider-pulse-ring {
+  animation: divider-pulse-ring 2.4s ease-out infinite;
+}
+.divider-rotate {
+  animation: divider-rotate 20s linear infinite;
+}
+.divider-float {
+  animation: divider-float 3s ease-in-out infinite;
+}
+.divider-spark {
+  animation: divider-spark 2s ease-in-out infinite;
+}
+.divider-line-pulse {
+  animation: divider-line-pulse 3s ease-in-out infinite;
+}
+.divider-drift {
+  animation: divider-drift 6s ease-in-out infinite;
+}
+.divider-tape-scroll {
+  animation: divider-tape-scroll 3s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .divider-shimmer,
+  .divider-pulse-ring,
+  .divider-rotate,
+  .divider-float,
+  .divider-spark,
+  .divider-line-pulse,
+  .divider-drift,
+  .divider-tape-scroll {
+    animation: none !important;
+  }
+}
+
 /* Скрываем плавающие кнопки когда открыта модалка */
 body.modal-open .floating-mobile-fab,
 body.modal-open .floating-mobile-notif {
