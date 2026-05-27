@@ -24,7 +24,7 @@ interface IndustrialBannerProps {
 }
 
 const DEFAULT_IMAGE =
-  "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/b030b7fd-d2de-459a-ae3c-2dc72f394346.png";
+  "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/ccc96b0f-beb1-49da-af45-2566c3bb7232.jpg";
 
 const IndustrialBanner = ({
   eyebrow = "СОБСТВЕННЫЙ ПАРК",

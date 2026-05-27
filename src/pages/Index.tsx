@@ -44,15 +44,16 @@ const Index = () => {
         <FeaturesSection visibleSections={visibleSections} />
       </SectionBackdrop>
 
-      {/* === Индустриальный баннер №1 — перед парком техники === */}
+      {/* === Баннер №1 — НАША ТЕХНИКА (кран-манипулятор с воздуха) === */}
       <IndustrialBanner
         eyebrow="СОБСТВЕННЫЙ ПАРК"
         titleStart="НАША"
         titleAccent="ТЕХНИКА"
-        subtitle="15+ единиц спецтехники в Нижнем Новгороде — манипуляторы, краны, асфальтоукладчики"
+        subtitle="15+ единиц спецтехники — манипуляторы, краны, асфальтоукладчики"
         icon="Truck"
         size="md"
         href="#fleet"
+        imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/ccc96b0f-beb1-49da-af45-2566c3bb7232.jpg"
       />
 
       {/* Зона техники — силуэт крана-манипулятора на фоне */}
@@ -62,7 +63,16 @@ const Index = () => {
         <LazySection id="fleet"><FleetSection /></LazySection>
       </SectionBackdrop>
 
-      <SectionDivider variant="circuit" />
+      {/* === Баннер №2 — ВЕСЬ ПАРК (грузовики в ряд на закате) === */}
+      <IndustrialBanner
+        eyebrow="ПОЛНЫЙ ПАРК"
+        titleStart="ВСЯ"
+        titleAccent="СПЕЦТЕХНИКА"
+        subtitle="Подача от 1 часа. Замена техники за 3-5 часов при поломке"
+        icon="Warehouse"
+        size="sm"
+        imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/e24297e7-89a1-4e23-ab8c-8a9684e4b369.jpg"
+      />
 
       {/* Применение + асфальт — следы протекторов (грузовая техника) */}
       <SectionBackdrop tone="warm" pattern="tracks">
@@ -71,7 +81,16 @@ const Index = () => {
         <LazySection><AsphaltPromoSection /></LazySection>
       </SectionBackdrop>
 
-      <SectionDivider variant="particles" />
+      {/* === Баннер №3 — АСФАЛЬТ (асфальтоукладчик на закате) === */}
+      <IndustrialBanner
+        eyebrow="АСФАЛЬТИРОВАНИЕ"
+        titleStart="УКЛАДЫВАЕМ"
+        titleAccent="АСФАЛЬТ"
+        subtitle="Дороги, дворы, парковки — под ключ с гарантией"
+        icon="Construction"
+        size="md"
+        imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/cafa74e6-93ab-4a2b-b259-a05618d0fccf.jpg"
+      />
 
       {/* Калькулятор + погода — чертёж со схемой (инженерный расчёт) */}
       <SectionBackdrop tone="deep" pattern="blueprint">
@@ -80,14 +99,15 @@ const Index = () => {
         <LazySection><WeatherWidget /></LazySection>
       </SectionBackdrop>
 
-      {/* === Индустриальный баннер №2 — перед галереей работ === */}
+      {/* === Баннер №4 — НАШИ РАБОТЫ (экскаватор в работе) === */}
       <IndustrialBanner
         eyebrow="ПОРТФОЛИО"
         titleStart="НАШИ"
         titleAccent="РАБОТЫ"
-        subtitle="5000+ выполненных заказов за 10 лет — фотоотчёты с реальных объектов"
+        subtitle="5000+ выполненных заказов за 10 лет — фотоотчёты с объектов"
         icon="Camera"
         size="md"
+        imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/0f2af5ce-948d-4baa-addf-0e2ccc621107.jpg"
       />
 
       {/* Галерея + клиенты — контейнеры со стропами (груз / работа) */}
@@ -97,14 +117,15 @@ const Index = () => {
         <LazySection><ClientsSection /></LazySection>
       </SectionBackdrop>
 
-      {/* === Индустриальный баннер №3 — перед отзывами === */}
+      {/* === Баннер №5 — ОТЗЫВЫ (рукопожатие на стройке) === */}
       <IndustrialBanner
         eyebrow="НАМ ДОВЕРЯЮТ"
         titleStart="ОТЗЫВЫ"
         titleAccent="КЛИЕНТОВ"
-        subtitle="Что говорят о нашей работе компании и частные заказчики"
+        subtitle="Что говорят компании и частные заказчики о нашей работе"
         icon="Star"
         size="sm"
+        imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/7f2d1534-6094-47fd-b346-1df7c8a42695.jpg"
       />
 
       {/* Отзывы — заклёпки на металле (надёжно) */}
@@ -121,7 +142,16 @@ const Index = () => {
         <LazySection><AsphaltSeoText /></LazySection>
       </SectionBackdrop>
 
-      <SectionDivider variant="neon" />
+      {/* === Баннер №6 — FAQ (городские краны на закате) === */}
+      <IndustrialBanner
+        eyebrow="ЧАСТЫЕ ВОПРОСЫ"
+        titleStart="ОТВЕЧАЕМ"
+        titleAccent="НА ВСЁ"
+        subtitle="Условия, цены, документы, география работы"
+        icon="HelpCircle"
+        size="sm"
+        imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/7b50cb06-2a30-4f2e-ba24-63f54989c96d.jpg"
+      />
 
       {/* FAQ — знаки стройки + жёлтая лента (внимание) */}
       <SectionBackdrop tone="warm" pattern="warning">
