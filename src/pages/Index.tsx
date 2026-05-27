@@ -5,6 +5,7 @@ import FeaturesSection from "@/components/sections/FeaturesSection";
 import LazySection from "@/components/LazySection";
 import SeoMeta from "@/components/seo/SeoMeta";
 import StructuredData from "@/components/seo/StructuredData";
+import SectionDivider from "@/components/ui/SectionDivider";
 import { useVisibleSections } from "@/hooks/useVisibleSections";
 
 const FleetSection = lazy(() => import("@/components/sections/FleetSection"));
@@ -33,19 +34,33 @@ const Index = () => {
       <StructuredData />
       <HeroSection visibleSections={visibleSections} />
       <TrustBarSection />
+      <SectionDivider variant="glow" />
       <FeaturesSection visibleSections={visibleSections} />
+      <SectionDivider variant="diamond" />
       <LazySection><PopularTechSection /></LazySection>
+      <SectionDivider variant="crane" />
       <LazySection id="fleet"><FleetSection /></LazySection>
+      <SectionDivider variant="stripes" />
       <LazySection><UseCasesSection /></LazySection>
+      <SectionDivider variant="wave" />
       <LazySection><AsphaltPromoSection /></LazySection>
+      <SectionDivider variant="glow" />
       <LazySection><CalculatorSection /></LazySection>
+      <SectionDivider variant="diamond" />
       <LazySection><WeatherWidget /></LazySection>
+      <SectionDivider variant="wave" flip />
       <LazySection><GallerySection /></LazySection>
+      <SectionDivider variant="stripes" />
       <LazySection><ClientsSection /></LazySection>
+      <SectionDivider variant="glow" />
       <LazySection><ReviewsSection /></LazySection>
+      <SectionDivider variant="crane" />
       <LazySection><SeoTextSection /></LazySection>
+      <SectionDivider variant="diamond" />
       <LazySection><AsphaltSeoText /></LazySection>
+      <SectionDivider variant="wave" />
       <LazySection><FaqSection /></LazySection>
+      <SectionDivider variant="glow" />
       <LazySection><BottomSections visibleSections={visibleSections} /></LazySection>
       <LazySection><SeoFooterLinks /></LazySection>
       <LazySection><SiteFooter /></LazySection>
