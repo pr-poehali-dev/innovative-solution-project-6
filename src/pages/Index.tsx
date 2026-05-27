@@ -6,6 +6,7 @@ import LazySection from "@/components/LazySection";
 import SeoMeta from "@/components/seo/SeoMeta";
 import StructuredData from "@/components/seo/StructuredData";
 import SectionDivider from "@/components/ui/SectionDivider";
+import SectionBackdrop from "@/components/ui/SectionBackdrop";
 import { useVisibleSections } from "@/hooks/useVisibleSections";
 
 const FleetSection = lazy(() => import("@/components/sections/FleetSection"));
@@ -34,33 +35,75 @@ const Index = () => {
       <StructuredData />
       <HeroSection visibleSections={visibleSections} />
       <TrustBarSection />
+
       <SectionDivider variant="aurora" />
-      <FeaturesSection visibleSections={visibleSections} />
+
+      {/* Зона преимуществ — spotlight (важно) */}
+      <SectionBackdrop tone="spotlight" pattern="dots">
+        <FeaturesSection visibleSections={visibleSections} />
+      </SectionBackdrop>
+
       <SectionDivider variant="neon" />
-      <LazySection><PopularTechSection /></LazySection>
-      <SectionDivider variant="crane" />
-      <LazySection id="fleet"><FleetSection /></LazySection>
+
+      {/* Зона техники — tech-фон с сеткой */}
+      <SectionBackdrop tone="tech" pattern="grid">
+        <LazySection><PopularTechSection /></LazySection>
+        <SectionDivider variant="crane" />
+        <LazySection id="fleet"><FleetSection /></LazySection>
+      </SectionBackdrop>
+
       <SectionDivider variant="circuit" />
-      <LazySection><UseCasesSection /></LazySection>
-      <SectionDivider variant="wave" />
-      <LazySection><AsphaltPromoSection /></LazySection>
+
+      {/* Зона применения + асфальт — тёплая */}
+      <SectionBackdrop tone="warm" pattern="diagonal">
+        <LazySection><UseCasesSection /></LazySection>
+        <SectionDivider variant="wave" />
+        <LazySection><AsphaltPromoSection /></LazySection>
+      </SectionBackdrop>
+
       <SectionDivider variant="particles" />
-      <LazySection><CalculatorSection /></LazySection>
-      <SectionDivider variant="blueprint" />
-      <LazySection><WeatherWidget /></LazySection>
+
+      {/* Зона калькулятора + погода — deep */}
+      <SectionBackdrop tone="deep" pattern="grid">
+        <LazySection><CalculatorSection /></LazySection>
+        <SectionDivider variant="blueprint" />
+        <LazySection><WeatherWidget /></LazySection>
+      </SectionBackdrop>
+
       <SectionDivider variant="wave" flip />
-      <LazySection><GallerySection /></LazySection>
-      <SectionDivider variant="stripes" />
-      <LazySection><ClientsSection /></LazySection>
+
+      {/* Зона визуала — soft (галерея + клиенты) */}
+      <SectionBackdrop tone="soft" pattern="dots">
+        <LazySection><GallerySection /></LazySection>
+        <SectionDivider variant="stripes" />
+        <LazySection><ClientsSection /></LazySection>
+      </SectionBackdrop>
+
       <SectionDivider variant="aurora" />
-      <LazySection><ReviewsSection /></LazySection>
+
+      {/* Отзывы — spotlight (выделяем) */}
+      <SectionBackdrop tone="spotlight" pattern="dots">
+        <LazySection><ReviewsSection /></LazySection>
+      </SectionBackdrop>
+
       <SectionDivider variant="diamond" />
-      <LazySection><SeoTextSection /></LazySection>
-      <SectionDivider variant="particles" />
-      <LazySection><AsphaltSeoText /></LazySection>
+
+      {/* Зона текста — deep */}
+      <SectionBackdrop tone="deep" pattern="diagonal">
+        <LazySection><SeoTextSection /></LazySection>
+        <SectionDivider variant="particles" />
+        <LazySection><AsphaltSeoText /></LazySection>
+      </SectionBackdrop>
+
       <SectionDivider variant="neon" />
-      <LazySection><FaqSection /></LazySection>
+
+      {/* FAQ — warm (тёплый, чтобы привлечь внимание) */}
+      <SectionBackdrop tone="warm" pattern="dots">
+        <LazySection><FaqSection /></LazySection>
+      </SectionBackdrop>
+
       <SectionDivider variant="glow" />
+
       <LazySection><BottomSections visibleSections={visibleSections} /></LazySection>
       <LazySection><SeoFooterLinks /></LazySection>
       <LazySection><SiteFooter /></LazySection>
