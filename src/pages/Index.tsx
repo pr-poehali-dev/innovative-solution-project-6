@@ -7,6 +7,7 @@ import SeoMeta from "@/components/seo/SeoMeta";
 import StructuredData from "@/components/seo/StructuredData";
 import SectionDivider from "@/components/ui/SectionDivider";
 import SectionBackdrop from "@/components/ui/SectionBackdrop";
+import IndustrialBanner from "@/components/sections/IndustrialBanner";
 import { useVisibleSections } from "@/hooks/useVisibleSections";
 
 const FleetSection = lazy(() => import("@/components/sections/FleetSection"));
@@ -43,7 +44,16 @@ const Index = () => {
         <FeaturesSection visibleSections={visibleSections} />
       </SectionBackdrop>
 
-      <SectionDivider variant="neon" />
+      {/* === Индустриальный баннер №1 — перед парком техники === */}
+      <IndustrialBanner
+        eyebrow="СОБСТВЕННЫЙ ПАРК"
+        titleStart="НАША"
+        titleAccent="ТЕХНИКА"
+        subtitle="15+ единиц спецтехники в Нижнем Новгороде — манипуляторы, краны, асфальтоукладчики"
+        icon="Truck"
+        size="md"
+        href="#fleet"
+      />
 
       {/* Зона техники — силуэт крана-манипулятора на фоне */}
       <SectionBackdrop tone="tech" pattern="crane">
@@ -70,7 +80,15 @@ const Index = () => {
         <LazySection><WeatherWidget /></LazySection>
       </SectionBackdrop>
 
-      <SectionDivider variant="wave" flip />
+      {/* === Индустриальный баннер №2 — перед галереей работ === */}
+      <IndustrialBanner
+        eyebrow="ПОРТФОЛИО"
+        titleStart="НАШИ"
+        titleAccent="РАБОТЫ"
+        subtitle="5000+ выполненных заказов за 10 лет — фотоотчёты с реальных объектов"
+        icon="Camera"
+        size="md"
+      />
 
       {/* Галерея + клиенты — контейнеры со стропами (груз / работа) */}
       <SectionBackdrop tone="soft" pattern="cargo">
@@ -79,7 +97,15 @@ const Index = () => {
         <LazySection><ClientsSection /></LazySection>
       </SectionBackdrop>
 
-      <SectionDivider variant="aurora" />
+      {/* === Индустриальный баннер №3 — перед отзывами === */}
+      <IndustrialBanner
+        eyebrow="НАМ ДОВЕРЯЮТ"
+        titleStart="ОТЗЫВЫ"
+        titleAccent="КЛИЕНТОВ"
+        subtitle="Что говорят о нашей работе компании и частные заказчики"
+        icon="Star"
+        size="sm"
+      />
 
       {/* Отзывы — заклёпки на металле (надёжно) */}
       <SectionBackdrop tone="spotlight" pattern="rivets">
