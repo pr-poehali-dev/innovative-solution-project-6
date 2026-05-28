@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import OrderModal from "@/components/ui/OrderModal";
-import SectionBadge from "@/components/ui/SectionBadge";
 import { trucks } from "./fleet/data";
 import TruckCard from "./fleet/TruckCard";
 import OrderInfoBlock from "./fleet/OrderInfoBlock";
@@ -47,7 +46,7 @@ const FleetSection = () => {
   }, []);
 
   return (
-    <section className="py-16 sm:py-32 px-4 sm:px-6 scroll-mt-20 sm:scroll-mt-24">
+    <section className="pt-4 sm:pt-6 pb-16 sm:pb-32 px-4 sm:px-6 scroll-mt-20 sm:scroll-mt-24">
       <OrderModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -56,20 +55,6 @@ const FleetSection = () => {
         submitLabel="Заказать технику"
       />
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10 sm:mb-20">
-          <div className="flex justify-center mb-4">
-            <SectionBadge>Наш парк</SectionBadge>
-          </div>
-          <h2 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mb-4 sm:mb-6">
-            <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
-              Наша техника
-            </span>
-          </h2>
-          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-            Мы подберём правильный манипулятор с платформой необходимых габаритов и нужной грузоподъёмностью КМУ под вашу задачу
-          </p>
-        </div>
-
         {trucks.map((truck, idx) => (
           <TruckCard
             key={idx}
