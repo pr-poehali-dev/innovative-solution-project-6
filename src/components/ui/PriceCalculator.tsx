@@ -17,6 +17,14 @@ interface PriceCalculatorProps {
 const PriceCalculator = ({ pricePerHour, onOrder }: PriceCalculatorProps) => {
   const [hours, setHours] = useState(4);
   const [shifts, setShifts] = useState(1);
+  const [interacted, setInteracted] = useState(false);
+
+  const trackInteraction = () => {
+    if (!interacted) {
+      setInteracted(true);
+      reachGoal("calc_opened");
+    }
+  };
 
   const minHours = 4;
   const total = pricePerHour * hours * shifts;
@@ -44,7 +52,10 @@ const PriceCalculator = ({ pricePerHour, onOrder }: PriceCalculatorProps) => {
             max={24}
             step={1}
             value={hours}
-            onChange={e => setHours(Number(e.target.value))}
+            onChange={e => {
+              trackInteraction();
+              setHours(Number(e.target.value));
+            }}
             aria-label="Количество часов аренды"
             className="w-full accent-yellow-400 cursor-pointer"
           />
@@ -64,7 +75,10 @@ const PriceCalculator = ({ pricePerHour, onOrder }: PriceCalculatorProps) => {
             {[1, 2, 3, 5, 10, 20, 30].map(d => (
               <button
                 key={d}
-                onClick={() => setShifts(d)}
+                onClick={() => {
+                  trackInteraction();
+                  setShifts(d);
+                }}
                 className="flex-1 py-2 rounded-xl text-sm font-bold transition-all"
                 style={
                   shifts === d

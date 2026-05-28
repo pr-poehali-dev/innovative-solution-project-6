@@ -1,5 +1,6 @@
 import Icon from "@/components/ui/icon";
 import HeroLeadForm from "./HeroLeadForm";
+import { reachGoal } from "@/lib/metrika";
 
 interface HeroContentProps {
   visibleSections: Record<string, boolean>;
@@ -67,6 +68,7 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
         <div className="flex gap-3 sm:gap-4 mb-4 sm:mb-10 flex-col sm:flex-row">
           <a
             href="tel:+79601883084"
+            onClick={() => reachGoal("phone_click", { place: "hero_main" })}
             className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-lg shadow-[0_10px_30px_rgba(245,214,128,0.4)] hover:scale-[1.03] transition-all duration-300 relative overflow-hidden"
             style={{
               background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",

@@ -10,14 +10,19 @@ declare global {
 }
 
 export type MetrikaGoal =
-  | "phone_click"         // Клик по кнопке/ссылке с телефоном
-  | "order_modal_open"    // Открыта модалка «Заказать»
-  | "callback_modal_open" // Открыта модалка «Перезвоните мне»
-  | "order_sent"          // Успешно отправлена заявка через OrderModal
-  | "callback_sent"       // Успешно отправлена заявка обратного звонка
-  | "calc_order"          // Клиент нажал «Заказать» в калькуляторе
-  | "whatsapp_click"      // Клик по WhatsApp
-  | "telegram_click";     // Клик по Telegram
+  | "phone_click"         // Клик по кнопке/ссылке с телефоном (главная цель — 150₽)
+  | "order_modal_open"    // Открыта модалка «Заказать» (микро — 50₽)
+  | "callback_modal_open" // Открыта модалка «Перезвоните мне» (микро — 50₽)
+  | "order_sent"          // ★ Успешно отправлена заявка через OrderModal (★ 500₽)
+  | "callback_sent"       // ★ Успешно отправлена заявка обратного звонка (★ 400₽)
+  | "hero_lead_sent"      // ★ Успешно отправлена заявка из формы в Hero (★ 500₽)
+  | "calc_order"          // Клиент нажал «Заказать» в калькуляторе (★ 400₽)
+  | "calc_opened"         // Пользователь открыл/использовал калькулятор (микро — 30₽)
+  | "whatsapp_click"      // Клик по WhatsApp (★ 200₽)
+  | "telegram_click"      // Клик по Telegram (★ 200₽)
+  | "fleet_view"          // Просмотр карточки техники / переход на /truck (50₽)
+  | "scroll_75"           // Глубокий скролл (вовлечённость 30₽)
+  | "long_session";       // Сессия 60+ секунд (вовлечённость 30₽)
 
 export function reachGoal(goal: MetrikaGoal, params?: Record<string, unknown>) {
   try {

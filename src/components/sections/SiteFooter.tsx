@@ -4,6 +4,7 @@ import Icon from "@/components/ui/icon";
 import BrandLogo from "@/components/ui/BrandLogo";
 import CallbackModal from "@/components/ui/CallbackModal";
 import { cities } from "@/data/cities";
+import { reachGoal } from "@/lib/metrika";
 
 const trucks = [
   { slug: "faw-kmu-dongyoung", label: "FAW + КМУ DongYang" },
@@ -211,6 +212,7 @@ const SiteFooter = () => {
               <div className="flex flex-col gap-2.5 mb-4">
                 <a
                   href="tel:+79601883084"
+                  onClick={() => reachGoal("phone_click", { place: "footer_main" })}
                   className="group flex items-center gap-3 px-4 py-3 rounded-2xl shadow-lg shadow-accent/30 active:scale-[0.98] transition-transform"
                   style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
                 >
@@ -224,6 +226,7 @@ const SiteFooter = () => {
                 </a>
                 <a
                   href="tel:+79601690990"
+                  onClick={() => reachGoal("phone_click", { place: "footer_director" })}
                   className="group flex items-center gap-3 px-4 py-3 rounded-2xl border border-accent/40 bg-accent/5 hover:bg-accent/10 transition-colors"
                 >
                   <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
@@ -237,7 +240,10 @@ const SiteFooter = () => {
 
                 <button
                   type="button"
-                  onClick={() => setCallbackOpen(true)}
+                  onClick={() => {
+                    reachGoal("callback_modal_open", { place: "footer" });
+                    setCallbackOpen(true);
+                  }}
                   className="group flex items-center gap-3 px-4 py-3 rounded-2xl border border-dashed border-accent/40 bg-transparent hover:border-accent/70 hover:bg-accent/5 transition-all text-left"
                 >
                   <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">

@@ -5,6 +5,7 @@ import LeadFormFields from "./leadForm/LeadFormFields";
 import MediaAttach from "./leadForm/MediaAttach";
 import SubmitButton from "./leadForm/SubmitButton";
 import { useMediaUploader } from "./leadForm/useMediaUploader";
+import { reachGoal } from "@/lib/metrika";
 
 const HeroLeadForm = () => {
   const [name, setName] = useState("");
@@ -76,6 +77,10 @@ const HeroLeadForm = () => {
       });
       if (res.ok) {
         setStatus("success");
+        reachGoal("hero_lead_sent", {
+          has_media: mediaPayload.length > 0,
+          media_count: mediaPayload.length,
+        });
         resetForm();
       } else {
         setStatus("error");

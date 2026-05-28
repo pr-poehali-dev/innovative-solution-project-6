@@ -3,6 +3,7 @@ import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import SectionBadge from "@/components/ui/SectionBadge";
 import ContractModal from "@/components/ui/ContractModal";
+import { reachGoal } from "@/lib/metrika";
 
 interface MapAndRequisitesSectionProps {
   copied: boolean;
@@ -94,6 +95,7 @@ const MapAndRequisitesSection = ({
               <PhoneButton size="lg" className="rounded-2xl w-full" />
               <a
                 href="tel:+79601690990"
+                onClick={() => reachGoal("phone_click", { place: "map_section_second" })}
                 className="inline-flex items-center justify-center gap-4 px-10 sm:px-14 py-5 sm:py-6 border rounded-2xl font-bold text-lg sm:text-2xl md:text-3xl w-full transition-all"
                 style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", fontFamily: "'Cinzel', serif", animation: "goldPulse 1.2s ease-in-out infinite" }}
               >

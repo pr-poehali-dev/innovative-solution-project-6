@@ -16,6 +16,7 @@ const OrderNotifications = lazy(() => import("@/components/ui/OrderNotifications
 const AutoReindex = lazy(() => import("@/components/AutoReindex"));
 const OfflineDownloadModal = lazy(() => import("@/components/ui/OfflineDownloadModal"));
 const OfflineSuccessToast = lazy(() => import("@/components/ui/OfflineSuccessToast"));
+const EngagementTracker = lazy(() => import("@/components/EngagementTracker"));
 
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -48,6 +49,7 @@ const App = () => (
         <AutoReindex />
         <OfflineDownloadModal />
         <OfflineSuccessToast />
+        <EngagementTracker />
       </Suspense>
       <div className="fixed inset-0 -z-10 bg-background">
         <div className="absolute inset-0 bg-grid opacity-100" />
