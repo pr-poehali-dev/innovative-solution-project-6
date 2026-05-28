@@ -60,7 +60,7 @@ const ReviewsSection = () => {
   };
 
   return (
-    <section className="py-16 sm:py-32 px-4 sm:px-6 bg-accent/5 overflow-hidden">
+    <section className="pt-4 sm:pt-6 pb-16 sm:pb-32 px-4 sm:px-6 bg-accent/5 overflow-hidden">
       <div className="max-w-7xl mx-auto">
 
         {/* Шапка */}

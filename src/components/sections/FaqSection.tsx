@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
-import SectionBadge from "@/components/ui/SectionBadge";
 
 export const faqs = [
   {
@@ -72,7 +71,7 @@ const FaqSection = () => {
   };
 
   return (
-    <section className="relative py-12 sm:py-24 px-4 sm:px-6 overflow-hidden">
+    <section className="relative pt-4 sm:pt-6 pb-12 sm:pb-24 px-4 sm:px-6 overflow-hidden">
       <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
 
       {/* Декоративные световые пятна */}
@@ -83,20 +82,6 @@ const FaqSection = () => {
       />
 
       <div className="relative max-w-4xl mx-auto">
-        <div className="text-center mb-8 sm:mb-14">
-          <div className="flex justify-center mb-4">
-            <SectionBadge>Частые вопросы</SectionBadge>
-          </div>
-          <h2 className="text-2xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mb-3 sm:mb-6">
-            <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
-              Отвечаем на вопросы об аренде манипулятора
-            </span>
-          </h2>
-          <p className="text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">
-            Собрали ответы на самые частые вопросы клиентов об услугах манипулятора в Нижнем Новгороде
-          </p>
-        </div>
-
         <div className="space-y-3 sm:space-y-4">
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i;

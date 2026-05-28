@@ -1,5 +1,4 @@
 import Icon from "@/components/ui/icon";
-import SectionBadge from "@/components/ui/SectionBadge";
 import { reviews, filters, getCategory, type FilterId } from "./data";
 
 interface ReviewsHeaderProps {
@@ -22,17 +21,9 @@ const ReviewsHeader = ({
   next,
 }: ReviewsHeaderProps) => {
   return (
-    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 sm:mb-16 gap-6">
+    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-6 sm:mb-10 gap-6">
       <div>
-        <div className="flex sm:justify-start justify-center mb-4">
-          <SectionBadge>Отзывы</SectionBadge>
-        </div>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-black tracking-tighter">
-          <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
-            Что говорят клиенты
-          </span>
-        </h2>
-        <div className="flex items-center gap-3 mt-4">
+        <div className="flex items-center gap-3">
           <div className="flex gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => (
               <span key={i} className="text-yellow-400 text-xl drop-shadow-[0_0_6px_rgba(250,204,21,0.6)]">★</span>
