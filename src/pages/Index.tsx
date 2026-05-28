@@ -25,6 +25,7 @@ const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 const WeatherWidget = lazy(() => import("@/components/sections/WeatherWidget"));
 const AsphaltPromoSection = lazy(() => import("@/components/sections/AsphaltPromoSection"));
 const AsphaltSeoText = lazy(() => import("@/components/sections/AsphaltSeoText"));
+const AsphaltBigBanner = lazy(() => import("@/components/sections/AsphaltBigBanner"));
 const SECTION_IDS = ["hero", "features", "how", "pricing", "cta"];
 
 const Index = () => {
@@ -92,9 +93,10 @@ const Index = () => {
         imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/cafa74e6-93ab-4a2b-b259-a05618d0fccf.jpg"
       />
 
-      {/* Всё про асфальт в одном месте: промо + SEO-текст */}
+      {/* Всё про асфальт в одном месте: промо + большой баннер с калькулятором + SEO-текст */}
       <SectionBackdrop tone="warm" pattern="tracks">
         <LazySection><AsphaltPromoSection /></LazySection>
+        <LazySection><AsphaltBigBanner /></LazySection>
         <SectionDivider variant="wave" />
         <LazySection><AsphaltSeoText /></LazySection>
       </SectionBackdrop>
