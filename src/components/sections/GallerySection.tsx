@@ -42,6 +42,21 @@ const photos: { url: string; caption: string; category: Category }[] = [
     category: "asphalt",
   },
   {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/64d274b7-ea55-412e-952b-72efedd17f37.jpg",
+    caption: "Асфальтирование подъездной дорожки к частному дому",
+    category: "asphalt",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/15a32fdf-10e6-41d2-9220-e2f703c6a43e.jpg",
+    caption: "Укладка асфальта у двухэтажного коттеджа — каток HAMM",
+    category: "asphalt",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/0d019fa7-9b61-423e-be2c-642236aa4802.jpg",
+    caption: "Заасфальтированная площадка и парковка у загородного дома",
+    category: "asphalt",
+  },
+  {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/8f5f1c5e-cd31-4f9e-83e9-6814c83c395e.webp",
     caption: "Работа на высоте — строительство склада",
     category: "heights",
