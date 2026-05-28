@@ -6,12 +6,12 @@ import OrderModal from "@/components/ui/OrderModal";
 
 const photos = [
   {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/191b94b2-35ca-4309-9273-0325efde7891.jpg",
-    caption: "Доставка на загородный объект — FAW J6P-390 с КМУ DongYang",
-  },
-  {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/96f657e8-7741-4d2b-b428-ca560b0047fb.webp",
     caption: "Монтаж металлоконструкций ангара",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/191b94b2-35ca-4309-9273-0325efde7891.jpg",
+    caption: "Доставка на загородный объект — FAW J6P-390 с КМУ DongYang",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/8f5f1c5e-cd31-4f9e-83e9-6814c83c395e.webp",
