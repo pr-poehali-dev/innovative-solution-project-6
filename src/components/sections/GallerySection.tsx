@@ -3,87 +3,117 @@ import { createPortal } from "react-dom";
 import Icon from "@/components/ui/icon";
 import OrderModal from "@/components/ui/OrderModal";
 
-const photos = [
+type Category = "manipulator" | "asphalt";
+
+const photos: { url: string; caption: string; category: Category }[] = [
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/96f657e8-7741-4d2b-b428-ca560b0047fb.webp",
     caption: "Монтаж металлоконструкций ангара",
+    category: "manipulator",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/191b94b2-35ca-4309-9273-0325efde7891.jpg",
     caption: "Доставка на загородный объект — FAW J6P-390 с КМУ DongYang",
+    category: "manipulator",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/bf13e959-8028-409c-96f6-6d4cdeef23bc.jpg",
     caption: "Укладка асфальта гусеничным асфальтоукладчиком Vögele SUPER 2000-3",
+    category: "asphalt",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/1c710088-2f75-4927-bd51-e49a078366c4.jpg",
     caption: "Уплотнение асфальта катком HAMM — благоустройство двора",
+    category: "asphalt",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/2990aefa-95af-485f-9c51-836315e9547d.jpg",
     caption: "Асфальтирование автомобильной трассы — бригада на объекте",
+    category: "asphalt",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/faf5a333-196c-43d0-8c3e-0efe23d3ab5e.jpg",
     caption: "Укладка асфальта в коттеджном посёлке — подъездная дорога",
+    category: "asphalt",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/d4d69dae-0a9c-4443-921a-3e1febd1cdf2.jpg",
     caption: "Асфальтирование городской дороги — полный цикл работ",
+    category: "asphalt",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/8f5f1c5e-cd31-4f9e-83e9-6814c83c395e.webp",
     caption: "Работа на высоте — строительство склада",
+    category: "manipulator",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/b5c276a4-5b1a-4bc7-ad4f-af1964ea3099.webp",
     caption: "Монтаж конструкций на промышленном объекте",
+    category: "manipulator",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/201f98a5-c2c5-42cf-9c8f-6fbd5c67b508.webp",
     caption: "Два манипулятора на строительстве производственного здания",
+    category: "manipulator",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/0c5ebbe2-cc38-4284-81fb-4721e3e53eaa.webp",
     caption: "Перевозка и разгрузка кабельных барабанов",
+    category: "manipulator",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/62534a4c-b7cb-4179-a953-6bf52321d543.webp",
     caption: "Монтаж кровли — подъём сэндвич-панелей",
+    category: "manipulator",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/bb2703e5-098c-4386-968f-1c4f5bd48fac.webp",
     caption: "Установка металлического гаража на участке",
+    category: "manipulator",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/1d067d16-d8b2-42b2-b1ef-4a27f3db79f1.webp",
     caption: "Перевозка торгового павильона по городу",
+    category: "manipulator",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/737482fb-5cef-4606-94a1-7256b0d8b9ab.webp",
     caption: "Монтаж фасадных панелей на здании",
+    category: "manipulator",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/a386df86-71cf-4a6a-b971-87f437eab3db.webp",
     caption: "Совместная работа манипулятора и автовышки на стройке",
+    category: "manipulator",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/56e40bf4-c213-4485-a5fc-cd80c85fb564.webp",
     caption: "Погрузка бетонных изделий на склад",
+    category: "manipulator",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/ad03fa64-abbe-491a-85cc-f51f79cefc0a.webp",
     caption: "Перевозка торгового павильона «Хочу Есть» по городу",
+    category: "manipulator",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/f96d4e3d-b06a-4cab-818e-ba49896791b5.webp",
     caption: "Работа автовышки на объектах РЖД зимой",
+    category: "manipulator",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/e8b0e860-8ca1-40df-8600-4d28597aa247.webp",
     caption: "КамАЗ с манипулятором DY — готов к выезду на объект",
+    category: "manipulator",
   },
+];
+
+type FilterId = "all" | Category;
+
+const filters: { id: FilterId; label: string; icon: string }[] = [
+  { id: "all", label: "Все работы", icon: "LayoutGrid" },
+  { id: "manipulator", label: "Манипулятор", icon: "Truck" },
+  { id: "asphalt", label: "Асфальт", icon: "Construction" },
 ];
 
 
@@ -91,11 +121,17 @@ const GallerySection = () => {
   const [active, setActive] = useState<number | null>(null);
   const [orderPhoto, setOrderPhoto] = useState<(typeof photos)[number] | null>(null);
   const [dragX, setDragX] = useState(0);
+  const [filter, setFilter] = useState<FilterId>("all");
   const startXRef = useRef<number | null>(null);
   const isDraggingRef = useRef(false);
 
-  const prev = () => setActive((p) => (p !== null ? (p - 1 + photos.length) % photos.length : 0));
-  const next = () => setActive((p) => (p !== null ? (p + 1) % photos.length : 0));
+  const filtered =
+    filter === "all" ? photos : photos.filter((p) => p.category === filter);
+
+  const prev = () =>
+    setActive((p) => (p !== null ? (p - 1 + filtered.length) % filtered.length : 0));
+  const next = () =>
+    setActive((p) => (p !== null ? (p + 1) % filtered.length : 0));
 
   const openOrder = (
     photo: (typeof photos)[number],
@@ -147,11 +183,47 @@ const GallerySection = () => {
   return (
     <section className="pt-4 sm:pt-6 pb-16 sm:pb-32 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
+        {/* Фильтры по типу работ */}
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-10">
+          {filters.map((f) => {
+            const isActive = filter === f.id;
+            const count =
+              f.id === "all"
+                ? photos.length
+                : photos.filter((p) => p.category === f.id).length;
+            return (
+              <button
+                key={f.id}
+                type="button"
+                onClick={() => {
+                  setFilter(f.id);
+                  setActive(null);
+                }}
+                className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all ${
+                  isActive
+                    ? "bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/30 scale-105"
+                    : "bg-white/5 text-white/80 border border-accent/20 hover:bg-white/10 hover:border-accent/40"
+                }`}
+              >
+                <Icon name={f.icon} size={14} />
+                <span>{f.label}</span>
+                <span
+                  className={`text-[10px] sm:text-xs px-1.5 py-0.5 rounded-full ${
+                    isActive ? "bg-white/25" : "bg-accent/20 text-accent"
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
         {/* Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-1.5 sm:gap-2.5 md:gap-3 lg:gap-4">
-          {photos.map((photo, i) => (
+          {filtered.map((photo, i) => (
             <div
-              key={i}
+              key={`${filter}-${i}`}
               className={`relative overflow-hidden rounded-xl sm:rounded-2xl cursor-pointer group border border-accent/10 hover:border-accent/40 transition-all duration-300 ${i === 0 ? "col-span-2 lg:col-span-2" : ""}`}
               style={{ aspectRatio: "4/3" }}
               onClick={() => setActive(i)}
@@ -197,8 +269,8 @@ const GallerySection = () => {
             onTouchEnd={onDragEnd}
           >
             <img
-              src={photos[active].url}
-              alt={photos[active].caption}
+              src={filtered[active].url}
+              alt={filtered[active].caption}
               draggable={false}
               onClick={(e) => e.stopPropagation()}
               style={{
@@ -250,16 +322,16 @@ const GallerySection = () => {
             </button>
 
             <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/70 text-white text-xs sm:text-sm font-bold">
-              {active + 1} / {photos.length}
+              {active + 1} / {filtered.length}
             </div>
 
             <div className="absolute left-0 right-0 bottom-0 px-4 py-4 sm:py-5 text-center bg-gradient-to-t from-black/90 via-black/60 to-transparent">
               <p className="text-white text-sm sm:text-base font-semibold drop-shadow mb-3 pointer-events-none">
-                {photos[active].caption}
+                {filtered[active].caption}
               </p>
               <button
                 type="button"
-                onClick={(e) => openOrder(photos[active], e)}
+                onClick={(e) => openOrder(filtered[active], e)}
                 className="inline-flex items-center gap-2 px-5 sm:px-7 py-3 rounded-xl text-sm sm:text-base font-bold bg-gradient-to-r from-accent to-accent/80 text-black shadow-xl shadow-accent/40 hover:shadow-2xl hover:shadow-accent/60 hover:scale-105 active:scale-95 transition-all"
               >
                 <Icon name="Sparkles" size={18} />
