@@ -13,6 +13,26 @@ const photos = [
     caption: "Доставка на загородный объект — FAW J6P-390 с КМУ DongYang",
   },
   {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/bf13e959-8028-409c-96f6-6d4cdeef23bc.jpg",
+    caption: "Укладка асфальта гусеничным асфальтоукладчиком Vögele SUPER 2000-3",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/1c710088-2f75-4927-bd51-e49a078366c4.jpg",
+    caption: "Уплотнение асфальта катком HAMM — благоустройство двора",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/2990aefa-95af-485f-9c51-836315e9547d.jpg",
+    caption: "Асфальтирование автомобильной трассы — бригада на объекте",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/faf5a333-196c-43d0-8c3e-0efe23d3ab5e.jpg",
+    caption: "Укладка асфальта в коттеджном посёлке — подъездная дорога",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/d4d69dae-0a9c-4443-921a-3e1febd1cdf2.jpg",
+    caption: "Асфальтирование городской дороги — полный цикл работ",
+  },
+  {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/8f5f1c5e-cd31-4f9e-83e9-6814c83c395e.webp",
     caption: "Работа на высоте — строительство склада",
   },
