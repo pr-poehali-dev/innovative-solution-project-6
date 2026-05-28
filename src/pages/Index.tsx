@@ -76,11 +76,9 @@ const Index = () => {
         imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/e24297e7-89a1-4e23-ab8c-8a9684e4b369.jpg"
       />
 
-      {/* Применение + асфальт — следы протекторов (грузовая техника) */}
+      {/* Применение — следы протекторов (грузовая техника) */}
       <SectionBackdrop tone="warm" pattern="tracks">
         <LazySection><UseCasesSection /></LazySection>
-        <SectionDivider variant="wave" />
-        <LazySection><AsphaltPromoSection /></LazySection>
       </SectionBackdrop>
 
       {/* === Баннер №3 — АСФАЛЬТ (асфальтоукладчик на закате) === */}
@@ -93,6 +91,13 @@ const Index = () => {
         size="md"
         imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/cafa74e6-93ab-4a2b-b259-a05618d0fccf.jpg"
       />
+
+      {/* Всё про асфальт в одном месте: промо + SEO-текст */}
+      <SectionBackdrop tone="warm" pattern="tracks">
+        <LazySection><AsphaltPromoSection /></LazySection>
+        <SectionDivider variant="wave" />
+        <LazySection><AsphaltSeoText /></LazySection>
+      </SectionBackdrop>
 
       {/* Погода — чертёж со схемой (инженерный расчёт) */}
       <SectionBackdrop tone="deep" pattern="blueprint">
@@ -138,8 +143,6 @@ const Index = () => {
       {/* SEO-текст — трубы / арматура (стройка) */}
       <SectionBackdrop tone="deep" pattern="pipes">
         <LazySection><SeoTextSection /></LazySection>
-        <SectionDivider variant="particles" />
-        <LazySection><AsphaltSeoText /></LazySection>
       </SectionBackdrop>
 
       {/* === Баннер №6 — FAQ (городские краны на закате) === */}
