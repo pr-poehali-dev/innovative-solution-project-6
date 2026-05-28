@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Icon from "@/components/ui/icon";
-import SectionBadge from "@/components/ui/SectionBadge";
 import OrderModal from "@/components/ui/OrderModal";
 
 const photos = [
@@ -126,22 +125,8 @@ const GallerySection = () => {
   };
 
   return (
-    <section className="py-16 sm:py-32 px-4 sm:px-6">
+    <section className="pt-4 sm:pt-6 pb-16 sm:pb-32 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10 sm:mb-20">
-          <div className="flex justify-center mb-4">
-            <SectionBadge>Портфолио</SectionBadge>
-          </div>
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tighter mb-4 sm:mb-6">
-            <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
-              Выполненные работы
-            </span>
-          </h2>
-          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-            Реальные объекты — стройки, склады, промышленные предприятия Нижнего Новгорода и области
-          </p>
-        </div>
-
         {/* Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-1.5 sm:gap-2.5 md:gap-3 lg:gap-4">
           {photos.map((photo, i) => (
