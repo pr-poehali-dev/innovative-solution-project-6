@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import Icon from "@/components/ui/icon";
 import OrderModal from "@/components/ui/OrderModal";
 
-type Category = "manipulator" | "asphalt";
+type Category = "manipulator" | "asphalt" | "heights" | "transport";
 
 const photos: { url: string; caption: string; category: Category }[] = [
   {
@@ -44,7 +44,7 @@ const photos: { url: string; caption: string; category: Category }[] = [
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/8f5f1c5e-cd31-4f9e-83e9-6814c83c395e.webp",
     caption: "Работа на высоте — строительство склада",
-    category: "manipulator",
+    category: "heights",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/b5c276a4-5b1a-4bc7-ad4f-af1964ea3099.webp",
@@ -64,7 +64,7 @@ const photos: { url: string; caption: string; category: Category }[] = [
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/62534a4c-b7cb-4179-a953-6bf52321d543.webp",
     caption: "Монтаж кровли — подъём сэндвич-панелей",
-    category: "manipulator",
+    category: "heights",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/bb2703e5-098c-4386-968f-1c4f5bd48fac.webp",
@@ -74,17 +74,17 @@ const photos: { url: string; caption: string; category: Category }[] = [
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/1d067d16-d8b2-42b2-b1ef-4a27f3db79f1.webp",
     caption: "Перевозка торгового павильона по городу",
-    category: "manipulator",
+    category: "transport",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/737482fb-5cef-4606-94a1-7256b0d8b9ab.webp",
     caption: "Монтаж фасадных панелей на здании",
-    category: "manipulator",
+    category: "heights",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/a386df86-71cf-4a6a-b971-87f437eab3db.webp",
     caption: "Совместная работа манипулятора и автовышки на стройке",
-    category: "manipulator",
+    category: "heights",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/56e40bf4-c213-4485-a5fc-cd80c85fb564.webp",
@@ -94,12 +94,12 @@ const photos: { url: string; caption: string; category: Category }[] = [
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/ad03fa64-abbe-491a-85cc-f51f79cefc0a.webp",
     caption: "Перевозка торгового павильона «Хочу Есть» по городу",
-    category: "manipulator",
+    category: "transport",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/f96d4e3d-b06a-4cab-818e-ba49896791b5.webp",
     caption: "Работа автовышки на объектах РЖД зимой",
-    category: "manipulator",
+    category: "heights",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/e8b0e860-8ca1-40df-8600-4d28597aa247.webp",
@@ -113,6 +113,8 @@ type FilterId = "all" | Category;
 const filters: { id: FilterId; label: string; icon: string }[] = [
   { id: "all", label: "Все работы", icon: "LayoutGrid" },
   { id: "manipulator", label: "Манипулятор", icon: "Truck" },
+  { id: "heights", label: "Высотные работы", icon: "ArrowUp" },
+  { id: "transport", label: "Перевозка", icon: "PackageOpen" },
   { id: "asphalt", label: "Асфальт", icon: "Construction" },
 ];
 
