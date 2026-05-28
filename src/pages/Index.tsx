@@ -10,8 +10,6 @@ import SectionBackdrop from "@/components/ui/SectionBackdrop";
 import IndustrialBanner from "@/components/sections/IndustrialBanner";
 import { useVisibleSections } from "@/hooks/useVisibleSections";
 
-const RealWorkGallery = lazy(() => import("@/components/sections/RealWorkGallery"));
-
 const FleetSection = lazy(() => import("@/components/sections/FleetSection"));
 const PopularTechSection = lazy(() => import("@/components/sections/PopularTechSection"));
 const BottomSections = lazy(() => import("@/components/sections/BottomSections"));
@@ -111,9 +109,6 @@ const Index = () => {
         size="md"
         imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/0f2af5ce-948d-4baa-addf-0e2ccc621107.jpg"
       />
-
-      {/* === Карусель «НАШИ РАБОТЫ» — реальные фото с объектов === */}
-      <LazySection><RealWorkGallery /></LazySection>
 
       {/* Галерея + клиенты — контейнеры со стропами (груз / работа) */}
       <SectionBackdrop tone="soft" pattern="cargo">
