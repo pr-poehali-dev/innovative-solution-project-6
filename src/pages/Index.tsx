@@ -61,6 +61,8 @@ const Index = () => {
         <LazySection><PopularTechSection /></LazySection>
         <SectionDivider variant="crane" />
         <LazySection id="fleet"><FleetSection /></LazySection>
+        <SectionDivider variant="blueprint" />
+        <LazySection><CalculatorSection /></LazySection>
       </SectionBackdrop>
 
       {/* === Баннер №2 — ВЕСЬ ПАРК (грузовики в ряд на закате) === */}
@@ -92,10 +94,8 @@ const Index = () => {
         imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/cafa74e6-93ab-4a2b-b259-a05618d0fccf.jpg"
       />
 
-      {/* Калькулятор + погода — чертёж со схемой (инженерный расчёт) */}
+      {/* Погода — чертёж со схемой (инженерный расчёт) */}
       <SectionBackdrop tone="deep" pattern="blueprint">
-        <LazySection><CalculatorSection /></LazySection>
-        <SectionDivider variant="blueprint" />
         <LazySection><WeatherWidget /></LazySection>
       </SectionBackdrop>
 
