@@ -1,4 +1,5 @@
 import Icon from "@/components/ui/icon";
+import SectionBadge from "@/components/ui/SectionBadge";
 import { reviews, filters, getCategory, type FilterId } from "./data";
 
 interface ReviewsHeaderProps {
@@ -23,6 +24,7 @@ const ReviewsHeader = ({
   return (
     <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-6 sm:mb-10 gap-6">
       <div>
+        <SectionBadge className="mb-4">Отзывы клиентов</SectionBadge>
         <div className="flex items-center gap-3">
           <div className="flex gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => (
