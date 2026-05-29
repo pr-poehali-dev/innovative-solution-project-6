@@ -12,7 +12,6 @@ const Sonner = lazy(() =>
 );
 const ScrollToTop = lazy(() => import("@/components/ScrollToTop"));
 const FloatingCallButton = lazy(() => import("@/components/ui/FloatingCallButton"));
-const OrderNotifications = lazy(() => import("@/components/ui/OrderNotifications"));
 const AutoReindex = lazy(() => import("@/components/AutoReindex"));
 const OfflineDownloadModal = lazy(() => import("@/components/ui/OfflineDownloadModal"));
 const OfflineSuccessToast = lazy(() => import("@/components/ui/OfflineSuccessToast"));
@@ -45,7 +44,6 @@ const App = () => (
         <Toaster />
         <Sonner />
         <FloatingCallButton />
-        <OrderNotifications />
         <AutoReindex />
         <OfflineDownloadModal />
         <OfflineSuccessToast />
