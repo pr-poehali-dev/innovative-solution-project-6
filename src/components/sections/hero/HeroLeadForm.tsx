@@ -1,96 +1,165 @@
-import { useState, useEffect, useRef } from "react";
-import LeadFormFields from "./leadForm/LeadFormFields";
-import SubmitButton from "./leadForm/SubmitButton";
-import CarouselControls from "./leadForm/CarouselControls";
-import { slides } from "./leadForm/data";
+import { useState } from "react";
 import Icon from "@/components/ui/icon";
+import { SUBMIT_URL } from "./heroData";
+import LeadFormFields from "./leadForm/LeadFormFields";
+import MediaAttach from "./leadForm/MediaAttach";
+import SubmitButton from "./leadForm/SubmitButton";
+import { useMediaUploader } from "./leadForm/useMediaUploader";
+import { reachGoal } from "@/lib/metrika";
 
 const HeroLeadForm = () => {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
-  const [comment, setComment] = useState("");
-  const [showExtra, setShowExtra] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [done, setDone] = useState(false);
-  const trackRef = useRef<HTMLDivElement>(null);
+  const [phone, setPhone] = useState("");
+  const [cargo, setCargo] = useState("");
+  const [fromAddr, setFromAddr] = useState("");
+  const [toAddr, setToAddr] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  useEffect(() => {
-    if (paused || done) return;
-    const t = setInterval(() => setActive((p) => (p + 1) % slides.length), 5000);
-    return () => clearInterval(t);
-  }, [paused, done]);
+  const {
+    media,
+    mediaError,
+    setMediaError,
+    fileInputRef,
+    handleFilesPicked,
+    retryUpload,
+    removeMedia,
+    resetMedia,
+  } = useMediaUploader();
 
-  const next = () => setActive((p) => (p + 1) % slides.length);
-  const prev = () => setActive((p) => (p - 1 + slides.length) % slides.length);
+  const resetForm = () => {
+    setName("");
+    setPhone("");
+    setCargo("");
+    setFromAddr("");
+    setToAddr("");
+    resetMedia();
+  };
 
   const handleFieldFocus = (e: React.FocusEvent<HTMLElement>) => {
-    setPaused(true);
     const target = e.target;
     setTimeout(() => {
       target.scrollIntoView({ behavior: "smooth", block: "center" });
     }, 350);
   };
 
-  return (
-    <div
-      className="relative"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <div className="overflow-x-clip rounded-3xl">
-        <div
-          ref={trackRef}
-          className="flex transition-transform duration-500 ease-out"
-          style={{ transform: `translateX(-${active * 100}%)` }}
-        >
-          {slides.map((slide, i) => (
-            <div key={i} className="w-full shrink-0 px-1">
-              <div
-                style={{ scrollMarginTop: "80px", scrollMarginBottom: "16px" }}
-                className="bg-card/80 backdrop-blur-xl border border-accent/20 rounded-3xl p-5 sm:p-7"
-              >
-                <div className="text-center mb-4">
-                  <div className="inline-flex items-center gap-2 text-accent text-sm font-semibold mb-2">
-                    <Icon name={slide.icon} size={18} />
-                    <span>{slide.badge}</span>
-                  </div>
-                  <h3 className="text-white font-bold text-xl">{slide.title}</h3>
-                  <p className="text-muted-foreground text-sm mt-1">{slide.subtitle}</p>
-                </div>
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !phone.trim()) return;
 
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    setSubmitting(true);
-                    setTimeout(() => {
-                      setSubmitting(false);
-                      setDone(true);
-                    }, 1000);
-                  }}
-                  className="space-y-3"
-                >
-                  <LeadFormFields
-                    phone={phone}
-                    setPhone={setPhone}
-                    name={name}
-                    setName={setName}
-                    comment={comment}
-                    setComment={setComment}
-                    showExtra={showExtra}
-                    setShowExtra={setShowExtra}
-                    onFieldFocus={handleFieldFocus}
-                  />
-                  <SubmitButton submitting={submitting} done={done} label={slide.cta} />
-                </form>
-              </div>
-            </div>
-          ))}
+    const stillUploading = media.some((m) => m.uploadStatus === "uploading" || m.uploadStatus === "pending");
+    if (stillUploading) {
+      setMediaError("Дождитесь окончания загрузки файлов");
+      return;
+    }
+
+    setStatus("loading");
+    setMediaError("");
+    try {
+      const commentParts = [
+        cargo && `Груз: ${cargo}`,
+        fromAddr && `Откуда: ${fromAddr}`,
+        toAddr && `Куда: ${toAddr}`,
+      ].filter(Boolean);
+
+      // К форме прикрепляем только успешно загруженные файлы — ссылки уже в S3
+      const mediaPayload = media
+        .filter((m) => m.uploadStatus === "done" && m.uploadedUrl)
+        .map((m) => ({
+          url: m.uploadedUrl,
+          name: m.file.name,
+          mime: m.file.type,
+          kind: m.kind,
+          size: m.file.size,
+        }));
+
+      const res = await fetch(SUBMIT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          phone,
+          comment: commentParts.join(" · "),
+          media: mediaPayload,
+        }),
+      });
+      if (res.ok) {
+        setStatus("success");
+        reachGoal("hero_lead_sent", {
+          has_media: mediaPayload.length > 0,
+          media_count: mediaPayload.length,
+        });
+        resetForm();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  if (status === "success") {
+    return (
+      <div className="relative rounded-2xl p-[2px] overflow-hidden" style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}>
+        <div className="bg-background rounded-2xl px-5 py-4 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-accent/20 border border-accent/40 flex items-center justify-center flex-shrink-0">
+            <Icon name="CheckCircle" size={22} className="text-accent" />
+          </div>
+          <div>
+            <p className="font-black text-white text-base flex items-center gap-1.5">Заявка принята <Icon name="Sparkles" size={16} className="text-accent" /></p>
+            <p className="text-xs text-white/70">Перезвоним в ближайшие 5 минут.</p>
+          </div>
         </div>
       </div>
+    );
+  }
 
-      <CarouselControls active={active} count={slides.length} prev={prev} next={next} onDot={setActive} />
+  return (
+    <div className="relative" id="order" style={{ scrollMarginTop: "80px" }}>
+      {/* Мягкое золотое свечение */}
+      <div
+        className="absolute -inset-0.5 rounded-2xl opacity-30 blur-md pointer-events-none animate-pulse"
+        style={{ background: "linear-gradient(135deg, #e8a820 0%, transparent 50%, #e8a820 100%)" }}
+      />
+
+      {/* Золотая рамка-градиент */}
+      <div className="relative rounded-2xl p-[1.5px]" style={{ background: "linear-gradient(135deg, rgba(245,208,96,0.9) 0%, rgba(232,168,32,0.3) 50%, rgba(232,168,32,0.8) 100%)" }}>
+        <div className="relative rounded-2xl bg-gradient-to-br from-zinc-950 via-background to-black p-3.5 sm:p-4 overflow-hidden">
+          <div className="absolute -top-16 -right-16 w-32 h-32 rounded-full bg-accent/20 blur-3xl pointer-events-none" />
+
+          <div className="relative">
+            <p className="text-[11px] text-white/60 mb-2 leading-snug text-center">
+              Перезвоним за 5 минут · рассчитаем цену · подберём технику
+            </p>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-1.5">
+              <LeadFormFields
+                name={name}
+                setName={setName}
+                phone={phone}
+                setPhone={setPhone}
+                fromAddr={fromAddr}
+                setFromAddr={setFromAddr}
+                toAddr={toAddr}
+                setToAddr={setToAddr}
+                cargo={cargo}
+                setCargo={setCargo}
+                onFieldFocus={handleFieldFocus}
+              />
+
+              {/* Прикрепить фото/видео объекта */}
+              <MediaAttach
+                media={media}
+                mediaError={mediaError}
+                fileInputRef={fileInputRef}
+                onFilesPicked={handleFilesPicked}
+                onRetry={retryUpload}
+                onRemove={removeMedia}
+              />
+
+              <SubmitButton status={status} />
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
