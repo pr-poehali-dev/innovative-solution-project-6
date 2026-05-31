@@ -35,13 +35,6 @@ const HeroLeadForm = () => {
     resetMedia();
   };
 
-  const handleFieldFocus = (e: React.FocusEvent<HTMLElement>) => {
-    const target = e.target;
-    setTimeout(() => {
-      target.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 350);
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !phone.trim()) return;
@@ -127,6 +120,9 @@ const HeroLeadForm = () => {
           <div className="absolute -top-16 -right-16 w-32 h-32 rounded-full bg-accent/20 blur-3xl pointer-events-none" />
 
           <div className="relative">
+            <p className="text-base font-black text-white mb-0.5 leading-tight text-center">
+              Оставьте заявку на технику
+            </p>
             <p className="text-[11px] text-white/60 mb-2 leading-snug text-center">
               Перезвоним за 5 минут · рассчитаем цену · подберём технику
             </p>
@@ -142,7 +138,6 @@ const HeroLeadForm = () => {
                 setToAddr={setToAddr}
                 cargo={cargo}
                 setCargo={setCargo}
-                onFieldFocus={handleFieldFocus}
               />
 
               {/* Прикрепить фото/видео объекта */}

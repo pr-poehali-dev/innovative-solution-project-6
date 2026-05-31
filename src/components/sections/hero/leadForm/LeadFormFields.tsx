@@ -11,7 +11,6 @@ type Props = {
   setToAddr: (v: string) => void;
   cargo: string;
   setCargo: (v: string) => void;
-  onFieldFocus?: (e: React.FocusEvent<HTMLElement>) => void;
 };
 
 const LeadFormFields = ({
@@ -25,7 +24,6 @@ const LeadFormFields = ({
   setToAddr,
   cargo,
   setCargo,
-  onFieldFocus,
 }: Props) => {
   return (
     <>
@@ -37,10 +35,8 @@ const LeadFormFields = ({
             placeholder="Имя или компания"
             value={name}
             onChange={e => setName(e.target.value)}
-            onFocus={onFieldFocus}
             required
             autoComplete="name"
-            style={{ scrollMarginTop: "90px", scrollMarginBottom: "20px" }}
             className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 h-11 sm:h-10 text-white placeholder:text-white/50 text-base sm:text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
           />
         </div>
@@ -53,9 +49,7 @@ const LeadFormFields = ({
             placeholder="Телефон +7 (___) ___-__-__"
             value={phone}
             onChange={e => setPhone(e.target.value)}
-            onFocus={onFieldFocus}
             required
-            style={{ scrollMarginTop: "90px", scrollMarginBottom: "20px" }}
             className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 h-11 sm:h-10 text-base sm:text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
           />
         </div>
@@ -68,8 +62,6 @@ const LeadFormFields = ({
             placeholder="Откуда (адрес погрузки)"
             value={fromAddr}
             onChange={e => setFromAddr(e.target.value)}
-            onFocus={onFieldFocus}
-            style={{ scrollMarginTop: "90px", scrollMarginBottom: "20px" }}
             className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 h-11 sm:h-10 text-base sm:text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
           />
         </div>
@@ -80,8 +72,6 @@ const LeadFormFields = ({
             placeholder="Куда (адрес разгрузки)"
             value={toAddr}
             onChange={e => setToAddr(e.target.value)}
-            onFocus={onFieldFocus}
-            style={{ scrollMarginTop: "90px", scrollMarginBottom: "20px" }}
             className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 h-11 sm:h-10 text-base sm:text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all"
           />
         </div>
@@ -93,8 +83,6 @@ const LeadFormFields = ({
           placeholder="Что везём (груз, вес, размеры, подъездные пути для техники)"
           value={cargo}
           onChange={e => setCargo(e.target.value)}
-          onFocus={onFieldFocus}
-          style={{ scrollMarginTop: "90px", scrollMarginBottom: "20px" }}
           className="w-full bg-white/[0.07] border border-white/20 rounded-lg pl-9 pr-3 py-3 sm:py-2.5 text-base sm:text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all resize-none leading-snug"
         />
       </div>
