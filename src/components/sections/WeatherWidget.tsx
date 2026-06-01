@@ -158,7 +158,10 @@ const WeatherWidget = () => {
           {/* МОБИЛЬНАЯ компактная версия */}
           <div className="sm:hidden">
             <div className="flex items-center gap-3 px-3 py-2.5 border-b border-white/10">
-              <span className="text-3xl leading-none drop-shadow-[0_2px_8px_rgba(245,208,96,0.3)]">{current.emoji}</span>
+              <span className="relative flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-accent/25 to-accent/5 border border-accent/30 overflow-hidden flex-shrink-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]">
+                <span className="pointer-events-none absolute top-0 left-0 h-full w-1/3 bg-white/20 blur-md weather-sheen" />
+                <span className="relative text-2xl leading-none drop-shadow-[0_2px_8px_rgba(245,208,96,0.4)] weather-emoji-float">{current.emoji}</span>
+              </span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline gap-1.5">
                   <span className="text-2xl font-display font-black text-white leading-none">
@@ -212,16 +215,16 @@ const WeatherWidget = () => {
                   return (
                     <div
                       key={i}
-                      className={`relative flex flex-col items-center gap-0.5 py-2 px-1 ${
+                      className={`relative flex flex-col items-center gap-0.5 py-2 px-1 transition-colors active:bg-white/[0.06] ${
                         d.weekend ? "bg-accent/[0.08]" : ""
                       }`}
                     >
-                      <span className={`absolute top-1 left-1 w-1.5 h-1.5 rounded-full ${c.dot} shadow-[0_0_6px_currentColor]`} title={dayAdvice.short} />
+                      <span className={`weather-status-pulse absolute top-1 left-1 w-1.5 h-1.5 rounded-full ${c.dot}`} title={dayAdvice.short} />
                       {d.weekend && (
                         <Icon name="Star" size={8} className="absolute top-1 right-1 text-accent fill-accent" />
                       )}
                       <div className={`text-[10px] font-semibold uppercase ${d.weekend ? "text-accent" : "text-white/60"}`}>{d.day}</div>
-                      <span className="text-xl leading-none">{ic.emoji}</span>
+                      <span className="text-xl leading-none transition-transform active:scale-110">{ic.emoji}</span>
                       <div className="text-[11px] text-white leading-none">
                         <span className={`font-bold ${d.weekend ? "text-accent" : ""}`}>{d.tMax > 0 ? "+" : ""}{d.tMax}°</span>
                         <span className="text-white/40"> {d.tMin > 0 ? "+" : ""}{d.tMin}°</span>
@@ -243,13 +246,13 @@ const WeatherWidget = () => {
                   return (
                     <div
                       key={i}
-                      className={`relative flex flex-col items-center gap-0.5 py-2 px-0.5 ${
+                      className={`relative flex flex-col items-center gap-0.5 py-2 px-0.5 transition-colors active:bg-white/[0.06] ${
                         d.weekend ? "bg-accent/[0.08]" : ""
                       }`}
                     >
-                      <span className={`absolute top-1 left-1 w-1.5 h-1.5 rounded-full ${c.dot} shadow-[0_0_6px_currentColor]`} title={dayAdvice.short} />
+                      <span className={`weather-status-pulse absolute top-1 left-1 w-1.5 h-1.5 rounded-full ${c.dot}`} title={dayAdvice.short} />
                       <div className={`text-[9px] font-semibold uppercase ${d.weekend ? "text-accent" : "text-white/60"}`}>{d.day}</div>
-                      <span className="text-base leading-none">{ic.emoji}</span>
+                      <span className="text-base leading-none transition-transform active:scale-110">{ic.emoji}</span>
                       <div className="text-[9px] text-white leading-none text-center">
                         <div className={`font-bold ${d.weekend ? "text-accent" : ""}`}>{d.tMax > 0 ? "+" : ""}{d.tMax}°</div>
                         <div className="text-white/40">{d.tMin > 0 ? "+" : ""}{d.tMin}°</div>
@@ -276,9 +279,9 @@ const WeatherWidget = () => {
             </div>
 
             <div
-              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 border-t ${levelColors[advice.level].bg} ${levelColors[advice.level].text} ${levelColors[advice.level].ring}`}
+              className={`flex items-center justify-center gap-1.5 px-3 py-2 border-t ${levelColors[advice.level].bg} ${levelColors[advice.level].text} ${levelColors[advice.level].ring}`}
             >
-              <span className="text-xs">{advice.emoji}</span>
+              <span className="text-sm weather-emoji-float">{advice.emoji}</span>
               <span className="text-[10px] font-bold leading-tight">{advice.text}</span>
             </div>
           </div>
