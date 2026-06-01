@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import MobileSwipeGallery from "@/components/ui/MobileSwipeGallery";
@@ -8,11 +7,10 @@ interface TruckCardProps {
   truck: Truck;
   idx: number;
   total: number;
-  onOrder: (title: string) => void;
   onOpenLightbox: (data: { src: string; alt: string; title: string }) => void;
 }
 
-const TruckCard = ({ truck, idx, total, onOrder, onOpenLightbox }: TruckCardProps) => {
+const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
   const tag = truck.tag;
   return (
     <div className={`group relative ${idx < total - 1 ? "mb-6 sm:mb-8" : "mb-8 sm:mb-12"}`}>
@@ -142,10 +140,6 @@ const TruckCard = ({ truck, idx, total, onOrder, onOpenLightbox }: TruckCardProp
               </div>
 
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                <button onClick={() => onOrder(truck.title)} className="group inline-flex w-full sm:w-auto justify-center items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-accent to-accent/90 text-black rounded-full font-semibold text-sm sm:text-base hover:shadow-xl hover:shadow-accent/40 transition-all">
-                  Заказать
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
-                </button>
                 <a
                   href="tel:+79601883084"
                   className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3 bg-green-500/15 border border-green-500/40 text-green-400 rounded-full font-semibold text-sm hover:bg-green-500/25 hover:border-green-500/60 transition-all"

@@ -1,19 +1,11 @@
 import { useState, useEffect } from "react";
-import OrderModal from "@/components/ui/OrderModal";
 import { trucks } from "./fleet/data";
 import TruckCard from "./fleet/TruckCard";
 import OrderInfoBlock from "./fleet/OrderInfoBlock";
 import FleetLightbox from "./fleet/FleetLightbox";
 
 const FleetSection = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedTruck, setSelectedTruck] = useState("");
   const [lightbox, setLightbox] = useState<{ src: string; alt: string; title: string } | null>(null);
-
-  const openModal = (truckTitle: string) => {
-    setSelectedTruck(truckTitle);
-    setModalOpen(true);
-  };
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -47,13 +39,6 @@ const FleetSection = () => {
 
   return (
     <section className="pt-4 sm:pt-6 pb-16 sm:pb-32 px-4 sm:px-6 scroll-mt-20 sm:scroll-mt-24">
-      <OrderModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        truckName={selectedTruck}
-        title="Заказать эту технику"
-        submitLabel="Заказать технику"
-      />
       <div className="max-w-7xl mx-auto">
         {trucks.map((truck, idx) => (
           <TruckCard
@@ -61,7 +46,6 @@ const FleetSection = () => {
             truck={truck}
             idx={idx}
             total={trucks.length}
-            onOrder={openModal}
             onOpenLightbox={setLightbox}
           />
         ))}
