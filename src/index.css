@@ -159,6 +159,102 @@
   }
 }
 
+/* === Виджет погоды === */
+@keyframes weather-aurora {
+  0% {
+    transform: translate(-10%, -10%) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(10%, 5%) scale(1.15);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-10%, -10%) scale(1);
+    opacity: 0.5;
+  }
+}
+@keyframes weather-aurora-2 {
+  0% {
+    transform: translate(8%, 6%) scale(1.1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(-8%, -6%) scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(8%, 6%) scale(1.1);
+    opacity: 0.4;
+  }
+}
+@keyframes weather-emoji-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(2deg);
+  }
+}
+@keyframes weather-status-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 currentColor;
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 0 5px transparent;
+    opacity: 0.6;
+  }
+}
+@keyframes weather-sheen {
+  0% {
+    transform: translateX(-120%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(220%) skewX(-20deg);
+  }
+}
+.weather-aurora {
+  animation: weather-aurora 14s ease-in-out infinite;
+}
+.weather-aurora-2 {
+  animation: weather-aurora-2 18s ease-in-out infinite;
+}
+.weather-emoji-float {
+  animation: weather-emoji-float 5s ease-in-out infinite;
+}
+.weather-status-pulse {
+  animation: weather-status-pulse 2s ease-in-out infinite;
+}
+.weather-sheen {
+  animation: weather-sheen 7s ease-in-out infinite;
+}
+.weather-day-card {
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s,
+    background-color 0.3s,
+    box-shadow 0.3s;
+}
+.weather-day-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.6);
+}
+@media (prefers-reduced-motion: reduce) {
+  .weather-aurora,
+  .weather-aurora-2,
+  .weather-emoji-float,
+  .weather-status-pulse,
+  .weather-sheen {
+    animation: none !important;
+  }
+  .weather-day-card:hover {
+    transform: none;
+  }
+}
+
 /* Скрываем плавающие кнопки когда открыта модалка */
 body.modal-open .floating-mobile-fab,
 body.modal-open .floating-mobile-notif {

@@ -149,7 +149,12 @@ const WeatherWidget = () => {
   return (
     <section className="py-4 sm:py-10 bg-black/30">
       <div className="max-w-7xl mx-auto px-3 sm:px-6">
-        <div className="rounded-2xl border border-accent/20 bg-gradient-to-br from-sky-950/40 via-black/60 to-accent/5 backdrop-blur-sm overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.4)]">
+        <div className="relative rounded-2xl border border-accent/20 bg-gradient-to-br from-sky-950/40 via-black/60 to-accent/5 backdrop-blur-sm overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.4)]">
+          {/* Анимированное «сияние» фона */}
+          <div className="pointer-events-none absolute -top-1/2 -left-1/4 w-[60%] h-[160%] rounded-full bg-sky-500/20 blur-3xl weather-aurora" />
+          <div className="pointer-events-none absolute -bottom-1/2 -right-1/4 w-[55%] h-[160%] rounded-full bg-accent/15 blur-3xl weather-aurora-2" />
+          <div className="pointer-events-none absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)", backgroundSize: "22px 22px" }} />
+          <div className="relative">
           {/* МОБИЛЬНАЯ компактная версия */}
           <div className="sm:hidden">
             <div className="flex items-center gap-3 px-3 py-2.5 border-b border-white/10">
@@ -282,8 +287,9 @@ const WeatherWidget = () => {
           <div className="hidden sm:block">
             <div className="grid grid-cols-[auto_1fr] gap-6 p-6">
               <div className="flex items-center gap-4 pr-6 border-r border-white/10">
-                <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center flex-shrink-0">
-                  <span className="text-5xl drop-shadow-[0_4px_12px_rgba(245,208,96,0.4)]">{current.emoji}</span>
+                <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-accent/25 to-accent/5 border border-accent/30 flex items-center justify-center flex-shrink-0 overflow-hidden shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]">
+                  <span className="pointer-events-none absolute top-0 left-0 h-full w-1/3 bg-white/20 blur-md weather-sheen" />
+                  <span className="relative text-5xl drop-shadow-[0_4px_12px_rgba(245,208,96,0.5)] weather-emoji-float">{current.emoji}</span>
                 </div>
                 <div>
                   <div className="text-xs uppercase tracking-wider text-white/60 font-semibold mb-1">
@@ -352,15 +358,15 @@ const WeatherWidget = () => {
                       <div
                         key={i}
                         title={dayAdvice.text}
-                        className={`relative flex flex-col items-center justify-center gap-1.5 p-2 sm:p-3 rounded-xl border transition-colors ${
+                        className={`weather-day-card group relative flex flex-col items-center justify-center gap-1.5 p-2 sm:p-3 rounded-xl border ${
                           d.weekend
-                            ? "bg-gradient-to-br from-accent/15 to-accent/5 border-accent/40 hover:border-accent/60"
-                            : "bg-white/5 border-white/10 hover:border-accent/30 hover:bg-white/[0.07]"
+                            ? "bg-gradient-to-br from-accent/15 to-accent/5 border-accent/40 hover:border-accent/70"
+                            : "bg-white/5 border-white/10 hover:border-accent/40 hover:bg-white/[0.08]"
                         }`}
                       >
                         {/* Светофор условий — точка статуса */}
                         <span
-                          className={`absolute top-1.5 left-1.5 w-2 h-2 rounded-full ${c.dot} shadow-[0_0_8px_currentColor]`}
+                          className={`weather-status-pulse absolute top-1.5 left-1.5 w-2 h-2 rounded-full ${c.dot}`}
                           aria-label={dayAdvice.short}
                         />
                         {d.weekend && (
@@ -370,7 +376,7 @@ const WeatherWidget = () => {
                           </span>
                         )}
                         <div className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wide ${d.weekend ? "text-accent" : "text-white/70"}`}>{d.day}</div>
-                        <span className={`leading-none ${range === 3 ? "text-3xl" : "text-2xl"}`}>{ic.emoji}</span>
+                        <span className={`leading-none transition-transform duration-300 group-hover:scale-110 ${range === 3 ? "text-3xl" : "text-2xl"}`}>{ic.emoji}</span>
                         <div className={`text-white leading-tight text-center ${range === 3 ? "text-sm" : "text-xs"}`}>
                           <span className="font-bold text-accent">{d.tMax > 0 ? "+" : ""}{d.tMax}°</span>
                           <span className="text-white/40"> / {d.tMin > 0 ? "+" : ""}{d.tMin}°</span>
@@ -391,8 +397,8 @@ const WeatherWidget = () => {
               className={`flex items-center justify-between gap-3 px-6 py-3 border-t ${levelColors[advice.level].bg} ${levelColors[advice.level].ring} ${levelColors[advice.level].text}`}
             >
               <div className="flex items-center gap-2.5 min-w-0">
-                <div className="flex-shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-lg bg-white/5 border border-white/15">
-                  <span className="text-base">{advice.emoji}</span>
+                <div className="flex-shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white/5 border border-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]">
+                  <span className="text-base weather-emoji-float">{advice.emoji}</span>
                 </div>
                 <div className="min-w-0">
                   <div className="text-[10px] uppercase tracking-widest font-black opacity-75 leading-none mb-0.5">
@@ -416,6 +422,7 @@ const WeatherWidget = () => {
                 </a>
               )}
             </div>
+          </div>
           </div>
         </div>
       </div>
