@@ -87,15 +87,29 @@ export const useTruckCardDownload = () => {
 
       let cy = padding;
 
-      // Шапка
+      // Шапка — логотип
+      const hLogo = 38;
+      let hTextX = padding;
+      if (logoImg) {
+        ctx.save();
+        drawRoundedRect(ctx, padding, cy, hLogo, hLogo, 9);
+        ctx.clip();
+        ctx.drawImage(logoImg, padding, cy, hLogo, hLogo);
+        ctx.restore();
+        ctx.strokeStyle = "rgba(13,148,136,0.4)";
+        ctx.lineWidth = 1;
+        drawRoundedRect(ctx, padding, cy, hLogo, hLogo, 9);
+        ctx.stroke();
+        hTextX = padding + hLogo + 10;
+      }
       ctx.fillStyle = "#0d9488";
-      ctx.font = "900 11px Arial, sans-serif";
+      ctx.font = "900 13px Arial, sans-serif";
       ctx.textAlign = "left";
       ctx.textBaseline = "top";
-      ctx.fillText("ООО «ФАВОРИТ»", padding, cy);
+      ctx.fillText("ООО «ФАВОРИТ»", hTextX, cy + 3);
       ctx.fillStyle = "#64748b";
       ctx.font = "400 11px Arial, sans-serif";
-      ctx.fillText("аренда манипуляторов · Нижний Новгород", padding, cy + 18);
+      ctx.fillText("аренда манипуляторов · Нижний Новгород", hTextX, cy + 21);
 
       ctx.fillStyle = "#64748b";
       ctx.textAlign = "right";

@@ -54,9 +54,17 @@ const TruckCardPreview = () => {
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18, paddingBottom: 14, borderBottom: "1px solid rgba(13,148,136,0.3)" }}>
-        <div>
-          <div style={{ fontSize: 11, fontWeight: 900, letterSpacing: 4, color: "#0d9488", marginBottom: 4 }}>ООО «ФАВОРИТ»</div>
-          <div style={{ fontSize: 11, color: "#64748b" }}>аренда манипуляторов · Нижний Новгород</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <img
+            src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp"
+            alt="ООО Фаворит"
+            crossOrigin="anonymous"
+            style={{ width: 44, height: 44, borderRadius: 10, objectFit: "cover", border: "1px solid rgba(13,148,136,0.4)", flexShrink: 0 }}
+          />
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 900, letterSpacing: 2, color: "#0d9488", marginBottom: 3 }}>ООО «ФАВОРИТ»</div>
+            <div style={{ fontSize: 11, color: "#64748b" }}>аренда манипуляторов · Нижний Новгород</div>
+          </div>
         </div>
         <div style={{ textAlign: "right" }}>
           <div style={{ fontSize: 11, color: "#64748b" }}>Сайт</div>
