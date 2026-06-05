@@ -29,6 +29,7 @@ export const useTruckCardDownload = () => {
         return total;
       })();
       const titleBlock2 = 44;
+      const driverHeaderH = 80;
       const tbl2H = (() => {
         let total = 0;
         for (const [label, value] of driverRows) {
@@ -49,6 +50,7 @@ export const useTruckCardDownload = () => {
         titleBlock1 +
         tbl1H +
         titleBlock2 +
+        driverHeaderH +
         tbl2H +
         contactsH +
         gaps;
@@ -147,6 +149,64 @@ export const useTruckCardDownload = () => {
       ctx.textBaseline = "middle";
       ctx.fillText(badge2Text, W / 2, cy + 11);
       cy += 32;
+
+      // Красивая шапка водителя
+      const dhH = 68;
+      const dhGrad = ctx.createLinearGradient(padding, cy, padding + innerW, cy + dhH);
+      dhGrad.addColorStop(0, "#0f766e");
+      dhGrad.addColorStop(0.5, "#0d9488");
+      dhGrad.addColorStop(1, "#14b8a6");
+      ctx.fillStyle = dhGrad;
+      drawRoundedRect(ctx, padding, cy, innerW, dhH, 12);
+      ctx.fill();
+
+      // Аватар-иконка
+      const avSize = 46;
+      const avX = padding + 12;
+      const avY = cy + (dhH - avSize) / 2;
+      ctx.fillStyle = "rgba(255,255,255,0.2)";
+      drawRoundedRect(ctx, avX, avY, avSize, avSize, 11);
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,0.5)";
+      ctx.lineWidth = 1.5;
+      drawRoundedRect(ctx, avX, avY, avSize, avSize, 11);
+      ctx.stroke();
+      ctx.font = "24px Arial, sans-serif";
+      ctx.fillStyle = "#ffffff";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("👷", avX + avSize / 2, avY + avSize / 2 + 1);
+
+      // Имя и подпись
+      const dhTextX = avX + avSize + 14;
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "900 17px Arial, sans-serif";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "top";
+      ctx.fillText("Никифоров Александр Николаевич", dhTextX, cy + 16);
+      ctx.fillStyle = "rgba(255,255,255,0.85)";
+      ctx.font = "400 12px Arial, sans-serif";
+      ctx.fillText("Машинист манипулятора · стаж 10+ лет", dhTextX, cy + 38);
+
+      // Бейдж «Проверен»
+      const vbText = "✓ Проверен";
+      ctx.font = "800 11px Arial, sans-serif";
+      const vbW = ctx.measureText(vbText).width + 22;
+      const vbX = padding + innerW - vbW - 12;
+      const vbY = cy + (dhH - 24) / 2;
+      ctx.fillStyle = "rgba(255,255,255,0.22)";
+      drawRoundedRect(ctx, vbX, vbY, vbW, 24, 12);
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,0.5)";
+      ctx.lineWidth = 1;
+      drawRoundedRect(ctx, vbX, vbY, vbW, 24, 12);
+      ctx.stroke();
+      ctx.fillStyle = "#ffffff";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(vbText, vbX + vbW / 2, vbY + 13);
+
+      cy += dhH + 14;
 
       // Таблица водителя
       const t2H = drawTable(ctx, driverRows, padding, cy, innerW);
