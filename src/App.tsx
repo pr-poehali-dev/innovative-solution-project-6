@@ -18,7 +18,7 @@ const OfflineSuccessToast = lazy(() => import("@/components/ui/OfflineSuccessToa
 const EngagementTracker = lazy(() => import("@/components/EngagementTracker"));
 
 const Index = lazy(() => import("./pages/Index"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+const NotFound = lazy(() => import("./components/NotFoundWithNoindex"));
 const TruckPage = lazy(() => import("./pages/TruckPage"));
 const CityPage = lazy(() => import("./pages/CityPage"));
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
