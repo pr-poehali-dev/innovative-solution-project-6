@@ -1,9 +1,34 @@
+import { useSearchParams } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import TruckCardPreview from "./truckCard/TruckCardPreview";
 import { useTruckCardDownload } from "./truckCard/useTruckCardDownload";
 
+const ACCESS_CODE = "favorit2024";
+
 const TruckCard = () => {
   const { downloading, handleDownload } = useTruckCardDownload();
+  const [searchParams] = useSearchParams();
+  const hasAccess = searchParams.get("code") === ACCESS_CODE;
+
+  if (!hasAccess) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center" style={{ background: "linear-gradient(135deg, #f0fdfa 0%, #ecfeff 50%, #f0fdfa 100%)" }}>
+        <Icon name="Lock" size={48} className="text-teal-600 mb-4" />
+        <h1 className="text-xl font-bold text-slate-800 mb-2">Доступ закрыт</h1>
+        <p className="text-sm text-slate-500 max-w-sm mb-6">
+          Эта страница доступна только по защищённой ссылке.
+        </p>
+        <a
+          href="/"
+          className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-white text-sm shadow-lg"
+          style={{ background: "linear-gradient(135deg, #14b8a6 0%, #0d9488 50%, #0f766e 100%)" }}
+        >
+          <Icon name="ArrowLeft" size={16} />
+          На сайт
+        </a>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen py-6 px-4" style={{ background: "linear-gradient(135deg, #f0fdfa 0%, #ecfeff 50%, #f0fdfa 100%)" }}>
