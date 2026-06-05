@@ -8,14 +8,29 @@ export const useTruckCardDownload = () => {
   const handleDownload = async () => {
     setDownloading(true);
     try {
-      const logoImg = await new Promise<HTMLImageElement | null>((resolve) => {
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        img.onload = () => resolve(img);
-        img.onerror = () => resolve(null);
-        img.src =
+      const loadLogo = async (): Promise<HTMLImageElement | null> => {
+        const url =
           "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp";
-      });
+        try {
+          const resp = await fetch(url, { mode: "cors" });
+          const blob = await resp.blob();
+          const dataUrl: string = await new Promise((res, rej) => {
+            const fr = new FileReader();
+            fr.onload = () => res(fr.result as string);
+            fr.onerror = rej;
+            fr.readAsDataURL(blob);
+          });
+          return await new Promise((res) => {
+            const img = new Image();
+            img.onload = () => res(img);
+            img.onerror = () => res(null);
+            img.src = dataUrl;
+          });
+        } catch {
+          return null;
+        }
+      };
+      const logoImg = await loadLogo();
 
       const W = 720;
       const padding = 28;

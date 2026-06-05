@@ -58,7 +58,6 @@ const TruckCardPreview = () => {
           <img
             src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp"
             alt="ООО Фаворит"
-            crossOrigin="anonymous"
             style={{ width: 44, height: 44, borderRadius: 10, objectFit: "cover", border: "1px solid rgba(13,148,136,0.4)", flexShrink: 0 }}
           />
           <div>
@@ -92,7 +91,6 @@ const TruckCardPreview = () => {
         <img
           src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp"
           alt="ООО Фаворит"
-          crossOrigin="anonymous"
           style={{ width: 52, height: 52, borderRadius: 12, objectFit: "cover", border: "1.5px solid rgba(255,255,255,0.45)", flexShrink: 0 }}
         />
         <div style={{ flex: 1, minWidth: 0 }}>
