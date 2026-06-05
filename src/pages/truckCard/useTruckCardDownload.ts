@@ -8,6 +8,15 @@ export const useTruckCardDownload = () => {
   const handleDownload = async () => {
     setDownloading(true);
     try {
+      const logoImg = await new Promise<HTMLImageElement | null>((resolve) => {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.onload = () => resolve(img);
+        img.onerror = () => resolve(null);
+        img.src =
+          "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp";
+      });
+
       const W = 720;
       const padding = 28;
       const innerW = W - padding * 2;
@@ -164,18 +173,26 @@ export const useTruckCardDownload = () => {
       const avSize = 46;
       const avX = padding + 12;
       const avY = cy + (dhH - avSize) / 2;
-      ctx.fillStyle = "rgba(255,255,255,0.2)";
-      drawRoundedRect(ctx, avX, avY, avSize, avSize, 11);
-      ctx.fill();
+      if (logoImg) {
+        ctx.save();
+        drawRoundedRect(ctx, avX, avY, avSize, avSize, 11);
+        ctx.clip();
+        ctx.drawImage(logoImg, avX, avY, avSize, avSize);
+        ctx.restore();
+      } else {
+        ctx.fillStyle = "rgba(255,255,255,0.2)";
+        drawRoundedRect(ctx, avX, avY, avSize, avSize, 11);
+        ctx.fill();
+        ctx.font = "24px Arial, sans-serif";
+        ctx.fillStyle = "#ffffff";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("👷", avX + avSize / 2, avY + avSize / 2 + 1);
+      }
       ctx.strokeStyle = "rgba(255,255,255,0.5)";
       ctx.lineWidth = 1.5;
       drawRoundedRect(ctx, avX, avY, avSize, avSize, 11);
       ctx.stroke();
-      ctx.font = "24px Arial, sans-serif";
-      ctx.fillStyle = "#ffffff";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText("👷", avX + avSize / 2, avY + avSize / 2 + 1);
 
       // Имя и подпись
       const dhTextX = avX + avSize + 14;

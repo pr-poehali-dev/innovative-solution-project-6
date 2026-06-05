@@ -81,9 +81,12 @@ const TruckCardPreview = () => {
 
       {/* Красивая шапка водителя */}
       <div style={{ display: "flex", alignItems: "center", gap: 14, padding: 14, marginBottom: 14, borderRadius: 12, background: "linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #14b8a6 100%)", boxShadow: "0 8px 20px rgba(13,148,136,0.3)" }}>
-        <div style={{ width: 52, height: 52, borderRadius: 12, background: "rgba(255,255,255,0.2)", border: "1.5px solid rgba(255,255,255,0.45)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 26 }}>
-          👷
-        </div>
+        <img
+          src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp"
+          alt="ООО Фаворит"
+          crossOrigin="anonymous"
+          style={{ width: 52, height: 52, borderRadius: 12, objectFit: "cover", border: "1.5px solid rgba(255,255,255,0.45)", flexShrink: 0 }}
+        />
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ fontSize: 17, fontWeight: 900, color: "#ffffff", lineHeight: 1.2 }}>Никифоров Александр Николаевич</div>
           <div style={{ fontSize: 12, color: "rgba(255,255,255,0.85)", marginTop: 2 }}>Машинист манипулятора · стаж 10+ лет</div>
