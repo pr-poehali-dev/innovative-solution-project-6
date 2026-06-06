@@ -34,12 +34,23 @@ const MobileCallPopover = ({ className = "" }: MobileCallPopoverProps) => {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-12 z-50 w-60 rounded-2xl border border-accent/30 bg-background/95 backdrop-blur-xl p-4 shadow-2xl shadow-black/50 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div
+          className="absolute right-0 top-12 z-50 w-60 rounded-2xl border border-accent/50 bg-background/95 backdrop-blur-xl p-4 animate-in fade-in slide-in-from-top-2 duration-200"
+          style={{ boxShadow: "0 0 0 1px rgba(232,168,32,0.25), 0 8px 40px rgba(232,168,32,0.45), 0 4px 20px rgba(0,0,0,0.5)" }}
+        >
           <p className="text-xs text-muted-foreground mb-1">Звоните прямо сейчас</p>
           <a
             href="tel:+79601883084"
             onClick={() => reachGoal("phone_click")}
-            className="block text-lg font-black text-white mb-3 tracking-tight"
+            className="block text-xl font-black mb-3 tracking-tight"
+            style={{
+              background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              filter: "drop-shadow(0 0 8px rgba(232,168,32,0.5))",
+              fontFamily: "'Cinzel', serif",
+            }}
           >
             +7 960 188-30-84
           </a>
