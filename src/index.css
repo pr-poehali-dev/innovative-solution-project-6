@@ -374,6 +374,26 @@ body.modal-open .floating-mobile-notif {
     }
   }
 
+  @keyframes popoverGlow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0 1px rgba(232, 168, 32, 0.25),
+        0 6px 24px rgba(232, 168, 32, 0.3),
+        0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+    50% {
+      box-shadow:
+        0 0 0 1px rgba(232, 168, 32, 0.45),
+        0 10px 48px rgba(232, 168, 32, 0.6),
+        0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .popover-glow {
+    animation: popoverGlow 1.6s ease-in-out infinite;
+  }
+
   .logo-glow {
     position: relative;
     box-shadow: 0 0 18px rgba(232, 168, 32, 0.6);

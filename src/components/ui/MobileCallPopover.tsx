@@ -34,10 +34,7 @@ const MobileCallPopover = ({ className = "" }: MobileCallPopoverProps) => {
       </button>
 
       {open && (
-        <div
-          className="absolute right-0 top-12 z-50 w-60 rounded-2xl border border-accent/50 bg-background/95 backdrop-blur-xl p-4 animate-in fade-in slide-in-from-top-2 duration-200"
-          style={{ boxShadow: "0 0 0 1px rgba(232,168,32,0.25), 0 8px 40px rgba(232,168,32,0.45), 0 4px 20px rgba(0,0,0,0.5)" }}
-        >
+        <div className="popover-glow absolute right-0 top-12 z-50 w-60 rounded-2xl border border-accent/50 bg-background/95 backdrop-blur-xl p-4 animate-in fade-in slide-in-from-top-2 duration-200">
           <p className="text-xs text-muted-foreground mb-1">Звоните прямо сейчас</p>
           <a
             href="tel:+79601883084"
