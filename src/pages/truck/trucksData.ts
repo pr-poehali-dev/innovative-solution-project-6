@@ -53,6 +53,11 @@ export const trucks: Record<string, Truck> = {
     count: 3,
     tag: { label: "Хит заказов", icon: "Flame", color: "from-orange-500 to-red-600" },
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/b646729f-a106-46bf-b7e4-abf0fe1c4983.webp",
+    images: [
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/b646729f-a106-46bf-b7e4-abf0fe1c4983.webp",
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/933fd1af-5a3d-4fcd-8774-2262da247cd2.jpg",
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/0bae6f85-dda7-47c1-9820-1a17d670e70d.jpg",
+    ],
     alt: "Аренда КАМАЗ 65115 с КМУ HANGIL в Нижнем Новгороде",
     description: "Компания «Фаворит» предлагает в аренду манипулятор КАМАЗ 65115 с КМУ HANGIL — проверенную спецтехнику для погрузки, разгрузки и транспортировки грузов в Нижнем Новгороде и области. Грузоподъёмность платформы до 12 тонн и вылет стрелы до 19 метров обеспечивают высокую эффективность на строительных и промышленных объектах.",
     specs: [
