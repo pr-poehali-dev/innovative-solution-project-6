@@ -6,6 +6,7 @@ export type Truck = {
   count: number;
   tag?: { label: string; icon: string; color: string };
   image: string;
+  images?: string[];
   alt: string;
   description: string;
   specs: { label: string; value: string }[];
