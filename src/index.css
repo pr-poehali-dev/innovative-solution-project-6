@@ -378,20 +378,20 @@ body.modal-open .floating-mobile-notif {
     0%,
     100% {
       box-shadow:
-        0 0 0 1px rgba(232, 168, 32, 0.25),
-        0 6px 24px rgba(232, 168, 32, 0.3),
+        0 0 0 1px rgba(232, 168, 32, 0.3),
+        0 8px 32px rgba(232, 168, 32, 0.38),
         0 4px 20px rgba(0, 0, 0, 0.5);
     }
     50% {
       box-shadow:
-        0 0 0 1px rgba(232, 168, 32, 0.45),
-        0 10px 48px rgba(232, 168, 32, 0.6),
+        0 0 0 1px rgba(232, 168, 32, 0.4),
+        0 9px 40px rgba(232, 168, 32, 0.5),
         0 4px 20px rgba(0, 0, 0, 0.5);
     }
   }
 
   .popover-glow {
-    animation: popoverGlow 1.6s ease-in-out infinite;
+    animation: popoverGlow 3.2s ease-in-out infinite;
   }
 
   .logo-glow {
