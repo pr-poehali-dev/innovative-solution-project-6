@@ -125,7 +125,7 @@ export const trucks: Record<string, Truck> = {
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/cb1469ab-3878-4eea-9eac-9ce6f4129301.webp",
     images: [
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/cb1469ab-3878-4eea-9eac-9ce6f4129301.webp",
-      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/29063acd-8133-4add-bce0-29f1a08d5004.jpg",
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/cf1eda21-0ae8-4774-9dc0-220bbbd948d0.jpg",
     ],
     alt: "Аренда FAW J6 с КМУ DONGYANG 1966 и буром в Нижнем Новгороде",
     description: "Компания «Фаворит» предлагает в аренду кран-манипулятор DONGYANG 1966 с буром на шасси FAW J6 в Нижнем Новгороде и области. Грузоподъёмность шасси до 20 тонн, стрелы до 8 тонн, вылет до 22 метров. Оснащён буровой установкой и монтажной люлькой — универсальная машина для строительных, монтажных и буровых работ.",
