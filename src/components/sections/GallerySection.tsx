@@ -259,14 +259,6 @@ const GallerySection = () => {
                 <p className="hidden sm:block text-white text-xs sm:text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0 line-clamp-2 drop-shadow-md">
                   {photo.caption}
                 </p>
-                <button
-                  type="button"
-                  onClick={(e) => openOrder(photo, e)}
-                  className="hidden sm:inline-flex self-start items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-bold bg-gradient-to-r from-accent to-accent/80 text-black shadow-lg shadow-accent/30 hover:shadow-xl hover:shadow-accent/50 active:scale-95 transition-all opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0"
-                >
-                  <Icon name="Sparkles" size={14} />
-                  Хочу такую же
-                </button>
               </div>
             </div>
           ))}
@@ -343,17 +335,9 @@ const GallerySection = () => {
             </div>
 
             <div className="absolute left-0 right-0 bottom-0 px-4 py-4 sm:py-5 text-center bg-gradient-to-t from-black/90 via-black/60 to-transparent">
-              <p className="text-white text-sm sm:text-base font-semibold drop-shadow mb-3 pointer-events-none">
+              <p className="text-white text-sm sm:text-base font-semibold drop-shadow pointer-events-none">
                 {filtered[active].caption}
               </p>
-              <button
-                type="button"
-                onClick={(e) => openOrder(filtered[active], e)}
-                className="inline-flex items-center gap-2 px-5 sm:px-7 py-3 rounded-xl text-sm sm:text-base font-bold bg-gradient-to-r from-accent to-accent/80 text-black shadow-xl shadow-accent/40 hover:shadow-2xl hover:shadow-accent/60 hover:scale-105 active:scale-95 transition-all"
-              >
-                <Icon name="Sparkles" size={18} />
-                Хочу такую же
-              </button>
             </div>
           </div>,
           document.body,
