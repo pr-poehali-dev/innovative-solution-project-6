@@ -54,6 +54,28 @@ export const faqs = [
   },
 ];
 
+const PHONE_REGEX = /(\+7\s?\d{3}\s?\d{3}-?\d{2}-?\d{2})/g;
+const PHONE_TEST = /^\+7\s?\d{3}\s?\d{3}-?\d{2}-?\d{2}$/;
+
+const renderAnswer = (text: string) => {
+  const parts = text.split(PHONE_REGEX);
+  return parts.map((part, idx) => {
+    if (PHONE_TEST.test(part)) {
+      const tel = part.replace(/[^\d+]/g, "");
+      return (
+        <a
+          key={idx}
+          href={`tel:${tel}`}
+          className="whitespace-nowrap font-bold text-accent hover:underline"
+        >
+          {part}
+        </a>
+      );
+    }
+    return part;
+  });
+};
+
 const FaqSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -204,7 +226,7 @@ const FaqSection = () => {
                           />
                           <div className="pl-[52px] sm:pl-[64px]">
                             <p className="text-muted-foreground text-sm sm:text-base lg:text-[15px] leading-relaxed">
-                              {faq.answer}
+                              {renderAnswer(faq.answer)}
                             </p>
                           </div>
                         </div>
