@@ -255,14 +255,14 @@ const GallerySection = () => {
                 height="600"
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent sm:from-black/0 sm:via-transparent group-hover:from-black/80 group-hover:via-black/30 transition-all duration-300 flex flex-col justify-end p-3 sm:p-5 gap-2">
-                <p className="text-white text-xs sm:text-sm font-semibold sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300 sm:translate-y-2 group-hover:translate-y-0 line-clamp-2 drop-shadow-md">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/0 via-transparent to-transparent group-hover:from-black/80 group-hover:via-black/30 transition-all duration-300 flex flex-col justify-end p-3 sm:p-5 gap-2">
+                <p className="hidden sm:block text-white text-xs sm:text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0 line-clamp-2 drop-shadow-md">
                   {photo.caption}
                 </p>
                 <button
                   type="button"
                   onClick={(e) => openOrder(photo, e)}
-                  className="self-start inline-flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-bold bg-gradient-to-r from-accent to-accent/80 text-black shadow-lg shadow-accent/30 hover:shadow-xl hover:shadow-accent/50 active:scale-95 transition-all sm:opacity-0 sm:translate-y-1 sm:group-hover:opacity-100 sm:group-hover:translate-y-0"
+                  className="hidden sm:inline-flex self-start items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-bold bg-gradient-to-r from-accent to-accent/80 text-black shadow-lg shadow-accent/30 hover:shadow-xl hover:shadow-accent/50 active:scale-95 transition-all opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0"
                 >
                   <Icon name="Sparkles" size={14} />
                   Хочу такую же
