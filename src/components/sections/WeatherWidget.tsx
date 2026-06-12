@@ -92,10 +92,30 @@ const WeatherWidget = () => {
   const [range, setRange] = useState<3 | 7>(3);
 
   useEffect(() => {
-    const url =
-      "https://api.open-meteo.com/v1/forecast?latitude=56.3287&longitude=44.002&current=temperature_2m,weather_code,wind_speed_10m,wind_gusts_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_gusts_10m_max,sunrise,sunset&timezone=Europe%2FMoscow&forecast_days=7";
-    fetch(url)
-      .then((r) => r.json())
+    const params =
+      "/v1/forecast?latitude=56.3287&longitude=44.002&current=temperature_2m,weather_code,wind_speed_10m,wind_gusts_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_gusts_10m_max,sunrise,sunset&timezone=Europe%2FMoscow&forecast_days=7";
+    const hosts = [
+      "https://api.open-meteo.com",
+      "https://historical-forecast-api.open-meteo.com",
+    ];
+
+    const fetchWithFallback = async () => {
+      for (const host of hosts) {
+        try {
+          const ctrl = new AbortController();
+          const timer = setTimeout(() => ctrl.abort(), 8000);
+          const r = await fetch(host + params, { signal: ctrl.signal });
+          clearTimeout(timer);
+          if (!r.ok) continue;
+          return await r.json();
+        } catch {
+          continue;
+        }
+      }
+      throw new Error("weather unavailable");
+    };
+
+    fetchWithFallback()
       .then((data) => {
         const daily: DayForecast[] = (data.daily?.time || []).map((t: string, i: number) => {
           const dow = new Date(t).getDay();
