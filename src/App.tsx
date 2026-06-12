@@ -97,6 +97,18 @@ const App = () => (
               element={<SeoLandingPage slugOverride="manipulyator-s-bur" />}
             />
             <Route
+              path="/arenda-manipulyatora-10-tonn"
+              element={<SeoLandingPage slugOverride="arenda-manipulyatora-10-tonn" />}
+            />
+            <Route
+              path="/perevozka-spetstehniki-manipulyatorom"
+              element={<SeoLandingPage slugOverride="perevozka-spetstehniki-manipulyatorom" />}
+            />
+            <Route
+              path="/arenda-manipulyatora-dzerzhinsk"
+              element={<SeoLandingPage slugOverride="arenda-manipulyatora-dzerzhinsk" />}
+            />
+            <Route
               path="/arenda-manipulyatora-dzerzhinsk-bor-kstovo"
               element={<SeoLandingPage slugOverride="arenda-manipulyatora-dzerzhinsk-bor-kstovo" />}
             />
