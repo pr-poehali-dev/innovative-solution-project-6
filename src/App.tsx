@@ -33,6 +33,7 @@ const AdminReindex = lazy(() => import("./pages/AdminReindex"));
 const SeoDashboard = lazy(() => import("./pages/SeoDashboard"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const AsfaltirovaniePage = lazy(() => import("./pages/AsfaltirovaniePage"));
+const AdLanding = lazy(() => import("./pages/AdLanding"));
 
 const queryClient = new QueryClient();
 
@@ -62,6 +63,7 @@ const App = () => (
         <Suspense fallback={<div className="min-h-screen" />}>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/zakazat" element={<AdLanding />} />
             <Route path="/tehnika/:slug" element={<TruckPage />} />
             <Route path="/gorod/:slug" element={<CityPage />} />
             <Route path="/blog" element={<BlogIndex />} />
