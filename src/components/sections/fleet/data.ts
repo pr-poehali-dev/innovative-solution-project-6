@@ -157,6 +157,25 @@ export const trucks: Truck[] = [
       { label: "Тип кузова", value: "Бортовой" },
     ],
   },
+  // ── Автокраны ──
+  {
+    badge: "Автокран 25 т",
+    title: "Автокран Галичанин КС-55713 (КАМАЗ)",
+    slug: "avtokran-galichanin-25t",
+    price: "3 500 ₽/час с НДС",
+    count: 1,
+    tag: { label: "Грузоподъёмность 25 т", icon: "ArrowUpFromLine", color: "from-yellow-500 to-amber-600" },
+    image: "/fleet/avtokran-galichanin-25t.webp",
+    alt: "Автокран Галичанин 25 тонн на шасси КАМАЗ",
+    specs: [
+      { label: "Грузоподъёмность", value: "до 25 т" },
+      { label: "Длина стрелы", value: "до 21,7 м" },
+      { label: "Высота подъёма", value: "до 21 м" },
+      { label: "Вылет стрелы", value: "до 19 м" },
+      { label: "Шасси", value: "КАМАЗ 6×4" },
+      { label: "Тип", value: "Телескопическая стрела" },
+    ],
+  },
   // ── Экскаваторы-погрузчики ──
   {
     badge: "Экскаватор-погрузчик",
