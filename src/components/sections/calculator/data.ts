@@ -30,9 +30,10 @@ export const tasks: { id: string; label: string; icon: string; suggested: number
   { id: "any", label: "Любая задача", icon: "Sparkles", suggested: [] },
   { id: "build", label: "Стройка / разгрузка", icon: "Hammer", suggested: [2, 3, 6] },
   { id: "long", label: "Длинные грузы", icon: "MoveHorizontal", suggested: [3, 6, 7] },
-  { id: "heavy", label: "Тяжёлые до 20 т", icon: "Anchor", suggested: [3, 7] },
+  { id: "heavy", label: "Тяжёлые до 25 т", icon: "Anchor", suggested: [3, 7, 10] },
+  { id: "crane", label: "Монтаж краном", icon: "ArrowUpFromLine", suggested: [10] },
   { id: "dig", label: "Копать / грунт", icon: "Construction", suggested: [8, 9] },
-  { id: "tower", label: "Высотные работы", icon: "Building2", suggested: [4, 5, 7] },
+  { id: "tower", label: "Высотные работы", icon: "Building2", suggested: [4, 5, 7, 10] },
 ];
 
 // Выезд в города области = N часов работы по тарифу выбранной техники (туда-обратно)
