@@ -1,4 +1,4 @@
-import { reviews, reviewSchema } from "@/data/reviews";
+import { reviews, reviewSchema, ratingValue } from "@/data/reviews";
 import { faqs } from "@/components/sections/FaqSection";
 import { trucks as fleetTrucks } from "@/components/sections/fleet/data";
 
@@ -95,7 +95,7 @@ const StructuredData = () => {
     ],
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "5",
+      "ratingValue": ratingValue,
       "reviewCount": String(reviews.length),
       "bestRating": "5",
       "worstRating": "1"
@@ -130,7 +130,7 @@ const StructuredData = () => {
     ],
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "5",
+      "ratingValue": ratingValue,
       "reviewCount": String(reviews.length),
       "bestRating": "5",
       "worstRating": "1"
@@ -210,7 +210,7 @@ const StructuredData = () => {
           "url": `https://фаварит.рф/tehnika/${truck.slug}`,
           "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": "5",
+            "ratingValue": ratingValue,
             "reviewCount": String(Math.max(3, Math.ceil(reviews.length / fleetTrucks.length))),
             "bestRating": "5",
             "worstRating": "1"
@@ -308,7 +308,7 @@ const StructuredData = () => {
     "category": "Дорожно-строительные работы",
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "5",
+      "ratingValue": ratingValue,
       "reviewCount": String(reviews.length),
       "bestRating": "5",
       "worstRating": "1"

@@ -6,7 +6,7 @@ import BrandLogo from "@/components/ui/BrandLogo";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import CallbackModal from "@/components/ui/CallbackModal";
 import LazySection from "@/components/LazySection";
-import { reviews, reviewSchema } from "@/data/reviews";
+import { reviews, reviewSchema, ratingValue } from "@/data/reviews";
 
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
@@ -22,7 +22,7 @@ const ReviewsPage = () => {
 
   const title = "Отзывы клиентов о компании Фаворит — аренда манипуляторов в Нижнем Новгороде";
   const description =
-    "Реальные отзывы клиентов компании Фаворит на Яндекс.Картах. Аренда манипуляторов в Нижнем Новгороде — оценка 5.0, более 6 отзывов от проверенных пользователей.";
+    `Реальные отзывы клиентов компании Фаворит на Яндекс.Картах. Аренда манипуляторов в Нижнем Новгороде — оценка ${ratingValue}, более ${reviews.length} отзывов от проверенных пользователей.`;
   const pageUrl = "https://фаварит.рф/otzyvy";
 
   const breadcrumbsLd = {
@@ -50,7 +50,7 @@ const ReviewsPage = () => {
     },
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "5",
+      ratingValue: ratingValue,
       reviewCount: String(reviews.length),
       bestRating: "5",
       worstRating: "1",
@@ -158,7 +158,7 @@ const ReviewsPage = () => {
                 ))}
               </div>
               <div className="flex items-baseline gap-2">
-                <span className="text-4xl sm:text-5xl font-display font-black text-white tabular-nums">5.0</span>
+                <span className="text-4xl sm:text-5xl font-display font-black text-white tabular-nums">{ratingValue}</span>
                 <span className="text-muted-foreground text-sm">из 5</span>
               </div>
             </div>

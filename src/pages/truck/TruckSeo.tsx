@@ -1,5 +1,5 @@
 import type { Truck } from "./trucksData";
-import { reviews, reviewSchema } from "@/data/reviews";
+import { reviews, reviewSchema, ratingValue } from "@/data/reviews";
 
 interface TruckSeoProps {
   truck: Truck;
@@ -124,7 +124,7 @@ export default function TruckSeo({ truck, slug }: TruckSeoProps) {
         },
         "aggregateRating": {
           "@type": "AggregateRating",
-          "ratingValue": "5",
+          "ratingValue": ratingValue,
           "reviewCount": String(reviews.length),
           "bestRating": "5",
           "worstRating": "1"
