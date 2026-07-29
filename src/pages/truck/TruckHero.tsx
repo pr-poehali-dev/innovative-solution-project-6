@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
@@ -6,6 +7,7 @@ import MobileCallPopover from "@/components/ui/MobileCallPopover";
 import TruckGallery from "./TruckGallery";
 import type { Truck } from "./trucksData";
 import { pluralizeUnits } from "./trucksData";
+import { reviews, ratingValue } from "@/data/reviews";
 
 interface TruckHeroProps {
   truck: Truck;
@@ -72,6 +74,21 @@ export default function TruckHero({ truck, slug, onOrder }: Omit<TruckHeroProps,
             </h1>
             <div className="flex items-center gap-3 mb-4 sm:mb-6 flex-wrap">
               <p className="text-2xl sm:text-3xl font-black text-accent">{truck.price}</p>
+              <Link
+                to="/otzyvy"
+                className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/40 hover:bg-amber-400/20 hover:border-amber-400/70 transition-all"
+                title="Смотреть отзывы клиентов"
+              >
+                <span className="flex items-center gap-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Icon key={i} name="Star" size={14} className="text-amber-400 fill-amber-400" />
+                  ))}
+                </span>
+                <span className="text-white text-xs sm:text-sm font-black tabular-nums">{ratingValue}</span>
+                <span className="text-muted-foreground text-xs sm:text-sm font-semibold group-hover:text-white transition-colors">
+                  {reviews.length} отзывов
+                </span>
+              </Link>
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/40 text-accent text-xs sm:text-sm font-bold">
                 <Icon name="Truck" size={14} />
                 В парке: {truck.count} {pluralizeUnits(truck.count)}
