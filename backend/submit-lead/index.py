@@ -717,6 +717,110 @@ def send_email(name: str, phone: str, comment: str, lead_id: int, media: list[di
         smtp.send_message(msg)
 
 
+MATERIALS_ADMIN_KEY = 'favorit2026'
+
+
+def _json_resp(payload: dict, status: int = 200) -> dict:
+    return {
+        'statusCode': status,
+        'headers': {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+        'body': json.dumps(payload, ensure_ascii=False),
+    }
+
+
+def _sql_str(value) -> str:
+    """Экранирует строку для Simple Query Protocol."""
+    return str(value or '').replace("'", "''")
+
+
+def materials_list() -> dict:
+    """Возвращает список стройматериалов из базы."""
+    conn = psycopg2.connect(os.environ['DATABASE_URL'])
+    cur = conn.cursor()
+    cur.execute(
+        "SELECT id, name, category, price, unit, description, image_url, in_stock "
+        "FROM materials ORDER BY sort_order, id DESC"
+    )
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+
+    items = [{
+        'id': r[0],
+        'name': r[1],
+        'category': r[2],
+        'price': r[3],
+        'unit': r[4],
+        'description': r[5],
+        'imageUrl': r[6],
+        'inStock': r[7],
+    } for r in rows]
+    return _json_resp({'items': items})
+
+
+def materials_handle(body: dict) -> dict:
+    """Добавление, обновление и удаление стройматериалов (нужен ключ администратора)."""
+    action = body.get('type')
+
+    if action == 'materials-list':
+        return materials_list()
+
+    if body.get('adminKey') != MATERIALS_ADMIN_KEY:
+        return _json_resp({'error': 'Неверный ключ доступа'}, 403)
+
+    conn = psycopg2.connect(os.environ['DATABASE_URL'])
+    cur = conn.cursor()
+
+    if action == 'materials-add':
+        name = _sql_str(body.get('name')).strip()
+        if not name:
+            cur.close()
+            conn.close()
+            return _json_resp({'error': 'Название обязательно'}, 400)
+        cur.execute(
+            "INSERT INTO materials (name, category, price, unit, description, image_url, in_stock, sort_order) "
+            f"VALUES ('{name}', '{_sql_str(body.get('category'))}', '{_sql_str(body.get('price'))}', "
+            f"'{_sql_str(body.get('unit') or 'шт')}', '{_sql_str(body.get('description'))}', "
+            f"'{_sql_str(body.get('imageUrl'))}', {'TRUE' if body.get('inStock', True) else 'FALSE'}, "
+            f"{int(body.get('sortOrder') or 0)}) RETURNING id"
+        )
+        new_id = cur.fetchone()[0]
+        conn.commit()
+        cur.close()
+        conn.close()
+        return _json_resp({'success': True, 'id': new_id})
+
+    if action == 'materials-update':
+        item_id = int(body.get('id') or 0)
+        if not item_id:
+            cur.close()
+            conn.close()
+            return _json_resp({'error': 'Не указан товар'}, 400)
+        cur.execute(
+            f"UPDATE materials SET name='{_sql_str(body.get('name'))}', "
+            f"category='{_sql_str(body.get('category'))}', price='{_sql_str(body.get('price'))}', "
+            f"unit='{_sql_str(body.get('unit') or 'шт')}', description='{_sql_str(body.get('description'))}', "
+            f"image_url='{_sql_str(body.get('imageUrl'))}', "
+            f"in_stock={'TRUE' if body.get('inStock', True) else 'FALSE'} WHERE id={item_id}"
+        )
+        conn.commit()
+        cur.close()
+        conn.close()
+        return _json_resp({'success': True})
+
+    if action == 'materials-delete':
+        item_id = int(body.get('id') or 0)
+        cur.execute(f"DELETE FROM materials WHERE id={item_id}")
+        conn.commit()
+        cur.close()
+        conn.close()
+        return _json_resp({'success': True})
+
+    cur.close()
+    conn.close()
+    return _json_resp({'error': 'Неизвестное действие'}, 400)
+
+
 def handler(event: dict, context) -> dict:
     """Сохраняет заявку от клиента в базу данных и отправляет уведомление на почту."""
 
@@ -725,14 +829,24 @@ def handler(event: dict, context) -> dict:
             'statusCode': 200,
             'headers': {
                 'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'POST, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Key',
                 'Access-Control-Max-Age': '86400'
             },
             'body': ''
         }
 
+    # ── Каталог стройматериалов ──
+    method = event.get('httpMethod', 'POST')
+    params = event.get('queryStringParameters') or {}
+
+    if method == 'GET' and params.get('type') == 'materials':
+        return materials_list()
+
     body = json.loads(event.get('body') or '{}')
+
+    if body.get('type') in ('materials-list', 'materials-add', 'materials-delete', 'materials-update'):
+        return materials_handle(body)
 
     # Чанковая загрузка тяжёлых файлов (видео) — фронт режет файл на куски ~2 МБ,
     # каждый кусок сохраняем как отдельный объект в S3, на финише склеиваем

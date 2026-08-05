@@ -34,6 +34,8 @@ const SeoDashboard = lazy(() => import("./pages/SeoDashboard"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const AsfaltirovaniePage = lazy(() => import("./pages/AsfaltirovaniePage"));
 const AdLanding = lazy(() => import("./pages/AdLanding"));
+const MaterialsPage = lazy(() => import("./pages/MaterialsPage"));
+const AdminMaterials = lazy(() => import("./pages/AdminMaterials"));
 
 const queryClient = new QueryClient();
 
@@ -149,6 +151,8 @@ const App = () => (
             <Route path="/karta/faw-j6p-390" element={<TruckCard />} />
             <Route path="/review-card" element={<ReviewCard />} />
             <Route path="/banner" element={<AdBanner />} />
+            <Route path="/stroymaterialy" element={<MaterialsPage />} />
+            <Route path="/admin/materialy" element={<AdminMaterials />} />
             <Route path="/admin/reindex" element={<AdminReindex />} />
             <Route path="/seo" element={<SeoDashboard />} />
             <Route path="/privacy" element={<PrivacyPage />} />

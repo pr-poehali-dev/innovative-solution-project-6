@@ -28,6 +28,7 @@ const sections = [
   { href: "/#fleet", label: "Наша техника" },
   { href: "/#usecases", label: "Виды работ" },
   { href: "/#pricing", label: "Тарифы" },
+  { href: "/stroymaterialy", label: "Стройматериалы" },
   { href: "/otzyvy", label: "Отзывы" },
   { href: "/blog", label: "Блог" },
 ];
@@ -113,16 +114,17 @@ const SiteFooter = () => {
             </h2>
             <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/30 text-[10px] text-accent/90 font-bold uppercase tracking-wider">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              7 разделов
+              8 разделов
             </div>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2 sm:gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 sm:gap-3">
             {[
               { href: "/#fleet", icon: "Truck", title: "Парк техники", desc: "15 машин 3–17 т", badge: "ТОП" },
               { href: "/#pricing", icon: "BadgeRussianRuble", title: "Цены", desc: "От 1500 ₽/час", badge: null },
               { href: "/#calculator", icon: "Calculator", title: "Калькулятор", desc: "Расчёт за минуту", badge: null },
               { href: "/otzyvy", icon: "Star", title: "Отзывы", desc: "4.9 на Я.Картах", badge: null },
-              { href: "/asfaltirovanie", icon: "Hammer", title: "Асфальтирование", desc: "От 450 ₽/м²", badge: "NEW" },
+              { href: "/asfaltirovanie", icon: "Hammer", title: "Асфальтирование", desc: "От 450 ₽/м²", badge: null },
+              { href: "/stroymaterialy", icon: "Package", title: "Стройматериалы", desc: "Кирпич, блоки, бетон", badge: "NEW" },
               { href: "/blog", icon: "BookOpen", title: "Блог", desc: "Полезные статьи", badge: null },
               { href: "#contacts", icon: "Phone", title: "Контакты", desc: "+7 960 188-30-84", badge: null },
             ].map((item) => {

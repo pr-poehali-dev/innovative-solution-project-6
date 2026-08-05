@@ -29,6 +29,22 @@
       "expectedStatus": 200,
       "expectedBody": {"success": true},
       "bodyMatcher": "partial"
+    },
+    {
+      "name": "Список стройматериалов",
+      "method": "POST",
+      "path": "/",
+      "body": {"type": "materials-list"},
+      "expectedStatus": 200,
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Добавление без ключа запрещено",
+      "method": "POST",
+      "path": "/",
+      "body": {"type": "materials-add", "name": "Кирпич"},
+      "expectedStatus": 403,
+      "bodyMatcher": "partial"
     }
   ]
 }
