@@ -41,7 +41,7 @@ const MaterialsMenu = () => {
 
       {open && (
         <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50">
-          <div className="w-64 rounded-2xl border border-accent/30 bg-background/98 backdrop-blur-2xl shadow-2xl shadow-black/60 p-2">
+          <div className="w-64 rounded-2xl border border-accent/40 bg-[#0e1420] shadow-2xl shadow-black/80 p-2">
             {MATERIAL_CATEGORIES.map((c) => (
               <a
                 key={c.slug}
