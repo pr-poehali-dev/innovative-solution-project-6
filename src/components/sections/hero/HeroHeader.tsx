@@ -27,10 +27,10 @@ const HeroHeader = () => {
         className={`fixed top-0 w-full bg-background/95 lg:bg-background/85 backdrop-blur-2xl border-b border-accent/30 shadow-[0_4px_24px_rgba(0,0,0,0.5)] z-50 transition-all duration-300 ${scrolled ? "bg-background/98 lg:bg-background/95" : ""}`}
       >
         <div className={`max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center gap-3 lg:gap-6 transition-all duration-300 ${scrolled ? "py-2 sm:py-2.5" : "py-3 sm:py-5"}`}>
-          <div className="min-w-0 shrink">
+          <div className="shrink-0">
             <BrandLogo compact={scrolled} />
           </div>
-          <nav className="hidden lg:flex gap-4 xl:gap-6 text-sm font-medium items-center shrink-0">
+          <nav className="hidden xl:flex gap-5 text-sm font-medium items-center shrink-0">
             {navLinks.map(link => {
               if (link.href === "/stroymaterialy") {
                 return <MaterialsMenu key={link.href} />;
@@ -64,7 +64,7 @@ const HeroHeader = () => {
 
             {/* Бургер — только мобайл */}
             <button
-              className="flex lg:hidden w-10 h-10 items-center justify-center rounded-full border border-white/10 hover:bg-white/5 transition-colors"
+              className="flex xl:hidden w-10 h-10 items-center justify-center rounded-full border border-white/10 hover:bg-white/5 transition-colors"
               onClick={() => setMenuOpen(prev => !prev)}
               aria-label="Меню"
             >
@@ -75,7 +75,7 @@ const HeroHeader = () => {
 
         {/* Мобильное меню */}
         {menuOpen && (
-          <div className="lg:hidden border-t border-accent/10 bg-background/95 backdrop-blur-2xl px-4 py-4 flex flex-col gap-1 max-h-[calc(100vh-5rem)] overflow-y-auto">
+          <div className="xl:hidden border-t border-accent/10 bg-background/95 backdrop-blur-2xl px-4 py-4 flex flex-col gap-1 max-h-[calc(100vh-5rem)] overflow-y-auto">
             {navLinks.map(link => {
               if (link.href === "/stroymaterialy") {
                 return (

@@ -8,7 +8,7 @@ interface HeroContentProps {
 
 const HeroContent = ({ visibleSections }: HeroContentProps) => {
   return (
-    <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-4 sm:pt-28 lg:pt-40 pb-16 sm:pb-32">
+    <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-28 sm:pt-32 lg:pt-40 pb-16 sm:pb-32">
       <div className={`max-w-2xl transition-all duration-1000 ${visibleSections["hero"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black leading-tight mb-2 sm:mb-5 tracking-tighter drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]">
           <span className="bg-gradient-to-br from-white via-white to-accent/40 bg-clip-text text-transparent">Аренда манипулятора </span>
