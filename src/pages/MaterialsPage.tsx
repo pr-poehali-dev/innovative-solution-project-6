@@ -37,7 +37,7 @@ const MaterialsPage = () => {
 
   const title = "Стройматериалы в Нижнем Новгороде — кирпич, блоки, бетон, бытовки | Фаворит";
   const description =
-    "Продажа стройматериалов в Нижнем Новгороде: силикатный кирпич, газосиликатные блоки, плиты, цемент, пиломатериалы, асфальт и бетон, бордюр и брусчатка, бытовки и контейнеры. Доставка манипулятором. ☎ +7 960 188-30-84";
+    "Продажа стройматериалов в Нижнем Новгороде: силикатный кирпич, газосиликатные блоки, плиты, цемент, пиломатериалы, асфальт и бетон, бордюр, бытовки и контейнеры. Доставка манипулятором. ☎ +7 960 188-30-84";
   const pageUrl = "https://фаварит.рф/stroymaterialy";
 
   return (
@@ -182,13 +182,13 @@ const MaterialsPage = () => {
                           <p className="text-xl font-black text-accent leading-none">{m.price}</p>
                           {m.unit && <p className="text-xs text-muted-foreground mt-1">за {m.unit}</p>}
                         </div>
-                        <button
-                          onClick={() => setCallbackOpen(true)}
-                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-black font-bold text-sm hover:shadow-lg hover:shadow-accent/30 transition-all"
+                        <a
+                          href="tel:+79601883084"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-black font-bold text-sm hover:shadow-lg hover:shadow-accent/30 transition-all whitespace-nowrap"
                         >
                           <Icon name="Phone" size={14} />
-                          Заказать
-                        </button>
+                          Позвонить
+                        </a>
                       </div>
                     </div>
                   </article>

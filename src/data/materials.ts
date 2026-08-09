@@ -18,7 +18,7 @@ export const MATERIAL_CATEGORIES = [
   { slug: "cement", label: "Цемент и сухие смеси", icon: "Package" },
   { slug: "pilomaterialy", label: "Пиломатериалы", icon: "TreePine" },
   { slug: "asfalt-beton", label: "Асфальт и бетон", icon: "Truck" },
-  { slug: "bordyur", label: "Бордюр и брусчатка", icon: "Grid3x3" },
+  { slug: "bordyur", label: "Бордюр", icon: "Grid3x3" },
   { slug: "bytovki", label: "Бытовки и контейнеры", icon: "Container" },
 ] as const;
 
