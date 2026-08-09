@@ -37,10 +37,20 @@ const HeroHeader = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="font-semibold transition-colors hover:text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
-                  style={{ color: "#f5d680", fontFamily: "'Cinzel', serif", letterSpacing: "0.05em" }}
+                  className="group relative inline-flex items-center gap-1.5 py-1.5 whitespace-nowrap transition-all hover:-translate-y-0.5"
                 >
-                  {link.label}
+                  <Icon
+                    name={link.icon}
+                    size={14}
+                    className="text-accent/70 group-hover:text-accent transition-colors drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                  />
+                  <span
+                    className="font-bold bg-gradient-to-b from-[#fff3c4] via-[#f5d680] to-[#d9a441] bg-clip-text text-transparent group-hover:from-white group-hover:via-[#ffe9a8] group-hover:to-[#f5d680] transition-all"
+                    style={{ fontFamily: "'Cinzel', serif", letterSpacing: "0.06em" }}
+                  >
+                    {link.label}
+                  </span>
+                  <span className="absolute -bottom-0.5 left-0 h-[2px] w-0 group-hover:w-full rounded-full bg-gradient-to-r from-transparent via-accent to-transparent transition-all duration-300" />
                 </a>
               );
             })}
@@ -125,9 +135,19 @@ const HeroHeader = () => {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="py-3 px-4 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 transition-all"
+                  className="group flex items-center gap-3 py-3 px-4 rounded-xl text-sm font-bold text-white/80 hover:text-white hover:bg-accent/10 border border-transparent hover:border-accent/25 transition-all"
                 >
-                  {link.label}
+                  <span className="w-8 h-8 rounded-lg bg-accent/10 group-hover:bg-accent/20 flex items-center justify-center shrink-0 transition-colors">
+                    <Icon name={link.icon} size={15} className="text-accent" />
+                  </span>
+                  <span style={{ fontFamily: "'Cinzel', serif", letterSpacing: "0.04em" }}>
+                    {link.label}
+                  </span>
+                  <Icon
+                    name="ChevronRight"
+                    size={15}
+                    className="ml-auto text-accent/40 group-hover:text-accent group-hover:translate-x-0.5 transition-all"
+                  />
                 </a>
               );
             })}

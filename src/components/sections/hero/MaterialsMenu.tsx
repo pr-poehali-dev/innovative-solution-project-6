@@ -18,14 +18,26 @@ const MaterialsMenu = () => {
     <div ref={ref} className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <a
         href="/stroymaterialy"
-        className="inline-flex items-center gap-1.5 font-semibold transition-colors hover:text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
-        style={{ color: "#f5d680", fontFamily: "'Cinzel', serif", letterSpacing: "0.05em" }}
+        className="group relative inline-flex items-center gap-1.5 py-1.5 whitespace-nowrap transition-all hover:-translate-y-0.5"
       >
-        Стройматериалы
+        <Icon
+          name="Package"
+          size={14}
+          className="text-accent/70 group-hover:text-accent transition-colors drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+        />
+        <span
+          className="font-bold bg-gradient-to-b from-[#fff3c4] via-[#f5d680] to-[#d9a441] bg-clip-text text-transparent group-hover:from-white group-hover:via-[#ffe9a8] group-hover:to-[#f5d680] transition-all"
+          style={{ fontFamily: "'Cinzel', serif", letterSpacing: "0.06em" }}
+        >
+          Стройматериалы
+        </span>
         <Icon
           name="ChevronDown"
-          size={14}
-          className={`transition-transform ${open ? "rotate-180" : ""}`}
+          size={13}
+          className={`text-accent/70 transition-transform duration-300 ${open ? "rotate-180 text-accent" : ""}`}
+        />
+        <span
+          className={`absolute -bottom-0.5 left-0 h-[2px] rounded-full bg-gradient-to-r from-transparent via-accent to-transparent transition-all duration-300 ${open ? "w-full" : "w-0 group-hover:w-full"}`}
         />
       </a>
 
