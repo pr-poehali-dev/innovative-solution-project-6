@@ -31,5 +31,6 @@ export const navLinks = [
   { href: "#usecases", label: "Услуги" },
   { href: "#how", label: "Как это работает" },
   { href: "/asfaltirovanie", label: "Асфальтирование" },
+  { href: "/stroymaterialy", label: "Стройматериалы" },
   { href: "/blog", label: "Блог" },
 ];

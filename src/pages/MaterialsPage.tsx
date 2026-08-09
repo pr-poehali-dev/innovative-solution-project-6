@@ -14,7 +14,9 @@ const MaterialsPage = () => {
   const [callbackOpen, setCallbackOpen] = useState(false);
   const [items, setItems] = useState<Material[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeCat, setActiveCat] = useState<string>("all");
+  const [activeCat, setActiveCat] = useState<string>(
+    () => new URLSearchParams(window.location.search).get("cat") || "all",
+  );
 
   useEffect(() => {
     fetchMaterials()
