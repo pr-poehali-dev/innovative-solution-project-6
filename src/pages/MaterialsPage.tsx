@@ -6,6 +6,7 @@ import BrandLogo from "@/components/ui/BrandLogo";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import CallbackModal from "@/components/ui/CallbackModal";
 import LazySection from "@/components/LazySection";
+import DeliveryCalculator from "@/components/materials/DeliveryCalculator";
 import { fetchMaterials, MATERIAL_CATEGORIES, type Material } from "@/data/materials";
 
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
@@ -197,6 +198,8 @@ const MaterialsPage = () => {
             </div>
           )}
         </section>
+
+        <DeliveryCalculator />
 
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-14 text-center">
           <h2 className="text-2xl sm:text-3xl font-black text-white mb-3">Нужны материалы с доставкой?</h2>
