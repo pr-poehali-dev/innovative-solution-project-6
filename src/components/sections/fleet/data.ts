@@ -181,7 +181,7 @@ export const trucks: Truck[] = [
     badge: "Автокран 25 т",
     title: "Автокран Галичанин КС-55713 (КАМАЗ)",
     slug: "avtokran-galichanin-25t",
-    price: "2 500 ₽/час с НДС",
+    price: "2 500 ₽/час без НДС",
     count: 1,
     tag: { label: "Грузоподъёмность 25 т", icon: "ArrowUpFromLine", color: "from-yellow-500 to-amber-600" },
     image: "/fleet/avtokran-galichanin-25t.webp",
