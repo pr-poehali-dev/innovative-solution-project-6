@@ -44,6 +44,22 @@ const DeliveryCalculator = () => {
   const total = baseTotal + citySurcharge;
   const materialsTotal = cargo.price * pallets;
 
+  const tonsOf = (t: (typeof deliveryTrucks)[number]) => {
+    const m = t.capacity.match(/[\d.,]+/);
+    return m ? parseFloat(m[0].replace(",", ".")) : 5;
+  };
+
+  const bestIdx = useMemo(() => {
+    const fits = deliveryTrucks
+      .map((t, i) => ({ i, tons: tonsOf(t), price: t.price }))
+      .filter((t) => t.tons >= cargoWeight)
+      .sort((a, b) => a.price - b.price || a.tons - b.tons);
+    if (fits.length) return fits[0].i;
+    return deliveryTrucks
+      .map((t, i) => ({ i, tons: tonsOf(t) }))
+      .sort((a, b) => b.tons - a.tons)[0].i;
+  }, [cargoWeight]);
+
   const fmt = (n: number) => n.toLocaleString("ru-RU");
 
   const waLink = useMemo(() => {
@@ -82,10 +98,21 @@ const DeliveryCalculator = () => {
         <div className="p-5 sm:p-8 grid lg:grid-cols-[1fr_320px] gap-8">
           <div className="space-y-7">
             <div>
-              <p className="text-sm font-bold text-white mb-3 flex items-center gap-2">
-                <Icon name="Truck" size={16} className="text-accent" />
-                Выберите машину
-              </p>
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+                <p className="text-sm font-bold text-white flex items-center gap-2">
+                  <Icon name="Truck" size={16} className="text-accent" />
+                  Выберите машину
+                </p>
+                {truckIdx !== bestIdx && (
+                  <button
+                    onClick={() => setTruckIdx(bestIdx)}
+                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-accent/40 bg-accent/10 text-accent text-xs font-bold hover:bg-accent/20 transition-colors"
+                  >
+                    <Icon name="Sparkles" size={14} />
+                    Подобрать под {cargoWeight} т — {deliveryTrucks[bestIdx].short}
+                  </button>
+                )}
+              </div>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 {deliveryTrucks.map((t, i) => {
                   const active = i === truckIdx;
@@ -114,6 +141,11 @@ const DeliveryCalculator = () => {
                         {active && (
                           <span className="absolute top-2 right-2 w-7 h-7 rounded-full bg-accent flex items-center justify-center">
                             <Icon name="Check" size={16} className="text-black" />
+                          </span>
+                        )}
+                        {i === bestIdx && !active && (
+                          <span className="absolute bottom-2 left-2 px-2 py-1 rounded-lg bg-accent text-black text-[10px] font-black uppercase tracking-wide">
+                            Рекомендуем
                           </span>
                         )}
                       </span>
