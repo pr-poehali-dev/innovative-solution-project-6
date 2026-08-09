@@ -72,52 +72,6 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
         {/* Форма заявки — компактная и заметная */}
         <HeroLeadForm />
 
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-8">
-          {[
-            { icon: "Truck", value: "15+", label: "Единиц техники", accent: true },
-            { icon: "CheckCircle2", value: "5 000+", label: "Выполненных заказов", accent: false },
-            { icon: "Award", value: "10 лет", label: "На рынке", accent: true },
-          ].map((s, i) => (
-            <div
-              key={i}
-              className="relative rounded-2xl p-[1.5px] overflow-hidden group"
-              style={{
-                background: s.accent
-                  ? "linear-gradient(135deg, rgba(245,208,96,0.7) 0%, rgba(232,168,32,0.2) 50%, rgba(232,168,32,0.7) 100%)"
-                  : "linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.2) 100%)",
-              }}
-            >
-              <div className="relative rounded-2xl bg-gradient-to-br from-zinc-950 via-black/90 to-zinc-900 p-3 sm:p-4 h-full">
-                <div
-                  className="absolute -top-6 -right-6 w-16 h-16 rounded-full blur-2xl pointer-events-none"
-                  style={{ background: s.accent ? "rgba(232,168,32,0.25)" : "rgba(255,255,255,0.08)" }}
-                />
-                <div className="relative">
-                  <div
-                    className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center mb-1.5 sm:mb-2"
-                    style={{
-                      background: s.accent
-                        ? "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)"
-                        : "rgba(255,255,255,0.08)",
-                      border: s.accent ? "none" : "1px solid rgba(255,255,255,0.15)",
-                    }}
-                  >
-                    <Icon
-                      name={s.icon}
-                      size={14}
-                      className={s.accent ? "text-black sm:!w-[18px] sm:!h-[18px]" : "text-white sm:!w-[18px] sm:!h-[18px]"}
-                      strokeWidth={2.5}
-                    />
-                  </div>
-                  <div className={`text-lg sm:text-2xl font-black leading-tight tabular-nums ${s.accent ? "text-accent" : "text-white"}`}>
-                    {s.value}
-                  </div>
-                  <p className="text-[10px] sm:text-xs text-white/60 leading-snug mt-0.5">{s.label}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );
