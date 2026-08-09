@@ -26,10 +26,10 @@ export const slides: { id: string; alt: string; fullSrc?: string }[] = [
 ];
 
 export const navLinks = [
+  { href: "/stroymaterialy", label: "Стройматериалы", icon: "Package" },
   { href: "#features", label: "Преимущества", icon: "Award" },
   { href: "#fleet", label: "Техника", icon: "Truck" },
   { href: "#usecases", label: "Услуги", icon: "Wrench" },
   { href: "#how", label: "Как это работает", icon: "Route" },
-  { href: "/stroymaterialy", label: "Стройматериалы", icon: "Package" },
   { href: "/blog", label: "Блог", icon: "BookOpen" },
 ];
