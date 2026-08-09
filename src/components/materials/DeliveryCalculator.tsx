@@ -46,6 +46,20 @@ const DeliveryCalculator = () => {
 
   const fmt = (n: number) => n.toLocaleString("ru-RU");
 
+  const waLink = useMemo(() => {
+    const lines = [
+      "Здравствуйте! Расчёт с сайта:",
+      `Материал: ${cargo.label} — ${pallets} подд. (${cargo.palletLabel} / поддон)`,
+      `Вес груза: ~${cargoWeight} т, рейсов: ${trips}`,
+      `Машина: ${truck.short} (${truck.capacity}), ${hours} ч`,
+      `Адрес: ${city.name}`,
+      `Доставка: ${fmt(total)} ₽`,
+      materialsTotal > 0 ? `Материал: ${fmt(materialsTotal)} ₽` : "",
+      materialsTotal > 0 ? `Итого: ${fmt(materialsTotal + total)} ₽` : "",
+    ].filter(Boolean);
+    return `https://wa.me/79601883084?text=${encodeURIComponent(lines.join("\n"))}`;
+  }, [cargo, pallets, cargoWeight, trips, truck, hours, city, total, materialsTotal]);
+
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
       <div className="rounded-3xl border border-accent/20 bg-card/40 overflow-hidden">
@@ -251,11 +265,20 @@ const DeliveryCalculator = () => {
             </div>
 
             <a
+              href={waLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center justify-center gap-2 h-12 rounded-xl bg-[#25D366] text-black font-black text-sm hover:shadow-lg hover:shadow-[#25D366]/30 transition-all"
+            >
+              <Icon name="MessageCircle" size={18} />
+              Отправить расчёт в WhatsApp
+            </a>
+            <a
               href="tel:+79601883084"
-              className="mt-5 inline-flex items-center justify-center gap-2 h-12 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-black font-black text-sm hover:shadow-lg hover:shadow-accent/30 transition-all"
+              className="mt-2.5 inline-flex items-center justify-center gap-2 h-12 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-black font-black text-sm hover:shadow-lg hover:shadow-accent/30 transition-all"
             >
               <Icon name="Phone" size={16} />
-              Заказать: +7 960 188-30-84
+              Позвонить: +7 960 188-30-84
             </a>
             <p className="text-[11px] text-muted-foreground text-center mt-2.5">
               Расчёт предварительный — точную цену назовём по телефону
