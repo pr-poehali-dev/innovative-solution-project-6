@@ -4,7 +4,9 @@ import { trucks, cities } from "@/components/sections/calculator/data";
 
 const MIN_HOURS = 4;
 
-const deliveryTrucks = trucks.filter((t) => t.category === "Манипулятор");
+const deliveryTrucks = trucks.filter(
+  (t) => t.category === "Манипулятор" || t.category === "Длинномер",
+);
 
 type Cargo = { id: string; label: string; palletLabel: string; weight: number; price: number };
 
@@ -154,7 +156,7 @@ const DeliveryCalculator = () => {
                           {t.short}
                         </span>
                         <span className="block text-xs text-muted-foreground mt-1">
-                          стрела {t.boom}
+                          {t.category === "Длинномер" ? t.boom : `стрела ${t.boom}`}
                         </span>
                         <span className="block text-base font-black text-accent mt-1.5">
                           {fmt(t.price)} <span className="text-xs font-bold">₽/час</span>

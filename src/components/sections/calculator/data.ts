@@ -2,7 +2,7 @@ export type Truck = {
   name: string;
   short: string;
   price: number;
-  category: "Манипулятор" | "Экскаватор" | "Автокран";
+  category: "Манипулятор" | "Экскаватор" | "Автокран" | "Длинномер";
   capacity: string;
   boom?: string;
   highlight?: string;
@@ -18,6 +18,7 @@ export const trucks: Truck[] = [
   { name: "RENAULT LANDER + КМУ", short: "Renault Lander", price: 3200, category: "Манипулятор", capacity: "до 15 т", boom: "20 м", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/72811b07-39fb-476d-9b0a-6a3f31285de9.webp" },
   { name: "КАМАЗ 43118 + КМУ Kanglim", short: "КАМАЗ 43118", price: 3500, category: "Манипулятор", capacity: "до 10 т", boom: "23 м", highlight: "Вездеход", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.webp" },
   { name: "FAW J6 + КМУ DONGYANG 1966", short: "FAW J6 + Бур", price: 3500, category: "Манипулятор", capacity: "до 20 т", boom: "22 м", highlight: "Эксклюзив · Бур", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/cb1469ab-3878-4eea-9eac-9ce6f4129301.webp" },
+  { name: "МАЗ длинномер с полуприцепом", short: "МАЗ длинномер", price: 2500, category: "Длинномер", capacity: "до 20 т", boom: "кузов 13,6 м", highlight: "Длинные грузы", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/8792b6c8-726d-4144-a065-23a9f68b6e7b.png" },
   { name: "Экскаватор-погрузчик JCB 3CX", short: "JCB 3CX", price: 2400, category: "Экскаватор", capacity: "8,1 т", boom: "копание 4,24 м", highlight: "Новинка", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/761d840a-c678-4fee-a5eb-4531b7ca7d17.webp" },
   { name: "Экскаватор-погрузчик JCB 4CX", short: "JCB 4CX", price: 2700, category: "Экскаватор", capacity: "8,8 т", boom: "копание 5,58 м", image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/29fc9d6a-adfb-4899-9119-3136ce0cb7d4.webp" },
   { name: "Автокран Галичанин КС-55713 (КАМАЗ)", short: "Автокран 25 т", price: 3000, category: "Автокран", capacity: "до 25 т", boom: "24 м", highlight: "Грузоподъёмность 25 т", image: "/fleet/avtokran-galichanin-25t.webp" },
