@@ -157,6 +157,25 @@ export const trucks: Truck[] = [
       { label: "Тип кузова", value: "Бортовой" },
     ],
   },
+  // ── Длинномеры ──
+  {
+    badge: "Длинномер 20 т",
+    title: "МАЗ длинномер с полуприцепом",
+    slug: "dlinnomer-maz",
+    price: "по запросу",
+    count: 1,
+    tag: { label: "Длина кузова 13,6 м", icon: "MoveHorizontal", color: "from-blue-500 to-indigo-600" },
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/8792b6c8-726d-4144-a065-23a9f68b6e7b.png",
+    alt: "МАЗ длинномер с бортовым полуприцепом",
+    specs: [
+      { label: "Грузоподъёмность", value: "до 20 т" },
+      { label: "Длина кузова", value: "до 13,6 м" },
+      { label: "Ширина кузова", value: "до 2,45 м" },
+      { label: "Тип кузова", value: "Бортовой, откидные борта" },
+      { label: "Погрузка", value: "Боковая, верхняя, задняя" },
+      { label: "Для чего", value: "Длинномерные и объёмные грузы" },
+    ],
+  },
   // ── Автокраны ──
   {
     badge: "Автокран 25 т",
