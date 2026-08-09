@@ -86,37 +86,48 @@ const DeliveryCalculator = () => {
                 <Icon name="Truck" size={16} className="text-accent" />
                 Выберите машину
               </p>
-              <div className="grid sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 {deliveryTrucks.map((t, i) => {
                   const active = i === truckIdx;
                   return (
                     <button
                       key={t.name}
                       onClick={() => setTruckIdx(i)}
-                      className={`text-left p-3 rounded-2xl border transition-all flex items-center gap-3 ${
+                      className={`group text-left rounded-2xl border-2 overflow-hidden transition-all ${
                         active
-                          ? "border-accent bg-accent/10 shadow-lg shadow-accent/10"
-                          : "border-accent/10 bg-card/40 hover:border-accent/40"
+                          ? "border-accent bg-accent/10 shadow-xl shadow-accent/20 scale-[1.02]"
+                          : "border-white/10 bg-card/60 hover:border-accent/50 hover:bg-card"
                       }`}
                     >
-                      <img
-                        src={t.image}
-                        alt={t.name}
-                        loading="lazy"
-                        className="w-14 h-14 rounded-xl object-cover shrink-0"
-                      />
-                      <span className="min-w-0">
-                        <span className="block text-sm font-bold text-white truncate">{t.short}</span>
-                        <span className="block text-xs text-muted-foreground">
-                          {t.capacity} · стрела {t.boom}
+                      <span className="relative block aspect-[4/3] bg-black/40 overflow-hidden">
+                        <img
+                          src={t.image}
+                          alt={t.name}
+                          loading="lazy"
+                          className={`w-full h-full object-cover transition-transform duration-500 ${
+                            active ? "scale-105" : "group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                          }`}
+                        />
+                        <span className="absolute top-2 left-2 px-2 py-1 rounded-lg bg-black/80 text-white text-[11px] font-black">
+                          {t.capacity}
                         </span>
-                        <span className="block text-xs font-bold text-accent mt-0.5">
-                          {fmt(t.price)} ₽/час
+                        {active && (
+                          <span className="absolute top-2 right-2 w-7 h-7 rounded-full bg-accent flex items-center justify-center">
+                            <Icon name="Check" size={16} className="text-black" />
+                          </span>
+                        )}
+                      </span>
+                      <span className="block p-3">
+                        <span className="block text-sm font-black text-white leading-tight truncate">
+                          {t.short}
+                        </span>
+                        <span className="block text-xs text-muted-foreground mt-1">
+                          стрела {t.boom}
+                        </span>
+                        <span className="block text-base font-black text-accent mt-1.5">
+                          {fmt(t.price)} <span className="text-xs font-bold">₽/час</span>
                         </span>
                       </span>
-                      {active && (
-                        <Icon name="CircleCheck" size={18} className="text-accent ml-auto shrink-0" />
-                      )}
                     </button>
                   );
                 })}
