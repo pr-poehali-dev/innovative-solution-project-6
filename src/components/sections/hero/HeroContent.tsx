@@ -15,8 +15,23 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
           <span className="text-accent">в Нижнем Новгороде</span>
         </h1>
         <p className="text-sm sm:text-lg text-white/85 leading-snug sm:leading-relaxed mb-3 sm:mb-7 max-w-full sm:max-w-xl font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-          Оставьте заявку или позвоните — подберём манипулятор с платформой нужных габаритов и грузоподъёмностью под вашу задачу. Подача за 60 минут, работаем 24/7 по Нижнему Новгороду и области.
+          Оставьте заявку или позвоните — подберём манипулятор с платформой нужных габаритов и грузоподъёмностью под вашу задачу по Нижнему Новгороду и области.
         </p>
+
+        {/* Ключевое преимущество — подача и режим работы */}
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3 sm:mb-6">
+          <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-accent text-black font-black text-sm sm:text-base shadow-[0_6px_20px_rgba(232,168,32,0.45)]">
+            <Icon name="Timer" size={18} strokeWidth={2.6} />
+            Подача за 60 минут
+          </span>
+          <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl border-2 border-accent/60 bg-black/60 backdrop-blur-sm text-accent font-black text-sm sm:text-base">
+            <span className="relative flex w-2 h-2">
+              <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75" />
+              <span className="relative w-2 h-2 rounded-full bg-green-400" />
+            </span>
+            Работаем 24/7
+          </span>
+        </div>
 
         {/* Ключевые условия */}
         <div className="flex flex-wrap gap-1.5 sm:gap-3 mb-3 sm:mb-6 max-w-xl">
