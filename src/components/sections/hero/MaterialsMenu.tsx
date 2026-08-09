@@ -18,7 +18,7 @@ const MaterialsMenu = () => {
     <div ref={ref} className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <a
         href="/stroymaterialy"
-        className="group relative inline-flex items-center gap-1.5 py-1.5 whitespace-nowrap transition-all hover:-translate-y-0.5"
+        className="group relative inline-flex items-center gap-1.5 py-1.5 px-3 -mx-1 rounded-lg border border-accent/35 bg-accent/10 hover:bg-accent/15 hover:border-accent/60 shadow-[0_0_14px_rgba(232,168,32,0.18)] whitespace-nowrap transition-all hover:-translate-y-0.5"
       >
         <Icon
           name="Package"
@@ -36,9 +36,7 @@ const MaterialsMenu = () => {
           size={13}
           className={`text-accent/70 transition-transform duration-300 ${open ? "rotate-180 text-accent" : ""}`}
         />
-        <span
-          className={`absolute -bottom-0.5 left-0 h-[2px] rounded-full bg-gradient-to-r from-transparent via-accent to-transparent transition-all duration-300 ${open ? "w-full" : "w-0 group-hover:w-full"}`}
-        />
+
       </a>
 
       {open && (

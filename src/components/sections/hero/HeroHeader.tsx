@@ -79,7 +79,7 @@ const HeroHeader = () => {
             {navLinks.map(link => {
               if (link.href === "/stroymaterialy") {
                 return (
-                  <div key={link.href} className="rounded-xl bg-white/5 border border-accent/20 overflow-hidden">
+                  <div key={link.href} className="rounded-xl bg-accent/10 border border-accent/40 shadow-[0_0_16px_rgba(232,168,32,0.15)] overflow-hidden">
                     <button
                       type="button"
                       onClick={() => setMatOpen(prev => !prev)}
