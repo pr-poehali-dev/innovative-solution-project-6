@@ -24,6 +24,7 @@ const SeoFooterLinks = lazy(() => import("@/components/sections/SeoFooterLinks")
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 const WeatherWidget = lazy(() => import("@/components/sections/WeatherWidget"));
 const AsphaltPromoSection = lazy(() => import("@/components/sections/AsphaltPromoSection"));
+const DeliveryCalculator = lazy(() => import("@/components/materials/DeliveryCalculator"));
 const AsphaltSeoText = lazy(() => import("@/components/sections/AsphaltSeoText"));
 const AsphaltBigBanner = lazy(() => import("@/components/sections/AsphaltBigBanner"));
 const SECTION_IDS = ["hero", "features", "how", "pricing", "cta"];
@@ -64,6 +65,8 @@ const Index = () => {
         <LazySection id="fleet"><FleetSection /></LazySection>
         <SectionDivider variant="blueprint" />
         <LazySection><CalculatorSection /></LazySection>
+        <SectionDivider variant="blueprint" />
+        <LazySection><DeliveryCalculator /></LazySection>
       </SectionBackdrop>
 
       {/* === Баннер №2 — ВЕСЬ ПАРК (грузовики в ряд на закате) === */}
