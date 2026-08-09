@@ -14,30 +14,9 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
           <span className="bg-gradient-to-br from-white via-white to-accent/40 bg-clip-text text-transparent">Аренда манипулятора </span>
           <span className="text-accent">в Нижнем Новгороде</span>
         </h1>
-        <p className="text-base sm:text-2xl font-display font-bold text-white/95 leading-snug mb-2 sm:mb-5 max-w-full sm:max-w-xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-          Услуги манипулятора с оператором — <span className="text-accent">от 1 500 ₽/час</span>
-        </p>
         <p className="text-sm sm:text-lg text-white/85 leading-snug sm:leading-relaxed mb-3 sm:mb-7 max-w-full sm:max-w-xl font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
           Оставьте заявку или позвоните — подберём манипулятор с платформой нужных габаритов и грузоподъёмностью под вашу задачу. Подача за 60 минут, работаем 24/7 по Нижнему Новгороду и области.
         </p>
-
-        {/* Крупный ценовой блок — для конверсии и качества рекламы */}
-        <div className="inline-flex items-center gap-3 sm:gap-4 mb-3 sm:mb-6 px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl border-2 border-accent/50 bg-black/60 backdrop-blur-sm shadow-[0_8px_30px_rgba(245,214,128,0.25)]">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-            style={{
-              background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
-              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 12px rgba(245,214,128,0.4)",
-            }}
-          >
-            <Icon name="Wallet" size={20} className="text-black" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[10px] sm:text-xs uppercase tracking-wider text-white/60 font-semibold">Цена с оператором</span>
-            <span className="text-lg sm:text-2xl font-display font-black text-white leading-none">
-              от <span className="text-accent">1 500 ₽</span>/час
-            </span>
-          </div>
-        </div>
 
         {/* Ключевые условия */}
         <div className="flex flex-wrap gap-1.5 sm:gap-3 mb-3 sm:mb-6 max-w-xl">
