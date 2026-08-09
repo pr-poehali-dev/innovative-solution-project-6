@@ -20,14 +20,14 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
 
         {/* Ключевое преимущество — подача и режим работы */}
         <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3 sm:mb-6">
-          <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-accent text-black font-black text-sm sm:text-base shadow-[0_6px_20px_rgba(232,168,32,0.45)]">
+          <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-green-500 text-black font-black text-sm sm:text-base shadow-[0_6px_20px_rgba(16,185,129,0.5)]">
             <Icon name="Timer" size={18} strokeWidth={2.6} />
             Подача за 60 минут
           </span>
-          <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl border-2 border-accent/60 bg-black/60 backdrop-blur-sm text-accent font-black text-sm sm:text-base">
+          <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl border-2 border-emerald-400/70 bg-emerald-500/10 backdrop-blur-sm text-emerald-300 font-black text-sm sm:text-base">
             <span className="relative flex w-2 h-2">
-              <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75" />
-              <span className="relative w-2 h-2 rounded-full bg-green-400" />
+              <span className="absolute inset-0 rounded-full bg-emerald-300 animate-ping opacity-75" />
+              <span className="relative w-2 h-2 rounded-full bg-emerald-300" />
             </span>
             Работаем 24/7
           </span>
