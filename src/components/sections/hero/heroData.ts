@@ -31,6 +31,6 @@ export const navLinks = [
   { href: "#usecases", label: "Услуги", icon: "Wrench" },
   { href: "#how", label: "Как это работает", icon: "Route" },
   { href: "/stroymaterialy", label: "Стройматериалы", icon: "Package" },
-  { href: "/#delivery-calc", label: "Калькулятор доставки", icon: "Calculator" },
+  { href: "/stroymaterialy#delivery-calc", label: "Калькулятор доставки", icon: "Calculator" },
   { href: "/blog", label: "Блог", icon: "BookOpen" },
 ];
