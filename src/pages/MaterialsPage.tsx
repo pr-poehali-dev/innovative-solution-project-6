@@ -79,7 +79,7 @@ const MaterialsPage = () => {
         </div>
 
         <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-8">
-          <SectionBadge icon="Package">Каталог</SectionBadge>
+          <SectionBadge>Каталог</SectionBadge>
           <h1 className="text-3xl sm:text-5xl font-black tracking-tighter mt-4 mb-4">
             <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
               Стройматериалы в Нижнем Новгороде

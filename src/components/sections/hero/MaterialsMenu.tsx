@@ -44,6 +44,21 @@ const MaterialsMenu = () => {
                 {c.label}
               </a>
             ))}
+            <div className="my-2 mx-1 border-t border-accent/15" />
+
+            <a
+              href="/asfaltirovanie"
+              className="relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-black bg-gradient-to-r from-amber-300 via-amber-400 to-orange-500 text-white shadow-lg shadow-amber-500/30 hover:shadow-xl hover:shadow-amber-500/50 transition-all"
+            >
+              <span className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+                <Icon name="Hammer" size={15} className="text-white" />
+              </span>
+              Асфальтирование
+              <span className="ml-auto px-1.5 py-0.5 rounded-full bg-red-600 text-white text-[8px] font-black tracking-wider">
+                NEW
+              </span>
+            </a>
+
             <a
               href="/stroymaterialy"
               className="flex items-center justify-center gap-2 mt-2 mx-1 mb-1 px-3 py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r from-accent to-accent/80 text-black hover:shadow-lg hover:shadow-accent/30 transition-all"

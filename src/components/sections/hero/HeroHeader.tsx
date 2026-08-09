@@ -33,23 +33,6 @@ const HeroHeader = () => {
               if (link.href === "/stroymaterialy") {
                 return <MaterialsMenu key={link.href} />;
               }
-              const isAsphalt = link.href === "/asfaltirovanie";
-              if (isAsphalt) {
-                return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="relative inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-black bg-gradient-to-r from-amber-300 via-amber-400 to-orange-500 text-white shadow-lg shadow-amber-500/40 hover:shadow-xl hover:shadow-amber-500/60 hover:scale-105 transition-all animate-pulse"
-                    style={{ fontFamily: "'Cinzel', serif", letterSpacing: "0.05em" }}
-                  >
-                    <Icon name="Sparkles" size={14} className="text-white drop-shadow" />
-                    <span className="relative">{link.label}</span>
-                    <span className="absolute -top-2 -right-2 px-1.5 py-0.5 rounded-full bg-red-600 text-white text-[8px] font-black tracking-wider shadow-md whitespace-nowrap">
-                      NEW
-                    </span>
-                  </a>
-                );
-              }
               return (
                 <a
                   key={link.href}
@@ -115,6 +98,17 @@ const HeroHeader = () => {
                           </a>
                         ))}
                         <a
+                          href="/asfaltirovanie"
+                          onClick={() => setMenuOpen(false)}
+                          className="mt-1 flex items-center gap-2.5 py-2.5 px-3 rounded-lg text-sm font-black bg-gradient-to-r from-amber-300 via-amber-400 to-orange-500 text-white shadow-md"
+                        >
+                          <Icon name="Hammer" size={14} className="text-white shrink-0" />
+                          Асфальтирование
+                          <span className="ml-auto px-1.5 py-0.5 rounded-full bg-red-600 text-white text-[8px] font-black">
+                            NEW
+                          </span>
+                        </a>
+                        <a
                           href="/stroymaterialy"
                           onClick={() => setMenuOpen(false)}
                           className="mt-1 py-2.5 px-3 rounded-lg text-sm font-bold text-center bg-accent/15 text-accent"
@@ -124,23 +118,6 @@ const HeroHeader = () => {
                       </div>
                     )}
                   </div>
-                );
-              }
-              const isAsphalt = link.href === "/asfaltirovanie";
-              if (isAsphalt) {
-                return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="relative py-3 px-4 rounded-xl text-sm font-black bg-gradient-to-r from-amber-300 via-amber-400 to-orange-500 text-white shadow-lg shadow-amber-500/40 hover:shadow-xl hover:scale-[1.02] transition-all flex items-center gap-2 animate-pulse"
-                  >
-                    <Icon name="Sparkles" size={16} className="text-white drop-shadow" />
-                    <span>{link.label}</span>
-                    <span className="ml-auto px-2 py-0.5 rounded-full bg-red-600 text-white text-[9px] font-black tracking-wider shadow-md">
-                      NEW
-                    </span>
-                  </a>
                 );
               }
               return (
