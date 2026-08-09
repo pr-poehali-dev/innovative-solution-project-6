@@ -26,8 +26,8 @@ const HeroHeader = () => {
       <header
         className={`fixed top-0 w-full bg-background/95 lg:bg-background/85 backdrop-blur-2xl border-b border-accent/30 shadow-[0_4px_24px_rgba(0,0,0,0.5)] z-50 transition-all duration-300 ${scrolled ? "bg-background/98 lg:bg-background/95" : ""}`}
       >
-        <div className={`max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center gap-3 lg:gap-6 transition-all duration-300 ${scrolled ? "py-2 sm:py-2.5" : "py-3 sm:py-5"}`}>
-          <div className="shrink-0">
+        <div className={`max-w-7xl mx-auto px-3 sm:px-6 flex justify-between items-center gap-2 lg:gap-6 transition-all duration-300 ${scrolled ? "py-2 sm:py-2.5" : "py-3 sm:py-5"}`}>
+          <div className="min-w-0 flex-1 xl:flex-none">
             <BrandLogo compact={scrolled} />
           </div>
           <nav className="hidden xl:flex gap-5 text-sm font-medium items-center shrink-0">
@@ -75,7 +75,7 @@ const HeroHeader = () => {
 
         {/* Мобильное меню */}
         {menuOpen && (
-          <div className="xl:hidden border-t border-accent/10 bg-background/95 backdrop-blur-2xl px-4 py-4 flex flex-col gap-1 max-h-[calc(100vh-5rem)] overflow-y-auto">
+          <div className="xl:hidden w-full border-t border-accent/10 bg-background/98 backdrop-blur-2xl px-3 py-4 flex flex-col gap-1 max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain">
             {navLinks.map(link => {
               if (link.href === "/stroymaterialy") {
                 return (
@@ -137,12 +137,12 @@ const HeroHeader = () => {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="group flex items-center gap-3 py-3 px-4 rounded-xl text-sm font-bold text-white/80 hover:text-white hover:bg-accent/10 border border-transparent hover:border-accent/25 transition-all"
+                  className="group flex items-center gap-3 py-3 px-3 rounded-xl text-sm font-bold text-white/80 hover:text-white hover:bg-accent/10 border border-transparent hover:border-accent/25 transition-all"
                 >
                   <span className="w-8 h-8 rounded-lg bg-accent/10 group-hover:bg-accent/20 flex items-center justify-center shrink-0 transition-colors">
                     <Icon name={link.icon} size={15} className="text-accent" />
                   </span>
-                  <span style={{ fontFamily: "'Cinzel', serif", letterSpacing: "0.04em" }}>
+                  <span className="truncate" style={{ fontFamily: "'Cinzel', serif", letterSpacing: "0.02em" }}>
                     {link.label}
                   </span>
                   <Icon
