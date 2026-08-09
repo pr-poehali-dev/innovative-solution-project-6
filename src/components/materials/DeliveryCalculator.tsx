@@ -6,20 +6,43 @@ const MIN_HOURS = 4;
 
 const deliveryTrucks = trucks.filter((t) => t.category === "Манипулятор");
 
+type Cargo = { id: string; label: string; palletLabel: string; weight: number; price: number };
+
+const cargos: Cargo[] = [
+  { id: "bordyur", label: "Бордюр 1000×300×150", palletLabel: "12 шт", weight: 1.6, price: 6000 },
+  { id: "kirpich", label: "Кирпич силикатный", palletLabel: "336 шт", weight: 1.4, price: 6050 },
+  { id: "bloki", label: "Газосиликатный блок D500", palletLabel: "1,8 м³", weight: 0.95, price: 7020 },
+  { id: "cement", label: "Цемент М500", palletLabel: "30 мешков", weight: 1.5, price: 14400 },
+  { id: "other", label: "Другой материал", palletLabel: "поддон", weight: 1.5, price: 0 },
+];
+
 const DeliveryCalculator = () => {
   const [truckIdx, setTruckIdx] = useState(2);
   const [cityName, setCityName] = useState(cities[0].name);
   const [hours, setHours] = useState(MIN_HOURS);
+  const [cargoId, setCargoId] = useState(cargos[0].id);
+  const [pallets, setPallets] = useState(4);
 
   const truck = deliveryTrucks[truckIdx];
   const city = useMemo(
     () => cities.find((c) => c.name === cityName) || cities[0],
     [cityName],
   );
+  const cargo = useMemo(() => cargos.find((c) => c.id === cargoId) || cargos[0], [cargoId]);
 
-  const baseTotal = truck.price * hours;
-  const citySurcharge = Math.round(city.hours * truck.price);
+  const truckTons = useMemo(() => {
+    const m = truck.capacity.match(/[\d.,]+/);
+    return m ? parseFloat(m[0].replace(",", ".")) : 5;
+  }, [truck]);
+
+  const cargoWeight = +(pallets * cargo.weight).toFixed(1);
+  const palletsPerTrip = Math.max(1, Math.floor(truckTons / cargo.weight));
+  const trips = Math.ceil(pallets / palletsPerTrip);
+
+  const baseTotal = truck.price * hours * trips;
+  const citySurcharge = Math.round(city.hours * truck.price) * trips;
   const total = baseTotal + citySurcharge;
+  const materialsTotal = cargo.price * pallets;
 
   const fmt = (n: number) => n.toLocaleString("ru-RU");
 
@@ -89,6 +112,53 @@ const DeliveryCalculator = () => {
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
                 <label className="text-sm font-bold text-white mb-3 flex items-center gap-2">
+                  <Icon name="Package" size={16} className="text-accent" />
+                  Что везём
+                </label>
+                <select
+                  value={cargoId}
+                  onChange={(e) => setCargoId(e.target.value)}
+                  className="w-full h-12 px-4 rounded-xl bg-card/60 border border-accent/20 text-white text-sm focus:border-accent outline-none"
+                >
+                  {cargos.map((c) => (
+                    <option key={c.id} value={c.id} className="bg-background">
+                      {c.label} ({c.palletLabel} / поддон)
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="text-sm font-bold text-white mb-3 flex items-center gap-2">
+                  <Icon name="Layers" size={16} className="text-accent" />
+                  Сколько поддонов
+                </label>
+                <div className="flex items-center gap-2 h-12">
+                  <button
+                    onClick={() => setPallets((p) => Math.max(1, p - 1))}
+                    className="w-12 h-12 rounded-xl border border-accent/20 bg-card/60 text-accent font-black text-lg hover:border-accent transition-colors"
+                    aria-label="Меньше поддонов"
+                  >
+                    −
+                  </button>
+                  <div className="flex-1 h-12 rounded-xl bg-card/60 border border-accent/20 flex items-center justify-center text-white font-black">
+                    {pallets} шт
+                  </div>
+                  <button
+                    onClick={() => setPallets((p) => Math.min(40, p + 1))}
+                    className="w-12 h-12 rounded-xl border border-accent/20 bg-card/60 text-accent font-black text-lg hover:border-accent transition-colors"
+                    aria-label="Больше поддонов"
+                  >
+                    +
+                  </button>
+                </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  Вес груза ≈ {cargoWeight} т · войдёт {palletsPerTrip} подд. за рейс
+                </p>
+              </div>
+
+              <div>
+                <label className="text-sm font-bold text-white mb-3 flex items-center gap-2">
                   <Icon name="MapPin" size={16} className="text-accent" />
                   Куда везём
                 </label>
@@ -141,7 +211,15 @@ const DeliveryCalculator = () => {
             <div className="space-y-2.5 text-sm">
               <div className="flex justify-between gap-3">
                 <span className="text-muted-foreground">
-                  {truck.short} × {hours} ч
+                  {pallets} подд. · {cargoWeight} т
+                </span>
+                <span className="text-white font-bold whitespace-nowrap">
+                  {trips} {trips === 1 ? "рейс" : trips < 5 ? "рейса" : "рейсов"}
+                </span>
+              </div>
+              <div className="flex justify-between gap-3">
+                <span className="text-muted-foreground">
+                  {truck.short} × {hours} ч{trips > 1 ? ` × ${trips}` : ""}
                 </span>
                 <span className="text-white font-bold whitespace-nowrap">{fmt(baseTotal)} ₽</span>
               </div>
@@ -156,9 +234,20 @@ const DeliveryCalculator = () => {
             <div className="mt-5 pt-4 border-t border-accent/20">
               <p className="text-xs text-muted-foreground mb-1">Итого доставка</p>
               <p className="text-3xl font-black text-accent leading-none">{fmt(total)} ₽</p>
-              <p className="text-xs text-muted-foreground mt-2">
-                Стоимость материалов оплачивается отдельно
-              </p>
+              {materialsTotal > 0 && (
+                <div className="mt-3 pt-3 border-t border-accent/10 space-y-1">
+                  <div className="flex justify-between gap-3 text-sm">
+                    <span className="text-muted-foreground">Материал ({pallets} подд.)</span>
+                    <span className="text-white font-bold whitespace-nowrap">{fmt(materialsTotal)} ₽</span>
+                  </div>
+                  <div className="flex justify-between gap-3 text-sm">
+                    <span className="font-bold text-white">Всё вместе</span>
+                    <span className="text-accent font-black whitespace-nowrap">
+                      {fmt(materialsTotal + total)} ₽
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
 
             <a
