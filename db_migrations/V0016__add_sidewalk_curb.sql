@@ -1,0 +1,2 @@
+INSERT INTO materials (name, category, price, unit, description, image_url, in_stock, sort_order) VALUES
+('Бордюр тротуарный 1000×200×80', 'bordyur', '260 ₽', 'шт', 'Размер 1000×200×80 мм. Для пешеходных дорожек, отмостки и клумб. На поддоне 30 шт — 7 800 ₽. Доставка манипулятором.', 'https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/8996ec16-9ca6-45aa-bf2c-fba785464b10.jpg', true, 1);
