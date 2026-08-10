@@ -21,7 +21,7 @@ export type CategoryBanner = {
 
 export const CATEGORY_BANNERS: Record<string, CategoryBanner> = {
   kirpich: {
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/4cbf56ed-2384-4c84-9dc9-d5c68ee3dc31.jpg",
+    image: "/images/kirpich-banner.jpg",
     title: "Кирпич силикатный",
     subtitle: "Прочные стены, ровная кладка, аккуратный фасад",
     text: "Полнотелый и пустотелый силикатный кирпич для несущих стен, перегородок и облицовки. Ровная геометрия — кладка идёт быстро, расход раствора меньше. Привезём нужный объём и разгрузим манипулятором точно там, где ведутся работы.",

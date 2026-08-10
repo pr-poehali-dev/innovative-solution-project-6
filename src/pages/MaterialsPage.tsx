@@ -129,26 +129,27 @@ const MaterialsPage = () => {
 
         {banner && (
           <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-10">
-            <div className="rounded-2xl overflow-hidden border border-accent/25 bg-card/40 grid lg:grid-cols-2">
-              <div className="relative bg-black">
+            <div className="rounded-2xl overflow-hidden border border-accent/25 bg-card/40">
+              <div className="relative w-full bg-black">
                 <img
                   src={banner.image}
                   alt={banner.title}
-                  className="w-full h-full object-contain lg:object-cover lg:min-h-[420px]"
+                  className="w-full h-auto block"
                 />
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-card/90 to-transparent pointer-events-none" />
               </div>
 
-              <div className="p-5 sm:p-8 lg:p-10 flex flex-col justify-center">
+              <div className="p-5 sm:p-8 lg:p-10">
                 <SectionBadge>Категория</SectionBadge>
                 <h2 className="text-2xl sm:text-4xl font-black text-white mt-4 mb-2 leading-tight">
                   {banner.title}
                 </h2>
                 <p className="text-accent font-bold text-sm sm:text-base mb-4">{banner.subtitle}</p>
-                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 max-w-3xl">
                   {banner.text}
                 </p>
 
-                <div className="grid sm:grid-cols-2 gap-3 mb-6">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
                   {banner.bullets.map((b) => (
                     <div
                       key={b.title}
