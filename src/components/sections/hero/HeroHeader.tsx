@@ -84,9 +84,16 @@ const HeroHeader = () => {
           </div>
         </div>
 
-        {/* Мобильное меню */}
-        {menuOpen && (
-          <div className="xl:hidden w-full border-t border-accent/10 bg-[#0e1420] flex flex-col max-h-[calc(100dvh-4.5rem)]">
+      </header>
+
+      {/* Мобильное меню — отдельный слой поверх страницы */}
+      {menuOpen && (
+        <>
+          <div
+            className="xl:hidden fixed inset-0 z-40 bg-black/60"
+            onClick={() => setMenuOpen(false)}
+          />
+          <div className="xl:hidden fixed left-0 right-0 bottom-0 top-[64px] z-50 border-t border-accent/10 bg-[#0e1420] flex flex-col">
             <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-3 py-4 flex flex-col gap-1">
             {navLinks.map(link => {
               if (link.href === "/stroymaterialy") {
@@ -94,17 +101,7 @@ const HeroHeader = () => {
                   <div key={link.href} ref={matRef} className="rounded-xl bg-accent/10 border border-accent/40 shadow-[0_0_16px_rgba(232,168,32,0.15)] overflow-hidden">
                     <button
                       type="button"
-                      onClick={() => {
-                        const next = !matOpen;
-                        setMatOpen(next);
-                        if (next) {
-                          requestAnimationFrame(() => {
-                            const box = scrollRef.current;
-                            const item = matRef.current;
-                            if (box && item) box.scrollTop = item.offsetTop - box.offsetTop;
-                          });
-                        }
-                      }}
+                      onClick={() => setMatOpen(prev => !prev)}
                       className="w-full py-3 px-4 flex items-center gap-2 text-sm font-bold text-white"
                     >
                       <Icon name="Package" size={16} className="text-accent" />
@@ -180,8 +177,8 @@ const HeroHeader = () => {
               <PhoneButton size="sm" className="w-full justify-center rounded-xl" />
             </div>
           </div>
-        )}
-      </header>
+        </>
+      )}
     </>
   );
 };
