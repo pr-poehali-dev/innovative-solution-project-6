@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import MobileCallPopover from "@/components/ui/MobileCallPopover";
@@ -12,6 +12,7 @@ const HeroHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [matOpen, setMatOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const matRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -19,6 +20,15 @@ const HeroHeader = () => {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [menuOpen]);
 
   return (
     <>
@@ -75,14 +85,18 @@ const HeroHeader = () => {
 
         {/* Мобильное меню */}
         {menuOpen && (
-          <div className="xl:hidden w-full border-t border-accent/10 bg-background/98 backdrop-blur-2xl px-3 py-4 flex flex-col gap-1 max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain">
+          <div className="xl:hidden w-full border-t border-accent/10 bg-[#0e1420] flex flex-col max-h-[calc(100dvh-4.5rem)]">
+            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-3 py-4 flex flex-col gap-1">
             {navLinks.map(link => {
               if (link.href === "/stroymaterialy") {
                 return (
-                  <div key={link.href} className="rounded-xl bg-accent/10 border border-accent/40 shadow-[0_0_16px_rgba(232,168,32,0.15)] overflow-hidden">
+                  <div key={link.href} ref={matRef} className="rounded-xl bg-accent/10 border border-accent/40 shadow-[0_0_16px_rgba(232,168,32,0.15)] overflow-hidden">
                     <button
                       type="button"
-                      onClick={() => setMatOpen(prev => !prev)}
+                      onClick={() => {
+                        setMatOpen(prev => !prev);
+                        setTimeout(() => matRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+                      }}
                       className="w-full py-3 px-4 flex items-center gap-2 text-sm font-bold text-white"
                     >
                       <Icon name="Package" size={16} className="text-accent" />
@@ -153,7 +167,8 @@ const HeroHeader = () => {
                 </a>
               );
             })}
-            <div className="mt-2 pt-3 border-t border-accent/10 flex flex-col gap-2" onClick={() => setMenuOpen(false)}>
+            </div>
+            <div className="shrink-0 px-3 py-3 border-t border-accent/20 bg-[#0e1420]" onClick={() => setMenuOpen(false)}>
               <PhoneButton size="sm" className="w-full justify-center rounded-xl" />
             </div>
           </div>
