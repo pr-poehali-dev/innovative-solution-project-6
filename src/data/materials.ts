@@ -11,6 +11,14 @@ export type Material = {
 
 export const MATERIALS_API = "https://functions.poehali.dev/dc327032-aa41-4632-b107-a026d92ef031";
 
+export const CATEGORY_BANNERS: Record<string, { image: string; title: string; text: string }> = {
+  kirpich: {
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/4cbf56ed-2384-4c84-9dc9-d5c68ee3dc31.jpg",
+    title: "Кирпич силикатный",
+    text: "Полнотелый и пустотелый кирпич для несущих стен, перегородок и облицовки. Доставка манипулятором прямо на объект — разгрузим краном в нужном месте площадки.",
+  },
+};
+
 export const MATERIAL_CATEGORIES = [
   { slug: "kirpich", label: "Кирпич силикатный", icon: "Blocks" },
   { slug: "bloki", label: "Газосиликатные блоки", icon: "Box" },

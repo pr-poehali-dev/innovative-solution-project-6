@@ -7,7 +7,7 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import CallbackModal from "@/components/ui/CallbackModal";
 import LazySection from "@/components/LazySection";
 import DeliveryCalculator from "@/components/materials/DeliveryCalculator";
-import { fetchMaterials, MATERIAL_CATEGORIES, type Material } from "@/data/materials";
+import { fetchMaterials, MATERIAL_CATEGORIES, CATEGORY_BANNERS, type Material } from "@/data/materials";
 
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
@@ -30,6 +30,8 @@ const MaterialsPage = () => {
     const present = new Set(items.map((i) => i.category));
     return MATERIAL_CATEGORIES.filter((c) => present.has(c.slug));
   }, [items]);
+
+  const banner = CATEGORY_BANNERS[activeCat];
 
   const visible = useMemo(
     () => (activeCat === "all" ? items : items.filter((i) => i.category === activeCat)),
@@ -120,6 +122,25 @@ const MaterialsPage = () => {
                     {c.label}
                   </button>
                 ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {banner && (
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-8">
+            <div className="relative rounded-2xl overflow-hidden border border-accent/25 min-h-[240px] sm:min-h-[340px] flex items-end">
+              <img
+                src={banner.image}
+                alt={banner.title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/55 to-black/20" />
+              <div className="relative p-5 sm:p-8 max-w-2xl">
+                <h2 className="text-2xl sm:text-4xl font-black text-white mb-2 sm:mb-3 leading-tight">
+                  {banner.title}
+                </h2>
+                <p className="text-sm sm:text-base text-white/85 leading-relaxed">{banner.text}</p>
               </div>
             </div>
           </section>
