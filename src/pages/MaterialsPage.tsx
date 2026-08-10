@@ -93,32 +93,34 @@ const MaterialsPage = () => {
         </section>
 
         {usedCategories.length > 0 && (
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-6">
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => setActiveCat("all")}
-                className={`px-4 py-2 rounded-full text-sm font-bold transition-all border ${
-                  activeCat === "all"
-                    ? "bg-accent text-black border-accent"
-                    : "bg-card/40 text-white border-accent/20 hover:border-accent/60"
-                }`}
-              >
-                Все товары
-              </button>
-              {usedCategories.map((c) => (
+          <section className="sticky top-[68px] z-40 bg-[#0e1420] border-y border-accent/15 sm:border-0 sm:bg-transparent sm:static mb-6">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-0">
+              <div className="flex gap-2 overflow-x-auto sm:flex-wrap sm:overflow-visible scrollbar-none -mx-1 px-1 snap-x">
                 <button
-                  key={c.slug}
-                  onClick={() => setActiveCat(c.slug)}
-                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold transition-all border ${
-                    activeCat === c.slug
+                  onClick={() => setActiveCat("all")}
+                  className={`shrink-0 snap-start px-4 py-2 rounded-full text-sm font-bold transition-all border whitespace-nowrap ${
+                    activeCat === "all"
                       ? "bg-accent text-black border-accent"
                       : "bg-card/40 text-white border-accent/20 hover:border-accent/60"
                   }`}
                 >
-                  <Icon name={c.icon} size={14} />
-                  {c.label}
+                  Все товары
                 </button>
-              ))}
+                {usedCategories.map((c) => (
+                  <button
+                    key={c.slug}
+                    onClick={() => setActiveCat(c.slug)}
+                    className={`shrink-0 snap-start inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold transition-all border whitespace-nowrap ${
+                      activeCat === c.slug
+                        ? "bg-accent text-black border-accent"
+                        : "bg-card/40 text-white border-accent/20 hover:border-accent/60"
+                    }`}
+                  >
+                    <Icon name={c.icon} size={14} />
+                    {c.label}
+                  </button>
+                ))}
+              </div>
             </div>
           </section>
         )}

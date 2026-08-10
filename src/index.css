@@ -593,3 +593,12 @@ body.modal-open .floating-mobile-notif {
     opacity: 0.6;
   }
 }
+
+/* Горизонтальные ленты фильтров — без видимой полосы прокрутки */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
