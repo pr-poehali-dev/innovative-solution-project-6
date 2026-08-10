@@ -80,7 +80,7 @@ export const trucks: Truck[] = [
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/cb1469ab-3878-4eea-9eac-9ce6f4129301.webp",
     alt: "FAW J6 кран-манипулятор DONGYANG 1966 с буром",
     specs: [
-      { label: "Грузоподъёмность шасси", value: "до 20 т" },
+      { label: "Грузоподъёмность шасси", value: "до 17 т" },
       { label: "Грузоподъёмность стрелы", value: "до 8 т" },
       { label: "Вылет стрелы", value: "до 22 м" },
       { label: "Полная масса", value: "35 100 кг" },

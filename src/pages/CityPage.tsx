@@ -280,7 +280,7 @@ const CityPage = () => {
               { slug: "faw-kmu-dongyoung", name: "FAW + КМУ DongYang", spec: "17 т · стрела 21 м · люлька", price: "от 3000 ₽/час" },
               { slug: "kamaz-65115-hangil", name: "КАМАЗ 65115 + HANGIL", spec: "10 т · надёжный КАМАЗ", price: "от 2800 ₽/час" },
               { slug: "renault-lander-kmu", name: "Renault Lander + КМУ", spec: "15 т · стрела 20 м · бортовой", price: "от 3200 ₽/час" },
-              { slug: "faw-j6-dongyang-1966", name: "FAW J6 + бур и люлька", spec: "20 т · стрела 22 м · бур", price: "от 3500 ₽/час" },
+              { slug: "faw-j6-dongyang-1966", name: "FAW J6 + бур и люлька", spec: "17 т · стрела 22 м · бур", price: "от 3500 ₽/час" },
               { slug: "hyundai-gold-kmu-8t", name: "Hyundai Gold + HIAB", spec: "8 т · длинная стрела 22 м", price: "от 3200 ₽/час" },
               { slug: "isuzu-kmu-5t", name: "ISUZU 5т + КМУ", spec: "5 т · компактный, для города", price: "от 2200 ₽/час" },
             ].map((t) => (
