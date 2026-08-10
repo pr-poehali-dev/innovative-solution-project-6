@@ -1,0 +1,7 @@
+INSERT INTO materials (name, category, price, unit, description, image_url, in_stock, sort_order) VALUES
+('Кирпич силикатный одинарный М-150', 'kirpich', '15 ₽', 'шт', 'Размер 250×120×65 мм. На поддоне 480 шт — от 7 200 ₽. Полнотелый, для несущих стен и перегородок.', 'https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/01f42a42-e61d-48d7-bf2b-9ca42a8be6d2.jpg', true, 1),
+('Кирпич силикатный полуторный М-200', 'kirpich', '19 ₽', 'шт', 'Размер 250×120×88 мм. Повышенная прочность М-200, морозостойкость F35. На поддоне 336 шт — от 6 400 ₽.', 'https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/01f42a42-e61d-48d7-bf2b-9ca42a8be6d2.jpg', true, 2),
+('Кирпич силикатный пустотелый полуторный М-150', 'kirpich', '16 ₽', 'шт', 'Размер 250×120×88 мм. Легче полнотелого, меньше нагрузка на фундамент, лучше теплоизоляция.', 'https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/01f42a42-e61d-48d7-bf2b-9ca42a8be6d2.jpg', true, 3),
+('Кирпич силикатный лицевой полуторный М-150', 'kirpich', '22 ₽', 'шт', 'Размер 250×120×88 мм. Ровная лицевая грань для облицовки фасада без последующей отделки.', 'https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/01f42a42-e61d-48d7-bf2b-9ca42a8be6d2.jpg', true, 4);
+
+UPDATE materials SET sort_order = 0 WHERE id = 1;
