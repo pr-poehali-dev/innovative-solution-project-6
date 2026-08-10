@@ -50,17 +50,7 @@ const OfflineStatusDot = () => {
     );
   }
 
-  return (
-    <div
-      className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-500/10 border border-green-500/30"
-      title="Есть интернет — сайт сохранён и работает офлайн"
-      aria-label="Есть интернет"
-    >
-      <span className="relative flex w-2 h-2">
-        <span className="relative w-2 h-2 rounded-full bg-green-400 shadow-[0_0_6px_rgba(74,222,128,0.8)]" />
-      </span>
-    </div>
-  );
+  return null;
 };
 
 export default OfflineStatusDot;
