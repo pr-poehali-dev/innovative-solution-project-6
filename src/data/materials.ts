@@ -11,11 +11,26 @@ export type Material = {
 
 export const MATERIALS_API = "https://functions.poehali.dev/dc327032-aa41-4632-b107-a026d92ef031";
 
-export const CATEGORY_BANNERS: Record<string, { image: string; title: string; text: string }> = {
+export type CategoryBanner = {
+  image: string;
+  title: string;
+  subtitle: string;
+  text: string;
+  bullets: { icon: string; title: string; text: string }[];
+};
+
+export const CATEGORY_BANNERS: Record<string, CategoryBanner> = {
   kirpich: {
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/4cbf56ed-2384-4c84-9dc9-d5c68ee3dc31.jpg",
     title: "Кирпич силикатный",
-    text: "Полнотелый и пустотелый кирпич для несущих стен, перегородок и облицовки. Доставка манипулятором прямо на объект — разгрузим краном в нужном месте площадки.",
+    subtitle: "Прочные стены, ровная кладка, аккуратный фасад",
+    text: "Полнотелый и пустотелый силикатный кирпич для несущих стен, перегородок и облицовки. Ровная геометрия — кладка идёт быстро, расход раствора меньше. Привезём нужный объём и разгрузим манипулятором точно там, где ведутся работы.",
+    bullets: [
+      { icon: "ShieldCheck", title: "Марка М150–М200", text: "Морозостойкость F35, ГОСТ 379-2015" },
+      { icon: "Truck", title: "Доставка от 1 поддона", text: "Своим транспортом по городу и области" },
+      { icon: "Crane", title: "Разгрузка манипулятором", text: "Ставим поддоны прямо на площадку" },
+      { icon: "FileText", title: "Работаем с юр. лицами", text: "Договор, НДС, ЭДО, безнал" },
+    ],
   },
 };
 

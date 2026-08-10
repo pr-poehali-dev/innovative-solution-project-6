@@ -128,19 +128,58 @@ const MaterialsPage = () => {
         )}
 
         {banner && (
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-8">
-            <div className="relative rounded-2xl overflow-hidden border border-accent/25 min-h-[240px] sm:min-h-[340px] flex items-end">
-              <img
-                src={banner.image}
-                alt={banner.title}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/55 to-black/20" />
-              <div className="relative p-5 sm:p-8 max-w-2xl">
-                <h2 className="text-2xl sm:text-4xl font-black text-white mb-2 sm:mb-3 leading-tight">
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-10">
+            <div className="rounded-2xl overflow-hidden border border-accent/25 bg-card/40 grid lg:grid-cols-2">
+              <div className="relative bg-black">
+                <img
+                  src={banner.image}
+                  alt={banner.title}
+                  className="w-full h-full object-contain lg:object-cover lg:min-h-[420px]"
+                />
+              </div>
+
+              <div className="p-5 sm:p-8 lg:p-10 flex flex-col justify-center">
+                <SectionBadge>Категория</SectionBadge>
+                <h2 className="text-2xl sm:text-4xl font-black text-white mt-4 mb-2 leading-tight">
                   {banner.title}
                 </h2>
-                <p className="text-sm sm:text-base text-white/85 leading-relaxed">{banner.text}</p>
+                <p className="text-accent font-bold text-sm sm:text-base mb-4">{banner.subtitle}</p>
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
+                  {banner.text}
+                </p>
+
+                <div className="grid sm:grid-cols-2 gap-3 mb-6">
+                  {banner.bullets.map((b) => (
+                    <div
+                      key={b.title}
+                      className="flex items-start gap-3 p-3 rounded-xl bg-background/50 border border-accent/15"
+                    >
+                      <span className="w-9 h-9 rounded-lg bg-accent/15 flex items-center justify-center shrink-0">
+                        <Icon name={b.icon} fallback="Check" size={17} className="text-accent" />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block text-sm font-bold text-white leading-tight">
+                          {b.title}
+                        </span>
+                        <span className="block text-xs text-muted-foreground mt-0.5 leading-snug">
+                          {b.text}
+                        </span>
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <PhoneButton size="md" className="rounded-xl justify-center" />
+                  <button
+                    type="button"
+                    onClick={() => setCallbackOpen(true)}
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all text-sm font-bold text-white"
+                  >
+                    <Icon name="Calculator" size={15} className="text-accent" />
+                    Рассчитать стоимость
+                  </button>
+                </div>
               </div>
             </div>
           </section>
