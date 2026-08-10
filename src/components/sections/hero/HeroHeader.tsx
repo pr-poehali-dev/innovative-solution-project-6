@@ -13,6 +13,7 @@ const HeroHeader = () => {
   const [matOpen, setMatOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const matRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -86,7 +87,7 @@ const HeroHeader = () => {
         {/* Мобильное меню */}
         {menuOpen && (
           <div className="xl:hidden w-full border-t border-accent/10 bg-[#0e1420] flex flex-col max-h-[calc(100dvh-4.5rem)]">
-            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-3 py-4 flex flex-col gap-1">
+            <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-3 py-4 flex flex-col gap-1">
             {navLinks.map(link => {
               if (link.href === "/stroymaterialy") {
                 return (
@@ -94,8 +95,15 @@ const HeroHeader = () => {
                     <button
                       type="button"
                       onClick={() => {
-                        setMatOpen(prev => !prev);
-                        setTimeout(() => matRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+                        const next = !matOpen;
+                        setMatOpen(next);
+                        if (next) {
+                          requestAnimationFrame(() => {
+                            const box = scrollRef.current;
+                            const item = matRef.current;
+                            if (box && item) box.scrollTop = item.offsetTop - box.offsetTop;
+                          });
+                        }
                       }}
                       className="w-full py-3 px-4 flex items-center gap-2 text-sm font-bold text-white"
                     >
