@@ -35,6 +35,7 @@ const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const AsfaltirovaniePage = lazy(() => import("./pages/AsfaltirovaniePage"));
 const AdLanding = lazy(() => import("./pages/AdLanding"));
 const MaterialsPage = lazy(() => import("./pages/MaterialsPage"));
+const MaterialCategoryPage = lazy(() => import("./pages/MaterialCategoryPage"));
 const AdminMaterials = lazy(() => import("./pages/AdminMaterials"));
 
 const queryClient = new QueryClient();
@@ -152,6 +153,7 @@ const App = () => (
             <Route path="/review-card" element={<ReviewCard />} />
             <Route path="/banner" element={<AdBanner />} />
             <Route path="/stroymaterialy" element={<MaterialsPage />} />
+            <Route path="/stroymaterialy/:slug" element={<MaterialCategoryPage />} />
             <Route path="/admin/materialy" element={<AdminMaterials />} />
             <Route path="/admin/reindex" element={<AdminReindex />} />
             <Route path="/seo" element={<SeoDashboard />} />

@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
+import { MATERIAL_SEO_PAGES } from "@/data/materialsSeo";
+import { MATERIAL_CATEGORIES } from "@/data/materials";
 
 const groups = [
   {
@@ -13,7 +16,7 @@ const groups = [
       "керамический кирпич поддон доставка",
       "кирпич с доставкой и разгрузкой",
     ],
-    cat: "kirpich",
+    cat: "/stroymaterialy/kirpich",
   },
   {
     icon: "Box",
@@ -26,7 +29,7 @@ const groups = [
       "керамзитобетонные блоки доставка",
       "пеноблок купить с разгрузкой",
     ],
-    cat: "bloki",
+    cat: "/stroymaterialy/bloki",
   },
   {
     icon: "Truck",
@@ -39,7 +42,7 @@ const groups = [
       "манипулятор 5 тонн аренда",
       "вызвать манипулятор сегодня",
     ],
-    cat: null,
+    cat: "/arenda-manipulyatora-nizhny-novgorod",
   },
   {
     icon: "Layers",
@@ -52,7 +55,7 @@ const groups = [
       "цемент мешками доставка",
       "пиломатериалы доска брус доставка",
     ],
-    cat: "plity",
+    cat: "/stroymaterialy/plity",
   },
 ];
 
@@ -78,22 +81,43 @@ const MaterialsSeoBlock = () => (
             <span className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center shrink-0">
               <Icon name={g.icon} size={20} className="text-accent" />
             </span>
-            <h3 className="text-base sm:text-lg font-black text-white leading-tight">{g.title}</h3>
+              <Link to={g.cat} className="text-base sm:text-lg font-black text-white leading-tight hover:text-accent transition-colors">
+              {g.title}
+            </Link>
           </div>
           <p className="text-sm text-muted-foreground mb-4">{g.text}</p>
           <div className="flex flex-wrap gap-2">
             {g.queries.map((q) => (
-              <a
+              <Link
                 key={q}
-                href={g.cat ? `/stroymaterialy?cat=${g.cat}` : "/"}
+                to={g.cat}
                 className="text-xs px-3 py-1.5 rounded-full border border-accent/20 bg-background/40 text-muted-foreground hover:text-accent hover:border-accent/60 transition-colors"
               >
                 {q}
-              </a>
+              </Link>
             ))}
           </div>
         </article>
       ))}
+    </div>
+
+    <div className="mt-8">
+      <p className="text-white font-black mb-3">Разделы каталога с доставкой:</p>
+      <div className="flex flex-wrap gap-2">
+        {MATERIAL_SEO_PAGES.map((p) => {
+          const c = MATERIAL_CATEGORIES.find((x) => x.slug === p.cat);
+          return (
+            <Link
+              key={p.slug}
+              to={`/stroymaterialy/${p.slug}`}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/20 bg-card/40 text-sm font-semibold text-white hover:border-accent/60 hover:text-accent transition-colors"
+            >
+              <Icon name={c?.icon || "Package"} size={14} className="text-accent" />
+              {c?.label || p.slug}
+            </Link>
+          );
+        })}
+      </div>
     </div>
 
     <div className="mt-8 rounded-2xl border border-accent/20 bg-accent/5 p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
