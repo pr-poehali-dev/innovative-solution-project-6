@@ -8,6 +8,7 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import CallbackModal from "@/components/ui/CallbackModal";
 import LazySection from "@/components/LazySection";
 import DeliveryCalculator from "@/components/materials/DeliveryCalculator";
+import MaterialsSeoBlock from "@/components/materials/MaterialsSeoBlock";
 import { fetchMaterials, MATERIAL_CATEGORIES, CATEGORY_BANNERS, type Material } from "@/data/materials";
 
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
@@ -42,12 +43,46 @@ const MaterialsPage = () => {
   const title = "Строительные материалы Нижний Новгород т.283-75-00 — кирпич, блоки, бордюр, бытовки | Фаворит";
   const description =
     "Продажа стройматериалов в Нижнем Новгороде: силикатный кирпич, газосиликатные блоки, плиты, цемент, пиломатериалы, бордюр, бытовки и контейнеры. Доставка манипулятором. ☎ т.283-75-00";
+  const keywords = [
+    "купить кирпич с доставкой манипулятором Нижний Новгород",
+    "купить кирпич Нижний Новгород",
+    "силикатный кирпич с доставкой",
+    "керамический кирпич купить с доставкой",
+    "кирпич поддон доставка манипулятором",
+    "купить газосиликатные блоки Нижний Новгород",
+    "газоблок с доставкой",
+    "керамзитобетонные блоки купить",
+    "пеноблок с доставкой Нижний Новгород",
+    "блоки для стен цена с доставкой",
+    "плиты перекрытия купить с доставкой",
+    "перемычки железобетонные Нижний Новгород",
+    "цемент купить с доставкой Нижний Новгород",
+    "пиломатериалы доска брус доставка",
+    "бордюрный камень купить Нижний Новгород",
+    "тротуарный бордюр с доставкой",
+    "бордюр дорожный купить",
+    "бытовки и контейнеры Нижний Новгород",
+    "стройматериалы с доставкой Нижний Новгород",
+    "купить стройматериалы с доставкой на объект",
+    "доставка стройматериалов манипулятором",
+    "аренда манипулятора Нижний Новгород т.283-75-00",
+    "услуги манипулятора Нижний Новгород т.283-75-00",
+    "аренда манипулятора Нижний Новгород",
+    "услуги манипулятора с оператором",
+    "заказать манипулятор Нижний Новгород",
+    "вызвать манипулятор",
+    "кран-манипулятор аренда",
+    "доставка материалов Бор Дзержинск Кстово Арзамас",
+    "стройматериалы Нижегородская область доставка",
+  ].join(", ");
+
   const pageUrl = "https://фаварит.рф/stroymaterialy";
 
   return (
     <div className="min-h-screen bg-background page-enter">
       <title>{title}</title>
       <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
@@ -264,6 +299,8 @@ const MaterialsPage = () => {
         </section>
 
         <DeliveryCalculator />
+
+        <MaterialsSeoBlock />
 
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-14 text-center">
           <h2 className="text-2xl sm:text-3xl font-black text-white mb-3">Нужны материалы с доставкой?</h2>
