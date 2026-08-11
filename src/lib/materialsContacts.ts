@@ -1,2 +1,2 @@
-export const MATERIALS_PHONE = "+78312837500";
-export const MATERIALS_PHONE_LABEL = "8 (831) 283-75-00";
+export const MATERIALS_PHONE = "2837500";
+export const MATERIALS_PHONE_LABEL = "283-75-00";
