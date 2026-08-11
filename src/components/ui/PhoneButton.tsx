@@ -22,9 +22,17 @@ interface PhoneButtonProps {
   className?: string;
   size?: "sm" | "md" | "lg";
   iconOnly?: boolean;
+  phone?: string;
+  label?: string;
 }
 
-const PhoneButton = ({ className = "", size = "md", iconOnly = false }: PhoneButtonProps) => {
+const PhoneButton = ({
+  className = "",
+  size = "md",
+  iconOnly = false,
+  phone = "+79601883084",
+  label = "+7 960 188-30-84",
+}: PhoneButtonProps) => {
   const sizeClasses = {
     sm: "px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm gap-1.5 sm:gap-2 whitespace-nowrap",
     md: "px-5 py-2.5 text-sm gap-2 whitespace-nowrap",
@@ -34,11 +42,11 @@ const PhoneButton = ({ className = "", size = "md", iconOnly = false }: PhoneBut
   if (iconOnly) {
     return (
       <a
-        href="tel:+79601883084"
+        href={`tel:${phone}`}
         onClick={() => reachGoal("phone_click")}
         className={`inline-flex w-10 h-10 items-center justify-center border-2 rounded-full font-black active:scale-95 transition-transform ${className}`}
         style={goldStyle}
-        aria-label="Позвонить +7 960 188-30-84"
+        aria-label={`Позвонить ${label}`}
       >
         <Icon name="Phone" size={18} />
       </a>
@@ -47,13 +55,13 @@ const PhoneButton = ({ className = "", size = "md", iconOnly = false }: PhoneBut
 
   return (
     <a
-      href="tel:+79601883084"
+      href={`tel:${phone}`}
       onClick={() => reachGoal("phone_click")}
       className={`inline-flex items-center justify-center border rounded-full font-bold ${sizeClasses[size]} ${className}`}
       style={goldStyleOutline}
     >
       <Icon name="Phone" size={16} />
-      +7 960 188-30-84
+      {label}
     </a>
   );
 };

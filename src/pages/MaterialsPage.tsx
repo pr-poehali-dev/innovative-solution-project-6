@@ -2,6 +2,7 @@ import { lazy, useEffect, useMemo, useState } from "react";
 import Icon from "@/components/ui/icon";
 import SectionBadge from "@/components/ui/SectionBadge";
 import PhoneButton from "@/components/ui/PhoneButton";
+import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
 import BrandLogo from "@/components/ui/BrandLogo";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import CallbackModal from "@/components/ui/CallbackModal";
@@ -40,7 +41,7 @@ const MaterialsPage = () => {
 
   const title = "Стройматериалы в Нижнем Новгороде — кирпич, блоки, бытовки | Фаворит";
   const description =
-    "Продажа стройматериалов в Нижнем Новгороде: силикатный кирпич, газосиликатные блоки, плиты, цемент, пиломатериалы, бордюр, бытовки и контейнеры. Доставка манипулятором. ☎ +7 960 188-30-84";
+    "Продажа стройматериалов в Нижнем Новгороде: силикатный кирпич, газосиликатные блоки, плиты, цемент, пиломатериалы, бордюр, бытовки и контейнеры. Доставка манипулятором. ☎ 8 (831) 283-75-00";
   const pageUrl = "https://фаварит.рф/stroymaterialy";
 
   return (
@@ -66,7 +67,7 @@ const MaterialsPage = () => {
               <Icon name="MessageCircle" size={14} className="text-accent" />
               Перезвоните мне
             </button>
-            <PhoneButton size="sm" className="rounded-xl" />
+            <PhoneButton size="sm" className="rounded-xl" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
           </div>
         </div>
       </header>
@@ -171,7 +172,7 @@ const MaterialsPage = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <PhoneButton size="md" className="rounded-xl justify-center" />
+                  <PhoneButton size="md" className="rounded-xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
                   <button
                     type="button"
                     onClick={() => setCallbackOpen(true)}
@@ -200,7 +201,7 @@ const MaterialsPage = () => {
               <p className="text-muted-foreground text-sm mb-6">
                 Позвоните — подберём материалы и назовём актуальные цены.
               </p>
-              <PhoneButton size="md" className="rounded-xl" />
+              <PhoneButton size="md" className="rounded-xl" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
             </div>
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -247,7 +248,7 @@ const MaterialsPage = () => {
                           {m.unit && <p className="text-xs text-muted-foreground mt-1">за {m.unit}</p>}
                         </div>
                         <a
-                          href="tel:+79601883084"
+                          href={`tel:${MATERIALS_PHONE}`}
                           className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-black font-bold text-sm hover:shadow-lg hover:shadow-accent/30 transition-all whitespace-nowrap"
                         >
                           <Icon name="Phone" size={14} />
@@ -269,7 +270,7 @@ const MaterialsPage = () => {
           <p className="text-muted-foreground mb-6">
             Привезём на объект своим манипулятором — разгрузим точно в месте укладки.
           </p>
-          <PhoneButton size="lg" className="rounded-2xl" />
+          <PhoneButton size="lg" className="rounded-2xl" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
         </section>
       </main>
 

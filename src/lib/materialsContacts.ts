@@ -1,0 +1,2 @@
+export const MATERIALS_PHONE = "+78312837500";
+export const MATERIALS_PHONE_LABEL = "8 (831) 283-75-00";

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import Icon from "@/components/ui/icon";
+import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
 import { trucks, cities } from "@/components/sections/calculator/data";
 
 const MIN_HOURS = 4;
@@ -319,11 +320,11 @@ const DeliveryCalculator = () => {
               Отправить расчёт в WhatsApp
             </a>
             <a
-              href="tel:+79601883084"
+              href={`tel:${MATERIALS_PHONE}`}
               className="mt-2.5 inline-flex items-center justify-center gap-2 h-12 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-black font-black text-sm hover:shadow-lg hover:shadow-accent/30 transition-all"
             >
               <Icon name="Phone" size={16} />
-              Позвонить: +7 960 188-30-84
+              Позвонить: {MATERIALS_PHONE_LABEL}
             </a>
             <p className="text-[11px] text-muted-foreground text-center mt-2.5">
               Расчёт предварительный — точную цену назовём по телефону
