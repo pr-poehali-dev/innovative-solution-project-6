@@ -9,12 +9,19 @@ export type MaterialSeoPage = {
   advantages: { icon: string; title: string; text: string }[];
   faq: { q: string; a: string }[];
   seoText: string[];
+  heroImage?: string;
+  heroAlt?: string;
+  heroCaption?: string;
 };
 
 export const MATERIAL_SEO_PAGES: MaterialSeoPage[] = [
   {
     slug: "kirpich",
     cat: "kirpich",
+    heroImage:
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/7f14e6f1-3e52-47b6-8367-ea9bd8635456.jpg",
+    heroAlt: "Силикатный облицовочный лицевой утолщённый кирпич разных цветов",
+    heroCaption: "Силикатный облицовочный кирпич — белый, жёлтый, персиковый, красный, коричневый",
     h1: "Купить кирпич с доставкой манипулятором в Нижнем Новгороде",
     title: "Купить кирпич с доставкой в Нижнем Новгороде т.283-75-00 — силикатный кирпич поддонами | Фаворит",
     description:

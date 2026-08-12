@@ -96,6 +96,22 @@ const MaterialCategoryPage = () => {
             </span>
           </h1>
           <p className="text-muted-foreground max-w-3xl text-sm sm:text-base mb-6">{page.intro}</p>
+
+          {page.heroImage && (
+            <figure className="mb-6 rounded-2xl overflow-hidden border border-accent/25 bg-card/40">
+              <img
+                src={page.heroImage}
+                alt={page.heroAlt || page.h1}
+                className="w-full h-auto object-cover"
+              />
+              {page.heroCaption && (
+                <figcaption className="px-4 py-3 text-xs sm:text-sm text-muted-foreground border-t border-accent/10">
+                  {page.heroCaption}
+                </figcaption>
+              )}
+            </figure>
+          )}
+
           <div className="flex flex-col sm:flex-row gap-3">
             <PhoneButton size="md" className="rounded-xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
             <button
@@ -181,6 +197,50 @@ const MaterialCategoryPage = () => {
               ))}
             </div>
           )}
+        </section>
+
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+          <h2 className="text-2xl sm:text-3xl font-black text-white mb-3">
+            Как проходит доставка манипулятором
+          </h2>
+          <p className="text-muted-foreground text-sm sm:text-base max-w-3xl mb-7">
+            Материал и техника у нас свои, поэтому доставка идёт одной машиной: манипулятор сам
+            грузит поддоны на складе и сам снимает их краном на вашем объекте. Отдельный кран,
+            грузчики и вторая машина не нужны.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {[
+              { icon: "PhoneCall", step: "1", title: "Заявка по телефону", text: "Назовите объём и адрес — посчитаем цену вместе с доставкой за 5 минут" },
+              { icon: "Package", step: "2", title: "Загрузка на складе", text: "Манипулятор берёт поддоны собственным краном, без сторонней техники" },
+              { icon: "Truck", step: "3", title: "Подача на объект", text: "По Нижнему Новгороду — от 60 минут, работаем 24/7 без выходных" },
+              { icon: "Crane", step: "4", title: "Разгрузка краном", text: "Стрела подаёт груз до 23 м — ставим поддоны прямо в зону работ или на этаж" },
+            ].map((s) => (
+              <div key={s.step} className="rounded-2xl border border-accent/15 bg-card/40 p-5 relative">
+                <span className="absolute top-4 right-4 text-3xl font-black text-accent/15">{s.step}</span>
+                <Icon name={s.icon} size={22} className="text-accent mb-3" />
+                <p className="text-white font-bold mb-1 text-sm">{s.title}</p>
+                <p className="text-xs text-muted-foreground">{s.text}</p>
+              </div>
+            ))}
+          </div>
+          <div className="rounded-2xl border border-accent/20 bg-accent/5 p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+            <div>
+              <p className="text-white font-black text-lg mb-1">
+                Доставка манипулятором по городу и области
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Нижний Новгород, Бор, Дзержинск, Кстово, Арзамас. Техника в Ростехнадзоре,
+                операторы с допусками. Договор, НДС, ЭДО.
+              </p>
+            </div>
+            <a
+              href={`tel:${MATERIALS_PHONE}`}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-black font-black whitespace-nowrap"
+            >
+              <Icon name="Phone" size={18} />
+              {MATERIALS_PHONE_LABEL}
+            </a>
+          </div>
         </section>
 
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
