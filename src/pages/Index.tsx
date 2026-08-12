@@ -75,6 +75,21 @@ const Index = () => {
         imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/e24297e7-89a1-4e23-ab8c-8a9684e4b369.jpg"
       />
 
+      {/* === Баннер — КИРПИЧ с доставкой === */}
+      <IndustrialBanner
+        eyebrow="СТРОЙМАТЕРИАЛЫ"
+        titleStart="КИРПИЧ С"
+        titleAccent="ДОСТАВКОЙ"
+        subtitle="Силикатный и облицовочный кирпич — привезём и разгрузим манипулятором"
+        icon="Blocks"
+        size="md"
+        href="/stroymaterialy/kirpich"
+        clean
+        caption="Силикатный облицовочный кирпич — белый, жёлтый, персиковый, красный и коричневый"
+        alt="Силикатный облицовочный лицевой утолщённый кирпич разных цветов"
+        imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/7f14e6f1-3e52-47b6-8367-ea9bd8635456.jpg"
+      />
+
       {/* Применение — следы протекторов (грузовая техника) */}
       <SectionBackdrop tone="warm" pattern="tracks">
         <LazySection><UseCasesSection /></LazySection>
