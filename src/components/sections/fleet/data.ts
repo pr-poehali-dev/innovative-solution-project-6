@@ -23,9 +23,10 @@ export const trucks: Truck[] = [
     slug: "faw-kmu-dongyoung",
     price: "3 000 ₽/час с НДС",
     count: 2,
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/f9494f00-8cb8-484a-91e2-d0ae5c2997aa.jpg",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/13a6c3ef-3d8b-4483-8329-cea58d1bfa39.jpg",
     alt: "FAW КМУ DongYang",
     images: [
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/13a6c3ef-3d8b-4483-8329-cea58d1bfa39.jpg",
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/f9494f00-8cb8-484a-91e2-d0ae5c2997aa.jpg",
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/4318b2a2-0422-4c73-b7d5-59f8c69483b6.webp",
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/df8d23ad-2b19-4a5c-bfef-8403f404cab9.webp",
