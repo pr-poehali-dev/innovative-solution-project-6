@@ -3,6 +3,18 @@ import Icon from "@/components/ui/icon";
 
 const items = [
   {
+    slug: "faw-kmu-dongyoung",
+    title: "FAW + КМУ DongYang",
+    badge: "Флагман парка",
+    badgeIcon: "Crown",
+    badgeColor: "from-amber-400 to-orange-500",
+    price: "от 3 000 ₽/час",
+    image:
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/4318b2a2-0422-4c73-b7d5-59f8c69483b6.webp",
+    alt: "FAW с краном-манипулятором DongYang 8 тонн",
+    specs: ["Кузов до 17 т, стрела до 8 т", "Вылет стрелы до 21 м", "Монтажная люлька на 2 человек"],
+  },
+  {
     slug: "jcb-3cx",
     title: "Экскаватор-погрузчик JCB 3CX",
     badge: "Новинка",
@@ -56,7 +68,7 @@ const PopularTechSection = () => {
               Популярная техника
             </h2>
             <p className="text-sm sm:text-base text-white/60 mt-2 max-w-2xl">
-              Три машины, которые клиенты Нижнего Новгорода берут в аренду чаще всего.
+              Машины, которые клиенты Нижнего Новгорода берут в аренду чаще всего.
               Подача за 30–60 минут.
             </p>
           </div>
@@ -69,7 +81,7 @@ const PopularTechSection = () => {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {items.map((it) => (
             <Link
               key={it.slug}
