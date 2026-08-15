@@ -5,8 +5,8 @@ const items = [
   {
     slug: "faw-kmu-dongyoung",
     title: "FAW + КМУ DongYang",
-    badge: "Флагман парка",
-    badgeIcon: "Crown",
+    badge: "Длинная стрела",
+    badgeIcon: "MoveUpRight",
     badgeColor: "from-amber-400 to-orange-500",
     price: "от 3 000 ₽/час",
     image:
@@ -41,8 +41,8 @@ const items = [
   {
     slug: "hyundai-gold-kmu-8t",
     title: "Hyundai Gold + КМУ HIAB 190TM",
-    badge: "Длинная стрела",
-    badgeIcon: "MoveUpRight",
+    badge: "Вылет 22 м",
+    badgeIcon: "Ruler",
     badgeColor: "from-sky-500 to-blue-600",
     price: "от 3 200 ₽/час",
     image:
