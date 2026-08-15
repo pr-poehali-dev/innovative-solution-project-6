@@ -10,8 +10,8 @@ const items = [
     badgeColor: "from-amber-400 to-orange-500",
     price: "от 3 000 ₽/час",
     image:
-      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/4318b2a2-0422-4c73-b7d5-59f8c69483b6.webp",
-    alt: "FAW с краном-манипулятором DongYang 8 тонн",
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/f9494f00-8cb8-484a-91e2-d0ae5c2997aa.jpg",
+    alt: "FAW с КМУ DongYang, гружённый газосиликатными блоками",
     specs: ["Кузов до 17 т, стрела до 8 т", "Вылет стрелы до 21 м", "Монтажная люлька на 2 человек"],
   },
   {
