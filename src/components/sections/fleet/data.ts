@@ -23,14 +23,14 @@ export const trucks: Truck[] = [
     slug: "faw-kmu-dongyoung",
     price: "3 000 ₽/час с НДС",
     count: 2,
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/4318b2a2-0422-4c73-b7d5-59f8c69483b6.webp",
+    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/f9494f00-8cb8-484a-91e2-d0ae5c2997aa.jpg",
     alt: "FAW КМУ DongYang",
     images: [
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/f9494f00-8cb8-484a-91e2-d0ae5c2997aa.jpg",
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/4318b2a2-0422-4c73-b7d5-59f8c69483b6.webp",
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/df8d23ad-2b19-4a5c-bfef-8403f404cab9.webp",
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/68956c17-3076-4d54-97a0-cd4b06bfa7ff.jpg",
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/7425c2f4-98e8-4ea4-9811-46deed091f65.jpg",
-      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/f9494f00-8cb8-484a-91e2-d0ae5c2997aa.jpg",
     ],
     specs: [
       { label: "Грузоподъёмность кузова", value: "до 17 т" },
