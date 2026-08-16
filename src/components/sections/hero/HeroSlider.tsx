@@ -105,7 +105,7 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
                   className={`absolute inset-0 w-full h-full transition-all duration-700 ${isActive ? "opacity-100 scale-100" : "opacity-0 scale-105"}`}
                 >
                   <img
-                    src={fullSrc}
+                    src={slide.mobileSrc || fullSrc}
                     sizes="(max-width: 1024px) 100vw, 0px"
                     alt={slide.alt}
                     className="w-full h-full object-cover object-center"

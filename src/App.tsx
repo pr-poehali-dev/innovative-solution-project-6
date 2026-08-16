@@ -55,9 +55,13 @@ const App = () => (
       </Suspense>
       <div className="fixed inset-0 -z-10 bg-background">
         <div className="absolute inset-0 bg-grid opacity-100" />
-        <div className="hidden lg:block absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-accent/8 blur-[120px]" />
-        <div className="hidden lg:block absolute top-1/3 -right-40 w-[500px] h-[500px] rounded-full bg-accent/6 blur-[100px]" />
-        <div className="hidden lg:block absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-orange-500/5 blur-[100px]" />
+        <div
+          className="hidden lg:block absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(600px circle at 8% 6%, rgba(232,168,32,0.08), transparent 60%), radial-gradient(500px circle at 96% 38%, rgba(232,168,32,0.06), transparent 60%), radial-gradient(400px circle at 30% 96%, rgba(249,115,22,0.05), transparent 60%)",
+          }}
+        />
       </div>
       <BrowserRouter>
         <Suspense fallback={null}>

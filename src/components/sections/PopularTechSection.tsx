@@ -10,7 +10,7 @@ const items = [
     badgeColor: "from-amber-400 to-orange-500",
     price: "от 3 000 ₽/час",
     image:
-      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/f9494f00-8cb8-484a-91e2-d0ae5c2997aa.jpg",
+      "/img/faw-gazoblok-1600.webp",
     alt: "FAW с КМУ DongYang, гружённый газосиликатными блоками",
     specs: [
       "Доставка газоблоков и кирпича",

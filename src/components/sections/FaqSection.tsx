@@ -97,10 +97,12 @@ const FaqSection = () => {
       <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
 
       {/* Декоративные световые пятна */}
-      <div className="hidden lg:block absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-accent/10 blur-[120px] pointer-events-none animate-pulse" />
       <div
-        className="hidden lg:block absolute top-2/3 -right-32 w-96 h-96 rounded-full bg-amber-500/10 blur-[120px] pointer-events-none animate-pulse"
-        style={{ animationDelay: "1.5s" }}
+        className="hidden lg:block absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(400px circle at -4% 25%, rgba(232,168,32,0.1), transparent 65%), radial-gradient(400px circle at 104% 68%, rgba(245,158,11,0.1), transparent 65%)",
+        }}
       />
 
       <div className="relative max-w-4xl mx-auto">

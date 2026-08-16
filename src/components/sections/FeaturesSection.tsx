@@ -54,13 +54,12 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
   return (
     <section id="features" className="relative py-12 sm:py-24 px-4 sm:px-6 bg-accent/5 overflow-hidden">
       {/* Декоративные световые пятна по бокам */}
-      <div className="hidden lg:block absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-accent/10 blur-[120px] pointer-events-none animate-pulse" />
       <div
-        className="hidden lg:block absolute top-2/3 -right-32 w-96 h-96 rounded-full bg-amber-500/10 blur-[120px] pointer-events-none animate-pulse"
-        style={{ animationDelay: "1.5s" }}
-      />
-      <div
-        className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-blue-500/[0.04] blur-[140px] pointer-events-none"
+        className="hidden lg:block absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(400px circle at -4% 25%, rgba(232,168,32,0.1), transparent 65%), radial-gradient(400px circle at 104% 68%, rgba(245,158,11,0.1), transparent 65%), radial-gradient(600px circle at 50% 50%, rgba(59,130,246,0.04), transparent 70%)",
+        }}
       />
 
       {/* Тонкая центральная вертикальная линия между колонками */}

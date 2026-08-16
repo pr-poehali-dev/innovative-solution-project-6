@@ -52,7 +52,7 @@ const Index = () => {
         icon="Truck"
         size="md"
         href="#fleet"
-        imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/ccc96b0f-beb1-49da-af45-2566c3bb7232.jpg"
+        imageUrl="/img/banner-tehnika.webp"
       />
 
       {/* Зона техники — силуэт крана-манипулятора на фоне */}
@@ -72,7 +72,7 @@ const Index = () => {
         subtitle="Подача от 1 часа. Замена техники за 3-5 часов при поломке"
         icon="Warehouse"
         size="sm"
-        imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/e24297e7-89a1-4e23-ab8c-8a9684e4b369.jpg"
+        imageUrl="/img/banner-park.webp"
       />
 
       {/* === Баннер — КИРПИЧ с доставкой === */}
@@ -87,7 +87,7 @@ const Index = () => {
         clean
         caption="Склад силикатного кирпича — белый, жёлтый и розовый, отгрузка поддонами"
         alt="Склад силикатного кирпича поддонами — белый, жёлтый и розовый кирпич"
-        imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/42e491fb-0e02-4eca-84ee-ff3bc0dc2ac8.jpg"
+        imageUrl="/img/banner-kirpich.webp"
       />
 
       {/* Применение — следы протекторов (грузовая техника) */}
@@ -103,7 +103,7 @@ const Index = () => {
         subtitle="Дороги, дворы, парковки — под ключ с гарантией"
         icon="Construction"
         size="md"
-        imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/cafa74e6-93ab-4a2b-b259-a05618d0fccf.jpg"
+        imageUrl="/img/banner-asfalt.webp"
       />
 
       {/* Всё про асфальт в одном месте: промо + большой баннер с калькулятором + SEO-текст */}
@@ -127,7 +127,7 @@ const Index = () => {
         subtitle="5000+ выполненных заказов за 10 лет — фотоотчёты с объектов"
         icon="Camera"
         size="md"
-        imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/0f2af5ce-948d-4baa-addf-0e2ccc621107.jpg"
+        imageUrl="/img/banner-raboty.webp"
       />
 
       {/* Галерея + клиенты — контейнеры со стропами (груз / работа) */}
@@ -145,7 +145,7 @@ const Index = () => {
         subtitle="Что говорят компании и частные заказчики о нашей работе"
         icon="Star"
         size="sm"
-        imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/7f2d1534-6094-47fd-b346-1df7c8a42695.jpg"
+        imageUrl="/img/banner-otzyvy.webp"
       />
 
       {/* Отзывы — заклёпки на металле (надёжно) */}
@@ -168,7 +168,7 @@ const Index = () => {
         subtitle="Условия, цены, документы, география работы"
         icon="HelpCircle"
         size="sm"
-        imageUrl="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/7b50cb06-2a30-4f2e-ba24-63f54989c96d.jpg"
+        imageUrl="/img/banner-faq.webp"
       />
 
       {/* FAQ — знаки стройки + жёлтая лента (внимание) */}

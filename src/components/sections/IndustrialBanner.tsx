@@ -30,7 +30,7 @@ interface IndustrialBannerProps {
 }
 
 const DEFAULT_IMAGE =
-  "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/ccc96b0f-beb1-49da-af45-2566c3bb7232.jpg";
+  "/img/banner-tehnika.webp";
 
 const IndustrialBanner = ({
   eyebrow = "СОБСТВЕННЫЙ ПАРК",
@@ -132,6 +132,9 @@ const IndustrialBanner = ({
               alt={alt || `${titleStart} ${titleAccent}`}
               loading="lazy"
               decoding="async"
+              width="1024"
+              height="1024"
+              sizes="(max-width: 768px) 100vw, 1024px"
               className={`relative w-full ${cleanHeights[size]} object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105`}
             />
 
@@ -190,6 +193,9 @@ const IndustrialBanner = ({
         src={imageUrl}
         alt=""
         loading="lazy"
+        decoding="async"
+        width="1024"
+        height="1024"
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-[2000ms] ease-out"
       />
