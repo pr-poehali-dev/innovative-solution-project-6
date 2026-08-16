@@ -5,6 +5,8 @@ Disallow: /admin/
 Disallow: /banner
 Disallow: /karta/
 Disallow: /review-card
+Disallow: /seo
+Disallow: /sitemap-source
 
 User-agent: Googlebot
 Allow: /
@@ -13,6 +15,8 @@ Disallow: /admin/
 Disallow: /banner
 Disallow: /karta/
 Disallow: /review-card
+Disallow: /seo
+Disallow: /sitemap-source
 
 User-agent: Yandex
 Allow: /
@@ -21,6 +25,8 @@ Disallow: /admin/
 Disallow: /banner
 Disallow: /karta/
 Disallow: /review-card
+Disallow: /seo
+Disallow: /sitemap-source
 Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&yclid&gclid&fbclid
 
 User-agent: Bingbot
@@ -30,6 +36,8 @@ Disallow: /admin/
 Disallow: /banner
 Disallow: /karta/
 Disallow: /review-card
+Disallow: /seo
+Disallow: /sitemap-source
 
 User-agent: Twitterbot
 Allow: /

@@ -31,6 +31,7 @@ const ReviewCard = lazy(() => import("./pages/ReviewCard"));
 const AdBanner = lazy(() => import("./pages/AdBanner"));
 const AdminReindex = lazy(() => import("./pages/AdminReindex"));
 const SeoDashboard = lazy(() => import("./pages/SeoDashboard"));
+const SeoReindexPage = lazy(() => import("./pages/SeoReindexPage"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const AsfaltirovaniePage = lazy(() => import("./pages/AsfaltirovaniePage"));
 const AdLanding = lazy(() => import("./pages/AdLanding"));
@@ -161,6 +162,7 @@ const App = () => (
             <Route path="/admin/materialy" element={<AdminMaterials />} />
             <Route path="/admin/reindex" element={<AdminReindex />} />
             <Route path="/seo" element={<SeoDashboard />} />
+            <Route path="/seo/pereobhod" element={<SeoReindexPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/asfaltirovanie" element={<AsfaltirovaniePage />} />
             <Route path="/asfaltirovanie-nizhny-novgorod" element={<AsfaltirovaniePage />} />
