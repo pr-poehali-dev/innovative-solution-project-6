@@ -28,7 +28,7 @@ const PrivacyPage = () => {
             </h1>
             <p className="text-muted-foreground text-sm mb-8">
               Действует с {today} · ООО «Фаворит», ИНН 5250077990
-            </p>
+</p>
 
             <div className="prose prose-invert max-w-none text-sm sm:text-base leading-relaxed space-y-6 text-muted-foreground">
               <section>
@@ -101,7 +101,7 @@ const PrivacyPage = () => {
                   или по телефону{" "}
                   <a href="tel:+79601690990" className="text-accent hover:underline whitespace-nowrap">
                     +7 960 169-09-90
-                  </a>.
+</a>.
                 </p>
               </section>
 

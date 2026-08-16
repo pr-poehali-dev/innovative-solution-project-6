@@ -88,7 +88,7 @@ const MapAndRequisitesSection = ({
               </h3>
               <p className="text-muted-foreground text-xs sm:text-sm">
                 📍 Нижний Новгород, Шуваловский проезд, 7
-              </p>
+</p>
               <p className="text-muted-foreground text-xs">Выезжаем по всему городу и области</p>
             </div>
             <div className="flex flex-col sm:flex-col gap-2 sm:col-span-2 sm:justify-end">
@@ -100,7 +100,7 @@ const MapAndRequisitesSection = ({
                 style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", fontFamily: "'Cinzel', serif", animation: "goldPulse 1.2s ease-in-out infinite" }}
               >
                 📞 +7 960 169-09-90
-              </a>
+</a>
             </div>
           </div>
 

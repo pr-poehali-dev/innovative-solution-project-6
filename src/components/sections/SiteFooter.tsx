@@ -120,7 +120,7 @@ const SiteFooter = () => {
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 sm:gap-3">
             {[
               { href: "/#fleet", icon: "Truck", title: "Парк техники", desc: "15 машин 3–17 т", badge: "ТОП" },
-              { href: "/#pricing", icon: "BadgeRussianRuble", title: "Цены", desc: "От 1500 ₽/час", badge: null },
+              { href: "/#pricing", icon: "BadgeRussianRuble", title: "Цены", desc: "От 1900 ₽/час", badge: null },
               { href: "/#calculator", icon: "Calculator", title: "Калькулятор", desc: "Расчёт за минуту", badge: null },
               { href: "/otzyvy", icon: "Star", title: "Отзывы", desc: "4.9 на Я.Картах", badge: null },
               { href: "/asfaltirovanie", icon: "Hammer", title: "Асфальтирование", desc: "От 450 ₽/м²", badge: null },

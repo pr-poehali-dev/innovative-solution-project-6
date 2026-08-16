@@ -109,7 +109,7 @@ export default function TruckHero({ truck, slug, onOrder }: Omit<TruckHeroProps,
               >
                 <Icon name="Phone" size={20} />
                 Заказать — +7 960 188-30-84
-              </button>
+</button>
             </div>
 
             {/* Характеристики */}

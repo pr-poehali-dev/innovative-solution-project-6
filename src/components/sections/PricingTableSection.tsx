@@ -111,7 +111,7 @@ const PricingTableSection = () => {
               >
                 <Icon name="Phone" size={18} />
                 Узнать цену: +7 960 188-30-84
-              </a>
+</a>
             </div>
           </div>
         </div>

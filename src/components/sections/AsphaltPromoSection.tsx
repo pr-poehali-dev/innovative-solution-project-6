@@ -96,7 +96,7 @@ const AsphaltPromoSection = () => {
           >
             <Icon name="Phone" size={18} />
             Позвонить +7 (960) 169-09-90
-          </a>
+</a>
         </div>
 
         <div className="sr-only">

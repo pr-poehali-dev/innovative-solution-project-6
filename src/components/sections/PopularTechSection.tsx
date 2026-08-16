@@ -8,7 +8,7 @@ const items = [
     badge: "Длинная стрела",
     badgeIcon: "MoveUpRight",
     badgeColor: "from-amber-400 to-orange-500",
-    price: "от 3 000 ₽/час",
+    price: "от 3 700 ₽/час",
     image:
       "/img/faw-gazoblok-1600.webp",
     alt: "FAW с КМУ DongYang, гружённый газосиликатными блоками",
@@ -25,7 +25,7 @@ const items = [
     badge: "Новинка",
     badgeIcon: "Sparkles",
     badgeColor: "from-cyan-500 to-blue-500",
-    price: "от 2 400 ₽/час",
+    price: "от 3 000 ₽/час",
     image:
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/761d840a-c678-4fee-a5eb-4531b7ca7d17.webp",
     alt: "Экскаватор-погрузчик JCB 3CX",
@@ -37,7 +37,7 @@ const items = [
     badge: "Выгодная цена",
     badgeIcon: "BadgePercent",
     badgeColor: "from-emerald-500 to-green-600",
-    price: "от 2 200 ₽/час",
+    price: "от 2 700 ₽/час",
     image:
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/4bb58aab-783b-43b6-8d89-ee519e570e09.webp",
     alt: "ISUZU 5т с КМУ",
@@ -49,7 +49,7 @@ const items = [
     badge: "Вылет 22 м",
     badgeIcon: "Ruler",
     badgeColor: "from-sky-500 to-blue-600",
-    price: "от 3 200 ₽/час",
+    price: "от 4 000 ₽/час",
     image:
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/106c30cf-02d3-4b99-ac02-47e7404652e2.webp",
     alt: "Hyundai Gold + КМУ HIAB 190TM 8т",

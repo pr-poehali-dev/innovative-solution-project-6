@@ -38,10 +38,10 @@ const CityPage = () => {
     return <Navigate to="/" replace />;
   }
 
-  const title = `Манипулятор с КМУ в ${city.nameIn} — заказать от 1500 ₽/час | Фаворит`;
+  const title = `Манипулятор с КМУ в ${city.nameIn} — заказать от 1900 ₽/час | Фаворит`;
   const description = `Заказать манипулятор в ${city.nameIn}: подача от 1 часа, до 20 т, стрела 23 м, люлька. Работаем без выходных, оператор включён. ☎ +7 960 188-30-84`;
   const cityUrl = `https://фаварит.рф/gorod/${city.slug}`;
-  const ogTitle = `Аренда манипулятора в ${city.nameIn} — от 1500 ₽/час | Фаворит`;
+  const ogTitle = `Аренда манипулятора в ${city.nameIn} — от 1900 ₽/час | Фаворит`;
   const ogDescription = `Манипулятор с КМУ в ${city.nameIn}: подача от 1 часа, до 20 тонн, стрела 23 м, люлька. Оператор включён. ☎ +7 960 188-30-84`;
 
   const breadcrumbsLd = {
@@ -205,7 +205,7 @@ const CityPage = () => {
             </div>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/30 bg-accent/5">
               <Icon name="BadgeRussianRuble" size={14} className="text-accent" />
-              <span className="text-white text-sm font-medium">От 2200 ₽/час</span>
+              <span className="text-white text-sm font-medium">От 2700 ₽/час</span>
             </div>
           </div>
 
@@ -277,12 +277,12 @@ const CityPage = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {[
-              { slug: "faw-kmu-dongyoung", name: "FAW + КМУ DongYang", spec: "17 т · стрела 21 м · люлька", price: "от 3000 ₽/час" },
-              { slug: "kamaz-65115-hangil", name: "КАМАЗ 65115 + HANGIL", spec: "10 т · надёжный КАМАЗ", price: "от 2800 ₽/час" },
-              { slug: "renault-lander-kmu", name: "Renault Lander + КМУ", spec: "15 т · стрела 20 м · бортовой", price: "от 3200 ₽/час" },
-              { slug: "faw-j6-dongyang-1966", name: "FAW J6 + бур и люлька", spec: "17 т · стрела 22 м · бур", price: "от 3500 ₽/час" },
-              { slug: "hyundai-gold-kmu-8t", name: "Hyundai Gold + HIAB", spec: "8 т · длинная стрела 22 м", price: "от 3200 ₽/час" },
-              { slug: "isuzu-kmu-5t", name: "ISUZU 5т + КМУ", spec: "5 т · компактный, для города", price: "от 2200 ₽/час" },
+              { slug: "faw-kmu-dongyoung", name: "FAW + КМУ DongYang", spec: "17 т · стрела 21 м · люлька", price: "от 3700 ₽/час" },
+              { slug: "kamaz-65115-hangil", name: "КАМАЗ 65115 + HANGIL", spec: "10 т · надёжный КАМАЗ", price: "от 3500 ₽/час" },
+              { slug: "renault-lander-kmu", name: "Renault Lander + КМУ", spec: "15 т · стрела 20 м · бортовой", price: "от 4000 ₽/час" },
+              { slug: "faw-j6-dongyang-1966", name: "FAW J6 + бур и люлька", spec: "17 т · стрела 22 м · бур", price: "от 4300 ₽/час" },
+              { slug: "hyundai-gold-kmu-8t", name: "Hyundai Gold + HIAB", spec: "8 т · длинная стрела 22 м", price: "от 4000 ₽/час" },
+              { slug: "isuzu-kmu-5t", name: "ISUZU 5т + КМУ", spec: "5 т · компактный, для города", price: "от 2700 ₽/час" },
             ].map((t) => (
               <Link
                 key={t.slug}

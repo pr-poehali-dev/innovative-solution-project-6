@@ -7,7 +7,7 @@ import { reachGoal } from "@/lib/metrika";
 
 const benefits = [
   { icon: "Clock", title: "Подача за 60 минут", text: "Дежурная машина в любой район Нижнего Новгорода" },
-  { icon: "BadgeRussianRuble", title: "От 1 500 ₽/час", text: "Фиксированный тариф, оператор включён" },
+  { icon: "BadgeRussianRuble", title: "От 1 900 ₽/час", text: "Фиксированный тариф, оператор включён" },
   { icon: "Truck", title: "15 машин в парке", text: "До 20 тонн, стрела 23 м, люлька, бур" },
   { icon: "ShieldCheck", title: "Работаем с НДС", text: "Договор, УПД, ЭДО для юр. лиц" },
 ];
@@ -30,7 +30,7 @@ const AdLanding = () => {
   return (
     <div className="min-h-screen bg-background page-enter">
       <title>Аренда манипулятора в Нижнем Новгороде — звоните, подадим за 60 минут</title>
-      <meta name="description" content="Аренда манипулятора в Нижнем Новгороде от 1500 ₽/час. Подача за 60 минут, оператор включён, работаем с НДС. Звоните +7 960 188-30-84." />
+      <meta name="description" content="Аренда манипулятора в Нижнем Новгороде от 1900 ₽/час. Подача за 60 минут, оператор включён, работаем с НДС. Звоните +7 960 188-30-84." />
       <meta name="robots" content="noindex, nofollow" />
 
       <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
@@ -60,8 +60,7 @@ const AdLanding = () => {
             </span>
             <br />
             <span className="bg-gradient-to-r from-accent via-yellow-400 to-accent bg-clip-text text-transparent">
-              от 1 500 ₽/час
-            </span>
+              от 1 900 ₽/час</span>
           </h1>
 
           <p className="text-base sm:text-xl text-muted-foreground mb-7 sm:mb-9 leading-relaxed max-w-2xl mx-auto">
@@ -141,7 +140,7 @@ const AdLanding = () => {
 
       <footer className="py-6 px-4 text-center text-xs text-muted-foreground/60 border-t border-accent/10">
         ООО «Фаворит» · Аренда манипулятора в Нижнем Новгороде · +7 960 188-30-84
-      </footer>
+</footer>
     </div>
   );
 };

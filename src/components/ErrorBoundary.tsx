@@ -102,7 +102,7 @@ class ErrorBoundary extends Component<Props, State> {
                   className="w-full h-11 rounded-xl border border-white/15 text-white/85 font-bold text-sm hover:bg-white/5 transition-colors flex items-center justify-center gap-2"
                 >
                   Позвонить +7 960 188-30-84
-                </a>
+</a>
               </div>
 
               {this.state.error && (

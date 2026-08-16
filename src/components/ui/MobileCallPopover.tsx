@@ -51,7 +51,7 @@ const MobileCallPopover = ({ className = "" }: MobileCallPopoverProps) => {
             }}
           >
             +7 960 188-30-84
-          </a>
+</a>
           <a
             href="tel:+79601883084"
             onClick={() => reachGoal("phone_click")}

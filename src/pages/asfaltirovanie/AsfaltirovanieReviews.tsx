@@ -150,7 +150,7 @@ const AsfaltirovanieReviews = () => {
           >
             <Icon name="Phone" size={16} />
             +7 (960) 169-09-90
-          </a>
+</a>
         </div>
       </div>
     </section>

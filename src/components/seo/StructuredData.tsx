@@ -17,7 +17,7 @@ const StructuredData = () => {
       "Услуги манипулятора в Нижнем Новгороде",
       "Аренда крана-манипулятора Нижний Новгород",
     ],
-    "slogan": "Аренда манипулятора и услуги манипулятора в Нижнем Новгороде — от 1500 ₽/час",
+    "slogan": "Аренда манипулятора и услуги манипулятора в Нижнем Новгороде — от 1900 ₽/час",
     "knowsAbout": [
       "Аренда манипулятора",
       "Услуги манипулятора",
@@ -74,7 +74,7 @@ const StructuredData = () => {
     ],
     "foundingDate": "2015",
     "description": "ООО «ФАВОРИТ» — аренда манипуляторов и спецтехники в Нижнем Новгороде с 2015 года. ИНН 5250077990, ОГРН 1235200013531. Собственный парк из 15 единиц техники, работа с НДС, договор для юр. лиц, документы для отчётности.",
-    "priceRange": "1500-3500 RUB",
+    "priceRange": "1900-4300 RUB",
     "currenciesAccepted": "RUB",
     "paymentAccepted": ["Cash", "Credit Card", "Bank Transfer"],
     "geo": {
@@ -120,7 +120,7 @@ const StructuredData = () => {
       "Заказать манипулятор в Нижнем Новгороде",
     ],
     "category": ["Аренда спецтехники", "Услуги манипулятора", "Грузоперевозки манипулятором"],
-    "description": "Аренда манипулятора в Нижнем Новгороде от 1500 ₽/час — услуги манипулятора с оператором с подачей за 60 минут, без выходных. 15 единиц техники: грузоподъёмность 3-17 т, стрела до 23 м, люлька для высотных работ, бур для свай. Работаем с юр. лицами по договору, НДС, ЭДО.",
+    "description": "Аренда манипулятора в Нижнем Новгороде от 1900 ₽/час — услуги манипулятора с оператором с подачей за 60 минут, без выходных. 15 единиц техники: грузоподъёмность 3-17 т, стрела до 23 м, люлька для высотных работ, бур для свай. Работаем с юр. лицами по договору, НДС, ЭДО.",
     "image": "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/d239fd05-a0c5-44a2-9cbb-e19192bf07a9.jpg",
     "url": "https://фаварит.рф",
     "provider": { "@id": "https://фаварит.рф/#organization" },
@@ -139,8 +139,8 @@ const StructuredData = () => {
       "@type": "AggregateOffer",
       "url": "https://фаварит.рф",
       "priceCurrency": "RUB",
-      "lowPrice": "1500",
-      "highPrice": "3500",
+      "lowPrice": "1900",
+      "highPrice": "4300",
       "offerCount": String(fleetTrucks.length),
       "availability": "https://schema.org/InStock",
       "seller": { "@id": "https://фаварит.рф/#organization" }
@@ -219,10 +219,10 @@ const StructuredData = () => {
             "@type": "Offer",
             "url": `https://фаварит.рф/tehnika/${truck.slug}`,
             "priceCurrency": "RUB",
-            "price": priceNum > 0 ? String(priceNum) : "2200",
+            "price": priceNum > 0 ? String(priceNum) : "2700",
             "priceSpecification": {
               "@type": "UnitPriceSpecification",
-              "price": priceNum > 0 ? String(priceNum) : "2200",
+              "price": priceNum > 0 ? String(priceNum) : "2700",
               "priceCurrency": "RUB",
               "unitText": "час",
               "referenceQuantity": {
@@ -411,7 +411,7 @@ const StructuredData = () => {
       "@type": "SiteNavigationElement",
       "@id": "https://фаварит.рф/#nav-prices",
       "name": "Цены",
-      "description": "Стоимость аренды манипулятора от 1500 ₽/час с НДС",
+      "description": "Стоимость аренды манипулятора от 1900 ₽/час с НДС",
       "url": "https://фаварит.рф/#pricing"
     },
     {

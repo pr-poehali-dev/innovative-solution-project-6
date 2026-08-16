@@ -520,7 +520,7 @@ ${buildHtml()}
               <label className={labelCls}>Стоимость</label>
               <input
                 className={inputCls}
-                placeholder="2 800 ₽/час с НДС или согласно прайс-листу"
+                placeholder="3 500 ₽/час с НДС или согласно прайс-листу"
                 value={data.totalSum}
                 onChange={(e) => set("totalSum", e.target.value)}
               />
