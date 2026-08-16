@@ -31,7 +31,7 @@ await esbuild.build({
 });
 const d = await import(`file://${out}?t=${Date.now()}`);
 
-const { articles, cities, seoLandings, MATERIAL_SEO_PAGES, trucks, reviews } = d;
+const { articles, cities, seoLandings, MATERIAL_SEO_PAGES, trucks, reviews, priceRows, terms } = d;
 
 const parts = [];
 parts.push(`<h1>Аренда манипулятора в Нижнем Новгороде</h1>`);
@@ -50,6 +50,24 @@ parts.push(
     )
     .join("")
 );
+
+parts.push(`<h2>Прайс-лист: цены на аренду техники</h2>`);
+parts.push(
+  `<p>Цены указаны за час работы вместе с оператором и включают НДС 20%. Топливо, подача в черте Нижнего Новгорода и работа стропальщика входят в стоимость. Минимальный заказ — 4 часа.</p>` +
+    `<table><thead><tr><th>Техника</th><th>Грузоподъёмность</th><th>Вылет стрелы</th><th>Мин. заказ</th><th>Цена с НДС</th></tr></thead><tbody>` +
+    priceRows
+      .map(
+        (r) =>
+          `<tr><td><a href="/tehnika/${r.slug}">${esc(r.title)}</a></td><td>${esc(
+            r.capacity
+          )}</td><td>${esc(r.boom)}</td><td>${esc(r.minOrder)}</td><td>${esc(r.price)}</td></tr>`
+      )
+      .join("") +
+    `</tbody></table>`
+);
+
+parts.push(`<h2>Условия работы и оплаты</h2>`);
+parts.push(terms.map((t) => `<h3>${esc(t.title)}</h3><p>${esc(t.text)}</p>`).join(""));
 
 parts.push(`<h2>Услуги манипулятора</h2>`);
 parts.push(

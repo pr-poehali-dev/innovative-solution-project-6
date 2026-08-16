@@ -4,5 +4,15 @@ import { seoLandings } from "@/data/seoLandings";
 import { MATERIAL_SEO_PAGES } from "@/data/materialsSeo";
 import { trucks } from "@/pages/truck/trucksData";
 import { reviews } from "@/data/reviews";
+import { priceRows, terms } from "@/components/sections/pricing/priceData";
 
-export { articles, cities, seoLandings, MATERIAL_SEO_PAGES, trucks, reviews };
+export {
+  articles,
+  cities,
+  seoLandings,
+  MATERIAL_SEO_PAGES,
+  trucks,
+  reviews,
+  priceRows,
+  terms,
+};
