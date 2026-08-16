@@ -221,8 +221,8 @@ const SeoDashboard = () => {
 
         {/* Main action: reindex */}
         <Link
-          to="/admin/reindex"
-          className="block mb-8 group"
+          to="/seo/pereobhod"
+          className="block mb-4 group"
         >
           <div className="rounded-2xl p-6 sm:p-8 bg-gradient-to-br from-accent via-accent/90 to-amber-600 hover:from-accent/95 hover:to-amber-700 transition-all shadow-xl shadow-accent/20 hover:shadow-accent/30 hover:-translate-y-0.5">
             <div className="flex items-start sm:items-center gap-4 flex-col sm:flex-row">
@@ -234,16 +234,27 @@ const SeoDashboard = () => {
                   Главное действие
                 </div>
                 <h2 className="text-xl sm:text-2xl font-display font-black text-black mb-1">
-                  Переиндексировать сайт сейчас
+                  Переобход страниц в поисковиках
                 </h2>
                 <p className="text-sm text-black/80">
-                  Отправит все {sitemapCount ?? "30"} страниц в Яндекс, Bing, IndexNow.org одним кликом
+                  Отправить весь сайт, отдельный раздел или одну страницу в Яндекс, Bing и
+                  IndexNow.org
                 </p>
               </div>
               <Icon name="ArrowRight" size={28} className="text-black flex-shrink-0 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
         </Link>
+
+        <div className="mb-8 text-sm text-muted-foreground">
+          Адрес страницы:{" "}
+          <code className="px-2 py-1 rounded bg-muted text-accent font-mono">
+            {SITE_ORIGIN}/seo/pereobhod
+          </code>
+          <Link to="/admin/reindex" className="ml-3 text-accent/70 hover:text-accent underline">
+            старая версия
+          </Link>
+        </div>
 
         {/* Position Tracker */}
         <div className="mb-8">
