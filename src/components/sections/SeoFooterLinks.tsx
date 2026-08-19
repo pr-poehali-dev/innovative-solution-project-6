@@ -60,6 +60,21 @@ const linkGroups: LinkGroup[] = [
     ],
   },
   {
+    title: "Доставка стройматериалов",
+    icon: "Package",
+    links: [
+      { label: "Доставка бытовки", to: "/stroymaterialy/bytovki" },
+      { label: "Доставка кирпича", to: "/stroymaterialy/kirpich" },
+      { label: "Доставка газосиликатных блоков", to: "/stroymaterialy/bloki" },
+      { label: "Доставка пиломатериала", to: "/stroymaterialy/pilomaterialy" },
+      { label: "Доставка брусчатки", to: "/stroymaterialy/bordyur" },
+      { label: "Доставка бордюров дорожных и тротуарных", to: "/stroymaterialy/bordyur" },
+      { label: "Доставка плит перекрытия", to: "/stroymaterialy/plity" },
+      { label: "Доставка цемента и сухих смесей", to: "/stroymaterialy/cement" },
+      { label: "Все стройматериалы с доставкой", to: "/stroymaterialy" },
+    ],
+  },
+  {
     title: "Асфальтирование",
     icon: "Sparkles",
     links: [

@@ -20,6 +20,12 @@ export const DEFAULT_QUERIES: Query[] = [
   { id: "q3", text: "услуги манипулятора нн", measurements: [] },
   { id: "q4", text: "аренда крана манипулятора нижний новгород", measurements: [] },
   { id: "q5", text: "манипулятор с люлькой нижний новгород", measurements: [] },
+  { id: "q6", text: "доставка бытовки", measurements: [] },
+  { id: "q7", text: "доставка кирпича", measurements: [] },
+  { id: "q8", text: "доставка газосиликатных блоков", measurements: [] },
+  { id: "q9", text: "доставка пиломатериала", measurements: [] },
+  { id: "q10", text: "доставка брусчатки", measurements: [] },
+  { id: "q11", text: "доставка бордюров дорожных тротуарных", measurements: [] },
 ];
 
 export const todayIso = () => new Date().toISOString().split("T")[0];
