@@ -2,8 +2,13 @@ import { useState } from "react";
 import { drawRoundedRect, drawTable, wrapText } from "./canvasHelpers";
 import { driverRows, truckRows } from "./truckCardData";
 
+export const FILE_NAME = "kartochka-faw-j6p-390.jpg";
+
 export const useTruckCardDownload = () => {
   const [downloading, setDownloading] = useState(false);
+  const [resultUrl, setResultUrl] = useState<string | null>(null);
+
+  const closeResult = () => setResultUrl(null);
 
   const handleDownload = async () => {
     setDownloading(true);
@@ -322,11 +327,22 @@ export const useTruckCardDownload = () => {
       ctx.fillText("фаварит.рф", W - padding - 14, cy + 11);
 
       // Скачивание
-      const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
+      const blob: Blob | null = await new Promise((res) =>
+        canvas.toBlob((b) => res(b), "image/jpeg", 0.95),
+      );
+      const url = blob
+        ? URL.createObjectURL(blob)
+        : canvas.toDataURL("image/jpeg", 0.95);
+
       const link = document.createElement("a");
-      link.download = "kartochka-faw-j6p-390.jpg";
-      link.href = dataUrl;
+      link.href = url;
+      link.download = FILE_NAME;
+      link.rel = "noopener";
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
+
+      setResultUrl(url);
     } catch (e) {
       alert("Ошибка при сохранении: " + (e as Error).message);
     } finally {
@@ -334,5 +350,5 @@ export const useTruckCardDownload = () => {
     }
   };
 
-  return { downloading, handleDownload };
+  return { downloading, handleDownload, resultUrl, closeResult };
 };

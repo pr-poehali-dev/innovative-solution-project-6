@@ -1,12 +1,13 @@
 import { useSearchParams } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import TruckCardPreview from "./truckCard/TruckCardPreview";
+import TruckCardResultModal from "./truckCard/TruckCardResultModal";
 import { useTruckCardDownload } from "./truckCard/useTruckCardDownload";
 
 const ACCESS_CODE = "favorit2024";
 
 const TruckCard = () => {
-  const { downloading, handleDownload } = useTruckCardDownload();
+  const { downloading, handleDownload, resultUrl, closeResult } = useTruckCardDownload();
   const [searchParams] = useSearchParams();
   const hasAccess = searchParams.get("code") === ACCESS_CODE;
 
@@ -66,6 +67,8 @@ const TruckCard = () => {
       <p className="max-w-[640px] mx-auto mt-4 text-center text-xs text-slate-500">
         Карточка техники в фирменном стиле · отправляйте клиентам в WhatsApp / Telegram
       </p>
+
+      {resultUrl && <TruckCardResultModal url={resultUrl} onClose={closeResult} />}
     </div>
   );
 };
