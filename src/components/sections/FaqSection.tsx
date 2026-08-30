@@ -117,7 +117,7 @@ const FaqSection = () => {
                 {/* Внешнее свечение при открытии */}
                 {isOpen && (
                   <div
-                    className="absolute -inset-0.5 rounded-2xl pointer-events-none opacity-70 emerald-pulse"
+                    className="absolute -inset-0.5 rounded-2xl pointer-events-none opacity-70"
                     style={{
                       background:
                         "linear-gradient(135deg, #5eead4 0%, rgba(94,234,212,0.4) 50%, #fbbf24 100%)",
@@ -244,7 +244,7 @@ const FaqSection = () => {
         {/* Блок «Не нашли ответ» */}
         <div className="relative mt-8 sm:mt-12 group">
           <div
-            className="absolute -inset-0.5 rounded-2xl pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity duration-500 emerald-pulse"
+            className="absolute -inset-0.5 rounded-2xl pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity duration-500"
             style={{
               background:
                 "linear-gradient(135deg, #fbbf24 0%, rgba(251,191,36,0.4) 50%, #5eead4 100%)",

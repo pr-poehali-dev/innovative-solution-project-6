@@ -80,7 +80,7 @@ const MapAndRequisitesSection = ({
           <div className="flex flex-col sm:grid sm:grid-cols-3 gap-4 mb-5">
             <div className="flex flex-col gap-2 sm:col-span-1">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-accent/15 border border-accent/30 rounded-full w-fit">
-                <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-accent" />
                 <span className="text-accent text-xs font-semibold">Работаем без выходных</span>
               </div>
               <h3 className="font-display font-black text-base sm:text-xl text-white">
@@ -97,7 +97,7 @@ const MapAndRequisitesSection = ({
                 href="tel:+79601690990"
                 onClick={() => reachGoal("phone_click", { place: "map_section_second" })}
                 className="inline-flex items-center justify-center gap-4 px-10 sm:px-14 py-5 sm:py-6 border rounded-2xl font-bold text-lg sm:text-2xl md:text-3xl w-full transition-all"
-                style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", fontFamily: "'Cinzel', serif", animation: "goldPulse 1.2s ease-in-out infinite" }}
+                style={{ color: "#e8a820", borderColor: "#e8a820", background: "rgba(232,168,32,0.08)", fontFamily: "'Cinzel', serif" }}
               >
                 📞 +7 960 169-09-90
 </a>

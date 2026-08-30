@@ -110,7 +110,7 @@ const HeroLeadForm = () => {
     <div className="relative" id="order" style={{ scrollMarginTop: "80px" }}>
       {/* Мягкое золотое свечение */}
       <div
-        className="absolute -inset-0.5 rounded-2xl opacity-30 blur-md pointer-events-none animate-pulse"
+        className="absolute -inset-0.5 rounded-2xl opacity-30 blur-md pointer-events-none"
         style={{ background: "linear-gradient(135deg, #e8a820 0%, transparent 50%, #e8a820 100%)" }}
       />
 

@@ -145,7 +145,7 @@ const AsphaltCalculatorResult = ({
           }`}
         >
           <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
-          <Icon name="Phone" size={18} className="relative animate-pulse" />
+          <Icon name="Phone" size={18} className="relative" />
           <span className="relative text-sm sm:text-base">Уточнить точную цену</span>
         </a>
 

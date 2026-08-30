@@ -239,7 +239,7 @@ const WeatherWidget = () => {
                         d.weekend ? "bg-accent/[0.08]" : ""
                       }`}
                     >
-                      <span className={`weather-status-pulse absolute top-1 left-1 w-1.5 h-1.5 rounded-full ${c.dot}`} title={dayAdvice.short} />
+                      <span className={`absolute top-1 left-1 w-1.5 h-1.5 rounded-full ${c.dot}`} title={dayAdvice.short} />
                       {d.weekend && (
                         <Icon name="Star" size={8} className="absolute top-1 right-1 text-accent fill-accent" />
                       )}
@@ -270,7 +270,7 @@ const WeatherWidget = () => {
                         d.weekend ? "bg-accent/[0.08]" : ""
                       }`}
                     >
-                      <span className={`weather-status-pulse absolute top-1 left-1 w-1.5 h-1.5 rounded-full ${c.dot}`} title={dayAdvice.short} />
+                      <span className={`absolute top-1 left-1 w-1.5 h-1.5 rounded-full ${c.dot}`} title={dayAdvice.short} />
                       <div className={`text-[9px] font-semibold uppercase ${d.weekend ? "text-accent" : "text-white/60"}`}>{d.day}</div>
                       <span className="text-base leading-none transition-transform active:scale-110">{ic.emoji}</span>
                       <div className="text-[9px] text-white leading-none text-center">
@@ -389,7 +389,7 @@ const WeatherWidget = () => {
                       >
                         {/* Светофор условий — точка статуса */}
                         <span
-                          className={`weather-status-pulse absolute top-1.5 left-1.5 w-2 h-2 rounded-full ${c.dot}`}
+                          className={`absolute top-1.5 left-1.5 w-2 h-2 rounded-full ${c.dot}`}
                           aria-label={dayAdvice.short}
                         />
                         {d.weekend && (

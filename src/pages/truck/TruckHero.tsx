@@ -95,7 +95,6 @@ export default function TruckHero({ truck, slug, onOrder }: Omit<TruckHeroProps,
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/40 text-green-400 text-xs sm:text-sm font-bold">
                 <span className="relative flex w-2 h-2">
-                  <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75" />
                   <span className="relative rounded-full w-2 h-2 bg-green-400" />
                 </span>
                 В наличии

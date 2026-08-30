@@ -57,7 +57,7 @@ const AsfaltirovanieHero = () => {
           {/* Бейдж скидки в левом верхнем углу */}
           <div className="absolute top-3 left-3 sm:top-6 sm:left-6 lg:top-10 lg:left-10">
             <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-4 sm:py-2 rounded-full bg-red-600/95 backdrop-blur-md border-2 border-red-400/60 shadow-2xl">
-              <span className="text-sm sm:text-lg animate-pulse">🔥</span>
+              <span className="text-sm sm:text-lg">🔥</span>
               <span className="text-white font-black text-[9px] sm:text-sm tracking-wider whitespace-nowrap">
                 СКИДКА 15%
               </span>
@@ -91,12 +91,12 @@ const AsfaltirovanieHero = () => {
                   <Icon
                     name="Phone"
                     size={14}
-                    className="relative animate-pulse sm:hidden"
+                    className="relative sm:hidden"
                   />
                   <Icon
                     name="Phone"
                     size={20}
-                    className="relative animate-pulse hidden sm:inline-block"
+                    className="relative hidden sm:inline-block"
                   />
                   <span className="relative">{PHONE}</span>
                 </a>

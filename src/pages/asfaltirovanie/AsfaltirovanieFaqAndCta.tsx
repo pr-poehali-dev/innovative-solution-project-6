@@ -66,12 +66,12 @@ const AsfaltirovanieFaqAndCta = () => {
                 className="group inline-flex items-center justify-center gap-3 px-6 sm:px-10 py-4 sm:py-5 rounded-2xl font-black bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-white overflow-hidden hover:shadow-2xl hover:shadow-amber-500/50 hover:scale-105 transition-all relative"
               >
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
-                <Icon name="Phone" size={22} className="relative animate-pulse" />
+                <Icon name="Phone" size={22} className="relative" />
                 <span className="relative text-lg sm:text-2xl">{PHONE}</span>
               </a>
 
               <div className="flex items-center justify-center gap-2 mt-5">
-                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-emerald-500" />
                 <p className="text-xs sm:text-sm text-slate-600 font-medium">
                   На связи прямо сейчас · Без выходных · Замер бесплатно
                 </p>

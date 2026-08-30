@@ -85,7 +85,6 @@ const BrandLogo = ({ to = "/", size = "md", compact = false }: BrandLogoProps) =
           {status.online ? (
             <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-green-500/15 border border-green-500/40" title="Работаем сейчас — звоните">
               <span className="relative flex w-1.5 h-1.5">
-                <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75" />
                 <span className="relative rounded-full w-1.5 h-1.5 bg-green-400" />
               </span>
               <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-green-400">Онлайн</span>

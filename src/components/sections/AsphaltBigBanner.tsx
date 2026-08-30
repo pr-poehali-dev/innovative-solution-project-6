@@ -72,7 +72,7 @@ const AsphaltBigBanner = () => {
 
                   <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-red-600/95 backdrop-blur-md border-2 border-white/50 shadow-2xl">
-                      <span className="text-base sm:text-lg animate-pulse">🔥</span>
+                      <span className="text-base sm:text-lg">🔥</span>
                       <span className="text-white font-black text-[11px] sm:text-sm tracking-wider">
                         СЕЗОННАЯ СКИДКА 15%
                       </span>
@@ -145,7 +145,7 @@ const AsphaltBigBanner = () => {
                     </button>
 
                     <div className="flex items-center justify-center gap-2 pt-1">
-                      <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      <div className="w-2 h-2 rounded-full bg-emerald-500" />
                       <p className="text-[10px] sm:text-[11px] text-slate-600 font-medium">
                         Бесплатный замер · Расчёт сметы за 15 минут
                       </p>

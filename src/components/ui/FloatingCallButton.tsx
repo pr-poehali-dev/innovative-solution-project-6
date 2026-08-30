@@ -46,11 +46,9 @@ const FloatingCallButton = () => {
       }`}
       style={{
         background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
-        animation: "goldPulse 1.4s ease-in-out infinite",
       }}
     >
-      <span className="absolute inset-0 rounded-full bg-accent/50 animate-ping" />
-      <span className="absolute -inset-1 rounded-full bg-accent/30 animate-ping" style={{ animationDelay: "0.4s" }} />
+
       <Icon name="Phone" size={24} className="relative text-black" strokeWidth={2.5} />
     </a>
   );

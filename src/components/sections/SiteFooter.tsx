@@ -113,7 +113,7 @@ const SiteFooter = () => {
               Быстрая навигация
             </h2>
             <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/30 text-[10px] text-accent/90 font-bold uppercase tracking-wider">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               8 разделов
             </div>
           </div>

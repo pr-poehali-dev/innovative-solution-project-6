@@ -43,7 +43,6 @@ const OfflineStatusDot = () => {
         aria-label="Нет интернета"
       >
         <span className="relative flex w-2 h-2">
-          <span className="absolute inset-0 rounded-full bg-amber-400 animate-ping opacity-75" />
           <span className="relative w-2 h-2 rounded-full bg-amber-400" />
         </span>
       </div>

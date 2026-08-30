@@ -34,7 +34,7 @@ const AsfaltirovanieStickyCall = () => {
           onClick={() => reachGoal("phone_click", { source: "asphalt_sticky_bottom" })}
           className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-white font-black text-xs shadow-lg shadow-amber-500/40 active:scale-95 transition-transform whitespace-nowrap"
         >
-          <Icon name="Phone" size={14} className="animate-pulse" />
+          <Icon name="Phone" size={14} className="" />
           {PHONE}
         </a>
       </div>

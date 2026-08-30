@@ -97,7 +97,7 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
               >
                 {/* Внешнее свечение — индивидуальный цвет */}
                 <div
-                  className="emerald-pulse absolute -inset-0.5 rounded-2xl pointer-events-none opacity-70 group-hover:opacity-100 transition-opacity duration-500"
+                  className="absolute -inset-0.5 rounded-2xl pointer-events-none opacity-70 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
                     background: `linear-gradient(135deg, ${c} 0%, ${s}0.4) 50%, ${c} 100%)`,
                     animationDelay: `${i * 0.4}s`,

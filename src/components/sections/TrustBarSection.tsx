@@ -27,7 +27,6 @@ const TrustBarSection = () => {
         <div className="flex items-center justify-between mb-3 sm:mb-5">
           <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full border border-accent/30 bg-accent/10">
             <span className="relative flex w-1.5 h-1.5">
-              <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
               <span className="relative w-1.5 h-1.5 rounded-full bg-emerald-400" />
             </span>
             <span className="text-[10px] sm:text-xs uppercase tracking-widest text-accent font-black">

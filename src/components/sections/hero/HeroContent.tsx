@@ -24,9 +24,8 @@ const HeroContent = ({ visibleSections }: HeroContentProps) => {
             <Icon name="Timer" size={18} strokeWidth={2.6} />
             Подача за 60 минут
           </span>
-          <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl border-2 border-emerald-400/70 bg-emerald-500/10 backdrop-blur-sm text-emerald-300 font-black text-sm sm:text-base animate-blink-badge motion-reduce:animate-none">
+          <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl border-2 border-emerald-400/70 bg-emerald-500/10 backdrop-blur-sm text-emerald-300 font-black text-sm sm:text-base">
             <span className="relative flex w-2 h-2">
-              <span className="absolute inset-0 rounded-full bg-emerald-300 animate-ping opacity-75" />
               <span className="relative w-2 h-2 rounded-full bg-emerald-300" />
             </span>
             Работаем 24/7

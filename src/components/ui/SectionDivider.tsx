@@ -39,7 +39,7 @@ const SectionDivider = ({ variant = "glow", flip = false, className = "" }: Sect
           <div className="divider-shimmer absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-accent to-transparent" />
         </div>
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="absolute inset-0 -m-3 rounded-full bg-accent/40 divider-pulse-ring" />
+          <div className="absolute inset-0 -m-3 rounded-full bg-accent/40" />
           <div className="w-2.5 h-2.5 rounded-full bg-accent shadow-[0_0_20px_rgba(245,208,96,0.9)]" />
         </div>
       </div>
@@ -61,7 +61,7 @@ const SectionDivider = ({ variant = "glow", flip = false, className = "" }: Sect
             filter: "blur(30px)",
           }}
         />
-        <div className="absolute left-1/2 top-[calc(50%-6px)] -translate-x-1/2 w-[80%] max-w-3xl h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent divider-line-pulse" />
+        <div className="absolute left-1/2 top-[calc(50%-6px)] -translate-x-1/2 w-[80%] max-w-3xl h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
         <div className="absolute left-1/2 top-[calc(50%+6px)] -translate-x-1/2 w-[60%] max-w-2xl h-px bg-gradient-to-r from-transparent via-accent/25 to-transparent" />
 
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 sm:gap-4">
@@ -173,7 +173,7 @@ const SectionDivider = ({ variant = "glow", flip = false, className = "" }: Sect
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-3 sm:gap-6">
           <span className="w-16 sm:w-32 h-px bg-gradient-to-r from-transparent via-accent/30 to-accent/60" />
           <div className="relative">
-            <div className="absolute inset-0 -m-2 rounded-full bg-accent/30 divider-pulse-ring" />
+            <div className="absolute inset-0 -m-2 rounded-full bg-accent/30" />
             <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-accent/30 via-accent/15 to-transparent border border-accent/50 flex items-center justify-center shadow-[0_0_30px_rgba(245,208,96,0.4)] backdrop-blur-sm divider-float">
               <Icon name="Construction" size={22} className="text-accent" />
             </div>

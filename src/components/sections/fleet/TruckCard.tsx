@@ -16,7 +16,7 @@ const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
     <div className={`group relative ${idx < total - 1 ? "mb-6 sm:mb-8" : "mb-8 sm:mb-12"}`}>
       {/* Пульсирующая изумрудная подсветка */}
       <div
-        className="emerald-pulse absolute -inset-0.5 rounded-2xl sm:rounded-3xl pointer-events-none"
+        className="absolute -inset-0.5 rounded-2xl sm:rounded-3xl pointer-events-none"
         style={{ background: "linear-gradient(135deg, #2dd4bf 0%, #10b981 50%, #0d9488 100%)", animationDelay: `${(idx % 4) * 0.6}s` }}
       />
       {/* Градиентная рамка */}
@@ -50,7 +50,6 @@ const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
                     </div>
                     <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-500/90 text-black text-[10px] font-bold tracking-widest uppercase shadow-lg">
                       <span className="relative flex w-1.5 h-1.5">
-                        <span className="absolute inset-0 rounded-full bg-white animate-ping opacity-75" />
                         <span className="relative rounded-full w-1.5 h-1.5 bg-white" />
                       </span>
                       В наличии
@@ -85,7 +84,6 @@ const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
                 </div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/40 text-green-400 text-xs font-bold">
                   <span className="relative flex w-2 h-2">
-                    <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75" />
                     <span className="relative rounded-full w-2 h-2 bg-green-400" />
                   </span>
                   В наличии

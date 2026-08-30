@@ -102,7 +102,7 @@ const UseCasesSection = () => {
               <div key={i} className="group relative transition-transform duration-500 hover:-translate-y-1.5">
                 {/* Внешнее свечение с пульсацией — индивидуальный цвет */}
                 <div
-                  className="emerald-pulse absolute -inset-0.5 rounded-2xl pointer-events-none opacity-70 group-hover:opacity-100 transition-opacity duration-500"
+                  className="absolute -inset-0.5 rounded-2xl pointer-events-none opacity-70 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
                     background: `linear-gradient(135deg, ${c} 0%, ${s}0.4) 50%, ${c} 100%)`,
                     animationDelay: `${(i % 3) * 0.5}s`,

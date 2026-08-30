@@ -247,7 +247,7 @@ const OfflineDownloadModal = () => {
                   {stage === "done" ? (
                     <Icon name="CircleCheck" size={16} className="text-green-400" />
                   ) : (
-                    <Icon name="Download" size={16} className="text-accent animate-pulse" />
+                    <Icon name="Download" size={16} className="text-accent" />
                   )}
                   <span className="text-white font-bold text-sm">
                     {stage === "done" ? "Готово" : "Загрузка..."}

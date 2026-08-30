@@ -42,7 +42,6 @@ const OfflineReadyBadge = () => {
     return (
       <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-400 text-xs font-semibold">
         <span className="relative flex w-2 h-2">
-          <span className="absolute inset-0 rounded-full bg-amber-400 animate-ping opacity-75" />
           <span className="relative w-2 h-2 rounded-full bg-amber-400" />
         </span>
         <Icon name="WifiOff" size={13} />

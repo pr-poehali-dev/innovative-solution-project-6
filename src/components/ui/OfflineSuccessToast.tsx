@@ -85,7 +85,6 @@ const OfflineSuccessToast = () => {
 
               <div className="mt-2.5 flex items-center gap-1.5 text-[10px] text-green-400/90 font-bold uppercase tracking-wider">
                 <span className="relative flex w-1.5 h-1.5">
-                  <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75" />
                   <span className="relative w-1.5 h-1.5 rounded-full bg-green-400" />
                 </span>
                 Готово к работе офлайн

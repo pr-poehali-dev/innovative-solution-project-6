@@ -5,7 +5,6 @@ const goldStyle = {
   color: "#000",
   borderColor: "#e8a820",
   background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
-  animation: "goldPulse 1.2s ease-in-out infinite",
   fontFamily: "'Cinzel', serif",
   boxShadow: "0 4px 14px rgba(232,168,32,0.4)",
 };
@@ -14,7 +13,6 @@ const goldStyleOutline = {
   color: "#e8a820",
   borderColor: "#e8a820",
   background: "rgba(232,168,32,0.08)",
-  animation: "goldPulse 1.2s ease-in-out infinite",
   fontFamily: "'Cinzel', serif",
 };
 

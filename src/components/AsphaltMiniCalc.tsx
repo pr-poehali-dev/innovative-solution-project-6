@@ -271,7 +271,7 @@ const AsphaltMiniCalc = ({ light = false }: AsphaltMiniCalcProps) => {
         }`}
       >
         <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
-        <Icon name="Phone" size={15} className="relative animate-pulse" />
+        <Icon name="Phone" size={15} className="relative" />
         <span className="relative">Узнать точную цену</span>
       </a>
 
