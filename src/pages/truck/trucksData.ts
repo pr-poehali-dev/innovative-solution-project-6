@@ -31,7 +31,6 @@ export const trucks: Record<string, Truck> = {
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/4318b2a2-0422-4c73-b7d5-59f8c69483b6.webp",
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/df8d23ad-2b19-4a5c-bfef-8403f404cab9.webp",
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/68956c17-3076-4d54-97a0-cd4b06bfa7ff.jpg",
-      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/7425c2f4-98e8-4ea4-9811-46deed091f65.jpg",
     ],
     alt: "Аренда FAW с КМУ DongYang в Нижнем Новгороде",
     description: "Компания «Фаворит» предлагает в аренду манипулятор FAW с КМУ DongYang — надёжную спецтехнику для погрузки, разгрузки и монтажа в Нижнем Новгороде и области. Грузоподъёмность кузова до 17 тонн, вылет стрелы до 21 метра и монтажная люлька делают эту машину незаменимой для работ на высоте. Оптимальный выбор для строительных, промышленных и логистических задач.",
