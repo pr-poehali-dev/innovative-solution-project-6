@@ -1,5 +1,5 @@
-/* Service Worker — Фаворит PWA v4 (Cache First, мгновенная работа без интернета) */
-const CACHE_VERSION = "v4";
+/* Service Worker — Фаворит PWA v5 (свежий HTML из сети, кеш — для офлайна) */
+const CACHE_VERSION = "v5";
 const STATIC_CACHE = `favorit-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `favorit-runtime-${CACHE_VERSION}`;
 const IMAGE_CACHE = `favorit-images-${CACHE_VERSION}`;
@@ -122,37 +122,31 @@ self.addEventListener("fetch", (event) => {
     req.mode === "navigate" ||
     (req.headers.get("accept") || "").includes("text/html");
 
+  // Всегда берём свежий HTML из сети: старый HTML ссылается на устаревшие
+  // файлы приложения и ломает страницу. Кеш — только когда сети нет.
   if (isNavigation) {
     event.respondWith(
-      caches.match("/index.html").then((shell) => {
-        // Если есть закешированный shell — отдаём моментально
-        const networkUpdate = fetchWithTimeout(new Request("/index.html", { cache: "no-cache" }))
-          .then((res) => {
-            if (res && res.status === 200) {
-              const copy = res.clone();
-              caches.open(STATIC_CACHE).then((c) => {
-                c.put("/", copy.clone());
-                c.put("/index.html", copy);
-              });
-            }
-            return res;
-          })
-          .catch(() => null);
-
-        if (shell) {
-          // Обновляем в фоне (промис уже запущен выше), отдаём кеш
-          return shell;
-        }
-        // Кеша нет (первая загрузка) — ждём сеть
-        return networkUpdate.then(
-          (res) =>
-            res ||
-            new Response(
-              "<h1>Нет соединения</h1><p>Откройте приложение, когда будет интернет.</p>",
-              { status: 503, headers: { "Content-Type": "text/html; charset=utf-8" } }
-            )
-        );
-      })
+      fetchWithTimeout(new Request("/index.html", { cache: "no-cache" }))
+        .then((res) => {
+          if (res && res.status === 200) {
+            const copy = res.clone();
+            caches.open(STATIC_CACHE).then((c) => {
+              c.put("/", copy.clone());
+              c.put("/index.html", copy);
+            });
+          }
+          return res;
+        })
+        .catch(() =>
+          caches.match("/index.html").then(
+            (shell) =>
+              shell ||
+              new Response(
+                "<h1>Нет соединения</h1><p>Откройте приложение, когда будет интернет.</p>",
+                { status: 503, headers: { "Content-Type": "text/html; charset=utf-8" } }
+              )
+          )
+        )
     );
     return;
   }
@@ -185,18 +179,17 @@ self.addEventListener("fetch", (event) => {
     ["script", "style", "font"].includes(req.destination) ||
     /\.(?:js|css|woff2?|ttf|otf)(?:\?.*)?$/i.test(url.pathname);
 
+  // Файлы приложения берём из сети (кеш может быть от старой версии),
+  // из кеша — только если сети нет
   if (isStatic) {
     event.respondWith(
       caches.open(STATIC_CACHE).then((cache) =>
-        cache.match(req).then((cached) => {
-          const network = fetch(req)
-            .then((res) => {
-              if (res && res.status === 200) cache.put(req, res.clone());
-              return res;
-            })
-            .catch(() => cached);
-          return cached || network;
-        })
+        fetchWithTimeout(req, 4000)
+          .then((res) => {
+            if (res && res.status === 200) cache.put(req, res.clone());
+            return res;
+          })
+          .catch(() => cache.match(req).then((cached) => cached || Response.error()))
       )
     );
     return;

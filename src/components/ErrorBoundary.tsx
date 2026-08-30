@@ -7,7 +7,26 @@ interface Props {
 interface State {
   hasError: boolean;
   error?: Error;
+  recovering?: boolean;
 }
+
+const RECOVERY_KEY = "favorit_error_recovery_ts";
+
+const clearCachesAndReload = async () => {
+  try {
+    if ("caches" in window) {
+      const keys = await caches.keys();
+      await Promise.all(keys.map((k) => caches.delete(k)));
+    }
+    if ("serviceWorker" in navigator) {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map((r) => r.unregister()));
+    }
+  } catch {
+    void 0;
+  }
+  window.location.reload();
+};
 
 class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
@@ -20,13 +39,25 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: { componentStack: string }) {
-    // Логируем в консоль — для отладки и для get_logs
-     
     console.error("ErrorBoundary поймал ошибку:", error, errorInfo);
+
+    // Чаще всего причина — устаревший офлайн-кеш после обновления сайта.
+    // Молча чистим кеш и перезагружаемся, но не чаще раза в 5 минут,
+    // чтобы не зациклиться на настоящей ошибке.
+    try {
+      const last = Number(sessionStorage.getItem(RECOVERY_KEY) || 0);
+      if (Date.now() - last > 5 * 60 * 1000) {
+        sessionStorage.setItem(RECOVERY_KEY, String(Date.now()));
+        this.setState({ recovering: true });
+        clearCachesAndReload();
+      }
+    } catch {
+      void 0;
+    }
   }
 
   handleReload = () => {
-    window.location.reload();
+    clearCachesAndReload();
   };
 
   handleGoHome = () => {
@@ -34,6 +65,24 @@ class ErrorBoundary extends Component<Props, State> {
   };
 
   render() {
+    if (this.state.recovering) {
+      return (
+        <div
+          className="min-h-screen flex flex-col items-center justify-center gap-4 px-6 text-center"
+          style={{
+            background:
+              "linear-gradient(135deg, #0a0a0a 0%, #1a1208 50%, #0a0a0a 100%)",
+          }}
+        >
+          <div
+            className="w-12 h-12 rounded-full border-2 border-white/15"
+            style={{ borderTopColor: "#e8a820" }}
+          />
+          <p className="text-white/70 text-sm">Обновляем страницу…</p>
+        </div>
+      );
+    }
+
     if (this.state.hasError) {
       return (
         <div
