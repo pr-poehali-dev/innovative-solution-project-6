@@ -6,7 +6,6 @@ type Platform = "ios" | "android" | "desktop";
 type Stage = "idle" | "downloading" | "done" | "error";
 
 const OPEN_EVENT = "favorit:open-download";
-const STORAGE_KEY = "favorit_offline_autoshown_v1";
 
 export const openDownloadModal = () => {
   if (typeof window !== "undefined") {
@@ -144,28 +143,8 @@ const OfflineDownloadModal = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Автопоказ при первом заходе
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    try {
-      if (localStorage.getItem(STORAGE_KEY)) return;
-      const isStandalone =
-        window.matchMedia("(display-mode: standalone)").matches ||
-        (navigator as unknown as { standalone?: boolean }).standalone === true;
-      if (isStandalone) return;
-
-      const t = window.setTimeout(() => {
-        if (!startedRef.current) {
-          localStorage.setItem(STORAGE_KEY, "1");
-          openAndStart();
-        }
-      }, 4000);
-      return () => window.clearTimeout(t);
-    } catch {
-      void 0;
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // Окно открывается только по кнопке — без автопоказа,
+  // чтобы не перекрывать сайт на телефоне
 
   if (installed && !open) return null;
   if (!open) return null;

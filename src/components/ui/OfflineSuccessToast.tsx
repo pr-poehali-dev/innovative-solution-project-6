@@ -19,29 +19,13 @@ const OfflineSuccessToast = () => {
     };
     checkStandalone();
 
-    // Показываем тост один раз — при первом срабатывании service worker
-    if (!("serviceWorker" in navigator)) return;
-    if (localStorage.getItem(STORAGE_KEY)) return;
-
-    navigator.serviceWorker.ready
-      .then(() => {
-        // Ждём чтобы кэш точно сохранился
-        setTimeout(() => {
-          if (navigator.serviceWorker.controller) {
-            setVisible(true);
-            localStorage.setItem(STORAGE_KEY, String(Date.now()));
-            // Автоскрытие через 8 секунд
-            setTimeout(() => setVisible(false), 8000);
-          }
-        }, 2000);
-      })
-      .catch(() => undefined);
-
-    // Реакция на событие установки приложения
+    // Показываем только после реальной установки приложения —
+    // без автопоказа, чтобы не перекрывать сайт на телефоне
     const onInstalled = () => {
       setInstalled(true);
       setVisible(true);
-      setTimeout(() => setVisible(false), 10000);
+      localStorage.setItem(STORAGE_KEY, String(Date.now()));
+      setTimeout(() => setVisible(false), 8000);
     };
     window.addEventListener("appinstalled", onInstalled);
     return () => window.removeEventListener("appinstalled", onInstalled);
