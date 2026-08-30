@@ -10,6 +10,7 @@ export type Truck = {
   alt: string;
   description: string;
   specs: { label: string; value: string }[];
+  scheme?: { image: string; alt: string; caption?: string };
   useCases: string[];
   seoTitle: string;
   seoDesc: string;
@@ -42,6 +43,13 @@ export const trucks: Record<string, Truck> = {
       { label: "Вылет стрелы", value: "до 21 м" },
       { label: "Монтажная корзина", value: "Люлька ✓" },
     ],
+    scheme: {
+      image:
+        "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/833b7cec-9ed8-43d3-b63d-178fd6a5f1b8.jpg",
+      alt: "Габаритный чертёж FAW с КМУ DongYang: длина 11800 мм, кузов 8100 мм, высота 3900 мм",
+      caption:
+        "Габариты в мм: общая длина 11 800, платформа 8 100, высота по стреле 3 900, высота борта 600, погрузочная высота 1 400",
+    },
     useCases: [
       "Монтаж металлоконструкций и кровли",
       "Подъём оборудования на высоту",

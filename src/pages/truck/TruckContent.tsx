@@ -24,6 +24,34 @@ export default function TruckContent({ truck, slug }: TruckContentProps) {
         </div>
       </section>
 
+      {/* Габаритная схема */}
+      {truck.scheme && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+          <div className="border border-accent/10 rounded-2xl bg-card/30 p-4 sm:p-8">
+            <div className="flex items-center gap-2 mb-4">
+              <Icon name="Ruler" size={18} className="text-accent" />
+              <span className="text-accent text-sm font-semibold uppercase tracking-widest">
+                Габаритная схема
+              </span>
+            </div>
+            <div className="rounded-xl bg-white p-3 sm:p-6">
+              <img
+                src={truck.scheme.image}
+                alt={truck.scheme.alt}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-auto"
+              />
+            </div>
+            {truck.scheme.caption && (
+              <p className="mt-4 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                {truck.scheme.caption}
+              </p>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* Применение */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <h2 className="text-2xl sm:text-3xl font-black tracking-tighter mb-6">
