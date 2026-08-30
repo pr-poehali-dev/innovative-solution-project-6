@@ -22,6 +22,7 @@ interface PhoneButtonProps {
   iconOnly?: boolean;
   phone?: string;
   label?: string;
+  subLabel?: string;
 }
 
 const PhoneButton = ({
@@ -30,11 +31,18 @@ const PhoneButton = ({
   iconOnly = false,
   phone = "+79601883084",
   label = "+7 960 188-30-84",
+  subLabel,
 }: PhoneButtonProps) => {
   const sizeClasses = {
     sm: "px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm gap-1.5 sm:gap-2 whitespace-nowrap",
     md: "px-5 py-2.5 text-sm gap-2 whitespace-nowrap",
     lg: "px-5 sm:px-14 py-4 sm:py-6 text-base sm:text-3xl gap-2 sm:gap-4 whitespace-nowrap",
+  };
+
+  const subSizeClasses = {
+    sm: "text-[8px] sm:text-[9px]",
+    md: "text-[9px]",
+    lg: "text-[10px] sm:text-sm",
   };
 
   if (iconOnly) {
@@ -59,7 +67,18 @@ const PhoneButton = ({
       style={goldStyleOutline}
     >
       <Icon name="Phone" size={16} />
-      {label}
+      {subLabel ? (
+        <span className="inline-flex flex-col items-center leading-tight">
+          <span>{label}</span>
+          <span
+            className={`font-black uppercase tracking-[0.14em] opacity-80 ${subSizeClasses[size]}`}
+          >
+            {subLabel}
+          </span>
+        </span>
+      ) : (
+        label
+      )}
     </a>
   );
 };

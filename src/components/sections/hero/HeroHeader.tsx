@@ -70,18 +70,8 @@ const HeroHeader = () => {
           </nav>
           <div className="flex gap-2 sm:gap-3 items-center shrink-0">
             <OfflineStatusDot />
-            <div className="hidden sm:flex flex-col items-center gap-0.5">
-              <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.18em] text-accent/90 leading-none">
-                Круглосуточно
-              </span>
-              <PhoneButton size="sm" />
-            </div>
-            <div className="flex sm:hidden flex-col items-center gap-0.5">
-              <span className="text-[8px] font-black uppercase tracking-[0.12em] text-accent/90 leading-none">
-                Круглосуточно
-              </span>
-              <MobileCallPopover />
-            </div>
+            <PhoneButton size="sm" subLabel="Круглосуточно" className="hidden sm:inline-flex" />
+            <MobileCallPopover className="flex sm:hidden" />
 
             {/* Бургер — только мобайл */}
             <button
@@ -184,7 +174,7 @@ const HeroHeader = () => {
             })}
             </div>
             <div className="shrink-0 px-3 py-3 border-t border-accent/20 bg-[#0e1420]" onClick={() => setMenuOpen(false)}>
-              <PhoneButton size="sm" className="w-full justify-center rounded-xl" />
+              <PhoneButton size="sm" subLabel="Круглосуточно" className="w-full justify-center rounded-xl" />
             </div>
           </div>
         </>
