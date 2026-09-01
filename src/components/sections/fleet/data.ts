@@ -28,9 +28,9 @@ export const trucks: Truck[] = [
     images: [
       "/img/faw-dongyang-1600.webp",
       "/img/faw-gazoblok-1600.webp",
-      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/4318b2a2-0422-4c73-b7d5-59f8c69483b6.webp",
-      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/df8d23ad-2b19-4a5c-bfef-8403f404cab9.webp",
-      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/68956c17-3076-4d54-97a0-cd4b06bfa7ff.jpg",
+      "/fleet-opt/4318b2a2-0422-4c73-b7d5-59f8c69483b6.webp",
+      "/fleet-opt/df8d23ad-2b19-4a5c-bfef-8403f404cab9.webp",
+      "/fleet-opt/68956c17-3076-4d54-97a0-cd4b06bfa7ff.webp",
     ],
     specs: [
       { label: "Грузоподъёмность кузова", value: "до 17 т" },
@@ -48,7 +48,7 @@ export const trucks: Truck[] = [
     price: "3 500 ₽/час с НДС",
     count: 3,
     tag: { label: "Хит заказов", icon: "Flame", color: "from-orange-500 to-red-600" },
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/b646729f-a106-46bf-b7e4-abf0fe1c4983.webp",
+    image: "/fleet-opt/b646729f-a106-46bf-b7e4-abf0fe1c4983.webp",
     alt: "КАМАЗ 65115 КМУ HANGIL",
     specs: [
       { label: "Грузоподъёмность платформы", value: "до 12 т" },
@@ -66,7 +66,7 @@ export const trucks: Truck[] = [
     price: "4 300 ₽/час с НДС",
     count: 2,
     tag: { label: "Популярно", icon: "TrendingUp", color: "from-blue-500 to-indigo-600" },
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.webp",
+    image: "/fleet-opt/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.webp",
     alt: "КАМАЗ 43118 КМУ Kanglim вездеход",
     specs: [
       { label: "Грузоподъёмность кузова", value: "до 10 т" },
@@ -84,7 +84,7 @@ export const trucks: Truck[] = [
     price: "4 300 ₽/час с НДС",
     count: 1,
     tag: { label: "Эксклюзив", icon: "Crown", color: "from-purple-500 to-pink-600" },
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/cb1469ab-3878-4eea-9eac-9ce6f4129301.webp",
+    image: "/fleet-opt/cb1469ab-3878-4eea-9eac-9ce6f4129301.webp",
     alt: "FAW J6 кран-манипулятор DONGYANG 1966 с буром",
     specs: [
       { label: "Грузоподъёмность шасси", value: "до 17 т" },
@@ -101,7 +101,7 @@ export const trucks: Truck[] = [
     slug: "renault-lander-kmu",
     price: "4 000 ₽/час с НДС",
     count: 2,
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/72811b07-39fb-476d-9b0a-6a3f31285de9.webp",
+    image: "/fleet-opt/72811b07-39fb-476d-9b0a-6a3f31285de9.webp",
     alt: "Renault Lander манипулятор КМУ",
     specs: [
       { label: "Грузоподъёмность автомобиля", value: "до 15 т" },
@@ -117,7 +117,7 @@ export const trucks: Truck[] = [
     price: "4 000 ₽/час с НДС",
     count: 1,
     tag: { label: "Длинная стрела", icon: "MoveUpRight", color: "from-sky-500 to-blue-600" },
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/106c30cf-02d3-4b99-ac02-47e7404652e2.webp",
+    image: "/fleet-opt/106c30cf-02d3-4b99-ac02-47e7404652e2.webp",
     alt: "Hyundai Gold КМУ HIAB 190TM 8 тонн",
     specs: [
       { label: "Грузоподъёмность кузова", value: "до 10 т" },
@@ -135,7 +135,7 @@ export const trucks: Truck[] = [
     price: "3 300 ₽/час с НДС",
     count: 1,
     tag: { label: "Универсал", icon: "Truck", color: "from-amber-500 to-orange-600" },
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/660a8623-ee67-4819-a414-68b954548e0b.webp",
+    image: "/fleet-opt/660a8623-ee67-4819-a414-68b954548e0b.webp",
     alt: "Hino 500 КМУ Kanglim KS1256G-II 7 тонн",
     specs: [
       { label: "Грузоподъёмность кузова", value: "до 6 т" },
@@ -153,7 +153,7 @@ export const trucks: Truck[] = [
     price: "2 700 ₽/час с НДС",
     count: 2,
     tag: { label: "Выгодная цена", icon: "BadgePercent", color: "from-emerald-500 to-green-600" },
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/4bb58aab-783b-43b6-8d89-ee519e570e09.webp",
+    image: "/fleet-opt/4bb58aab-783b-43b6-8d89-ee519e570e09.webp",
     alt: "ISUZU 5т КМУ",
     specs: [
       { label: "Грузоподъёмность платформы", value: "до 5 т" },
@@ -172,7 +172,7 @@ export const trucks: Truck[] = [
     price: "по запросу",
     count: 1,
     tag: { label: "Длина кузова 13,6 м", icon: "MoveHorizontal", color: "from-blue-500 to-indigo-600" },
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/8792b6c8-726d-4144-a065-23a9f68b6e7b.png",
+    image: "/fleet-opt/8792b6c8-726d-4144-a065-23a9f68b6e7b.webp",
     alt: "МАЗ длинномер с бортовым полуприцепом",
     specs: [
       { label: "Грузоподъёмность", value: "до 20 т" },
@@ -209,7 +209,7 @@ export const trucks: Truck[] = [
     slug: "jcb-4cx",
     price: "3 300 ₽/час с НДС",
     count: 2,
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/29fc9d6a-adfb-4899-9119-3136ce0cb7d4.webp",
+    image: "/fleet-opt/29fc9d6a-adfb-4899-9119-3136ce0cb7d4.webp",
     alt: "Экскаватор-погрузчик JCB 4CX",
     specs: [
       { label: "Макс. глубина копания", value: "5,58 м" },
@@ -226,7 +226,7 @@ export const trucks: Truck[] = [
     price: "3 000 ₽/час с НДС",
     count: 1,
     tag: { label: "Новинка", icon: "Sparkles", color: "from-cyan-500 to-blue-500" },
-    image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/761d840a-c678-4fee-a5eb-4531b7ca7d17.webp",
+    image: "/fleet-opt/761d840a-c678-4fee-a5eb-4531b7ca7d17.webp",
     alt: "Экскаватор-погрузчик JCB 3CX",
     specs: [
       { label: "Макс. глубина копания", value: "4,24 м" },
