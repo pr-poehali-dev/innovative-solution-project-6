@@ -1,0 +1,10 @@
+// Мини-превью баннеров: показываются сразу, пока грузится полное фото
+export const BANNER_BLUR: Record<string, string> = {
+  "/img/banner-asfalt.webp": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAADwBACdASoUABQAPwFwrFGrJiQiqA1RYCAJYwC7ABELEFwXvw0Sw6bLMNf5V0WxEwAA/suLDkIQWFXQgZ26Oc4QYG/xdC5dPs5XNbPCZf1q5Jwyyweg/4rWGJxIuI4B9M8T6nDXJxr3wpyny5jXgahj2eiP+j3kKnlqHfHYtyGQ7O24HImoYbDDXktkBdOIIiAAAA==",
+  "/img/banner-faq.webp": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAADwBACdASoUABQAPwFssFCrJaSisBgIAWAgCWQAxNg0eGoD00G0sMaJXLJrTSJ06wAA/uOq5sjaHGc62WSu1vKL5YLzzML5QiGFbgCx0Q1oT11/9wk1fPjoKv0V0soKE8ZoCUqnQBoLRvlHqsCMzqa/4e2gdN/AdL+qKKwu4qEU1XHhPIYQAA==",
+  "/img/banner-kirpich.webp": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAABwBACdASoUAA8APwForE6rJaQiMAgBYCAJQBUilWk/wHlDvW/AX8g+QFj3YAD+1B8R4gaBCh1xddL35EKtdYZ0pF5H5Kx4tOxK4lfNNTljxrVdInpiWxfQbLJi/HzZFHandUvcyS7gsEv5ZLlWIqQ0EMmTrzQrisl9VwJ651/dnJNe+n7XtbbQXTLFBgAA",
+  "/img/banner-otzyvy.webp": "data:image/webp;base64,UklGRrgAAABXRUJQVlA4IKwAAABQBQCdASoUABQAPwF4tFOrJyUiqAgBYCAJZACdMwnBo/2k5DLj2/HaVfEWDJP7Pa48ogAA/t6K0b6+HdskEDm/oDStibR1hh0FEmFajKLkGtOum1Ycfn1dilmL2N3hiVkNPBhsul1viWTZpvXU3Pi962b9uqJIcNqEks5wBw2k0+F1KbJhtdq7zBE0rnKrjbmeV1bluX04kjNWdgSA+wuO/jTojt26uQ61sAAA",
+  "/img/banner-park.webp": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAADwBACdASoUABQAPwFyrVKrJqOiqAqpYCAJagCB4QPv4Nwca8qz2nNV/cQaAK/26gAA/nCiynDv6OIXZ6Ej3rbNyjIjQ+3W03xH+LIxI46LXfw1qzDhX8QnwzEMDngL2wEvvFgmZai74xBSgKgtdGiacGUOrCuJDxTKjRfYcsR0JxxlWCkN5P/XoCpgAA==",
+  "/img/banner-raboty.webp": "data:image/webp;base64,UklGRsAAAABXRUJQVlA4ILQAAAAwBQCdASoUABQAPwF2s1OrJySiqAgBYCAJQBdgAcjKk8Smy+eih8ac2Sx6tETIKIsugAD7+nGKmr4OWqnxvbFYUghzrZvO+2MYP6n+p89kjVLStEilevzpnGleiCeW/9A4DCQuVUgI6Cs88VKfCcgSnXNNyPhT6jaD9M3iieCkphe+sgY2yMTUNmkqlt5zuyg8nUiH7B6eLsY8RzC6lMgoVEZ8REY92c9WvYmPwlCGwE5AAAA=",
+  "/img/banner-tehnika.webp": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAADQBACdASoUABQAPwF4tFQrJyUjKAgBYCAJQAAD2P0GtWyfoXDdYFv3nbzFJ0opgAD+lN0Oyw51l5PT+VrK4lXT+fOFIQJGDu8wa25i8octalN6/b+7+92SHLUgH491dxNIDMA1W0Ho+4QaH5GYrf6lDLq0yL0/qUq+bqDJwjGcbAAA"
+};

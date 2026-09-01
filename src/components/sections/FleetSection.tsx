@@ -7,6 +7,28 @@ import FleetLightbox from "./fleet/FleetLightbox";
 const FleetSection = () => {
   const [lightbox, setLightbox] = useState<{ src: string; alt: string; title: string } | null>(null);
 
+  // Фоновая предзагрузка всех фото парка: браузер скачивает их в свободное время,
+  // поэтому к моменту прокрутки картинки уже лежат в кэше и появляются мгновенно
+  useEffect(() => {
+    const urls = Array.from(
+      new Set(trucks.flatMap((t) => (t.images?.length ? t.images : t.image ? [t.image] : [])))
+    );
+    let i = 0;
+    let stopped = false;
+    const next = () => {
+      if (stopped || i >= urls.length) return;
+      const img = new Image();
+      img.src = urls[i++];
+      img.onload = img.onerror = () => window.setTimeout(next, 60);
+    };
+    // Стартуем после первой отрисовки, чтобы не мешать главному экрану
+    const t = window.setTimeout(next, 600);
+    return () => {
+      stopped = true;
+      window.clearTimeout(t);
+    };
+  }, []);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.innerWidth < 1024) return;
