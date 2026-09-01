@@ -131,17 +131,6 @@ const HeroHeader = () => {
                           </a>
                         ))}
                         <a
-                          href="/asfaltirovanie"
-                          onClick={() => setMenuOpen(false)}
-                          className="mt-1 flex items-center gap-2.5 py-2.5 px-3 rounded-lg text-sm font-black bg-gradient-to-r from-amber-300 via-amber-400 to-orange-500 text-white shadow-md"
-                        >
-                          <Icon name="Hammer" size={14} className="text-white shrink-0" />
-                          Асфальтирование
-                          <span className="ml-auto px-1.5 py-0.5 rounded-full bg-red-600 text-white text-[8px] font-black">
-                            NEW
-                          </span>
-                        </a>
-                        <a
                           href="/stroymaterialy"
                           onClick={() => setMenuOpen(false)}
                           className="mt-1 py-2.5 px-3 rounded-lg text-sm font-bold text-center bg-accent/15 text-accent"

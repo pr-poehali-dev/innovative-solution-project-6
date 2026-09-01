@@ -31,6 +31,7 @@ export const slides: { id: string; alt: string; fullSrc?: string; mobileSrc?: st
 ];
 
 export const navLinks = [
+  { href: "/stroymaterialy", label: "Стройматериалы", icon: "Package" },
   { href: "#features", label: "Преимущества", icon: "Award" },
   { href: "#fleet", label: "Техника", icon: "Truck" },
   { href: "#usecases", label: "Услуги", icon: "Wrench" },

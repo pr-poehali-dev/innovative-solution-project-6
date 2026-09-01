@@ -31,6 +31,7 @@ const sections = [
   { href: "/#fleet", label: "Наша техника" },
   { href: "/#usecases", label: "Виды работ" },
   { href: "/#pricing", label: "Тарифы" },
+  { href: "/stroymaterialy", label: "Стройматериалы" },
   { href: "/otzyvy", label: "Отзывы" },
   { href: "/blog", label: "Блог" },
 ];
@@ -126,7 +127,7 @@ const SiteFooter = () => {
               { href: "/#calculator", icon: "Calculator", title: "Калькулятор", desc: "Расчёт за минуту", badge: null },
               { href: "/otzyvy", icon: "Star", title: "Отзывы", desc: "4.9 на Я.Картах", badge: null },
               { href: "/manipulyator-s-lyulkoy", icon: "ArrowUpFromLine", title: "С люлькой", desc: "Работы на высоте", badge: null },
-              { href: "/manipulyator-s-bur", icon: "Drill", title: "С буром", desc: "Бурение под опоры", badge: null },
+              { href: "/stroymaterialy", icon: "Package", title: "Стройматериалы", desc: "Кирпич, блоки, бетон", badge: "NEW" },
               { href: "/blog", icon: "BookOpen", title: "Блог", desc: "Полезные статьи", badge: null },
               { href: "#contacts", icon: "Phone", title: "Контакты", desc: "+7 960 188-30-84", badge: null },
             ].map((item) => {
