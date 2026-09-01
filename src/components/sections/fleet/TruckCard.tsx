@@ -18,10 +18,10 @@ const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
   const tag = truck.tag;
   return (
     <div className={`group relative ${idx < total - 1 ? "mb-6 sm:mb-8" : "mb-8 sm:mb-12"}`}>
-      {/* Пульсирующая изумрудная подсветка */}
+      {/* Изумрудная подсветка — только на десктопе, на мобиле это лишний слой */}
       <div
-        className="absolute -inset-0.5 rounded-2xl sm:rounded-3xl pointer-events-none"
-        style={{ background: "linear-gradient(135deg, #2dd4bf 0%, #10b981 50%, #0d9488 100%)", animationDelay: `${(idx % 4) * 0.6}s` }}
+        className="hidden lg:block absolute -inset-0.5 rounded-2xl sm:rounded-3xl pointer-events-none"
+        style={{ background: "linear-gradient(135deg, #2dd4bf 0%, #10b981 50%, #0d9488 100%)" }}
       />
       {/* Градиентная рамка */}
       <div
