@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import MobileSwipeGallery from "@/components/ui/MobileSwipeGallery";
+import MaxIcon from "@/components/ui/MaxIcon";
+import { MAX_GRADIENT } from "@/components/ui/MaxButton";
+import { MAX_LINK } from "@/data/contacts";
+import { reachGoal } from "@/lib/metrika";
 import { Truck, pluralizeUnits } from "./data";
 
 interface TruckCardProps {
@@ -144,6 +148,20 @@ const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
                 >
                   <Icon name="Phone" size={16} />
                   Позвонить
+                </a>
+                <a
+                  href={MAX_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => reachGoal("max_click", { place: "fleet_card", truck: truck.slug })}
+                  className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3 rounded-full font-bold text-sm text-white transition-all active:scale-95 hover:brightness-110"
+                  style={{
+                    background: MAX_GRADIENT,
+                    boxShadow: "0 4px 16px rgba(124,58,237,0.45), 0 0 0 1px rgba(255,255,255,0.15) inset",
+                  }}
+                >
+                  <MaxIcon size={18} className="text-white shrink-0" />
+                  Написать в MAX
                 </a>
                 <Link to={`/tehnika/${truck.slug}`} className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3 border border-accent/30 rounded-full font-semibold text-sm hover:border-accent/60 hover:bg-accent/5 transition-all">
                   Подробнее

@@ -4,7 +4,10 @@ import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import MobileCallPopover from "@/components/ui/MobileCallPopover";
-import MaxButton from "@/components/ui/MaxButton";
+import MaxButton, { MAX_GRADIENT } from "@/components/ui/MaxButton";
+import MaxIcon from "@/components/ui/MaxIcon";
+import { MAX_LINK } from "@/data/contacts";
+import { reachGoal } from "@/lib/metrika";
 import TruckGallery from "./TruckGallery";
 import type { Truck } from "./trucksData";
 import { pluralizeUnits } from "./trucksData";
@@ -103,14 +106,28 @@ export default function TruckHero({ truck, slug, onOrder }: Omit<TruckHeroProps,
               </span>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 mb-6 sm:mb-8">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 mb-6 sm:mb-8">
               <button
                 onClick={onOrder}
-                className="inline-flex flex-1 sm:flex-initial items-center justify-center gap-3 bg-gradient-to-r from-accent to-accent/80 text-black font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl hover:shadow-xl hover:shadow-accent/40 transition-all text-base sm:text-lg"
+                className="inline-flex flex-1 sm:flex-initial items-center justify-center gap-3 bg-gradient-to-r from-accent to-accent/80 text-black font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl hover:shadow-xl hover:shadow-accent/40 transition-all text-base sm:text-lg whitespace-nowrap"
               >
-                <Icon name="Phone" size={20} />
+                <Icon name="Phone" size={20} className="shrink-0" />
                 Заказать — +7 960 188-30-84
 </button>
+              <a
+                href={MAX_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => reachGoal("max_click", { place: "truck_hero", truck: slug })}
+                className="inline-flex flex-1 sm:flex-initial items-center justify-center gap-2.5 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl transition-all active:scale-95 hover:brightness-110 text-base sm:text-lg whitespace-nowrap"
+                style={{
+                  background: MAX_GRADIENT,
+                  boxShadow: "0 4px 20px rgba(124,58,237,0.5), 0 0 0 1px rgba(255,255,255,0.15) inset",
+                }}
+              >
+                <MaxIcon size={22} className="text-white shrink-0" />
+                Написать в MAX
+              </a>
             </div>
 
             {/* Характеристики */}

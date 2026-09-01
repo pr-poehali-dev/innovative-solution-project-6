@@ -3,6 +3,9 @@ import Icon from "@/components/ui/icon";
 import type { Truck } from "./trucksData";
 import { trucks } from "./trucksData";
 import { cities } from "@/data/cities";
+import { MAX_LINK } from "@/data/contacts";
+import MaxIcon from "@/components/ui/MaxIcon";
+import { MAX_GRADIENT } from "@/components/ui/MaxButton";
 import { reachGoal } from "@/lib/metrika";
 
 interface TruckContentProps {
@@ -118,14 +121,30 @@ export default function TruckContent({ truck, slug }: TruckContentProps) {
       <section className="max-w-3xl mx-auto px-4 sm:px-6 py-12 text-center">
         <h2 className="text-2xl sm:text-3xl font-black tracking-tighter mb-4">Нужен {truck.title}?</h2>
         <p className="text-muted-foreground mb-6">Позвоните прямо сейчас — подача от 1 часа, работаем без выходных.</p>
-        <a
-          href="tel:+79601883084"
-          onClick={() => reachGoal("phone_click", { place: "truck_page", slug })}
-          className="inline-flex items-center gap-3 bg-gradient-to-r from-accent to-accent/80 text-black font-black px-10 py-5 rounded-2xl hover:shadow-2xl hover:shadow-accent/40 transition-all text-2xl"
-        >
-          <span className="text-2xl">📞</span>
-          <span className="text-red-600">+7 960 188-30-84</span>
-        </a>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center">
+          <a
+            href="tel:+79601883084"
+            onClick={() => reachGoal("phone_click", { place: "truck_page", slug })}
+            className="inline-flex justify-center items-center gap-3 bg-gradient-to-r from-accent to-accent/80 text-black font-black px-6 sm:px-10 py-4 sm:py-5 rounded-2xl hover:shadow-2xl hover:shadow-accent/40 transition-all text-xl sm:text-2xl"
+          >
+            <span className="text-2xl">📞</span>
+            <span className="text-red-600 whitespace-nowrap">+7 960 188-30-84</span>
+          </a>
+          <a
+            href={MAX_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => reachGoal("max_click", { place: "truck_page_cta", truck: slug })}
+            className="inline-flex justify-center items-center gap-2.5 text-white font-black px-6 sm:px-8 py-4 sm:py-5 rounded-2xl transition-all active:scale-95 hover:brightness-110 text-lg sm:text-xl"
+            style={{
+              background: MAX_GRADIENT,
+              boxShadow: "0 4px 20px rgba(124,58,237,0.5), 0 0 0 1px rgba(255,255,255,0.15) inset",
+            }}
+          >
+            <MaxIcon size={24} className="text-white shrink-0" />
+            Написать в MAX
+          </a>
+        </div>
       </section>
     </>
   );
