@@ -592,6 +592,45 @@ body.modal-open .floating-mobile-notif {
     animation: none !important;
     opacity: 0.6;
   }
+
+  /* Декоративные SVG-паттерны в подложках секций: на длинной странице
+     десятки таких слоёв переполняют видеопамять телефона — экран чернеет
+     и начинает мигать при скролле. Оставляем только фон-градиент. */
+  [aria-hidden="true"] svg[style*="gear-spin"],
+  svg[style*="animation"] {
+    animation: none !important;
+  }
+
+  /* Убираем бесконечные фоновые анимации-переливы */
+  .weather-aurora,
+  .weather-aurora-2,
+  .weather-sheen,
+  .divider-shimmer,
+  .divider-drift,
+  .divider-tape-scroll {
+    animation: none !important;
+  }
+}
+
+/* === Стабильность длинной страницы на мобильных ===
+   Chrome/Android при большом числе композитных слоёв «теряет» отрисовку:
+   появляется чёрный экран и мигание. Фиксируем фон и запрещаем
+   создавать лишние слои внутри секций. */
+@media (max-width: 767px) {
+  html {
+    background-color: hsl(var(--background));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    /* важно: без этого фиксированный фон «отваливается» при инерционном скролле */
+    overflow-x: hidden;
+  }
+
+  /* Фиксированные подложки на мобильных заменяем обычным фоном body */
+  .bg-grid {
+    background-image: none !important;
+  }
 }
 
 /* Горизонтальные ленты фильтров — без видимой полосы прокрутки */

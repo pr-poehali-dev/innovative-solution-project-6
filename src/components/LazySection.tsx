@@ -38,16 +38,10 @@ const LazySection = ({ children, minHeight = "400px", rootMargin, id }: LazySect
     };
   }, [rootMargin]);
 
+  // content-visibility на мобильных вызывает мигание и чёрные полосы при скролле:
+  // браузер постоянно пересчитывает высоту секции. Держим только минимальную высоту.
   return (
-    <div
-      ref={ref}
-      id={id}
-      style={{
-        minHeight: visible ? undefined : minHeight,
-        contentVisibility: visible ? undefined : ("auto" as const),
-        containIntrinsicSize: visible ? undefined : `1px ${minHeight}`,
-      }}
-    >
+    <div ref={ref} id={id} style={{ minHeight: visible ? undefined : minHeight }}>
       {visible && <Suspense fallback={<div style={{ minHeight }} />}>{children}</Suspense>}
     </div>
   );

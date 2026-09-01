@@ -58,7 +58,7 @@ const App = () => (
         <OfflineSuccessToast />
         <EngagementTracker />
       </Suspense>
-      <div className="fixed inset-0 -z-10 bg-background">
+      <div className="hidden lg:block fixed inset-0 -z-10 bg-background pointer-events-none">
         <div className="absolute inset-0 bg-grid opacity-100" />
         <div
           className="hidden lg:block absolute inset-0"
