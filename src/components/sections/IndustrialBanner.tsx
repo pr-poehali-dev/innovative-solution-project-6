@@ -131,7 +131,7 @@ const IndustrialBanner = ({
             <img
               src={imageUrl}
               alt={alt || `${titleStart} ${titleAccent}`}
-              loading="eager"
+              loading="lazy"
               decoding="async"
               style={
                 BANNER_BLUR[imageUrl]
@@ -211,7 +211,7 @@ const IndustrialBanner = ({
       <img
         src={imageUrl}
         alt=""
-        loading="eager"
+        loading="lazy"
         decoding="async"
         width="1024"
         height="1024"

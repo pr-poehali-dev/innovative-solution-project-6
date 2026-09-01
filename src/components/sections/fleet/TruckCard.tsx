@@ -17,7 +17,7 @@ interface TruckCardProps {
 const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
   const tag = truck.tag;
   return (
-    <div className={`group relative ${idx < total - 1 ? "mb-6 sm:mb-8" : "mb-8 sm:mb-12"}`}>
+    <div className={`fleet-card group relative ${idx < total - 1 ? "mb-6 sm:mb-8" : "mb-8 sm:mb-12"}`}>
       {/* Изумрудная подсветка — только на десктопе, на мобиле это лишний слой */}
       <div
         className="hidden lg:block absolute -inset-0.5 rounded-2xl sm:rounded-3xl pointer-events-none"

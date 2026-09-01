@@ -448,7 +448,7 @@ const SectionBackdrop = ({
   };
 
   return (
-    <div className={`relative isolate overflow-hidden ${toneStyles[tone]} ${className}`}>
+    <div className={`section-backdrop relative isolate overflow-hidden ${toneStyles[tone]} ${className}`}>
       {/* Декоративный паттерн спецтехники */}
       {renderPattern()}
 

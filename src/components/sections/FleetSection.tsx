@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import LazySection from "@/components/LazySection";
 import { trucks } from "./fleet/data";
 import TruckCard from "./fleet/TruckCard";
 import OrderInfoBlock from "./fleet/OrderInfoBlock";
@@ -7,9 +8,11 @@ import FleetLightbox from "./fleet/FleetLightbox";
 const FleetSection = () => {
   const [lightbox, setLightbox] = useState<{ src: string; alt: string; title: string } | null>(null);
 
-  // Фоновая предзагрузка всех фото парка: браузер скачивает их в свободное время,
-  // поэтому к моменту прокрутки картинки уже лежат в кэше и появляются мгновенно
+  // Предзагрузка фото парка — ТОЛЬКО на десктопе.
+  // На телефоне одновременная загрузка десятка больших фото переполняет память:
+  // браузер начинает выгружать и заново декодировать картинки, экран мигает.
   useEffect(() => {
+    if (typeof window === "undefined" || window.innerWidth < 1024) return;
     const urls = Array.from(
       new Set(trucks.flatMap((t) => (t.images?.length ? t.images : t.image ? [t.image] : [])))
     );
@@ -19,10 +22,9 @@ const FleetSection = () => {
       if (stopped || i >= urls.length) return;
       const img = new Image();
       img.src = urls[i++];
-      img.onload = img.onerror = () => window.setTimeout(next, 60);
+      img.onload = img.onerror = () => window.setTimeout(next, 120);
     };
-    // Стартуем после первой отрисовки, чтобы не мешать главному экрану
-    const t = window.setTimeout(next, 600);
+    const t = window.setTimeout(next, 1200);
     return () => {
       stopped = true;
       window.clearTimeout(t);
@@ -62,15 +64,26 @@ const FleetSection = () => {
   return (
     <section className="pt-4 sm:pt-6 pb-16 sm:pb-32 px-4 sm:px-6 scroll-mt-20 sm:scroll-mt-24">
       <div className="max-w-7xl mx-auto">
-        {trucks.map((truck, idx) => (
-          <TruckCard
-            key={idx}
-            truck={truck}
-            idx={idx}
-            total={trucks.length}
-            onOpenLightbox={setLightbox}
-          />
-        ))}
+        {trucks.map((truck, idx) => {
+          const card = (
+            <TruckCard
+              truck={truck}
+              idx={idx}
+              total={trucks.length}
+              onOpenLightbox={setLightbox}
+            />
+          );
+          // Первые 3 карточки рисуем сразу, остальные — через фоновую очередь.
+          // Они всё равно готовы до того, как пользователь долистает, но телефон
+          // собирает их по одной и не захлёбывается от 13 карточек разом.
+          return idx < 3 ? (
+            <div key={idx}>{card}</div>
+          ) : (
+            <LazySection key={idx} minHeight="700px">
+              {card}
+            </LazySection>
+          );
+        })}
 
         <OrderInfoBlock />
       </div>
