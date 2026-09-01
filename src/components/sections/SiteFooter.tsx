@@ -5,6 +5,7 @@ import BrandLogo from "@/components/ui/BrandLogo";
 import CallbackModal from "@/components/ui/CallbackModal";
 import { cities } from "@/data/cities";
 import { MAX_LINK } from "@/data/contacts";
+import MaxIcon from "@/components/ui/MaxIcon";
 import { reachGoal } from "@/lib/metrika";
 
 const trucks = [
@@ -248,8 +249,11 @@ const SiteFooter = () => {
                   onClick={() => reachGoal("max_click", { place: "footer" })}
                   className="group flex items-center gap-3 px-4 py-3 rounded-2xl border border-[#8B5CF6]/40 bg-[#8B5CF6]/10 hover:bg-[#8B5CF6]/20 transition-colors"
                 >
-                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#8B5CF6] flex items-center justify-center flex-shrink-0">
-                    <Icon name="MessageSquare" size={16} className="text-white sm:!w-[18px] sm:!h-[18px]" />
+                  <div
+                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#7C3AED]/40"
+                    style={{ background: "linear-gradient(135deg, #3B82F6 0%, #7C3AED 55%, #A855F7 100%)" }}
+                  >
+                    <MaxIcon size={20} className="text-white" />
                   </div>
                   <div className="flex flex-col leading-tight">
                     <span className="text-[#c4b5fd] text-[10px] sm:text-xs font-bold uppercase tracking-wider">Мы в MAX</span>

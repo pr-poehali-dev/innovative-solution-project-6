@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
 import { MAX_LINK } from "@/data/contacts";
+import MaxIcon from "@/components/ui/MaxIcon";
 import { reachGoal } from "@/lib/metrika";
 
 const PHONE = "+7 960 188-30-84";
@@ -49,9 +50,10 @@ const FloatingCallButton = () => {
         rel="noopener noreferrer"
         onClick={() => reachGoal("max_click", { source: "floating_fab" })}
         aria-label="Написать в MAX"
-        className="w-12 h-12 rounded-full shadow-xl shadow-[#8B5CF6]/40 active:scale-90 flex items-center justify-center bg-[#8B5CF6]"
+        className="w-12 h-12 rounded-full shadow-xl shadow-[#7C3AED]/50 active:scale-90 flex items-center justify-center"
+        style={{ background: "linear-gradient(135deg, #3B82F6 0%, #7C3AED 55%, #A855F7 100%)" }}
       >
-        <Icon name="MessageSquare" size={20} className="text-white" strokeWidth={2.5} />
+        <MaxIcon size={24} className="text-white" />
       </a>
 
       <a
