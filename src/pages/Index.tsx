@@ -12,9 +12,6 @@ import FaqSection from "@/components/sections/FaqSection";
 import SeoFooterLinks from "@/components/sections/SeoFooterLinks";
 import SiteFooter from "@/components/sections/SiteFooter";
 import WeatherWidget from "@/components/sections/WeatherWidget";
-import AsphaltPromoSection from "@/components/sections/AsphaltPromoSection";
-import AsphaltSeoText from "@/components/sections/AsphaltSeoText";
-import AsphaltBigBanner from "@/components/sections/AsphaltBigBanner";
 import HeroSection from "@/components/sections/HeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import SeoMeta from "@/components/seo/SeoMeta";
@@ -47,7 +44,7 @@ const Index = () => {
         eyebrow="СОБСТВЕННЫЙ ПАРК"
         titleStart="НАША"
         titleAccent="ТЕХНИКА"
-        subtitle="15+ единиц спецтехники — манипуляторы, краны, асфальтоукладчики"
+        subtitle="15+ единиц спецтехники — краны-манипуляторы и автокраны"
         icon="Truck"
         size="md"
         href="#fleet"
@@ -76,43 +73,9 @@ const Index = () => {
         imageUrl="/img/banner-park.webp"
       />
 
-      {/* === Баннер — КИРПИЧ с доставкой === */}
-      <IndustrialBanner
-        eyebrow="СТРОЙМАТЕРИАЛЫ"
-        titleStart="КИРПИЧ С"
-        titleAccent="ДОСТАВКОЙ"
-        subtitle="Силикатный и облицовочный кирпич — привезём и разгрузим манипулятором"
-        icon="Blocks"
-        size="md"
-        href="/stroymaterialy/kirpich"
-        clean
-        caption="Склад силикатного кирпича — белый, жёлтый и розовый, отгрузка поддонами"
-        alt="Склад силикатного кирпича поддонами — белый, жёлтый и розовый кирпич"
-        imageUrl="/img/banner-kirpich.webp"
-      />
-
       {/* Применение — следы протекторов (грузовая техника) */}
       <SectionBackdrop tone="warm" pattern="tracks">
         <UseCasesSection />
-      </SectionBackdrop>
-
-      {/* === Баннер №3 — АСФАЛЬТ (асфальтоукладчик на закате) === */}
-      <IndustrialBanner
-        eyebrow="АСФАЛЬТИРОВАНИЕ"
-        titleStart="УКЛАДЫВАЕМ"
-        titleAccent="АСФАЛЬТ"
-        subtitle="Дороги, дворы, парковки — под ключ с гарантией"
-        icon="Construction"
-        size="md"
-        imageUrl="/img/banner-asfalt.webp"
-      />
-
-      {/* Всё про асфальт в одном месте: промо + большой баннер с калькулятором + SEO-текст */}
-      <SectionBackdrop tone="warm" pattern="tracks">
-        <AsphaltPromoSection />
-        <AsphaltBigBanner />
-        <SectionDivider variant="wave" />
-        <AsphaltSeoText />
       </SectionBackdrop>
 
       {/* Погода — чертёж со схемой (инженерный расчёт) */}

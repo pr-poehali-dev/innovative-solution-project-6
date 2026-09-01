@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
-import { getCategory, type Review, type Palette } from "./data";
+import { type Review, type Palette } from "./data";
 
 interface ReviewCardProps {
   review: Review;
@@ -96,36 +95,10 @@ const ReviewCard = ({ review, palette }: ReviewCardProps) => {
 
         {/* Услуга + категория */}
         <div className="flex flex-wrap items-center gap-2">
-          {(() => {
-            const cat = getCategory(review);
-            const isAsphalt = cat === "asphalt";
-            const badgeClass = `inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black tracking-widest uppercase transition-all ${
-              isAsphalt
-                ? "bg-amber-500/15 border border-amber-400/50 text-amber-300 hover:bg-amber-500/30 hover:border-amber-300 hover:scale-105 cursor-pointer"
-                : "bg-cyan-500/15 border border-cyan-400/50 text-cyan-300"
-            }`;
-            const inner = (
-              <>
-                <Icon
-                  name={isAsphalt ? "Sparkles" : "Truck"}
-                  size={11}
-                />
-                {isAsphalt ? "Асфальтирование" : "Манипулятор"}
-                {isAsphalt && <Icon name="ArrowRight" size={10} />}
-              </>
-            );
-            return isAsphalt ? (
-              <Link
-                to="/asfaltirovanie"
-                className={badgeClass}
-                aria-label="Перейти к услуге асфальтирования"
-              >
-                {inner}
-              </Link>
-            ) : (
-              <span className={badgeClass}>{inner}</span>
-            );
-          })()}
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black tracking-widest uppercase bg-cyan-500/15 border border-cyan-400/50 text-cyan-300">
+            <Icon name="Truck" size={11} />
+            Манипулятор
+          </span>
           <div
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full ${palette.accentBg} border ${palette.accentBorder}`}
           >

@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import Icon from "@/components/ui/icon";
 import OrderModal from "@/components/ui/OrderModal";
 
-type Category = "manipulator" | "asphalt" | "heights" | "transport";
+type Category = "manipulator" | "heights" | "transport";
 
 const photos: { url: string; caption: string; category: Category }[] = [
   {
@@ -15,46 +15,6 @@ const photos: { url: string; caption: string; category: Category }[] = [
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/191b94b2-35ca-4309-9273-0325efde7891.jpg",
     caption: "Доставка на загородный объект — FAW J6P-390 с КМУ DongYang",
     category: "manipulator",
-  },
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/bf13e959-8028-409c-96f6-6d4cdeef23bc.jpg",
-    caption: "Укладка асфальта гусеничным асфальтоукладчиком Vögele SUPER 2000-3",
-    category: "asphalt",
-  },
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/1c710088-2f75-4927-bd51-e49a078366c4.jpg",
-    caption: "Уплотнение асфальта катком HAMM — благоустройство двора",
-    category: "asphalt",
-  },
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/2990aefa-95af-485f-9c51-836315e9547d.jpg",
-    caption: "Асфальтирование автомобильной трассы — бригада на объекте",
-    category: "asphalt",
-  },
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/faf5a333-196c-43d0-8c3e-0efe23d3ab5e.jpg",
-    caption: "Укладка асфальта в коттеджном посёлке — подъездная дорога",
-    category: "asphalt",
-  },
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/d4d69dae-0a9c-4443-921a-3e1febd1cdf2.jpg",
-    caption: "Асфальтирование городской дороги — полный цикл работ",
-    category: "asphalt",
-  },
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/64d274b7-ea55-412e-952b-72efedd17f37.jpg",
-    caption: "Асфальтирование подъездной дорожки к частному дому",
-    category: "asphalt",
-  },
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/15a32fdf-10e6-41d2-9220-e2f703c6a43e.jpg",
-    caption: "Укладка асфальта у двухэтажного коттеджа — каток HAMM",
-    category: "asphalt",
-  },
-  {
-    url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/0d019fa7-9b61-423e-be2c-642236aa4802.jpg",
-    caption: "Заасфальтированная площадка и парковка у загородного дома",
-    category: "asphalt",
   },
   {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/8f5f1c5e-cd31-4f9e-83e9-6814c83c395e.webp",
@@ -130,7 +90,6 @@ const filters: { id: FilterId; label: string; icon: string }[] = [
   { id: "manipulator", label: "Манипулятор", icon: "Truck" },
   { id: "heights", label: "Высотные работы", icon: "ArrowUp" },
   { id: "transport", label: "Перевозка", icon: "PackageOpen" },
-  { id: "asphalt", label: "Асфальт", icon: "Construction" },
 ];
 
 
