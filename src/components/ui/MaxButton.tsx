@@ -8,7 +8,8 @@ interface MaxButtonProps {
   className?: string;
 }
 
-const GRADIENT = "linear-gradient(135deg, #3B82F6 0%, #7C3AED 55%, #A855F7 100%)";
+export const MAX_GRADIENT =
+  "linear-gradient(135deg, #22D3EE 0%, #3B82F6 35%, #7C3AED 70%, #D946EF 100%)";
 
 const MaxButton = ({ place = "header", compact = false, className = "" }: MaxButtonProps) => (
   <a
@@ -18,13 +19,20 @@ const MaxButton = ({ place = "header", compact = false, className = "" }: MaxBut
     onClick={() => reachGoal("max_click", { place })}
     aria-label="Написать нам в MAX"
     title="Написать в MAX"
-    className={`inline-flex items-center justify-center rounded-full text-white shadow-lg shadow-[#7C3AED]/40 hover:shadow-[#7C3AED]/60 hover:brightness-110 active:scale-95 transition-all ${
-      compact ? "w-10 h-10 sm:w-11 sm:h-11" : "gap-2 px-4 py-2.5 font-black text-sm"
+    className={`group relative inline-flex items-center justify-center rounded-full text-white transition-all active:scale-95 hover:brightness-110 ${
+      compact ? "w-10 h-10 sm:w-11 sm:h-11" : "gap-2.5 px-5 py-3 font-black text-sm"
     } ${className}`}
-    style={{ background: GRADIENT }}
+    style={{
+      background: MAX_GRADIENT,
+      boxShadow: "0 4px 20px rgba(124,58,237,0.55), 0 0 0 1px rgba(255,255,255,0.15) inset",
+    }}
   >
-    <MaxIcon size={compact ? 22 : 20} className="text-white shrink-0" />
-    {!compact && <span>Написать в MAX</span>}
+    <span
+      className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+      style={{ boxShadow: "0 0 26px 4px rgba(168,85,247,0.55)" }}
+    />
+    <MaxIcon size={compact ? 26 : 22} className="relative text-white shrink-0" />
+    {!compact && <span className="relative">Написать в MAX</span>}
   </a>
 );
 

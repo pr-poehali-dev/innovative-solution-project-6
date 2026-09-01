@@ -6,6 +6,7 @@ import CallbackModal from "@/components/ui/CallbackModal";
 import { cities } from "@/data/cities";
 import { MAX_LINK } from "@/data/contacts";
 import MaxIcon from "@/components/ui/MaxIcon";
+import { MAX_GRADIENT } from "@/components/ui/MaxButton";
 import { reachGoal } from "@/lib/metrika";
 
 const trucks = [
@@ -250,8 +251,11 @@ const SiteFooter = () => {
                   className="group flex items-center gap-3 px-4 py-3 rounded-2xl border border-[#8B5CF6]/40 bg-[#8B5CF6]/10 hover:bg-[#8B5CF6]/20 transition-colors"
                 >
                   <div
-                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#7C3AED]/40"
-                    style={{ background: "linear-gradient(135deg, #3B82F6 0%, #7C3AED 55%, #A855F7 100%)" }}
+                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{
+                      background: MAX_GRADIENT,
+                      boxShadow: "0 4px 18px rgba(124,58,237,0.5), 0 0 0 1px rgba(255,255,255,0.15) inset",
+                    }}
                   >
                     <MaxIcon size={20} className="text-white" />
                   </div>
