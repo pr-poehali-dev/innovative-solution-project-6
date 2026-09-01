@@ -641,3 +641,56 @@ body.modal-open .floating-mobile-notif {
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
+/* ============================================================
+   ОТКЛЮЧЕНИЕ АНИМАЦИЙ
+   Убираем все декоративные анимации и переходы ради скорости.
+   Важно: элементы, которые раньше «проявлялись», принудительно
+   делаем видимыми — иначе без анимации они остались бы скрытыми.
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
+  scroll-behavior: auto !important;
+}
+
+/* Анимации появления доводим до конечного состояния — контент виден сразу */
+.page-enter,
+.animate-in,
+.animate-fade-in,
+.animate-slide-up {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Бесконечные декоративные эффекты (свечение, парение, блики) — полностью убираем */
+.animate-float,
+.animate-glow,
+.animate-pulse,
+.animate-ping,
+.animate-bounce {
+  animation: none !important;
+}
+
+/* Спиннеры загрузки оставляем крутиться — иначе непонятно, что идёт процесс */
+.animate-spin {
+  animation: spin 0.8s linear infinite !important;
+}
+
+/* Раскрытие аккордеонов оставляем мгновенным, но рабочим */
+.animate-accordion-down,
+.animate-accordion-up {
+  animation: none !important;
+}
+
+/* Убираем тяжёлые для мобильных подсказки браузеру о будущей анимации */
+* {
+  will-change: auto !important;
+}
