@@ -20,6 +20,7 @@ export type MetrikaGoal =
   | "calc_opened"         // Пользователь открыл/использовал калькулятор (микро — 30₽)
   | "whatsapp_click"      // Клик по WhatsApp (★ 200₽)
   | "telegram_click"      // Клик по Telegram (★ 200₽)
+  | "max_click"           // Клик по мессенджеру MAX (★ 200₽)
   | "fleet_view"          // Просмотр карточки техники / переход на /truck (50₽)
   | "scroll_75"           // Глубокий скролл (вовлечённость 30₽)
   | "long_session";       // Сессия 60+ секунд (вовлечённость 30₽)

@@ -6,6 +6,8 @@ import uuid
 import psycopg2
 import smtplib
 import boto3
+import urllib.request
+import urllib.parse
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
@@ -717,6 +719,38 @@ def send_email(name: str, phone: str, comment: str, lead_id: int, media: list[di
         smtp.send_message(msg)
 
 
+def send_max(name: str, phone: str, comment: str, lead_id: int, media: list[dict] | None = None) -> None:
+    """Отправляет заявку в мессенджер MAX через бота."""
+    token = os.environ.get('MAX_BOT_TOKEN')
+    chat_id = os.environ.get('MAX_CHAT_ID')
+    if not token or not chat_id:
+        return
+
+    lines = [
+        f"🔔 Новая заявка #{lead_id}",
+        "",
+        f"👤 Имя: {name}",
+        f"📞 Телефон: {phone}",
+    ]
+    if comment:
+        lines.append(f"📝 Задача: {comment}")
+    if media:
+        lines.append(f"📎 Вложений: {len(media)}")
+        for m in media[:5]:
+            lines.append(m.get('url', ''))
+    lines.append("")
+    lines.append(f"🕐 {datetime.now().strftime('%d.%m.%Y %H:%M')}")
+
+    payload = json.dumps({'text': "\n".join(lines)}).encode('utf-8')
+    url = f"https://botapi.max.ru/messages?access_token={urllib.parse.quote(token)}&chat_id={urllib.parse.quote(str(chat_id))}"
+
+    req = urllib.request.Request(
+        url, data=payload, headers={'Content-Type': 'application/json'}, method='POST'
+    )
+    with urllib.request.urlopen(req, timeout=5) as resp:
+        print(f"MAX status: {resp.status}")
+
+
 MATERIALS_ADMIN_KEY = 'favorit2026'
 
 
@@ -985,6 +1019,11 @@ def handler(event: dict, context) -> dict:
         send_email(name, phone, comment, lead_id, uploaded_media)
     except Exception as e:
         print(f"Email send error: {e}")
+
+    try:
+        send_max(name, phone, comment, lead_id, uploaded_media)
+    except Exception as e:
+        print(f"MAX send error: {e}")
 
     return {
         'statusCode': 200,

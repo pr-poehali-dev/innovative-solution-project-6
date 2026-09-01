@@ -4,6 +4,7 @@ import Icon from "@/components/ui/icon";
 import BrandLogo from "@/components/ui/BrandLogo";
 import CallbackModal from "@/components/ui/CallbackModal";
 import { cities } from "@/data/cities";
+import { MAX_LINK } from "@/data/contacts";
 import { reachGoal } from "@/lib/metrika";
 
 const trucks = [
@@ -237,6 +238,22 @@ const SiteFooter = () => {
                   <div className="flex flex-col leading-tight">
                     <span className="text-accent/80 text-[10px] sm:text-xs font-bold uppercase tracking-wider">Директор</span>
                     <span className="text-white font-black text-base sm:text-lg tabular-nums">+7 960 169-09-90</span>
+                  </div>
+                </a>
+
+                <a
+                  href={MAX_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => reachGoal("max_click", { place: "footer" })}
+                  className="group flex items-center gap-3 px-4 py-3 rounded-2xl border border-[#8B5CF6]/40 bg-[#8B5CF6]/10 hover:bg-[#8B5CF6]/20 transition-colors"
+                >
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#8B5CF6] flex items-center justify-center flex-shrink-0">
+                    <Icon name="MessageSquare" size={16} className="text-white sm:!w-[18px] sm:!h-[18px]" />
+                  </div>
+                  <div className="flex flex-col leading-tight">
+                    <span className="text-[#c4b5fd] text-[10px] sm:text-xs font-bold uppercase tracking-wider">Мы в MAX</span>
+                    <span className="text-white font-black text-sm sm:text-base">Написать в мессенджер</span>
                   </div>
                 </a>
 
