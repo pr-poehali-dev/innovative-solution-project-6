@@ -74,7 +74,7 @@ const MobileSwipeGallery = ({
                   src={src}
                   alt={`${alt} — фото ${i + 1}`}
                   className={`w-full select-none pointer-events-none ${imgClassName}`}
-                  loading={i === 0 ? "eager" : "lazy"}
+                  loading="lazy"
                   decoding="async"
                   draggable={false}
                   width="800"

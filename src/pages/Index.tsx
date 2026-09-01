@@ -60,7 +60,7 @@ const Index = () => {
       <SectionBackdrop tone="tech" pattern="crane">
         <LazySection><PopularTechSection /></LazySection>
         <SectionDivider variant="crane" />
-        <LazySection id="fleet"><FleetSection /></LazySection>
+        <LazySection id="fleet" minHeight="3000px"><FleetSection /></LazySection>
         <SectionDivider variant="blueprint" />
         <LazySection><PricingTableSection /></LazySection>
         <SectionDivider variant="blueprint" />
