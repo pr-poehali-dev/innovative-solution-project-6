@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { createRoot } from 'react-dom/client'
 import App from './App'
 import './index.css'
@@ -8,12 +7,28 @@ const RELOAD_FLAG = "chunk-reload-attempted";
 const isChunkLoadError = (msg: string) =>
   /Failed to fetch dynamically imported module|Importing a module script failed|ChunkLoadError|Loading chunk \d+ failed|Loading CSS chunk/i.test(msg);
 
-const tryReload = (reason: string) => {
+const tryReload = async (reason: string) => {
   if (sessionStorage.getItem(RELOAD_FLAG)) {
     console.error("Chunk reload already attempted, skipping. Reason:", reason);
     return;
   }
   sessionStorage.setItem(RELOAD_FLAG, "1");
+
+  // Причина почти всегда — устаревший офлайн-кеш после обновления сайта.
+  // Чистим его, иначе перезагрузка отдаст тот же битый файл.
+  try {
+    if ("caches" in window) {
+      const keys = await caches.keys();
+      await Promise.all(keys.map((k) => caches.delete(k)));
+    }
+    if ("serviceWorker" in navigator) {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map((r) => r.unregister()));
+    }
+  } catch {
+    void 0;
+  }
+
   window.location.reload();
 };
 

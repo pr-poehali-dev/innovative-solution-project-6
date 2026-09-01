@@ -1,21 +1,25 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, type ComponentType } from "react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+// Второстепенные блоки: если файл не догрузился (старый кеш, обрыв связи),
+// сайт продолжает работать без него, а не падает целиком
+const softLazy = <T,>(load: () => Promise<T>) =>
+  lazy(() =>
+    load().catch(() => ({ default: () => null })) as Promise<{
+      default: ComponentType;
+    }>
+  );
 
-const Toaster = lazy(() =>
-  import("@/components/ui/toaster").then((m) => ({ default: m.Toaster }))
-);
-const Sonner = lazy(() =>
-  import("@/components/ui/sonner").then((m) => ({ default: m.Toaster }))
-);
-const ScrollToTop = lazy(() => import("@/components/ScrollToTop"));
-const FloatingCallButton = lazy(() => import("@/components/ui/FloatingCallButton"));
-const AutoReindex = lazy(() => import("@/components/AutoReindex"));
-const OfflineDownloadModal = lazy(() => import("@/components/ui/OfflineDownloadModal"));
-const OfflineSuccessToast = lazy(() => import("@/components/ui/OfflineSuccessToast"));
-const EngagementTracker = lazy(() => import("@/components/EngagementTracker"));
+const ScrollToTop = softLazy(() => import("@/components/ScrollToTop"));
+const FloatingCallButton = softLazy(() => import("@/components/ui/FloatingCallButton"));
+const AutoReindex = softLazy(() => import("@/components/AutoReindex"));
+const OfflineDownloadModal = softLazy(() => import("@/components/ui/OfflineDownloadModal"));
+const OfflineSuccessToast = softLazy(() => import("@/components/ui/OfflineSuccessToast"));
+const EngagementTracker = softLazy(() => import("@/components/EngagementTracker"));
 
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./components/NotFoundWithNoindex"));
