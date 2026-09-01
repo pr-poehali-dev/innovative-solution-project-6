@@ -3,7 +3,6 @@ import { trucks } from "./fleet/data";
 import TruckCard from "./fleet/TruckCard";
 import OrderInfoBlock from "./fleet/OrderInfoBlock";
 import FleetLightbox from "./fleet/FleetLightbox";
-import LazySection from "@/components/LazySection";
 
 const FleetSection = () => {
   const [lightbox, setLightbox] = useState<{ src: string; alt: string; title: string } | null>(null);
@@ -41,25 +40,15 @@ const FleetSection = () => {
   return (
     <section className="pt-4 sm:pt-6 pb-16 sm:pb-32 px-4 sm:px-6 scroll-mt-20 sm:scroll-mt-24">
       <div className="max-w-7xl mx-auto">
-        {trucks.map((truck, idx) => {
-          const card = (
-            <TruckCard
-              truck={truck}
-              idx={idx}
-              total={trucks.length}
-              onOpenLightbox={setLightbox}
-            />
-          );
-          // Первые 2 карточки рендерим сразу, остальные — по мере прокрутки,
-          // иначе телефон одновременно тянет 13 фото и подвисает
-          return idx < 2 ? (
-            <div key={idx}>{card}</div>
-          ) : (
-            <LazySection key={idx} minHeight="700px">
-              {card}
-            </LazySection>
-          );
-        })}
+        {trucks.map((truck, idx) => (
+          <TruckCard
+            key={idx}
+            truck={truck}
+            idx={idx}
+            total={trucks.length}
+            onOpenLightbox={setLightbox}
+          />
+        ))}
 
         <OrderInfoBlock />
       </div>

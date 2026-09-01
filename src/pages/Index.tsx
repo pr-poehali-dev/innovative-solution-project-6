@@ -1,7 +1,22 @@
-import { lazy } from "react";
+import FleetSection from "@/components/sections/FleetSection";
+import PopularTechSection from "@/components/sections/PopularTechSection";
+import BottomSections from "@/components/sections/BottomSections";
+import ReviewsSection from "@/components/sections/ReviewsSection";
+import GallerySection from "@/components/sections/GallerySection";
+import CalculatorSection from "@/components/sections/CalculatorSection";
+import PricingTableSection from "@/components/sections/PricingTableSection";
+import ClientsSection from "@/components/sections/ClientsSection";
+import UseCasesSection from "@/components/sections/UseCasesSection";
+import SeoTextSection from "@/components/sections/SeoTextSection";
+import FaqSection from "@/components/sections/FaqSection";
+import SeoFooterLinks from "@/components/sections/SeoFooterLinks";
+import SiteFooter from "@/components/sections/SiteFooter";
+import WeatherWidget from "@/components/sections/WeatherWidget";
+import AsphaltPromoSection from "@/components/sections/AsphaltPromoSection";
+import AsphaltSeoText from "@/components/sections/AsphaltSeoText";
+import AsphaltBigBanner from "@/components/sections/AsphaltBigBanner";
 import HeroSection from "@/components/sections/HeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
-import LazySection from "@/components/LazySection";
 import SeoMeta from "@/components/seo/SeoMeta";
 import StructuredData from "@/components/seo/StructuredData";
 import SectionDivider from "@/components/ui/SectionDivider";
@@ -9,23 +24,6 @@ import SectionBackdrop from "@/components/ui/SectionBackdrop";
 import IndustrialBanner from "@/components/sections/IndustrialBanner";
 import { useVisibleSections } from "@/hooks/useVisibleSections";
 
-const FleetSection = lazy(() => import("@/components/sections/FleetSection"));
-const PopularTechSection = lazy(() => import("@/components/sections/PopularTechSection"));
-const BottomSections = lazy(() => import("@/components/sections/BottomSections"));
-const ReviewsSection = lazy(() => import("@/components/sections/ReviewsSection"));
-const GallerySection = lazy(() => import("@/components/sections/GallerySection"));
-const CalculatorSection = lazy(() => import("@/components/sections/CalculatorSection"));
-const PricingTableSection = lazy(() => import("@/components/sections/PricingTableSection"));
-const ClientsSection = lazy(() => import("@/components/sections/ClientsSection"));
-const UseCasesSection = lazy(() => import("@/components/sections/UseCasesSection"));
-const SeoTextSection = lazy(() => import("@/components/sections/SeoTextSection"));
-const FaqSection = lazy(() => import("@/components/sections/FaqSection"));
-const SeoFooterLinks = lazy(() => import("@/components/sections/SeoFooterLinks"));
-const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
-const WeatherWidget = lazy(() => import("@/components/sections/WeatherWidget"));
-const AsphaltPromoSection = lazy(() => import("@/components/sections/AsphaltPromoSection"));
-const AsphaltSeoText = lazy(() => import("@/components/sections/AsphaltSeoText"));
-const AsphaltBigBanner = lazy(() => import("@/components/sections/AsphaltBigBanner"));
 const SECTION_IDS = ["hero", "features", "how", "pricing", "cta"];
 
 const Index = () => {
@@ -58,13 +56,13 @@ const Index = () => {
 
       {/* Зона техники — силуэт крана-манипулятора на фоне */}
       <SectionBackdrop tone="tech" pattern="crane">
-        <LazySection><PopularTechSection /></LazySection>
+        <PopularTechSection />
         <SectionDivider variant="crane" />
-        <LazySection id="fleet" minHeight="3000px"><FleetSection /></LazySection>
+        <FleetSection />
         <SectionDivider variant="blueprint" />
-        <LazySection><PricingTableSection /></LazySection>
+        <PricingTableSection />
         <SectionDivider variant="blueprint" />
-        <LazySection><CalculatorSection /></LazySection>
+        <CalculatorSection />
       </SectionBackdrop>
 
       {/* === Баннер №2 — ВЕСЬ ПАРК (грузовики в ряд на закате) === */}
@@ -95,7 +93,7 @@ const Index = () => {
 
       {/* Применение — следы протекторов (грузовая техника) */}
       <SectionBackdrop tone="warm" pattern="tracks">
-        <LazySection><UseCasesSection /></LazySection>
+        <UseCasesSection />
       </SectionBackdrop>
 
       {/* === Баннер №3 — АСФАЛЬТ (асфальтоукладчик на закате) === */}
@@ -111,15 +109,15 @@ const Index = () => {
 
       {/* Всё про асфальт в одном месте: промо + большой баннер с калькулятором + SEO-текст */}
       <SectionBackdrop tone="warm" pattern="tracks">
-        <LazySection><AsphaltPromoSection /></LazySection>
-        <LazySection><AsphaltBigBanner /></LazySection>
+        <AsphaltPromoSection />
+        <AsphaltBigBanner />
         <SectionDivider variant="wave" />
-        <LazySection><AsphaltSeoText /></LazySection>
+        <AsphaltSeoText />
       </SectionBackdrop>
 
       {/* Погода — чертёж со схемой (инженерный расчёт) */}
       <SectionBackdrop tone="deep" pattern="blueprint">
-        <LazySection><WeatherWidget /></LazySection>
+        <WeatherWidget />
       </SectionBackdrop>
 
       {/* === Баннер №4 — НАШИ РАБОТЫ (экскаватор в работе) === */}
@@ -135,9 +133,9 @@ const Index = () => {
 
       {/* Галерея + клиенты — контейнеры со стропами (груз / работа) */}
       <SectionBackdrop tone="soft" pattern="cargo">
-        <LazySection><GallerySection /></LazySection>
+        <GallerySection />
         <SectionDivider variant="stripes" />
-        <LazySection><ClientsSection /></LazySection>
+        <ClientsSection />
       </SectionBackdrop>
 
       {/* === Баннер №5 — ОТЗЫВЫ (рукопожатие на стройке) === */}
@@ -153,14 +151,14 @@ const Index = () => {
 
       {/* Отзывы — заклёпки на металле (надёжно) */}
       <SectionBackdrop tone="spotlight" pattern="rivets">
-        <LazySection><ReviewsSection /></LazySection>
+        <ReviewsSection />
       </SectionBackdrop>
 
       <SectionDivider variant="diamond" />
 
       {/* SEO-текст — трубы / арматура (стройка) */}
       <SectionBackdrop tone="deep" pattern="pipes">
-        <LazySection><SeoTextSection /></LazySection>
+        <SeoTextSection />
       </SectionBackdrop>
 
       {/* === Баннер №6 — FAQ (городские краны на закате) === */}
@@ -176,14 +174,14 @@ const Index = () => {
 
       {/* FAQ — знаки стройки + жёлтая лента (внимание) */}
       <SectionBackdrop tone="warm" pattern="warning">
-        <LazySection><FaqSection /></LazySection>
+        <FaqSection />
       </SectionBackdrop>
 
       <SectionDivider variant="glow" />
 
-      <LazySection><BottomSections visibleSections={visibleSections} /></LazySection>
-      <LazySection><SeoFooterLinks /></LazySection>
-      <LazySection><SiteFooter /></LazySection>
+      <BottomSections visibleSections={visibleSections} />
+      <SeoFooterLinks />
+      <SiteFooter />
     </div>
   );
 };
