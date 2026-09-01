@@ -6,6 +6,7 @@ import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import CallbackModal from "@/components/ui/CallbackModal";
+import MaxButton from "@/components/ui/MaxButton";
 import LazySection from "@/components/LazySection";
 import { useState } from "react";
 import { getCityBySlug, cities } from "@/data/cities";
@@ -163,6 +164,7 @@ const CityPage = () => {
             >
               <Icon name="MessageCircle" size={18} className="text-accent" />
             </button>
+            <MaxButton place="header_city" compact />
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />
           </div>

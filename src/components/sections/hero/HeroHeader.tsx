@@ -4,6 +4,7 @@ import PhoneButton from "@/components/ui/PhoneButton";
 import MobileCallPopover from "@/components/ui/MobileCallPopover";
 import BrandLogo from "@/components/ui/BrandLogo";
 import OfflineStatusDot from "@/components/ui/OfflineStatusDot";
+import MaxButton from "@/components/ui/MaxButton";
 import MaterialsMenu from "./MaterialsMenu";
 import { navLinks } from "./heroData";
 import { MATERIAL_CATEGORIES } from "@/data/materials";
@@ -70,6 +71,7 @@ const HeroHeader = () => {
           </nav>
           <div className="flex gap-2 sm:gap-3 items-center shrink-0">
             <OfflineStatusDot />
+            <MaxButton place="header_main" compact />
             <PhoneButton size="sm" subLabel="Круглосуточно" className="hidden sm:inline-flex" />
             <MobileCallPopover className="flex sm:hidden" />
 

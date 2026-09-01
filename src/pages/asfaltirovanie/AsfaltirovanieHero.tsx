@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import MaxButton from "@/components/ui/MaxButton";
 import { ASPHALT_IMG, PHONE, PHONE_TEL } from "./asfaltirovanieData";
 import { reachGoal } from "@/lib/metrika";
 
@@ -16,15 +17,18 @@ const AsfaltirovanieHero = () => {
             <Icon name="ArrowLeft" size={16} />
             На главную
           </Link>
-          <a
-            href={PHONE_TEL}
-            onClick={() => reachGoal("phone_click", { source: "asphalt_landing_header" })}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-amber-500/30 hover:shadow-xl hover:shadow-amber-500/50 hover:scale-105 transition-all"
-          >
-            <Icon name="Phone" size={14} />
-            <span className="hidden sm:inline">{PHONE}</span>
-            <span className="sm:hidden">Позвонить</span>
-          </a>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <MaxButton place="header_asphalt" compact />
+            <a
+              href={PHONE_TEL}
+              onClick={() => reachGoal("phone_click", { source: "asphalt_landing_header" })}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-amber-500/30 hover:shadow-xl hover:shadow-amber-500/50 hover:scale-105 transition-all"
+            >
+              <Icon name="Phone" size={14} />
+              <span className="hidden sm:inline">{PHONE}</span>
+              <span className="sm:hidden">Позвонить</span>
+            </a>
+          </div>
         </div>
       </header>
 

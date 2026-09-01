@@ -4,6 +4,7 @@ import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import MobileCallPopover from "@/components/ui/MobileCallPopover";
+import MaxButton from "@/components/ui/MaxButton";
 import TruckGallery from "./TruckGallery";
 import type { Truck } from "./trucksData";
 import { pluralizeUnits } from "./trucksData";
@@ -30,6 +31,7 @@ export function TruckHeader({ onCallback }: { onCallback: () => void }) {
             <Icon name="MessageCircle" size={14} className="text-accent" />
             Перезвоните мне
           </button>
+          <MaxButton place="header_truck" compact />
           <MobileCallPopover className="flex md:hidden" />
           <PhoneButton size="sm" className="hidden md:inline-flex rounded-xl" />
         </div>

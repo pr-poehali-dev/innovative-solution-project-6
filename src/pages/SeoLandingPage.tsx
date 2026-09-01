@@ -6,6 +6,7 @@ import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import CallbackModal from "@/components/ui/CallbackModal";
+import MaxButton from "@/components/ui/MaxButton";
 import LazySection from "@/components/LazySection";
 import { getSeoLandingBySlug } from "@/data/seoLandings";
 import { cities } from "@/data/cities";
@@ -136,6 +137,7 @@ const SeoLandingPage = ({ slugOverride }: SeoLandingPageProps) => {
             >
               <Icon name="MessageCircle" size={18} className="text-accent" />
             </button>
+            <MaxButton place="header_seo" compact />
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />
           </div>

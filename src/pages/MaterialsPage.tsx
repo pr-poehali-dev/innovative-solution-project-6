@@ -6,6 +6,7 @@ import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts"
 import BrandLogo from "@/components/ui/BrandLogo";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import CallbackModal from "@/components/ui/CallbackModal";
+import MaxButton from "@/components/ui/MaxButton";
 import LazySection from "@/components/LazySection";
 import DeliveryCalculator from "@/components/materials/DeliveryCalculator";
 import MaterialsSeoBlock from "@/components/materials/MaterialsSeoBlock";
@@ -102,6 +103,7 @@ const MaterialsPage = () => {
               <Icon name="MessageCircle" size={14} className="text-accent" />
               Перезвоните мне
             </button>
+            <MaxButton place="header_materials" compact />
             <PhoneButton size="sm" className="rounded-xl" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
           </div>
         </div>

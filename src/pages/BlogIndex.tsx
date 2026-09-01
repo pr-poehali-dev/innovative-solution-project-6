@@ -6,6 +6,7 @@ import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import CallbackModal from "@/components/ui/CallbackModal";
+import MaxButton from "@/components/ui/MaxButton";
 import LazySection from "@/components/LazySection";
 import { articles } from "@/data/articles";
 
@@ -80,6 +81,7 @@ const BlogIndex = () => {
             >
               <Icon name="MessageCircle" size={18} className="text-accent" />
             </button>
+            <MaxButton place="header_blog" compact />
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />
           </div>
