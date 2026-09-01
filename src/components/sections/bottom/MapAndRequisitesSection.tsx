@@ -30,12 +30,13 @@ const MapAndRequisitesSection = ({
   onOpenEmailModal,
 }: MapAndRequisitesSectionProps) => {
   const [contractOpen, setContractOpen] = useState(false);
+  const [mapLoaded, setMapLoaded] = useState(false);
   const openContract = () => setContractOpen(true);
 
   return (
     <>
       {/* Map Section */}
-      <section className="py-12 sm:py-24 px-4 sm:px-6 bg-accent/5">
+      <section className="defer-paint py-12 sm:py-24 px-4 sm:px-6 bg-accent/5">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-6 sm:mb-12">
             <div className="flex justify-center mb-4">
@@ -211,18 +212,37 @@ const MapAndRequisitesSection = ({
 
           <ContractModal open={contractOpen} onClose={() => setContractOpen(false)} />
 
-          {/* Карта */}
+          {/* Карта — грузится только по нажатию.
+              Виджет Яндекса весит несколько мегабайт и запускает внутри страницы
+              отдельный движок карт. На телефоне в самом низу длинной страницы
+              памяти уже нет — экран начинал мигать. Теперь до клика её нет. */}
           <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden" style={{ minHeight: "300px", height: "300px" }}>
-            <iframe
-              src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad4a56098b0cf87fda42b842d643c95a74c726e9616eafe64e9ea35dc809ded31&lang=ru_RU&scroll=true"
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              allowFullScreen
-              title="Карта — ООО Фаворит"
-              className="absolute inset-0 w-full h-full"
-              loading="lazy"
-            />
+            {mapLoaded ? (
+              <iframe
+                src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad4a56098b0cf87fda42b842d643c95a74c726e9616eafe64e9ea35dc809ded31&lang=ru_RU&scroll=true"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                allowFullScreen
+                title="Карта — ООО Фаворит"
+                className="absolute inset-0 w-full h-full"
+              />
+            ) : (
+              <button
+                type="button"
+                onClick={() => setMapLoaded(true)}
+                className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-zinc-900 via-background to-black border border-accent/20"
+                aria-label="Показать карту"
+              >
+                <span className="w-14 h-14 rounded-full bg-accent/15 border border-accent/40 flex items-center justify-center">
+                  <Icon name="MapPin" size={26} className="text-accent" />
+                </span>
+                <span className="text-white font-bold text-base">Показать карту</span>
+                <span className="text-white/60 text-xs px-6 text-center">
+                  г. Кстово, 6-й микрорайон, д. 2, офис 13
+                </span>
+              </button>
+            )}
           </div>
 
           {/* Блок с кнопкой отзыва — под картой */}
