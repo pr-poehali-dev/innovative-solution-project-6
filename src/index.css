@@ -736,4 +736,19 @@ body.modal-open .floating-mobile-notif {
   .defer-paint [class*="blur-2xl"] {
     display: none !important;
   }
+
+  /* ГЛАВНОЕ: страница длиной ~50 экранов, и телефон держал ВСЕ секции
+     отрисованными одновременно. Память заканчивалась примерно на середине —
+     браузер начинал бесконечно перерисовывать слои, экран мигал.
+     Теперь каждая секция рисуется только когда подходит к экрану. */
+  .section-backdrop {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 1200px;
+  }
+
+  /* Баннеры-разделители с фото — тоже отдельные тяжёлые слои */
+  .industrial-banner {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 320px;
+  }
 }
