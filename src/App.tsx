@@ -34,6 +34,7 @@ const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 const ReviewsPage = lazy(() => import("./pages/ReviewsPage"));
 const GalleryPage = lazy(() => import("./pages/GalleryPage"));
 const WeatherPage = lazy(() => import("./pages/WeatherPage"));
+const FaqPage = lazy(() => import("./pages/FaqPage"));
 const SitemapSourcePage = lazy(() => import("./pages/SitemapSourcePage"));
 const SeoLandingPage = lazy(() => import("./pages/SeoLandingPage"));
 const TruckCard = lazy(() => import("./pages/TruckCard"));
@@ -89,6 +90,7 @@ const App = () => (
             <Route path="/otzyvy" element={<ReviewsPage />} />
             <Route path="/nashi-raboty" element={<GalleryPage />} />
             <Route path="/pogoda" element={<WeatherPage />} />
+            <Route path="/voprosy" element={<FaqPage />} />
             <Route path="/sitemap-source" element={<SitemapSourcePage />} />
             <Route
               path="/arenda-manipulyatora-nizhny-novgorod"

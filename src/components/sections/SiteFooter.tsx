@@ -35,6 +35,7 @@ const sections = [
   { href: "/otzyvy", label: "Отзывы" },
   { href: "/nashi-raboty", label: "Наши работы" },
   { href: "/pogoda", label: "Погода для работ" },
+  { href: "/voprosy", label: "Частые вопросы" },
   { href: "/blog", label: "Блог" },
 ];
 

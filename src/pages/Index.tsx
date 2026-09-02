@@ -20,7 +20,6 @@ const PricingTableSection = lazy(() => import("@/components/sections/PricingTabl
 const ClientsSection = lazy(() => import("@/components/sections/ClientsSection"));
 const UseCasesSection = lazy(() => import("@/components/sections/UseCasesSection"));
 const SeoTextSection = lazy(() => import("@/components/sections/SeoTextSection"));
-const FaqSection = lazy(() => import("@/components/sections/FaqSection"));
 const SeoFooterLinks = lazy(() => import("@/components/sections/SeoFooterLinks"));
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
@@ -60,7 +59,7 @@ const Index = () => {
         <SectionDivider variant="crane" />
         <LazySection id="fleet"><FleetSection /></LazySection>
         <SectionDivider variant="blueprint" />
-        <LazySection><PricingTableSection /></LazySection>
+        <LazySection><PricingTableSection compact /></LazySection>
         <SectionDivider variant="blueprint" />
         <LazySection><CalculatorSection /></LazySection>
       </SectionBackdrop>
@@ -125,21 +124,16 @@ const Index = () => {
         <LazySection><SeoTextSection /></LazySection>
       </SectionBackdrop>
 
-      {/* === Баннер №6 — FAQ (городские краны на закате) === */}
-      <IndustrialBanner
-        eyebrow="ЧАСТЫЕ ВОПРОСЫ"
-        titleStart="ОТВЕЧАЕМ"
-        titleAccent="НА ВСЁ"
-        subtitle="Условия, цены, документы, география работы"
+      {/* Частые вопросы вынесены на /voprosy — на главной короткая ссылка */}
+      <SectionLinkCard
+        to="/voprosy"
+        eyebrow="Частые вопросы"
+        title="Отвечаем на всё"
+        description="Условия и цены, сроки подачи, документы и оплата, география работы."
         icon="HelpCircle"
-        size="sm"
+        cta="Читать ответы"
         imageUrl="/img/banner-faq.webp"
       />
-
-      {/* FAQ — знаки стройки + жёлтая лента (внимание) */}
-      <SectionBackdrop tone="warm" pattern="warning">
-        <LazySection><FaqSection /></LazySection>
-      </SectionBackdrop>
 
       <SectionDivider variant="glow" />
 

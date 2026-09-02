@@ -3,7 +3,13 @@ import SectionBadge from "@/components/ui/SectionBadge";
 import Icon from "@/components/ui/icon";
 import { priceRows, terms } from "./pricing/priceData";
 
-const PricingTableSection = () => {
+type Props = {
+  /** Компактный режим для главной: только таблица цен, без блока «Условия работы».
+      Условия целиком есть на странице частых вопросов. */
+  compact?: boolean;
+};
+
+const PricingTableSection = ({ compact = false }: Props) => {
   const offerJsonLd = {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
@@ -41,8 +47,8 @@ const PricingTableSection = () => {
             </span>
           </h2>
           <p className="mt-4 max-w-3xl mx-auto text-sm sm:text-base text-white/70">
-            Стоимость указана за час работы вместе с оператором и включает НДС 22%. Топливо, подача
-            в черте Нижнего Новгорода и работа стропальщика уже в цене — доплат на объекте нет.
+            Цена за час работы с оператором, НДС включён. Топливо, подача по городу
+            и работа стропальщика — уже в цене.
           </p>
         </div>
 
@@ -116,7 +122,9 @@ const PricingTableSection = () => {
           </div>
         </div>
 
-        {/* Условия работы */}
+        {/* Условия работы — на главной скрыты, они есть на странице /voprosy */}
+        {!compact && (
+        <>
         <h3 className="mt-12 sm:mt-16 mb-6 sm:mb-8 text-center text-xl sm:text-3xl font-display font-black tracking-tight text-white">
           Условия работы и оплаты
         </h3>
@@ -140,6 +148,8 @@ const PricingTableSection = () => {
             </div>
           ))}
         </div>
+        </>
+        )}
       </div>
     </section>
   );

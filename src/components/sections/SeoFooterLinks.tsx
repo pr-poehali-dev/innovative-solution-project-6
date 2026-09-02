@@ -27,6 +27,7 @@ const linkGroups: LinkGroup[] = [
       { label: "Все отзывы клиентов", to: "/otzyvy" },
       { label: "Наши работы — фотоотчёты", to: "/nashi-raboty" },
       { label: "Погода для крановых работ", to: "/pogoda" },
+      { label: "Частые вопросы об аренде", to: "/voprosy" },
       { label: "Блог о манипуляторах", to: "/blog" },
       { label: "Контакты и реквизиты", to: "/privacy" },
     ],
