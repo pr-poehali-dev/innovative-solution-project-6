@@ -5,6 +5,10 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
+// Главная — её открывают почти все посетители. Держим её в основном файле,
+// чтобы браузер получил страницу сразу, без второго запроса к серверу.
+// Именно эта лишняя ступенька давала пустой экран при первом открытии.
+import Index from "./pages/Index";
 // Второстепенные блоки: если файл не догрузился (старый кеш, обрыв связи),
 // сайт продолжает работать без него, а не падает целиком
 const softLazy = <T,>(load: () => Promise<T>) =>
@@ -21,7 +25,7 @@ const OfflineDownloadModal = softLazy(() => import("@/components/ui/OfflineDownl
 const OfflineSuccessToast = softLazy(() => import("@/components/ui/OfflineSuccessToast"));
 const EngagementTracker = softLazy(() => import("@/components/EngagementTracker"));
 
-const Index = lazy(() => import("./pages/Index"));
+
 const NotFound = lazy(() => import("./components/NotFoundWithNoindex"));
 const TruckPage = lazy(() => import("./pages/TruckPage"));
 const CityPage = lazy(() => import("./pages/CityPage"));
