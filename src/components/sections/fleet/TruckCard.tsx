@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import MobileSwipeGallery from "@/components/ui/MobileSwipeGallery";
-import MaxIcon from "@/components/ui/MaxIcon";
-import { MAX_GRADIENT } from "@/components/ui/MaxButton";
-import { MAX_LINK } from "@/data/contacts";
-import { reachGoal } from "@/lib/metrika";
 import { Truck, pluralizeUnits } from "./data";
 
 interface TruckCardProps {
@@ -18,10 +14,10 @@ const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
   const tag = truck.tag;
   return (
     <div className={`group relative ${idx < total - 1 ? "mb-6 sm:mb-8" : "mb-8 sm:mb-12"}`}>
-      {/* Изумрудная подсветка — только на десктопе, на мобиле это лишний слой */}
+      {/* Пульсирующая изумрудная подсветка */}
       <div
-        className="hidden lg:block absolute -inset-0.5 rounded-2xl sm:rounded-3xl pointer-events-none"
-        style={{ background: "linear-gradient(135deg, #2dd4bf 0%, #10b981 50%, #0d9488 100%)" }}
+        className="emerald-pulse absolute -inset-0.5 rounded-2xl sm:rounded-3xl pointer-events-none"
+        style={{ background: "linear-gradient(135deg, #2dd4bf 0%, #10b981 50%, #0d9488 100%)", animationDelay: `${(idx % 4) * 0.6}s` }}
       />
       {/* Градиентная рамка */}
       <div
@@ -54,6 +50,7 @@ const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
                     </div>
                     <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-500/90 text-black text-[10px] font-bold tracking-widest uppercase shadow-lg">
                       <span className="relative flex w-1.5 h-1.5">
+                        <span className="absolute inset-0 rounded-full bg-white animate-ping opacity-75" />
                         <span className="relative rounded-full w-1.5 h-1.5 bg-white" />
                       </span>
                       В наличии
@@ -88,6 +85,7 @@ const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
                 </div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/40 text-green-400 text-xs font-bold">
                   <span className="relative flex w-2 h-2">
+                    <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75" />
                     <span className="relative rounded-full w-2 h-2 bg-green-400" />
                   </span>
                   В наличии
@@ -148,20 +146,6 @@ const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
                 >
                   <Icon name="Phone" size={16} />
                   Позвонить
-                </a>
-                <a
-                  href={MAX_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => reachGoal("max_click", { place: "fleet_card", truck: truck.slug })}
-                  className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3 rounded-full font-bold text-sm text-white transition-all active:scale-95 hover:brightness-110"
-                  style={{
-                    background: MAX_GRADIENT,
-                    boxShadow: "0 4px 16px rgba(124,58,237,0.45), 0 0 0 1px rgba(255,255,255,0.15) inset",
-                  }}
-                >
-                  <MaxIcon size={18} className="text-white shrink-0" />
-                  Написать в MAX
                 </a>
                 <Link to={`/tehnika/${truck.slug}`} className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3 border border-accent/30 rounded-full font-semibold text-sm hover:border-accent/60 hover:bg-accent/5 transition-all">
                   Подробнее

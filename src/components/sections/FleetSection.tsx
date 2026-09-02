@@ -8,26 +8,6 @@ const FleetSection = () => {
   const [lightbox, setLightbox] = useState<{ src: string; alt: string; title: string } | null>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined" || window.innerWidth < 1024) return;
-    const urls = Array.from(
-      new Set(trucks.flatMap((t) => (t.images?.length ? t.images : t.image ? [t.image] : [])))
-    );
-    let i = 0;
-    let stopped = false;
-    const next = () => {
-      if (stopped || i >= urls.length) return;
-      const img = new Image();
-      img.src = urls[i++];
-      img.onload = img.onerror = () => window.setTimeout(next, 120);
-    };
-    const t = window.setTimeout(next, 1200);
-    return () => {
-      stopped = true;
-      window.clearTimeout(t);
-    };
-  }, []);
-
-  useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.innerWidth < 1024) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;

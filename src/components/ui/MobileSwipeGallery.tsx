@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import { BLUR } from "@/components/sections/fleet/blur";
 
 interface MobileSwipeGalleryProps {
   images: string[];
@@ -68,28 +67,14 @@ const MobileSwipeGallery = ({
           // Рендерим картинки только в окне ±1 от текущего слайда —
           // экономит память и трафик на мобиле, когда карточек 10+
           const shouldRender = Math.abs(i - index) <= 1;
-          const blur = BLUR[src];
           return (
-            <div
-              key={i}
-              className="flex-shrink-0 w-full h-full flex items-center justify-center"
-              style={
-                blur
-                  ? {
-                      backgroundImage: `url(${blur})`,
-                      backgroundSize: "contain",
-                      backgroundPosition: "center",
-                      backgroundRepeat: "no-repeat",
-                    }
-                  : undefined
-              }
-            >
+            <div key={i} className="flex-shrink-0 w-full h-full flex items-center justify-center">
               {shouldRender ? (
                 <img
                   src={src}
                   alt={`${alt} — фото ${i + 1}`}
                   className={`w-full select-none pointer-events-none ${imgClassName}`}
-                  loading="lazy"
+                  loading={i === 0 ? "eager" : "lazy"}
                   decoding="async"
                   draggable={false}
                   width="800"

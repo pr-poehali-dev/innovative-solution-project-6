@@ -1,5 +1,4 @@
 import Icon from "@/components/ui/icon";
-import { BANNER_BLUR } from "./bannerBlur";
 
 interface IndustrialBannerProps {
   /** Маленький лейбл сверху (например "СОБСТВЕННЫЙ ПАРК") */
@@ -133,15 +132,6 @@ const IndustrialBanner = ({
               alt={alt || `${titleStart} ${titleAccent}`}
               loading="lazy"
               decoding="async"
-              style={
-                BANNER_BLUR[imageUrl]
-                  ? {
-                      backgroundImage: `url(${BANNER_BLUR[imageUrl]})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }
-                  : undefined
-              }
               width="1024"
               height="1024"
               sizes="(max-width: 768px) 100vw, 1024px"
@@ -198,15 +188,6 @@ const IndustrialBanner = ({
       }`}
       aria-label={`${titleStart} ${titleAccent}`}
     >
-      {/* === Мини-превью: видно мгновенно, пока грузится полное фото === */}
-      {BANNER_BLUR[imageUrl] && (
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-cover bg-center scale-105"
-          style={{ backgroundImage: `url(${BANNER_BLUR[imageUrl]})` }}
-        />
-      )}
-
       {/* === Фоновое изображение === */}
       <img
         src={imageUrl}

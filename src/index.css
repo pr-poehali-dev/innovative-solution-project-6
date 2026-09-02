@@ -564,27 +564,22 @@ body.modal-open .floating-mobile-notif {
    вызывают артефакты композитинга (полосы/шум на экране).
    На экранах < 768px отключаем самые тяжёлые эффекты. */
 @media (max-width: 767px) {
-  /* Отключаем ВСЕ размытия без исключений.
-     Раньше правило перечисляло классы вручную и пропускало blur-md/blur-sm —
-     а их на странице оказалось полсотни. Каждое размытие заставляет телефон
-     держать отдельный слой в видеопамяти: на длинной странице они копятся,
-     память кончается, и экран начинает мигать. */
-  [class*="blur-"]:not([class*="backdrop-blur"]) {
+  /* Глобально снижаем интенсивность всех blur-фильтров */
+  .blur-3xl,
+  .blur-2xl,
+  [class*="blur-["] {
     filter: none !important;
   }
 
-  [class*="backdrop-blur"] {
+  /* Backdrop-blur очень дорогой на мобилке — заменяем на сплошной фон */
+  .backdrop-blur-2xl,
+  .backdrop-blur-xl,
+  .backdrop-blur-lg,
+  .backdrop-blur-md,
+  .backdrop-blur-sm,
+  .backdrop-blur {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-  }
-
-  /* Декоративные светящиеся пятна: без размытия они превратились бы
-     в некрасивые чёткие круги — просто убираем их с мобильных */
-  [class*="blur-3xl"][class*="pointer-events-none"],
-  [class*="blur-2xl"][class*="pointer-events-none"],
-  [class*="blur-3xl"][aria-hidden="true"],
-  [class*="blur-2xl"][aria-hidden="true"] {
-    display: none !important;
   }
 
   /* emerald-pulse — декоративное свечение в карточках, на мобилке не нужно */
@@ -597,45 +592,6 @@ body.modal-open .floating-mobile-notif {
     animation: none !important;
     opacity: 0.6;
   }
-
-  /* Декоративные SVG-паттерны в подложках секций: на длинной странице
-     десятки таких слоёв переполняют видеопамять телефона — экран чернеет
-     и начинает мигать при скролле. Оставляем только фон-градиент. */
-  [aria-hidden="true"] svg[style*="gear-spin"],
-  svg[style*="animation"] {
-    animation: none !important;
-  }
-
-  /* Убираем бесконечные фоновые анимации-переливы */
-  .weather-aurora,
-  .weather-aurora-2,
-  .weather-sheen,
-  .divider-shimmer,
-  .divider-drift,
-  .divider-tape-scroll {
-    animation: none !important;
-  }
-}
-
-/* === Стабильность длинной страницы на мобильных ===
-   Chrome/Android при большом числе композитных слоёв «теряет» отрисовку:
-   появляется чёрный экран и мигание. Фиксируем фон и запрещаем
-   создавать лишние слои внутри секций. */
-@media (max-width: 767px) {
-  html {
-    background-color: hsl(var(--background));
-  }
-
-  body {
-    background-color: hsl(var(--background));
-    /* важно: без этого фиксированный фон «отваливается» при инерционном скролле */
-    overflow-x: hidden;
-  }
-
-  /* Фиксированные подложки на мобильных заменяем обычным фоном body */
-  .bg-grid {
-    background-image: none !important;
-  }
 }
 
 /* Горизонтальные ленты фильтров — без видимой полосы прокрутки */
@@ -646,58 +602,3 @@ body.modal-open .floating-mobile-notif {
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
-
-/* ============================================================
-   ОТКЛЮЧЕНИЕ АНИМАЦИЙ
-   Убираем все декоративные анимации и переходы ради скорости.
-   Важно: элементы, которые раньше «проявлялись», принудительно
-   делаем видимыми — иначе без анимации они остались бы скрытыми.
-   ============================================================ */
-
-*,
-*::before,
-*::after {
-  animation-duration: 0s !important;
-  animation-delay: 0s !important;
-  animation-iteration-count: 1 !important;
-  transition-duration: 0s !important;
-  transition-delay: 0s !important;
-  scroll-behavior: auto !important;
-}
-
-/* Анимации появления доводим до конечного состояния — контент виден сразу */
-.page-enter,
-.animate-in,
-.animate-fade-in,
-.animate-slide-up {
-  animation: none !important;
-  opacity: 1 !important;
-  transform: none !important;
-}
-
-/* Бесконечные декоративные эффекты (свечение, парение, блики) — полностью убираем */
-.animate-float,
-.animate-glow,
-.animate-pulse,
-.animate-ping,
-.animate-bounce {
-  animation: none !important;
-}
-
-/* Спиннеры загрузки оставляем крутиться — иначе непонятно, что идёт процесс */
-.animate-spin {
-  animation: spin 0.8s linear infinite !important;
-}
-
-/* Раскрытие аккордеонов оставляем мгновенным, но рабочим */
-.animate-accordion-down,
-.animate-accordion-up {
-  animation: none !important;
-}
-
-/* Убираем тяжёлые для мобильных подсказки браузеру о будущей анимации */
-* {
-  will-change: auto !important;
-}
-
-
