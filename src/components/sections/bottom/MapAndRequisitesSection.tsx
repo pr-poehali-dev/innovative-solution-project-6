@@ -36,7 +36,7 @@ const MapAndRequisitesSection = ({
   return (
     <>
       {/* Map Section */}
-      <section className="defer-paint py-12 sm:py-24 px-4 sm:px-6 bg-accent/5">
+      <section className="py-12 sm:py-24 px-4 sm:px-6 bg-accent/5">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-6 sm:mb-12">
             <div className="flex justify-center mb-4">
