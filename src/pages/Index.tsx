@@ -7,6 +7,7 @@ import StructuredData from "@/components/seo/StructuredData";
 import SectionDivider from "@/components/ui/SectionDivider";
 import SectionBackdrop from "@/components/ui/SectionBackdrop";
 import IndustrialBanner from "@/components/sections/IndustrialBanner";
+import SectionLinkCard from "@/components/sections/SectionLinkCard";
 import { useVisibleSections } from "@/hooks/useVisibleSections";
 
 // Разделы грузятся по мере прокрутки — так сайт работал раньше.
@@ -14,8 +15,6 @@ import { useVisibleSections } from "@/hooks/useVisibleSections";
 const FleetSection = lazy(() => import("@/components/sections/FleetSection"));
 const PopularTechSection = lazy(() => import("@/components/sections/PopularTechSection"));
 const BottomSections = lazy(() => import("@/components/sections/BottomSections"));
-const ReviewsSection = lazy(() => import("@/components/sections/ReviewsSection"));
-const GallerySection = lazy(() => import("@/components/sections/GallerySection"));
 const CalculatorSection = lazy(() => import("@/components/sections/CalculatorSection"));
 const PricingTableSection = lazy(() => import("@/components/sections/PricingTableSection"));
 const ClientsSection = lazy(() => import("@/components/sections/ClientsSection"));
@@ -24,7 +23,6 @@ const SeoTextSection = lazy(() => import("@/components/sections/SeoTextSection")
 const FaqSection = lazy(() => import("@/components/sections/FaqSection"));
 const SeoFooterLinks = lazy(() => import("@/components/sections/SeoFooterLinks"));
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
-const WeatherWidget = lazy(() => import("@/components/sections/WeatherWidget"));
 
 const SECTION_IDS = ["hero", "features", "how", "pricing", "cta"];
 
@@ -83,44 +81,42 @@ const Index = () => {
         <LazySection><UseCasesSection /></LazySection>
       </SectionBackdrop>
 
-      {/* Погода — чертёж со схемой (инженерный расчёт) */}
-      <SectionBackdrop tone="deep" pattern="blueprint">
-        <LazySection><WeatherWidget /></LazySection>
-      </SectionBackdrop>
+      {/* Погода вынесена на /pogoda — на главной короткая ссылка */}
+      <SectionLinkCard
+        to="/pogoda"
+        eyebrow="Планирование работ"
+        title="Погода для крановых работ"
+        description="Прогноз ветра в Нижнем Новгороде на неделю. Ветер — главное ограничение при подъёме груза."
+        icon="CloudSun"
+        cta="Смотреть прогноз"
+      />
 
-      {/* === Баннер №4 — НАШИ РАБОТЫ (экскаватор в работе) === */}
-      <IndustrialBanner
-        eyebrow="ПОРТФОЛИО"
-        titleStart="НАШИ"
-        titleAccent="РАБОТЫ"
-        subtitle="5000+ выполненных заказов за 10 лет — фотоотчёты с объектов"
+      {/* Галерея вынесена на /nashi-raboty — на главной короткая ссылка */}
+      <SectionLinkCard
+        to="/nashi-raboty"
+        eyebrow="Портфолио"
+        title="Наши работы на объектах"
+        description="5000+ выполненных заказов за 10 лет — фотоотчёты с реальных объектов."
         icon="Camera"
-        size="md"
+        cta="Смотреть работы"
         imageUrl="/img/banner-raboty.webp"
       />
 
-      {/* Галерея + клиенты — контейнеры со стропами (груз / работа) */}
+      {/* Клиенты остаются на главной — блок лёгкий */}
       <SectionBackdrop tone="soft" pattern="cargo">
-        <LazySection><GallerySection /></LazySection>
-        <SectionDivider variant="stripes" />
         <LazySection><ClientsSection /></LazySection>
       </SectionBackdrop>
 
-      {/* === Баннер №5 — ОТЗЫВЫ (рукопожатие на стройке) === */}
-      <IndustrialBanner
-        eyebrow="НАМ ДОВЕРЯЮТ"
-        titleStart="ОТЗЫВЫ"
-        titleAccent="КЛИЕНТОВ"
-        subtitle="Что говорят компании и частные заказчики о нашей работе"
+      {/* Отзывы вынесены на /otzyvy — на главной короткая ссылка */}
+      <SectionLinkCard
+        to="/otzyvy"
+        eyebrow="Нам доверяют"
+        title="Отзывы клиентов"
+        description="Реальные отзывы с Яндекс.Карт от компаний и частных заказчиков."
         icon="Star"
-        size="sm"
+        cta="Читать отзывы"
         imageUrl="/img/banner-otzyvy.webp"
       />
-
-      {/* Отзывы — заклёпки на металле (надёжно) */}
-      <SectionBackdrop tone="spotlight" pattern="rivets">
-        <LazySection><ReviewsSection /></LazySection>
-      </SectionBackdrop>
 
       <SectionDivider variant="diamond" />
 

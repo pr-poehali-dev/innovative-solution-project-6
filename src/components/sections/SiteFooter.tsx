@@ -33,6 +33,8 @@ const sections = [
   { href: "/#pricing", label: "Тарифы" },
   { href: "/stroymaterialy", label: "Стройматериалы" },
   { href: "/otzyvy", label: "Отзывы" },
+  { href: "/nashi-raboty", label: "Наши работы" },
+  { href: "/pogoda", label: "Погода для работ" },
   { href: "/blog", label: "Блог" },
 ];
 

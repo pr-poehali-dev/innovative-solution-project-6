@@ -25,6 +25,8 @@ const linkGroups: LinkGroup[] = [
       { label: "Перевозка спецтехники манипулятором", to: "/perevozka-spetstehniki-manipulyatorom" },
       { label: "Аренда манипулятора в Дзержинске", to: "/arenda-manipulyatora-dzerzhinsk" },
       { label: "Все отзывы клиентов", to: "/otzyvy" },
+      { label: "Наши работы — фотоотчёты", to: "/nashi-raboty" },
+      { label: "Погода для крановых работ", to: "/pogoda" },
       { label: "Блог о манипуляторах", to: "/blog" },
       { label: "Контакты и реквизиты", to: "/privacy" },
     ],
