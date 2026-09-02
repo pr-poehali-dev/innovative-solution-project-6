@@ -564,22 +564,27 @@ body.modal-open .floating-mobile-notif {
    вызывают артефакты композитинга (полосы/шум на экране).
    На экранах < 768px отключаем самые тяжёлые эффекты. */
 @media (max-width: 767px) {
-  /* Глобально снижаем интенсивность всех blur-фильтров */
-  .blur-3xl,
-  .blur-2xl,
-  [class*="blur-["] {
+  /* Отключаем ВСЕ размытия без исключений.
+     Раньше правило перечисляло классы вручную и пропускало blur-md/blur-sm —
+     а их на странице оказалось полсотни. Каждое размытие заставляет телефон
+     держать отдельный слой в видеопамяти: на длинной странице они копятся,
+     память кончается, и экран начинает мигать. */
+  [class*="blur-"]:not([class*="backdrop-blur"]) {
     filter: none !important;
   }
 
-  /* Backdrop-blur очень дорогой на мобилке — заменяем на сплошной фон */
-  .backdrop-blur-2xl,
-  .backdrop-blur-xl,
-  .backdrop-blur-lg,
-  .backdrop-blur-md,
-  .backdrop-blur-sm,
-  .backdrop-blur {
+  [class*="backdrop-blur"] {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
+  }
+
+  /* Декоративные светящиеся пятна: без размытия они превратились бы
+     в некрасивые чёткие круги — просто убираем их с мобильных */
+  [class*="blur-3xl"][class*="pointer-events-none"],
+  [class*="blur-2xl"][class*="pointer-events-none"],
+  [class*="blur-3xl"][aria-hidden="true"],
+  [class*="blur-2xl"][aria-hidden="true"] {
+    display: none !important;
   }
 
   /* emerald-pulse — декоративное свечение в карточках, на мобилке не нужно */
@@ -741,5 +746,21 @@ body.modal-open .floating-mobile-notif {
   .section-backdrop,
   .defer-paint {
     overflow-anchor: none;
+  }
+
+  /* Тени: на странице их 355 штук. Каждая мягкая тень — это отдельная
+     операция размытия при отрисовке. На тёмном фоне сайта они почти
+     не видны, но нагрузку дают вполне реальную. */
+  [class*="shadow-2xl"],
+  [class*="shadow-xl"],
+  [class*="shadow-lg"] {
+    box-shadow: none !important;
+  }
+
+  /* Скруглённые углы + overflow-hidden заставляют браузер обрезать
+     содержимое по маске — дорого, когда таких блоков 300.
+     Оставляем скругление, но убираем самые дорогие комбинации. */
+  .fleet-card [class*="rounded-3xl"] {
+    border-radius: 1rem;
   }
 }
