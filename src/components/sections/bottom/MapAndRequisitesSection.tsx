@@ -12,11 +12,12 @@ interface MapAndRequisitesSectionProps {
   onOpenEmailModal: () => void;
 }
 
+// Первые два пункта видны всегда, остальные разворачиваются по кнопке
 const requisitesItems = [
-  { icon: "Building2", label: "Полное название", value: "Общество с ограниченной ответственностью «ФАВОРИТ»", full: true },
   { icon: "Hash", label: "ИНН / КПП", value: "5250077990 / 525001001" },
   { icon: "FileBadge", label: "ОГРН", value: "1235200013531" },
-  { icon: "MapPin", label: "Юридический адрес", value: "607657, Нижегородская обл., Кстовский М.О., г. Кстово, 6-й м-он, д. 2, офис 13", full: true },
+  { icon: "Building2", label: "Полное название", value: "Общество с ограниченной ответственностью «ФАВОРИТ»" },
+  { icon: "MapPin", label: "Юридический адрес", value: "607657, Нижегородская обл., Кстовский М.О., г. Кстово, 6-й м-он, д. 2, офис 13" },
   { icon: "CreditCard", label: "Расчётный счёт", value: "40702810316020000009" },
   { icon: "Landmark", label: "Банк", value: "АО «АЛЬФА-БАНК»" },
   { icon: "Wallet", label: "Корр. счёт", value: "30101810200000000593" },
@@ -30,6 +31,7 @@ const MapAndRequisitesSection = ({
   onOpenEmailModal,
 }: MapAndRequisitesSectionProps) => {
   const [contractOpen, setContractOpen] = useState(false);
+  const [showAllRequisites, setShowAllRequisites] = useState(false);
   const [mapLoaded, setMapLoaded] = useState(false);
   const openContract = () => setContractOpen(true);
 
@@ -106,11 +108,8 @@ const MapAndRequisitesSection = ({
           </div>
 
           {/* Реквизиты */}
-          <div className="relative overflow-hidden rounded-3xl border border-accent/30 p-5 sm:p-8 mb-5 shadow-2xl" style={{ background: "linear-gradient(135deg, rgba(232,168,32,0.08) 0%, rgba(255,255,255,0.04) 50%, rgba(232,168,32,0.06) 100%)" }}>
-            <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-accent/10 blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-accent/5 blur-3xl pointer-events-none" />
-
-            <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
+          <div className="relative overflow-hidden rounded-3xl border border-accent/30 p-4 sm:p-6 mb-5" style={{ background: "linear-gradient(135deg, rgba(232,168,32,0.08) 0%, rgba(255,255,255,0.04) 50%, rgba(232,168,32,0.06) 100%)" }}>
+            <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-accent/30 to-accent/10 border border-accent/40 flex items-center justify-center shadow-lg">
                   <Icon name="BadgeCheck" size={22} className="text-accent" />
@@ -164,22 +163,37 @@ const MapAndRequisitesSection = ({
               </div>
             </div>
 
-            <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {requisitesItems.map((item, i) => (
-                <div
-                  key={i}
-                  className={`group flex items-start gap-3 p-3 sm:p-4 rounded-xl bg-white/5 border border-white/10 hover:border-accent/40 hover:bg-accent/5 transition-all ${item.full ? "sm:col-span-2" : ""}`}
-                >
-                  <div className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/25 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
-                    <Icon name={item.icon} size={16} className="text-accent" />
+            {/* Компактный список: сразу видны ИНН и ОГРН, банковские данные — по кнопке */}
+            <div className="relative rounded-xl border border-white/10 bg-white/5 overflow-hidden">
+              {requisitesItems
+                .slice(0, showAllRequisites ? requisitesItems.length : 2)
+                .map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-4 px-4 py-2.5 border-b border-white/5 last:border-0"
+                  >
+                    <div className="text-muted-foreground text-[10px] sm:text-xs uppercase tracking-wider sm:w-44 sm:flex-shrink-0">
+                      {item.label}
+                    </div>
+                    <div className="text-white font-semibold text-sm break-words min-w-0">
+                      {item.value}
+                    </div>
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-muted-foreground text-[10px] sm:text-xs uppercase tracking-wider mb-0.5">{item.label}</div>
-                    <div className="text-white font-semibold text-sm sm:text-base break-words">{item.value}</div>
-                  </div>
-                </div>
-              ))}
+                ))}
             </div>
+
+            <button
+              type="button"
+              onClick={() => setShowAllRequisites((v) => !v)}
+              className="relative mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-accent/30 bg-accent/5 hover:bg-accent/15 hover:border-accent/60 transition-all text-xs font-semibold text-white"
+            >
+              <Icon
+                name={showAllRequisites ? "ChevronUp" : "ChevronDown"}
+                size={14}
+                className="text-accent"
+              />
+              {showAllRequisites ? "Свернуть" : "Все реквизиты и банк"}
+            </button>
 
             {/* Большая кнопка договора — только на мобильном */}
             <div className="sm:hidden mt-5 pt-5 border-t border-accent/20">
