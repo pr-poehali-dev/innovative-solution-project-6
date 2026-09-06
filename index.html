@@ -100,6 +100,9 @@
   #initial-loader{position:fixed;inset:0;background:#0b0f14;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;color:#f5d680;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;transition:opacity .25s ease}
   #initial-loader.hidden{opacity:0;pointer-events:none}
   #initial-loader .il-logo{width:104px;height:104px;border-radius:22px;object-fit:cover;box-shadow:0 10px 40px rgba(245,208,96,.28)}
+  /* Текст для поисковых систем лежит в разметке, но пользователь его не видит:
+     раньше он на мгновение показывался при перезагрузке — мелькали цены и заголовки. */
+  #seo-static{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 </style>
 <div id="initial-loader" aria-hidden="true">
   <img class="il-logo" src="https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp" alt="ООО Фаворит" width="104" height="104"/>
