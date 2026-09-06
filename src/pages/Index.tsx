@@ -16,7 +16,6 @@ const FleetSection = lazy(() => import("@/components/sections/FleetSection"));
 const PopularTechSection = lazy(() => import("@/components/sections/PopularTechSection"));
 const BottomSections = lazy(() => import("@/components/sections/BottomSections"));
 const CalculatorSection = lazy(() => import("@/components/sections/CalculatorSection"));
-const PricingTableSection = lazy(() => import("@/components/sections/PricingTableSection"));
 const ClientsSection = lazy(() => import("@/components/sections/ClientsSection"));
 const UseCasesSection = lazy(() => import("@/components/sections/UseCasesSection"));
 const SeoTextSection = lazy(() => import("@/components/sections/SeoTextSection"));
@@ -58,8 +57,6 @@ const Index = () => {
         <LazySection><PopularTechSection /></LazySection>
         <SectionDivider variant="crane" />
         <LazySection id="fleet"><FleetSection /></LazySection>
-        <SectionDivider variant="blueprint" />
-        <LazySection><PricingTableSection compact /></LazySection>
         <SectionDivider variant="blueprint" />
         <LazySection><CalculatorSection /></LazySection>
       </SectionBackdrop>
