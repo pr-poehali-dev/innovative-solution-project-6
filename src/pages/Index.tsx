@@ -57,9 +57,9 @@ const Index = () => {
 
       {/* Зона техники — силуэт крана-манипулятора на фоне */}
       <SectionBackdrop tone="tech" pattern="crane">
-        <LazySection><PopularTechSection /></LazySection>
-        <SectionDivider variant="crane" />
         <LazySection id="fleet"><FleetSection /></LazySection>
+        <SectionDivider variant="crane" />
+        <LazySection><PopularTechSection /></LazySection>
         <SectionDivider variant="blueprint" />
         <LazySection><CalculatorSection /></LazySection>
       </SectionBackdrop>
