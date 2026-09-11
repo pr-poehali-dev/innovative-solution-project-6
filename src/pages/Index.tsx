@@ -35,22 +35,25 @@ const Index = () => {
 
       <SectionDivider variant="aurora" />
 
-      {/* Преимущества — спотлайт с шестерёнками (механика работы) */}
-      <SectionBackdrop tone="spotlight" pattern="gears">
-        <FeaturesSection visibleSections={visibleSections} />
-      </SectionBackdrop>
+      {/* На компьютере — преимущества и баннер перед техникой.
+          На телефоне их прячем: после формы заявки сразу идут карточки техники. */}
+      <div className="hidden md:block">
+        <SectionBackdrop tone="spotlight" pattern="gears">
+          <FeaturesSection visibleSections={visibleSections} />
+        </SectionBackdrop>
 
-      {/* === Баннер №1 — НАША ТЕХНИКА (кран-манипулятор с воздуха) === */}
-      <IndustrialBanner
-        eyebrow="СОБСТВЕННЫЙ ПАРК"
-        titleStart="НАША"
-        titleAccent="ТЕХНИКА"
-        subtitle="15+ единиц спецтехники — краны-манипуляторы и автокраны"
-        icon="Truck"
-        size="md"
-        href="#fleet"
-        imageUrl="/img/banner-tehnika.webp"
-      />
+        {/* === Баннер №1 — НАША ТЕХНИКА (кран-манипулятор с воздуха) === */}
+        <IndustrialBanner
+          eyebrow="СОБСТВЕННЫЙ ПАРК"
+          titleStart="НАША"
+          titleAccent="ТЕХНИКА"
+          subtitle="15+ единиц спецтехники — краны-манипуляторы и автокраны"
+          icon="Truck"
+          size="md"
+          href="#fleet"
+          imageUrl="/img/banner-tehnika.webp"
+        />
+      </div>
 
       {/* Зона техники — силуэт крана-манипулятора на фоне */}
       <SectionBackdrop tone="tech" pattern="crane">
@@ -60,6 +63,13 @@ const Index = () => {
         <SectionDivider variant="blueprint" />
         <LazySection><CalculatorSection /></LazySection>
       </SectionBackdrop>
+
+      {/* Телефон: преимущества и баннер показываем после карточек техники */}
+      <div className="md:hidden">
+        <SectionBackdrop tone="spotlight" pattern="gears">
+          <FeaturesSection visibleSections={visibleSections} />
+        </SectionBackdrop>
+      </div>
 
       {/* === Баннер №2 — ВЕСЬ ПАРК (грузовики в ряд на закате) === */}
       <IndustrialBanner

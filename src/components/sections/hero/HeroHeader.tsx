@@ -7,7 +7,7 @@ import OfflineStatusDot from "@/components/ui/OfflineStatusDot";
 import MaxButton from "@/components/ui/MaxButton";
 import MaterialsMenu from "./MaterialsMenu";
 import { navLinks } from "./heroData";
-import { MATERIAL_CATEGORIES } from "@/data/materials";
+import { MENU_CATEGORIES } from "@/data/materials";
 
 const HeroHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -119,10 +119,10 @@ const HeroHeader = () => {
                     </button>
                     {matOpen && (
                       <div className="px-2 pb-2 flex flex-col gap-0.5">
-                        {MATERIAL_CATEGORIES.map(c => (
+                        {MENU_CATEGORIES.map(c => (
                           <a
                             key={c.slug}
-                            href={`/stroymaterialy?cat=${c.slug}`}
+                            href={"href" in c && c.href ? c.href : `/stroymaterialy?cat=${c.slug}`}
                             onClick={() => setMenuOpen(false)}
                             className="flex items-center gap-2.5 py-2.5 px-3 rounded-lg text-sm text-white/75 hover:text-white hover:bg-white/5 transition-all"
                           >

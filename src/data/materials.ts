@@ -58,16 +58,21 @@ export const CATEGORY_BANNERS: Record<string, CategoryBanner> = {
   },
 };
 
+// hidden: страница и старые ссылки работают, но в меню пункт не показываем
+// href: свой адрес вместо раздела стройматериалов
 export const MATERIAL_CATEGORIES = [
   { slug: "kirpich", label: "Кирпич силикатный", icon: "Blocks" },
   { slug: "bloki", label: "Газосиликатные блоки", icon: "Box" },
-  { slug: "plity", label: "Плиты и перемычки", icon: "Layers" },
-  { slug: "cement", label: "Цемент и сухие смеси", icon: "Package" },
-  { slug: "pilomaterialy", label: "Пиломатериалы", icon: "TreePine" },
-  { slug: "asfalt-beton", label: "Асфальтирование", icon: "Truck" },
   { slug: "bordyur", label: "Бордюр", icon: "Grid3x3" },
-  { slug: "bytovki", label: "Бытовки и контейнеры", icon: "Container" },
+  { slug: "asfalt-beton", label: "Асфальтирование", icon: "Truck", href: "/asfaltirovanie" },
+  { slug: "plity", label: "Плиты и перемычки", icon: "Layers", hidden: true },
+  { slug: "cement", label: "Цемент и сухие смеси", icon: "Package", hidden: true },
+  { slug: "pilomaterialy", label: "Пиломатериалы", icon: "TreePine", hidden: true },
+  { slug: "bytovki", label: "Бытовки и контейнеры", icon: "Container", hidden: true },
 ] as const;
+
+// Пункты для меню и вкладок на сайте
+export const MENU_CATEGORIES = MATERIAL_CATEGORIES.filter((c) => !("hidden" in c && c.hidden));
 
 export async function fetchMaterials(): Promise<Material[]> {
   const res = await fetch(MATERIALS_API, {

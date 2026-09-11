@@ -10,7 +10,7 @@ import MaxButton from "@/components/ui/MaxButton";
 import LazySection from "@/components/LazySection";
 import DeliveryCalculator from "@/components/materials/DeliveryCalculator";
 import MaterialsSeoBlock from "@/components/materials/MaterialsSeoBlock";
-import { fetchMaterials, MATERIAL_CATEGORIES, CATEGORY_BANNERS, type Material } from "@/data/materials";
+import { fetchMaterials, MATERIAL_CATEGORIES, MENU_CATEGORIES, CATEGORY_BANNERS, type Material } from "@/data/materials";
 
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
@@ -31,7 +31,7 @@ const MaterialsPage = () => {
 
   const usedCategories = useMemo(() => {
     const present = new Set(items.map((i) => i.category));
-    return MATERIAL_CATEGORIES.filter((c) => present.has(c.slug));
+    return MENU_CATEGORIES.filter((c) => present.has(c.slug));
   }, [items]);
 
   const banner = CATEGORY_BANNERS[activeCat];
