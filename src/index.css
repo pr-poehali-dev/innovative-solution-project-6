@@ -231,6 +231,29 @@
 .weather-sheen {
   animation: weather-sheen 7s ease-in-out infinite;
 }
+
+/* На телефонах и планшетах отключаем непрерывные анимации виджета погоды:
+   они заставляют экран перерисовываться без остановки и страница начинает тормозить */
+@media (max-width: 767px) {
+  .weather-aurora,
+  .weather-aurora-2,
+  .weather-sheen,
+  .weather-emoji-float,
+  .weather-status-pulse {
+    animation: none !important;
+  }
+}
+
+/* Уважаем системную настройку "уменьшить движение" */
+@media (prefers-reduced-motion: reduce) {
+  .weather-aurora,
+  .weather-aurora-2,
+  .weather-sheen,
+  .weather-emoji-float,
+  .weather-status-pulse {
+    animation: none !important;
+  }
+}
 .weather-day-card {
   transition:
     transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),

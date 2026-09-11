@@ -171,15 +171,15 @@ const WeatherWidget = () => {
       <div className="max-w-7xl mx-auto px-3 sm:px-6">
         <div className="relative rounded-2xl border border-accent/20 bg-gradient-to-br from-sky-950/40 via-black/60 to-accent/5 backdrop-blur-sm overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.4)]">
           {/* Анимированное «сияние» фона */}
-          <div className="pointer-events-none absolute -top-1/2 -left-1/4 w-[60%] h-[160%] rounded-full bg-sky-500/20 blur-3xl weather-aurora" />
-          <div className="pointer-events-none absolute -bottom-1/2 -right-1/4 w-[55%] h-[160%] rounded-full bg-accent/15 blur-3xl weather-aurora-2" />
+          <div className="pointer-events-none absolute -top-1/2 -left-1/4 w-[60%] h-[160%] rounded-full bg-sky-500/20 blur-3xl hidden md:block weather-aurora" />
+          <div className="pointer-events-none absolute -bottom-1/2 -right-1/4 w-[55%] h-[160%] rounded-full bg-accent/15 blur-3xl hidden md:block weather-aurora-2" />
           <div className="pointer-events-none absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)", backgroundSize: "22px 22px" }} />
           <div className="relative">
           {/* МОБИЛЬНАЯ компактная версия */}
           <div className="sm:hidden">
             <div className="flex items-center gap-3 px-3 py-2.5 border-b border-white/10">
               <span className="relative flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-accent/25 to-accent/5 border border-accent/30 overflow-hidden flex-shrink-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]">
-                <span className="pointer-events-none absolute top-0 left-0 h-full w-1/3 bg-white/20 blur-md weather-sheen" />
+                <span className="pointer-events-none absolute top-0 left-0 h-full w-1/3 bg-white/20 blur-md hidden md:block weather-sheen" />
                 <span className="relative text-2xl leading-none drop-shadow-[0_2px_8px_rgba(245,208,96,0.4)] weather-emoji-float">{current.emoji}</span>
               </span>
               <div className="flex-1 min-w-0">
@@ -311,7 +311,7 @@ const WeatherWidget = () => {
             <div className="grid grid-cols-[auto_1fr] gap-6 p-6">
               <div className="flex items-center gap-4 pr-6 border-r border-white/10">
                 <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-accent/25 to-accent/5 border border-accent/30 flex items-center justify-center flex-shrink-0 overflow-hidden shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]">
-                  <span className="pointer-events-none absolute top-0 left-0 h-full w-1/3 bg-white/20 blur-md weather-sheen" />
+                  <span className="pointer-events-none absolute top-0 left-0 h-full w-1/3 bg-white/20 blur-md hidden md:block weather-sheen" />
                   <span className="relative text-5xl drop-shadow-[0_4px_12px_rgba(245,208,96,0.5)] weather-emoji-float">{current.emoji}</span>
                 </div>
                 <div>
