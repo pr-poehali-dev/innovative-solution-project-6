@@ -244,6 +244,16 @@
   }
 }
 
+/* Android-браузеры (Яндекс, Chrome) на длинных страницах с полупрозрачными слоями
+   иногда рвут картинку горизонтальными полосами. Отключаем на телефонах
+   "матовое стекло" — именно оно вызывает сбой отрисовки. */
+@media (max-width: 767px) {
+  [class*="backdrop-blur"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
 /* Уважаем системную настройку "уменьшить движение" */
 @media (prefers-reduced-motion: reduce) {
   .weather-aurora,

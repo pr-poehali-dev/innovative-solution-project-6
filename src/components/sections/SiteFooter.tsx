@@ -109,8 +109,8 @@ const SiteFooter = () => {
             "linear-gradient(135deg, rgba(20,12,4,0.6) 0%, rgba(0,0,0,0.4) 50%, rgba(20,12,4,0.6) 100%)",
         }}
       >
-        <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-accent/8 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-20 -right-20 w-64 h-64 rounded-full bg-accent/8 blur-3xl pointer-events-none" />
+        <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-accent/8 blur-3xl pointer-events-none hidden md:block" />
+        <div className="absolute -bottom-20 -right-20 w-64 h-64 rounded-full bg-accent/8 blur-3xl pointer-events-none hidden md:block" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-7">
           <div className="flex items-center justify-between mb-4 sm:mb-5">
@@ -137,8 +137,8 @@ const SiteFooter = () => {
               const isExternal = item.href.startsWith("/") && !item.href.startsWith("/#");
               const content = (
                 <>
-                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-accent/20 to-transparent pointer-events-none rounded-2xl" />
-                  <span className="absolute -top-6 -right-6 w-16 h-16 rounded-full bg-accent/15 blur-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <span className="hidden md:block absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-accent/20 to-transparent pointer-events-none rounded-2xl" />
+                  <span className="hidden md:block absolute -top-6 -right-6 w-16 h-16 rounded-full bg-accent/15 blur-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
 
                   {item.badge && (
                     <span

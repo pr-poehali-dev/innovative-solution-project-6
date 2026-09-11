@@ -169,7 +169,7 @@ const WeatherWidget = () => {
   return (
     <section className="py-4 sm:py-10 bg-black/30">
       <div className="max-w-7xl mx-auto px-3 sm:px-6">
-        <div className="relative rounded-2xl border border-accent/20 bg-gradient-to-br from-sky-950/40 via-black/60 to-accent/5 backdrop-blur-sm overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.4)]">
+        <div className="relative rounded-2xl border border-accent/20 bg-gradient-to-br from-sky-950/40 via-black/60 to-accent/5 md:backdrop-blur-sm overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.4)]">
           {/* Анимированное «сияние» фона */}
           <div className="pointer-events-none absolute -top-1/2 -left-1/4 w-[60%] h-[160%] rounded-full bg-sky-500/20 blur-3xl hidden md:block weather-aurora" />
           <div className="pointer-events-none absolute -bottom-1/2 -right-1/4 w-[55%] h-[160%] rounded-full bg-accent/15 blur-3xl hidden md:block weather-aurora-2" />

@@ -52,7 +52,7 @@ const WeatherPage = () => {
 
       <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
 
-      <header className="fixed top-0 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
+      <header className="fixed top-0 w-full bg-background/95 md:bg-background/80 md:backdrop-blur-2xl border-b border-accent/20 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5 flex justify-between items-center">
           <BrandLogo compact />
           <div className="flex gap-2 sm:gap-3 items-center">
