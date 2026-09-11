@@ -317,14 +317,14 @@ const CalculatorOptionsAndTotal = ({
       )}
 
       {/* Итог */}
-      <div className="border-t border-accent/10 pt-6">
+      <div className="border-t border-accent/10 pt-6 repaint-safe">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-5">
           <div className="flex-1">
             <p className="text-muted-foreground text-xs sm:text-sm mb-1 flex items-center gap-1.5">
               <Icon name="Calculator" size={12} className="text-accent" />
               Итоговая стоимость
             </p>
-            <p className="text-3xl sm:text-5xl font-black bg-gradient-to-r from-accent via-amber-300 to-accent bg-clip-text text-transparent tabular-nums">
+            <p className="text-3xl sm:text-5xl font-black live-number md:bg-gradient-to-r md:from-accent md:via-amber-300 md:to-accent md:bg-clip-text md:text-transparent tabular-nums">
               {finalTotal.toLocaleString("ru")} ₽
             </p>
             <p className="text-muted-foreground text-xs mt-1.5">
