@@ -101,7 +101,7 @@ const BrandLogo = ({ to = "/", size = "md", compact = false }: BrandLogoProps) =
             Откроемся через {status.timeLeft}
           </span>
         )}
-        <span className={`font-black drop-shadow-lg whitespace-nowrap truncate ${titleSize}`} style={goldText}>
+        <span className={`brand-gold-title font-black drop-shadow-lg whitespace-nowrap truncate ${titleSize}`} style={goldText}>
           ООО Фаворит
         </span>
         <span

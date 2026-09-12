@@ -270,6 +270,57 @@
   }
 }
 
+/* Непрерывные анимации свечения на телефонах.
+   Их на странице два десятка, и каждая заставляет браузер постоянно
+   перерисовывать свой участок. Телефон не успевает и показывает
+   вместо содержимого цветные полосы. На мобильных отключаем —
+   декоративное мерцание не стоит сломанной страницы. */
+@media (max-width: 767px) {
+  .divider-shimmer,
+  .divider-pulse-ring,
+  .divider-rotate,
+  .divider-float,
+  .divider-spark,
+  .divider-line-pulse,
+  .divider-drift,
+  .divider-tape-scroll,
+  .weather-aurora,
+  .weather-aurora-2,
+  .weather-emoji-float,
+  .weather-sheen,
+  .popover-glow,
+  .brand-tagline-glow,
+  .animate-float,
+  .animate-glow,
+  .emerald-pulse,
+  .logo-glow::after {
+    animation: none !important;
+    will-change: auto !important;
+  }
+
+  .logo-glow::after {
+    display: none !important;
+  }
+
+  /* Светящийся текст держит слой отрисовки постоянно активным */
+  .brand-tagline-glow {
+    text-shadow: none !important;
+  }
+
+  /* Название компании залито градиентом. Такой текст рисуется отдельным
+     слоем и на телефоне остаётся «висеть» поверх страницы обрывками.
+     Заменяем на сплошное золото — на глаз разница незаметна. */
+  .brand-gold-title {
+    background: none !important;
+    -webkit-background-clip: border-box !important;
+    background-clip: border-box !important;
+    -webkit-text-fill-color: #f0c040 !important;
+    color: #f0c040 !important;
+    filter: none !important;
+    text-shadow: none !important;
+  }
+}
+
 /* Числа, которые пересчитываются на лету (цена в калькуляторе), нельзя
    заливать градиентом: на Android после пересчёта на экране остаются обрывки
    старого значения. Для таких чисел используем сплошной цвет. */
