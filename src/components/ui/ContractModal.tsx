@@ -226,13 +226,20 @@ ${buildHtml()}
 
       const iframe = document.createElement("iframe");
       iframe.id = "contract-print-frame";
+      iframe.setAttribute("aria-hidden", "true");
+      iframe.setAttribute("tabindex", "-1");
+      // Уводим кадр далеко за пределы экрана: нулевой размер с opacity:0
+      // мобильные браузеры всё равно отрисовывают поверх страницы
       iframe.style.position = "fixed";
-      iframe.style.right = "0";
-      iframe.style.bottom = "0";
-      iframe.style.width = "0";
-      iframe.style.height = "0";
+      iframe.style.left = "-10000px";
+      iframe.style.top = "0";
+      iframe.style.width = "1px";
+      iframe.style.height = "1px";
       iframe.style.border = "0";
       iframe.style.opacity = "0";
+      iframe.style.visibility = "hidden";
+      iframe.style.pointerEvents = "none";
+      iframe.style.zIndex = "-1";
       document.body.appendChild(iframe);
 
       const doc = iframe.contentDocument || iframe.contentWindow?.document;
@@ -249,6 +256,9 @@ ${buildHtml()}
         } catch (e) {
           /* fallback ниже */
         }
+        // Убираем кадр после печати. Если его оставить, мобильный браузер
+        // продолжает его отрисовывать и рвёт страницу полосами.
+        setTimeout(() => iframe.remove(), 1000);
       };
       // Дать время на загрузку шрифтов и таблиц
       setTimeout(trigger, 500);
