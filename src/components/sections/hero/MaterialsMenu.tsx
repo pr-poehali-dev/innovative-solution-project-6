@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
-import { MATERIAL_CATEGORIES } from "@/data/materials";
+import { MENU_CATEGORIES } from "@/data/materials";
 
 const MaterialsMenu = () => {
   const [open, setOpen] = useState(false);
@@ -42,10 +42,10 @@ const MaterialsMenu = () => {
       {open && (
         <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50">
           <div className="w-64 rounded-2xl border border-accent/40 bg-[#0e1420] shadow-2xl shadow-black/80 p-2">
-            {MATERIAL_CATEGORIES.map((c) => (
+            {MENU_CATEGORIES.map((c) => (
               <a
                 key={c.slug}
-                href={`/stroymaterialy?cat=${c.slug}`}
+                href={"href" in c && c.href ? c.href : `/stroymaterialy?cat=${c.slug}`}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-white/80 hover:text-white hover:bg-accent/10 transition-all"
               >
                 <span className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
