@@ -247,7 +247,7 @@ const MapAndRequisitesSection = ({
           <div ref={mapRef} className="relative rounded-2xl sm:rounded-3xl overflow-hidden" style={{ minHeight: "300px", height: "300px" }}>
             {mapLoaded ? (
               <iframe
-                src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad4a56098b0cf87fda42b842d643c95a74c726e9616eafe64e9ea35dc809ded31&lang=ru_RU&scroll=true"
+                src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad4a56098b0cf87fda42b842d643c95a74c726e9616eafe64e9ea35dc809ded31&lang=ru_RU&ll=43.851330%2C56.274655&z=16&scroll=true"
                 width="100%"
                 height="100%"
                 frameBorder="0"
