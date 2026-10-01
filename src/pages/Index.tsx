@@ -19,6 +19,7 @@ const CalculatorSection = lazy(() => import("@/components/sections/CalculatorSec
 const ClientsSection = lazy(() => import("@/components/sections/ClientsSection"));
 const UseCasesSection = lazy(() => import("@/components/sections/UseCasesSection"));
 const SeoTextSection = lazy(() => import("@/components/sections/SeoTextSection"));
+const WeatherWidget = lazy(() => import("@/components/sections/WeatherWidget"));
 const SeoFooterLinks = lazy(() => import("@/components/sections/SeoFooterLinks"));
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
@@ -87,15 +88,7 @@ const Index = () => {
         <LazySection><UseCasesSection /></LazySection>
       </SectionBackdrop>
 
-      {/* Погода вынесена на /pogoda — на главной короткая ссылка */}
-      <SectionLinkCard
-        to="/pogoda"
-        eyebrow="Планирование работ"
-        title="Погода для крановых работ"
-        description="Прогноз ветра в Нижнем Новгороде на неделю. Ветер — главное ограничение при подъёме груза."
-        icon="CloudSun"
-        cta="Смотреть прогноз"
-      />
+      <LazySection id="pogoda"><WeatherWidget /></LazySection>
 
       {/* Галерея вынесена на /nashi-raboty — на главной короткая ссылка */}
       <SectionLinkCard
