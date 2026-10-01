@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import SectionBadge from "@/components/ui/SectionBadge";
@@ -33,6 +33,23 @@ const MapAndRequisitesSection = ({
   const [contractOpen, setContractOpen] = useState(false);
   const [showAllRequisites, setShowAllRequisites] = useState(false);
   const [mapLoaded, setMapLoaded] = useState(false);
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = mapRef.current;
+    if (!el || mapLoaded) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setMapLoaded(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [mapLoaded]);
   const openContract = () => setContractOpen(true);
 
   return (
@@ -226,11 +243,8 @@ const MapAndRequisitesSection = ({
 
           <ContractModal open={contractOpen} onClose={() => setContractOpen(false)} />
 
-          {/* Карта — грузится только по нажатию.
-              Виджет Яндекса весит несколько мегабайт и запускает внутри страницы
-              отдельный движок карт. На телефоне в самом низу длинной страницы
-              памяти уже нет — экран начинал мигать. Теперь до клика её нет. */}
-          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden" style={{ minHeight: "300px", height: "300px" }}>
+          {/* Карта загружается сама, когда до неё долистали */}
+          <div ref={mapRef} className="relative rounded-2xl sm:rounded-3xl overflow-hidden" style={{ minHeight: "300px", height: "300px" }}>
             {mapLoaded ? (
               <iframe
                 src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad4a56098b0cf87fda42b842d643c95a74c726e9616eafe64e9ea35dc809ded31&lang=ru_RU&scroll=true"
