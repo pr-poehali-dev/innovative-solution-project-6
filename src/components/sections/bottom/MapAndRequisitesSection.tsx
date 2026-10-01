@@ -234,7 +234,7 @@ const MapAndRequisitesSection = ({
             aria-label="Открыть адрес в Яндекс Картах"
           >
             <img
-              src="/img/map-favorit-z17.webp"
+              src="/img/map-favorit-label.webp"
               alt="Карта — ООО Фаворит, Нижний Новгород, Шуваловский проезд"
               width="650"
               height="450"
