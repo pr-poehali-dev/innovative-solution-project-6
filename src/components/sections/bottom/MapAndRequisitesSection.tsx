@@ -4,6 +4,7 @@ import PhoneButton from "@/components/ui/PhoneButton";
 import SectionBadge from "@/components/ui/SectionBadge";
 import ContractModal from "@/components/ui/ContractModal";
 import { reachGoal } from "@/lib/metrika";
+import LiveMap from "./LiveMap";
 
 interface MapAndRequisitesSectionProps {
   copied: boolean;
@@ -225,24 +226,8 @@ const MapAndRequisitesSection = ({
 
           <ContractModal open={contractOpen} onClose={() => setContractOpen(false)} />
 
-          {/* Карта картинкой — без рекламы и без нагрузки на телефон */}
-          <a
-            href="https://yandex.ru/maps/?pt=43.851330,56.274655&z=17&l=map"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative block rounded-2xl sm:rounded-3xl overflow-hidden border border-accent/20"
-            aria-label="Открыть адрес в Яндекс Картах"
-          >
-            <img
-              src="/img/map-favorit-label.webp"
-              alt="Карта — ООО Фаворит, Нижний Новгород, Шуваловский проезд"
-              width="650"
-              height="450"
-              loading="lazy"
-              decoding="async"
-              className="w-full h-[300px] sm:h-[400px] object-cover object-[50%_45%]"
-            />
-          </a>
+          {/* Живая карта без рекламы — грузится, когда до неё долистали */}
+          <LiveMap />
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mt-3">
             <a
               href="https://yandex.ru/maps/?rtext=~56.274655,43.851330&rtt=auto"
@@ -256,7 +241,7 @@ const MapAndRequisitesSection = ({
               Построить маршрут
             </a>
             <a
-              href="https://yandex.ru/maps/?pt=43.851330,56.274655&z=17&l=map"
+              href="https://yandex.ru/maps/?pt=43.851330,56.274655&z=16&l=map"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-accent/40 bg-accent/5 hover:bg-accent/15 text-white font-semibold text-sm transition-all"
