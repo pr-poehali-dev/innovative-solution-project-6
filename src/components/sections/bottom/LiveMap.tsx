@@ -1,9 +1,45 @@
 import { useEffect, useRef, useState } from "react";
-import "leaflet/dist/leaflet.css";
 
 const LAT = 56.274655;
 const LNG = 43.85133;
 const ZOOM = 15;
+const API_SRC = "https://api-maps.yandex.ru/2.1/?lang=ru_RU";
+
+type YMaps = {
+  ready: (cb: () => void) => void;
+  Map: new (el: HTMLElement, state: object, options?: object) => YMap;
+  Placemark: new (coords: number[], props: object, options: object) => unknown;
+};
+type YMap = {
+  geoObjects: { add: (o: unknown) => void };
+  behaviors: { disable: (b: string | string[]) => void };
+  destroy: () => void;
+};
+
+declare global {
+  interface Window {
+    ymaps?: YMaps;
+  }
+}
+
+let loader: Promise<YMaps> | null = null;
+const loadYmaps = () => {
+  if (window.ymaps) return new Promise<YMaps>((res) => window.ymaps!.ready(() => res(window.ymaps!)));
+  if (!loader) {
+    loader = new Promise<YMaps>((res, rej) => {
+      const s = document.createElement("script");
+      s.src = API_SRC;
+      s.async = true;
+      s.onload = () => window.ymaps!.ready(() => res(window.ymaps!));
+      s.onerror = () => {
+        loader = null;
+        rej(new Error("ymaps"));
+      };
+      document.head.appendChild(s);
+    });
+  }
+  return loader;
+};
 
 const LiveMap = () => {
   const boxRef = useRef<HTMLDivElement>(null);
@@ -26,46 +62,33 @@ const LiveMap = () => {
   }, []);
 
   useEffect(() => {
-    if (!visible || !boxRef.current) return;
-    let map: import("leaflet").Map | null = null;
+    if (!visible) return;
+    let map: YMap | null = null;
     let cancelled = false;
 
-    import("leaflet").then(({ default: L }) => {
-      if (cancelled || !boxRef.current) return;
-      const isTouch = L.Browser.mobile;
-      map = L.map(boxRef.current, {
-        center: [LAT, LNG],
-        zoom: ZOOM,
-        scrollWheelZoom: false,
-        dragging: !isTouch,
-        attributionControl: true,
-      });
-      map.attributionControl.setPrefix(false);
-
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>',
-      }).addTo(map);
-
-      const icon = L.divIcon({
-        className: "",
-        iconSize: [0, 0],
-        html: `
-          <div style="position:relative;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;pointer-events:none">
-            <div style="background:#0e1420;border:2px solid #e8a820;border-radius:8px;padding:3px 8px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.35);line-height:1.15;text-align:center">
-              <div style="color:#f5d060;font-weight:800;font-size:12px">Фаворит</div>
-              <div style="color:#fff;font-size:10px;opacity:.85">аренда манипуляторов</div>
-            </div>
-            <div style="width:2px;height:8px;background:#e8a820"></div>
-            <div style="width:14px;height:14px;border-radius:50%;background:#e53935;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)"></div>
-          </div>`,
-      });
-      L.marker([LAT, LNG], { icon, keyboard: false }).addTo(map);
-    });
+    loadYmaps()
+      .then((ymaps) => {
+        if (cancelled || !boxRef.current) return;
+        map = new ymaps.Map(
+          boxRef.current,
+          { center: [LAT, LNG], zoom: ZOOM, controls: ["zoomControl"] },
+          { suppressMapOpenBlock: true, yandexMapDisablePoiInteractivity: true }
+        );
+        map.behaviors.disable("scrollZoom");
+        if (window.matchMedia("(pointer: coarse)").matches) map.behaviors.disable("drag");
+        map.geoObjects.add(
+          new ymaps.Placemark(
+            [LAT, LNG],
+            { iconCaption: "Фаворит", hintContent: "Фаворит — аренда манипуляторов" },
+            { preset: "islands#redDotIconWithCaption" }
+          )
+        );
+      })
+      .catch(() => {});
 
     return () => {
       cancelled = true;
-      map?.remove();
+      map?.destroy();
     };
   }, [visible]);
 
