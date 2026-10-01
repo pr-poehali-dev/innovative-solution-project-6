@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Icon from "@/components/ui/icon";
 import PhoneButton from "@/components/ui/PhoneButton";
 import SectionBadge from "@/components/ui/SectionBadge";
@@ -32,24 +32,6 @@ const MapAndRequisitesSection = ({
 }: MapAndRequisitesSectionProps) => {
   const [contractOpen, setContractOpen] = useState(false);
   const [showAllRequisites, setShowAllRequisites] = useState(false);
-  const [mapLoaded, setMapLoaded] = useState(false);
-  const mapRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = mapRef.current;
-    if (!el || mapLoaded) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setMapLoaded(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: "200px" }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [mapLoaded]);
   const openContract = () => setContractOpen(true);
 
   return (
@@ -243,34 +225,45 @@ const MapAndRequisitesSection = ({
 
           <ContractModal open={contractOpen} onClose={() => setContractOpen(false)} />
 
-          {/* Карта загружается сама, когда до неё долистали */}
-          <div ref={mapRef} className="relative rounded-2xl sm:rounded-3xl overflow-hidden" style={{ minHeight: "300px", height: "300px" }}>
-            {mapLoaded ? (
-              <iframe
-                src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad4a56098b0cf87fda42b842d643c95a74c726e9616eafe64e9ea35dc809ded31&lang=ru_RU&ll=43.851330%2C56.274655&z=16&scroll=true"
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                allowFullScreen
-                title="Карта — ООО Фаворит"
-                className="absolute inset-0 w-full h-full"
-              />
-            ) : (
-              <button
-                type="button"
-                onClick={() => setMapLoaded(true)}
-                className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-zinc-900 via-background to-black border border-accent/20"
-                aria-label="Показать карту"
-              >
-                <span className="w-14 h-14 rounded-full bg-accent/15 border border-accent/40 flex items-center justify-center">
-                  <Icon name="MapPin" size={26} className="text-accent" />
-                </span>
-                <span className="text-white font-bold text-base">Показать карту</span>
-                <span className="text-white/60 text-xs px-6 text-center">
-                  г. Кстово, 6-й микрорайон, д. 2, офис 13
-                </span>
-              </button>
-            )}
+          {/* Карта картинкой — без рекламы и без нагрузки на телефон */}
+          <a
+            href="https://yandex.ru/maps/?pt=43.851330,56.274655&z=16&l=map"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative block rounded-2xl sm:rounded-3xl overflow-hidden border border-accent/20"
+            aria-label="Открыть адрес в Яндекс Картах"
+          >
+            <img
+              src="/img/map-favorit.webp"
+              alt="Карта — ООО Фаворит, Нижний Новгород, Шуваловский проезд"
+              width="650"
+              height="400"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-[300px] sm:h-[400px] object-cover"
+            />
+          </a>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mt-3">
+            <a
+              href="https://yandex.ru/maps/?rtext=~56.274655,43.851330&rtt=auto"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => reachGoal("route_click", { place: "map_section" })}
+              className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-black font-bold text-sm shadow-lg shadow-accent/30 active:scale-[0.98] transition-transform"
+              style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
+            >
+              <Icon name="Navigation" size={16} />
+              Построить маршрут
+            </a>
+            <a
+              href="https://yandex.ru/maps/?pt=43.851330,56.274655&z=16&l=map"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-accent/40 bg-accent/5 hover:bg-accent/15 text-white font-semibold text-sm transition-all"
+            >
+              <Icon name="MapPin" size={16} className="text-accent" />
+              Открыть в Яндекс Картах
+            </a>
           </div>
 
           {/* Блок с кнопкой отзыва — под картой */}
