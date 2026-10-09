@@ -24,15 +24,18 @@ const HeroSection = ({ visibleSections }: HeroSectionProps) => {
     <>
       <HeroHeader />
 
-      <section id="hero" className="relative lg:min-h-screen lg:flex lg:items-center overflow-hidden">
+      <section id="hero" className="relative lg:h-screen overflow-hidden">
         <HeroSlider current={current} setCurrent={setCurrent} />
-        <HeroContent visibleSections={visibleSections} showForm={!isDesktop} />
+        {!isDesktop && <HeroContent visibleSections={visibleSections} />}
       </section>
 
       {isDesktop && (
-        <section className="relative bg-background py-12">
-          <div className="max-w-3xl mx-auto px-6">
-            <HeroLeadForm />
+        <section className="relative bg-background">
+          <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-2 gap-12 items-start">
+            <HeroContent visibleSections={visibleSections} showForm={false} below />
+            <div className="pt-2">
+              <HeroLeadForm />
+            </div>
           </div>
         </section>
       )}

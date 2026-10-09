@@ -144,19 +144,19 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
       })}
 
       {/* Затемнение — только для десктопа */}
-      <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent z-10" />
+      <div className="hidden lg:block absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/50 to-transparent z-10 pointer-events-none" />
       <div className="hidden lg:block absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/70 to-transparent z-10 pointer-events-none" />
 
       <button
         onClick={() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length)}
-        className="hidden lg:flex absolute right-24 bottom-6 w-12 h-12 rounded-full bg-black/50 backdrop-blur-md border border-white/20 items-center justify-center hover:bg-black/70 transition z-20"
+        className="hidden lg:flex absolute left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 backdrop-blur-md border border-white/20 items-center justify-center hover:bg-black/70 transition z-20"
         aria-label="Предыдущее фото"
       >
         <Icon name="ChevronLeft" size={24} className="text-white" />
       </button>
       <button
         onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
-        className="hidden lg:flex absolute right-8 bottom-6 w-12 h-12 rounded-full bg-black/50 backdrop-blur-md border border-white/20 items-center justify-center hover:bg-black/70 transition z-20"
+        className="hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 backdrop-blur-md border border-white/20 items-center justify-center hover:bg-black/70 transition z-20"
         aria-label="Следующее фото"
       >
         <Icon name="ChevronRight" size={24} className="text-white" />
