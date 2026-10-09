@@ -73,7 +73,7 @@ const SeoMeta = () => {
       <meta name="keywords" content={keywords} />
       <meta name="subject" content="Аренда и услуги манипулятора в Нижнем Новгороде" />
       <meta name="topic" content="Услуги манипулятора, аренда крана-манипулятора" />
-      <meta name="abstract" content="Аренда манипулятора в Нижнем Новгороде от 1900 ₽/час — краны-манипуляторы 3-17 тонн, подача за 60 минут." />
+      <meta name="abstract" content="Аренда манипулятора в Нижнем Новгороде — краны-манипуляторы 3-17 тонн, подача за 60 минут." />
       <meta name="classification" content="Аренда спецтехники, услуги манипулятора" />
       <meta name="coverage" content="Нижний Новгород, Нижегородская область" />
       <meta name="distribution" content="Local" />
