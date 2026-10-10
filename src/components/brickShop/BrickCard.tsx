@@ -94,7 +94,7 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
             {brick.priceNum > 0 && (
               <div className="text-right">
                 <p className="text-sm font-bold text-white">{priceText(brick.palletPrice)}</p>
-                <p className="text-xs text-muted-foreground">за поддон</p>
+                <p className="text-xs text-muted-foreground">за упаковку {PALLET_SIZE} шт</p>
               </div>
             )}
           </div>
