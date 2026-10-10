@@ -107,9 +107,9 @@ const MaterialCategoryPage = () => {
             <p className="relative mt-4 text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
               Силикатный кирпич М-150 с доставкой манипулятором по Нижнему Новгороду и области
             </p>
-            <div className="relative mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-              <PhoneButton size="lg" className="rounded-2xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
-              <MaxButton place="brick_shop_hero" className="justify-center" />
+            <div className="relative mt-6 flex flex-wrap items-center gap-2 justify-center">
+              <PhoneButton size="md" className="rounded-xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
+              <MaxButton place="brick_shop_hero" className="justify-center !px-4 !py-2.5 !gap-2 !text-sm !font-bold" />
             </div>
             {page.heroImage && (
               <figure className="relative mt-7 rounded-2xl overflow-hidden border border-accent/30 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
@@ -132,9 +132,9 @@ const MaterialCategoryPage = () => {
               <p className="text-2xl font-black text-white mb-1">Остались вопросы?</p>
               <p className="text-muted-foreground">Позвоните или напишите — подберём кирпич и посчитаем доставку за 5 минут</p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-              <PhoneButton size="lg" className="rounded-2xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
-              <MaxButton place="brick_shop_bottom" className="justify-center" />
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
+              <PhoneButton size="md" className="rounded-xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
+              <MaxButton place="brick_shop_bottom" className="justify-center !px-4 !py-2.5 !gap-2 !text-sm !font-bold" />
             </div>
           </div>
         </section>
