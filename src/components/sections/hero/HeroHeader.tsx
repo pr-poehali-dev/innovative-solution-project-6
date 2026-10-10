@@ -7,13 +7,10 @@ import OfflineStatusDot from "@/components/ui/OfflineStatusDot";
 import MaxButton from "@/components/ui/MaxButton";
 import MaterialsMenu from "./MaterialsMenu";
 import { navLinks } from "./heroData";
-import { HEADER_MENU_CATEGORIES } from "@/data/materials";
 
 const HeroHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [matOpen, setMatOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const matRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -100,39 +97,18 @@ const HeroHeader = () => {
             {navLinks.map(link => {
               if (link.href === "/stroymaterialy") {
                 return (
-                  <div key={link.href} ref={matRef} className="rounded-xl bg-accent/10 border border-accent/40 shadow-[0_0_16px_rgba(232,168,32,0.15)] overflow-hidden">
-                    <button
-                      type="button"
-                      onClick={() => setMatOpen(prev => !prev)}
-                      className="w-full py-3 px-4 flex items-center gap-2 text-sm font-bold text-white"
-                    >
-                      <Icon name="Package" size={16} className="text-accent" />
-                      Стройматериалы
-                      <span className="ml-auto px-2 py-0.5 rounded-full bg-accent text-black text-[9px] font-black">
-                        NEW
-                      </span>
-                      <Icon
-                        name="ChevronDown"
-                        size={16}
-                        className={`text-accent transition-transform ${matOpen ? "rotate-180" : ""}`}
-                      />
-                    </button>
-                    {matOpen && (
-                      <div className="px-2 pb-2 flex flex-col gap-0.5">
-                        {HEADER_MENU_CATEGORIES.map(c => (
-                          <a
-                            key={c.slug}
-                            href={"href" in c && c.href ? c.href : `/stroymaterialy?cat=${c.slug}`}
-                            onClick={() => setMenuOpen(false)}
-                            className="flex items-center gap-2.5 py-2.5 px-3 rounded-lg text-sm text-white/75 hover:text-white hover:bg-white/5 transition-all"
-                          >
-                            <Icon name={c.icon} size={14} className="text-accent shrink-0" />
-                            {c.label}
-                          </a>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <a
+                    key={link.href}
+                    href="/stroymaterialy/kirpich"
+                    onClick={() => setMenuOpen(false)}
+                    className="rounded-xl bg-accent/10 border border-accent/40 shadow-[0_0_16px_rgba(232,168,32,0.15)] py-3 px-4 flex items-center gap-2 text-sm font-bold text-white"
+                  >
+                    <Icon name="Package" size={16} className="text-accent" />
+                    Стройматериалы
+                    <span className="ml-auto px-2 py-0.5 rounded-full bg-accent text-black text-[9px] font-black">
+                      NEW
+                    </span>
+                  </a>
                 );
               }
               return (
