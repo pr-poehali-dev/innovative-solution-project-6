@@ -107,7 +107,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value as SortId)}
-              className="rounded-xl border border-accent/25 bg-[#0e1420] px-3 py-2 text-white font-semibold outline-none focus:border-accent"
+              className="rounded-xl border border-accent/25 bg-[#4a5260] px-3 py-2 text-white font-semibold outline-none focus:border-accent"
             >
               <option value="cheap">Сначала дешёвые</option>
               <option value="expensive">Сначала дорогие</option>

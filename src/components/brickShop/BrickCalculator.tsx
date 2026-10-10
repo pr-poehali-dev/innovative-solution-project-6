@@ -74,7 +74,7 @@ const NumField = ({
 }) => (
   <label className="block">
     <span className="text-xs text-muted-foreground">{label}</span>
-    <div className="mt-1 flex items-center rounded-xl border border-accent/25 bg-black/30 focus-within:border-accent">
+    <div className="mt-1 flex items-center rounded-xl border border-accent/25 bg-black/15 focus-within:border-accent">
       <input
         type="number"
         inputMode="decimal"
@@ -90,7 +90,7 @@ const NumField = ({
 );
 
 const Counter = ({ label, value, onChange, hint }: { label: string; value: number; onChange: (v: number) => void; hint: string }) => (
-  <div className="rounded-xl border border-white/10 bg-black/20 p-3">
+  <div className="rounded-xl border border-white/10 bg-black/10 p-3">
     <p className="text-xs text-muted-foreground">{label}</p>
     <div className="mt-1.5 flex items-center justify-between">
       <button
@@ -205,7 +205,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
   };
 
   return (
-    <div className="rounded-3xl border border-accent/30 bg-gradient-to-br from-card/70 to-black/40 p-4 sm:p-8">
+    <div className="rounded-3xl border border-accent/30 bg-gradient-to-br from-card/70 to-black/10 p-4 sm:p-8">
       <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="w-11 h-11 rounded-xl bg-accent/15 border border-accent/40 flex items-center justify-center shrink-0">
@@ -216,7 +216,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
             <p className="text-sm text-muted-foreground">Посчитайте сами — сколько кирпича и упаковок нужно</p>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-1 p-1 rounded-2xl bg-black/40 border border-white/10 sm:w-[420px]">
+        <div className="grid grid-cols-2 gap-1 p-1 rounded-2xl bg-black/15 border border-white/10 sm:w-[420px]">
           {[
             { id: "build" as Mode, label: "По размерам постройки", icon: "Home" },
             { id: "packs" as Mode, label: "По упаковкам", icon: "Package" },
@@ -249,7 +249,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
                       type="button"
                       onClick={() => setBrickId(b.id)}
                       className={`flex items-center gap-3 rounded-xl border p-2 text-left transition-all ${
-                        active ? "border-accent bg-accent/15" : "border-white/10 bg-black/20 hover:border-accent/50"
+                        active ? "border-accent bg-accent/15" : "border-white/10 bg-black/10 hover:border-accent/50"
                       }`}
                     >
                       <span className="w-12 h-12 rounded-lg bg-white shrink-0 overflow-hidden">
@@ -278,7 +278,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
                       type="button"
                       onClick={() => applyPreset(p.id)}
                       className={`flex flex-col items-center gap-1.5 rounded-xl border px-2 py-3 text-sm font-bold transition-all ${
-                        preset === p.id ? "border-accent bg-accent/15 text-white" : "border-white/10 bg-black/20 text-white/80 hover:border-accent/50"
+                        preset === p.id ? "border-accent bg-accent/15 text-white" : "border-white/10 bg-black/10 text-white/80 hover:border-accent/50"
                       }`}
                     >
                       <Icon name={p.icon} size={20} className="text-accent" />
@@ -290,7 +290,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
               </Step>
 
               <Step n={3} title="Размеры">
-                <div className="grid grid-cols-2 gap-1 p-1 rounded-xl bg-black/30 border border-white/10 mb-3">
+                <div className="grid grid-cols-2 gap-1 p-1 rounded-xl bg-black/15 border border-white/10 mb-3">
                   {[
                     { id: "box" as Shape, label: "Коробка из 4 стен" },
                     { id: "wall" as Shape, label: "Одна стена / забор" },
@@ -335,7 +335,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
                       type="button"
                       onClick={() => setThickness(w.id)}
                       className={`rounded-xl border p-2.5 text-left transition-all ${
-                        thickness === w.id ? "border-accent bg-accent/15" : "border-white/10 bg-black/20 hover:border-accent/50"
+                        thickness === w.id ? "border-accent bg-accent/15" : "border-white/10 bg-black/10 hover:border-accent/50"
                       }`}
                     >
                       <p className="text-sm font-bold text-white">{w.label}</p>
@@ -363,7 +363,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
                   inputMode="numeric"
                   value={packs}
                   onChange={(e) => setPacks(Math.max(1, Math.floor(num(e.target.value)) || 1))}
-                  className="flex-1 min-w-0 h-12 rounded-xl border border-accent/25 bg-black/30 text-center text-2xl font-black text-white outline-none focus:border-accent"
+                  className="flex-1 min-w-0 h-12 rounded-xl border border-accent/25 bg-black/15 text-center text-2xl font-black text-white outline-none focus:border-accent"
                 />
                 <button
                   type="button"
@@ -381,7 +381,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
                     type="button"
                     onClick={() => setPacks(n)}
                     className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all ${
-                      packs === n ? "border-accent bg-accent text-black" : "border-white/10 bg-black/20 text-white/80 hover:border-accent/50"
+                      packs === n ? "border-accent bg-accent text-black" : "border-white/10 bg-black/10 text-white/80 hover:border-accent/50"
                     }`}
                   >
                     {n} уп.
@@ -389,7 +389,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
                 ))}
               </div>
 
-              <div className="mt-5 rounded-xl bg-black/30 border border-white/10 p-4">
+              <div className="mt-5 rounded-xl bg-black/15 border border-white/10 p-4">
                 <p className="text-sm text-white font-bold mb-3">
                   На сколько хватит {packQty.toLocaleString("ru-RU")} шт?
                 </p>
@@ -409,7 +409,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
           )}
         </div>
 
-        <div className="lg:sticky lg:top-24 self-start rounded-2xl border border-accent/40 bg-black/50 p-5 shadow-[0_0_40px_rgba(232,168,32,0.08)]">
+        <div className="lg:sticky lg:top-24 self-start rounded-2xl border border-accent/40 bg-black/10 p-5 shadow-[0_0_40px_rgba(232,168,32,0.08)]">
           <p className="text-xs uppercase tracking-wider text-muted-foreground mb-4">Итог расчёта</p>
 
           <div className="rounded-xl bg-accent/10 border border-accent/30 p-4 text-center mb-4">
@@ -454,7 +454,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
                     setCity(e.target.value);
                     if (c) setDistance(String(c.km));
                   }}
-                  className="w-full appearance-none rounded-xl border border-accent/25 bg-[#0e1420] pl-9 pr-9 py-2.5 text-white font-bold outline-none focus:border-accent"
+                  className="w-full appearance-none rounded-xl border border-accent/25 bg-[#4a5260] pl-9 pr-9 py-2.5 text-white font-bold outline-none focus:border-accent"
                 >
                   {DELIVERY_CITIES.map((c) => (
                     <option key={c.name} value={c.name}>
@@ -487,7 +487,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
                     type="button"
                     onClick={() => setTruckTons(t.tons)}
                     className={`relative rounded-lg border px-1.5 py-2 text-center transition-all ${
-                      active ? "border-accent bg-accent/15" : "border-white/10 bg-black/20 hover:border-accent/50"
+                      active ? "border-accent bg-accent/15" : "border-white/10 bg-black/10 hover:border-accent/50"
                     }`}
                   >
                     {bestTruck?.tons === t.tons && (

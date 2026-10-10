@@ -81,7 +81,7 @@ const MaterialCategoryPage = () => {
       </header>
 
       {page.cat === "kirpich" ? (
-      <main className="pt-24 sm:pt-28 pb-16">
+      <main className="shop-light pt-24 sm:pt-28 pb-16">
         <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-4">
           <div className="relative mb-8 rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/10 via-card/40 to-transparent px-5 py-7 sm:px-10 sm:py-10 overflow-hidden text-center">
             <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[520px] h-[220px] rounded-full bg-accent/20 blur-3xl" />
@@ -107,6 +107,10 @@ const MaterialCategoryPage = () => {
             <p className="relative mt-4 text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
               Силикатный кирпич М-150 с доставкой манипулятором по Нижнему Новгороду и области
             </p>
+            <div className="relative mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+              <PhoneButton size="lg" className="rounded-2xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
+              <MaxButton place="brick_shop_hero" className="justify-center" />
+            </div>
             {page.heroImage && (
               <figure className="relative mt-7 rounded-2xl overflow-hidden border border-accent/30 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
                 <img
@@ -123,6 +127,16 @@ const MaterialCategoryPage = () => {
             )}
           </div>
           <BrickShop items={visible} loading={loading} />
+          <div className="mt-10 rounded-3xl border border-accent/30 bg-card/60 p-6 sm:p-8 flex flex-col md:flex-row md:items-center gap-5 justify-between">
+            <div>
+              <p className="text-2xl font-black text-white mb-1">Остались вопросы?</p>
+              <p className="text-muted-foreground">Позвоните или напишите — подберём кирпич и посчитаем доставку за 5 минут</p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+              <PhoneButton size="lg" className="rounded-2xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
+              <MaxButton place="brick_shop_bottom" className="justify-center" />
+            </div>
+          </div>
         </section>
       </main>
       ) : (

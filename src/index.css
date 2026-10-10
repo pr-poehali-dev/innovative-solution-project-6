@@ -723,3 +723,11 @@ body.modal-open .floating-mobile-notif {
   from { transform: scale(1.12); }
   to { transform: scale(1); }
 }
+
+.shop-light {
+  --background: 220 14% 38%;
+  --card: 220 14% 46%;
+  --muted-foreground: 0 0% 90%;
+  background-color: hsl(220 14% 38%);
+  zoom: 1.08;
+}

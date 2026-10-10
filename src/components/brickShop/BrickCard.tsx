@@ -112,7 +112,7 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="flex items-center rounded-xl border border-accent/30 bg-black/30">
+            <div className="flex items-center rounded-xl border border-accent/30 bg-black/15">
               <button
                 type="button"
                 onClick={() => setPallets((p) => Math.max(1, p - 1))}
