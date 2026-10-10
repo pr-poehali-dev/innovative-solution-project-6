@@ -83,10 +83,6 @@ const MaterialCategoryPage = () => {
       {page.cat === "kirpich" ? (
       <main className="pt-24 sm:pt-28 pb-16">
         <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-4">
-          <Link to="/stroymaterialy" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-accent mb-3">
-            <Icon name="ArrowLeft" size={14} />
-            Все стройматериалы
-          </Link>
           <h1 className="text-3xl sm:text-4xl font-black tracking-tighter text-white mb-6">Магазин кирпича</h1>
           <BrickShop items={visible} loading={loading} />
         </section>
