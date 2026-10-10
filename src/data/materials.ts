@@ -13,6 +13,7 @@ export const MATERIALS_API = "https://functions.poehali.dev/dc327032-aa41-4632-b
 
 export type CategoryBanner = {
   image: string;
+  gallery?: string[];
   title: string;
   subtitle: string;
   text: string;
@@ -22,6 +23,12 @@ export type CategoryBanner = {
 export const CATEGORY_BANNERS: Record<string, CategoryBanner> = {
   kirpich: {
     image: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/1de2d830-e589-46da-83a6-4123bcc9f4e2.jpg",
+    gallery: [
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/94db1223-b95a-4475-81ad-de52d8d520d4.jpg",
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/f6745e34-93a8-4d4e-ba10-83c2a9781e4c.jpg",
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/c70a6663-a4c9-4b99-9d24-317e4e6f708d.jpg",
+      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/1de2d830-e589-46da-83a6-4123bcc9f4e2.jpg",
+    ],
     title: "Кирпич силикатный",
     subtitle: "Прочные стены, ровная кладка, аккуратный фасад",
     text: "Полнотелый и пустотелый силикатный кирпич для несущих стен, перегородок и облицовки. Ровная геометрия — кладка идёт быстро, расход раствора меньше. Привезём нужный объём и разгрузим манипулятором точно там, где ведутся работы.",
