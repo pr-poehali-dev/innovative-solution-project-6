@@ -3,7 +3,7 @@ import Icon from "@/components/ui/icon";
 import { SUBMIT_URL } from "@/components/sections/hero/heroData";
 import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
 import { reachGoal } from "@/lib/metrika";
-import { type Brick, PALLET_SIZE, formatRub, palletsFor } from "./brickUtils";
+import { type Brick, PALLET_SIZE, formatTons, priceText, palletsFor } from "./brickUtils";
 
 export type CartLine = { brick: Brick; qty: number };
 
@@ -27,17 +27,18 @@ const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear }: BrickChe
   const totalQty = lines.reduce((s, l) => s + l.qty, 0);
   const total = lines.reduce((s, l) => s + l.qty * l.brick.priceNum, 0);
   const pallets = lines.reduce((s, l) => s + palletsFor(l.qty), 0);
+  const weight = lines.reduce((s, l) => s + palletsFor(l.qty) * l.brick.palletWeight, 0);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !phone.trim() || lines.length === 0) return;
     setStatus("loading");
     const list = lines
-      .map((l) => `${l.brick.name} — ${l.qty} шт (${palletsFor(l.qty)} под.) = ${formatRub(l.qty * l.brick.priceNum)}`)
+      .map((l) => `${l.brick.name} — ${l.qty} шт (${palletsFor(l.qty)} под., ${formatTons(palletsFor(l.qty) * l.brick.palletWeight)})`)
       .join("; ");
     const comment = [
       `ЗАКАЗ КИРПИЧА: ${list}`,
-      `Итого: ${totalQty} шт, ${pallets} поддонов, ${formatRub(total)} без доставки`,
+      `Итого: ${totalQty} шт, ${pallets} поддонов, вес ${formatTons(weight)}${total > 0 ? `, ${priceText(total)} без доставки` : ""}`,
       address && `Адрес доставки: ${address}`,
     ]
       .filter(Boolean)
@@ -98,7 +99,7 @@ const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear }: BrickChe
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-white leading-tight mb-1">{l.brick.name}</p>
                       <p className="text-xs text-muted-foreground mb-2">
-                        {l.qty} шт · {palletsFor(l.qty)} под. · <span className="text-accent font-bold">{formatRub(l.qty * l.brick.priceNum)}</span>
+                        {l.qty} шт · {palletsFor(l.qty)} под. · <span className="text-accent font-bold">{formatTons(palletsFor(l.qty) * l.brick.palletWeight)}</span>
                       </p>
                       <div className="flex items-center gap-2">
                         <button type="button" onClick={() => setQty(l.brick.id, l.qty - PALLET_SIZE)} className="w-7 h-7 rounded-lg border border-accent/30 flex items-center justify-center text-white" aria-label="Минус поддон">
@@ -121,10 +122,10 @@ const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear }: BrickChe
             {lines.length > 0 && (
               <form onSubmit={submit} className="border-t border-accent/20 p-5 space-y-3">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">{totalQty.toLocaleString("ru-RU")} шт · {pallets} поддонов</span>
-                  <span className="text-xl font-black text-accent">{formatRub(total)}</span>
+                  <span className="text-muted-foreground">{totalQty.toLocaleString("ru-RU")} шт · {pallets} под. · {formatTons(weight)}</span>
+                  <span className="text-xl font-black text-accent">{priceText(total)}</span>
                 </div>
-                <p className="text-[11px] text-muted-foreground -mt-2">Доставку манипулятором посчитаем по адресу</p>
+                <p className="text-[11px] text-muted-foreground -mt-2">Перезвоним, назовём цену кирпича и доставки манипулятором</p>
                 <input required value={name} onChange={(e) => setName(e.target.value)} placeholder="Имя или компания" className="w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-sm text-white outline-none focus:border-accent" />
                 <input required type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Телефон" className="w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-sm text-white outline-none focus:border-accent" />
                 <input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Адрес доставки (необязательно)" className="w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-sm text-white outline-none focus:border-accent" />

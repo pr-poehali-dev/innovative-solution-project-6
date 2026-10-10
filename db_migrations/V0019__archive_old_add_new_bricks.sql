@@ -1,0 +1,5 @@
+ALTER TABLE t_p98221464_innovative_solution_.materials ADD COLUMN IF NOT EXISTS archived boolean NOT NULL DEFAULT false;
+UPDATE t_p98221464_innovative_solution_.materials SET archived = true;
+INSERT INTO t_p98221464_innovative_solution_.materials (name, category, price, unit, description, image_url, in_stock, sort_order) VALUES
+('Кирпич силикатный полнотелый полуторный М-150', 'kirpich', 'По запросу', 'шт', 'Размер 250×120×88 мм. В упаковке (на поддоне) 336 шт. Вес поддона 1680 кг. Полнотелый — для несущих стен, фундаментов и перегородок.', 'https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/c699244b-a105-4f7f-8845-2b9576712a98.jpg', true, 1),
+('Кирпич силикатный пустотелый полуторный М-150', 'kirpich', 'По запросу', 'шт', 'Размер 250×120×88 мм. В упаковке (на поддоне) 336 шт. Вес поддона 1340 кг. Пустотелый — легче, меньше нагрузка на фундамент, лучше держит тепло.', 'https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/c699244b-a105-4f7f-8845-2b9576712a98.jpg', true, 2);

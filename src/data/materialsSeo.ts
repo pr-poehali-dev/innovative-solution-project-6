@@ -45,7 +45,7 @@ export const MATERIAL_SEO_PAGES: MaterialSeoPage[] = [
       "заказать доставку кирпича на объект",
     ],
     advantages: [
-      { icon: "ShieldCheck", title: "ГОСТ и марка М150–М200", text: "Морозостойкость F35, ровная геометрия" },
+      { icon: "ShieldCheck", title: "ГОСТ и марка М150", text: "Морозостойкость F35, ровная геометрия" },
       { icon: "Truck", title: "Доставка от 1 поддона", text: "Свой транспорт, без посредников" },
       { icon: "Crane", title: "Разгрузка манипулятором", text: "Ставим поддоны прямо на площадку" },
       { icon: "FileText", title: "Договор, НДС, ЭДО", text: "Работаем с юр. лицами и физлицами" },

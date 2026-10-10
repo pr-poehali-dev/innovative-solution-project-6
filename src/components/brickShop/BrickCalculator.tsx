@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import Icon from "@/components/ui/icon";
-import { type Brick, type BrickFormat, FORMAT_LABEL, PALLET_SIZE, WALL_THICKNESS, formatRub, palletsFor } from "./brickUtils";
+import { type Brick, type BrickFormat, FORMAT_LABEL, PALLET_SIZE, WALL_THICKNESS, formatTons, priceText, palletsFor } from "./brickUtils";
 
 interface BrickCalculatorProps {
   bricks: Brick[];
@@ -12,7 +12,8 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
   const [height, setHeight] = useState("3");
   const [openings, setOpenings] = useState("0");
   const [thickness, setThickness] = useState<(typeof WALL_THICKNESS)[number]["id"]>("1");
-  const [format, setFormat] = useState<BrickFormat>("oneHalf");
+  const formats = (Object.keys(FORMAT_LABEL) as BrickFormat[]).filter((f) => bricks.some((b) => b.format === f));
+  const [format, setFormat] = useState<BrickFormat>(formats.includes("oneHalf") ? "oneHalf" : formats[0] || "oneHalf");
   const [brickId, setBrickId] = useState<number | null>(null);
   const [done, setDone] = useState(false);
 
@@ -87,10 +88,11 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
             </div>
           </div>
 
+          {formats.length > 1 && (
           <div>
             <p className="text-xs text-muted-foreground mb-2">Формат кирпича</p>
             <div className="flex gap-2">
-              {(Object.keys(FORMAT_LABEL) as BrickFormat[]).map((f) => (
+              {formats.map((f) => (
                 <button
                   key={f}
                   type="button"
@@ -107,6 +109,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
               ))}
             </div>
           </div>
+          )}
 
           {options.length > 0 && (
             <label className="block">
@@ -118,7 +121,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
               >
                 {options.map((b) => (
                   <option key={b.id} value={b.id}>
-                    {b.name} — {b.price}
+                    {b.name}
                   </option>
                 ))}
               </select>
@@ -141,12 +144,16 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
               <span className="text-muted-foreground">Поддонов по {PALLET_SIZE} шт</span>
               <span className="text-white font-bold">{result.pallets}</span>
             </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Общий вес</span>
+              <span className="text-white font-bold">{selected ? formatTons(result.pallets * selected.palletWeight) : "—"}</span>
+            </div>
             <div className="pt-3 border-t border-accent/20 flex justify-between items-end">
               <span className="text-muted-foreground">Стоимость</span>
-              <span className="text-2xl font-black text-accent">{formatRub(total)}</span>
+              <span className="text-2xl font-black text-accent">{priceText(total)}</span>
             </div>
             <p className="text-[11px] text-muted-foreground">
-              Цена за {result.orderQty.toLocaleString("ru-RU")} шт (целые поддоны), без доставки
+              {result.orderQty.toLocaleString("ru-RU")} шт — целые упаковки по {PALLET_SIZE} шт
             </p>
           </div>
           <button

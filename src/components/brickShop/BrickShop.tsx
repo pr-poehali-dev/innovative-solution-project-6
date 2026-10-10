@@ -4,7 +4,7 @@ import type { Material } from "@/data/materials";
 import BrickCard from "./BrickCard";
 import BrickCalculator from "./BrickCalculator";
 import BrickCheckout, { type CartLine } from "./BrickCheckout";
-import { type BrickFormat, type PurposeId, FORMAT_LABEL, PURPOSES, formatRub, matchesPurpose, toBrick } from "./brickUtils";
+import { type BrickFormat, type PurposeId, FORMAT_LABEL, PALLET_SIZE, PURPOSES, formatTons, priceText, matchesPurpose, toBrick } from "./brickUtils";
 
 interface BrickShopProps {
   items: Material[];
@@ -20,6 +20,10 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
   const [sort, setSort] = useState<SortId>("cheap");
   const [cart, setCart] = useState<CartLine[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
+
+  const formats = (Object.keys(FORMAT_LABEL) as BrickFormat[]).filter((f) => bricks.some((b) => b.format === f));
+  const purposes = PURPOSES.filter((p) => p.id === "all" || bricks.some((b) => matchesPurpose(b, p.id)));
+  const hasPrices = bricks.some((b) => b.priceNum > 0);
 
   const visible = useMemo(() => {
     const list = bricks.filter((b) => matchesPurpose(b, purpose) && (format === "all" || b.format === format));
@@ -43,7 +47,9 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
 
   const cartQty = cart.reduce((s, l) => s + l.qty, 0);
   const cartTotal = cart.reduce((s, l) => s + l.qty * l.brick.priceNum, 0);
-  const minPrice = bricks.length ? Math.min(...bricks.map((b) => b.priceNum)) : 0;
+  const prices = bricks.map((b) => b.priceNum).filter((v) => v > 0);
+  const minPrice = prices.length ? Math.min(...prices) : 0;
+  const cartWeight = cart.reduce((s, l) => s + (l.qty / PALLET_SIZE) * l.brick.palletWeight, 0);
 
   const chip = (active: boolean) =>
     `shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-bold border transition-all whitespace-nowrap ${
@@ -54,8 +60,8 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
     <div id="shop" className="scroll-mt-24">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
         {[
-          { icon: "Tag", value: minPrice ? `от ${minPrice} ₽` : "—", label: "за штуку" },
-          { icon: "Layers", value: `${bricks.length}`, label: "видов в наличии" },
+          { icon: "Tag", value: minPrice ? `от ${minPrice} ₽` : "По запросу", label: minPrice ? "за штуку" : "цена за 5 минут" },
+          { icon: "Package", value: `${PALLET_SIZE} шт`, label: "в упаковке" },
           { icon: "Truck", value: "от 1 поддона", label: "доставка манипулятором" },
           { icon: "ShieldCheck", value: "ГОСТ 379-2015", label: "сертифицировано" },
         ].map((s) => (
@@ -73,7 +79,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
         <div>
           <p className="text-xs text-muted-foreground mb-2">Для чего кирпич</p>
           <div className="flex gap-2 overflow-x-auto sm:flex-wrap scrollbar-none -mx-1 px-1">
-            {PURPOSES.map((p) => (
+            {purposes.map((p) => (
               <button key={p.id} type="button" onClick={() => setPurpose(p.id)} className={chip(purpose === p.id)}>
                 <Icon name={p.icon} size={14} />
                 {p.label}
@@ -82,17 +88,20 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row sm:items-end gap-3 sm:justify-between">
+          {formats.length > 1 ? (
           <div>
             <p className="text-xs text-muted-foreground mb-2">Формат</p>
             <div className="flex gap-2">
               <button type="button" onClick={() => setFormat("all")} className={chip(format === "all")}>Любой</button>
-              {(Object.keys(FORMAT_LABEL) as BrickFormat[]).map((f) => (
+              {formats.map((f) => (
                 <button key={f} type="button" onClick={() => setFormat(f)} className={chip(format === f)}>
                   {FORMAT_LABEL[f]}
                 </button>
               ))}
             </div>
           </div>
+          ) : <div />}
+          {hasPrices && (
           <label className="flex items-center gap-2 text-sm">
             <Icon name="ArrowUpDown" size={16} className="text-accent" />
             <select
@@ -105,6 +114,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
               <option value="grade">По прочности</option>
             </select>
           </label>
+          )}
         </div>
       </div>
 
@@ -129,7 +139,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
               key={b.id}
               brick={b}
               inCart={cart.find((l) => l.brick.id === b.id)?.qty || 0}
-              onAdd={(brick, pallets) => addToCart(brick, pallets * 240)}
+              onAdd={(brick, pallets) => addToCart(brick, pallets * PALLET_SIZE)}
             />
           ))}
         </div>
@@ -153,7 +163,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
               {cart.length}
             </span>
           </span>
-          <span className="text-sm">{cartQty.toLocaleString("ru-RU")} шт · {formatRub(cartTotal)}</span>
+          <span className="text-sm">{cartQty.toLocaleString("ru-RU")} шт · {cartTotal > 0 ? priceText(cartTotal) : formatTons(cartWeight)}</span>
           <span className="text-sm underline">Оформить</span>
         </button>
       )}

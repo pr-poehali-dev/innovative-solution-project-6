@@ -1,6 +1,6 @@
 import type { Material } from "@/data/materials";
 
-export const PALLET_SIZE = 240;
+export const PALLET_SIZE = 336;
 
 export type BrickFormat = "single" | "oneHalf";
 
@@ -12,6 +12,7 @@ export type Brick = Material & {
   grade: string;
   size: string;
   palletPrice: number;
+  palletWeight: number;
 };
 
 export const FORMAT_LABEL: Record<BrickFormat, string> = {
@@ -33,16 +34,19 @@ export const toBrick = (m: Material): Brick => {
   const priceNum = parseFloat((m.price || "0").replace(/[^\d.,]/g, "").replace(",", ".")) || 0;
   const format: BrickFormat = n.includes("одинарн") ? "single" : "oneHalf";
   const gradeMatch = m.name.match(/М-?\s?(\d{2,3})/i);
+  const weightMatch = (m.description || "").match(/Вес поддона\s*(\d+)/i);
+  const hollow = n.includes("пустотел");
   const sizeMatch = (m.description || "").match(/(\d{3})\s?[×x]\s?(\d{2,3})\s?[×x]\s?(\d{2,3})/);
   return {
     ...m,
     priceNum,
     format,
-    hollow: n.includes("пустотел"),
+    hollow,
     facing: n.includes("лицев"),
     grade: gradeMatch ? `М${gradeMatch[1]}` : "",
     size: sizeMatch ? `${sizeMatch[1]}×${sizeMatch[2]}×${sizeMatch[3]} мм` : format === "single" ? "250×120×65 мм" : "250×120×88 мм",
     palletPrice: priceNum * PALLET_SIZE,
+    palletWeight: weightMatch ? Number(weightMatch[1]) : hollow ? 1340 : 1680,
   };
 };
 
@@ -62,5 +66,9 @@ export const WALL_THICKNESS = [
 
 export const formatRub = (v: number) =>
   `${Math.round(v).toLocaleString("ru-RU")} ₽`;
+
+export const priceText = (v: number) => (v > 0 ? formatRub(v) : "По запросу");
+
+export const formatTons = (kg: number) => `${(kg / 1000).toLocaleString("ru-RU", { maximumFractionDigits: 1 })} т`;
 
 export const palletsFor = (qty: number) => Math.ceil(qty / PALLET_SIZE);

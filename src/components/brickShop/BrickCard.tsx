@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
-import { type Brick, FORMAT_LABEL, PALLET_SIZE, formatRub } from "./brickUtils";
+import { type Brick, FORMAT_LABEL, PALLET_SIZE, priceText } from "./brickUtils";
 
 interface BrickCardProps {
   brick: Brick;
@@ -74,21 +74,29 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
             <p className="text-white font-semibold">{brick.size}</p>
           </div>
           <div className="rounded-lg bg-white/5 p-2">
-            <p className="text-muted-foreground">На поддоне</p>
+            <p className="text-muted-foreground">В упаковке</p>
             <p className="text-white font-semibold">{PALLET_SIZE} шт</p>
+          </div>
+          <div className="rounded-lg bg-white/5 p-2 col-span-2 flex items-center justify-between">
+            <p className="text-muted-foreground">Вес поддона</p>
+            <p className="text-white font-semibold">{brick.palletWeight.toLocaleString("ru-RU")} кг</p>
           </div>
         </div>
 
         <div className="mt-auto">
           <div className="flex items-end justify-between mb-3">
             <div>
-              <p className="text-2xl font-black text-accent leading-none">{brick.price}</p>
-              <p className="text-xs text-muted-foreground mt-1">за {brick.unit || "шт"}</p>
+              <p className={`${brick.priceNum > 0 ? "text-2xl" : "text-lg"} font-black text-accent leading-none`}>
+                {brick.priceNum > 0 ? brick.price : "Цена по запросу"}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">{brick.priceNum > 0 ? `за ${brick.unit || "шт"}` : "назовём за 5 минут"}</p>
             </div>
-            <div className="text-right">
-              <p className="text-sm font-bold text-white">{formatRub(brick.palletPrice)}</p>
-              <p className="text-xs text-muted-foreground">за поддон</p>
-            </div>
+            {brick.priceNum > 0 && (
+              <div className="text-right">
+                <p className="text-sm font-bold text-white">{priceText(brick.palletPrice)}</p>
+                <p className="text-xs text-muted-foreground">за поддон</p>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-2">

@@ -773,7 +773,7 @@ def materials_list() -> dict:
     cur = conn.cursor()
     cur.execute(
         "SELECT id, name, category, price, unit, description, image_url, in_stock "
-        "FROM materials ORDER BY sort_order, id DESC"
+        "FROM materials WHERE archived = false ORDER BY sort_order, id"
     )
     rows = cur.fetchall()
     cur.close()
