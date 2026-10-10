@@ -93,28 +93,31 @@ const NumField = ({
 );
 
 const Counter = ({ label, value, onChange, hint }: { label: string; value: number; onChange: (v: number) => void; hint: string }) => (
-  <div className="rounded-xl border border-white/10 bg-black/10 p-3">
-    <p className="text-xs text-muted-foreground">{label}</p>
-    <div className="mt-1.5 flex items-center justify-between">
+  <div className="rounded-xl border border-white/10 bg-black/10 p-3 flex sm:block items-center justify-between gap-3">
+    <div className="min-w-0">
+      <p className="text-sm sm:text-xs text-white sm:text-muted-foreground font-bold sm:font-normal">{label}</p>
+      <p className="text-[11px] sm:hidden text-muted-foreground/80">{hint}</p>
+    </div>
+    <div className="sm:mt-1.5 flex items-center gap-1 sm:justify-between shrink-0">
       <button
         type="button"
         onClick={() => onChange(Math.max(0, value - 1))}
-        className="w-8 h-8 rounded-lg border border-accent/30 text-white flex items-center justify-center hover:bg-accent/10"
+        className="w-11 h-11 sm:w-8 sm:h-8 rounded-lg border border-accent/30 text-white flex items-center justify-center hover:bg-accent/10"
         aria-label={`Меньше: ${label}`}
       >
-        <Icon name="Minus" size={14} />
+        <Icon name="Minus" size={16} />
       </button>
-      <span className="text-lg font-black text-white">{value}</span>
+      <span className="w-9 text-center text-lg font-black text-white">{value}</span>
       <button
         type="button"
         onClick={() => onChange(value + 1)}
-        className="w-8 h-8 rounded-lg border border-accent/30 text-white flex items-center justify-center hover:bg-accent/10"
+        className="w-11 h-11 sm:w-8 sm:h-8 rounded-lg border border-accent/30 text-white flex items-center justify-center hover:bg-accent/10"
         aria-label={`Больше: ${label}`}
       >
-        <Icon name="Plus" size={14} />
+        <Icon name="Plus" size={16} />
       </button>
     </div>
-    <p className="mt-1 text-[10px] text-muted-foreground/80">{hint}</p>
+    <p className="hidden sm:block mt-1 text-[10px] text-muted-foreground/80">{hint}</p>
   </div>
 );
 
@@ -331,7 +334,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
               </Step>
 
               <Step n={4} title="Окна, двери, ворота">
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <Counter label="Окна" value={windows} onChange={setWindows} hint="≈ 1,5 × 1,2 м" />
                   <Counter label="Двери" value={doors} onChange={setDoors} hint="≈ 0,9 × 2,1 м" />
                   <Counter label="Ворота" value={gates} onChange={setGates} hint="≈ 2,5 × 2,4 м" />
@@ -465,7 +468,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
                     setCity(e.target.value);
                     if (c) setDistance(String(c.km));
                   }}
-                  className="w-full appearance-none rounded-xl border border-accent/25 bg-[#4a5260] pl-9 pr-9 py-2.5 text-white font-bold outline-none focus:border-accent"
+                  className="w-full appearance-none rounded-xl border border-accent/25 bg-[#4a5260] pl-9 pr-9 py-2.5 text-[15px] text-white font-bold outline-none truncate focus:border-accent"
                 >
                   {DELIVERY_CITIES.map((c) => (
                     <option key={c.name} value={c.name}>
@@ -516,7 +519,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
               <Row label="Вес груза" value={formatTons(pallets * palletKg)} />
               <Row label="Везём за рейс" value={truck ? `${perTrip} уп. (${formatTons(perTrip * palletKg)})` : "—"} />
               <Row label="Рейсов манипулятора" value={km > 0 ? `${trips}` : "—"} />
-              <Row label="Доставка с разгрузкой" value={deliveryText} />
+              <Row label="Доставка" value={isLocal ? "по телефону" : deliveryText} />
             </div>
             {isLocal && (
               <p className="mt-2 text-[11px] text-accent">По городу и ближайшим районам — назовём лучшую цену при звонке</p>
@@ -525,11 +528,11 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
 
           <div className="mt-4 pt-4 border-t border-accent/20 space-y-2 text-sm">
             <Row label="Кирпич" value={priceText(total)} />
-            <Row label="Доставка" value={deliveryText} />
+            <Row label="Доставка" value={isLocal ? "по телефону" : deliveryText} />
           </div>
           <div className="mt-3 flex justify-between items-end">
-            <span className="text-white font-bold">{isLocal || km <= 0 ? "Итого без доставки" : "Итого"}</span>
-            <span className="text-3xl font-black text-accent">{priceText(grandTotal)}</span>
+            <span className="text-white font-bold leading-tight">{isLocal || km <= 0 ? "Итого без доставки" : "Итого"}</span>
+            <span className="text-2xl sm:text-3xl font-black text-accent whitespace-nowrap">{priceText(grandTotal)}</span>
           </div>
 
           <button
