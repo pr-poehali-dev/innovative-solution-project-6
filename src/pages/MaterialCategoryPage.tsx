@@ -80,6 +80,18 @@ const MaterialCategoryPage = () => {
         </div>
       </header>
 
+      {page.cat === "kirpich" ? (
+      <main className="pt-24 sm:pt-28 pb-16">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-4">
+          <Link to="/stroymaterialy" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-accent mb-3">
+            <Icon name="ArrowLeft" size={14} />
+            Все стройматериалы
+          </Link>
+          <h1 className="text-3xl sm:text-4xl font-black tracking-tighter text-white mb-6">Магазин кирпича</h1>
+          <BrickShop items={visible} loading={loading} />
+        </section>
+      </main>
+      ) : (
       <main className="pt-24 sm:pt-28 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
           <Breadcrumbs
@@ -320,6 +332,7 @@ const MaterialCategoryPage = () => {
           <PhoneButton size="lg" className="rounded-2xl" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
         </section>
       </main>
+      )}
 
       <LazySection>
         <SiteFooter />

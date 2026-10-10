@@ -1,4 +1,5 @@
 import { lazy, useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import SectionBadge from "@/components/ui/SectionBadge";
 import PhoneButton from "@/components/ui/PhoneButton";
@@ -16,6 +17,7 @@ import { fetchMaterials, MATERIAL_CATEGORIES, MENU_CATEGORIES, CATEGORY_BANNERS,
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
 const MaterialsPage = () => {
+  const navigate = useNavigate();
   const [callbackOpen, setCallbackOpen] = useState(false);
   const [items, setItems] = useState<Material[]>([]);
   const [loading, setLoading] = useState(true);
@@ -150,7 +152,7 @@ const MaterialsPage = () => {
                 {usedCategories.map((c) => (
                   <button
                     key={c.slug}
-                    onClick={() => setActiveCat(c.slug)}
+                    onClick={() => (c.slug === "kirpich" ? navigate("/stroymaterialy/kirpich") : setActiveCat(c.slug))}
                     className={`shrink-0 snap-start inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold transition-all border whitespace-nowrap ${
                       activeCat === c.slug
                         ? "bg-accent text-black border-accent"
