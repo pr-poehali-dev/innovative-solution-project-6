@@ -166,27 +166,38 @@ const MaterialsPage = () => {
         )}
 
         {banner && (
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-10">
-            <div className="rounded-2xl overflow-hidden border border-accent/25 bg-card/40">
-              <div className="relative w-full bg-black">
-                <img
-                  src={banner.image}
-                  alt={banner.title}
-                  className="w-full h-auto block"
-                />
-                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-card/90 to-transparent pointer-events-none" />
-              </div>
-
-              <div className="p-5 sm:p-8 lg:p-10">
+          <section className="pb-10">
+            <div className="relative w-full min-h-[460px] sm:min-h-[560px] lg:min-h-[640px] overflow-hidden flex items-end">
+              <img
+                key={banner.image}
+                src={banner.image}
+                alt={banner.title}
+                className="absolute inset-0 w-full h-full object-cover animate-[bannerZoom_14s_ease-out_forwards]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-background via-background/40 to-transparent" />
+              <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 pb-8 sm:pb-14 pt-24">
                 <SectionBadge>Категория</SectionBadge>
-                <h2 className="text-2xl sm:text-4xl font-black text-white mt-4 mb-2 leading-tight">
+                <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white mt-4 mb-3 leading-[0.95] tracking-tighter drop-shadow-[0_4px_20px_rgba(0,0,0,0.8)] max-w-3xl">
                   {banner.title}
                 </h2>
-                <p className="text-accent font-bold text-sm sm:text-base mb-4">{banner.subtitle}</p>
-                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 max-w-3xl">
+                <p className="text-accent font-bold text-base sm:text-xl mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{banner.subtitle}</p>
+                <p className="text-sm sm:text-base text-white/85 leading-relaxed max-w-2xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
                   {banner.text}
                 </p>
+                {activeCat === "kirpich" && (
+                  <a
+                    href="/stroymaterialy/kirpich#shop"
+                    className="mt-6 inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-black font-black hover:shadow-lg hover:shadow-accent/40 hover:scale-[1.03] transition-all"
+                  >
+                    <Icon name="ShoppingCart" size={18} />
+                    Выбрать кирпич в магазине
+                  </a>
+                )}
+              </div>
+            </div>
 
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6">
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
                   {banner.bullets.map((b) => (
                     <div
@@ -219,7 +230,6 @@ const MaterialsPage = () => {
                     Рассчитать стоимость
                   </button>
                 </div>
-              </div>
             </div>
           </section>
         )}
