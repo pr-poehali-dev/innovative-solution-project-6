@@ -83,7 +83,7 @@ export const MENU_CATEGORIES = MATERIAL_CATEGORIES.filter((c) => !("hidden" in c
 
 // Пункты выпадающего меню «Стройматериалы» в шапке
 // Добавьте slug — и под кнопкой «Стройматериалы» появится выпадающий список
-export const HEADER_MENU_CATEGORIES = ["kirpich"]
+export const HEADER_MENU_CATEGORIES = ["kirpich", "asfalt-beton"]
   .map((slug) => MATERIAL_CATEGORIES.find((c) => c.slug === slug)!)
   .filter(Boolean);
 

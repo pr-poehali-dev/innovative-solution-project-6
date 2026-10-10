@@ -40,7 +40,7 @@ const HeroHeader = () => {
           <div className="min-w-0 flex-1 xl:flex-none">
             <BrandLogo compact={scrolled} />
           </div>
-          <nav className="hidden xl:flex gap-3 2xl:gap-5 text-[13px] 2xl:text-sm font-medium items-center shrink-0">
+          <nav className="hidden xl:flex gap-5 text-sm font-medium items-center shrink-0">
             {navLinks.map(link => {
               if (link.href === "/stroymaterialy") {
                 return <MaterialsMenu key={link.href} />;
