@@ -295,9 +295,17 @@ const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear, delivery, 
                 onClick={() => setStep("form")}
                 className="w-full h-14 rounded-2xl bg-gradient-to-r from-accent to-accent/80 text-black text-lg font-black inline-flex items-center justify-center gap-2"
               >
-                Оформить заказ
-                <Icon name="ArrowRight" size={20} />
+                <Icon name="Send" size={20} />
+                Отправить заказ
               </button>
+              <a
+                href={`tel:${MATERIALS_PHONE}`}
+                onClick={() => reachGoal("phone_click", { place: "brick_cart" })}
+                className="w-full h-12 rounded-2xl border border-accent/50 bg-accent/5 text-white font-bold inline-flex items-center justify-center gap-2"
+              >
+                <Icon name="Phone" size={18} className="text-accent" />
+                Позвонить {MATERIALS_PHONE_LABEL}
+              </a>
             </div>
           </>
         ) : (
@@ -366,6 +374,14 @@ const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear, delivery, 
                 <Icon name={status === "loading" ? "Loader2" : "Send"} size={20} className={status === "loading" ? "animate-spin" : ""} />
                 {status === "loading" ? "Отправляем…" : "Отправить заказ"}
               </button>
+              <a
+                href={`tel:${MATERIALS_PHONE}`}
+                onClick={() => reachGoal("phone_click", { place: "brick_cart" })}
+                className="w-full h-12 rounded-2xl border border-accent/50 bg-accent/5 text-white font-bold inline-flex items-center justify-center gap-2"
+              >
+                <Icon name="Phone" size={18} className="text-accent" />
+                Позвонить {MATERIALS_PHONE_LABEL}
+              </a>
             </div>
           </form>
         )}
