@@ -83,7 +83,31 @@ const MaterialCategoryPage = () => {
       {page.cat === "kirpich" ? (
       <main className="pt-24 sm:pt-28 pb-16">
         <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-4">
-          <h1 className="text-3xl sm:text-4xl font-black tracking-tighter text-white mb-6">Магазин кирпича</h1>
+          <div className="relative mb-8 rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/10 via-card/40 to-transparent px-5 py-7 sm:px-10 sm:py-10 overflow-hidden text-center">
+            <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[520px] h-[220px] rounded-full bg-accent/20 blur-3xl" />
+            <div className="relative flex items-center justify-center gap-3 mb-3">
+              <span className="h-px w-10 sm:w-20 bg-gradient-to-r from-transparent to-[#d9a441]" />
+              <span
+                className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.35em] text-[#f5d680]"
+                style={{ fontFamily: "'Cinzel', serif" }}
+              >
+                от компании
+              </span>
+              <span className="h-px w-10 sm:w-20 bg-gradient-to-l from-transparent to-[#d9a441]" />
+            </div>
+            <h1 className="relative leading-[1.05]">
+              <span className="block text-3xl sm:text-5xl font-black tracking-tight text-white">Магазин кирпича</span>
+              <span
+                className="block mt-2 text-4xl sm:text-6xl font-bold bg-gradient-to-b from-[#fff3c4] via-[#f5d680] to-[#d9a441] bg-clip-text text-transparent drop-shadow-[0_4px_18px_rgba(232,168,32,0.35)]"
+                style={{ fontFamily: "'Cinzel', serif", letterSpacing: "0.04em" }}
+              >
+                «Фаворит»
+              </span>
+            </h1>
+            <p className="relative mt-4 text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
+              Силикатный кирпич М-150 с доставкой манипулятором по Нижнему Новгороду и области
+            </p>
+          </div>
           <BrickShop items={visible} loading={loading} />
         </section>
       </main>
