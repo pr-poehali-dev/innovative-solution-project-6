@@ -68,7 +68,7 @@ export const CATEGORY_BANNERS: Record<string, CategoryBanner> = {
 // hidden: страница и старые ссылки работают, но в меню пункт не показываем
 // href: свой адрес вместо раздела стройматериалов
 export const MATERIAL_CATEGORIES = [
-  { slug: "kirpich", label: "Кирпич силикатный", icon: "Blocks" },
+  { slug: "kirpich", label: "Кирпич силикатный", icon: "Blocks", href: "/stroymaterialy/kirpich" },
   { slug: "bloki", label: "Газосиликатные блоки", icon: "Box" },
   { slug: "bordyur", label: "Бордюр", icon: "Grid3x3" },
   { slug: "asfalt-beton", label: "Асфальтирование", icon: "Truck", href: "/asfaltirovanie" },

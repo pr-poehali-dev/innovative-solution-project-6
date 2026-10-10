@@ -26,6 +26,10 @@ const MaterialsPage = () => {
   );
 
   useEffect(() => {
+    if (activeCat === "kirpich") navigate("/stroymaterialy/kirpich", { replace: true });
+  }, [activeCat, navigate]);
+
+  useEffect(() => {
     fetchMaterials()
       .then(setItems)
       .catch(() => setItems([]))
