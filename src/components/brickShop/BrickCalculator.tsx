@@ -121,7 +121,7 @@ const Counter = ({ label, value, onChange, hint }: { label: string; value: numbe
 const Row = ({ label, value, strong }: { label: string; value: string; strong?: boolean }) => (
   <div className="flex justify-between gap-3">
     <span className="text-muted-foreground">{label}</span>
-    <span className={strong ? "text-white font-black" : "text-white font-bold"}>{value}</span>
+    <span className={`text-right whitespace-nowrap ${strong ? "text-white font-black" : "text-white font-bold"}`}>{value}</span>
   </div>
 );
 
@@ -251,7 +251,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
         <div className="space-y-4">
           {bricks.length > 0 && (
             <Step n={1} title="Выберите кирпич">
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {bricks.map((b) => {
                   const active = selected?.id === b.id;
                   return (
@@ -469,7 +469,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
                 >
                   {DELIVERY_CITIES.map((c) => (
                     <option key={c.name} value={c.name}>
-                      {c.name} — {c.km} км
+                      {c.name} · {c.km} км
                     </option>
                   ))}
                   <option value="other">Другой адрес — введу километры</option>

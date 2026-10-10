@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import Icon from "@/components/ui/icon";
 import type { Material } from "@/data/materials";
 import BrickCard from "./BrickCard";
@@ -20,6 +21,13 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
   const [sort, setSort] = useState<SortId>("cheap");
   const [cart, setCart] = useState<CartLine[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(null), 2500);
+    return () => clearTimeout(t);
+  }, [toast]);
 
   const formats = (Object.keys(FORMAT_LABEL) as BrickFormat[]).filter((f) => bricks.some((b) => b.format === f));
   const purposes = PURPOSES.filter((p) => p.id === "all" || bricks.some((b) => matchesPurpose(b, p.id)));
@@ -42,6 +50,12 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
       if (found) return prev.map((l) => (l.brick.id === brick.id ? { ...l, qty: l.qty + qty } : l));
       return [...prev, { brick, qty }];
     });
+    setToast(`${brick.hollow ? "Пустотелый" : "Полнотелый"} · ${Math.ceil(qty / PALLET_SIZE)} уп. добавлено`);
+  };
+
+  const goCalc = () => {
+    setCartOpen(false);
+    setTimeout(() => document.getElementById("brick-calc")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
   };
 
   const setQty = (id: number, qty: number) =>
@@ -60,18 +74,18 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
 
   return (
     <div id="shop" className="scroll-mt-24">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-6 sm:mb-8">
         {[
           { icon: "Tag", value: minPrice ? `от ${minPrice} ₽` : "По запросу", label: minPrice ? "за штуку" : "цена за 5 минут" },
           { icon: "Package", value: `${PALLET_SIZE} шт`, label: "в упаковке" },
           { icon: "Truck", value: "от 1 поддона", label: "доставка манипулятором" },
           { icon: "ShieldCheck", value: "ГОСТ 379-2015", label: "сертифицировано" },
         ].map((s) => (
-          <div key={s.label} className="rounded-2xl border border-accent/20 bg-card/40 p-4 flex items-center gap-3">
+          <div key={s.label} className="rounded-2xl border border-accent/20 bg-card/40 p-3 sm:p-4 flex items-center gap-2.5 sm:gap-3">
             <Icon name={s.icon} size={22} className="text-accent shrink-0" />
             <div className="min-w-0">
-              <p className="text-white font-black leading-tight">{s.value}</p>
-              <p className="text-xs text-muted-foreground">{s.label}</p>
+              <p className="text-white font-black leading-tight text-sm sm:text-base">{s.value}</p>
+              <p className="text-[11px] sm:text-xs text-muted-foreground leading-tight">{s.label}</p>
             </div>
           </div>
         ))}
@@ -148,7 +162,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
       )}
 
       {bricks.length > 0 && (
-        <div className="mt-12">
+        <div id="brick-calc" className="mt-10 sm:mt-12 scroll-mt-20">
           <BrickCalculator
             bricks={bricks}
             onAdd={(b, q, d) => {
@@ -159,21 +173,40 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
         </div>
       )}
 
-      {cart.length > 0 && !cartOpen && (
-        <button
-          type="button"
-          onClick={() => setCartOpen(true)}
-          className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 inline-flex items-center gap-3 pl-4 pr-5 py-3 rounded-full bg-gradient-to-r from-accent to-accent/80 text-black font-black shadow-[0_10px_40px_rgba(232,168,32,0.5)] hover:scale-105 transition-transform"
-        >
-          <span className="relative">
-            <Icon name="ShoppingCart" size={22} />
-            <span className="absolute -top-2 -right-2 min-w-5 h-5 px-1 rounded-full bg-black text-accent text-[11px] flex items-center justify-center">
-              {cart.length}
+      {cart.length > 0 && !cartOpen && <div className="h-24" />}
+
+      {cart.length > 0 && !cartOpen && createPortal(
+        <div className="fixed inset-x-0 bottom-0 z-50 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:p-4 pointer-events-none">
+          {toast && (
+            <div className="mx-auto max-w-md mb-2 rounded-xl bg-emerald-500 text-black font-bold text-sm px-4 py-2.5 flex items-center gap-2 shadow-lg animate-in fade-in slide-in-from-bottom-2">
+              <Icon name="CheckCircle" size={18} />
+              {toast}
+            </div>
+          )}
+          <button
+            type="button"
+            onClick={() => setCartOpen(true)}
+            className="pointer-events-auto mx-auto w-full max-w-md flex items-center gap-3 rounded-2xl bg-gradient-to-r from-accent to-accent/85 text-black px-4 py-3 shadow-[0_10px_40px_rgba(0,0,0,0.45)] active:scale-[0.98] transition-transform"
+          >
+            <span className="relative w-11 h-11 rounded-xl bg-black/15 flex items-center justify-center shrink-0">
+              <Icon name="ShoppingCart" size={22} />
+              <span className="absolute -top-1.5 -right-1.5 min-w-5 h-5 px-1 rounded-full bg-black text-accent text-[11px] font-black flex items-center justify-center">
+                {cart.length}
+              </span>
             </span>
-          </span>
-          <span className="text-sm">{cartQty.toLocaleString("ru-RU")} шт · {cartTotal > 0 ? priceText(cartTotal) : formatTons(cartWeight)}</span>
-          <span className="text-sm underline">Оформить</span>
-        </button>
+            <span className="flex-1 text-left leading-tight">
+              <span className="block text-[11px] font-bold opacity-75">
+                В корзине {Math.ceil(cartQty / PALLET_SIZE)} уп. · {cartQty.toLocaleString("ru-RU")} шт
+              </span>
+              <span className="block text-lg font-black">{cartTotal > 0 ? priceText(cartTotal) : formatTons(cartWeight)}</span>
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-xl bg-black text-accent px-3 py-2.5 text-sm font-black">
+              Корзина
+              <Icon name="ChevronRight" size={16} />
+            </span>
+          </button>
+        </div>,
+        document.body,
       )}
 
       <BrickCheckout
@@ -187,6 +220,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
           setDelivery(undefined);
         }}
         delivery={delivery}
+        onCalc={goCalc}
       />
     </div>
   );

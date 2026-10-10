@@ -116,19 +116,19 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
               <button
                 type="button"
                 onClick={() => setPallets((p) => Math.max(1, p - 1))}
-                className="w-9 h-10 flex items-center justify-center text-white hover:text-accent"
+                className="w-11 h-12 flex items-center justify-center text-white hover:text-accent"
                 aria-label="Меньше поддонов"
               >
                 <Icon name="Minus" size={16} />
               </button>
               <div className="w-12 text-center leading-none">
                 <p className="text-white font-black">{pallets}</p>
-                <p className="text-[9px] text-muted-foreground mt-0.5">поддон</p>
+                <p className="text-[10px] text-muted-foreground mt-0.5">упак.</p>
               </div>
               <button
                 type="button"
                 onClick={() => setPallets((p) => Math.min(99, p + 1))}
-                className="w-9 h-10 flex items-center justify-center text-white hover:text-accent"
+                className="w-11 h-12 flex items-center justify-center text-white hover:text-accent"
                 aria-label="Больше поддонов"
               >
                 <Icon name="Plus" size={16} />
@@ -137,7 +137,7 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
             <button
               type="button"
               onClick={handleAdd}
-              className={`flex-1 h-10 inline-flex items-center justify-center gap-2 rounded-xl font-bold text-sm transition-all ${
+              className={`flex-1 h-12 inline-flex items-center justify-center gap-2 rounded-xl font-bold text-sm transition-all ${
                 added
                   ? "bg-emerald-500 text-black"
                   : "bg-gradient-to-r from-accent to-accent/80 text-black hover:shadow-lg hover:shadow-accent/30"
@@ -148,7 +148,9 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
             </button>
           </div>
           {inCart > 0 && (
-            <p className="text-xs text-accent mt-2 text-center">В корзине: {inCart} шт</p>
+            <p className="text-sm text-accent font-bold mt-2 text-center">
+              ✓ В корзине: {Math.ceil(inCart / PALLET_SIZE)} уп. ({inCart.toLocaleString("ru-RU")} шт)
+            </p>
           )}
         </div>
       </div>
