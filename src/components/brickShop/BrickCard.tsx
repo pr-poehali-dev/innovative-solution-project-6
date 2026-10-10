@@ -20,19 +20,18 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
 
   const tags = [
     FORMAT_LABEL[brick.format],
-    brick.hollow ? "Пустотелый" : "Полнотелый",
     brick.facing ? "Лицевой" : "Рядовой",
   ];
 
   return (
     <article className="group rounded-2xl overflow-hidden border border-accent/15 bg-card/40 hover:border-accent/50 hover:shadow-[0_10px_40px_rgba(232,168,32,0.12)] transition-all flex flex-col">
-      <div className="relative aspect-[4/3] bg-card/60 overflow-hidden">
+      <div className="relative aspect-[4/3] bg-white overflow-hidden">
         {brick.imageUrl ? (
           <img
             src={brick.imageUrl}
             alt={brick.name}
             loading="lazy"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-contain p-6 pb-14 group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
@@ -57,6 +56,19 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
           <span className={`w-1.5 h-1.5 rounded-full ${brick.inStock ? "bg-white" : "bg-white/60"}`} />
           {brick.inStock ? "В наличии" : "Под заказ"}
         </span>
+        <div
+          className={`absolute bottom-3 left-3 right-3 flex items-center gap-2.5 px-3 py-2 rounded-xl text-white shadow-lg ${
+            brick.hollow ? "bg-sky-700" : "bg-zinc-800"
+          }`}
+        >
+          <Icon name={brick.hollow ? "CircleDashed" : "Square"} size={20} className="shrink-0" />
+          <div className="leading-tight">
+            <p className="text-sm font-black uppercase tracking-wide">{brick.hollow ? "Пустотелый" : "Полнотелый"}</p>
+            <p className="text-[11px] text-white/80">
+              {brick.hollow ? "С отверстиями — легче и теплее" : "Сплошной — максимальная прочность"}
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="p-5 flex flex-col flex-1">
