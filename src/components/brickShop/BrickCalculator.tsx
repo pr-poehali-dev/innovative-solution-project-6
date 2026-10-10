@@ -15,6 +15,8 @@ const WINDOW_M2 = 1.8;
 const DOOR_M2 = 1.9;
 const GATE_M2 = 6;
 const RESERVE = 1.05;
+const KM_RATE = 110;
+const TRUCK_TONS = 12;
 
 const PRESETS: {
   id: string;
@@ -127,6 +129,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
   const [thickness, setThickness] = useState<ThicknessId>("1.5");
 
   const [packs, setPacks] = useState(1);
+  const [distance, setDistance] = useState("20");
 
   const selected = bricks.find((b) => b.id === brickId) || bricks[0];
   const format = selected?.format || "oneHalf";
@@ -166,6 +169,11 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
   const orderQty = mode === "build" ? build.orderQty : packQty;
   const weight = selected ? pallets * selected.palletWeight : 0;
   const total = selected ? orderQty * selected.priceNum : 0;
+  const km = num(distance);
+  const perTrip = selected ? Math.max(1, Math.floor((TRUCK_TONS * 1000) / selected.palletWeight)) : 1;
+  const trips = pallets > 0 ? Math.ceil(pallets / perTrip) : 0;
+  const delivery = Math.round(km * 2 * KM_RATE * trips);
+  const grandTotal = total + delivery;
 
   const handleAdd = () => {
     if (!selected || orderQty === 0) return;
@@ -408,11 +416,26 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
             <Row label="Цена упаковки" value={selected ? priceText(selected.palletPrice) : "—"} />
           </div>
 
-          <div className="mt-4 pt-4 border-t border-accent/20 flex justify-between items-end">
-            <span className="text-muted-foreground text-sm">Стоимость кирпича</span>
-            <span className="text-3xl font-black text-accent">{priceText(total)}</span>
+          <div className="mt-4 pt-4 border-t border-white/10">
+            <div className="flex items-center gap-2 mb-2">
+              <Icon name="Truck" size={16} className="text-accent" />
+              <span className="text-sm font-bold text-white">Доставка манипулятором</span>
+            </div>
+            <NumField label="Расстояние от нас до объекта" value={distance} onChange={setDistance} suffix="км" hint="Посмотрите в Яндекс Картах от Нижнего Новгорода" />
+            <div className="space-y-2 text-sm mt-3">
+              <Row label="Рейсов манипулятора" value={km > 0 ? `${trips}` : "—"} />
+              <Row label="Доставка с разгрузкой" value={km > 0 ? priceText(delivery) : "—"} />
+            </div>
           </div>
-          <p className="text-[11px] text-muted-foreground mt-1">Доставку манипулятором посчитаем по адресу</p>
+
+          <div className="mt-4 pt-4 border-t border-accent/20 space-y-2 text-sm">
+            <Row label="Кирпич" value={priceText(total)} />
+            <Row label="Доставка" value={km > 0 ? priceText(delivery) : "—"} />
+          </div>
+          <div className="mt-3 flex justify-between items-end">
+            <span className="text-white font-bold">Итого</span>
+            <span className="text-3xl font-black text-accent">{priceText(grandTotal)}</span>
+          </div>
 
           <button
             type="button"
