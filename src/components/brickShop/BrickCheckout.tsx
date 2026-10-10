@@ -42,8 +42,8 @@ const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear, delivery }
       `ЗАКАЗ КИРПИЧА: ${list}`,
       `Кирпич: ${totalQty} шт, ${pallets} поддонов, вес ${formatTons(weight)}${total > 0 ? `, ${priceText(total)}` : ""}`,
       delivery &&
-        `Доставка: ${delivery.city}, ${delivery.km} км, манипулятор ${delivery.truck}, рейсов ${delivery.trips} — ${priceText(delivery.cost)}`,
-      delivery && total > 0 && `ИТОГО с доставкой: ${priceText(total + delivery.cost)}`,
+        `Доставка: ${delivery.city}, ${delivery.km} км, манипулятор ${delivery.truck}, рейсов ${delivery.trips} — ${delivery.local ? "по городу, цену назвать при звонке" : priceText(delivery.cost)}`,
+      delivery && !delivery.local && total > 0 && `ИТОГО с доставкой: ${priceText(total + delivery.cost)}`,
       address && `Адрес: ${address}`,
     ]
       .filter(Boolean)
@@ -152,10 +152,10 @@ const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear, delivery }
                   <div className="text-sm space-y-1 -mt-1">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Доставка: {delivery.city}, {delivery.trips} рейс.</span>
-                      <span className="text-white font-bold">{priceText(delivery.cost)}</span>
+                      <span className="text-white font-bold">{delivery.local ? "по телефону" : priceText(delivery.cost)}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-white font-bold">Итого</span>
+                      <span className="text-white font-bold">{delivery.local ? "Итого без доставки" : "Итого"}</span>
                       <span className="text-white font-black">{priceText(total + delivery.cost)}</span>
                     </div>
                   </div>

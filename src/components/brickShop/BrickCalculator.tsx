@@ -4,7 +4,7 @@ import { trucks } from "@/components/sections/calculator/data";
 import { DELIVERY_CITIES } from "./deliveryCities";
 import { type Brick, PALLET_SIZE, WALL_THICKNESS, formatTons, priceText, palletsFor } from "./brickUtils";
 
-export type DeliveryInfo = { city: string; km: number; truck: string; trips: number; cost: number };
+export type DeliveryInfo = { city: string; km: number; truck: string; trips: number; cost: number; local?: boolean };
 
 interface BrickCalculatorProps {
   bricks: Brick[];
@@ -20,6 +20,7 @@ const DOOR_M2 = 1.9;
 const GATE_M2 = 6;
 const RESERVE = 1.05;
 const KM_RATE = 120;
+const LOCAL_KM = 30;
 const MANIPULATORS = trucks
   .filter((t) => t.category === "Манипулятор")
   .map((t) => {
@@ -196,8 +197,10 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
   const truck = usable.find((t) => t.tons === truckTons) || bestTruck;
   const perTrip = truck ? perTripOf(truck.tons) : 0;
   const trips = truck ? tripsOf(truck.tons) : 0;
-  const delivery = Math.round(km * 2 * KM_RATE * trips);
+  const isLocal = km > 0 && km <= LOCAL_KM;
+  const delivery = isLocal ? 0 : Math.round(km * 2 * KM_RATE * trips);
   const grandTotal = total + delivery;
+  const deliveryText = km <= 0 ? "—" : isLocal ? "Рассчитаем по телефону" : priceText(delivery);
 
   const handleAdd = () => {
     if (!selected || orderQty === 0) return;
@@ -205,7 +208,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
       selected,
       orderQty,
       km > 0 && truck
-        ? { city: city === "other" ? "Другой адрес" : city, km, truck: `${fmt(truck.tons)} т`, trips, cost: delivery }
+        ? { city: city === "other" ? "Другой адрес" : city, km, truck: `${fmt(truck.tons)} т`, trips, cost: delivery, local: isLocal }
         : undefined,
     );
     setDone(true);
@@ -513,16 +516,19 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
               <Row label="Вес груза" value={formatTons(pallets * palletKg)} />
               <Row label="Везём за рейс" value={truck ? `${perTrip} уп. (${formatTons(perTrip * palletKg)})` : "—"} />
               <Row label="Рейсов манипулятора" value={km > 0 ? `${trips}` : "—"} />
-              <Row label="Доставка с разгрузкой" value={km > 0 ? priceText(delivery) : "—"} />
+              <Row label="Доставка с разгрузкой" value={deliveryText} />
             </div>
+            {isLocal && (
+              <p className="mt-2 text-[11px] text-accent">По городу и ближайшим районам — назовём лучшую цену при звонке</p>
+            )}
           </div>
 
           <div className="mt-4 pt-4 border-t border-accent/20 space-y-2 text-sm">
             <Row label="Кирпич" value={priceText(total)} />
-            <Row label="Доставка" value={km > 0 ? priceText(delivery) : "—"} />
+            <Row label="Доставка" value={deliveryText} />
           </div>
           <div className="mt-3 flex justify-between items-end">
-            <span className="text-white font-bold">Итого</span>
+            <span className="text-white font-bold">{isLocal || km <= 0 ? "Итого без доставки" : "Итого"}</span>
             <span className="text-3xl font-black text-accent">{priceText(grandTotal)}</span>
           </div>
 

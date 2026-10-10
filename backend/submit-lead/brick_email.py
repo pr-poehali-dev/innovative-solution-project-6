@@ -58,8 +58,22 @@ def build_brick_email(name: str, phone: str, order: dict, lead_id: int) -> tuple
         <td style="padding:12px 10px;border-bottom:1px solid #eee;text-align:right;font-weight:900;color:#111;white-space:nowrap;">{_rub(i.get('sum'))}</td>
       </tr>"""
 
+    is_local = bool((delivery or {}).get("local"))
     delivery_html = ""
-    if delivery:
+    if delivery and is_local:
+        delivery_html = f"""
+  <tr><td style="padding:0 24px 18px;">
+    <div style="border:1px solid #f0d58a;background:#fffaf0;border-radius:14px;padding:16px 18px;">
+      <div style="font-size:12px;font-weight:900;color:#b07a06;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">🚚 Доставка по городу / рядом</div>
+      <table width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;color:#222;">
+        <tr><td style="padding:3px 0;color:#777;">Куда</td><td style="padding:3px 0;text-align:right;font-weight:800;">{_e(delivery.get('city'))}</td></tr>
+        <tr><td style="padding:3px 0;color:#777;">Расстояние</td><td style="padding:3px 0;text-align:right;font-weight:800;">{_num(delivery.get('km'))} км</td></tr>
+        <tr><td style="padding:3px 0;color:#777;">Манипулятор</td><td style="padding:3px 0;text-align:right;font-weight:800;">{_e(delivery.get('truck'))} · рейсов {_e(delivery.get('trips'))}</td></tr>
+        <tr><td style="padding:8px 0 0;font-weight:900;">Стоимость доставки</td><td style="padding:8px 0 0;text-align:right;font-weight:900;color:#c8850a;">назвать клиенту при звонке</td></tr>
+      </table>
+    </div>
+  </td></tr>"""
+    elif delivery:
         delivery_html = f"""
   <tr><td style="padding:0 24px 18px;">
     <div style="border:1px solid #f0d58a;background:#fffaf0;border-radius:14px;padding:16px 18px;">
@@ -128,7 +142,7 @@ def build_brick_email(name: str, phone: str, order: dict, lead_id: int) -> tuple
   <tr><td style="padding:0 24px 22px;">
     <div style="background:{GOLD};border-radius:16px;padding:18px 20px;">
       <table width="100%" cellpadding="0" cellspacing="0"><tr>
-        <td style="font-size:15px;font-weight:900;color:#000;">ИТОГО К ОПЛАТЕ{' с доставкой' if delivery else ''}</td>
+        <td style="font-size:15px;font-weight:900;color:#000;">ИТОГО К ОПЛАТЕ{' с доставкой' if delivery and not is_local else ' (без доставки)'}</td>
         <td style="text-align:right;font-size:28px;font-weight:900;color:#000;white-space:nowrap;">{_rub(grand)}</td>
       </tr></table>
     </div>
@@ -156,7 +170,9 @@ def build_brick_email(name: str, phone: str, order: dict, lead_id: int) -> tuple
             f"{_num(float(i.get('weightKg') or 0) / 1000)} т — {_rub(i.get('sum'))}"
         )
     lines.append(f"Итого кирпич: {total_packs} уп., {_num(total_weight / 1000)} т — {_rub(bricks_total)}")
-    if delivery:
+    if delivery and is_local:
+        lines += ["", f"ДОСТАВКА: {delivery.get('city')}, {_num(delivery.get('km'))} км — по городу, цену назвать при звонке"]
+    elif delivery:
         lines += [
             "",
             f"ДОСТАВКА: {delivery.get('city')}, {_num(delivery.get('km'))} км, манипулятор {delivery.get('truck')}, "
