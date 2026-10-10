@@ -107,6 +107,20 @@ const MaterialCategoryPage = () => {
             <p className="relative mt-4 text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
               Силикатный кирпич М-150 с доставкой манипулятором по Нижнему Новгороду и области
             </p>
+            {page.heroImage && (
+              <figure className="relative mt-7 rounded-2xl overflow-hidden border border-accent/30 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
+                <img
+                  src={page.heroImage}
+                  alt={page.heroAlt || "Кирпич Фаворит"}
+                  className="w-full h-auto max-h-[460px] object-cover"
+                />
+                {page.heroCaption && (
+                  <figcaption className="absolute bottom-0 inset-x-0 px-4 py-3 bg-gradient-to-t from-black/80 to-transparent text-xs sm:text-sm text-white/90 text-left">
+                    {page.heroCaption}
+                  </figcaption>
+                )}
+              </figure>
+            )}
           </div>
           <BrickShop items={visible} loading={loading} />
         </section>
