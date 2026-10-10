@@ -1,0 +1,1 @@
+UPDATE t_p98221464_innovative_solution_.materials SET price = '18 ₽', description = replace(description, '336 шт — 5 712 ₽.', '336 шт — 6 048 ₽.') WHERE archived = false AND category = 'kirpich';

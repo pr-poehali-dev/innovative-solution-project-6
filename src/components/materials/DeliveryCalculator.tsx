@@ -13,7 +13,7 @@ type Cargo = { id: string; label: string; palletLabel: string; weight: number; p
 
 const cargos: Cargo[] = [
   { id: "bordyur", label: "Бордюр 1000×300×150", palletLabel: "12 шт", weight: 1.6, price: 6000 },
-  { id: "kirpich", label: "Кирпич силикатный", palletLabel: "336 шт", weight: 1.4, price: 6050 },
+  { id: "kirpich", label: "Кирпич силикатный", palletLabel: "336 шт", weight: 1.4, price: 6048 },
   { id: "bloki", label: "Газосиликатный блок D500", palletLabel: "1,8 м³", weight: 0.95, price: 7020 },
   { id: "cement", label: "Цемент М500", palletLabel: "30 мешков", weight: 1.5, price: 14400 },
   { id: "other", label: "Другой материал", palletLabel: "поддон", weight: 1.5, price: 0 },
