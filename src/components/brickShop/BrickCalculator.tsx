@@ -219,7 +219,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
   };
 
   return (
-    <div className="rounded-3xl border border-accent/30 bg-gradient-to-br from-card/70 to-black/10 p-4 sm:p-8">
+    <div className="w-full min-w-0 overflow-hidden rounded-3xl border border-accent/30 bg-gradient-to-br from-card/70 to-black/10 p-4 sm:p-8">
       <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="w-11 h-11 rounded-xl bg-accent/15 border border-accent/40 flex items-center justify-center shrink-0">
@@ -250,8 +250,8 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-[1.4fr_1fr] gap-5">
-        <div className="space-y-4">
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] gap-5">
+        <div className="space-y-4 min-w-0">
           {bricks.length > 0 && (
             <Step n={1} title="Выберите кирпич">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -410,7 +410,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
                 <div className="space-y-2 text-sm">
                   {WALL_THICKNESS.map((w) => (
                     <div key={w.id} className="flex justify-between gap-3">
-                      <span className="text-muted-foreground">
+                      <span className="text-muted-foreground min-w-0">
                         Стена {w.label.toLowerCase()} <span className="text-white/50">({w.hint.toLowerCase()})</span>
                       </span>
                       <span className="text-white font-bold whitespace-nowrap">≈ {fmt(packQty / w.perM2[format] / RESERVE)} м²</span>
@@ -423,7 +423,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
           )}
         </div>
 
-        <div className="lg:sticky lg:top-24 self-start rounded-2xl border border-accent/40 bg-black/10 p-5 shadow-[0_0_40px_rgba(232,168,32,0.08)]">
+        <div className="min-w-0 w-full lg:sticky lg:top-24 self-start rounded-2xl border border-accent/40 bg-black/10 p-5 shadow-[0_0_40px_rgba(232,168,32,0.08)]">
           <p className="text-xs uppercase tracking-wider text-muted-foreground mb-4">Итог расчёта</p>
 
           <div className="rounded-xl bg-accent/10 border border-accent/30 p-4 text-center mb-4">
