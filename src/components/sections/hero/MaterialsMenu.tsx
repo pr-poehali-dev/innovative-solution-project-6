@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
-import { MENU_CATEGORIES } from "@/data/materials";
+import { HEADER_MENU_CATEGORIES } from "@/data/materials";
 
 const MaterialsMenu = () => {
   const [open, setOpen] = useState(false);
@@ -42,7 +42,7 @@ const MaterialsMenu = () => {
       {open && (
         <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50">
           <div className="w-64 rounded-2xl border border-accent/40 bg-[#0e1420] shadow-2xl shadow-black/80 p-2">
-            {MENU_CATEGORIES.map((c) => (
+            {HEADER_MENU_CATEGORIES.map((c) => (
               <a
                 key={c.slug}
                 href={"href" in c && c.href ? c.href : `/stroymaterialy?cat=${c.slug}`}
@@ -54,15 +54,6 @@ const MaterialsMenu = () => {
                 {c.label}
               </a>
             ))}
-            <div className="my-2 mx-1 border-t border-accent/15" />
-
-            <a
-              href="/stroymaterialy"
-              className="flex items-center justify-center gap-2 mt-2 mx-1 mb-1 px-3 py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r from-accent to-accent/80 text-black hover:shadow-lg hover:shadow-accent/30 transition-all"
-            >
-              Весь каталог
-              <Icon name="ArrowRight" size={14} />
-            </a>
           </div>
         </div>
       )}

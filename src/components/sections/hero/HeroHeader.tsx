@@ -7,7 +7,7 @@ import OfflineStatusDot from "@/components/ui/OfflineStatusDot";
 import MaxButton from "@/components/ui/MaxButton";
 import MaterialsMenu from "./MaterialsMenu";
 import { navLinks } from "./heroData";
-import { MENU_CATEGORIES } from "@/data/materials";
+import { HEADER_MENU_CATEGORIES } from "@/data/materials";
 
 const HeroHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -119,7 +119,7 @@ const HeroHeader = () => {
                     </button>
                     {matOpen && (
                       <div className="px-2 pb-2 flex flex-col gap-0.5">
-                        {MENU_CATEGORIES.map(c => (
+                        {HEADER_MENU_CATEGORIES.map(c => (
                           <a
                             key={c.slug}
                             href={"href" in c && c.href ? c.href : `/stroymaterialy?cat=${c.slug}`}
@@ -130,13 +130,6 @@ const HeroHeader = () => {
                             {c.label}
                           </a>
                         ))}
-                        <a
-                          href="/stroymaterialy"
-                          onClick={() => setMenuOpen(false)}
-                          className="mt-1 py-2.5 px-3 rounded-lg text-sm font-bold text-center bg-accent/15 text-accent"
-                        >
-                          Весь каталог →
-                        </a>
                       </div>
                     )}
                   </div>

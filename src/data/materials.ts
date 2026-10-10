@@ -74,6 +74,11 @@ export const MATERIAL_CATEGORIES = [
 // Пункты для меню и вкладок на сайте
 export const MENU_CATEGORIES = MATERIAL_CATEGORIES.filter((c) => !("hidden" in c && c.hidden));
 
+// Пункты выпадающего меню «Стройматериалы» в шапке
+export const HEADER_MENU_CATEGORIES = ["asfalt-beton", "kirpich"]
+  .map((slug) => MATERIAL_CATEGORIES.find((c) => c.slug === slug)!)
+  .filter(Boolean);
+
 export async function fetchMaterials(): Promise<Material[]> {
   const res = await fetch(MATERIALS_API, {
     method: "POST",
