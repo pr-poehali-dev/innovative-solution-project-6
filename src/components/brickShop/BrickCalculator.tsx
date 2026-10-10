@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import Icon from "@/components/ui/icon";
 import { trucks } from "@/components/sections/calculator/data";
+import { DELIVERY_CITIES } from "./deliveryCities";
 import { type Brick, PALLET_SIZE, WALL_THICKNESS, formatTons, priceText, palletsFor } from "./brickUtils";
 
 interface BrickCalculatorProps {
@@ -137,7 +138,8 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
   const [thickness, setThickness] = useState<ThicknessId>("1.5");
 
   const [packs, setPacks] = useState(1);
-  const [distance, setDistance] = useState("20");
+  const [city, setCity] = useState(DELIVERY_CITIES[0].name);
+  const [distance, setDistance] = useState(String(DELIVERY_CITIES[0].km));
   const [truckTons, setTruckTons] = useState<number | null>(null);
 
   const selected = bricks.find((b) => b.id === brickId) || bricks[0];
@@ -441,7 +443,40 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
               <Icon name="Truck" size={16} className="text-accent" />
               <span className="text-sm font-bold text-white">Доставка манипулятором</span>
             </div>
-            <NumField label="Расстояние от нас до объекта" value={distance} onChange={setDistance} suffix="км" hint="Посмотрите в Яндекс Картах от Нижнего Новгорода" />
+            <label className="block mb-3">
+              <span className="text-xs text-muted-foreground">Город или посёлок</span>
+              <div className="mt-1 relative">
+                <Icon name="MapPin" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent pointer-events-none" />
+                <select
+                  value={city}
+                  onChange={(e) => {
+                    const c = DELIVERY_CITIES.find((x) => x.name === e.target.value);
+                    setCity(e.target.value);
+                    if (c) setDistance(String(c.km));
+                  }}
+                  className="w-full appearance-none rounded-xl border border-accent/25 bg-[#0e1420] pl-9 pr-9 py-2.5 text-white font-bold outline-none focus:border-accent"
+                >
+                  {DELIVERY_CITIES.map((c) => (
+                    <option key={c.name} value={c.name}>
+                      {c.name} — {c.km} км
+                    </option>
+                  ))}
+                  <option value="other">Другой адрес — введу километры</option>
+                </select>
+                <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+              </div>
+            </label>
+            <NumField
+              label="Расстояние до объекта"
+              value={distance}
+              onChange={(v) => {
+                setDistance(v);
+                const c = DELIVERY_CITIES.find((x) => x.name === city);
+                if (c && String(c.km) !== v) setCity("other");
+              }}
+              suffix="км"
+              hint="Можно поправить, если объект дальше или ближе"
+            />
             <p className="text-xs text-muted-foreground mt-3 mb-1.5">Грузоподъёмность манипулятора</p>
             <div className="grid grid-cols-3 gap-1.5">
               {usable.map((t) => {
