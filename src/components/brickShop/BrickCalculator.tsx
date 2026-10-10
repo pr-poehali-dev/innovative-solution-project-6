@@ -17,7 +17,7 @@ const WINDOW_M2 = 1.8;
 const DOOR_M2 = 1.9;
 const GATE_M2 = 6;
 const RESERVE = 1.05;
-const KM_RATE = 110;
+const KM_RATE = 120;
 const MANIPULATORS = trucks
   .filter((t) => t.category === "Манипулятор")
   .map((t) => {
