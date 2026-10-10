@@ -53,12 +53,12 @@ const BrandLogo = ({ to = "/", size = "md", compact = false }: BrandLogoProps) =
     ? "w-8 h-8 sm:w-12 sm:h-12"
     : size === "sm"
       ? "w-9 h-9 sm:w-12 sm:h-12"
-      : "w-14 h-14 sm:w-20 sm:h-20";
+      : "w-11 h-11 sm:w-20 sm:h-20";
   const titleSize = compact
     ? "text-sm sm:text-xl"
     : size === "sm"
       ? "text-base sm:text-xl"
-      : "text-xl sm:text-3xl";
+      : "text-[17px] sm:text-3xl";
 
   const [status, setStatus] = useState(getStatus);
 
@@ -70,7 +70,7 @@ const BrandLogo = ({ to = "/", size = "md", compact = false }: BrandLogoProps) =
   }, []);
 
   const content = (
-    <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+    <div className="flex items-center gap-1.5 sm:gap-3 min-w-0">
       <img
         src={LOGO_URL}
         alt="Фаворит герб"
@@ -101,12 +101,12 @@ const BrandLogo = ({ to = "/", size = "md", compact = false }: BrandLogoProps) =
             Откроемся через {status.timeLeft}
           </span>
         )}
-        <span className={`brand-gold-title font-black drop-shadow-lg whitespace-nowrap truncate ${titleSize}`} style={goldText}>
+        <span className={`brand-gold-title font-black drop-shadow-lg whitespace-nowrap ${titleSize} !tracking-[0.02em] sm:!tracking-[0.08em]`} style={goldText}>
           ООО Фаворит
         </span>
         <span
-          className={`brand-tagline-glow ${compact ? "hidden sm:block" : "block"} truncate text-[10px] sm:text-sm font-semibold uppercase mt-1`}
-          style={{ color: "#f5d680", letterSpacing: "0.1em" }}
+          className={`brand-tagline-glow ${compact ? "hidden sm:block" : "block"} text-[9px] sm:text-sm font-semibold uppercase mt-0.5 sm:mt-1 leading-tight tracking-[0.02em] sm:tracking-[0.1em]`}
+          style={{ color: "#f5d680" }}
         >
           Надёжная аренда манипуляторов
         </span>

@@ -38,7 +38,7 @@ const HeroHeader = () => {
       <header
         className={`fixed top-0 w-full bg-background/95 lg:bg-background/85 backdrop-blur-2xl border-b border-accent/30 shadow-[0_4px_24px_rgba(0,0,0,0.5)] z-50 transition-all duration-300 ${scrolled ? "bg-background/98 lg:bg-background/95" : ""}`}
       >
-        <div className={`max-w-7xl mx-auto px-3 sm:px-6 flex justify-between items-center gap-2 lg:gap-6 transition-all duration-300 ${scrolled ? "py-2 sm:py-2.5" : "py-3 sm:py-5"}`}>
+        <div className={`max-w-7xl mx-auto px-2.5 sm:px-6 flex justify-between items-center gap-1.5 lg:gap-6 transition-all duration-300 ${scrolled ? "py-2 sm:py-2.5" : "py-3 sm:py-5"}`}>
           <div className="min-w-0 flex-1 xl:flex-none">
             <BrandLogo compact={scrolled} />
           </div>
@@ -69,7 +69,7 @@ const HeroHeader = () => {
               );
             })}
           </nav>
-          <div className="flex gap-2 sm:gap-3 items-center shrink-0">
+          <div className="flex gap-1.5 sm:gap-3 items-center shrink-0">
             <OfflineStatusDot />
             <MaxButton place="header_main" compact />
             <PhoneButton size="sm" subLabel="Круглосуточно" className="hidden sm:inline-flex" />
