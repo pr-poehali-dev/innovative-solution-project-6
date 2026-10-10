@@ -742,13 +742,54 @@ def send_max(name: str, phone: str, comment: str, lead_id: int, media: list[dict
     lines.append(f"🕐 {datetime.now().strftime('%d.%m.%Y %H:%M')}")
 
     payload = json.dumps({'text': "\n".join(lines)}).encode('utf-8')
-    url = f"https://botapi.max.ru/messages?access_token={urllib.parse.quote(token)}&chat_id={urllib.parse.quote(str(chat_id))}"
+    target = 'user_id' if str(chat_id).startswith('u') else 'chat_id'
+    target_id = str(chat_id).lstrip('u')
+    last_error = None
+    for base in MAX_API_HOSTS:
+        url = f"{base}/messages?{target}={urllib.parse.quote(target_id)}"
+        req = urllib.request.Request(
+            url, data=payload,
+            headers={'Content-Type': 'application/json', 'Authorization': token},
+            method='POST',
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=4) as resp:
+                print(f"MAX status: {resp.status} via {base}")
+                return
+        except Exception as e:
+            last_error = e
+            print(f"MAX error via {base}: {e}")
+    if last_error:
+        raise last_error
 
-    req = urllib.request.Request(
-        url, data=payload, headers={'Content-Type': 'application/json'}, method='POST'
-    )
-    with urllib.request.urlopen(req, timeout=5) as resp:
-        print(f"MAX status: {resp.status}")
+
+MAX_API_HOSTS = ('https://platform-api.max.ru', 'https://platform-api2.max.ru')
+
+
+def max_chats(body: dict) -> dict:
+    """Показывает чаты, где есть бот MAX, — чтобы узнать MAX_CHAT_ID."""
+    if body.get('adminKey') != MATERIALS_ADMIN_KEY:
+        return _json_resp({'error': 'forbidden'}, 403)
+    token = os.environ.get('MAX_BOT_TOKEN')
+    if not token:
+        return _json_resp({'error': 'MAX_BOT_TOKEN не задан'}, 400)
+    result: dict = {'chatIdSet': bool(os.environ.get('MAX_CHAT_ID'))}
+    for base in MAX_API_HOSTS:
+        try:
+            req = urllib.request.Request(f"{base}/chats?count=50", headers={'Authorization': token})
+            with urllib.request.urlopen(req, timeout=4) as resp:
+                data = json.loads(resp.read().decode('utf-8'))
+            result['chats'] = [
+                {'chat_id': c.get('chat_id'), 'type': c.get('type'), 'title': c.get('title'),
+                 'dialog_with': (c.get('dialog_with_user') or {}).get('name'),
+                 'dialog_user_id': (c.get('dialog_with_user') or {}).get('user_id')}
+                for c in data.get('chats', [])
+            ]
+            result['host'] = base
+            return _json_resp(result)
+        except Exception as e:
+            result[f'error_{base}'] = str(e)
+    return _json_resp(result, 502)
 
 
 MATERIALS_ADMIN_KEY = 'favorit2026'
@@ -881,6 +922,9 @@ def handler(event: dict, context) -> dict:
 
     if body.get('type') in ('materials-list', 'materials-add', 'materials-delete', 'materials-update'):
         return materials_handle(body)
+
+    if body.get('type') == 'max-chats':
+        return max_chats(body)
 
     # Чанковая загрузка тяжёлых файлов (видео) — фронт режет файл на куски ~2 МБ,
     # каждый кусок сохраняем как отдельный объект в S3, на финише склеиваем

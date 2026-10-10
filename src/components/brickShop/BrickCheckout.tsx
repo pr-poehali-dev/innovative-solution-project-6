@@ -3,6 +3,7 @@ import Icon from "@/components/ui/icon";
 import { SUBMIT_URL } from "@/components/sections/hero/heroData";
 import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
 import { reachGoal } from "@/lib/metrika";
+import type { DeliveryInfo } from "./BrickCalculator";
 import { type Brick, PALLET_SIZE, formatTons, priceText, palletsFor } from "./brickUtils";
 
 export type CartLine = { brick: Brick; qty: number };
@@ -14,9 +15,10 @@ interface BrickCheckoutProps {
   setQty: (id: number, qty: number) => void;
   remove: (id: number) => void;
   clear: () => void;
+  delivery?: DeliveryInfo;
 }
 
-const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear }: BrickCheckoutProps) => {
+const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear, delivery }: BrickCheckoutProps) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -38,8 +40,11 @@ const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear }: BrickChe
       .join("; ");
     const comment = [
       `ЗАКАЗ КИРПИЧА: ${list}`,
-      `Итого: ${totalQty} шт, ${pallets} поддонов, вес ${formatTons(weight)}${total > 0 ? `, ${priceText(total)} без доставки` : ""}`,
-      address && `Адрес доставки: ${address}`,
+      `Кирпич: ${totalQty} шт, ${pallets} поддонов, вес ${formatTons(weight)}${total > 0 ? `, ${priceText(total)}` : ""}`,
+      delivery &&
+        `Доставка: ${delivery.city}, ${delivery.km} км, манипулятор ${delivery.truck}, рейсов ${delivery.trips} — ${priceText(delivery.cost)}`,
+      delivery && total > 0 && `ИТОГО с доставкой: ${priceText(total + delivery.cost)}`,
+      address && `Адрес: ${address}`,
     ]
       .filter(Boolean)
       .join(" · ");
@@ -125,7 +130,20 @@ const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear }: BrickChe
                   <span className="text-muted-foreground">{totalQty.toLocaleString("ru-RU")} шт · {pallets} под. · {formatTons(weight)}</span>
                   <span className="text-xl font-black text-accent">{priceText(total)}</span>
                 </div>
-                <p className="text-[11px] text-muted-foreground -mt-2">Перезвоним, назовём цену кирпича и доставки манипулятором</p>
+                {delivery ? (
+                  <div className="text-sm space-y-1 -mt-1">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Доставка: {delivery.city}, {delivery.trips} рейс.</span>
+                      <span className="text-white font-bold">{priceText(delivery.cost)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-white font-bold">Итого</span>
+                      <span className="text-white font-black">{priceText(total + delivery.cost)}</span>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-[11px] text-muted-foreground -mt-2">Стоимость доставки посчитаем по адресу</p>
+                )}
                 <input required value={name} onChange={(e) => setName(e.target.value)} placeholder="Имя или компания" className="w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-sm text-white outline-none focus:border-accent" />
                 <input required type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Телефон" className="w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-sm text-white outline-none focus:border-accent" />
                 <input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Адрес доставки (необязательно)" className="w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-sm text-white outline-none focus:border-accent" />

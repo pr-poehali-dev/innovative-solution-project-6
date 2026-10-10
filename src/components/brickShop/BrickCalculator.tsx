@@ -4,9 +4,11 @@ import { trucks } from "@/components/sections/calculator/data";
 import { DELIVERY_CITIES } from "./deliveryCities";
 import { type Brick, PALLET_SIZE, WALL_THICKNESS, formatTons, priceText, palletsFor } from "./brickUtils";
 
+export type DeliveryInfo = { city: string; km: number; truck: string; trips: number; cost: number };
+
 interface BrickCalculatorProps {
   bricks: Brick[];
-  onAdd: (brick: Brick, qty: number) => void;
+  onAdd: (brick: Brick, qty: number, delivery?: DeliveryInfo) => void;
 }
 
 type Mode = "build" | "packs";
@@ -199,7 +201,13 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
 
   const handleAdd = () => {
     if (!selected || orderQty === 0) return;
-    onAdd(selected, orderQty);
+    onAdd(
+      selected,
+      orderQty,
+      km > 0 && truck
+        ? { city: city === "other" ? "Другой адрес" : city, km, truck: `${fmt(truck.tons)} т`, trips, cost: delivery }
+        : undefined,
+    );
     setDone(true);
     setTimeout(() => setDone(false), 1500);
   };

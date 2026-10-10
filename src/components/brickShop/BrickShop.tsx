@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import Icon from "@/components/ui/icon";
 import type { Material } from "@/data/materials";
 import BrickCard from "./BrickCard";
-import BrickCalculator from "./BrickCalculator";
+import BrickCalculator, { type DeliveryInfo } from "./BrickCalculator";
 import BrickCheckout, { type CartLine } from "./BrickCheckout";
 import { type BrickFormat, type PurposeId, FORMAT_LABEL, PALLET_SIZE, PURPOSES, formatTons, priceText, matchesPurpose, toBrick } from "./brickUtils";
 
@@ -33,6 +33,8 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
       return a.priceNum - b.priceNum;
     });
   }, [bricks, purpose, format, sort]);
+
+  const [delivery, setDelivery] = useState<DeliveryInfo | undefined>();
 
   const addToCart = (brick: CartLine["brick"], qty: number) => {
     setCart((prev) => {
@@ -147,7 +149,13 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
 
       {bricks.length > 0 && (
         <div className="mt-12">
-          <BrickCalculator bricks={bricks} onAdd={addToCart} />
+          <BrickCalculator
+            bricks={bricks}
+            onAdd={(b, q, d) => {
+              addToCart(b, q);
+              if (d) setDelivery(d);
+            }}
+          />
         </div>
       )}
 
@@ -174,7 +182,11 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
         lines={cart}
         setQty={setQty}
         remove={(id) => setQty(id, 0)}
-        clear={() => setCart([])}
+        clear={() => {
+          setCart([]);
+          setDelivery(undefined);
+        }}
+        delivery={delivery}
       />
     </div>
   );
