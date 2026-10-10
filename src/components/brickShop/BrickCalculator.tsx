@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import Icon from "@/components/ui/icon";
+import { trucks } from "@/components/sections/calculator/data";
 import { type Brick, PALLET_SIZE, WALL_THICKNESS, formatTons, priceText, palletsFor } from "./brickUtils";
 
 interface BrickCalculatorProps {
@@ -16,7 +17,14 @@ const DOOR_M2 = 1.9;
 const GATE_M2 = 6;
 const RESERVE = 1.05;
 const KM_RATE = 110;
-const TRUCK_TONS = 12;
+const MANIPULATORS = trucks
+  .filter((t) => t.category === "Манипулятор")
+  .map((t) => {
+    const m = t.capacity.match(/[\d.,]+/);
+    return { name: t.short || t.name, tons: m ? parseFloat(m[0].replace(",", ".")) : 5 };
+  })
+  .filter((t, i, arr) => arr.findIndex((x) => x.tons === t.tons) === i)
+  .sort((a, b) => a.tons - b.tons);
 
 const PRESETS: {
   id: string;
@@ -130,6 +138,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
 
   const [packs, setPacks] = useState(1);
   const [distance, setDistance] = useState("20");
+  const [truckTons, setTruckTons] = useState<number | null>(null);
 
   const selected = bricks.find((b) => b.id === brickId) || bricks[0];
   const format = selected?.format || "oneHalf";
@@ -170,8 +179,19 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
   const weight = selected ? pallets * selected.palletWeight : 0;
   const total = selected ? orderQty * selected.priceNum : 0;
   const km = num(distance);
-  const perTrip = selected ? Math.max(1, Math.floor((TRUCK_TONS * 1000) / selected.palletWeight)) : 1;
-  const trips = pallets > 0 ? Math.ceil(pallets / perTrip) : 0;
+  const palletKg = selected?.palletWeight || 1680;
+  const perTripOf = (tons: number) => Math.floor((tons * 1000) / palletKg);
+  const tripsOf = (tons: number) => (pallets > 0 && perTripOf(tons) > 0 ? Math.ceil(pallets / perTripOf(tons)) : 0);
+  const usable = MANIPULATORS.filter((t) => perTripOf(t.tons) > 0);
+  const bestTruck = usable.reduce<(typeof MANIPULATORS)[number] | undefined>((best, t) => {
+    if (!best) return t;
+    const a = tripsOf(t.tons);
+    const b = tripsOf(best.tons);
+    return a < b || (a === b && t.tons < best.tons) ? t : best;
+  }, undefined);
+  const truck = usable.find((t) => t.tons === truckTons) || bestTruck;
+  const perTrip = truck ? perTripOf(truck.tons) : 0;
+  const trips = truck ? tripsOf(truck.tons) : 0;
   const delivery = Math.round(km * 2 * KM_RATE * trips);
   const grandTotal = total + delivery;
 
@@ -422,7 +442,33 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
               <span className="text-sm font-bold text-white">Доставка манипулятором</span>
             </div>
             <NumField label="Расстояние от нас до объекта" value={distance} onChange={setDistance} suffix="км" hint="Посмотрите в Яндекс Картах от Нижнего Новгорода" />
+            <p className="text-xs text-muted-foreground mt-3 mb-1.5">Грузоподъёмность манипулятора</p>
+            <div className="grid grid-cols-3 gap-1.5">
+              {usable.map((t) => {
+                const active = truck?.tons === t.tons;
+                return (
+                  <button
+                    key={t.tons}
+                    type="button"
+                    onClick={() => setTruckTons(t.tons)}
+                    className={`relative rounded-lg border px-1.5 py-2 text-center transition-all ${
+                      active ? "border-accent bg-accent/15" : "border-white/10 bg-black/20 hover:border-accent/50"
+                    }`}
+                  >
+                    {bestTruck?.tons === t.tons && (
+                      <span className="absolute -top-2 left-1/2 -translate-x-1/2 px-1.5 rounded-full bg-accent text-black text-[9px] font-black whitespace-nowrap">
+                        выгодно
+                      </span>
+                    )}
+                    <span className="block text-sm font-black text-white">{fmt(t.tons)} т</span>
+                    <span className="block text-[10px] text-muted-foreground">{perTripOf(t.tons)} уп./рейс</span>
+                  </button>
+                );
+              })}
+            </div>
             <div className="space-y-2 text-sm mt-3">
+              <Row label="Вес груза" value={formatTons(pallets * palletKg)} />
+              <Row label="Везём за рейс" value={truck ? `${perTrip} уп. (${formatTons(perTrip * palletKg)})` : "—"} />
               <Row label="Рейсов манипулятора" value={km > 0 ? `${trips}` : "—"} />
               <Row label="Доставка с разгрузкой" value={km > 0 ? priceText(delivery) : "—"} />
             </div>
