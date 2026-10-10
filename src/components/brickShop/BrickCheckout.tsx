@@ -52,7 +52,25 @@ const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear, delivery }
       const res = await fetch(SUBMIT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, comment, media: [] }),
+        body: JSON.stringify({
+          name,
+          phone,
+          comment,
+          media: [],
+          brickOrder: {
+            items: lines.map((l) => ({
+              name: l.brick.name,
+              price: l.brick.priceNum,
+              qty: l.qty,
+              packs: palletsFor(l.qty),
+              weightKg: palletsFor(l.qty) * l.brick.palletWeight,
+              sum: l.qty * l.brick.priceNum,
+            })),
+            bricksTotal: total,
+            delivery: delivery ? { ...delivery, rate: 120 } : null,
+            address,
+          },
+        }),
       });
       if (!res.ok) throw new Error();
       setStatus("success");

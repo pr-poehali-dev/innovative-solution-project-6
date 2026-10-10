@@ -12,6 +12,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 from datetime import datetime
+from brick_email import send_brick_email
 
 
 MAX_MEDIA_FILES = 5
@@ -1059,8 +1060,12 @@ def handler(event: dict, context) -> dict:
     except Exception as e:
         print(f"Media upload error: {e}")
 
+    brick_order = body.get('brickOrder') if isinstance(body.get('brickOrder'), dict) else None
     try:
-        send_email(name, phone, comment, lead_id, uploaded_media)
+        if brick_order and brick_order.get('items'):
+            send_brick_email(name, phone, brick_order, lead_id)
+        else:
+            send_email(name, phone, comment, lead_id, uploaded_media)
     except Exception as e:
         print(f"Email send error: {e}")
 
