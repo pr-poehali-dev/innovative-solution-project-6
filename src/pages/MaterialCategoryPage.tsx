@@ -9,6 +9,7 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import CallbackModal from "@/components/ui/CallbackModal";
 import MaxButton from "@/components/ui/MaxButton";
 import LazySection from "@/components/LazySection";
+import BrickShop from "@/components/brickShop/BrickShop";
 import NotFound from "@/pages/NotFound";
 import { fetchMaterials, MATERIAL_CATEGORIES, type Material } from "@/data/materials";
 import { MATERIAL_SEO_PAGES, getMaterialSeoPage } from "@/data/materialsSeo";
@@ -124,6 +125,15 @@ const MaterialCategoryPage = () => {
               <Icon name="Calculator" size={15} className="text-accent" />
               Рассчитать стоимость
             </button>
+            {page.cat === "kirpich" && (
+              <a
+                href="#shop"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-black text-sm font-black hover:shadow-lg hover:shadow-accent/30 transition-all"
+              >
+                <Icon name="ShoppingCart" size={15} />
+                Выбрать кирпич
+              </a>
+            )}
           </div>
         </section>
 
@@ -139,67 +149,73 @@ const MaterialCategoryPage = () => {
           </div>
         </section>
 
+        {page.cat === "kirpich" ? (
+          <section className="max-w-7xl mx-auto px-4 sm:px-6">
+            <BrickShop items={visible} loading={loading} />
+          </section>
+        ) : (
         <section className="max-w-7xl mx-auto px-4 sm:px-6">
-          {loading ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {[...Array(3)].map((_, i) => (
-                <div key={i} className="h-72 rounded-2xl bg-card/40 border border-accent/10 animate-pulse" />
-              ))}
-            </div>
-          ) : visible.length === 0 ? (
-            <div className="text-center py-16 border border-accent/10 rounded-2xl bg-card/30">
-              <Icon name="PackageOpen" size={44} className="text-accent/50 mx-auto mb-4" />
-              <p className="text-lg font-bold text-white mb-2">Позиции уточняются</p>
-              <p className="text-muted-foreground text-sm mb-6">
-                Позвоните — назовём актуальные цены и наличие на складе.
-              </p>
-              <PhoneButton size="md" className="rounded-xl" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
-            </div>
-          ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {visible.map((m) => (
-                <article
-                  key={m.id}
-                  className="group rounded-2xl overflow-hidden border border-accent/10 bg-card/30 hover:border-accent/40 transition-all flex flex-col"
-                >
-                  <div className="relative aspect-[4/3] bg-card/60 overflow-hidden">
-                    {m.imageUrl ? (
-                      <img
-                        src={m.imageUrl}
-                        alt={m.name}
-                        loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <Icon name="Package" size={48} className="text-accent/30" />
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-5 flex flex-col flex-1">
-                    <h2 className="text-lg font-black text-white mb-2 leading-tight">{m.name}</h2>
-                    {m.description && (
-                      <p className="text-sm text-muted-foreground mb-4 line-clamp-3">{m.description}</p>
-                    )}
-                    <div className="mt-auto flex items-end justify-between gap-3 pt-3 border-t border-accent/10">
-                      <div>
-                        <p className="text-xl font-black text-accent leading-none">{m.price}</p>
-                        {m.unit && <p className="text-xs text-muted-foreground mt-1">за {m.unit}</p>}
-                      </div>
-                      <a
-                        href={`tel:${MATERIALS_PHONE}`}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-black font-bold text-sm hover:shadow-lg hover:shadow-accent/30 transition-all whitespace-nowrap"
-                      >
-                        <Icon name="Phone" size={14} />
-                        Позвонить
-                      </a>
+            {loading ? (
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="h-72 rounded-2xl bg-card/40 border border-accent/10 animate-pulse" />
+                ))}
+              </div>
+            ) : visible.length === 0 ? (
+              <div className="text-center py-16 border border-accent/10 rounded-2xl bg-card/30">
+                <Icon name="PackageOpen" size={44} className="text-accent/50 mx-auto mb-4" />
+                <p className="text-lg font-bold text-white mb-2">Позиции уточняются</p>
+                <p className="text-muted-foreground text-sm mb-6">
+                  Позвоните — назовём актуальные цены и наличие на складе.
+                </p>
+                <PhoneButton size="md" className="rounded-xl" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
+              </div>
+            ) : (
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {visible.map((m) => (
+                  <article
+                    key={m.id}
+                    className="group rounded-2xl overflow-hidden border border-accent/10 bg-card/30 hover:border-accent/40 transition-all flex flex-col"
+                  >
+                    <div className="relative aspect-[4/3] bg-card/60 overflow-hidden">
+                      {m.imageUrl ? (
+                        <img
+                          src={m.imageUrl}
+                          alt={m.name}
+                          loading="lazy"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <Icon name="Package" size={48} className="text-accent/30" />
+                        </div>
+                      )}
                     </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
-        </section>
+                    <div className="p-5 flex flex-col flex-1">
+                      <h2 className="text-lg font-black text-white mb-2 leading-tight">{m.name}</h2>
+                      {m.description && (
+                        <p className="text-sm text-muted-foreground mb-4 line-clamp-3">{m.description}</p>
+                      )}
+                      <div className="mt-auto flex items-end justify-between gap-3 pt-3 border-t border-accent/10">
+                        <div>
+                          <p className="text-xl font-black text-accent leading-none">{m.price}</p>
+                          {m.unit && <p className="text-xs text-muted-foreground mt-1">за {m.unit}</p>}
+                        </div>
+                        <a
+                          href={`tel:${MATERIALS_PHONE}`}
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-black font-bold text-sm hover:shadow-lg hover:shadow-accent/30 transition-all whitespace-nowrap"
+                        >
+                          <Icon name="Phone" size={14} />
+                          Позвонить
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
 
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
           <h2 className="text-2xl sm:text-3xl font-black text-white mb-3">
