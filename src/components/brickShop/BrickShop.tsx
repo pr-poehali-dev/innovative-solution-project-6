@@ -14,6 +14,26 @@ interface BrickShopProps {
 
 type SortId = "cheap" | "expensive" | "grade";
 
+const CART_KEY = "favorit_brick_cart_v1";
+const CART_TTL = 14 * 24 * 60 * 60 * 1000;
+
+type SavedCart = { items: { id: number; qty: number }[]; delivery?: DeliveryInfo; ts: number };
+
+const readSaved = (): SavedCart | null => {
+  try {
+    const raw = localStorage.getItem(CART_KEY);
+    if (!raw) return null;
+    const data = JSON.parse(raw) as SavedCart;
+    if (!data?.items?.length || Date.now() - (data.ts || 0) > CART_TTL) {
+      localStorage.removeItem(CART_KEY);
+      return null;
+    }
+    return data;
+  } catch {
+    return null;
+  }
+};
+
 const BrickShop = ({ items, loading }: BrickShopProps) => {
   const bricks = useMemo(() => items.map(toBrick), [items]);
   const [purpose, setPurpose] = useState<PurposeId>("all");
@@ -43,6 +63,40 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
   }, [bricks, purpose, format, sort]);
 
   const [delivery, setDelivery] = useState<DeliveryInfo | undefined>();
+  const [restored, setRestored] = useState(false);
+
+  useEffect(() => {
+    if (restored || !bricks.length) return;
+    const saved = readSaved();
+    if (saved) {
+      const lines = saved.items
+        .map((it) => {
+          const brick = bricks.find((b) => b.id === it.id);
+          return brick && it.qty > 0 ? { brick, qty: Math.ceil(it.qty / PALLET_SIZE) * PALLET_SIZE } : null;
+        })
+        .filter((l): l is CartLine => l !== null);
+      if (lines.length) {
+        setCart(lines);
+        if (saved.delivery) setDelivery(saved.delivery);
+        setToast("Ваша корзина сохранена");
+      }
+    }
+    setRestored(true);
+  }, [bricks, restored]);
+
+  useEffect(() => {
+    if (!restored) return;
+    try {
+      if (!cart.length) {
+        localStorage.removeItem(CART_KEY);
+        return;
+      }
+      const data: SavedCart = { items: cart.map((l) => ({ id: l.brick.id, qty: l.qty })), delivery, ts: Date.now() };
+      localStorage.setItem(CART_KEY, JSON.stringify(data));
+    } catch {
+      /* хранилище недоступно — корзина просто не сохранится */
+    }
+  }, [cart, delivery, restored]);
 
   const addToCart = (brick: CartLine["brick"], qty: number) => {
     setCart((prev) => {
