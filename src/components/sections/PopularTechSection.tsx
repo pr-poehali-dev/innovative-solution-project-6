@@ -27,7 +27,7 @@ const items = [
     badgeColor: "from-cyan-500 to-blue-500",
     price: "от 3 000 ₽/час",
     image:
-      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/761d840a-c678-4fee-a5eb-4531b7ca7d17.webp",
+      "/img/tech-wm/761d840a-c678-4fee-a5eb-4531b7ca7d17.webp",
     alt: "Экскаватор-погрузчик JCB 3CX",
     specs: ["Глубина копания 4,24 м", "Задний и погрузочный ковш", "Навесное оборудование"],
   },
@@ -39,7 +39,7 @@ const items = [
     badgeColor: "from-emerald-500 to-green-600",
     price: "от 2 700 ₽/час",
     image:
-      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/4bb58aab-783b-43b6-8d89-ee519e570e09.webp",
+      "/img/tech-wm/4bb58aab-783b-43b6-8d89-ee519e570e09.webp",
     alt: "ISUZU 5т с КМУ",
     specs: ["Платформа до 5 т", "Стрела до 3 т", "Вылет до 8,5 м"],
   },
@@ -51,7 +51,7 @@ const items = [
     badgeColor: "from-sky-500 to-blue-600",
     price: "от 4 000 ₽/час",
     image:
-      "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/106c30cf-02d3-4b99-ac02-47e7404652e2.webp",
+      "/img/tech-wm/106c30cf-02d3-4b99-ac02-47e7404652e2.webp",
     alt: "Hyundai Gold + КМУ HIAB 190TM 8т",
     specs: ["КМУ до 8 т", "Вылет стрелы до 22 м", "Платформа 6,0 × 2,45 м"],
   },

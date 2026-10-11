@@ -12,7 +12,7 @@ import GallerySection from "@/components/sections/GallerySection";
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
 const COVER =
-  "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/96f657e8-7741-4d2b-b428-ca560b0047fb.webp";
+  "/img/tech-wm/96f657e8-7741-4d2b-b428-ca560b0047fb.webp";
 
 const GalleryPage = () => {
   const [callbackOpen, setCallbackOpen] = useState(false);
