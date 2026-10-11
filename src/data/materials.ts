@@ -87,15 +87,76 @@ export const HEADER_MENU_CATEGORIES = ["kirpich", "asfalt-beton"]
   .map((slug) => MATERIAL_CATEGORIES.find((c) => c.slug === slug)!)
   .filter(Boolean);
 
+const CDN = "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket";
+const CATALOG_CACHE_KEY = "favorit_materials_cache_v1";
+
+export const FALLBACK_MATERIALS: Material[] = [
+  {
+    id: 19,
+    name: "Кирпич силикатный полнотелый полуторный М-150",
+    category: "kirpich",
+    price: "18 ₽",
+    unit: "шт",
+    description:
+      "Размер 250×120×88 мм. В упаковке (на поддоне) 336 шт — 6 048 ₽. Вес поддона 1680 кг. Полнотелый — для несущих стен, фундаментов и перегородок.",
+    imageUrl: `${CDN}/327d8aaf-b8d5-4aaa-ab04-96c42d53df15.jpg`,
+    inStock: true,
+  },
+  {
+    id: 20,
+    name: "Кирпич силикатный пустотелый полуторный М-150",
+    category: "kirpich",
+    price: "18 ₽",
+    unit: "шт",
+    description:
+      "Размер 250×120×88 мм. В упаковке (на поддоне) 336 шт — 6 048 ₽. Вес поддона 1340 кг. Пустотелый — легче, меньше нагрузка на фундамент, лучше держит тепло.",
+    imageUrl: `${CDN}/ddecef1e-b070-4ac4-b4c3-6254deac6fb5.jpg`,
+    inStock: true,
+  },
+];
+
+function readCachedMaterials(): Material[] | null {
+  try {
+    const raw = localStorage.getItem(CATALOG_CACHE_KEY);
+    const items = raw ? JSON.parse(raw) : null;
+    return Array.isArray(items) && items.length ? items : null;
+  } catch {
+    return null;
+  }
+}
+
+async function loadMaterialsFromServer(): Promise<Material[]> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  try {
+    const res = await fetch(MATERIALS_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type: "materials-list" }),
+      signal: controller.signal,
+    });
+    if (!res.ok) throw new Error("Не удалось загрузить каталог");
+    const data = await res.json();
+    return data.items || [];
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export async function fetchMaterials(): Promise<Material[]> {
-  const res = await fetch(MATERIALS_API, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ type: "materials-list" }),
-  });
-  if (!res.ok) throw new Error("Не удалось загрузить каталог");
-  const data = await res.json();
-  return data.items || [];
+  try {
+    const items = await loadMaterialsFromServer();
+    if (items.length) {
+      try {
+        localStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(items));
+      } catch {
+        /* ignore */
+      }
+    }
+    return items;
+  } catch {
+    return readCachedMaterials() || FALLBACK_MATERIALS;
+  }
 }
 
 export async function addMaterial(adminKey: string, item: Partial<Material>) {
