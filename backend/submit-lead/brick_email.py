@@ -1,11 +1,26 @@
 import os
 import smtplib
 from datetime import datetime, timedelta, timezone
+from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from html import escape
 
 ORDER_EMAIL = "960188@list.ru"
+IMG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "email_img")
+COLOR_IMAGES = [
+    ("розов", "pink"), ("красн", "pink"), ("жёлт", "yellow"), ("желт", "yellow"),
+    ("коричн", "brown"), ("мрамор", "marble"), ("чёрн", "marble"), ("черн", "marble"),
+    ("пустотел", "hollow"),
+]
+
+
+def _brick_image(name: str) -> str:
+    n = (name or "").lower()
+    for key, img in COLOR_IMAGES:
+        if key in n:
+            return img
+    return "solid"
 GOLD = "linear-gradient(135deg,#f5d060 0%,#e8a820 50%,#c8850a 100%)"
 
 
@@ -50,8 +65,13 @@ def build_brick_email(name: str, phone: str, order: dict, lead_id: int) -> tuple
         rows += f"""
       <tr>
         <td style="padding:12px 10px;border-bottom:1px solid #eee;">
-          <div style="font-weight:800;color:#111;font-size:14px;">{_e(i.get('name'))}</div>
-          <div style="color:#777;font-size:12px;margin-top:2px;">{_rub(i.get('price'))} за шт · {_e(i.get('qty'))} шт</div>
+          <table cellpadding="0" cellspacing="0"><tr>
+            <td style="padding-right:12px;vertical-align:middle;"><img src="cid:brick-{_brick_image(i.get('name'))}" width="80" alt="" style="display:block;width:80px;height:auto;border-radius:8px;border:1px solid #eee;" /></td>
+            <td style="vertical-align:middle;">
+              <div style="font-weight:800;color:#111;font-size:14px;">{_e(i.get('name'))}</div>
+              <div style="color:#777;font-size:12px;margin-top:2px;">{_rub(i.get('price'))} за шт · {_e(i.get('qty'))} шт</div>
+            </td>
+          </tr></table>
         </td>
         <td style="padding:12px 10px;border-bottom:1px solid #eee;text-align:center;font-weight:800;color:#111;white-space:nowrap;">{_e(i.get('packs'))} уп.</td>
         <td style="padding:12px 10px;border-bottom:1px solid #eee;text-align:center;color:#444;white-space:nowrap;">{_num(float(i.get('weightKg') or 0) / 1000)} т</td>
@@ -105,7 +125,11 @@ def build_brick_email(name: str, phone: str, order: dict, lead_id: int) -> tuple
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#eef0f3;padding:24px 10px;"><tr><td align="center">
 <table width="620" cellpadding="0" cellspacing="0" style="max-width:620px;width:100%;background:#ffffff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,0.08);">
 
-  <tr><td style="background:#1c2230;padding:26px 24px;text-align:center;">
+  <tr><td style="padding:0;line-height:0;background:#1c2230;">
+    <img src="cid:brick-banner" width="620" alt="Фирменный кирпич Фаворит" style="display:block;width:100%;max-width:620px;height:auto;border:0;" />
+  </td></tr>
+
+  <tr><td style="background:#1c2230;padding:22px 24px 26px;text-align:center;">
     <div style="font-size:11px;letter-spacing:4px;color:#f5d680;text-transform:uppercase;font-weight:700;">ООО «Фаворит» · магазин кирпича</div>
     <div style="font-size:26px;font-weight:900;color:#ffffff;margin-top:8px;">🧱 Новый заказ кирпича</div>
     <div style="display:inline-block;margin-top:10px;padding:5px 14px;border-radius:999px;background:{GOLD};color:#000;font-weight:900;font-size:13px;">№ {lead_id} · {now}</div>
@@ -185,12 +209,24 @@ def build_brick_email(name: str, phone: str, order: dict, lead_id: int) -> tuple
 def send_brick_email(name: str, phone: str, order: dict, lead_id: int) -> None:
     """Отправляет красивое письмо о заказе кирпича на почту компании."""
     subject, text, html = build_brick_email(name, phone, order, lead_id)
-    msg = MIMEMultipart("alternative")
+    msg = MIMEMultipart("related")
     msg["Subject"] = subject
     msg["From"] = ORDER_EMAIL
     msg["To"] = ORDER_EMAIL
-    msg.attach(MIMEText(text, "plain", "utf-8"))
-    msg.attach(MIMEText(html, "html", "utf-8"))
+    alt = MIMEMultipart("alternative")
+    alt.attach(MIMEText(text, "plain", "utf-8"))
+    alt.attach(MIMEText(html, "html", "utf-8"))
+    msg.attach(alt)
+    used = {"banner"} | {_brick_image(i.get("name")) for i in (order.get("items") or [])}
+    for key in sorted(used):
+        path = os.path.join(IMG_DIR, f"{key}.jpg")
+        if not os.path.exists(path):
+            continue
+        with open(path, "rb") as f:
+            img = MIMEImage(f.read(), _subtype="jpeg")
+        img.add_header("Content-ID", f"<brick-{key}>")
+        img.add_header("Content-Disposition", "inline", filename=f"{key}.jpg")
+        msg.attach(img)
     with smtplib.SMTP_SSL("smtp.mail.ru", 465) as smtp:
         smtp.login(ORDER_EMAIL, os.environ["MAIL_PASSWORD"])
         smtp.send_message(msg)
