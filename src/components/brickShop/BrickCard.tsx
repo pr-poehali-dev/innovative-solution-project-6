@@ -22,6 +22,7 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
     FORMAT_LABEL[brick.format],
     brick.facing ? "Лицевой" : "Рядовой",
     ...(brick.name.toLowerCase().includes("жёлт") || brick.name.toLowerCase().includes("желт") ? ["Жёлтый"] : []),
+    ...(brick.name.toLowerCase().includes("красн") ? ["Красный"] : []),
   ];
 
   return (
@@ -73,6 +74,15 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
       </div>
 
       <div className="p-5 flex flex-col flex-1">
+        <div className="flex items-center gap-2.5 mb-3 -mt-1 px-3 py-2.5 rounded-xl bg-gradient-to-r from-accent/25 to-accent/5 border border-accent/50">
+          <span className="w-9 h-9 shrink-0 rounded-lg bg-accent text-black flex items-center justify-center">
+            <Icon name="Factory" size={20} />
+          </span>
+          <div className="leading-tight">
+            <p className="text-[10px] uppercase tracking-wider text-accent font-bold">Производитель</p>
+            <p className="text-base font-black text-white">{MANUFACTURER}</p>
+          </div>
+        </div>
         <h3 className="text-lg font-black text-white mb-2 leading-tight">{brick.name}</h3>
         <div className="flex flex-wrap gap-1.5 mb-3">
           {tags.map((t) => (
@@ -89,13 +99,6 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
           <div className="rounded-lg bg-white/5 p-2">
             <p className="text-muted-foreground">В упаковке</p>
             <p className="text-white font-semibold">{PALLET_SIZE} шт</p>
-          </div>
-          <div className="rounded-lg bg-accent/10 border border-accent/25 p-2 col-span-2 flex items-center justify-between gap-2">
-            <p className="text-muted-foreground flex items-center gap-1.5">
-              <Icon name="Factory" size={14} className="text-accent" />
-              Производитель
-            </p>
-            <p className="text-white font-semibold text-right">{MANUFACTURER}</p>
           </div>
           <div className="rounded-lg bg-white/5 p-2 col-span-2 flex items-center justify-between">
             <p className="text-muted-foreground">Вес поддона</p>
