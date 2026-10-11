@@ -23,6 +23,7 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
     brick.facing ? "Лицевой" : "Рядовой",
     ...(brick.name.toLowerCase().includes("жёлт") || brick.name.toLowerCase().includes("желт") ? ["Жёлтый"] : []),
     ...(brick.name.toLowerCase().includes("розов") ? ["Розовый"] : []),
+    ...(brick.name.toLowerCase().includes("коричн") ? ["Коричневый"] : []),
   ];
 
   return (
