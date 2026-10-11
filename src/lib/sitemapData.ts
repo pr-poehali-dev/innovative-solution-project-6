@@ -10,6 +10,7 @@ import { articles } from "@/data/articles";
 import { cities } from "@/data/cities";
 import { seoLandings } from "@/data/seoLandings";
 import { trucks } from "@/pages/truck/trucksData";
+import { MATERIAL_SEO_PAGES } from "@/data/materialsSeo";
 
 export const SITE_DOMAIN = "https://фаварит.рф";
 
@@ -69,6 +70,22 @@ export const buildSitemapEntries = (): SitemapEntry[] => {
       lastmod: today,
       changefreq: "monthly",
       priority: "0.9",
+    });
+  });
+
+  // Стройматериалы
+  entries.push({
+    loc: `${SITE_DOMAIN}/stroymaterialy`,
+    lastmod: today,
+    changefreq: "weekly",
+    priority: "0.85",
+  });
+  MATERIAL_SEO_PAGES.forEach((p) => {
+    entries.push({
+      loc: `${SITE_DOMAIN}/stroymaterialy/${p.slug}`,
+      lastmod: today,
+      changefreq: "weekly",
+      priority: p.slug === "kirpich" ? "0.95" : "0.8",
     });
   });
 

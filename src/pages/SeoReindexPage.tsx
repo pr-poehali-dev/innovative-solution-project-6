@@ -102,7 +102,7 @@ const SeoReindexPage = () => {
                   Отправить весь сайт
                 </h2>
                 <p className="text-sm text-white/60">
-                  Будет отправлено {total} страниц: главная, услуги, техника, города, статьи.
+                  Будет отправлено {total} страниц: главная, услуги, техника, стройматериалы, города, статьи.
                 </p>
               </div>
               <button
@@ -149,6 +149,42 @@ const SeoReindexPage = () => {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Магазин кирпича */}
+        <div className="rounded-2xl border border-accent/40 bg-accent/5 p-5 sm:p-6 mb-6 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4">
+          <div className="w-12 h-12 rounded-xl bg-accent text-black flex items-center justify-center shrink-0">
+            <Icon name="Blocks" size={24} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h2 className="text-lg font-black text-white mb-0.5">Магазин кирпича</h2>
+            <p className="text-sm text-white/60">
+              Обновили цены, товары или фото кирпича — отправьте только эту страницу и раздел стройматериалов.
+            </p>
+          </div>
+          <div className="flex flex-col sm:items-end gap-2 shrink-0">
+            <button
+              onClick={() => send({ urls: [`${SITE_PUNY}/stroymaterialy/kirpich`, `${SITE_PUNY}/stroymaterialy`] })}
+              disabled={state.status === "loading"}
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-black text-black bg-accent hover:shadow-lg hover:shadow-accent/30 transition-all disabled:opacity-60"
+            >
+              {state.status === "loading" ? <Icon name="Loader2" size={18} className="animate-spin" /> : <Icon name="Send" size={18} />}
+              Отправить кирпич
+            </button>
+            <a
+              href={yandexReindexUrl(`${SITE_PUNY}/stroymaterialy/kirpich`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-accent underline text-center"
+            >
+              Открыть в Яндекс Вебмастере
+            </a>
+          </div>
+          {state.status !== "idle" && state.status !== "loading" && (
+            <p className={`sm:basis-full text-sm font-bold ${state.status === "done" ? "text-emerald-400" : "text-red-400"}`}>
+              {state.message}
+            </p>
+          )}
         </div>
 
         {/* Одна страница */}
