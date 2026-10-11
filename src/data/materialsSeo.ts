@@ -27,7 +27,7 @@ export const MATERIAL_SEO_PAGES: MaterialSeoPage[] = [
     heroCaption: "Свой склад и манипулятор — привезём и выгрузим кирпич прямо на объект",
     heroSlides: [
       {
-        image: "/img/brick-favorit.jpg",
+        image: "/img/brick-favorit-2.jpg",
         alt: "Фирменный кирпич ООО «Фаворит» с гербом — аренда манипуляторов",
         badge: "ООО «Фаворит»",
         title: "Фирменный кирпич Фаворит",
