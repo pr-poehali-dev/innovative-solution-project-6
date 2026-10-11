@@ -98,7 +98,7 @@ export const FALLBACK_MATERIALS: Material[] = [
     unit: "шт",
     description:
       "Борский силикатный завод. Размер 250×120×88 мм. В упаковке (на поддоне) 336 шт — 6 048 ₽. Вес поддона 1680 кг. Полнотелый — для несущих стен, фундаментов и перегородок.",
-    imageUrl: "/img/brick-solid-card.jpg",
+    imageUrl: "/img/brick-solid-wm.jpg",
     inStock: true,
   },
   {
@@ -109,7 +109,7 @@ export const FALLBACK_MATERIALS: Material[] = [
     unit: "шт",
     description:
       "Борский силикатный завод. Размер 250×120×88 мм. В упаковке (на поддоне) 336 шт — 6 048 ₽. Вес поддона 1340 кг. Пустотелый — легче, меньше нагрузка на фундамент, лучше держит тепло.",
-    imageUrl: "/img/brick-hollow-card.jpg",
+    imageUrl: "/img/brick-hollow-wm.jpg",
     inStock: true,
   },
   {
@@ -120,7 +120,7 @@ export const FALLBACK_MATERIALS: Material[] = [
     unit: "шт",
     description:
       "Борский силикатный завод. Размер 250×120×88 мм. В упаковке (на поддоне) 336 шт — 9 072 ₽. Вес поддона 1340 кг. Жёлтый пустотелый — для красивой кладки, лёгкий и тёплый.",
-    imageUrl: "/img/brick-yellow-card.jpg",
+    imageUrl: "/img/brick-yellow-wm.jpg",
     inStock: true,
   },
   {
@@ -131,7 +131,7 @@ export const FALLBACK_MATERIALS: Material[] = [
     unit: "шт",
     description:
       "Борский силикатный завод. Размер 250×120×88 мм. В упаковке (на поддоне) 336 шт — 9 072 ₽. Вес поддона 1340 кг. Розовый пустотелый — для красивой кладки, лёгкий и тёплый.",
-    imageUrl: "/img/brick-pink-card.jpg",
+    imageUrl: "/img/brick-pink-wm.jpg",
     inStock: true,
   },
   {
@@ -142,7 +142,7 @@ export const FALLBACK_MATERIALS: Material[] = [
     unit: "шт",
     description:
       "Борский силикатный завод. Размер 250×120×88 мм. В упаковке (на поддоне) 336 шт — 9 139,20 ₽. Вес поддона 1340 кг. Коричневый пустотелый — для красивой кладки, лёгкий и тёплый.",
-    imageUrl: "/img/brick-brown-card.jpg",
+    imageUrl: "/img/brick-brown-wm.jpg",
     inStock: true,
   },
   {
@@ -153,7 +153,7 @@ export const FALLBACK_MATERIALS: Material[] = [
     unit: "шт",
     description:
       "Борский силикатный завод. Размер 250×120×88 мм. В упаковке (на поддоне) 336 шт — 9 105,60 ₽. Вес поддона 1340 кг. Мраморный пустотелый — для красивой кладки, лёгкий и тёплый.",
-    imageUrl: "/img/brick-marble-card.jpg",
+    imageUrl: "/img/brick-marble-wm.jpg",
     inStock: true,
   },
 ];

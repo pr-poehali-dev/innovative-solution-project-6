@@ -1,0 +1,1 @@
+UPDATE materials SET image_url = REPLACE(image_url, '-card.jpg', '-wm.jpg') WHERE category = 'kirpich' AND archived = false AND image_url LIKE '/img/brick-%-card.jpg';
