@@ -84,7 +84,7 @@ const MaterialCategoryPage = () => {
       {page.cat === "kirpich" ? (
       <main className="shop-light pt-24 sm:pt-28 pb-16">
         <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-4">
-          <div className="relative mb-8 rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/10 via-card/40 to-transparent px-5 py-7 sm:px-10 sm:py-10 overflow-hidden text-center">
+          <div className="relative mb-8 rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/10 via-card/40 to-transparent px-5 py-7 sm:px-10 sm:py-10 overflow-hidden text-center flex flex-col">
             <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[520px] h-[220px] rounded-full bg-accent/20 blur-3xl" />
             <div className="relative flex items-center justify-center gap-3 mb-3">
               <span className="h-px w-10 sm:w-20 bg-gradient-to-r from-transparent to-[#d9a441]" />
@@ -113,9 +113,9 @@ const MaterialCategoryPage = () => {
               <MaxButton place="brick_shop_hero" className="justify-center !px-4 !py-2.5 !gap-2 !text-sm !font-bold" />
             </div>
             {page.heroSlides?.length ? (
-              <BrickHeroSlider slides={page.heroSlides} className="mt-7 -mx-5 -mb-7 sm:-mx-10 sm:-mb-10 aspect-[16/9] border-t border-accent/30" />
+              <BrickHeroSlider slides={page.heroSlides} className="order-first sm:order-none -mt-7 mb-6 sm:mb-0 sm:mt-7 -mx-5 sm:-mx-10 sm:-mb-10 aspect-[16/9] border-b sm:border-b-0 sm:border-t border-accent/30" />
             ) : page.heroImage && (
-              <figure className="relative mt-7 rounded-2xl overflow-hidden border border-accent/30 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
+              <figure className="relative order-first sm:order-none mb-6 sm:mb-0 sm:mt-7 rounded-2xl overflow-hidden border border-accent/30 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
                 <img
                   src={page.heroImage}
                   alt={page.heroAlt || "Кирпич Фаворит"}
