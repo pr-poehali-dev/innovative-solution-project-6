@@ -98,7 +98,7 @@ export const FALLBACK_MATERIALS: Material[] = [
     unit: "шт",
     description:
       "Размер 250×120×88 мм. В упаковке (на поддоне) 336 шт — 6 048 ₽. Вес поддона 1680 кг. Полнотелый — для несущих стен, фундаментов и перегородок.",
-    imageUrl: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/327d8aaf-b8d5-4aaa-ab04-96c42d53df15.jpg",
+    imageUrl: "/img/brick-solid-card.jpg",
     inStock: true,
   },
   {
@@ -109,7 +109,7 @@ export const FALLBACK_MATERIALS: Material[] = [
     unit: "шт",
     description:
       "Размер 250×120×88 мм. В упаковке (на поддоне) 336 шт — 6 048 ₽. Вес поддона 1340 кг. Пустотелый — легче, меньше нагрузка на фундамент, лучше держит тепло.",
-    imageUrl: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/ddecef1e-b070-4ac4-b4c3-6254deac6fb5.jpg",
+    imageUrl: "/img/brick-hollow-card.jpg",
     inStock: true,
   },
 ];
