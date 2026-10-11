@@ -1,7 +1,7 @@
 import os
 import smtplib
+import boto3
 from datetime import datetime, timedelta, timezone
-from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from html import escape
@@ -13,6 +13,38 @@ COLOR_IMAGES = [
     ("коричн", "brown"), ("мрамор", "marble"), ("чёрн", "marble"), ("черн", "marble"),
     ("пустотел", "hollow"),
 ]
+
+
+EMAIL_IMG_VERSION = "v1"
+
+
+def _upload_email_images(keys: set) -> dict:
+    """Кладёт картинки письма в хранилище (один раз) и возвращает ссылки на них."""
+    access_key = os.environ.get("AWS_ACCESS_KEY_ID")
+    secret_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
+    if not access_key or not secret_key:
+        print("Email images: no S3 keys")
+        return {}
+    s3 = boto3.client("s3", endpoint_url="https://bucket.poehali.dev",
+                      aws_access_key_id=access_key, aws_secret_access_key=secret_key)
+    urls = {}
+    for key in keys:
+        s3_key = f"email/{EMAIL_IMG_VERSION}/brick-{key}.jpg"
+        url = f"https://cdn.poehali.dev/projects/{access_key}/bucket/{s3_key}"
+        try:
+            s3.head_object(Bucket="files", Key=s3_key)
+            urls[key] = url
+            continue
+        except Exception:
+            pass
+        path = os.path.join(IMG_DIR, f"{key}.jpg")
+        if not os.path.exists(path):
+            print(f"Email images: file missing {path}")
+            continue
+        with open(path, "rb") as f:
+            s3.put_object(Bucket="files", Key=s3_key, Body=f.read(), ContentType="image/jpeg")
+        urls[key] = url
+    return urls
 
 
 def _brick_image(name: str) -> str:
@@ -44,9 +76,10 @@ def _e(v) -> str:
     return escape(str(v if v is not None else ""))
 
 
-def build_brick_email(name: str, phone: str, order: dict, lead_id: int) -> tuple[str, str, str]:
+def build_brick_email(name: str, phone: str, order: dict, lead_id: int, img_urls: dict | None = None) -> tuple[str, str, str]:
     """Собирает тему, текст и HTML письма о заказе кирпича."""
     items = order.get("items") or []
+    img_urls = img_urls or {}
     delivery = order.get("delivery") or None
     address = (order.get("address") or "").strip()
     bricks_total = float(order.get("bricksTotal") or 0)
@@ -60,13 +93,30 @@ def build_brick_email(name: str, phone: str, order: dict, lead_id: int) -> tuple
 
     subject = f"🧱 Заказ кирпича #{lead_id}: {name} — {total_packs} уп. на {_rub(grand)}"
 
+    banner_html = ""
+    if img_urls.get("banner"):
+        banner_html = (
+            '  <tr><td style="padding:0;line-height:0;background:#1c2230;">'
+            f'<img src="{img_urls["banner"]}" width="620" alt="Фирменный кирпич Фаворит" '
+            'style="display:block;width:100%;max-width:620px;height:auto;border:0;" />'
+            "</td></tr>\n"
+        )
+
     rows = ""
     for i in items:
+        thumb_url = img_urls.get(_brick_image(i.get("name")))
+        thumb_html = ""
+        if thumb_url:
+            thumb_html = (
+                '<td style="padding-right:12px;vertical-align:middle;">'
+                f'<img src="{thumb_url}" width="80" alt="" '
+                'style="display:block;width:80px;height:auto;border-radius:8px;border:1px solid #eee;" /></td>'
+            )
         rows += f"""
       <tr>
         <td style="padding:12px 10px;border-bottom:1px solid #eee;">
           <table cellpadding="0" cellspacing="0"><tr>
-            <td style="padding-right:12px;vertical-align:middle;"><img src="cid:brick-{_brick_image(i.get('name'))}" width="80" alt="" style="display:block;width:80px;height:auto;border-radius:8px;border:1px solid #eee;" /></td>
+            {thumb_html}
             <td style="vertical-align:middle;">
               <div style="font-weight:800;color:#111;font-size:14px;">{_e(i.get('name'))}</div>
               <div style="color:#777;font-size:12px;margin-top:2px;">{_rub(i.get('price'))} за шт · {_e(i.get('qty'))} шт</div>
@@ -125,10 +175,7 @@ def build_brick_email(name: str, phone: str, order: dict, lead_id: int) -> tuple
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#eef0f3;padding:24px 10px;"><tr><td align="center">
 <table width="620" cellpadding="0" cellspacing="0" style="max-width:620px;width:100%;background:#ffffff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,0.08);">
 
-  <tr><td style="padding:0;line-height:0;background:#1c2230;">
-    <img src="cid:brick-banner" width="620" alt="Фирменный кирпич Фаворит" style="display:block;width:100%;max-width:620px;height:auto;border:0;" />
-  </td></tr>
-
+{banner_html}
   <tr><td style="background:#1c2230;padding:22px 24px 26px;text-align:center;">
     <div style="font-size:11px;letter-spacing:4px;color:#f5d680;text-transform:uppercase;font-weight:700;">ООО «Фаворит» · магазин кирпича</div>
     <div style="font-size:26px;font-weight:900;color:#ffffff;margin-top:8px;">🧱 Новый заказ кирпича</div>
@@ -208,25 +255,20 @@ def build_brick_email(name: str, phone: str, order: dict, lead_id: int) -> tuple
 
 def send_brick_email(name: str, phone: str, order: dict, lead_id: int) -> None:
     """Отправляет красивое письмо о заказе кирпича на почту компании."""
-    subject, text, html = build_brick_email(name, phone, order, lead_id)
-    msg = MIMEMultipart("related")
+    keys = {"banner"} | {_brick_image(i.get("name")) for i in (order.get("items") or [])}
+    try:
+        img_urls = _upload_email_images(keys)
+    except Exception as e:
+        print(f"Email images error: {e}")
+        img_urls = {}
+    print(f"Email images: {sorted(img_urls)}")
+    subject, text, html = build_brick_email(name, phone, order, lead_id, img_urls)
+    msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
     msg["From"] = ORDER_EMAIL
     msg["To"] = ORDER_EMAIL
-    alt = MIMEMultipart("alternative")
-    alt.attach(MIMEText(text, "plain", "utf-8"))
-    alt.attach(MIMEText(html, "html", "utf-8"))
-    msg.attach(alt)
-    used = {"banner"} | {_brick_image(i.get("name")) for i in (order.get("items") or [])}
-    for key in sorted(used):
-        path = os.path.join(IMG_DIR, f"{key}.jpg")
-        if not os.path.exists(path):
-            continue
-        with open(path, "rb") as f:
-            img = MIMEImage(f.read(), _subtype="jpeg")
-        img.add_header("Content-ID", f"<brick-{key}>")
-        img.add_header("Content-Disposition", "inline", filename=f"{key}.jpg")
-        msg.attach(img)
+    msg.attach(MIMEText(text, "plain", "utf-8"))
+    msg.attach(MIMEText(html, "html", "utf-8"))
     with smtplib.SMTP_SSL("smtp.mail.ru", 465) as smtp:
         smtp.login(ORDER_EMAIL, os.environ["MAIL_PASSWORD"])
         smtp.send_message(msg)
