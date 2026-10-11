@@ -1,7 +1,7 @@
 export const SUBMIT_URL = "https://functions.poehali.dev/dc327032-aa41-4632-b107-a026d92ef031";
 
-export const WEBP_BASE = "/img/tech-wm";
-export const BUCKET_BASE = "/img/tech-wm";
+export const WEBP_BASE = "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm";
+export const BUCKET_BASE = "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm";
 
 // fullSrc — прямой URL к оригинальному файлу (используется когда WebP-конвертация ещё не готова)
 export const slides: { id: string; alt: string; fullSrc?: string; mobileSrc?: string }[] = [
