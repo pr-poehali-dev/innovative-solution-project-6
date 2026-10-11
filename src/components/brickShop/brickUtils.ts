@@ -31,6 +31,21 @@ export const PURPOSES = [
 
 export type PurposeId = (typeof PURPOSES)[number]["id"];
 
+export const BRICK_COLORS = [
+  { id: "white", label: "Белый", swatch: "#f4f4f2", match: [] as string[] },
+  { id: "yellow", label: "Жёлтый", swatch: "#d9c56b", match: ["жёлт", "желт"] },
+  { id: "pink", label: "Розовый", swatch: "#b8746f", match: ["розов", "красн"] },
+  { id: "brown", label: "Коричневый", swatch: "#5a4033", match: ["коричн"] },
+] as const;
+
+export type BrickColorId = (typeof BRICK_COLORS)[number]["id"];
+
+export const brickColor = (name: string): BrickColorId => {
+  const n = name.toLowerCase();
+  const found = BRICK_COLORS.find((c) => c.match.some((m) => n.includes(m)));
+  return found ? found.id : "white";
+};
+
 export const toBrick = (m: Material): Brick => {
   const n = m.name.toLowerCase();
   const priceNum = parseFloat((m.price || "0").replace(/[^\d.,]/g, "").replace(",", ".")) || 0;

@@ -5,7 +5,7 @@ import type { Material } from "@/data/materials";
 import BrickCard from "./BrickCard";
 import BrickCalculator, { type DeliveryInfo } from "./BrickCalculator";
 import BrickCheckout, { type CartLine } from "./BrickCheckout";
-import { type BrickFormat, type PurposeId, FORMAT_LABEL, PALLET_SIZE, PURPOSES, formatTons, priceText, matchesPurpose, toBrick } from "./brickUtils";
+import { type BrickColorId, type BrickFormat, type PurposeId, BRICK_COLORS, FORMAT_LABEL, brickColor, PALLET_SIZE, PURPOSES, formatTons, priceText, matchesPurpose, toBrick } from "./brickUtils";
 
 interface BrickShopProps {
   items: Material[];
@@ -38,6 +38,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
   const bricks = useMemo(() => items.map(toBrick), [items]);
   const [purpose, setPurpose] = useState<PurposeId>("all");
   const [format, setFormat] = useState<BrickFormat | "all">("all");
+  const [color, setColor] = useState<BrickColorId | "all">("all");
   const [sort, setSort] = useState<SortId>("cheap");
   const [cart, setCart] = useState<CartLine[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
@@ -50,17 +51,18 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
   }, [toast]);
 
   const formats = (Object.keys(FORMAT_LABEL) as BrickFormat[]).filter((f) => bricks.some((b) => b.format === f));
+  const colors = BRICK_COLORS.filter((c) => bricks.some((b) => brickColor(b.name) === c.id));
   const purposes = PURPOSES.filter((p) => p.id === "all" || bricks.some((b) => matchesPurpose(b, p.id)));
   const hasPrices = bricks.some((b) => b.priceNum > 0);
 
   const visible = useMemo(() => {
-    const list = bricks.filter((b) => matchesPurpose(b, purpose) && (format === "all" || b.format === format));
+    const list = bricks.filter((b) => matchesPurpose(b, purpose) && (format === "all" || b.format === format) && (color === "all" || brickColor(b.name) === color));
     return [...list].sort((a, b) => {
       if (sort === "expensive") return b.priceNum - a.priceNum;
       if (sort === "grade") return parseInt(b.grade.slice(1) || "0") - parseInt(a.grade.slice(1) || "0");
       return a.priceNum - b.priceNum;
     });
-  }, [bricks, purpose, format, sort]);
+  }, [bricks, purpose, format, color, sort]);
 
   const [delivery, setDelivery] = useState<DeliveryInfo | undefined>();
   const [restored, setRestored] = useState(false);
@@ -146,6 +148,23 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
       </div>
 
       <div className="rounded-2xl border border-accent/20 bg-card/30 p-4 mb-6 space-y-3">
+        {colors.length > 1 && (
+          <div>
+            <p className="text-xs text-muted-foreground mb-2">Цвет кирпича</p>
+            <div className="flex gap-2 overflow-x-auto sm:flex-wrap scrollbar-none -mx-1 px-1">
+              <button type="button" onClick={() => setColor("all")} className={chip(color === "all")}>
+                <span className="w-4 h-4 rounded-full shrink-0 border border-white/40 bg-[conic-gradient(#f4f4f2_0_25%,#d9c56b_0_50%,#b8746f_0_75%,#5a4033_0)]" />
+                Все цвета
+              </button>
+              {colors.map((c) => (
+                <button key={c.id} type="button" onClick={() => setColor(c.id)} className={chip(color === c.id)}>
+                  <span className="w-4 h-4 rounded-full shrink-0 border border-white/40" style={{ background: c.swatch }} />
+                  {c.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
         <div>
           <p className="text-xs text-muted-foreground mb-2">Для чего кирпич</p>
           <div className="flex gap-2 overflow-x-auto sm:flex-wrap scrollbar-none -mx-1 px-1">
@@ -198,7 +217,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
         <div className="text-center py-14 border border-accent/10 rounded-2xl bg-card/30">
           <Icon name="SearchX" size={40} className="text-accent/50 mx-auto mb-3" />
           <p className="text-white font-bold mb-1">Под такие условия ничего нет</p>
-          <button type="button" onClick={() => { setPurpose("all"); setFormat("all"); }} className="text-accent text-sm underline">
+          <button type="button" onClick={() => { setPurpose("all"); setFormat("all"); setColor("all"); }} className="text-accent text-sm underline">
             Сбросить фильтры
           </button>
         </div>
