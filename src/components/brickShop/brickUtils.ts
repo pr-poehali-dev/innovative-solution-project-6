@@ -36,6 +36,7 @@ export const BRICK_COLORS = [
   { id: "yellow", label: "Жёлтый", swatch: "#d9c56b", match: ["жёлт", "желт"] },
   { id: "pink", label: "Розовый", swatch: "#b8746f", match: ["розов", "красн"] },
   { id: "brown", label: "Коричневый", swatch: "#5a4033", match: ["коричн"] },
+  { id: "black", label: "Чёрный", swatch: "#2f3338", match: ["чёрн", "черн", "графит"] },
 ] as const;
 
 export type BrickColorId = (typeof BRICK_COLORS)[number]["id"];

@@ -153,7 +153,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
             <p className="text-xs text-muted-foreground mb-2">Цвет кирпича</p>
             <div className="flex gap-2 overflow-x-auto sm:flex-wrap scrollbar-none -mx-1 px-1">
               <button type="button" onClick={() => setColor("all")} className={chip(color === "all")}>
-                <span className="w-4 h-4 rounded-full shrink-0 border border-white/40 bg-[conic-gradient(#f4f4f2_0_25%,#d9c56b_0_50%,#b8746f_0_75%,#5a4033_0)]" />
+                <span className="w-4 h-4 rounded-full shrink-0 border border-white/40 bg-[conic-gradient(#f4f4f2_0_20%,#d9c56b_0_40%,#b8746f_0_60%,#5a4033_0_80%,#2f3338_0)]" />
                 Все цвета
               </button>
               {colors.map((c) => (
