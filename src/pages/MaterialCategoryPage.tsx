@@ -143,7 +143,7 @@ const MaterialCategoryPage = () => {
               </div>
             </div>
             <img
-              src="/img/builder-toon.webp"
+              src="/img/builder-toon-white.webp"
               alt="Строитель Фаворит"
               loading="lazy"
               className="w-36 sm:w-48 h-auto self-center md:self-end drop-shadow-[0_10px_25px_rgba(0,0,0,0.45)]"
@@ -398,7 +398,7 @@ const MaterialCategoryPage = () => {
               <PhoneButton size="lg" className="rounded-2xl" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
             </div>
             <img
-              src="/img/builder-toon.webp"
+              src="/img/builder-toon-white.webp"
               alt="Строитель Фаворит"
               loading="lazy"
               className="w-40 sm:w-52 h-auto self-end drop-shadow-[0_10px_25px_rgba(0,0,0,0.45)]"
