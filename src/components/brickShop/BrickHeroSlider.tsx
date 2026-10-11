@@ -45,7 +45,7 @@ const BrickHeroSlider = ({ slides }: { slides: HeroSlide[] }) => {
             src={s.image}
             alt={s.alt}
             loading={i === 0 ? "eager" : "lazy"}
-            className={`w-full h-full transition-transform duration-[6000ms] ease-out ${s.plain ? "object-contain bg-white" : "object-cover"} ${i === active ? (s.plain ? "scale-105" : "scale-110") : "scale-100"}`}
+            className={`w-full h-full transition-transform duration-[6000ms] ease-out object-cover ${i === active ? (s.plain ? "scale-105" : "scale-110") : "scale-100"}`}
           />
           {!s.plain && <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />}
           {!s.plain && <figcaption className="absolute bottom-0 inset-x-0 p-4 sm:p-7 pb-9 sm:pb-11">
