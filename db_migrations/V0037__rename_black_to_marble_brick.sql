@@ -1,0 +1,1 @@
+UPDATE materials SET name = 'Кирпич силикатный мраморный пустотелый полуторный М-150', description = REPLACE(description, 'Чёрный пустотелый', 'Мраморный пустотелый'), image_url = '/img/brick-marble-card.jpg' WHERE category = 'kirpich' AND name = 'Кирпич силикатный чёрный пустотелый полуторный М-150';
