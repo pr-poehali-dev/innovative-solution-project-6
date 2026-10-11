@@ -27,7 +27,7 @@ export const MATERIAL_SEO_PAGES: MaterialSeoPage[] = [
     heroCaption: "Свой склад и манипулятор — привезём и выгрузим кирпич прямо на объект",
     heroSlides: [
       {
-        image: "/img/brick-favorit-hero6.jpg",
+        image: "/img/brick-favorit-hero7.jpg",
         alt: "Фирменный кирпич «Фаворит» с гербом — аренда манипуляторов, телефон +7 960 188-30-84",
         badge: "Фаворит",
         title: "Фирменный кирпич Фаворит",
