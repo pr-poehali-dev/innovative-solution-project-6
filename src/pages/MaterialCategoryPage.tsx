@@ -10,6 +10,7 @@ import CallbackModal from "@/components/ui/CallbackModal";
 import MaxButton from "@/components/ui/MaxButton";
 import LazySection from "@/components/LazySection";
 import BrickShop from "@/components/brickShop/BrickShop";
+import BrickHeroSlider from "@/components/brickShop/BrickHeroSlider";
 import NotFound from "@/pages/NotFound";
 import { fetchMaterials, MATERIAL_CATEGORIES, type Material } from "@/data/materials";
 import { MATERIAL_SEO_PAGES, getMaterialSeoPage } from "@/data/materialsSeo";
@@ -111,7 +112,9 @@ const MaterialCategoryPage = () => {
               <PhoneButton size="md" className="rounded-xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
               <MaxButton place="brick_shop_hero" className="justify-center !px-4 !py-2.5 !gap-2 !text-sm !font-bold" />
             </div>
-            {page.heroImage && (
+            {page.heroSlides?.length ? (
+              <BrickHeroSlider slides={page.heroSlides} />
+            ) : page.heroImage && (
               <figure className="relative mt-7 rounded-2xl overflow-hidden border border-accent/30 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
                 <img
                   src={page.heroImage}

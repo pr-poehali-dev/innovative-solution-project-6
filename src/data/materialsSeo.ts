@@ -12,7 +12,10 @@ export type MaterialSeoPage = {
   heroImage?: string;
   heroAlt?: string;
   heroCaption?: string;
+  heroSlides?: { image: string; alt: string; badge: string; title: string; text: string }[];
 };
+
+const IMG = "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files";
 
 export const MATERIAL_SEO_PAGES: MaterialSeoPage[] = [
   {
@@ -22,6 +25,36 @@ export const MATERIAL_SEO_PAGES: MaterialSeoPage[] = [
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files/cd32635b-95ed-4f5a-81ce-f599784a4c79.jpg",
     heroAlt: "Склад силикатного кирпича Фаворит: манипулятор грузит поддон с кирпичом",
     heroCaption: "Свой склад и манипулятор — привезём и выгрузим кирпич прямо на объект",
+    heroSlides: [
+      {
+        image: `${IMG}/cd32635b-95ed-4f5a-81ce-f599784a4c79.jpg`,
+        alt: "Склад силикатного кирпича Фаворит: манипулятор грузит поддон",
+        badge: "Свой склад",
+        title: "Кирпич в наличии — отгрузка в день заказа",
+        text: "Грузим поддоны манипулятором прямо со склада",
+      },
+      {
+        image: `${IMG}/31700ce3-3053-4e05-80f8-1aded2ad0ce4.jpg`,
+        alt: "Манипулятор выгружает поддон кирпича на строящемся доме",
+        badge: "Разгрузка краном",
+        title: "Ставим поддоны прямо к месту кладки",
+        text: "Без грузчиков, без боя — кран дотянется до перекрытия",
+      },
+      {
+        image: `${IMG}/b448449f-d912-4cdd-853c-1e1e329a7f2f.jpg`,
+        alt: "Силикатный кирпич М-150 полнотелый и пустотелый на поддоне",
+        badge: "М-150 · 18 ₽/шт",
+        title: "Полнотелый и пустотелый кирпич",
+        text: "Ровная геометрия, 336 шт на поддоне — 6 048 ₽",
+      },
+      {
+        image: `${IMG}/1f0ee621-b3dd-41cf-8194-bf0665554e2d.jpg`,
+        alt: "Доставка кирпича манипулятором по Нижнему Новгороду",
+        badge: "Доставка 24/7",
+        title: "Привезём по Нижнему и области",
+        text: "Подача машины по городу — в течение 60 минут",
+      },
+    ],
     h1: "Купить кирпич с доставкой манипулятором в Нижнем Новгороде",
     title: "Кирпич с доставкой и разгрузкой в Нижнем Новгороде",
     description:
