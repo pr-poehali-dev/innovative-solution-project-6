@@ -38,24 +38,6 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
             <Icon name="Blocks" size={48} className="text-accent/30" />
           </div>
         )}
-        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-          {brick.grade && (
-            <span className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur text-accent text-xs font-black border border-accent/40">
-              {brick.grade}
-            </span>
-          )}
-          {brick.facing && (
-            <span className="px-2.5 py-1 rounded-full bg-accent text-black text-xs font-black">Для фасада</span>
-          )}
-        </div>
-        <span
-          className={`absolute top-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold backdrop-blur ${
-            brick.inStock ? "bg-emerald-600 text-white" : "bg-black/70 text-white"
-          }`}
-        >
-          <span className={`w-1.5 h-1.5 rounded-full ${brick.inStock ? "bg-white" : "bg-white/60"}`} />
-          {brick.inStock ? "В наличии" : "Под заказ"}
-        </span>
       </div>
       <div
         className={`flex items-center gap-2.5 px-4 py-2.5 text-white ${
@@ -68,6 +50,24 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
           <p className="text-[11px] text-white/80">
             {brick.hollow ? "С отверстиями — легче и теплее" : "Сплошной — максимальная прочность"}
           </p>
+        </div>
+        <div className="ml-auto flex flex-wrap justify-end gap-1.5">
+          {brick.grade && (
+            <span className="px-2.5 py-1 rounded-full bg-black/40 text-accent text-xs font-black border border-accent/40">
+              {brick.grade}
+            </span>
+          )}
+          {brick.facing && (
+            <span className="px-2.5 py-1 rounded-full bg-accent text-black text-xs font-black">Для фасада</span>
+          )}
+          <span
+            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${
+              brick.inStock ? "bg-emerald-600 text-white" : "bg-black/40 text-white"
+            }`}
+          >
+            <span className={`w-1.5 h-1.5 rounded-full ${brick.inStock ? "bg-white" : "bg-white/60"}`} />
+            {brick.inStock ? "В наличии" : "Под заказ"}
+          </span>
         </div>
       </div>
 
