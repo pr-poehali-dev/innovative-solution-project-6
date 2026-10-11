@@ -109,7 +109,7 @@ export const FALLBACK_MATERIALS: Material[] = [
     unit: "шт",
     description:
       "Размер 250×120×88 мм. В упаковке (на поддоне) 336 шт — 6 048 ₽. Вес поддона 1340 кг. Пустотелый — легче, меньше нагрузка на фундамент, лучше держит тепло.",
-    imageUrl: "/img/brick-hollow-favorit-3.jpg",
+    imageUrl: "/img/brick-hollow-favorit-card.jpg",
     inStock: true,
   },
 ];

@@ -1,0 +1,1 @@
+UPDATE materials SET image_url = '/img/brick-hollow-favorit-card.jpg' WHERE id = 20;
