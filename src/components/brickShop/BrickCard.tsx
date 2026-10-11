@@ -31,7 +31,7 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
             src={brick.imageUrl}
             alt={brick.name}
             loading="lazy"
-            className="w-full h-full object-contain p-6 pb-14 group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
@@ -56,18 +56,18 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
           <span className={`w-1.5 h-1.5 rounded-full ${brick.inStock ? "bg-white" : "bg-white/60"}`} />
           {brick.inStock ? "В наличии" : "Под заказ"}
         </span>
-        <div
-          className={`absolute bottom-3 left-3 right-3 flex items-center gap-2.5 px-3 py-2 rounded-xl text-white shadow-lg ${
-            brick.hollow ? "bg-sky-700" : "bg-zinc-800"
-          }`}
-        >
-          <Icon name={brick.hollow ? "CircleDashed" : "Square"} size={20} className="shrink-0" />
-          <div className="leading-tight">
-            <p className="text-sm font-black uppercase tracking-wide">{brick.hollow ? "Пустотелый" : "Полнотелый"}</p>
-            <p className="text-[11px] text-white/80">
-              {brick.hollow ? "С отверстиями — легче и теплее" : "Сплошной — максимальная прочность"}
-            </p>
-          </div>
+      </div>
+      <div
+        className={`flex items-center gap-2.5 px-4 py-2.5 text-white ${
+          brick.hollow ? "bg-sky-700" : "bg-zinc-800"
+        }`}
+      >
+        <Icon name={brick.hollow ? "CircleDashed" : "Square"} size={20} className="shrink-0" />
+        <div className="leading-tight">
+          <p className="text-sm font-black uppercase tracking-wide">{brick.hollow ? "Пустотелый" : "Полнотелый"}</p>
+          <p className="text-[11px] text-white/80">
+            {brick.hollow ? "С отверстиями — легче и теплее" : "Сплошной — максимальная прочность"}
+          </p>
         </div>
       </div>
 
