@@ -1,0 +1,1 @@
+UPDATE materials SET image_url = 'https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/327d8aaf-b8d5-4aaa-ab04-96c42d53df15.jpg' WHERE id = 19;

@@ -98,7 +98,7 @@ export const FALLBACK_MATERIALS: Material[] = [
     unit: "шт",
     description:
       "Размер 250×120×88 мм. В упаковке (на поддоне) 336 шт — 6 048 ₽. Вес поддона 1680 кг. Полнотелый — для несущих стен, фундаментов и перегородок.",
-    imageUrl: "/img/brick-solid-favorit-3.jpg",
+    imageUrl: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/327d8aaf-b8d5-4aaa-ab04-96c42d53df15.jpg",
     inStock: true,
   },
   {
