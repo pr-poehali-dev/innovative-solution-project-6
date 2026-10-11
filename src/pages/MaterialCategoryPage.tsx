@@ -113,7 +113,7 @@ const MaterialCategoryPage = () => {
               <MaxButton place="brick_shop_hero" className="justify-center !px-4 !py-2.5 !gap-2 !text-sm !font-bold" />
             </div>
             {page.heroSlides?.length ? (
-              <BrickHeroSlider slides={page.heroSlides} />
+              <BrickHeroSlider slides={page.heroSlides} className="mt-7 -mx-5 -mb-7 sm:-mx-10 sm:-mb-10 aspect-[16/9] border-t border-accent/30" />
             ) : page.heroImage && (
               <figure className="relative mt-7 rounded-2xl overflow-hidden border border-accent/30 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
                 <img

@@ -3,7 +3,7 @@ import Icon from "@/components/ui/icon";
 
 export type HeroSlide = { image: string; alt: string; badge: string; title: string; text: string; plain?: boolean };
 
-const BrickHeroSlider = ({ slides }: { slides: HeroSlide[] }) => {
+const BrickHeroSlider = ({ slides, className = "" }: { slides: HeroSlide[]; className?: string }) => {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const count = slides.length;
@@ -19,7 +19,7 @@ const BrickHeroSlider = ({ slides }: { slides: HeroSlide[] }) => {
 
   return (
     <div
-      className="relative mt-7 rounded-2xl overflow-hidden border border-accent/30 shadow-[0_12px_40px_rgba(0,0,0,0.45)] aspect-[5/4] sm:aspect-[16/8] bg-black/40 text-left"
+      className={`relative overflow-hidden bg-black/40 text-left ${className || "mt-7 rounded-2xl border border-accent/30 shadow-[0_12px_40px_rgba(0,0,0,0.45)] aspect-[5/4] sm:aspect-[16/8]"}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={(e) => {
@@ -45,7 +45,7 @@ const BrickHeroSlider = ({ slides }: { slides: HeroSlide[] }) => {
             src={s.image}
             alt={s.alt}
             loading={i === 0 ? "eager" : "lazy"}
-            className={`w-full h-full transition-transform duration-[6000ms] ease-out object-cover ${i === active ? (s.plain ? "scale-105" : "scale-110") : "scale-100"}`}
+            className={`w-full h-full transition-transform duration-[6000ms] ease-out object-cover ${i === active && !s.plain ? "scale-110" : "scale-100"}`}
           />
           {!s.plain && <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />}
           {!s.plain && <figcaption className="absolute bottom-0 inset-x-0 p-4 sm:p-7 pb-9 sm:pb-11">
