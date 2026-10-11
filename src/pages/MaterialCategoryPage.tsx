@@ -36,6 +36,39 @@ const MaterialCategoryPage = () => {
     [items, page],
   );
 
+  useEffect(() => {
+    if (!page) return;
+    const url = `https://фаварит.рф/stroymaterialy/${page.slug}`;
+    const prevTitle = document.title;
+    document.title = page.title;
+    const setTag = (attr: "name" | "property", key: string, content: string) => {
+      let tag = document.head.querySelector(`meta[${attr}="${key}"]`);
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute(attr, key);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute("content", content);
+    };
+    setTag("name", "description", page.description);
+    setTag("name", "keywords", page.keywords.join(", "));
+    setTag("property", "og:title", page.title);
+    setTag("property", "og:description", page.description);
+    setTag("property", "og:url", url);
+    setTag("name", "twitter:title", page.title);
+    setTag("name", "twitter:description", page.description);
+    let canonical = document.head.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", url);
+    return () => {
+      document.title = prevTitle;
+    };
+  }, [page]);
+
   if (!page) return <NotFound />;
 
   const pageUrl = `https://фаварит.рф/stroymaterialy/${page.slug}`;
@@ -49,6 +82,29 @@ const MaterialCategoryPage = () => {
     })),
   };
 
+  const priceOf = (m: Material) => parseFloat((m.price || "0").replace(/[^\d.,]/g, "").replace(",", ".")) || 0;
+  const priced = visible.filter((m) => priceOf(m) > 0);
+  const productSchema = priced.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: page.h1,
+        description: page.description,
+        image: priced.map((m) => (m.imageUrl?.startsWith("/") ? `https://фаварит.рф${m.imageUrl}` : m.imageUrl)).filter(Boolean),
+        brand: { "@type": "Brand", name: page.cat === "kirpich" ? "Борский силикатный завод" : "Фаворит" },
+        offers: {
+          "@type": "AggregateOffer",
+          priceCurrency: "RUB",
+          lowPrice: Math.min(...priced.map(priceOf)),
+          highPrice: Math.max(...priced.map(priceOf)),
+          offerCount: priced.length,
+          availability: "https://schema.org/InStock",
+          seller: { "@type": "Organization", name: "ООО «Фаворит»", telephone: "+7 960 188-30-84" },
+          url: pageUrl,
+        },
+      }
+    : null;
+
   return (
     <div className="min-h-screen bg-background page-enter">
       <title>{page.title}</title>
@@ -60,6 +116,7 @@ const MaterialCategoryPage = () => {
       <meta property="og:url" content={pageUrl} />
       <link rel="canonical" href={pageUrl} />
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      {productSchema && <script type="application/ld+json">{JSON.stringify(productSchema)}</script>}
 
       <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
 
