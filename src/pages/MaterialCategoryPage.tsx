@@ -130,15 +130,24 @@ const MaterialCategoryPage = () => {
             )}
           </div>
           <BrickShop items={visible} loading={loading} />
-          <div className="mt-10 rounded-3xl border border-accent/30 bg-card/60 p-6 sm:p-8 flex flex-col md:flex-row md:items-center gap-5 justify-between">
-            <div>
+          <div className="mt-10 rounded-3xl border border-accent/30 bg-card/60 px-6 pt-6 sm:px-8 sm:pt-8 flex flex-col md:flex-row md:items-center gap-5 overflow-hidden">
+            <div className="flex-1 pb-2 md:pb-8 text-center md:text-left">
+              <div className="inline-block mb-3 px-4 py-2 rounded-2xl bg-white text-zinc-900 text-sm font-bold shadow-lg">
+                Звоните — всё посчитаю и привезу!
+              </div>
               <p className="text-2xl font-black text-white mb-1">Остались вопросы?</p>
-              <p className="text-muted-foreground">Позвоните или напишите — подберём кирпич и посчитаем доставку за 5 минут</p>
+              <p className="text-muted-foreground mb-5">Позвоните или напишите — подберём кирпич и посчитаем доставку за 5 минут</p>
+              <div className="flex flex-wrap items-center gap-2 justify-center md:justify-start">
+                <PhoneButton size="md" className="rounded-xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
+                <MaxButton place="brick_shop_bottom" className="justify-center !px-4 !py-2.5 !gap-2 !text-sm !font-bold" />
+              </div>
             </div>
-            <div className="flex flex-wrap items-center gap-2 shrink-0">
-              <PhoneButton size="md" className="rounded-xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
-              <MaxButton place="brick_shop_bottom" className="justify-center !px-4 !py-2.5 !gap-2 !text-sm !font-bold" />
-            </div>
+            <img
+              src="/img/builder-toon.webp"
+              alt="Строитель Фаворит"
+              loading="lazy"
+              className="w-36 sm:w-48 h-auto self-center md:self-end drop-shadow-[0_10px_25px_rgba(0,0,0,0.45)]"
+            />
           </div>
         </section>
       </main>
@@ -375,12 +384,26 @@ const MaterialCategoryPage = () => {
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10 text-center">
-          <h2 className="text-2xl sm:text-3xl font-black text-white mb-3">Посчитаем заказ с доставкой</h2>
-          <p className="text-muted-foreground mb-6">
-            Назовите объём — назовём цену вместе с доставкой и разгрузкой манипулятором.
-          </p>
-          <PhoneButton size="lg" className="rounded-2xl" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+          <div className="relative rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/10 via-card/40 to-transparent px-5 pt-8 sm:px-10 flex flex-col sm:flex-row items-center gap-4 sm:gap-8 overflow-hidden">
+            <div className="flex-1 text-center sm:text-left pb-2 sm:pb-8">
+              <div className="relative inline-block mb-4 px-4 py-2 rounded-2xl bg-white text-zinc-900 text-sm font-bold shadow-lg">
+                Звоните — всё посчитаю и привезу!
+                <span className="hidden sm:block absolute -right-2 bottom-3 w-4 h-4 bg-white rotate-45" />
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black text-white mb-3">Посчитаем заказ с доставкой</h2>
+              <p className="text-muted-foreground mb-6">
+                Назовите объём — назовём цену вместе с доставкой и разгрузкой манипулятором.
+              </p>
+              <PhoneButton size="lg" className="rounded-2xl" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
+            </div>
+            <img
+              src="/img/builder-toon.webp"
+              alt="Строитель Фаворит"
+              loading="lazy"
+              className="w-40 sm:w-52 h-auto self-end drop-shadow-[0_10px_25px_rgba(0,0,0,0.45)]"
+            />
+          </div>
         </section>
       </main>
       )}
