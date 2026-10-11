@@ -12,7 +12,7 @@ export type MaterialSeoPage = {
   heroImage?: string;
   heroAlt?: string;
   heroCaption?: string;
-  heroSlides?: { image: string; alt: string; badge: string; title: string; text: string }[];
+  heroSlides?: { image: string; alt: string; badge: string; title: string; text: string; plain?: boolean }[];
 };
 
 const IMG = "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/files";
@@ -26,6 +26,14 @@ export const MATERIAL_SEO_PAGES: MaterialSeoPage[] = [
     heroAlt: "Склад силикатного кирпича Фаворит: манипулятор грузит поддон с кирпичом",
     heroCaption: "Свой склад и манипулятор — привезём и выгрузим кирпич прямо на объект",
     heroSlides: [
+      {
+        image: "/img/brick-favorit.jpg",
+        alt: "Фирменный кирпич ООО «Фаворит» с гербом — аренда манипуляторов",
+        badge: "ООО «Фаворит»",
+        title: "Фирменный кирпич Фаворит",
+        text: "Аренда манипуляторов · Доставка кирпича · Грузоперевозки",
+        plain: true,
+      },
       {
         image: `${IMG}/cd32635b-95ed-4f5a-81ce-f599784a4c79.jpg`,
         alt: "Склад силикатного кирпича Фаворит: манипулятор грузит поддон",
