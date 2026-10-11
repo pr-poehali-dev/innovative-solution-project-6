@@ -112,6 +112,17 @@ export const FALLBACK_MATERIALS: Material[] = [
     imageUrl: "/img/brick-hollow-card.jpg",
     inStock: true,
   },
+  {
+    id: 21,
+    name: "Кирпич силикатный жёлтый пустотелый полуторный М-150",
+    category: "kirpich",
+    price: "27 ₽",
+    unit: "шт",
+    description:
+      "Борский силикатный завод. Размер 250×120×88 мм. В упаковке (на поддоне) 336 шт — 9 072 ₽. Вес поддона 1340 кг. Жёлтый пустотелый — для красивой кладки, лёгкий и тёплый.",
+    imageUrl: "/img/brick-yellow-card.jpg",
+    inStock: true,
+  },
 ];
 
 function readCachedMaterials(): Material[] | null {

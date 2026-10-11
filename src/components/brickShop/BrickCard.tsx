@@ -21,6 +21,7 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
   const tags = [
     FORMAT_LABEL[brick.format],
     brick.facing ? "Лицевой" : "Рядовой",
+    ...(brick.name.toLowerCase().includes("жёлт") || brick.name.toLowerCase().includes("желт") ? ["Жёлтый"] : []),
   ];
 
   return (
