@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
-import { type Brick, FORMAT_LABEL, PALLET_SIZE, priceText } from "./brickUtils";
+import { type Brick, FORMAT_LABEL, MANUFACTURER, PALLET_SIZE, priceText } from "./brickUtils";
 
 interface BrickCardProps {
   brick: Brick;
@@ -88,6 +88,13 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
           <div className="rounded-lg bg-white/5 p-2">
             <p className="text-muted-foreground">В упаковке</p>
             <p className="text-white font-semibold">{PALLET_SIZE} шт</p>
+          </div>
+          <div className="rounded-lg bg-accent/10 border border-accent/25 p-2 col-span-2 flex items-center justify-between gap-2">
+            <p className="text-muted-foreground flex items-center gap-1.5">
+              <Icon name="Factory" size={14} className="text-accent" />
+              Производитель
+            </p>
+            <p className="text-white font-semibold text-right">{MANUFACTURER}</p>
           </div>
           <div className="rounded-lg bg-white/5 p-2 col-span-2 flex items-center justify-between">
             <p className="text-muted-foreground">Вес поддона</p>

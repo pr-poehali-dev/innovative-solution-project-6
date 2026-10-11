@@ -1,0 +1,1 @@
+UPDATE materials SET description = 'Борский силикатный завод. ' || description WHERE id IN (19, 20) AND description NOT LIKE 'Борский%';

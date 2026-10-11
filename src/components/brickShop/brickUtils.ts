@@ -2,6 +2,8 @@ import type { Material } from "@/data/materials";
 
 export const PALLET_SIZE = 336;
 
+export const MANUFACTURER = "Борский силикатный завод";
+
 export type BrickFormat = "single" | "oneHalf";
 
 export type Brick = Material & {
