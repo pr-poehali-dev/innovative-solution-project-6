@@ -65,7 +65,7 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
       {/* Тонкая центральная вертикальная линия между колонками */}
       <div className="hidden lg:block absolute top-32 bottom-32 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-transparent via-accent/20 to-transparent pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto">
+      <div className="relative w-full">
         <div
           className={`text-center mb-8 sm:mb-14 transition-all duration-1000 ${visibleSections["features"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
         >
@@ -79,7 +79,7 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
           </h2>
         </div>
 
-        <div className="flex flex-col gap-4 sm:gap-5 max-w-3xl mx-auto lg:max-w-6xl lg:grid lg:grid-cols-2 lg:gap-6">
+        <div className="flex flex-col gap-4 sm:gap-5 w-full lg:grid lg:grid-cols-2 lg:gap-6">
           {features.map((item, i) => {
             const isVisible = visibleSections["features"];
             const c = item.color.main;
