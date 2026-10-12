@@ -3,6 +3,10 @@ import Icon from "@/components/ui/icon";
 
 const CATEGORIES = [
   { to: "/stroymaterialy/kirpich", icon: "Blocks", title: "Кирпич", text: "Силикатный, цветной, М-150", hit: true },
+  { to: "/stroymaterialy/kirpich", icon: "Square", title: "Газоблоки", text: "Тёплые стены D400–D600" },
+  { to: "/stroymaterialy/kirpich", icon: "Layers", title: "Плиты и перемычки", text: "Перекрытия и проёмы" },
+  { to: "/stroymaterialy/kirpich", icon: "Package", title: "Цемент и смеси", text: "Кладка, стяжка, штукатурка" },
+  { to: "/stroymaterialy/kirpich", icon: "TreePine", title: "Пиломатериалы", text: "Брус, доска, кровля" },
   { to: "/stroymaterialy/bordyur", icon: "LayoutGrid", title: "Бордюр", text: "Дорожный и тротуарный" },
 ];
 
@@ -87,10 +91,10 @@ const Photo = ({ className = "" }: { className?: string }) => (
 );
 
 const Categories = ({ className = "" }: { className?: string }) => (
-  <div className={`relative grid grid-cols-2 gap-3 w-full ${className}`}>
+  <div className={`relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 w-full ${className}`}>
     {CATEGORIES.map((c) => (
       <Link
-        key={c.to}
+        key={c.title}
         to={c.to}
         className="group relative rounded-2xl bg-white/[0.04] border border-white/10 hover:border-amber-400/60 hover:bg-amber-400/[0.07] p-4 transition-all hover:-translate-y-0.5"
       >
