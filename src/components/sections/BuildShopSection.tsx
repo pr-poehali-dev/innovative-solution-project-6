@@ -24,7 +24,7 @@ const BuildShopSection = () => (
         <div className="absolute -bottom-40 -left-24 w-96 h-96 rounded-full bg-accent/10 blur-3xl pointer-events-none" />
 
         <div className="relative grid lg:grid-cols-[5fr_7fr]">
-          <div className="p-6 sm:p-10 lg:p-14 xl:pl-[max(3.5rem,calc((100vw-1280px)/2))] flex flex-col justify-center">
+          <div className="order-2 lg:order-1 p-6 sm:p-10 lg:p-14 xl:pl-[max(3.5rem,calc((100vw-1280px)/2))] flex flex-col justify-center">
             <span className="self-start inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/15 border border-amber-400/40 text-amber-300 text-[11px] sm:text-xs font-bold uppercase tracking-widest">
               <Icon name="Warehouse" size={14} />
               Наш магазин
@@ -73,7 +73,7 @@ const BuildShopSection = () => (
             </div>
           </div>
 
-          <div className="relative aspect-[16/9] lg:aspect-auto lg:min-h-[480px]">
+          <div className="order-1 lg:order-2 relative aspect-[16/9] lg:aspect-auto lg:min-h-[480px]">
             <img
               src="/img/brick-favorit-hero8.jpg"
               alt="Силикатный кирпич в магазине Фаворит"
