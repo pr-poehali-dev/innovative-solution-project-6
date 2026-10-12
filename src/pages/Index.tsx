@@ -22,6 +22,7 @@ const SeoTextSection = lazy(() => import("@/components/sections/SeoTextSection")
 const WeatherWidget = lazy(() => import("@/components/sections/WeatherWidget"));
 const SeoFooterLinks = lazy(() => import("@/components/sections/SeoFooterLinks"));
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
+const BuildShopSection = lazy(() => import("@/components/sections/BuildShopSection"));
 
 const SECTION_IDS = ["hero", "features", "how", "pricing", "cta"];
 
@@ -35,6 +36,8 @@ const Index = () => {
       <HeroSection visibleSections={visibleSections} />
 
       <SectionDivider variant="aurora" />
+
+      <LazySection id="magazin"><BuildShopSection /></LazySection>
 
       {/* На компьютере — преимущества и баннер перед техникой.
           На телефоне их прячем: после формы заявки сразу идут карточки техники. */}
