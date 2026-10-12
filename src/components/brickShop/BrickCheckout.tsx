@@ -72,6 +72,7 @@ const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear, delivery, 
         `Доставка: ${delivery.city}, ${delivery.km} км, манипулятор ${delivery.truck}, рейсов ${delivery.trips} — ${delivery.local ? "по городу, цену назвать при звонке" : priceText(delivery.cost)}`,
       delivery && !delivery.local && total > 0 && `ИТОГО с доставкой: ${priceText(total + delivery.cost)}`,
       address && `Адрес: ${address}`,
+      delivery && "Разгрузка манипулятором — нужен стропальщик на объекте",
     ]
       .filter(Boolean)
       .join(" · ");

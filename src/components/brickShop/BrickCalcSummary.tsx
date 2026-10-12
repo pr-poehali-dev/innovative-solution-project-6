@@ -2,6 +2,7 @@ import Icon from "@/components/ui/icon";
 import { DELIVERY_CITIES } from "./deliveryCities";
 import { type Brick, PALLET_SIZE, WALL_THICKNESS, formatTons, priceText } from "./brickUtils";
 import { type Manipulator, type Mode, NumField, Row, fmt } from "./calculatorParts";
+import SlingerNotice from "@/components/materials/SlingerNotice";
 
 interface BuildResult {
   wallArea: number;
@@ -169,6 +170,7 @@ const BrickCalcSummary = ({
       {isLocal && (
         <p className="mt-2 text-[11px] text-accent">По городу и ближайшим районам — назовём лучшую цену при звонке</p>
       )}
+      <SlingerNotice className="mt-3" />
     </div>
 
     <div className="mt-4 pt-4 border-t border-accent/20 space-y-2 text-sm">

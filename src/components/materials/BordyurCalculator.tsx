@@ -8,6 +8,7 @@ import MaxIcon from "@/components/ui/MaxIcon";
 import { MAX_GRADIENT } from "@/components/ui/MaxButton";
 import { reachGoal } from "@/lib/metrika";
 import { toast } from "sonner";
+import SlingerNotice, { SLINGER_TEXT } from "@/components/materials/SlingerNotice";
 
 const MIN_HOURS = 4;
 
@@ -113,6 +114,7 @@ const BordyurCalculator = ({ items }: Props) => {
       `Машина: ${chosen.t.short} (${chosen.t.capacity}), рейсов: ${chosen.trips}`,
       `Адрес: ${city.name}, доставка: ${fmt(chosen.cost)} ₽`,
       `Итого: ${fmt(total)} ₽`,
+      SLINGER_TEXT,
     ];
     return lines.join("\n");
   }, [kind, pieces, pallets, totalT, materialTotal, chosen, city, total]);
@@ -324,6 +326,7 @@ const BordyurCalculator = ({ items }: Props) => {
               <p className="text-[11px] text-muted-foreground">
                 Минимальный заказ машины {MIN_HOURS} ч{city.hours > 0 ? ` + дорога до г. ${city.name}` : ""}, разгрузка краном включена
               </p>
+              <SlingerNotice />
             </div>
             <div className="mt-5 pt-5 border-t border-white/10">
               <p className="text-xs text-muted-foreground">Итого</p>

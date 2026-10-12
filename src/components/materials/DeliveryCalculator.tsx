@@ -7,6 +7,7 @@ import MaxIcon from "@/components/ui/MaxIcon";
 import { MAX_GRADIENT } from "@/components/ui/MaxButton";
 import { reachGoal } from "@/lib/metrika";
 import { toast } from "sonner";
+import SlingerNotice, { SLINGER_TEXT } from "@/components/materials/SlingerNotice";
 
 const MIN_HOURS = 4;
 
@@ -80,6 +81,7 @@ const DeliveryCalculator = () => {
       `Доставка: ${fmt(total)} ₽`,
       materialsTotal > 0 ? `Материал: ${fmt(materialsTotal)} ₽` : "",
       materialsTotal > 0 ? `Итого: ${fmt(materialsTotal + total)} ₽` : "",
+      SLINGER_TEXT,
     ].filter(Boolean);
     return lines.join("\n");
   }, [cargo, pallets, cargoWeight, trips, truck, hours, city, total, materialsTotal]);
@@ -327,6 +329,8 @@ const DeliveryCalculator = () => {
                 </div>
               )}
             </div>
+
+            <SlingerNotice className="mt-4" />
 
             <a
               href={MAX_LINK}
