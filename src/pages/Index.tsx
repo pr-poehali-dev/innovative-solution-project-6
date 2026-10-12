@@ -38,7 +38,7 @@ const Index = () => {
 
       <SectionDivider variant="aurora" />
 
-      {SHOP_PUBLIC && <LazySection id="magazin"><BuildShopSection /></LazySection>}
+      {SHOP_PUBLIC && <div className="hidden md:block"><LazySection id="magazin"><BuildShopSection /></LazySection></div>}
 
       {/* На компьютере — преимущества и баннер перед техникой.
           На телефоне их прячем: после формы заявки сразу идут карточки техники. */}
@@ -68,6 +68,8 @@ const Index = () => {
         <SectionDivider variant="blueprint" />
         <LazySection><CalculatorSection /></LazySection>
       </SectionBackdrop>
+
+      {SHOP_PUBLIC && <div className="md:hidden"><LazySection><BuildShopSection /></LazySection></div>}
 
       {/* Телефон: преимущества и баннер показываем после карточек техники */}
       <div className="md:hidden">
