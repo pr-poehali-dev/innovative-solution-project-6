@@ -11,6 +11,12 @@ interface BrickCardProps {
 const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
   const [pallets, setPallets] = useState(1);
   const [added, setAdded] = useState(false);
+  const [zoom, setZoom] = useState<{ x: number; y: number } | null>(null);
+
+  const handleZoomMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    setZoom({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 });
+  };
 
   const handleAdd = () => {
     onAdd(brick, pallets);
@@ -29,13 +35,18 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
 
   return (
     <article className="group rounded-2xl overflow-hidden border border-accent/15 bg-card/40 hover:border-accent/50 hover:shadow-[0_10px_40px_rgba(232,168,32,0.12)] transition-all flex flex-col">
-      <div className="relative aspect-[4/3] bg-white overflow-hidden">
+      <div
+        className={`relative aspect-[4/3] bg-white overflow-hidden ${brick.imageUrl ? "md:cursor-zoom-in" : ""}`}
+        onMouseMove={brick.imageUrl ? handleZoomMove : undefined}
+        onMouseLeave={() => setZoom(null)}
+      >
         {brick.imageUrl ? (
           <img
             src={brick.imageUrl}
             alt={brick.name}
             loading="lazy"
-            className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500"
+            style={zoom ? { transform: "scale(2)", transformOrigin: `${zoom.x}% ${zoom.y}%` } : undefined}
+            className="w-full h-full object-contain p-3 transition-transform duration-300 ease-out"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
