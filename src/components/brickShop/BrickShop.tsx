@@ -210,7 +210,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
       </div>
 
       {loading ? (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
           {[...Array(3)].map((_, i) => (
             <div key={i} className="h-96 rounded-2xl bg-card/40 border border-accent/10 animate-pulse" />
           ))}
@@ -224,7 +224,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
           </button>
         </div>
       ) : (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
           {visible.map((b) => (
             <BrickCard
               key={b.id}

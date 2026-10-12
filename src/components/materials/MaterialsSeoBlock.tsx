@@ -60,7 +60,7 @@ const groups = [
 ];
 
 const MaterialsSeoBlock = () => (
-  <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-accent/10">
+  <section className="w-full px-4 sm:px-6 lg:px-10 py-12 border-t border-accent/10">
     <h2 className="text-2xl sm:text-3xl font-black text-white mb-3">
       Купить стройматериалы с доставкой манипулятором в Нижнем Новгороде
     </h2>

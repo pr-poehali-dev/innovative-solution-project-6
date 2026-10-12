@@ -124,7 +124,7 @@ const MaterialCategoryPage = () => {
       <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
 
       <header className="fixed top-0 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+        <div className="w-full px-4 sm:px-6 lg:px-10 py-4 flex justify-between items-center">
           <BrandLogo size="sm" compact />
           <div className="flex items-center gap-2 sm:gap-3">
             <button
@@ -143,7 +143,7 @@ const MaterialCategoryPage = () => {
 
       {page.cat === "kirpich" ? (
       <main className="shop-light pt-24 sm:pt-28 pb-16">
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-4">
+        <section className="w-full px-4 sm:px-6 lg:px-10 pt-4">
           <div className="relative mb-8 rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/10 via-card/40 to-transparent px-5 py-7 sm:px-10 sm:py-10 overflow-hidden text-center flex flex-col">
             <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[520px] h-[220px] rounded-full bg-accent/20 blur-3xl" />
             <div className="relative flex items-center justify-center gap-3 mb-3">
@@ -173,7 +173,7 @@ const MaterialCategoryPage = () => {
               <MaxButton place="brick_shop_hero" className="justify-center !px-4 !py-2.5 !gap-2 !text-sm !font-bold" />
             </div>
             {page.heroSlides?.length ? (
-              <BrickHeroSlider slides={page.heroSlides} className="order-first sm:order-none -mt-7 mb-6 sm:mb-0 sm:mt-7 -mx-5 sm:-mx-10 sm:-mb-10 aspect-[16/9] border-b sm:border-b-0 sm:border-t border-accent/30" />
+              <BrickHeroSlider slides={page.heroSlides} className="order-first sm:order-none -mt-7 mb-6 sm:mb-0 sm:mt-7 -mx-5 sm:-mx-10 sm:-mb-10 aspect-[16/9] lg:aspect-[21/9] border-b sm:border-b-0 sm:border-t border-accent/30" />
             ) : page.heroImage && (
               <figure className="relative order-first sm:order-none mb-6 sm:mb-0 sm:mt-7 rounded-2xl overflow-hidden border border-accent/30 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
                 <img
@@ -213,7 +213,7 @@ const MaterialCategoryPage = () => {
       </main>
       ) : (
       <main className="pt-24 sm:pt-28 pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+        <div className="w-full px-4 sm:px-6 lg:px-10 py-4">
           <Breadcrumbs
             items={[
               { label: "Главная", to: "/" },
@@ -223,7 +223,7 @@ const MaterialCategoryPage = () => {
           />
         </div>
 
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-8">
+        <section className="w-full px-4 sm:px-6 lg:px-10 pb-8">
           <SectionBadge>Каталог</SectionBadge>
           <h1 className="text-3xl sm:text-5xl font-black tracking-tighter mt-4 mb-4">
             <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
@@ -273,7 +273,7 @@ const MaterialCategoryPage = () => {
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-10">
+        <section className="w-full px-4 sm:px-6 lg:px-10 pb-10">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {page.advantages.map((a) => (
               <div key={a.title} className="rounded-2xl border border-accent/15 bg-card/40 p-5">
@@ -286,13 +286,13 @@ const MaterialCategoryPage = () => {
         </section>
 
         {page.cat === "kirpich" ? (
-          <section className="max-w-7xl mx-auto px-4 sm:px-6">
+          <section className="w-full px-4 sm:px-6 lg:px-10">
             <BrickShop items={visible} loading={loading} />
           </section>
         ) : (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6">
+        <section className="w-full px-4 sm:px-6 lg:px-10">
             {loading ? (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
                 {[...Array(3)].map((_, i) => (
                   <div key={i} className="h-72 rounded-2xl bg-card/40 border border-accent/10 animate-pulse" />
                 ))}
@@ -307,7 +307,7 @@ const MaterialCategoryPage = () => {
                 <PhoneButton size="md" className="rounded-xl" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
               </div>
             ) : (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
                 {visible.map((m) => (
                   <article
                     key={m.id}
@@ -359,7 +359,7 @@ const MaterialCategoryPage = () => {
           </div>
         )}
 
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+        <section className="w-full px-4 sm:px-6 lg:px-10 py-12">
           <h2 className="text-2xl sm:text-3xl font-black text-white mb-3">
             Как проходит доставка манипулятором
           </h2>
@@ -403,7 +403,7 @@ const MaterialCategoryPage = () => {
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+        <section className="w-full px-4 sm:px-6 lg:px-10 py-12">
           <h2 className="text-2xl sm:text-3xl font-black text-white mb-4">Частые вопросы</h2>
           <div className="space-y-3">
             {page.faq.map((f) => (
@@ -415,7 +415,7 @@ const MaterialCategoryPage = () => {
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-12">
+        <section className="w-full px-4 sm:px-6 lg:px-10 pb-12">
           <div className="rounded-2xl border border-accent/10 bg-card/20 p-6 space-y-3">
             {page.seoText.map((t) => (
               <p key={t.slice(0, 30)} className="text-sm text-muted-foreground leading-relaxed">
@@ -435,7 +435,7 @@ const MaterialCategoryPage = () => {
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-12">
+        <section className="w-full px-4 sm:px-6 lg:px-10 pb-12">
           <h2 className="text-xl font-black text-white mb-4">Другие материалы с доставкой</h2>
           <div className="flex flex-wrap gap-2">
             {MATERIAL_SEO_PAGES.filter((p) => p.slug !== page.slug).map((p) => {
@@ -454,7 +454,7 @@ const MaterialCategoryPage = () => {
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+        <section className="w-full px-4 sm:px-6 lg:px-10 py-10">
           <div className="relative rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/10 via-card/40 to-transparent px-5 pt-8 sm:px-10 flex flex-col sm:flex-row items-center gap-4 sm:gap-8 overflow-hidden">
             <div className="flex-1 text-center sm:text-left pb-2 sm:pb-8">
               <div className="relative inline-block mb-4 px-4 py-2 rounded-2xl bg-white text-zinc-900 text-sm font-bold shadow-lg">

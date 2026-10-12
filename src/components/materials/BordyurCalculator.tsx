@@ -125,7 +125,7 @@ const BordyurCalculator = ({ items }: Props) => {
   }, [kind, pieces, pallets, totalT, materialTotal, chosen, city, total]);
 
   return (
-    <section id="bordyur-calc" className="max-w-7xl mx-auto px-4 sm:px-6 pb-12 scroll-mt-24">
+    <section id="bordyur-calc" className="w-full px-4 sm:px-6 lg:px-10 pb-12 scroll-mt-24">
       <div className="rounded-3xl border border-accent/25 bg-card/50 overflow-hidden">
         <div className="px-5 sm:px-8 py-6 border-b border-accent/10 bg-gradient-to-r from-accent/15 to-transparent flex items-center gap-3">
           <span className="w-11 h-11 rounded-xl bg-accent/15 flex items-center justify-center shrink-0">

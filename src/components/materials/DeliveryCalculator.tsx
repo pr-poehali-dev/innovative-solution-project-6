@@ -101,7 +101,7 @@ const DeliveryCalculator = () => {
   };
 
   return (
-    <section id="delivery-calc" className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 scroll-mt-24">
+    <section id="delivery-calc" className="w-full px-4 sm:px-6 lg:px-10 py-12 sm:py-16 scroll-mt-24">
       <div className="rounded-3xl border border-accent/20 bg-card/40 overflow-hidden">
         <div className="px-5 sm:px-8 py-6 border-b border-accent/10 bg-gradient-to-r from-accent/10 to-transparent">
           <div className="flex items-center gap-3">
