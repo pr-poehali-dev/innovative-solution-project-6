@@ -1,7 +1,7 @@
 import Icon from "@/components/ui/icon";
 
 export const SLINGER_TEXT =
-  "Важно: при разгрузке манипулятором на объекте нужен стропальщик с удостоверением";
+  "Важно: при разгрузке манипулятором на объекте нужен стропальщик";
 
 type Props = { className?: string };
 
@@ -10,7 +10,7 @@ const SlingerNotice = ({ className = "" }: Props) => (
     <Icon name="TriangleAlert" size={16} className="text-amber-300 shrink-0 mt-0.5" />
     <p className="text-xs leading-snug text-amber-100">
       <span className="font-bold text-amber-300">Нужен стропальщик.</span> При разгрузке манипулятором на
-      объекте должен быть стропальщик с удостоверением — он цепляет и принимает груз.
+      объекте должен быть стропальщик — он цепляет и принимает груз.
     </p>
   </div>
 );
