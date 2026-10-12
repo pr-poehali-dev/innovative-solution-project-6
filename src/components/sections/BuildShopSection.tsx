@@ -30,7 +30,7 @@ const Heading = () => (
       </span>
     </h2>
 
-    <p className="mt-4 text-white/70 text-sm sm:text-base max-w-lg">
+    <p className="mt-4 text-white/85 text-sm sm:text-base max-w-lg">
       Мы не только возим грузы — мы продаём стройматериалы. Купите кирпич, блоки и всё
       для стройки в одном месте и получите доставку нашим манипулятором прямо на участок.
     </p>
@@ -80,7 +80,7 @@ const Photo = ({ className = "" }: { className?: string }) => (
       height="768"
       className="absolute inset-0 w-full h-full object-cover object-[80%_center]"
     />
-    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#1d1a14] lg:via-transparent lg:via-20%" />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#4a4130] lg:via-transparent lg:via-20%" />
     <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-1/4 rounded-2xl bg-black/70 backdrop-blur-md border border-amber-400/40 px-4 py-3">
       <div className="text-[11px] uppercase tracking-widest text-white/60">Кирпич</div>
       <div className="text-2xl sm:text-3xl font-black text-amber-300 leading-none mt-1">
@@ -96,7 +96,7 @@ const Categories = ({ className = "" }: { className?: string }) => (
       <Link
         key={c.title}
         to={c.to}
-        className="group relative rounded-2xl bg-white/[0.04] border border-white/10 hover:border-amber-400/60 hover:bg-amber-400/[0.07] p-4 transition-all hover:-translate-y-0.5"
+        className="group relative rounded-2xl bg-white/[0.08] border border-white/15 hover:border-amber-400/60 hover:bg-amber-400/[0.07] p-4 transition-all hover:-translate-y-0.5"
       >
         {c.hit && (
           <span className="absolute top-2 right-2 px-1.5 py-0.5 rounded-md bg-amber-400 text-black text-[9px] font-black uppercase">
@@ -107,7 +107,7 @@ const Categories = ({ className = "" }: { className?: string }) => (
           <Icon name={c.icon} fallback="Package" size={20} className="text-amber-300" />
         </span>
         <div className="font-bold text-white text-sm leading-tight">{c.title}</div>
-        <div className="text-white/55 text-xs mt-1 leading-snug">{c.text}</div>
+        <div className="text-white/70 text-xs mt-1 leading-snug">{c.text}</div>
         <Icon
           name="MoveUpRight"
           size={16}
@@ -121,8 +121,8 @@ const Categories = ({ className = "" }: { className?: string }) => (
 const BuildShopSection = () => (
   <section className="py-8 sm:py-12" aria-label="Магазин стройматериалов">
     <div className="w-full">
-      <div className="relative overflow-hidden border-y border-amber-400/30 bg-gradient-to-br from-zinc-950 via-[#1d1a14] to-black shadow-2xl shadow-black/40">
-        <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-amber-500/20 blur-3xl pointer-events-none" />
+      <div className="relative overflow-hidden border-y border-amber-400/30 bg-gradient-to-br from-[#5a4e38] via-[#4a4130] to-[#3a3428] shadow-2xl shadow-black/30">
+        <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-amber-400/30 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-40 -left-24 w-96 h-96 rounded-full bg-accent/10 blur-3xl pointer-events-none" />
 
         {/* Телефон и планшет: заголовок → фото → товары → кнопки */}
