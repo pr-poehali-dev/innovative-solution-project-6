@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
+import MaxIcon from "@/components/ui/MaxIcon";
+import { MAX_GRADIENT } from "@/components/ui/MaxButton";
 import { useReviewCardDownload } from "./reviewCard/useReviewCardDownload";
 
 const YANDEX_URL = "https://yandex.ru/search/?text=фаварит.рф+отзывы";
@@ -27,7 +29,6 @@ const ReviewCard = () => {
     }
   };
 
-  const wa = `https://wa.me/?text=${encodeURIComponent(SHARE_TEXT)}`;
   const tg = `https://t.me/share/url?url=${encodeURIComponent(YANDEX_URL)}&text=${encodeURIComponent(SHARE_TEXT)}`;
 
   return (
@@ -71,14 +72,19 @@ const ReviewCard = () => {
           {copied ? "Скопировано ✓" : "Скопировать текст"}
         </button>
         <a
-          href={wa}
+          href="https://web.max.ru/"
           target="_blank"
           rel="noreferrer"
+          onClick={() => {
+            navigator.clipboard?.writeText(SHARE_TEXT).catch(() => undefined);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+          }}
           className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-white text-sm shadow-sm"
-          style={{ background: "#25D366" }}
+          style={{ background: MAX_GRADIENT }}
         >
-          <Icon name="MessageCircle" size={16} />
-          Ватсап
+          <MaxIcon size={18} className="text-white" />
+          MAX
         </a>
         <a
           href={tg}
@@ -250,7 +256,7 @@ const ReviewCard = () => {
       </div>
 
       <p className="max-w-[520px] mx-auto mt-4 text-center text-xs text-slate-500">
-        Откройте на телефоне клиента или отправьте через WhatsApp / Telegram
+        Откройте на телефоне клиента или отправьте через MAX / Telegram
       </p>
     </div>
   );

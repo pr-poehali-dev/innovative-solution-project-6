@@ -65,7 +65,7 @@ const TruckCard = () => {
       <TruckCardPreview />
 
       <p className="max-w-[640px] mx-auto mt-4 text-center text-xs text-slate-500">
-        Карточка техники в фирменном стиле · отправляйте клиентам в WhatsApp / Telegram
+        Карточка техники в фирменном стиле · отправляйте клиентам в MAX / Telegram
       </p>
 
       {resultUrl && <TruckCardResultModal url={resultUrl} onClose={closeResult} />}

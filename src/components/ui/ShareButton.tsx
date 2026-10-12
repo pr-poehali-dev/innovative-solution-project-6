@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
+import MaxIcon from "@/components/ui/MaxIcon";
+import { toast } from "sonner";
 
 interface ShareButtonProps {
   title: string;
@@ -62,7 +64,7 @@ export default function ShareButton({ title, text, url, className, compact, icon
   const encodedText = encodeURIComponent(shareText);
 
   const links = [
-    { name: "WhatsApp", icon: "MessageCircle", href: `https://wa.me/?text=${encodedText}%20${encodedUrl}` },
+    { name: "MAX", icon: "max", href: "https://web.max.ru/" },
     { name: "Telegram", icon: "Send", href: `https://t.me/share/url?url=${encodedUrl}&text=${encodedText}` },
     { name: "ВКонтакте", icon: "Share2", href: `https://vk.com/share.php?url=${encodedUrl}&title=${encodeURIComponent(title)}` },
     { name: "Viber", icon: "Phone", href: `viber://forward?text=${encodedText}%20${encodedUrl}` },
@@ -124,11 +126,23 @@ export default function ShareButton({ title, text, url, className, compact, icon
                   href={l.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => {
+                    if (l.icon === "max") {
+                      navigator.clipboard
+                        ?.writeText(`${shareText} ${shareUrl}`)
+                        .then(() => toast.success("Ссылка скопирована — вставьте её в чат MAX"))
+                        .catch(() => undefined);
+                    }
+                    setMenuOpen(false);
+                  }}
                   className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-accent/10 transition-all"
                 >
                   <span className="w-9 h-9 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center">
-                    <Icon name={l.icon} size={16} className="text-accent" />
+                    {l.icon === "max" ? (
+                      <MaxIcon size={18} className="text-accent" />
+                    ) : (
+                      <Icon name={l.icon} size={16} className="text-accent" />
+                    )}
                   </span>
                   <span className="font-semibold text-sm text-white">{l.name}</span>
                 </a>
