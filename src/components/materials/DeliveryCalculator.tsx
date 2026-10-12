@@ -305,9 +305,6 @@ const DeliveryCalculator = () => {
                   {fmt(perTripCost)} ₽{trips > 1 ? ` × ${trips}` : ""}
                 </span>
               </div>
-              <p className="text-[11px] text-muted-foreground">
-                В цену входит дорога туда и обратно и разгрузка краном
-              </p>
             </div>
 
             <div className="mt-5 pt-4 border-t border-accent/20">

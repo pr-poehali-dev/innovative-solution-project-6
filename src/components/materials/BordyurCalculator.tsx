@@ -351,9 +351,6 @@ const BordyurCalculator = ({ items }: Props) => {
                 </span>
                 <span className="text-white font-bold whitespace-nowrap">{fmt(chosen.cost)} ₽</span>
               </div>
-              <p className="text-[11px] text-muted-foreground">
-                {city.name} · {city.km} км. В цену входит дорога туда и обратно и разгрузка краном
-              </p>
               <SlingerNotice />
             </div>
             <div className="mt-5 pt-5 border-t border-white/10">
