@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
+import BrickPhotoViewer from "./BrickPhotoViewer";
 import { type Brick, FORMAT_LABEL, MANUFACTURER, PALLET_SIZE, priceText, isPopular } from "./brickUtils";
 
 interface BrickCardProps {
@@ -12,6 +13,7 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
   const [pallets, setPallets] = useState(1);
   const [added, setAdded] = useState(false);
   const [zoom, setZoom] = useState<{ x: number; y: number } | null>(null);
+  const [viewerOpen, setViewerOpen] = useState(false);
 
   const handleZoomMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
@@ -36,8 +38,9 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
   return (
     <article className="group rounded-2xl overflow-hidden border border-accent/15 bg-card/40 hover:border-accent/50 hover:shadow-[0_10px_40px_rgba(232,168,32,0.12)] transition-all flex flex-col">
       <div
-        className={`relative aspect-[4/3] bg-white overflow-hidden ${brick.imageUrl ? "md:cursor-zoom-in" : ""}`}
+        className={`relative aspect-[4/3] bg-white overflow-hidden ${brick.imageUrl ? "cursor-zoom-in" : ""}`}
         onMouseMove={brick.imageUrl ? handleZoomMove : undefined}
+        onClick={brick.imageUrl ? () => { setZoom(null); setViewerOpen(true); } : undefined}
         onMouseLeave={() => setZoom(null)}
       >
         {brick.imageUrl ? (
@@ -53,8 +56,15 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
             <Icon name="Blocks" size={48} className="text-accent/30" />
           </div>
         )}
-
+        {brick.imageUrl && (
+          <span className="md:hidden absolute bottom-2 right-2 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center pointer-events-none">
+            <Icon name="Maximize2" size={16} />
+          </span>
+        )}
       </div>
+      {viewerOpen && brick.imageUrl && (
+        <BrickPhotoViewer src={brick.imageUrl} alt={brick.name} onClose={() => setViewerOpen(false)} />
+      )}
       <div
         className={`flex items-center gap-2.5 px-4 py-2.5 text-white ${
           brick.hollow ? "bg-sky-700" : "bg-zinc-800"
