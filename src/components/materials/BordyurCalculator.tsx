@@ -18,13 +18,14 @@ type Kind = {
   title: string;
   size: string;
   perPallet: number;
+  packs: number[];
   pieceKg: number;
   fallbackPrice: number;
 };
 
 const KINDS: Kind[] = [
-  { id: "road", match: "дорожн", title: "Дорожный", size: "1000×300×150", perPallet: 12, pieceKg: 120, fallbackPrice: 500 },
-  { id: "walk", match: "тротуар", title: "Тротуарный", size: "1000×200×80", perPallet: 40, pieceKg: 40, fallbackPrice: 210 },
+  { id: "road", match: "дорожн", title: "Дорожный", size: "1000×300×150", perPallet: 12, packs: [12], pieceKg: 120, fallbackPrice: 500 },
+  { id: "walk", match: "тротуар", title: "Тротуарный", size: "1000×200×80", perPallet: 40, packs: [30, 40], pieceKg: 40, fallbackPrice: 210 },
 ];
 
 const PALLET_KG = 25;
@@ -57,13 +58,16 @@ const BordyurCalculator = ({ items }: Props) => {
   const [cityName, setCityName] = useState(cities[0].name);
   const [pickedTruck, setPickedTruck] = useState<string | null>(null);
 
-  const kind = KINDS.find((k) => k.id === kindId) || KINDS[0];
+  const baseKind = KINDS.find((k) => k.id === kindId) || KINDS[0];
+  const [packByKind, setPackByKind] = useState<Record<string, number>>({});
+  const perPallet = packByKind[baseKind.id] || baseKind.perPallet;
+  const kind = useMemo(() => ({ ...baseKind, perPallet }), [baseKind, perPallet]);
   const city = cities.find((c) => c.name === cityName) || cities[0];
 
   const unitPrice = useMemo(() => {
     const item = items.find((m) => m.name.toLowerCase().includes(kind.match));
     return priceOf(item?.price) || kind.fallbackPrice;
-  }, [items, kind]);
+  }, [items, kind.match, kind.fallbackPrice]);
 
   const pallets = mode === "pallets" ? Math.max(1, qty) : Math.max(1, Math.ceil(qty / kind.perPallet));
   const pieces = mode === "pallets" ? pallets * kind.perPallet : Math.max(1, qty);
@@ -108,7 +112,7 @@ const BordyurCalculator = ({ items }: Props) => {
   const calcText = useMemo(() => {
     const lines = [
       "Здравствуйте! Расчёт бордюра с сайта:",
-      `Бордюр ${kind.title.toLowerCase()} ${kind.size} — ${pieces} шт (${pallets} подд.)`,
+      `Бордюр ${kind.title.toLowerCase()} ${kind.size} — ${pieces} шт (${pallets} подд. по ${kind.perPallet} шт)`,
       `Вес: ~${totalT.toFixed(1)} т`,
       `Материал: ${fmt(materialTotal)} ₽`,
       `Машина: ${chosen.t.short} (${chosen.t.capacity}), рейсов: ${chosen.trips}`,
@@ -165,6 +169,29 @@ const BordyurCalculator = ({ items }: Props) => {
                   );
                 })}
               </div>
+              {baseKind.packs.length > 1 && (
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  <span className="text-xs text-muted-foreground mr-1">Упаковка поддона:</span>
+                  {baseKind.packs.map((n) => (
+                    <button
+                      key={n}
+                      type="button"
+                      onClick={() => {
+                        if (mode === "pallets") setQty(Math.max(1, Math.ceil(pieces / n)));
+                        setPackByKind((prev) => ({ ...prev, [baseKind.id]: n }));
+                        setPickedTruck(null);
+                      }}
+                      className={`px-3 py-1.5 rounded-lg border text-xs font-bold transition-colors ${
+                        perPallet === n
+                          ? "border-accent bg-accent text-black"
+                          : "border-white/15 bg-card/60 text-white/80 hover:border-accent/60"
+                      }`}
+                    >
+                      {n} шт на поддоне
+                    </button>
+                  ))}
+                </div>
+              )}
               <p className="text-xs text-muted-foreground mt-2">
                 На поддоне {kind.perPallet} шт · 1 шт ≈ {kind.pieceKg} кг · поддон ≈ {palletT.toFixed(2).replace(".", ",")} т
               </p>
