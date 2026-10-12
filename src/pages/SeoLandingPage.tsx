@@ -11,6 +11,7 @@ import LazySection from "@/components/LazySection";
 import { getSeoLandingBySlug } from "@/data/seoLandings";
 import { cities } from "@/data/cities";
 import { trucks } from "@/pages/truck/trucksData";
+import ShopHeaderButton from "@/components/ui/ShopHeaderButton";
 
 const FleetSection = lazy(() => import("@/components/sections/FleetSection"));
 const ReviewsSection = lazy(() => import("@/components/sections/ReviewsSection"));
@@ -137,6 +138,7 @@ const SeoLandingPage = ({ slugOverride }: SeoLandingPageProps) => {
             >
               <Icon name="MessageCircle" size={18} className="text-accent" />
             </button>
+            <ShopHeaderButton />
             <MaxButton place="header_seo" compact />
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />

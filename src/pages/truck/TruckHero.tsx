@@ -12,6 +12,7 @@ import TruckGallery from "./TruckGallery";
 import type { Truck } from "./trucksData";
 import { pluralizeUnits } from "./trucksData";
 import { reviews, ratingValue } from "@/data/reviews";
+import ShopHeaderButton from "@/components/ui/ShopHeaderButton";
 
 interface TruckHeroProps {
   truck: Truck;
@@ -34,6 +35,7 @@ export function TruckHeader({ onCallback }: { onCallback: () => void }) {
             <Icon name="MessageCircle" size={14} className="text-accent" />
             Перезвоните мне
           </button>
+          <ShopHeaderButton />
           <MaxButton place="header_truck" compact />
           <MobileCallPopover className="flex md:hidden" />
           <PhoneButton size="sm" className="hidden md:inline-flex rounded-xl" />

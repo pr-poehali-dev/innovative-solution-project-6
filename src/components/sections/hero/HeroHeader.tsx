@@ -8,6 +8,7 @@ import MaxButton from "@/components/ui/MaxButton";
 import MaterialsMenu, { MATERIALS_HAS_DROPDOWN, MATERIALS_MAIN_HREF, materialHref } from "./MaterialsMenu";
 import { HEADER_MENU_CATEGORIES } from "@/data/materials";
 import { navLinks } from "./heroData";
+import ShopHeaderButton from "@/components/ui/ShopHeaderButton";
 
 const HeroHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -69,6 +70,7 @@ const HeroHeader = () => {
           </nav>
           <div className="flex gap-1.5 sm:gap-3 items-center shrink-0">
             <OfflineStatusDot />
+            <ShopHeaderButton className="xl:hidden" iconOnlyMobile />
             <MaxButton place="header_main" compact />
             <PhoneButton size="sm" subLabel="Круглосуточно" className="hidden sm:inline-flex" />
             <MobileCallPopover className="flex sm:hidden" />

@@ -8,6 +8,7 @@ import CallbackModal from "@/components/ui/CallbackModal";
 import MaxButton from "@/components/ui/MaxButton";
 import LazySection from "@/components/LazySection";
 import GallerySection from "@/components/sections/GallerySection";
+import ShopHeaderButton from "@/components/ui/ShopHeaderButton";
 
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
@@ -64,6 +65,7 @@ const GalleryPage = () => {
               <Icon name="MessageCircle" size={14} className="text-accent" />
               Перезвоните мне
             </button>
+            <ShopHeaderButton />
             <MaxButton place="header_gallery" compact />
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />

@@ -3,6 +3,7 @@ import Icon from "@/components/ui/icon";
 import MaxButton from "@/components/ui/MaxButton";
 import { ASPHALT_IMG, PHONE, PHONE_TEL } from "./asfaltirovanieData";
 import { reachGoal } from "@/lib/metrika";
+import ShopHeaderButton from "@/components/ui/ShopHeaderButton";
 
 const AsfaltirovanieHero = () => {
   return (
@@ -18,6 +19,7 @@ const AsfaltirovanieHero = () => {
             На главную
           </Link>
           <div className="flex items-center gap-2 sm:gap-3">
+            <ShopHeaderButton />
             <MaxButton place="header_asphalt" compact />
             <a
               href={PHONE_TEL}
