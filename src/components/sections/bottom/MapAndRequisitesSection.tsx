@@ -39,7 +39,7 @@ const MapAndRequisitesSection = ({
     <>
       {/* Map Section */}
       <section className="py-12 sm:py-24 px-4 sm:px-6 bg-accent/5">
-        <div className="max-w-7xl mx-auto">
+        <div className="w-full">
           <div className="text-center mb-6 sm:mb-12">
             <div className="flex justify-center mb-4">
               <SectionBadge>Наш адрес</SectionBadge>

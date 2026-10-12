@@ -75,7 +75,7 @@ const cards = [
 const SeoTextSection = () => {
   return (
     <section className="py-12 sm:py-20 px-4 sm:px-6 bg-accent/5 border-y border-accent/10">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         <div className="text-center mb-8 sm:mb-12">
           <div className="flex justify-center mb-4">
             <SectionBadge>О компании</SectionBadge>

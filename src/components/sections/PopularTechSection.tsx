@@ -60,7 +60,7 @@ const items = [
 const PopularTechSection = () => {
   return (
     <section className="py-10 sm:py-16 bg-gradient-to-b from-background to-black/40">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6">
+      <div className="w-full px-3 sm:px-6">
         <div className="flex items-end justify-between gap-4 mb-6 sm:mb-10">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/30 mb-3">

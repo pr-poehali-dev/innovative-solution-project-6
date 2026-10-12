@@ -79,7 +79,7 @@ const useCases = [
 const UseCasesSection = () => {
   return (
     <section id="usecases" className="py-16 sm:py-32 px-4 sm:px-6 bg-accent/5">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         <div className="text-center mb-10 sm:mb-20">
           <div className="flex justify-center mb-4">
             <SectionBadge>Области применения</SectionBadge>

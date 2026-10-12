@@ -113,7 +113,7 @@ const SiteFooter = () => {
         <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-accent/8 blur-3xl pointer-events-none hidden md:block" />
         <div className="absolute -bottom-20 -right-20 w-64 h-64 rounded-full bg-accent/8 blur-3xl pointer-events-none hidden md:block" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-7">
+        <div className="relative w-full px-4 sm:px-6 lg:px-8 py-5 sm:py-7">
           <div className="flex items-center justify-between mb-4 sm:mb-5">
             <h2 className="text-[11px] sm:text-xs uppercase tracking-widest text-accent font-black flex items-center gap-2">
               <Icon name="Compass" size={14} className="text-accent" />
@@ -207,7 +207,7 @@ const SiteFooter = () => {
       </nav>
 
       {/* Верхний блок с колонками */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-14">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10 xl:gap-12">
           {/* Колонка 1 — Логотип + сворачиваемые контакты */}
           <div className="md:col-span-2 lg:col-span-1">
@@ -378,7 +378,7 @@ const SiteFooter = () => {
 
       {/* Дисклеймер — не публичная оферта */}
       <div className="border-t border-accent/15 bg-black/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+        <div className="w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
           <p className="text-xs sm:text-sm text-white/85 text-center leading-relaxed flex items-start sm:items-center justify-center gap-2">
             <Icon name="Info" size={14} className="text-accent flex-shrink-0 mt-0.5 sm:mt-0" />
             <span>
@@ -390,7 +390,7 @@ const SiteFooter = () => {
 
       {/* Нижняя полоска */}
       <div className="border-t border-accent/15 bg-black/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-xs sm:text-sm text-white/85 flex flex-col items-center gap-2">
+        <div className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-xs sm:text-sm text-white/85 flex flex-col items-center gap-2">
           <p className="text-center leading-relaxed font-medium">
             © 2015–2026 ООО «Фаворит» — аренда манипуляторов<br className="sm:hidden" /> в Нижнем Новгороде и области
           </p>

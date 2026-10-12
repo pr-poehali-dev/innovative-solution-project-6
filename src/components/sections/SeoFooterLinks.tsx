@@ -81,7 +81,7 @@ const linkGroups: LinkGroup[] = [
 const SeoFooterLinks = () => {
   return (
     <section className="py-10 sm:py-16 px-4 sm:px-6 border-t border-accent/10 bg-accent/[0.03]">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         <div className="text-center mb-8 sm:mb-10">
           <h2 className="font-display font-black text-xl sm:text-2xl text-white/90 mb-2">
             Услуги и аренда манипулятора в Нижнем Новгороде

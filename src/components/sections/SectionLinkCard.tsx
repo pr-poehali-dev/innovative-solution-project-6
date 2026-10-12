@@ -13,7 +13,7 @@ type Props = {
 
 const SectionLinkCard = ({ to, eyebrow, title, description, icon, cta, imageUrl }: Props) => (
   <section className="py-10 sm:py-16 px-4 sm:px-6">
-    <div className="max-w-5xl mx-auto">
+    <div className="w-full">
       <Link
         to={to}
         className="group block relative overflow-hidden rounded-2xl sm:rounded-3xl border border-accent/25 hover:border-accent/60 transition-colors bg-accent/5"

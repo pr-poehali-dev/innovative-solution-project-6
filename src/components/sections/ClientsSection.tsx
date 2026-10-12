@@ -18,7 +18,7 @@ const clients = [
 const ClientsSection = () => {
   return (
     <section className="py-16 sm:py-32 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         <div className="mb-8 sm:mb-14">
           <div className="flex justify-center mb-4">
             <SectionBadge>Партнёры</SectionBadge>

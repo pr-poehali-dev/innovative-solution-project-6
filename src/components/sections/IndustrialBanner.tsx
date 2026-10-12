@@ -60,7 +60,7 @@ const IndustrialBanner = ({
 
     return (
       <section id={id} className="relative w-full py-8 sm:py-12 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="w-full">
           {/* Заголовок над фото — снаружи, чтобы не закрывал картинку */}
           <div className="flex flex-col items-center text-center mb-5 sm:mb-7">
             <div className="flex items-center gap-2.5 mb-3">

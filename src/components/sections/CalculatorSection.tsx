@@ -83,7 +83,7 @@ const CalculatorSection = () => {
         submitLabel="Получить расчёт"
       />
 
-      <div className="max-w-5xl mx-auto relative">
+      <div className="w-full relative">
         <CalculatorHeader minPrice={minPrice} maxPrice={maxPrice} stepsDone={stepsDone} />
 
         <div className="relative rounded-2xl sm:rounded-3xl p-[1.5px] bg-gradient-to-br from-accent/40 via-accent/10 to-accent/40">

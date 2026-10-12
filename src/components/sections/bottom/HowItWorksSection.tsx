@@ -68,7 +68,7 @@ const steps = [
 const HowItWorksSection = ({ visibleSections }: HowItWorksSectionProps) => {
   return (
     <section id="how" className="py-12 sm:py-24 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         <div
           className={`text-center mb-8 sm:mb-16 transition-all duration-1000 ${visibleSections["how"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
         >
