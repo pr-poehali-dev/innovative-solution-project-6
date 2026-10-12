@@ -70,6 +70,16 @@ export const toBrick = (m: Material): Brick => {
   };
 };
 
+export const popularRank = (b: Brick) => {
+  const c = brickColor(b.name);
+  if (c === "white" && !b.hollow && !b.facing) return 0;
+  if (c === "white" && b.hollow && !b.facing) return 1;
+  if (c === "yellow") return 2;
+  return 99;
+};
+
+export const isPopular = (b: Brick) => popularRank(b) < 99;
+
 export const matchesPurpose = (b: Brick, p: PurposeId) => {
   if (p === "all") return true;
   if (p === "facade") return b.facing;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
-import { type Brick, FORMAT_LABEL, MANUFACTURER, PALLET_SIZE, priceText } from "./brickUtils";
+import { type Brick, FORMAT_LABEL, MANUFACTURER, PALLET_SIZE, priceText, isPopular } from "./brickUtils";
 
 interface BrickCardProps {
   brick: Brick;
@@ -41,6 +41,12 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
           <div className="w-full h-full flex items-center justify-center">
             <Icon name="Blocks" size={48} className="text-accent/30" />
           </div>
+        )}
+        {isPopular(brick) && (
+          <span className="absolute top-3 left-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-black text-xs font-black uppercase shadow-lg">
+            <Icon name="Flame" size={13} />
+            Хит продаж
+          </span>
         )}
       </div>
       <div

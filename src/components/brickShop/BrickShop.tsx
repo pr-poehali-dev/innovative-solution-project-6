@@ -5,14 +5,14 @@ import type { Material } from "@/data/materials";
 import BrickCard from "./BrickCard";
 import BrickCalculator, { type DeliveryInfo } from "./BrickCalculator";
 import BrickCheckout, { type CartLine } from "./BrickCheckout";
-import { type BrickColorId, type BrickFormat, type PurposeId, BRICK_COLORS, FORMAT_LABEL, brickColor, PALLET_SIZE, PURPOSES, formatTons, priceText, matchesPurpose, toBrick } from "./brickUtils";
+import { type BrickColorId, type BrickFormat, type PurposeId, BRICK_COLORS, FORMAT_LABEL, brickColor, PALLET_SIZE, PURPOSES, formatTons, priceText, matchesPurpose, popularRank, toBrick } from "./brickUtils";
 
 interface BrickShopProps {
   items: Material[];
   loading: boolean;
 }
 
-type SortId = "cheap" | "expensive" | "grade";
+type SortId = "popular" | "cheap" | "expensive" | "grade";
 
 const CART_KEY = "favorit_brick_cart_v1";
 const CART_TTL = 14 * 24 * 60 * 60 * 1000;
@@ -39,7 +39,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
   const [purpose, setPurpose] = useState<PurposeId>("all");
   const [format, setFormat] = useState<BrickFormat | "all">("all");
   const [color, setColor] = useState<BrickColorId | "all">("all");
-  const [sort, setSort] = useState<SortId>("cheap");
+  const [sort, setSort] = useState<SortId>("popular");
   const [cart, setCart] = useState<CartLine[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
@@ -58,6 +58,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
   const visible = useMemo(() => {
     const list = bricks.filter((b) => matchesPurpose(b, purpose) && (format === "all" || b.format === format) && (color === "all" || brickColor(b.name) === color));
     return [...list].sort((a, b) => {
+      if (sort === "popular") return popularRank(a) - popularRank(b) || a.priceNum - b.priceNum;
       if (sort === "expensive") return b.priceNum - a.priceNum;
       if (sort === "grade") return parseInt(b.grade.slice(1) || "0") - parseInt(a.grade.slice(1) || "0");
       return a.priceNum - b.priceNum;
@@ -198,6 +199,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
               onChange={(e) => setSort(e.target.value as SortId)}
               className="rounded-xl border border-accent/25 bg-[#4a5260] px-3 py-2 text-white font-semibold outline-none focus:border-accent"
             >
+              <option value="popular">Сначала популярные</option>
               <option value="cheap">Сначала дешёвые</option>
               <option value="expensive">Сначала дорогие</option>
               <option value="grade">По прочности</option>
