@@ -3,6 +3,11 @@ import Icon from "@/components/ui/icon";
 import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
 import { trucks, cities } from "@/components/sections/calculator/data";
 import type { Material } from "@/data/materials";
+import { MAX_LINK } from "@/data/contacts";
+import MaxIcon from "@/components/ui/MaxIcon";
+import { MAX_GRADIENT } from "@/components/ui/MaxButton";
+import { reachGoal } from "@/lib/metrika";
+import { toast } from "sonner";
 
 const MIN_HOURS = 4;
 
@@ -83,10 +88,23 @@ const BordyurCalculator = ({ items }: Props) => {
   const chosen = options.find((o) => o.t.name === pickedTruck) || best;
   const total = materialTotal + chosen.cost;
 
+  const sendToMax = async () => {
+    reachGoal("max_click", { place: "bordyur_calc" });
+    let copied = false;
+    try {
+      await navigator.clipboard.writeText(calcText);
+      copied = true;
+    } catch {
+      copied = false;
+    }
+    if (copied) toast.success("Расчёт скопирован — вставьте его в чат MAX");
+    else toast("Откроется чат MAX — напишите нам, и мы всё посчитаем");
+  };
+
   const step = mode === "pallets" ? 1 : kind.perPallet;
   const setSafeQty = (v: number) => setQty(Math.max(1, Math.min(100000, Math.round(v) || 1)));
 
-  const waLink = useMemo(() => {
+  const calcText = useMemo(() => {
     const lines = [
       "Здравствуйте! Расчёт бордюра с сайта:",
       `Бордюр ${kind.title.toLowerCase()} ${kind.size} — ${pieces} шт (${pallets} подд.)`,
@@ -96,7 +114,7 @@ const BordyurCalculator = ({ items }: Props) => {
       `Адрес: ${city.name}, доставка: ${fmt(chosen.cost)} ₽`,
       `Итого: ${fmt(total)} ₽`,
     ];
-    return `https://wa.me/79601883084?text=${encodeURIComponent(lines.join("\n"))}`;
+    return lines.join("\n");
   }, [kind, pieces, pallets, totalT, materialTotal, chosen, city, total]);
 
   return (
@@ -314,14 +332,19 @@ const BordyurCalculator = ({ items }: Props) => {
             </div>
             <div className="mt-5 grid gap-2">
               <a
-                href={waLink}
+                href={MAX_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 h-12 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-black font-black text-sm hover:shadow-lg hover:shadow-accent/30 transition-all"
+                onClick={sendToMax}
+                className="inline-flex items-center justify-center gap-2 h-12 rounded-xl text-white font-black text-sm hover:brightness-110 transition-all"
+                style={{ background: MAX_GRADIENT, boxShadow: "0 4px 20px rgba(124,58,237,0.45)" }}
               >
-                <Icon name="Send" size={16} />
-                Отправить расчёт в WhatsApp
+                <MaxIcon size={22} className="text-white shrink-0" />
+                Отправить расчёт в MAX
               </a>
+              <p className="text-[11px] text-muted-foreground text-center -mt-0.5">
+                Расчёт скопируется — просто вставьте его в чат
+              </p>
               <a
                 href={`tel:${MATERIALS_PHONE}`}
                 className="inline-flex items-center justify-center gap-2 h-12 rounded-xl border border-accent/40 text-white font-bold text-sm hover:bg-accent/10 transition-all"
