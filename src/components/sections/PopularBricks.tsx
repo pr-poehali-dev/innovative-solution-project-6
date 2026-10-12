@@ -52,13 +52,15 @@ const PopularBricks = ({ className = "" }: { className?: string }) => {
                   className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500"
                 />
               )}
-              <span className="absolute top-1.5 left-1.5 inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-black text-[9px] sm:text-[10px] font-black uppercase">
-                <Icon name="Flame" size={10} />
-                Хит
-              </span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-white font-black text-sm leading-tight">{shortName(b)}</p>
+              <p className="flex items-center gap-1.5 text-white font-black text-sm leading-tight">
+                {shortName(b)}
+                <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-black text-[9px] font-black uppercase">
+                  <Icon name="Flame" size={10} />
+                  Хит
+                </span>
+              </p>
               <p className="text-white/60 text-xs mt-0.5">
                 Полуторный {b.grade} · {PALLET_SIZE} шт/уп.
               </p>

@@ -42,12 +42,7 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
             <Icon name="Blocks" size={48} className="text-accent/30" />
           </div>
         )}
-        {isPopular(brick) && (
-          <span className="absolute top-3 left-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-black text-xs font-black uppercase shadow-lg">
-            <Icon name="Flame" size={13} />
-            Хит продаж
-          </span>
-        )}
+
       </div>
       <div
         className={`flex items-center gap-2.5 px-4 py-2.5 text-white ${
@@ -62,6 +57,12 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
           </p>
         </div>
         <div className="ml-auto flex flex-wrap justify-end gap-1.5">
+          {isPopular(brick) && (
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-black text-xs font-black uppercase">
+              <Icon name="Flame" size={12} />
+              Хит продаж
+            </span>
+          )}
           {brick.grade && (
             <span className="px-2.5 py-1 rounded-full bg-black/40 text-accent text-xs font-black border border-accent/40">
               {brick.grade}
