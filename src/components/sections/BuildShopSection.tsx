@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import PopularBricks from "@/components/sections/PopularBricks";
 
 const CATEGORIES = [
   { to: "/stroymaterialy/kirpich", icon: "Blocks", title: "Кирпич", text: "Силикатный, цветной, М-150", hit: true },
@@ -84,7 +85,7 @@ const Photo = ({ className = "" }: { className?: string }) => (
     <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-1/4 rounded-2xl bg-black/70 backdrop-blur-md border border-amber-400/40 px-4 py-3">
       <div className="text-[11px] uppercase tracking-widest text-white/60">Кирпич</div>
       <div className="text-2xl sm:text-3xl font-black text-amber-300 leading-none mt-1">
-        от 18 ₽<span className="text-sm text-white/70 font-bold">/шт</span>
+        от 6 400 ₽<span className="text-sm text-white/70 font-bold">/уп.</span>
       </div>
     </div>
   </div>
@@ -131,6 +132,7 @@ const BuildShopSection = () => (
             <Heading />
           </div>
           <Photo className="aspect-[16/9]" />
+          <PopularBricks className="px-4 pt-5 sm:px-6 sm:pt-6" />
           <Categories className="p-4 sm:p-6" />
           <div className="px-4 pb-6 sm:px-6 sm:pb-8">
             <Buttons />
@@ -148,7 +150,8 @@ const BuildShopSection = () => (
             </div>
             <Photo className="min-h-[480px]" />
           </div>
-          <Categories className="border-t border-white/10 p-6 px-14" />
+          <PopularBricks className="border-t border-white/10 pt-6 px-14" />
+          <Categories className="p-6 px-14" />
         </div>
       </div>
     </div>
