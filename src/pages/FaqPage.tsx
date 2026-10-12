@@ -9,7 +9,6 @@ import MaxButton from "@/components/ui/MaxButton";
 import LazySection from "@/components/LazySection";
 import FaqSection from "@/components/sections/FaqSection";
 import { terms } from "@/components/sections/pricing/priceData";
-import ShopHeaderButton from "@/components/ui/ShopHeaderButton";
 
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
@@ -66,7 +65,6 @@ const FaqPage = () => {
               <Icon name="MessageCircle" size={14} className="text-accent" />
               Перезвоните мне
             </button>
-            <ShopHeaderButton />
             <MaxButton place="header_faq" compact />
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />

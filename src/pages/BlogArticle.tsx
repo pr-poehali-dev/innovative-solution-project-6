@@ -8,7 +8,6 @@ import CallbackModal from "@/components/ui/CallbackModal";
 import MaxButton from "@/components/ui/MaxButton";
 import LazySection from "@/components/LazySection";
 import { articles, getArticleBySlug, type ArticleBlock } from "@/data/articles";
-import ShopHeaderButton from "@/components/ui/ShopHeaderButton";
 
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
@@ -188,7 +187,6 @@ const BlogArticle = () => {
             >
               <Icon name="MessageCircle" size={18} className="text-accent" />
             </button>
-            <ShopHeaderButton />
             <MaxButton place="header_blog_article" compact />
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />

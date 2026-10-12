@@ -8,7 +8,6 @@ import CallbackModal from "@/components/ui/CallbackModal";
 import MaxButton from "@/components/ui/MaxButton";
 import LazySection from "@/components/LazySection";
 import WeatherWidget from "@/components/sections/WeatherWidget";
-import ShopHeaderButton from "@/components/ui/ShopHeaderButton";
 
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
@@ -65,7 +64,6 @@ const WeatherPage = () => {
               <Icon name="MessageCircle" size={14} className="text-accent" />
               Перезвоните мне
             </button>
-            <ShopHeaderButton />
             <MaxButton place="header_weather" compact />
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />

@@ -10,7 +10,6 @@ import MaxButton from "@/components/ui/MaxButton";
 import LazySection from "@/components/LazySection";
 import { useState } from "react";
 import { getCityBySlug, cities } from "@/data/cities";
-import ShopHeaderButton from "@/components/ui/ShopHeaderButton";
 
 const INDEXED_CITIES = [
   "nizhny-novgorod",
@@ -165,7 +164,6 @@ const CityPage = () => {
             >
               <Icon name="MessageCircle" size={18} className="text-accent" />
             </button>
-            <ShopHeaderButton />
             <MaxButton place="header_city" compact />
             <PhoneButton size="sm" className="hidden sm:inline-flex" />
             <PhoneButton iconOnly className="flex sm:hidden" />
