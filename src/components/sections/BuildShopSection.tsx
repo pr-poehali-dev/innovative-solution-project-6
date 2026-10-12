@@ -3,11 +3,7 @@ import Icon from "@/components/ui/icon";
 
 const CATEGORIES = [
   { to: "/stroymaterialy/kirpich", icon: "Blocks", title: "Кирпич", text: "Силикатный, цветной, М-150", hit: true },
-  { to: "/stroymaterialy/bloki", icon: "Square", title: "Газоблоки", text: "Тёплые стены D400–D600" },
-  { to: "/stroymaterialy/plity", icon: "Layers", title: "Плиты и перемычки", text: "Перекрытия и проёмы" },
-  { to: "/stroymaterialy/cement", icon: "Package", title: "Цемент и смеси", text: "Кладка, стяжка, штукатурка" },
-  { to: "/stroymaterialy/pilomaterialy", icon: "TreePine", title: "Пиломатериалы", text: "Брус, доска, кровля" },
-  { to: "/stroymaterialy/bordyur", icon: "LayoutGrid", title: "Бордюр", text: "Дорожки и участок" },
+  { to: "/stroymaterialy/bordyur", icon: "LayoutGrid", title: "Бордюр", text: "Дорожный и тротуарный" },
 ];
 
 const PERKS = [
@@ -91,7 +87,7 @@ const Photo = ({ className = "" }: { className?: string }) => (
 );
 
 const Categories = ({ className = "" }: { className?: string }) => (
-  <div className={`relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 w-full ${className}`}>
+  <div className={`relative grid grid-cols-2 gap-3 w-full ${className}`}>
     {CATEGORIES.map((c) => (
       <Link
         key={c.to}

@@ -1,0 +1,1 @@
+UPDATE t_p98221464_innovative_solution_.materials SET archived = false WHERE id IN (7, 18) AND category = 'bordyur';
