@@ -39,8 +39,8 @@ const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
                 <MobileSwipeGallery
                   images={truck.images?.length ? truck.images : [truck.image]}
                   alt={truck.alt}
-                  className="w-full h-80 sm:h-[420px] md:h-[520px]"
-                  imgClassName="object-contain h-80 sm:h-[420px] md:h-[520px]"
+                  className="w-full h-64 sm:h-[420px] md:h-[520px]"
+                  imgClassName="object-contain h-64 sm:h-[420px] md:h-[520px]"
                 />
                 {/* Информационный блок ПОД фото — больше не перекрывает машину */}
                 <div className="px-4 py-3 bg-gradient-to-b from-transparent to-black/40">

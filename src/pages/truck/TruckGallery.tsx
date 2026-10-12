@@ -32,14 +32,14 @@ export default function TruckGallery({ truck }: TruckGalleryProps) {
 
       {/* Миниатюры */}
       {gallery.length > 1 && (
-        <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 sm:gap-3">
+        <div className="flex gap-2 overflow-x-auto snap-x pb-1 -mx-1 px-1 sm:grid sm:grid-cols-6 sm:gap-3 sm:overflow-visible sm:mx-0 sm:px-0">
           {gallery.map((img, i) => (
             <button
               key={img + i}
               type="button"
               onClick={() => setActive(i)}
               aria-label={`Фото ${i + 1}`}
-              className={`relative rounded-xl overflow-hidden aspect-square bg-card/50 border transition-all ${
+              className={`relative shrink-0 w-20 sm:w-auto snap-start rounded-xl overflow-hidden aspect-square bg-card/50 border transition-all ${
                 active === i
                   ? "border-accent ring-2 ring-accent/40"
                   : "border-accent/10 hover:border-accent/50"

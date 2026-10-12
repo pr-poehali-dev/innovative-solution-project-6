@@ -60,7 +60,7 @@ export default function TruckHero({ truck, slug, onOrder }: Omit<TruckHeroProps,
 
       {/* Основной блок */}
       <section className="w-full px-4 sm:px-6 lg:px-10 py-8">
-        <div className="grid lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-16 items-start [&>*]:min-w-0">
           {/* Фото / галерея */}
           <TruckGallery truck={truck} />
 
