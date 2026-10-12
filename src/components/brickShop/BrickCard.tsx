@@ -1,19 +1,18 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
-import BrickPhotoViewer from "./BrickPhotoViewer";
 import { type Brick, FORMAT_LABEL, MANUFACTURER, PALLET_SIZE, priceText, isPopular } from "./brickUtils";
 
 interface BrickCardProps {
   brick: Brick;
   inCart: number;
   onAdd: (brick: Brick, pallets: number) => void;
+  onOpenPhoto?: () => void;
 }
 
-const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
+const BrickCard = ({ brick, inCart, onAdd, onOpenPhoto }: BrickCardProps) => {
   const [pallets, setPallets] = useState(1);
   const [added, setAdded] = useState(false);
   const [zoom, setZoom] = useState<{ x: number; y: number } | null>(null);
-  const [viewerOpen, setViewerOpen] = useState(false);
 
   const handleZoomMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
@@ -40,7 +39,7 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
       <div
         className={`relative aspect-[4/3] bg-white overflow-hidden ${brick.imageUrl ? "cursor-zoom-in" : ""}`}
         onMouseMove={brick.imageUrl ? handleZoomMove : undefined}
-        onClick={brick.imageUrl ? () => { setZoom(null); setViewerOpen(true); } : undefined}
+        onClick={brick.imageUrl ? () => { setZoom(null); onOpenPhoto?.(); } : undefined}
         onMouseLeave={() => setZoom(null)}
       >
         {brick.imageUrl ? (
@@ -62,9 +61,7 @@ const BrickCard = ({ brick, inCart, onAdd }: BrickCardProps) => {
           </span>
         )}
       </div>
-      {viewerOpen && brick.imageUrl && (
-        <BrickPhotoViewer src={brick.imageUrl} alt={brick.name} onClose={() => setViewerOpen(false)} />
-      )}
+
       <div
         className={`flex items-center gap-2.5 px-4 py-2.5 text-white ${
           brick.hollow ? "bg-sky-700" : "bg-zinc-800"

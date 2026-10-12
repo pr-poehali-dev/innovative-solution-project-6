@@ -2,9 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Icon from "@/components/ui/icon";
 
-interface BrickPhotoViewerProps {
+export interface ViewerPhoto {
   src: string;
   alt: string;
+  price?: string;
+}
+
+interface BrickPhotoViewerProps {
+  photos: ViewerPhoto[];
+  index: number;
+  onIndexChange: (i: number) => void;
   onClose: () => void;
 }
 
@@ -14,9 +21,12 @@ const MAX_SCALE = 5;
 
 type Pt = { x: number; y: number };
 
-const BrickPhotoViewer = ({ src, alt, onClose }: BrickPhotoViewerProps) => {
+const BrickPhotoViewer = ({ photos, index, onIndexChange, onClose }: BrickPhotoViewerProps) => {
+  const { src, alt, price } = photos[index];
+  const total = photos.length;
   const [scale, setScale] = useState(1);
   const [pos, setPos] = useState<Pt>({ x: 0, y: 0 });
+  const [swipeX, setSwipeX] = useState(0);
   const [animate, setAnimate] = useState(true);
   const imgRef = useRef<HTMLImageElement>(null);
   const pointers = useRef(new Map<number, Pt>());
@@ -35,13 +45,28 @@ const BrickPhotoViewer = ({ src, alt, onClose }: BrickPhotoViewerProps) => {
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") goRef.current(1);
+      if (e.key === "ArrowLeft") goRef.current(-1);
+    };
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = prev;
       window.removeEventListener("keydown", onKey);
     };
   }, [onClose]);
+
+  const go = (dir: number) => {
+    if (total < 2) return;
+    setAnimate(false);
+    setScale(1);
+    setPos({ x: 0, y: 0 });
+    setSwipeX(0);
+    onIndexChange((index + dir + total) % total);
+  };
+  const goRef = useRef(go);
+  goRef.current = go;
 
   const clampPos = (p: Pt, s: number): Pt => {
     const img = imgRef.current;
@@ -112,6 +137,7 @@ const BrickPhotoViewer = ({ src, alt, onClose }: BrickPhotoViewerProps) => {
     if (!g.moved && Math.hypot(dx, dy) < 6) return;
     g.moved = true;
     if (scale > 1) setPos(clampPos({ x: g.pos0.x + dx, y: g.pos0.y + dy }, scale));
+    else if (total > 1) setSwipeX(dx);
   };
 
   const onPointerEnd = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -127,6 +153,15 @@ const BrickPhotoViewer = ({ src, alt, onClose }: BrickPhotoViewerProps) => {
 
     gesture.current = null;
     setAnimate(true);
+
+    if (scale <= 1 && g?.mode === "pan" && !g.pinched && total > 1) {
+      const dx = e.clientX - g.start.x;
+      setSwipeX(0);
+      if (Math.abs(dx) > 60) {
+        go(dx < 0 ? 1 : -1);
+        return;
+      }
+    }
 
     if (scale < 1.05) {
       setScale(1);
@@ -163,7 +198,13 @@ const BrickPhotoViewer = ({ src, alt, onClose }: BrickPhotoViewerProps) => {
       aria-label={alt}
     >
       <div className="relative z-10 flex items-center justify-between gap-3 px-4 py-3 text-white" onClick={(e) => e.stopPropagation()}>
-        <p className="text-sm font-bold leading-tight line-clamp-2">{alt}</p>
+        <div className="min-w-0">
+          <p className="text-sm font-bold leading-tight line-clamp-2">{alt}</p>
+          <p className="text-xs text-white/60 mt-0.5">
+            {price && <span className="text-accent font-bold mr-2">{price}</span>}
+            {total > 1 && `${index + 1} из ${total}`}
+          </p>
+        </div>
         <button
           type="button"
           onClick={onClose}
@@ -173,7 +214,27 @@ const BrickPhotoViewer = ({ src, alt, onClose }: BrickPhotoViewerProps) => {
           <Icon name="X" size={22} />
         </button>
       </div>
-      <div className="flex-1 min-h-0 flex items-center justify-center overflow-hidden px-2">
+      <div className="relative flex-1 min-h-0 flex items-center justify-center overflow-hidden px-2">
+        {total > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); go(-1); }}
+              className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 text-white items-center justify-center"
+              aria-label="Предыдущий кирпич"
+            >
+              <Icon name="ChevronLeft" size={28} />
+            </button>
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); go(1); }}
+              className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 text-white items-center justify-center"
+              aria-label="Следующий кирпич"
+            >
+              <Icon name="ChevronRight" size={28} />
+            </button>
+          </>
+        )}
         <div
           onClick={(e) => e.stopPropagation()}
           onPointerDown={onPointerDown}
@@ -181,10 +242,11 @@ const BrickPhotoViewer = ({ src, alt, onClose }: BrickPhotoViewerProps) => {
           onPointerUp={onPointerEnd}
           onPointerCancel={onPointerEnd}
           onWheel={onWheel}
-          style={{ touchAction: "none" }}
+          style={{ touchAction: "none", transform: `translateX(${swipeX}px)`, opacity: 1 - Math.min(Math.abs(swipeX) / 400, 0.5) }}
           className="max-w-full max-h-full flex items-center justify-center"
         >
           <img
+            key={src}
             ref={imgRef}
             src={src}
             alt={alt}
@@ -197,7 +259,11 @@ const BrickPhotoViewer = ({ src, alt, onClose }: BrickPhotoViewerProps) => {
         </div>
       </div>
       <p className="relative z-10 text-center text-xs text-white/60 py-3">
-        {zoomed ? "Двигайте фото пальцем · разведите или сведите пальцы · нажмите, чтобы уменьшить" : "Разведите пальцы или нажмите на фото, чтобы приблизить"}
+        {zoomed
+          ? "Двигайте фото пальцем · нажмите, чтобы уменьшить"
+          : total > 1
+            ? "Листайте влево-вправо · разведите пальцы, чтобы приблизить"
+            : "Разведите пальцы или нажмите на фото, чтобы приблизить"}
       </p>
     </div>,
     document.body

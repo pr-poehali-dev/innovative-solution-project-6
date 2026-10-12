@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import Icon from "@/components/ui/icon";
 import type { Material } from "@/data/materials";
 import BrickCard from "./BrickCard";
+import BrickPhotoViewer from "./BrickPhotoViewer";
 import BrickCalculator, { type DeliveryInfo } from "./BrickCalculator";
 import BrickCheckout, { type CartLine } from "./BrickCheckout";
 import { type BrickColorId, type BrickFormat, type PurposeId, BRICK_COLORS, FORMAT_LABEL, brickColor, PALLET_SIZE, PURPOSES, formatTons, priceText, matchesPurpose, popularRank, toBrick } from "./brickUtils";
@@ -64,6 +65,9 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
       return a.priceNum - b.priceNum;
     });
   }, [bricks, purpose, format, color, sort]);
+
+  const photoBricks = useMemo(() => visible.filter((b) => b.imageUrl), [visible]);
+  const [photoIndex, setPhotoIndex] = useState<number | null>(null);
 
   const [delivery, setDelivery] = useState<DeliveryInfo | undefined>();
   const [restored, setRestored] = useState(false);
@@ -231,9 +235,19 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
               brick={b}
               inCart={cart.find((l) => l.brick.id === b.id)?.qty || 0}
               onAdd={(brick, pallets) => addToCart(brick, pallets * PALLET_SIZE)}
+              onOpenPhoto={() => setPhotoIndex(photoBricks.findIndex((p) => p.id === b.id))}
             />
           ))}
         </div>
+      )}
+
+      {photoIndex !== null && photoBricks[photoIndex] && (
+        <BrickPhotoViewer
+          photos={photoBricks.map((p) => ({ src: p.imageUrl as string, alt: p.name, price: p.priceNum > 0 ? p.price : undefined }))}
+          index={photoIndex}
+          onIndexChange={setPhotoIndex}
+          onClose={() => setPhotoIndex(null)}
+        />
       )}
 
       {bricks.length > 0 && (
