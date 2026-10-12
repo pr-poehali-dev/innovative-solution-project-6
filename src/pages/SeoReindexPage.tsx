@@ -8,6 +8,7 @@ import {
   checklist,
   yandexReindexUrl,
 } from "@/components/seo-reindex/reindexData";
+import { SHOP_PUBLIC } from "@/data/shopVisibility";
 
 type SendState = {
   status: "idle" | "loading" | "done" | "error";
@@ -102,7 +103,7 @@ const SeoReindexPage = () => {
                   Отправить весь сайт
                 </h2>
                 <p className="text-sm text-white/60">
-                  Будет отправлено {total} страниц: главная, услуги, техника, стройматериалы, города, статьи.
+                  Будет отправлено {total} страниц: главная, услуги, техника{SHOP_PUBLIC ? ", стройматериалы" : ""}, города, статьи.
                 </p>
               </div>
               <button
@@ -151,7 +152,8 @@ const SeoReindexPage = () => {
           </div>
         </div>
 
-        {/* Магазин кирпича */}
+        {SHOP_PUBLIC && (
+        <>
         <div className="rounded-2xl border border-accent/40 bg-accent/5 p-5 sm:p-6 mb-6 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4">
           <div className="w-12 h-12 rounded-xl bg-accent text-black flex items-center justify-center shrink-0">
             <Icon name="Blocks" size={24} />
@@ -186,6 +188,9 @@ const SeoReindexPage = () => {
             </p>
           )}
         </div>
+
+        </>
+        )}
 
         {/* Одна страница */}
         <div className="rounded-2xl border border-accent/25 bg-card/40 p-6 mb-6">

@@ -9,6 +9,7 @@ import SectionBackdrop from "@/components/ui/SectionBackdrop";
 import IndustrialBanner from "@/components/sections/IndustrialBanner";
 import SectionLinkCard from "@/components/sections/SectionLinkCard";
 import { useVisibleSections } from "@/hooks/useVisibleSections";
+import { SHOP_PUBLIC } from "@/data/shopVisibility";
 
 // Разделы грузятся по мере прокрутки — так сайт работал раньше.
 // Браузер не держит в памяти всю страницу разом, поэтому не мигает.
@@ -37,7 +38,7 @@ const Index = () => {
 
       <SectionDivider variant="aurora" />
 
-      <LazySection id="magazin"><BuildShopSection /></LazySection>
+      {SHOP_PUBLIC && <LazySection id="magazin"><BuildShopSection /></LazySection>}
 
       {/* На компьютере — преимущества и баннер перед техникой.
           На телефоне их прячем: после формы заявки сразу идут карточки техники. */}

@@ -79,12 +79,17 @@ parts.push(
     .join("")
 );
 
-parts.push(`<h2>Доставка стройматериалов</h2>`);
-parts.push(
-  MATERIAL_SEO_PAGES.map(
-    (m) => `<h3><a href="/stroymaterialy/${m.slug}">${esc(m.h1)}</a></h3><p>${esc(m.intro)}</p>`
-  ).join("")
+const SHOP_PUBLIC = /SHOP_PUBLIC\s*=\s*true/.test(
+  fs.readFileSync(path.join(root, "src/data/shopVisibility.ts"), "utf8")
 );
+if (SHOP_PUBLIC) {
+  parts.push(`<h2>Доставка стройматериалов</h2>`);
+  parts.push(
+    MATERIAL_SEO_PAGES.map(
+      (m) => `<h3><a href="/stroymaterialy/${m.slug}">${esc(m.h1)}</a></h3><p>${esc(m.intro)}</p>`
+    ).join("")
+  );
+}
 
 parts.push(`<h2>Асфальтирование</h2>`);
 parts.push(

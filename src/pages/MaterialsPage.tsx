@@ -13,6 +13,7 @@ import DeliveryCalculator from "@/components/materials/DeliveryCalculator";
 import MaterialsSeoBlock from "@/components/materials/MaterialsSeoBlock";
 import BannerSlider from "@/components/materials/BannerSlider";
 import { fetchMaterials, MATERIAL_CATEGORIES, MENU_CATEGORIES, CATEGORY_BANNERS, type Material } from "@/data/materials";
+import { SHOP_PUBLIC } from "@/data/shopVisibility";
 
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
@@ -89,6 +90,7 @@ const MaterialsPage = () => {
   return (
     <div className="min-h-screen bg-background page-enter">
       <title>{title}</title>
+      {!SHOP_PUBLIC && <meta name="robots" content="noindex, nofollow" />}
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <meta property="og:type" content="website" />

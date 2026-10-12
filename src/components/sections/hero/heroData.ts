@@ -1,3 +1,4 @@
+import { SHOP_PUBLIC } from "@/data/shopVisibility";
 export const SUBMIT_URL = "https://functions.poehali.dev/dc327032-aa41-4632-b107-a026d92ef031";
 
 export const WEBP_BASE = "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm";
@@ -31,7 +32,7 @@ export const slides: { id: string; alt: string; fullSrc?: string; mobileSrc?: st
 ];
 
 export const navLinks = [
-  { href: "/stroymaterialy", label: "Стройматериалы", icon: "Package" },
+  ...(SHOP_PUBLIC ? [{ href: "/stroymaterialy", label: "Стройматериалы", icon: "Package" }] : []),
   { href: "#features", label: "Преимущества", icon: "Award" },
   { href: "#fleet", label: "Техника", icon: "Truck" },
   { href: "#usecases", label: "Услуги", icon: "Wrench" },

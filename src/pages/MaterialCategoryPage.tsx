@@ -14,6 +14,7 @@ import BrickHeroSlider from "@/components/brickShop/BrickHeroSlider";
 import NotFound from "@/pages/NotFound";
 import { fetchMaterials, MATERIAL_CATEGORIES, type Material } from "@/data/materials";
 import { MATERIAL_SEO_PAGES, getMaterialSeoPage } from "@/data/materialsSeo";
+import { SHOP_PUBLIC } from "@/data/shopVisibility";
 
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
@@ -108,6 +109,7 @@ const MaterialCategoryPage = () => {
   return (
     <div className="min-h-screen bg-background page-enter">
       <title>{page.title}</title>
+      {!SHOP_PUBLIC && <meta name="robots" content="noindex, nofollow" />}
       <meta name="description" content={page.description} />
       <meta name="keywords" content={page.keywords.join(", ")} />
       <meta property="og:type" content="website" />

@@ -11,6 +11,7 @@ import { cities } from "@/data/cities";
 import { seoLandings } from "@/data/seoLandings";
 import { trucks } from "@/pages/truck/trucksData";
 import { MATERIAL_SEO_PAGES } from "@/data/materialsSeo";
+import { SHOP_PUBLIC } from "@/data/shopVisibility";
 
 export const SITE_DOMAIN = "https://фаварит.рф";
 
@@ -74,13 +75,13 @@ export const buildSitemapEntries = (): SitemapEntry[] => {
   });
 
   // Стройматериалы
-  entries.push({
+  if (SHOP_PUBLIC) entries.push({
     loc: `${SITE_DOMAIN}/stroymaterialy`,
     lastmod: today,
     changefreq: "weekly",
     priority: "0.85",
   });
-  MATERIAL_SEO_PAGES.forEach((p) => {
+  if (SHOP_PUBLIC) MATERIAL_SEO_PAGES.forEach((p) => {
     entries.push({
       loc: `${SITE_DOMAIN}/stroymaterialy/${p.slug}`,
       lastmod: today,
