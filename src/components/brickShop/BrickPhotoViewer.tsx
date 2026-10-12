@@ -170,6 +170,13 @@ const BrickPhotoViewer = ({ photos, index, onIndexChange, onClose }: BrickPhotoV
 
     if (!g || g.moved || g.pinched || e.type === "pointercancel") return;
 
+    const r = imgRef.current?.getBoundingClientRect();
+    const onImage = r && e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+    if (!onImage && scale <= 1) {
+      onClose();
+      return;
+    }
+
     if (scale > 1) {
       setScale(1);
       setPos({ x: 0, y: 0 });
@@ -214,21 +221,34 @@ const BrickPhotoViewer = ({ photos, index, onIndexChange, onClose }: BrickPhotoV
           <Icon name="X" size={22} />
         </button>
       </div>
-      <div className="relative flex-1 min-h-0 flex items-center justify-center overflow-hidden px-2">
+      <div
+        className="relative flex-1 min-h-0 flex items-center justify-center overflow-hidden px-2"
+        onClick={(e) => e.stopPropagation()}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerEnd}
+        onPointerCancel={onPointerEnd}
+        onWheel={onWheel}
+        style={{ touchAction: "none" }}
+      >
         {total > 1 && (
           <>
             <button
               type="button"
+              onPointerDown={(e) => e.stopPropagation()}
+              onPointerUp={(e) => e.stopPropagation()}
               onClick={(e) => { e.stopPropagation(); go(-1); }}
-              className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 text-white items-center justify-center"
+              className="flex absolute left-1 md:left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 md:bg-white/10 hover:bg-white/25  text-white items-center justify-center"
               aria-label="Предыдущий кирпич"
             >
               <Icon name="ChevronLeft" size={28} />
             </button>
             <button
               type="button"
+              onPointerDown={(e) => e.stopPropagation()}
+              onPointerUp={(e) => e.stopPropagation()}
               onClick={(e) => { e.stopPropagation(); go(1); }}
-              className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 text-white items-center justify-center"
+              className="flex absolute right-1 md:right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 md:bg-white/10 hover:bg-white/25  text-white items-center justify-center"
               aria-label="Следующий кирпич"
             >
               <Icon name="ChevronRight" size={28} />
@@ -236,13 +256,7 @@ const BrickPhotoViewer = ({ photos, index, onIndexChange, onClose }: BrickPhotoV
           </>
         )}
         <div
-          onClick={(e) => e.stopPropagation()}
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={onPointerEnd}
-          onPointerCancel={onPointerEnd}
-          onWheel={onWheel}
-          style={{ touchAction: "none", transform: `translateX(${swipeX}px)`, opacity: 1 - Math.min(Math.abs(swipeX) / 400, 0.5) }}
+          style={{ transform: `translateX(${swipeX}px)`, opacity: 1 - Math.min(Math.abs(swipeX) / 400, 0.5) }}
           className="max-w-full max-h-full flex items-center justify-center"
         >
           <img
