@@ -54,16 +54,18 @@ export const toBrick = (m: Material): Brick => {
   const gradeMatch = m.name.match(/М-?\s?(\d{2,3})/i);
   const weightMatch = (m.description || "").match(/Вес поддона\s*(\d+)/i);
   const hollow = n.includes("пустотел");
+  const packMatch = (m.description || "").match(/336 шт\s*[—-]\s*([\d\s\u00a0]+)\s*₽/);
+  const packPrice = packMatch ? Number(packMatch[1].replace(/[\s\u00a0]/g, "")) : 0;
   const sizeMatch = (m.description || "").match(/(\d{3})\s?[×x]\s?(\d{2,3})\s?[×x]\s?(\d{2,3})/);
   return {
     ...m,
-    priceNum,
+    priceNum: packPrice > 0 ? packPrice / PALLET_SIZE : priceNum,
     format,
     hollow,
     facing: n.includes("лицев"),
     grade: gradeMatch ? `М${gradeMatch[1]}` : "",
     size: sizeMatch ? `${sizeMatch[1]}×${sizeMatch[2]}×${sizeMatch[3]} мм` : format === "single" ? "250×120×65 мм" : "250×120×88 мм",
-    palletPrice: priceNum * PALLET_SIZE,
+    palletPrice: packPrice > 0 ? packPrice : priceNum * PALLET_SIZE,
     palletWeight: weightMatch ? Number(weightMatch[1]) : hollow ? 1340 : 1680,
   };
 };

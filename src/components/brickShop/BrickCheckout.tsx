@@ -226,7 +226,7 @@ const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear, delivery, 
                         </span>
                         <p className="text-[15px] font-bold text-white leading-snug mt-1">{l.brick.name}</p>
                         <p className="text-xs text-muted-foreground mt-0.5">
-                          {l.brick.priceNum > 0 ? `${l.brick.priceNum} ₽/шт · ` : ""}
+                          {l.brick.priceNum > 0 ? `${l.brick.priceNum.toLocaleString("ru-RU", { maximumFractionDigits: 2 })} ₽/шт · ` : ""}
                           {priceText(l.brick.palletPrice)} за упаковку
                         </p>
                       </div>
