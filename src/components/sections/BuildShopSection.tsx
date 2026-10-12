@@ -17,14 +17,14 @@ const PERKS = [
 ];
 
 const BuildShopSection = () => (
-  <section className="py-12 sm:py-20 px-4 sm:px-6" aria-labelledby="build-shop-title">
-    <div className="max-w-6xl mx-auto">
-      <div className="relative overflow-hidden rounded-3xl border border-amber-400/30 bg-gradient-to-br from-zinc-950 via-[#1d1a14] to-black shadow-2xl shadow-black/40">
+  <section className="py-8 sm:py-12" aria-labelledby="build-shop-title">
+    <div className="w-full">
+      <div className="relative overflow-hidden border-y border-amber-400/30 bg-gradient-to-br from-zinc-950 via-[#1d1a14] to-black shadow-2xl shadow-black/40">
         <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-amber-500/20 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-40 -left-24 w-96 h-96 rounded-full bg-accent/10 blur-3xl pointer-events-none" />
 
-        <div className="relative grid lg:grid-cols-2">
-          <div className="p-6 sm:p-10 lg:p-12 flex flex-col">
+        <div className="relative grid lg:grid-cols-[5fr_7fr]">
+          <div className="p-6 sm:p-10 lg:p-14 xl:pl-[max(3.5rem,calc((100vw-1280px)/2))] flex flex-col justify-center">
             <span className="self-start inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/15 border border-amber-400/40 text-amber-300 text-[11px] sm:text-xs font-bold uppercase tracking-widest">
               <Icon name="Warehouse" size={14} />
               Наш магазин
@@ -73,7 +73,7 @@ const BuildShopSection = () => (
             </div>
           </div>
 
-          <div className="relative min-h-[240px] sm:min-h-[320px] lg:min-h-full">
+          <div className="relative aspect-[16/9] lg:aspect-auto lg:min-h-[480px]">
             <img
               src="/img/brick-favorit-hero8.jpg"
               alt="Силикатный кирпич в магазине Фаворит"
@@ -81,10 +81,10 @@ const BuildShopSection = () => (
               decoding="async"
               width="1360"
               height="768"
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover object-[80%_center]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#1d1a14] lg:via-transparent" />
-            <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 rounded-2xl bg-black/70 backdrop-blur-md border border-amber-400/40 px-4 py-3 text-right">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#1d1a14] lg:via-transparent lg:via-20%" />
+            <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-1/4 rounded-2xl bg-black/70 backdrop-blur-md border border-amber-400/40 px-4 py-3">
               <div className="text-[11px] uppercase tracking-widest text-white/60">Кирпич</div>
               <div className="text-2xl sm:text-3xl font-black text-amber-300 leading-none mt-1">
                 от 18 ₽<span className="text-sm text-white/70 font-bold">/шт</span>
@@ -93,7 +93,7 @@ const BuildShopSection = () => (
           </div>
         </div>
 
-        <div className="relative border-t border-white/10 p-4 sm:p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div className="relative border-t border-white/10 p-4 sm:p-6 lg:px-14 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 w-full">
           {CATEGORIES.map((c) => (
             <Link
               key={c.to}
