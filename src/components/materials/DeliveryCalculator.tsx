@@ -3,7 +3,7 @@ import Icon from "@/components/ui/icon";
 import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
 import { trucks } from "@/components/sections/calculator/data";
 import { DELIVERY_CITIES as cities } from "@/components/brickShop/deliveryCities";
-import { kmRateFor, tripCost, roundTo } from "@/lib/deliveryPricing";
+import { tripCost, roundTo } from "@/lib/deliveryPricing";
 import { MAX_LINK } from "@/data/contacts";
 import MaxIcon from "@/components/ui/MaxIcon";
 import { MAX_GRADIENT } from "@/components/ui/MaxButton";
@@ -50,7 +50,6 @@ const DeliveryCalculator = () => {
   const palletsPerTrip = Math.max(1, Math.floor(truckTons / cargo.weight));
   const trips = Math.ceil(pallets / palletsPerTrip);
 
-  const kmRate = kmRateFor(truckTons);
   const perTripCost = Math.max(roundTo(tripCost(city.km, truckTons, truck.price)), truck.price * hours);
   const total = perTripCost * trips;
   const materialsTotal = cargo.price * pallets;
@@ -307,7 +306,7 @@ const DeliveryCalculator = () => {
                 </span>
               </div>
               <p className="text-[11px] text-muted-foreground">
-                Дорога туда и обратно по {kmRate} ₽/км + разгрузка краном
+                В цену входит дорога туда и обратно и разгрузка краном
               </p>
             </div>
 

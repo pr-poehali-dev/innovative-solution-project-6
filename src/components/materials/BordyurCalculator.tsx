@@ -3,7 +3,7 @@ import Icon from "@/components/ui/icon";
 import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
 import { trucks } from "@/components/sections/calculator/data";
 import { DELIVERY_CITIES } from "@/components/brickShop/deliveryCities";
-import { kmRateFor, tripCost, roundTo, MIN_HOURS } from "@/lib/deliveryPricing";
+import { tripCost, roundTo } from "@/lib/deliveryPricing";
 import type { Material } from "@/data/materials";
 import { MAX_LINK } from "@/data/contacts";
 import MaxIcon from "@/components/ui/MaxIcon";
@@ -312,7 +312,7 @@ const BordyurCalculator = ({ items }: Props) => {
                           )}
                         </span>
                         <span className="block text-xs text-muted-foreground mt-0.5">
-                          {o.t.capacity} · стрела {o.t.boom} · до {o.perTrip} подд. за рейс · {kmRateFor(o.cap)} ₽/км
+                          {o.t.capacity} · стрела {o.t.boom} · до {o.perTrip} подд. за рейс
                         </span>
                         <span className={`block text-xs mt-0.5 font-semibold ${o.trips === 1 ? "text-emerald-400" : "text-amber-300"}`}>
                           {o.trips === 1 ? "Увезёт за 1 рейс" : `Нужно ${o.trips} ${tripsWord(o.trips)}`}
@@ -352,7 +352,7 @@ const BordyurCalculator = ({ items }: Props) => {
                 <span className="text-white font-bold whitespace-nowrap">{fmt(chosen.cost)} ₽</span>
               </div>
               <p className="text-[11px] text-muted-foreground">
-                {city.name} · {city.km} км. Дорога туда и обратно по {kmRateFor(chosen.cap)} ₽/км + разгрузка краном. Минимальный заказ — {MIN_HOURS} ч работы машины
+                {city.name} · {city.km} км. В цену входит дорога туда и обратно и разгрузка краном
               </p>
               <SlingerNotice />
             </div>
