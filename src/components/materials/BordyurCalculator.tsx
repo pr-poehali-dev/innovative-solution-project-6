@@ -1,0 +1,340 @@
+import { useMemo, useState } from "react";
+import Icon from "@/components/ui/icon";
+import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
+import { trucks, cities } from "@/components/sections/calculator/data";
+import type { Material } from "@/data/materials";
+
+const MIN_HOURS = 4;
+
+type Kind = {
+  id: "road" | "walk";
+  match: string;
+  title: string;
+  size: string;
+  perPallet: number;
+  pieceKg: number;
+  fallbackPrice: number;
+};
+
+const KINDS: Kind[] = [
+  { id: "road", match: "дорожн", title: "Дорожный", size: "1000×300×150", perPallet: 12, pieceKg: 120, fallbackPrice: 500 },
+  { id: "walk", match: "тротуар", title: "Тротуарный", size: "1000×200×80", perPallet: 40, pieceKg: 40, fallbackPrice: 210 },
+];
+
+const PALLET_KG = 25;
+
+const manipulators = trucks.filter((t) => t.category === "Манипулятор");
+
+const tonsOf = (capacity: string) => {
+  const m = capacity.match(/[\d.,]+/);
+  return m ? parseFloat(m[0].replace(",", ".")) : 5;
+};
+
+const priceOf = (s?: string) => parseFloat((s || "").replace(/[^\d.,]/g, "").replace(",", ".")) || 0;
+
+const tripsWord = (n: number) => {
+  const m10 = n % 10;
+  const m100 = n % 100;
+  if (m10 === 1 && m100 !== 11) return "рейс";
+  if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return "рейса";
+  return "рейсов";
+};
+
+const fmt = (n: number) => Math.round(n).toLocaleString("ru-RU");
+
+type Props = { items: Material[] };
+
+const BordyurCalculator = ({ items }: Props) => {
+  const [kindId, setKindId] = useState<Kind["id"]>("road");
+  const [mode, setMode] = useState<"pcs" | "pallets">("pcs");
+  const [qty, setQty] = useState(50);
+  const [cityName, setCityName] = useState(cities[0].name);
+  const [pickedTruck, setPickedTruck] = useState<string | null>(null);
+
+  const kind = KINDS.find((k) => k.id === kindId) || KINDS[0];
+  const city = cities.find((c) => c.name === cityName) || cities[0];
+
+  const unitPrice = useMemo(() => {
+    const item = items.find((m) => m.name.toLowerCase().includes(kind.match));
+    return priceOf(item?.price) || kind.fallbackPrice;
+  }, [items, kind]);
+
+  const pallets = mode === "pallets" ? Math.max(1, qty) : Math.max(1, Math.ceil(qty / kind.perPallet));
+  const pieces = mode === "pallets" ? pallets * kind.perPallet : Math.max(1, qty);
+  const palletT = (kind.perPallet * kind.pieceKg + PALLET_KG) / 1000;
+  const totalT = (pieces * kind.pieceKg + pallets * PALLET_KG) / 1000;
+  const materialTotal = pieces * unitPrice;
+
+  const options = useMemo(
+    () =>
+      manipulators
+        .map((t) => {
+          const cap = tonsOf(t.capacity);
+          const perTrip = Math.max(1, Math.floor(cap / palletT));
+          const trips = Math.ceil(pallets / perTrip);
+          const cost = (t.price * MIN_HOURS + Math.round(city.hours * t.price)) * trips;
+          return { t, cap, perTrip, trips, cost };
+        })
+        .sort((a, b) => a.trips - b.trips || a.cost - b.cost),
+    [palletT, pallets, city],
+  );
+
+  const best = options[0];
+  const chosen = options.find((o) => o.t.name === pickedTruck) || best;
+  const total = materialTotal + chosen.cost;
+
+  const step = mode === "pallets" ? 1 : kind.perPallet;
+  const setSafeQty = (v: number) => setQty(Math.max(1, Math.min(100000, Math.round(v) || 1)));
+
+  const waLink = useMemo(() => {
+    const lines = [
+      "Здравствуйте! Расчёт бордюра с сайта:",
+      `Бордюр ${kind.title.toLowerCase()} ${kind.size} — ${pieces} шт (${pallets} подд.)`,
+      `Вес: ~${totalT.toFixed(1)} т`,
+      `Материал: ${fmt(materialTotal)} ₽`,
+      `Машина: ${chosen.t.short} (${chosen.t.capacity}), рейсов: ${chosen.trips}`,
+      `Адрес: ${city.name}, доставка: ${fmt(chosen.cost)} ₽`,
+      `Итого: ${fmt(total)} ₽`,
+    ];
+    return `https://wa.me/79601883084?text=${encodeURIComponent(lines.join("\n"))}`;
+  }, [kind, pieces, pallets, totalT, materialTotal, chosen, city, total]);
+
+  return (
+    <section id="bordyur-calc" className="max-w-7xl mx-auto px-4 sm:px-6 pb-12 scroll-mt-24">
+      <div className="rounded-3xl border border-accent/25 bg-card/50 overflow-hidden">
+        <div className="px-5 sm:px-8 py-6 border-b border-accent/10 bg-gradient-to-r from-accent/15 to-transparent flex items-center gap-3">
+          <span className="w-11 h-11 rounded-xl bg-accent/15 flex items-center justify-center shrink-0">
+            <Icon name="Calculator" size={22} className="text-accent" />
+          </span>
+          <div>
+            <h2 className="text-xl sm:text-2xl font-black text-white leading-tight">Калькулятор бордюра с доставкой</h2>
+            <p className="text-sm text-muted-foreground mt-0.5">Поддоны, вес и подходящий манипулятор — считаем сразу</p>
+          </div>
+        </div>
+
+        <div className="p-5 sm:p-8 grid lg:grid-cols-[1fr_340px] gap-8">
+          <div className="space-y-7">
+            <div>
+              <p className="text-sm font-bold text-white mb-3">1. Какой бордюр</p>
+              <div className="grid grid-cols-2 gap-3">
+                {KINDS.map((k) => {
+                  const active = k.id === kindId;
+                  const item = items.find((m) => m.name.toLowerCase().includes(k.match));
+                  const p = priceOf(item?.price) || k.fallbackPrice;
+                  return (
+                    <button
+                      key={k.id}
+                      type="button"
+                      onClick={() => {
+                        setKindId(k.id);
+                        setPickedTruck(null);
+                      }}
+                      className={`text-left rounded-2xl border-2 p-3 sm:p-4 transition-all flex gap-3 items-center ${
+                        active ? "border-accent bg-accent/10" : "border-white/10 bg-card/60 hover:border-accent/50"
+                      }`}
+                    >
+                      {item?.imageUrl && (
+                        <img src={item.imageUrl} alt={item.name} loading="lazy" className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl object-cover shrink-0" />
+                      )}
+                      <span className="min-w-0">
+                        <span className="block font-black text-white text-sm sm:text-base">{k.title}</span>
+                        <span className="block text-xs text-muted-foreground">{k.size} мм</span>
+                        <span className="block text-accent font-bold text-sm mt-1">{fmt(p)} ₽/шт</span>
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+              <p className="text-xs text-muted-foreground mt-2">
+                На поддоне {kind.perPallet} шт · 1 шт ≈ {kind.pieceKg} кг · поддон ≈ {palletT.toFixed(2).replace(".", ",")} т
+              </p>
+            </div>
+
+            <div>
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+                <p className="text-sm font-bold text-white">2. Сколько нужно</p>
+                <div className="inline-flex rounded-xl border border-white/10 p-1 bg-black/20">
+                  {([
+                    ["pcs", "Штуки / метры"],
+                    ["pallets", "Поддоны"],
+                  ] as const).map(([m, label]) => (
+                    <button
+                      key={m}
+                      type="button"
+                      onClick={() => {
+                        if (m === mode) return;
+                        setQty(m === "pallets" ? pallets : pallets * kind.perPallet);
+                        setMode(m);
+                      }}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
+                        mode === m ? "bg-accent text-black" : "text-white/70 hover:text-white"
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setSafeQty(qty - step)}
+                  className="w-12 h-12 rounded-xl border border-white/15 bg-card/60 hover:border-accent/60 flex items-center justify-center text-white"
+                  aria-label="Меньше"
+                >
+                  <Icon name="Minus" size={18} />
+                </button>
+                <div className="relative flex-1">
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    min={1}
+                    value={qty}
+                    onChange={(e) => setSafeQty(Number(e.target.value))}
+                    className="w-full h-12 rounded-xl border border-white/15 bg-black/30 px-4 pr-20 text-lg font-black text-white focus:outline-none focus:border-accent"
+                  />
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
+                    {mode === "pallets" ? "поддонов" : "шт / пог. м"}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSafeQty(qty + step)}
+                  className="w-12 h-12 rounded-xl border border-white/15 bg-card/60 hover:border-accent/60 flex items-center justify-center text-white"
+                  aria-label="Больше"
+                >
+                  <Icon name="Plus" size={18} />
+                </button>
+              </div>
+              <div className="grid grid-cols-3 gap-2 mt-3">
+                {[
+                  ["Поддонов", `${pallets}`],
+                  ["Штук", `${pieces}`],
+                  ["Вес", `≈ ${totalT.toFixed(1).replace(".", ",")} т`],
+                ].map(([l, v]) => (
+                  <div key={l} className="rounded-xl bg-black/25 border border-white/10 px-3 py-2">
+                    <p className="text-[11px] text-muted-foreground">{l}</p>
+                    <p className="text-white font-black">{v}</p>
+                  </div>
+                ))}
+              </div>
+              {mode === "pcs" && pieces % kind.perPallet !== 0 && (
+                <p className="text-xs text-muted-foreground mt-2">
+                  Неполный поддон — последний поддон будет на {pieces % kind.perPallet} шт
+                </p>
+              )}
+            </div>
+
+            <div>
+              <p className="text-sm font-bold text-white mb-3">3. Куда везти</p>
+              <select
+                value={cityName}
+                onChange={(e) => setCityName(e.target.value)}
+                className="w-full h-12 rounded-xl border border-white/15 bg-black/30 px-4 text-white focus:outline-none focus:border-accent"
+              >
+                {cities.map((c) => (
+                  <option key={c.name} value={c.name} className="bg-zinc-900">
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <p className="text-sm font-bold text-white mb-3">4. Какой манипулятор отвезёт</p>
+              <div className="space-y-2">
+                {options.map((o) => {
+                  const active = o.t.name === chosen.t.name;
+                  const isBest = o.t.name === best.t.name;
+                  return (
+                    <button
+                      key={o.t.name}
+                      type="button"
+                      onClick={() => setPickedTruck(o.t.name)}
+                      className={`w-full text-left rounded-2xl border-2 p-2.5 flex items-center gap-3 transition-all ${
+                        active ? "border-accent bg-accent/10" : "border-white/10 bg-card/60 hover:border-accent/50"
+                      }`}
+                    >
+                      <img src={o.t.image} alt={o.t.name} loading="lazy" className="w-20 h-14 sm:w-24 sm:h-16 rounded-xl object-cover shrink-0" />
+                      <span className="flex-1 min-w-0">
+                        <span className="flex flex-wrap items-center gap-2">
+                          <span className="font-black text-white text-sm">{o.t.short}</span>
+                          {isBest && (
+                            <span className="px-2 py-0.5 rounded-full bg-accent text-black text-[10px] font-black uppercase">Оптимально</span>
+                          )}
+                        </span>
+                        <span className="block text-xs text-muted-foreground mt-0.5">
+                          {o.t.capacity} · стрела {o.t.boom} · до {o.perTrip} подд. за рейс
+                        </span>
+                        <span className={`block text-xs mt-0.5 font-semibold ${o.trips === 1 ? "text-emerald-400" : "text-amber-300"}`}>
+                          {o.trips === 1 ? "Увезёт за 1 рейс" : `Нужно ${o.trips} ${tripsWord(o.trips)}`}
+                        </span>
+                      </span>
+                      <span className="text-right shrink-0">
+                        <span className="block text-white font-black text-sm">{fmt(o.cost)} ₽</span>
+                        <span className="block text-[11px] text-muted-foreground">{fmt(o.t.price)} ₽/ч</span>
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          <aside className="lg:sticky lg:top-28 self-start rounded-2xl border border-accent/30 bg-gradient-to-b from-accent/10 to-black/30 p-5 sm:p-6">
+            <p className="text-xs uppercase tracking-wider text-accent font-bold mb-4">Ваш расчёт</p>
+            <div className="space-y-3 text-sm">
+              <div className="flex justify-between gap-3">
+                <span className="text-muted-foreground">
+                  {kind.title} × {pieces} шт
+                </span>
+                <span className="text-white font-bold whitespace-nowrap">{fmt(materialTotal)} ₽</span>
+              </div>
+              <div className="flex justify-between gap-3">
+                <span className="text-muted-foreground">Поддонов / вес</span>
+                <span className="text-white font-bold whitespace-nowrap">
+                  {pallets} · {totalT.toFixed(1).replace(".", ",")} т
+                </span>
+              </div>
+              <div className="flex justify-between gap-3">
+                <span className="text-muted-foreground">
+                  Доставка {chosen.t.short}
+                  {chosen.trips > 1 ? `, ${chosen.trips} ${tripsWord(chosen.trips)}` : ""}
+                </span>
+                <span className="text-white font-bold whitespace-nowrap">{fmt(chosen.cost)} ₽</span>
+              </div>
+              <p className="text-[11px] text-muted-foreground">
+                Минимальный заказ машины {MIN_HOURS} ч{city.hours > 0 ? ` + дорога до г. ${city.name}` : ""}, разгрузка краном включена
+              </p>
+            </div>
+            <div className="mt-5 pt-5 border-t border-white/10">
+              <p className="text-xs text-muted-foreground">Итого</p>
+              <p className="text-3xl font-black text-accent leading-tight">{fmt(total)} ₽</p>
+              <p className="text-[11px] text-muted-foreground mt-1">Предварительный расчёт, точную цену подтвердит менеджер</p>
+            </div>
+            <div className="mt-5 grid gap-2">
+              <a
+                href={waLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 h-12 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-black font-black text-sm hover:shadow-lg hover:shadow-accent/30 transition-all"
+              >
+                <Icon name="Send" size={16} />
+                Отправить расчёт в WhatsApp
+              </a>
+              <a
+                href={`tel:${MATERIALS_PHONE}`}
+                className="inline-flex items-center justify-center gap-2 h-12 rounded-xl border border-accent/40 text-white font-bold text-sm hover:bg-accent/10 transition-all"
+              >
+                <Icon name="Phone" size={16} className="text-accent" />
+                {MATERIALS_PHONE_LABEL}
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default BordyurCalculator;

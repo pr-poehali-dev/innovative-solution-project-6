@@ -11,6 +11,7 @@ import MaxButton from "@/components/ui/MaxButton";
 import LazySection from "@/components/LazySection";
 import BrickShop from "@/components/brickShop/BrickShop";
 import BrickHeroSlider from "@/components/brickShop/BrickHeroSlider";
+import BordyurCalculator from "@/components/materials/BordyurCalculator";
 import NotFound from "@/pages/NotFound";
 import { fetchMaterials, MATERIAL_CATEGORIES, type Material } from "@/data/materials";
 import { MATERIAL_SEO_PAGES, getMaterialSeoPage } from "@/data/materialsSeo";
@@ -250,7 +251,11 @@ const MaterialCategoryPage = () => {
             <PhoneButton size="md" className="rounded-xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
             <button
               type="button"
-              onClick={() => setCallbackOpen(true)}
+              onClick={() =>
+                page.cat === "bordyur"
+                  ? document.getElementById("bordyur-calc")?.scrollIntoView({ behavior: "smooth" })
+                  : setCallbackOpen(true)
+              }
               className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all text-sm font-bold text-white"
             >
               <Icon name="Calculator" size={15} className="text-accent" />
@@ -346,6 +351,12 @@ const MaterialCategoryPage = () => {
               </div>
             )}
           </section>
+        )}
+
+        {page.cat === "bordyur" && (
+          <div className="pt-10">
+            <BordyurCalculator items={visible} />
+          </div>
         )}
 
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
