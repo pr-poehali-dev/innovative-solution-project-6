@@ -9,7 +9,6 @@ import {
   type ThicknessId,
   DOOR_M2,
   GATE_M2,
-  KM_RATE,
   LOCAL_KM,
   MANIPULATORS,
   PRESETS,
@@ -22,6 +21,7 @@ import {
 import BrickBuildSteps from "./BrickBuildSteps";
 import BrickPacksStep from "./BrickPacksStep";
 import BrickCalcSummary from "./BrickCalcSummary";
+import { tripCost, roundTo } from "@/lib/deliveryPricing";
 
 export type { DeliveryInfo } from "./calculatorParts";
 
@@ -103,7 +103,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
   const perTrip = truck ? perTripOf(truck.tons) : 0;
   const trips = truck ? tripsOf(truck.tons) : 0;
   const isLocal = km > 0 && km <= LOCAL_KM;
-  const delivery = isLocal ? 0 : Math.round(km * 2 * KM_RATE * trips);
+  const delivery = isLocal || !truck ? 0 : roundTo(tripCost(km, truck.tons, truck.price)) * trips;
   const grandTotal = total + delivery;
   const deliveryText = km <= 0 ? "—" : isLocal ? "Рассчитаем по телефону" : priceText(delivery);
 

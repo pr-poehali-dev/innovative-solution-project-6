@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react";
 import Icon from "@/components/ui/icon";
 import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
-import { trucks, cities } from "@/components/sections/calculator/data";
+import { trucks } from "@/components/sections/calculator/data";
+import { DELIVERY_CITIES as cities } from "@/components/brickShop/deliveryCities";
+import { kmRateFor, tripCost, roundTo } from "@/lib/deliveryPricing";
 import { MAX_LINK } from "@/data/contacts";
 import MaxIcon from "@/components/ui/MaxIcon";
 import { MAX_GRADIENT } from "@/components/ui/MaxButton";
@@ -48,9 +50,9 @@ const DeliveryCalculator = () => {
   const palletsPerTrip = Math.max(1, Math.floor(truckTons / cargo.weight));
   const trips = Math.ceil(pallets / palletsPerTrip);
 
-  const baseTotal = truck.price * hours * trips;
-  const citySurcharge = Math.round(city.hours * truck.price) * trips;
-  const total = baseTotal + citySurcharge;
+  const kmRate = kmRateFor(truckTons);
+  const perTripCost = Math.max(roundTo(tripCost(city.km, truckTons, truck.price)), truck.price * hours);
+  const total = perTripCost * trips;
   const materialsTotal = cargo.price * pallets;
 
   const tonsOf = (t: (typeof deliveryTrucks)[number]) => {
@@ -77,7 +79,7 @@ const DeliveryCalculator = () => {
       `Материал: ${cargo.label} — ${pallets} подд. (${cargo.palletLabel} / поддон)`,
       `Вес груза: ~${cargoWeight} т, рейсов: ${trips}`,
       `Машина: ${truck.short} (${truck.capacity}), ${hours} ч`,
-      `Адрес: ${city.name}`,
+      `Адрес: ${city.name} (${city.km} км)`,
       `Доставка: ${fmt(total)} ₽`,
       materialsTotal > 0 ? `Материал: ${fmt(materialsTotal)} ₽` : "",
       materialsTotal > 0 ? `Итого: ${fmt(materialsTotal + total)} ₽` : "",
@@ -249,8 +251,7 @@ const DeliveryCalculator = () => {
                 >
                   {cities.map((c) => (
                     <option key={c.name} value={c.name} className="bg-background">
-                      {c.name}
-                      {c.hours > 0 ? ` (+${fmt(Math.round(c.hours * truck.price))} ₽)` : ""}
+                      {c.name} · {c.km} км
                     </option>
                   ))}
                 </select>
@@ -280,7 +281,7 @@ const DeliveryCalculator = () => {
                     +
                   </button>
                 </div>
-                <p className="text-xs text-muted-foreground mt-2">Минимальный заказ — {MIN_HOURS} часа</p>
+                <p className="text-xs text-muted-foreground mt-2">Минимальный заказ — {MIN_HOURS} часа, если работы больше — добавьте часы</p>
               </div>
             </div>
           </div>
@@ -299,16 +300,15 @@ const DeliveryCalculator = () => {
               </div>
               <div className="flex justify-between gap-3">
                 <span className="text-muted-foreground">
-                  {truck.short} × {hours} ч{trips > 1 ? ` × ${trips}` : ""}
+                  {truck.short} · {city.name}, {city.km} км
                 </span>
-                <span className="text-white font-bold whitespace-nowrap">{fmt(baseTotal)} ₽</span>
+                <span className="text-white font-bold whitespace-nowrap">
+                  {fmt(perTripCost)} ₽{trips > 1 ? ` × ${trips}` : ""}
+                </span>
               </div>
-              {citySurcharge > 0 && (
-                <div className="flex justify-between gap-3">
-                  <span className="text-muted-foreground">Выезд: {city.name}</span>
-                  <span className="text-white font-bold whitespace-nowrap">+{fmt(citySurcharge)} ₽</span>
-                </div>
-              )}
+              <p className="text-[11px] text-muted-foreground">
+                Дорога туда и обратно по {kmRate} ₽/км + разгрузка краном
+              </p>
             </div>
 
             <div className="mt-5 pt-4 border-t border-accent/20">

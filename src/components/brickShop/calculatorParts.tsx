@@ -12,13 +12,12 @@ export const WINDOW_M2 = 1.8;
 export const DOOR_M2 = 1.9;
 export const GATE_M2 = 6;
 export const RESERVE = 1.05;
-export const KM_RATE = 120;
 export const LOCAL_KM = 30;
 export const MANIPULATORS = trucks
   .filter((t) => t.category === "Манипулятор")
   .map((t) => {
     const m = t.capacity.match(/[\d.,]+/);
-    return { name: t.short || t.name, tons: m ? parseFloat(m[0].replace(",", ".")) : 5 };
+    return { name: t.short || t.name, tons: m ? parseFloat(m[0].replace(",", ".")) : 5, price: t.price };
   })
   .filter((t, i, arr) => arr.findIndex((x) => x.tons === t.tons) === i)
   .sort((a, b) => a.tons - b.tons);

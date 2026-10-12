@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react";
 import Icon from "@/components/ui/icon";
 import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
-import { trucks, cities } from "@/components/sections/calculator/data";
+import { trucks } from "@/components/sections/calculator/data";
+import { DELIVERY_CITIES } from "@/components/brickShop/deliveryCities";
+import { kmRateFor, tripCost, roundTo, MIN_HOURS } from "@/lib/deliveryPricing";
 import type { Material } from "@/data/materials";
 import { MAX_LINK } from "@/data/contacts";
 import MaxIcon from "@/components/ui/MaxIcon";
@@ -10,7 +12,6 @@ import { reachGoal } from "@/lib/metrika";
 import { toast } from "sonner";
 import SlingerNotice, { SLINGER_TEXT } from "@/components/materials/SlingerNotice";
 
-const MIN_HOURS = 4;
 
 type Kind = {
   id: "road" | "walk";
@@ -55,14 +56,14 @@ const BordyurCalculator = ({ items }: Props) => {
   const [kindId, setKindId] = useState<Kind["id"]>("road");
   const [mode, setMode] = useState<"pcs" | "pallets">("pcs");
   const [qty, setQty] = useState(50);
-  const [cityName, setCityName] = useState(cities[0].name);
+  const [cityName, setCityName] = useState(DELIVERY_CITIES[0].name);
   const [pickedTruck, setPickedTruck] = useState<string | null>(null);
 
   const baseKind = KINDS.find((k) => k.id === kindId) || KINDS[0];
   const [packByKind, setPackByKind] = useState<Record<string, number>>({});
   const perPallet = packByKind[baseKind.id] || baseKind.perPallet;
   const kind = useMemo(() => ({ ...baseKind, perPallet }), [baseKind, perPallet]);
-  const city = cities.find((c) => c.name === cityName) || cities[0];
+  const city = DELIVERY_CITIES.find((c) => c.name === cityName) || DELIVERY_CITIES[0];
 
   const unitPrice = useMemo(() => {
     const item = items.find((m) => m.name.toLowerCase().includes(kind.match));
@@ -82,7 +83,7 @@ const BordyurCalculator = ({ items }: Props) => {
           const cap = tonsOf(t.capacity);
           const perTrip = Math.max(1, Math.floor(cap / palletT));
           const trips = Math.ceil(pallets / perTrip);
-          const cost = (t.price * MIN_HOURS + Math.round(city.hours * t.price)) * trips;
+          const cost = roundTo(tripCost(city.km, cap, t.price)) * trips;
           return { t, cap, perTrip, trips, cost };
         })
         .sort((a, b) => a.trips - b.trips || a.cost - b.cost),
@@ -116,7 +117,7 @@ const BordyurCalculator = ({ items }: Props) => {
       `Вес: ~${totalT.toFixed(1)} т`,
       `Материал: ${fmt(materialTotal)} ₽`,
       `Машина: ${chosen.t.short} (${chosen.t.capacity}), рейсов: ${chosen.trips}`,
-      `Адрес: ${city.name}, доставка: ${fmt(chosen.cost)} ₽`,
+      `Адрес: ${city.name} (${city.km} км), доставка: ${fmt(chosen.cost)} ₽`,
       `Итого: ${fmt(total)} ₽`,
       SLINGER_TEXT,
     ];
@@ -279,9 +280,9 @@ const BordyurCalculator = ({ items }: Props) => {
                 onChange={(e) => setCityName(e.target.value)}
                 className="w-full h-12 rounded-xl border border-white/15 bg-black/30 px-4 text-white focus:outline-none focus:border-accent"
               >
-                {cities.map((c) => (
+                {DELIVERY_CITIES.map((c) => (
                   <option key={c.name} value={c.name} className="bg-zinc-900">
-                    {c.name}
+                    {c.name} · {c.km} км
                   </option>
                 ))}
               </select>
@@ -311,7 +312,7 @@ const BordyurCalculator = ({ items }: Props) => {
                           )}
                         </span>
                         <span className="block text-xs text-muted-foreground mt-0.5">
-                          {o.t.capacity} · стрела {o.t.boom} · до {o.perTrip} подд. за рейс
+                          {o.t.capacity} · стрела {o.t.boom} · до {o.perTrip} подд. за рейс · {kmRateFor(o.cap)} ₽/км
                         </span>
                         <span className={`block text-xs mt-0.5 font-semibold ${o.trips === 1 ? "text-emerald-400" : "text-amber-300"}`}>
                           {o.trips === 1 ? "Увезёт за 1 рейс" : `Нужно ${o.trips} ${tripsWord(o.trips)}`}
@@ -319,7 +320,7 @@ const BordyurCalculator = ({ items }: Props) => {
                       </span>
                       <span className="text-right shrink-0">
                         <span className="block text-white font-black text-sm">{fmt(o.cost)} ₽</span>
-                        <span className="block text-[11px] text-muted-foreground">{fmt(o.t.price)} ₽/ч</span>
+                        <span className="block text-[11px] text-muted-foreground">{o.trips > 1 ? `${fmt(o.cost / o.trips)} ₽ × ${o.trips}` : "за рейс"}</span>
                       </span>
                     </button>
                   );
@@ -351,7 +352,7 @@ const BordyurCalculator = ({ items }: Props) => {
                 <span className="text-white font-bold whitespace-nowrap">{fmt(chosen.cost)} ₽</span>
               </div>
               <p className="text-[11px] text-muted-foreground">
-                Минимальный заказ машины {MIN_HOURS} ч{city.hours > 0 ? ` + дорога до г. ${city.name}` : ""}, разгрузка краном включена
+                {city.name} · {city.km} км. Дорога туда и обратно по {kmRateFor(chosen.cap)} ₽/км + разгрузка краном. Минимальный заказ — {MIN_HOURS} ч работы машины
               </p>
               <SlingerNotice />
             </div>
