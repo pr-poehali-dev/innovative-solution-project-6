@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 
@@ -79,6 +80,9 @@ const linkGroups: LinkGroup[] = [
 ];
 
 const SeoFooterLinks = () => {
+  const [open, setOpen] = useState<Record<number, boolean>>({});
+  const toggle = (i: number) => setOpen((o) => ({ ...o, [i]: !o[i] }));
+
   return (
     <section className="py-10 sm:py-16 px-4 sm:px-6 border-t border-accent/10 bg-accent/[0.03]">
       <div className="w-full">
@@ -91,18 +95,36 @@ const SeoFooterLinks = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 mb-4 sm:mb-6 items-start">
           {linkGroups.map((group, i) => (
-            <div key={i} className="p-4 sm:p-5 rounded-2xl border border-accent/15 bg-card/30">
-              <div className="flex items-center gap-2 mb-4 pb-3 border-b border-accent/15">
+            <div
+              key={i}
+              className={`rounded-2xl border bg-card/30 transition-colors ${open[i] ? "border-accent/40" : "border-accent/15 hover:border-accent/30"}`}
+            >
+              <button
+                type="button"
+                onClick={() => toggle(i)}
+                aria-expanded={!!open[i]}
+                className="w-full flex items-center gap-2 p-4 sm:p-5 text-left"
+              >
                 <div className="w-8 h-8 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
                   <Icon name={group.icon} size={15} className="text-accent" />
                 </div>
-                <h3 className="font-display font-bold text-sm sm:text-base text-white truncate">
+                <h3 className="flex-1 min-w-0 font-display font-bold text-sm sm:text-base text-white truncate">
                   {group.title}
                 </h3>
-              </div>
-              <ul className="space-y-2">
+                <span className="text-[11px] text-muted-foreground shrink-0">{group.links.length}</span>
+                <Icon
+                  name="ChevronDown"
+                  size={18}
+                  className={`text-accent shrink-0 transition-transform duration-300 ${open[i] ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`grid transition-[grid-template-rows] duration-300 ease-out ${open[i] ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+              >
+                <div className="overflow-hidden">
+              <ul className="space-y-2 px-4 sm:px-5 pb-4 sm:pb-5 pt-3 border-t border-accent/15 mx-4 sm:mx-5 !px-0">
                 {group.links.map((link, j) => {
                   const baseClass =
                     "inline-flex items-start gap-1.5 text-muted-foreground text-xs sm:text-sm leading-snug hover:text-accent transition-colors group";
@@ -127,6 +149,8 @@ const SeoFooterLinks = () => {
                   );
                 })}
               </ul>
+                </div>
+              </div>
             </div>
           ))}
         </div>
