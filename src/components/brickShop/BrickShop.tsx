@@ -133,7 +133,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
     <div id="shop" className="scroll-mt-24">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-6 sm:mb-8">
         {[
-          { icon: "Tag", value: minPrice ? `от ${minPrice} ₽` : "По запросу", label: minPrice ? "за штуку" : "цена за 5 минут" },
+          { icon: "Tag", value: minPrice ? `от ${minPrice.toLocaleString("ru-RU", { maximumFractionDigits: 2 })} ₽` : "По запросу", label: minPrice ? "за штуку" : "цена за 5 минут" },
           { icon: "Package", value: `${PALLET_SIZE} шт`, label: "в упаковке" },
           { icon: "Truck", value: "от 1 поддона", label: "доставка манипулятором" },
           { icon: "ShieldCheck", value: "ГОСТ 379-2015", label: "сертифицировано" },
