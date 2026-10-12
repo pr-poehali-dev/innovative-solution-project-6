@@ -17,7 +17,7 @@ export default function TruckContent({ truck, slug }: TruckContentProps) {
   return (
     <>
       {/* Описание */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <section className="w-full px-4 sm:px-6 lg:px-10 py-8">
         <div className="border border-accent/10 rounded-2xl bg-card/30 p-6 sm:p-8">
           <div className="flex items-center gap-2 mb-4">
             <Icon name="Info" size={18} className="text-accent" />
@@ -29,7 +29,7 @@ export default function TruckContent({ truck, slug }: TruckContentProps) {
 
       {/* Габаритная схема */}
       {truck.scheme && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <section className="w-full px-4 sm:px-6 lg:px-10 py-8">
           <div className="border border-accent/10 rounded-2xl bg-card/30 p-4 sm:p-8">
             <div className="flex items-center gap-2 mb-4">
               <Icon name="Ruler" size={18} className="text-accent" />
@@ -56,7 +56,7 @@ export default function TruckContent({ truck, slug }: TruckContentProps) {
       )}
 
       {/* Применение */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <section className="w-full px-4 sm:px-6 lg:px-10 py-8">
         <h2 className="text-2xl sm:text-3xl font-black tracking-tighter mb-6">
           Где применяется
         </h2>
@@ -71,7 +71,7 @@ export default function TruckContent({ truck, slug }: TruckContentProps) {
       </section>
 
       {/* Другая техника */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <section className="w-full px-4 sm:px-6 lg:px-10 py-8">
         <h2 className="text-xl sm:text-3xl font-black tracking-tighter mb-6">Другая техника</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {Object.entries(trucks)
@@ -91,7 +91,7 @@ export default function TruckContent({ truck, slug }: TruckContentProps) {
       </section>
 
       {/* Города работы */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <section className="w-full px-4 sm:px-6 lg:px-10 py-8">
         <h2 className="text-xl sm:text-3xl font-black tracking-tighter mb-2">
           Куда подаём {truck.title}
         </h2>

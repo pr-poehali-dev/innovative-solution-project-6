@@ -23,7 +23,7 @@ interface TruckHeroProps {
 export function TruckHeader({ onCallback }: { onCallback: () => void }) {
   return (
     <header className="fixed top-0 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <div className="w-full px-4 sm:px-6 lg:px-10 py-4 flex justify-between items-center">
         <BrandLogo size="sm" compact />
         <div className="flex items-center gap-2 sm:gap-3">
           <button
@@ -47,7 +47,7 @@ export default function TruckHero({ truck, slug, onOrder }: Omit<TruckHeroProps,
   return (
     <>
       {/* Хлебные крошки */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+      <div className="w-full px-4 sm:px-6 lg:px-10 py-4">
         <Breadcrumbs
           items={[
             { label: "Главная", to: "/" },
@@ -59,7 +59,7 @@ export default function TruckHero({ truck, slug, onOrder }: Omit<TruckHeroProps,
       </div>
 
       {/* Основной блок */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <section className="w-full px-4 sm:px-6 lg:px-10 py-8">
         <div className="grid lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-16 items-start">
           {/* Фото / галерея */}
           <TruckGallery truck={truck} />

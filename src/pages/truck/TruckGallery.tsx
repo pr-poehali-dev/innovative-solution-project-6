@@ -14,7 +14,7 @@ export default function TruckGallery({ truck }: TruckGalleryProps) {
   return (
     <div className="flex flex-col gap-3">
       {/* Главное фото */}
-      <div className="relative rounded-2xl overflow-hidden aspect-video lg:aspect-square bg-card/50 border border-accent/10">
+      <div className="relative rounded-2xl overflow-hidden aspect-video bg-card/50 border border-accent/10">
         <img
           key={current}
           src={current}
@@ -32,7 +32,7 @@ export default function TruckGallery({ truck }: TruckGalleryProps) {
 
       {/* Миниатюры */}
       {gallery.length > 1 && (
-        <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 sm:gap-3">
+        <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 sm:gap-3">
           {gallery.map((img, i) => (
             <button
               key={img + i}

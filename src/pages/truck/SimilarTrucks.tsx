@@ -22,7 +22,7 @@ const SimilarTrucks = ({ currentSlug }: Props) => {
   if (similar.length === 0) return null;
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
+    <section className="w-full px-4 sm:px-6 lg:px-10 py-10 sm:py-16">
       <div className="flex items-end justify-between gap-4 mb-6 sm:mb-8">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/30 mb-3">

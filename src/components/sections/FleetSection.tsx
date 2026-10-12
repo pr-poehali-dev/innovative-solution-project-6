@@ -39,7 +39,7 @@ const FleetSection = () => {
 
   return (
     <section className="pt-4 sm:pt-6 pb-16 sm:pb-32 px-4 sm:px-6 scroll-mt-20 sm:scroll-mt-24">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         {trucks.map((truck, idx) => (
           <TruckCard
             key={idx}

@@ -49,7 +49,7 @@ export default function TruckPage() {
         <TruckHero truck={truck} slug={slug!} onOrder={() => setModalOpen(true)} />
 
         {/* Калькулятор */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+        <section className="w-full px-4 sm:px-6 lg:px-10 py-4">
           <PriceCalculator pricePerHour={truck.priceNum} onOrder={(result) => {
             setCalcSummary(`${result.hours} ч × ${result.shifts} дн. × ${result.pricePerHour.toLocaleString("ru-RU")} ₽/ч = ${result.total.toLocaleString("ru-RU")} ₽`);
             setModalOpen(true);
