@@ -31,11 +31,15 @@ export const slides: { id: string; alt: string; fullSrc?: string; mobileSrc?: st
   { id: "e8b0e860-8ca1-40df-8600-4d28597aa247", alt: "КамАЗ с манипулятором DY" },
 ];
 
-export const navLinks = [
-  ...(SHOP_PUBLIC ? [{ href: "/stroymaterialy", label: "Стройматериалы", icon: "Package" }] : []),
+export const manipulatorLinks = [
   { href: "#features", label: "Преимущества", icon: "Award" },
   { href: "#fleet", label: "Техника", icon: "Truck" },
   { href: "#usecases", label: "Услуги", icon: "Wrench" },
   { href: "#how", label: "Как это работает", icon: "Route" },
+];
+
+export const navLinks = [
+  ...(SHOP_PUBLIC ? [{ href: "/stroymaterialy", label: "Стройматериалы", icon: "Package" }] : []),
+  { href: "#manipulator", label: "Манипулятор", icon: "Truck" },
   { href: "/blog", label: "Блог", icon: "BookOpen" },
 ];

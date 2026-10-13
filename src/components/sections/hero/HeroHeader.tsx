@@ -7,11 +7,22 @@ import OfflineStatusDot from "@/components/ui/OfflineStatusDot";
 import MaxButton from "@/components/ui/MaxButton";
 import MaterialsMenu, { MATERIALS_HAS_DROPDOWN, MATERIALS_MAIN_HREF, materialHref } from "./MaterialsMenu";
 import { HEADER_MENU_CATEGORIES } from "@/data/materials";
-import { navLinks } from "./heroData";
+import { navLinks, manipulatorLinks } from "./heroData";
 
 const HeroHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [manipOpen, setManipOpen] = useState(false);
+  const [manipMobile, setManipMobile] = useState(false);
+  const manipRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (manipRef.current && !manipRef.current.contains(e.target as Node)) setManipOpen(false);
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, []);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -44,6 +55,51 @@ const HeroHeader = () => {
             {navLinks.map(link => {
               if (link.href === "/stroymaterialy") {
                 return <MaterialsMenu key={link.href} />;
+              }
+              if (link.href === "#manipulator") {
+                return (
+                  <div
+                    key={link.href}
+                    ref={manipRef}
+                    className="relative"
+                    onMouseEnter={() => setManipOpen(true)}
+                    onMouseLeave={() => setManipOpen(false)}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setManipOpen((v) => !v)}
+                      className="group relative inline-flex items-center gap-1.5 py-1.5 whitespace-nowrap transition-all hover:-translate-y-0.5"
+                    >
+                      <Icon name={link.icon} size={14} className="text-accent/70 group-hover:text-accent transition-colors drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" />
+                      <span
+                        className="font-bold bg-gradient-to-b from-[#fff3c4] via-[#f5d680] to-[#d9a441] bg-clip-text text-transparent group-hover:from-white group-hover:via-[#ffe9a8] group-hover:to-[#f5d680] transition-all"
+                        style={{ fontFamily: "'Cinzel', serif", letterSpacing: "0.06em" }}
+                      >
+                        {link.label}
+                      </span>
+                      <Icon name="ChevronDown" size={13} className={`text-accent/70 transition-transform duration-300 ${manipOpen ? "rotate-180 text-accent" : ""}`} />
+                    </button>
+                    {manipOpen && (
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50">
+                        <div className="w-60 rounded-2xl border border-accent/40 bg-[#0e1420] shadow-2xl shadow-black/80 p-2">
+                          {manipulatorLinks.map((c) => (
+                            <a
+                              key={c.href}
+                              href={c.href}
+                              onClick={() => setManipOpen(false)}
+                              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-white/80 hover:text-white hover:bg-accent/10 transition-all"
+                            >
+                              <span className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
+                                <Icon name={c.icon} size={15} className="text-accent" />
+                              </span>
+                              {c.label}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
               }
               return (
                 <a
@@ -116,6 +172,38 @@ const HeroHeader = () => {
                           <a
                             key={c.slug}
                             href={materialHref(c)}
+                            onClick={() => setMenuOpen(false)}
+                            className="flex items-center gap-2.5 py-2.5 px-3 rounded-lg text-sm text-white/75 hover:text-white hover:bg-white/5 transition-all"
+                          >
+                            <Icon name={c.icon} size={14} className="text-accent shrink-0" />
+                            {c.label}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              if (link.href === "#manipulator") {
+                return (
+                  <div key={link.href} className="rounded-xl border border-accent/20 overflow-hidden">
+                    <button
+                      type="button"
+                      onClick={() => setManipMobile((v) => !v)}
+                      className="w-full flex items-center gap-3 py-3 px-3 text-sm font-bold text-white/90"
+                    >
+                      <span className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
+                        <Icon name={link.icon} size={15} className="text-accent" />
+                      </span>
+                      <span style={{ fontFamily: "'Cinzel', serif", letterSpacing: "0.02em" }}>{link.label}</span>
+                      <Icon name="ChevronDown" size={16} className={`ml-auto text-accent transition-transform ${manipMobile ? "rotate-180" : ""}`} />
+                    </button>
+                    {manipMobile && (
+                      <div className="px-2 pb-2 flex flex-col gap-0.5">
+                        {manipulatorLinks.map((c) => (
+                          <a
+                            key={c.href}
+                            href={c.href}
                             onClick={() => setMenuOpen(false)}
                             className="flex items-center gap-2.5 py-2.5 px-3 rounded-lg text-sm text-white/75 hover:text-white hover:bg-white/5 transition-all"
                           >
