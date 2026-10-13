@@ -168,6 +168,7 @@ const BlockCalc = ({ items, onOrder }: { items: Material[]; onOrder: (item: Mate
   const area = Math.max(0, parseNum(perimeter) * parseNum(height) - parseNum(openings));
   const volume = area * (thick / 1000) * 1.05;
   const packs = Math.ceil(volume / pack.m3);
+  const glueBags = Math.ceil(packs * pack.m3);
   const field = "w-full h-12 rounded-xl bg-black/20 border border-accent/30 px-3 text-white font-bold focus:outline-none focus:border-accent";
 
   return (
@@ -228,6 +229,19 @@ const BlockCalc = ({ items, onOrder }: { items: Material[]; onOrder: (item: Mate
           </div>
         ))}
       </div>
+      {packs > 0 && (
+        <div className="flex items-center gap-3 rounded-xl border border-accent/25 bg-accent/5 p-3 mb-5">
+          <span className="w-10 h-10 shrink-0 rounded-lg bg-accent/15 text-accent flex items-center justify-center">
+            <Icon name="PaintBucket" size={20} />
+          </span>
+          <div className="flex-1 leading-tight">
+            <p className="text-xs text-muted-foreground">Клей для блоков (шов 2–3 мм, ~25 кг на 1 м³)</p>
+            <p className="text-lg font-black text-white">
+              {glueBags} мешк. по 25 кг <span className="text-sm font-semibold text-muted-foreground">· {(glueBags * 25).toLocaleString("ru-RU")} кг</span>
+            </p>
+          </div>
+        </div>
+      )}
       <button
         type="button"
         disabled={packs < 1 || !block}
