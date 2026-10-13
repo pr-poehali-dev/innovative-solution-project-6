@@ -6,7 +6,7 @@ export const materialHref = (c: (typeof HEADER_MENU_CATEGORIES)[number]) =>
   "href" in c && c.href ? c.href : `/stroymaterialy/${c.slug}`;
 
 export const MATERIALS_MAIN_HREF = "/stroymaterialy";
-export const MATERIALS_HAS_DROPDOWN = HEADER_MENU_CATEGORIES.length > 1;
+export const MATERIALS_HAS_DROPDOWN = false;
 
 const MaterialsMenu = () => {
   const [open, setOpen] = useState(false);
