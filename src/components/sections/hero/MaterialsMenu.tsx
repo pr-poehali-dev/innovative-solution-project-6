@@ -6,7 +6,7 @@ export const materialHref = (c: (typeof HEADER_MENU_CATEGORIES)[number]) =>
   "href" in c && c.href ? c.href : `/stroymaterialy/${c.slug}`;
 
 export const MATERIALS_MAIN_HREF = "/stroymaterialy";
-export const MATERIALS_HAS_DROPDOWN = false;
+export const MATERIALS_HAS_DROPDOWN = true;
 
 const MaterialsMenu = () => {
   const [open, setOpen] = useState(false);
@@ -53,7 +53,16 @@ const MaterialsMenu = () => {
 
       {open && (
         <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50">
-          <div className="w-64 rounded-2xl border border-accent/40 bg-[#0e1420] shadow-2xl shadow-black/80 p-2">
+          <div className="w-72 rounded-2xl border border-accent/40 bg-[#0e1420] shadow-2xl shadow-black/80 p-2">
+            <a
+              href={MATERIALS_MAIN_HREF}
+              className="flex items-center gap-3 px-3 py-2.5 mb-1 rounded-xl text-sm font-bold text-accent hover:bg-accent/10 border-b border-white/10 transition-all"
+            >
+              <span className="w-8 h-8 rounded-lg bg-accent/15 flex items-center justify-center shrink-0">
+                <Icon name="LayoutGrid" size={15} className="text-accent" />
+              </span>
+              Все стройматериалы
+            </a>
             {HEADER_MENU_CATEGORIES.map((c) => (
               <a
                 key={c.slug}
