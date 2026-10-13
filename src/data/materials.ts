@@ -159,7 +159,34 @@ export const FALLBACK_MATERIALS: Material[] = [
     imageUrl: "/img/brick-marble-wm.jpg",
     inStock: true,
   },
+  {
+    id: 25,
+    name: "Газосиликатный блок D600 600×250×300",
+    category: "bloki",
+    price: "5 100 ₽",
+    unit: "м³",
+    description:
+      "Производство г. Бор. Размер 600×250×300 мм. Плотность D600. В упаковке (на поддоне) 1,8 м³ — 40 шт. Вес поддона 1405 кг. Прочный автоклавный блок для несущих стен: тёплый, ровная геометрия под кладку на клей. Доставка манипулятором с разгрузкой.",
+    imageUrl: "/img/gazoblok-bor-wm-size.jpg",
+    inStock: true,
+  },
+  {
+    id: 26,
+    name: "Газосиликатный блок D600 600×200×400",
+    category: "bloki",
+    price: "5 100 ₽",
+    unit: "м³",
+    description:
+      "Производство г. Бор. Размер 600×200×400 мм. Плотность D600. В упаковке (на поддоне) 1,92 м³ — 40 шт. Вес поддона 1500 кг. Толстый автоклавный блок для тёплых несущих стен без утепления: ровная геометрия под кладку на клей. Доставка манипулятором с разгрузкой.",
+    imageUrl: "/img/gazoblok-600-200-400.jpg",
+    inStock: true,
+  },
 ];
+
+function withFallback(items: Material[]): Material[] {
+  const ids = new Set(items.map((i) => i.id));
+  return [...items, ...FALLBACK_MATERIALS.filter((f) => !ids.has(f.id))];
+}
 
 function readCachedMaterials(): Material[] | null {
   try {
@@ -201,7 +228,7 @@ export async function fetchMaterials(): Promise<Material[]> {
     }
     return items;
   } catch {
-    return readCachedMaterials() || FALLBACK_MATERIALS;
+    return withFallback(readCachedMaterials() || []);
   }
 }
 
