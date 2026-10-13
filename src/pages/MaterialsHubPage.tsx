@@ -12,7 +12,7 @@ const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
 const SECTIONS = [
   { to: "/stroymaterialy/kirpich", title: "Кирпич силикатный", text: "Белый и цветной, М-150, Борский завод", image: "/img/hub-silikat.jpg", tag: "Хит продаж" },
-  { to: "/stroymaterialy/bloki", title: "Газосиликатные блоки", text: "D600 600×250×300, производство г. Бор", image: "/img/hub-bloki.jpg" },
+  { to: "/stroymaterialy/bloki", title: "Газосиликатные блоки", text: "D500–D600, 4 размера, с доставкой", image: "/img/hub-bloki.jpg" },
   { to: "/stroymaterialy/bordyur", title: "Бордюр", text: "Дорожный и тротуарный, поддонами", image: "/img/hub-bordyur.jpg" },
   { to: "/stroymaterialy/plity", title: "Плиты перекрытия и ФБС блоки", text: "Доставка и укладка манипулятором", image: "/img/hub-plity.jpg?v=2" },
   { to: "/stroymaterialy/keramicheskiy-oblicovochnyy", title: "Кирпич керамический облицовочный", text: "Для красивого и долговечного фасада", image: "/img/hub-oblic.jpg?v=2" },

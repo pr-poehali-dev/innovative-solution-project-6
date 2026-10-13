@@ -3,12 +3,13 @@ import Icon from "@/components/ui/icon";
 import PopularBricks from "@/components/sections/PopularBricks";
 
 const CATEGORIES = [
-  { to: "/stroymaterialy/kirpich", icon: "Blocks", title: "Кирпич", text: "Силикатный, цветной, М-150", hit: true },
-  { to: "/stroymaterialy/kirpich", icon: "Square", title: "Газоблоки", text: "Тёплые стены D400–D600" },
-  { to: "/stroymaterialy/kirpich", icon: "Layers", title: "Плиты и перемычки", text: "Перекрытия и проёмы" },
-  { to: "/stroymaterialy/kirpich", icon: "Package", title: "Цемент и смеси", text: "Кладка, стяжка, штукатурка" },
-  { to: "/stroymaterialy/kirpich", icon: "TreePine", title: "Пиломатериалы", text: "Брус, доска, кровля" },
+  { to: "/stroymaterialy/kirpich", icon: "Blocks", title: "Кирпич силикатный", text: "Белый и цветной, М-150", hit: true },
+  { to: "/stroymaterialy/bloki", icon: "Box", title: "Газосиликатные блоки", text: "D500–D600, тёплые стены" },
   { to: "/stroymaterialy/bordyur", icon: "LayoutGrid", title: "Бордюр", text: "Дорожный и тротуарный" },
+  { to: "/stroymaterialy/plity", icon: "Layers", title: "Плиты перекрытия и ФБС блоки", text: "Доставка и укладка" },
+  { to: "/stroymaterialy/keramicheskiy-oblicovochnyy", icon: "Sparkles", title: "Кирпич керамический облицовочный", text: "Для красивого фасада" },
+  { to: "/stroymaterialy/keramicheskiy", icon: "Blocks", title: "Кирпич керамический", text: "Рядовой полнотелый и пустотелый" },
+  { to: "/stroymaterialy/betonnye-kolca", icon: "Circle", title: "Бетонные кольца", text: "Для колодцев и септиков" },
 ];
 
 const PERKS = [
@@ -92,7 +93,7 @@ const Photo = ({ className = "" }: { className?: string }) => (
 );
 
 const Categories = ({ className = "" }: { className?: string }) => (
-  <div className={`relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 w-full ${className}`}>
+  <div className={`relative grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-3 w-full ${className}`}>
     {CATEGORIES.map((c) => (
       <Link
         key={c.title}
