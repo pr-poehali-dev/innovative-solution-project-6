@@ -29,8 +29,9 @@ const rub = (v: number) => `${Math.round(v).toLocaleString("ru-RU")} ₽`;
 const m3 = (v: number) => `${v.toLocaleString("ru-RU", { maximumFractionDigits: 3 })} м³`;
 
 const THICKNESS = [
-  { mm: 300, label: "300 мм", hint: "Стены дома" },
-  { mm: 250, label: "250 мм", hint: "Гараж, баня" },
+  { mm: 400, label: "400 мм", hint: "Тёплый дом", size: /600\s?[×x]\s?200\s?[×x]\s?400/ },
+  { mm: 300, label: "300 мм", hint: "Стены дома", size: /600\s?[×x]\s?250\s?[×x]\s?300/ },
+  { mm: 250, label: "250 мм", hint: "Гараж, баня", size: /600\s?[×x]\s?250\s?[×x]\s?300/ },
 ];
 
 interface BlockShopProps {
@@ -154,15 +155,19 @@ const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs
   );
 };
 
-const BlockCalc = ({ price, onOrder }: { price: number; onOrder: (packs: number) => void }) => {
+const BlockCalc = ({ items, onOrder }: { items: Material[]; onOrder: (item: Material, packs: number) => void }) => {
   const [perimeter, setPerimeter] = useState("40");
   const [height, setHeight] = useState("3");
   const [openings, setOpenings] = useState("8");
   const [thick, setThick] = useState(300);
 
+  const opt = THICKNESS.find((t) => t.mm === thick) || THICKNESS[1];
+  const block = items.find((i) => opt.size.test(i.name)) || items[0];
+  const price = block ? parseNum(block.price) : 0;
+  const pack = block ? packInfo(block) : { m3: PACK_M3, pcs: 0, kg: 0, density: "" };
   const area = Math.max(0, parseNum(perimeter) * parseNum(height) - parseNum(openings));
   const volume = area * (thick / 1000) * 1.05;
-  const packs = Math.ceil(volume / PACK_M3);
+  const packs = Math.ceil(volume / pack.m3);
   const field = "w-full h-12 rounded-xl bg-black/20 border border-accent/30 px-3 text-white font-bold focus:outline-none focus:border-accent";
 
   return (
@@ -191,7 +196,7 @@ const BlockCalc = ({ price, onOrder }: { price: number; onOrder: (packs: number)
         </label>
       </div>
       <p className="text-sm text-muted-foreground mb-2">Толщина стены</p>
-      <div className="grid grid-cols-2 gap-2 mb-5">
+      <div className="grid grid-cols-3 gap-2 mb-3">
         {THICKNESS.map((t) => (
           <button
             key={t.mm}
@@ -204,12 +209,18 @@ const BlockCalc = ({ price, onOrder }: { price: number; onOrder: (packs: number)
           </button>
         ))}
       </div>
+      {block && (
+        <p className="text-sm text-muted-foreground mb-5">
+          Блок: <span className="text-white font-semibold">{block.name}</span> · упаковка {m3(pack.m3)}
+          {pack.pcs > 0 && ` · ${pack.pcs} шт`}
+        </p>
+      )}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-5">
         {[
           { label: "Площадь стен", value: `${area.toLocaleString("ru-RU", { maximumFractionDigits: 1 })} м²` },
           { label: "Объём с запасом 5%", value: m3(Math.round(volume * 100) / 100) },
-          { label: "Упаковок", value: `${packs} уп.` },
-          { label: "Стоимость", value: price > 0 ? rub(packs * PACK_M3 * price) : "По запросу" },
+          { label: "Упаковок", value: `${packs} уп.${pack.pcs > 0 ? ` · ${packs * pack.pcs} шт` : ""}` },
+          { label: "Стоимость", value: price > 0 ? rub(packs * pack.m3 * price) : "По запросу" },
         ].map((s) => (
           <div key={s.label} className="rounded-xl bg-black/20 p-3">
             <p className="text-[11px] text-muted-foreground">{s.label}</p>
@@ -219,8 +230,8 @@ const BlockCalc = ({ price, onOrder }: { price: number; onOrder: (packs: number)
       </div>
       <button
         type="button"
-        disabled={packs < 1}
-        onClick={() => onOrder(packs)}
+        disabled={packs < 1 || !block}
+        onClick={() => block && onOrder(block, packs)}
         className="w-full h-14 rounded-2xl bg-gradient-to-r from-accent to-accent/85 text-black text-lg font-black inline-flex items-center justify-center gap-2 disabled:opacity-50"
       >
         <Icon name="ShoppingCart" size={20} />
@@ -341,7 +352,7 @@ const BlockShop = ({ items, loading }: BlockShopProps) => {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
         {[
           { icon: "Factory", value: "г. Бор", label: "производство" },
-          { icon: "Package", value: `${m3(PACK_M3)} · 40 шт`, label: "в упаковке" },
+          { icon: "Package", value: "40 шт", label: "в упаковке" },
           { icon: "Thermometer", value: "Тёплые стены", label: "без мостиков холода" },
           { icon: "Truck", value: "Манипулятор", label: "разгрузка на объекте" },
         ].map((s) => (
@@ -383,7 +394,7 @@ const BlockShop = ({ items, loading }: BlockShopProps) => {
 
       {main && (
         <div className="mt-10">
-          <BlockCalc price={parseNum(main.price)} onOrder={(packs) => setOrder({ item: main, packs })} />
+          <BlockCalc items={items} onOrder={(item, packs) => setOrder({ item, packs })} />
         </div>
       )}
 
