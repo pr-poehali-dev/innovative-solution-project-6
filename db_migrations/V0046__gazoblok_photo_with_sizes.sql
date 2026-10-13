@@ -1,0 +1,1 @@
+UPDATE t_p98221464_innovative_solution_.materials SET image_url = '/img/gazoblok-bor-wm-size.jpg' WHERE category = 'bloki' AND name = 'Газосиликатный блок D600 600×250×300';
