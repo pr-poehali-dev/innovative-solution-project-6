@@ -28,6 +28,7 @@ const EngagementTracker = softLazy(() => import("@/components/EngagementTracker"
 
 const NotFound = lazy(() => import("./components/NotFoundWithNoindex"));
 const TruckPage = lazy(() => import("./pages/TruckPage"));
+const MaterialsHubPage = lazy(() => import("./pages/MaterialsHubPage"));
 const CityPage = lazy(() => import("./pages/CityPage"));
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
 const BlogArticle = lazy(() => import("./pages/BlogArticle"));
@@ -170,7 +171,7 @@ const App = () => (
             <Route path="/karta/faw-j6p-390" element={<TruckCard />} />
             <Route path="/review-card" element={<ReviewCard />} />
             <Route path="/banner" element={<AdBanner />} />
-            <Route path="/stroymaterialy" element={<Navigate to="/stroymaterialy/kirpich" replace />} />
+            <Route path="/stroymaterialy" element={<MaterialsHubPage />} />
             <Route path="/stroymaterialy/:slug" element={<MaterialCategoryPage />} />
             <Route path="/admin/materialy" element={<AdminMaterials />} />
             <Route path="/admin/reindex" element={<AdminReindex />} />

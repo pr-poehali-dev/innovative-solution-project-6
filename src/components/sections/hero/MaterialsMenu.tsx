@@ -5,7 +5,7 @@ import { HEADER_MENU_CATEGORIES } from "@/data/materials";
 export const materialHref = (c: (typeof HEADER_MENU_CATEGORIES)[number]) =>
   "href" in c && c.href ? c.href : `/stroymaterialy/${c.slug}`;
 
-export const MATERIALS_MAIN_HREF = HEADER_MENU_CATEGORIES[0] ? materialHref(HEADER_MENU_CATEGORIES[0]) : "/stroymaterialy";
+export const MATERIALS_MAIN_HREF = "/stroymaterialy";
 export const MATERIALS_HAS_DROPDOWN = HEADER_MENU_CATEGORIES.length > 1;
 
 const MaterialsMenu = () => {
