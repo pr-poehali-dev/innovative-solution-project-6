@@ -366,7 +366,7 @@ const BlockShop = ({ items, loading }: BlockShopProps) => {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
         {[
           { icon: "Factory", value: "г. Бор", label: "производство" },
-          { icon: "Package", value: "40 шт", label: "в упаковке" },
+          { icon: "Package", value: "40–50 шт", label: "в упаковке" },
           { icon: "Thermometer", value: "Тёплые стены", label: "без мостиков холода" },
           { icon: "Truck", value: "Манипулятор", label: "разгрузка на объекте" },
         ].map((s) => (

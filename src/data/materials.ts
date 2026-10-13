@@ -181,6 +181,17 @@ export const FALLBACK_MATERIALS: Material[] = [
     imageUrl: "/img/gazoblok-600-200-400.jpg",
     inStock: true,
   },
+  {
+    id: 27,
+    name: "Газосиликатный блок D600 600×200×300",
+    category: "bloki",
+    price: "5 100 ₽",
+    unit: "м³",
+    description:
+      "Производство г. Бор. Размер 600×200×300 мм. Плотность D600. В упаковке (на поддоне) 1,80 м³ — 50 шт. Вес поддона 1405 кг. Автоклавный блок для несущих стен: тёплый, лёгкий, ровная геометрия под кладку на клей. Доставка манипулятором с разгрузкой.",
+    imageUrl: "/img/gazoblok-600-200-300.jpg",
+    inStock: true,
+  },
 ];
 
 function withFallback(items: Material[]): Material[] {
