@@ -1,0 +1,1 @@
+UPDATE t_p98221464_innovative_solution_.materials SET archived = true WHERE id = 2 AND category = 'bloki';
