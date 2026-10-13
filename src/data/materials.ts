@@ -192,6 +192,17 @@ export const FALLBACK_MATERIALS: Material[] = [
     imageUrl: "/img/gazoblok-600-200-300.jpg",
     inStock: true,
   },
+  {
+    id: 28,
+    name: "Газосиликатный блок D500 625×200×400",
+    category: "bloki",
+    price: "5 150 ₽",
+    unit: "м³",
+    description:
+      "Производство «Поритеп». Размер 625×200×400 мм. Плотность D500. В упаковке (на поддоне) 2,0 м³ — 40 шт. Вес поддона 1280 кг. Лёгкий и самый тёплый блок для стен без утепления: ровная геометрия под кладку на клей. Доставка манипулятором с разгрузкой.",
+    imageUrl: "/img/gazoblok-625-200-400-d500.jpg",
+    inStock: true,
+  },
 ];
 
 function withFallback(items: Material[]): Material[] {

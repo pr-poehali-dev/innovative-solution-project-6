@@ -95,7 +95,7 @@ const BlockCalc = ({ items, onOrder }: { items: Material[]; onOrder: (item: Mate
 
       <Step n={2} title="Выберите блок">
         <p className="text-xs text-muted-foreground -mt-1 mb-3">Толщина блока = толщина стены. Чем толще — тем теплее дом.</p>
-        <div className="grid sm:grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
           {blocks.map((b) => {
             const active = b.it.id === sel.it.id;
             const kg = b.pack.kg && b.pack.pcs ? Math.round(b.pack.kg / b.pack.pcs) : 0;
@@ -109,7 +109,10 @@ const BlockCalc = ({ items, onOrder }: { items: Material[]; onOrder: (item: Mate
                 {active && <Icon name="CircleCheck" size={18} className="absolute top-2.5 right-2.5 text-accent" />}
                 <p className="text-xs text-muted-foreground">Стена</p>
                 <p className="text-2xl font-black text-white leading-none mb-1">{b.size!.t} мм</p>
-                <p className="text-sm font-semibold text-accent">Блок {b.size!.l}×{b.size!.h}×{b.size!.t}</p>
+                <p className="text-sm font-semibold text-accent">
+                  Блок {b.size!.l}×{b.size!.h}×{b.size!.t}
+                  {b.pack.density && <span className="ml-1.5 px-1.5 py-0.5 rounded bg-black/30 text-[11px] text-white">{b.pack.density}</span>}
+                </p>
                 <p className="text-xs text-muted-foreground mt-1">{wallHint(b.size!.t, b.size!.h)}</p>
                 <p className="text-xs text-white/70 mt-2">
                   {b.pack.pcs > 0 && `${b.pack.pcs} шт в поддоне`}
