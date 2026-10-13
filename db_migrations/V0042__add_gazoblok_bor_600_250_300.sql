@@ -1,0 +1,2 @@
+INSERT INTO t_p98221464_innovative_solution_.materials (name, category, price, unit, description, image_url, in_stock, sort_order, archived)
+VALUES ('Газосиликатный блок 600×250×300', 'bloki', '5 100 ₽', 'м³', 'Производство г. Бор. Размер 600×250×300 мм. В упаковке 1,875 м³. Автоклавный блок для несущих стен и перегородок: тёплый, лёгкий, ровная геометрия под кладку на клей. Доставка манипулятором с разгрузкой.', '/img/gazoblok-bor-600-250-300.webp', true, 0, false);

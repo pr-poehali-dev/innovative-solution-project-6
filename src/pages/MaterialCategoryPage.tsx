@@ -11,6 +11,7 @@ import MaxButton from "@/components/ui/MaxButton";
 import LazySection from "@/components/LazySection";
 import BrickShop from "@/components/brickShop/BrickShop";
 import BrickHeroSlider from "@/components/brickShop/BrickHeroSlider";
+import BlockShop from "@/components/blockShop/BlockShop";
 import BordyurCalculator from "@/components/materials/BordyurCalculator";
 import NotFound from "@/pages/NotFound";
 import { fetchMaterials, MATERIAL_CATEGORIES, type Material } from "@/data/materials";
@@ -141,7 +142,7 @@ const MaterialCategoryPage = () => {
         </div>
       </header>
 
-      {page.cat === "kirpich" ? (
+      {page.cat === "kirpich" || page.cat === "bloki" ? (
       <main className="shop-light pt-24 sm:pt-28 pb-16">
         <section className="w-full px-4 sm:px-6 lg:px-10 pt-4">
           <div className="relative mb-8 rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/10 via-card/40 to-transparent px-5 py-7 sm:px-10 sm:py-10 overflow-hidden text-center flex flex-col">
@@ -157,7 +158,7 @@ const MaterialCategoryPage = () => {
               <span className="h-px w-10 sm:w-20 bg-gradient-to-l from-transparent to-[#d9a441]" />
             </div>
             <h1 className="relative leading-[1.05]">
-              <span className="block text-3xl sm:text-5xl font-black tracking-tight text-white">Магазин кирпича</span>
+              <span className="block text-3xl sm:text-5xl font-black tracking-tight text-white">{page.cat === "bloki" ? "Газосиликатные блоки" : "Магазин кирпича"}</span>
               <span
                 className="block mt-2 text-4xl sm:text-6xl font-bold bg-gradient-to-b from-[#fff3c4] via-[#f5d680] to-[#d9a441] bg-clip-text text-transparent drop-shadow-[0_4px_18px_rgba(232,168,32,0.35)]"
                 style={{ fontFamily: "'Cinzel', serif", letterSpacing: "0.04em" }}
@@ -166,7 +167,9 @@ const MaterialCategoryPage = () => {
               </span>
             </h1>
             <p className="relative mt-4 text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
-              Силикатный кирпич М-150 с доставкой манипулятором по Нижнему Новгороду и области
+              {page.cat === "bloki"
+                ? "Газосиликатный блок производства г. Бор с доставкой манипулятором по Нижнему Новгороду и области"
+                : "Силикатный кирпич М-150 с доставкой манипулятором по Нижнему Новгороду и области"}
             </p>
             <div className="relative mt-6 flex flex-wrap items-center gap-2 justify-center">
               <PhoneButton size="md" className="rounded-xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
@@ -189,6 +192,7 @@ const MaterialCategoryPage = () => {
               </figure>
             )}
           </div>
+          {page.cat === "bloki" ? <BlockShop items={visible} loading={loading} /> : <>
           <BrickShop items={visible} loading={loading} />
           <div className="mt-10 rounded-3xl border border-accent/30 bg-card/60 px-6 pt-6 sm:px-8 sm:pt-8 flex flex-col md:flex-row md:items-center gap-5 overflow-hidden">
             <div className="flex-1 pb-2 md:pb-8 text-center md:text-left">
@@ -209,6 +213,7 @@ const MaterialCategoryPage = () => {
               className="w-36 sm:w-48 h-auto self-center md:self-end drop-shadow-[0_10px_25px_rgba(0,0,0,0.45)]"
             />
           </div>
+          </>}
         </section>
       </main>
       ) : (
