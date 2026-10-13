@@ -85,7 +85,7 @@ export const MATERIAL_SEO_PAGES: MaterialSeoPage[] = [
     cat: "bloki",
     heroSlides: [
       {
-        image: "/img/gazoblok-hero.jpg",
+        image: "/img/gazoblok-hero2.jpg",
         alt: "Газосиликатные блоки «Фаворит» D600, производство г. Бор — телефон +7 960 188-30-84",
         badge: "Фаворит",
         title: "Газосиликатные блоки Фаворит",
