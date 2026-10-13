@@ -97,15 +97,15 @@ const MaterialsHubPage = () => {
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  {s.tag && (
-                    <span className="absolute top-3 left-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-black text-xs font-black uppercase">
-                      <Icon name="Flame" size={12} />
-                      {s.tag}
-                    </span>
-                  )}
                 </div>
                 <div className="p-4 sm:p-5 flex items-center gap-3 flex-1">
                   <div className="flex-1 min-w-0">
+                    {s.tag && (
+                      <span className="mb-2 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-black text-xs font-black uppercase">
+                        <Icon name="Flame" size={12} />
+                        {s.tag}
+                      </span>
+                    )}
                     <h2 className="text-lg font-black text-white leading-tight">{s.title}</h2>
                     <p className="text-sm text-muted-foreground mt-1">{s.text}</p>
                   </div>
