@@ -14,7 +14,7 @@ const CDN = "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a6
 
 const SECTIONS = [
   { to: "/stroymaterialy/kirpich", title: "Кирпич силикатный", text: "Белый и цветной, М-150, Борский завод", image: "/img/kirpich-silikatnyy-hub.webp", tag: "Хит продаж", contain: true },
-  { to: "/stroymaterialy/bloki", title: "Газосиликатные блоки", text: "D600 600×250×300, производство г. Бор", image: "/img/gazoblok-bor-600-250-300.webp" },
+  { to: "/stroymaterialy/bloki", title: "Газосиликатные блоки", text: "D600 600×250×300, производство г. Бор", image: "/img/gazoblok-hub.webp", contain: true },
   { to: "/stroymaterialy/bordyur", title: "Бордюр", text: "Дорожный и тротуарный, поддонами", image: `${CDN}/bucket/edb86890-67b2-46dc-9a1e-e9baa1be5684.jpg` },
   { to: "/stroymaterialy/plity", title: "Плиты перекрытия и ФБС блоки", text: "Доставка и укладка манипулятором", image: `${CDN}/files/d4c84658-35b1-40c3-9098-94e28d8ffe4a.jpg` },
   { to: "/stroymaterialy/keramicheskiy-oblicovochnyy", title: "Кирпич керамический облицовочный", text: "Для красивого и долговечного фасада", image: `${CDN}/files/9899c045-8af8-40c8-9c26-75cd49e01040.jpg` },
