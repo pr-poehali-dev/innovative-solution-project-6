@@ -8,9 +8,23 @@ import { reachGoal } from "@/lib/metrika";
 import type { Material } from "@/data/materials";
 import BrickPhotoViewer from "@/components/brickShop/BrickPhotoViewer";
 
-const PACK_M3 = 1.875;
+const PACK_M3 = 1.8;
 
 const parseNum = (s: string) => parseFloat((s || "0").replace(/[^\d.,]/g, "").replace(",", ".")) || 0;
+
+const packInfo = (item: Material) => {
+  const d = item.description || "";
+  const vol = d.match(/(\d+[.,]\d+)\s*м³/);
+  const pcs = d.match(/(\d+)\s*(?:шт|блок)/);
+  const kg = d.match(/Вес поддона\s*(\d+)/i);
+  const dens = (item.name + " " + d).match(/D\s?(\d{3})/);
+  return {
+    m3: vol ? parseFloat(vol[1].replace(",", ".")) : PACK_M3,
+    pcs: pcs ? Number(pcs[1]) : 0,
+    kg: kg ? Number(kg[1]) : 0,
+    density: dens ? `D${dens[1]}` : "",
+  };
+};
 const rub = (v: number) => `${Math.round(v).toLocaleString("ru-RU")} ₽`;
 const m3 = (v: number) => `${v.toLocaleString("ru-RU", { maximumFractionDigits: 3 })} м³`;
 
@@ -27,7 +41,8 @@ interface BlockShopProps {
 const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs: number) => void; onPhoto: () => void }) => {
   const [packs, setPacks] = useState(1);
   const price = parseNum(item.price);
-  const packPrice = price * PACK_M3;
+  const pack = packInfo(item);
+  const packPrice = price * pack.m3;
   const size = (item.description || "").match(/(\d{3})\s?[×x]\s?(\d{2,3})\s?[×x]\s?(\d{2,3})/);
   const bor = /бор/i.test(item.description || "");
 
@@ -50,8 +65,11 @@ const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs
           <p className="text-sm font-black uppercase tracking-wide">Газосиликат</p>
           <p className="text-[11px] text-white/80">Лёгкий, тёплый, ровный</p>
         </div>
+        {pack.density && (
+          <span className="ml-auto px-2.5 py-1 rounded-full bg-black/40 text-accent text-xs font-black border border-accent/40">{pack.density}</span>
+        )}
         <span
-          className={`ml-auto inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${
+          className={`${pack.density ? "" : "ml-auto "}inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${
             item.inStock ? "bg-emerald-600 text-white" : "bg-black/40 text-white"
           }`}
         >
@@ -80,8 +98,14 @@ const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs
           </div>
           <div className="rounded-lg bg-white/5 p-2">
             <p className="text-muted-foreground">В упаковке</p>
-            <p className="text-white font-semibold">{m3(PACK_M3)}</p>
+            <p className="text-white font-semibold">{m3(pack.m3)}{pack.pcs > 0 && ` · ${pack.pcs} шт`}</p>
           </div>
+          {pack.kg > 0 && (
+            <div className="rounded-lg bg-white/5 p-2 col-span-2 flex items-center justify-between">
+              <p className="text-muted-foreground">Вес поддона</p>
+              <p className="text-white font-semibold">{pack.kg.toLocaleString("ru-RU")} кг</p>
+            </div>
+          )}
         </div>
 
         <div className="mt-auto">
@@ -93,7 +117,7 @@ const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs
             {price > 0 && (
               <div className="text-right">
                 <p className="text-sm font-bold text-white">{rub(packPrice)}</p>
-                <p className="text-xs text-muted-foreground">за упаковку {m3(PACK_M3)}</p>
+                <p className="text-xs text-muted-foreground">за упаковку {m3(pack.m3)}</p>
               </div>
             )}
           </div>
@@ -121,7 +145,7 @@ const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs
           </div>
           {price > 0 && (
             <p className="text-xs text-muted-foreground mt-2 text-center">
-              {packs} уп. = {m3(packs * PACK_M3)} · {rub(packs * packPrice)}
+              {packs} уп. = {m3(packs * pack.m3)}{pack.pcs > 0 && ` (${packs * pack.pcs} шт)`} · {rub(packs * packPrice)}
             </p>
           )}
         </div>
@@ -213,14 +237,15 @@ const OrderModal = ({ item, packs, onClose }: { item: Material; packs: number; o
   const [address, setAddress] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "error" | "done">("idle");
   const price = parseNum(item.price);
-  const total = count * PACK_M3 * price;
+  const pack = packInfo(item);
+  const total = count * pack.m3 * price;
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || phone.trim().length < 6) return;
     setStatus("loading");
     const comment = [
-      `ЗАКАЗ БЛОКОВ: ${item.name} — ${count} уп. (${m3(count * PACK_M3)})${price > 0 ? `, ${rub(total)}` : ""}`,
+      `ЗАКАЗ БЛОКОВ: ${item.name} — ${count} уп. (${m3(count * pack.m3)}${pack.pcs > 0 ? `, ${count * pack.pcs} шт` : ""}${pack.kg > 0 ? `, ${((count * pack.kg) / 1000).toLocaleString("ru-RU", { maximumFractionDigits: 1 })} т` : ""})${price > 0 ? `, ${rub(total)}` : ""}`,
       address && `Адрес: ${address}`,
       "Доставка манипулятором",
     ]
@@ -270,7 +295,7 @@ const OrderModal = ({ item, packs, onClose }: { item: Material; packs: number; o
               {item.imageUrl && <img src={item.imageUrl} alt="" className="w-16 h-16 rounded-xl bg-white object-contain p-1" />}
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-bold text-white leading-tight">{item.name}</p>
-                <p className="text-xs text-muted-foreground mt-1">{m3(count * PACK_M3)}{price > 0 && ` · ${rub(total)}`}</p>
+                <p className="text-xs text-muted-foreground mt-1">{m3(count * pack.m3)}{pack.pcs > 0 && ` · ${count * pack.pcs} шт`}{price > 0 && ` · ${rub(total)}`}</p>
               </div>
               <div className="flex items-center rounded-xl border border-accent/30">
                 <button type="button" onClick={() => setCount((c) => Math.max(1, c - 1))} className="w-9 h-10 flex items-center justify-center text-white" aria-label="Меньше">
@@ -316,7 +341,7 @@ const BlockShop = ({ items, loading }: BlockShopProps) => {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
         {[
           { icon: "Factory", value: "г. Бор", label: "производство" },
-          { icon: "Package", value: m3(PACK_M3), label: "в упаковке" },
+          { icon: "Package", value: `${m3(PACK_M3)} · 40 шт`, label: "в упаковке" },
           { icon: "Thermometer", value: "Тёплые стены", label: "без мостиков холода" },
           { icon: "Truck", value: "Манипулятор", label: "разгрузка на объекте" },
         ].map((s) => (
