@@ -7,32 +7,10 @@ import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts"
 import { reachGoal } from "@/lib/metrika";
 import type { Material } from "@/data/materials";
 import BrickPhotoViewer from "@/components/brickShop/BrickPhotoViewer";
+import BlockCalc from "./BlockCalc";
+import { m3, packInfo, parseNum, rub } from "./blockUtils";
 
-const PACK_M3 = 1.8;
 
-const parseNum = (s: string) => parseFloat((s || "0").replace(/[^\d.,]/g, "").replace(",", ".")) || 0;
-
-const packInfo = (item: Material) => {
-  const d = item.description || "";
-  const vol = d.match(/(\d+[.,]\d+)\s*м³/);
-  const pcs = d.match(/(\d+)\s*(?:шт|блок)/);
-  const kg = d.match(/Вес поддона\s*(\d+)/i);
-  const dens = (item.name + " " + d).match(/D\s?(\d{3})/);
-  return {
-    m3: vol ? parseFloat(vol[1].replace(",", ".")) : PACK_M3,
-    pcs: pcs ? Number(pcs[1]) : 0,
-    kg: kg ? Number(kg[1]) : 0,
-    density: dens ? `D${dens[1]}` : "",
-  };
-};
-const rub = (v: number) => `${Math.round(v).toLocaleString("ru-RU")} ₽`;
-const m3 = (v: number) => `${v.toLocaleString("ru-RU", { maximumFractionDigits: 3 })} м³`;
-
-const THICKNESS = [
-  { mm: 400, label: "400 мм", hint: "Тёплый дом", size: /600\s?[×x]\s?200\s?[×x]\s?400/ },
-  { mm: 300, label: "300 мм", hint: "Стены дома", size: /600\s?[×x]\s?250\s?[×x]\s?300/ },
-  { mm: 250, label: "250 мм", hint: "Гараж, баня", size: /600\s?[×x]\s?250\s?[×x]\s?300/ },
-];
 
 interface BlockShopProps {
   items: Material[];
@@ -152,106 +130,6 @@ const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs
         </div>
       </div>
     </article>
-  );
-};
-
-const BlockCalc = ({ items, onOrder }: { items: Material[]; onOrder: (item: Material, packs: number) => void }) => {
-  const [perimeter, setPerimeter] = useState("40");
-  const [height, setHeight] = useState("3");
-  const [openings, setOpenings] = useState("8");
-  const [thick, setThick] = useState(300);
-
-  const opt = THICKNESS.find((t) => t.mm === thick) || THICKNESS[1];
-  const block = items.find((i) => opt.size.test(i.name)) || items[0];
-  const price = block ? parseNum(block.price) : 0;
-  const pack = block ? packInfo(block) : { m3: PACK_M3, pcs: 0, kg: 0, density: "" };
-  const area = Math.max(0, parseNum(perimeter) * parseNum(height) - parseNum(openings));
-  const volume = area * (thick / 1000) * 1.05;
-  const packs = Math.ceil(volume / pack.m3);
-  const glueBags = Math.ceil(packs * pack.m3);
-  const field = "w-full h-12 rounded-xl bg-black/20 border border-accent/30 px-3 text-white font-bold focus:outline-none focus:border-accent";
-
-  return (
-    <div className="rounded-3xl border border-accent/30 bg-card/60 p-5 sm:p-8">
-      <div className="flex items-center gap-3 mb-5">
-        <span className="w-11 h-11 rounded-xl bg-accent text-black flex items-center justify-center">
-          <Icon name="Calculator" size={22} />
-        </span>
-        <div>
-          <h2 className="text-xl sm:text-2xl font-black text-white">Сколько блоков нужно?</h2>
-          <p className="text-sm text-muted-foreground">Посчитаем объём и количество упаковок</p>
-        </div>
-      </div>
-      <div className="grid sm:grid-cols-3 gap-3 mb-4">
-        <label className="text-sm text-muted-foreground">
-          Периметр стен, м
-          <input inputMode="decimal" value={perimeter} onChange={(e) => setPerimeter(e.target.value)} className={`${field} mt-1`} />
-        </label>
-        <label className="text-sm text-muted-foreground">
-          Высота стен, м
-          <input inputMode="decimal" value={height} onChange={(e) => setHeight(e.target.value)} className={`${field} mt-1`} />
-        </label>
-        <label className="text-sm text-muted-foreground">
-          Окна и двери, м²
-          <input inputMode="decimal" value={openings} onChange={(e) => setOpenings(e.target.value)} className={`${field} mt-1`} />
-        </label>
-      </div>
-      <p className="text-sm text-muted-foreground mb-2">Толщина стены</p>
-      <div className="grid grid-cols-3 gap-2 mb-3">
-        {THICKNESS.map((t) => (
-          <button
-            key={t.mm}
-            type="button"
-            onClick={() => setThick(t.mm)}
-            className={`rounded-xl border p-3 text-left transition-all ${thick === t.mm ? "border-accent bg-accent/15" : "border-white/15 hover:border-accent/50"}`}
-          >
-            <p className="font-black text-white">{t.label}</p>
-            <p className="text-xs text-muted-foreground">{t.hint}</p>
-          </button>
-        ))}
-      </div>
-      {block && (
-        <p className="text-sm text-muted-foreground mb-5">
-          Блок: <span className="text-white font-semibold">{block.name}</span> · упаковка {m3(pack.m3)}
-          {pack.pcs > 0 && ` · ${pack.pcs} шт`}
-        </p>
-      )}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-5">
-        {[
-          { label: "Площадь стен", value: `${area.toLocaleString("ru-RU", { maximumFractionDigits: 1 })} м²` },
-          { label: "Объём с запасом 5%", value: m3(Math.round(volume * 100) / 100) },
-          { label: "Упаковок", value: `${packs} уп.${pack.pcs > 0 ? ` · ${packs * pack.pcs} шт` : ""}` },
-          { label: "Стоимость", value: price > 0 ? rub(packs * pack.m3 * price) : "По запросу" },
-        ].map((s) => (
-          <div key={s.label} className="rounded-xl bg-black/20 p-3">
-            <p className="text-[11px] text-muted-foreground">{s.label}</p>
-            <p className="text-lg font-black text-accent">{s.value}</p>
-          </div>
-        ))}
-      </div>
-      {packs > 0 && (
-        <div className="flex items-center gap-3 rounded-xl border border-accent/25 bg-accent/5 p-3 mb-5">
-          <span className="w-10 h-10 shrink-0 rounded-lg bg-accent/15 text-accent flex items-center justify-center">
-            <Icon name="PaintBucket" size={20} />
-          </span>
-          <div className="flex-1 leading-tight">
-            <p className="text-xs text-muted-foreground">Клей для блоков (шов 2–3 мм, ~25 кг на 1 м³)</p>
-            <p className="text-lg font-black text-white">
-              {glueBags} мешк. по 25 кг <span className="text-sm font-semibold text-muted-foreground">· {(glueBags * 25).toLocaleString("ru-RU")} кг</span>
-            </p>
-          </div>
-        </div>
-      )}
-      <button
-        type="button"
-        disabled={packs < 1 || !block}
-        onClick={() => block && onOrder(block, packs)}
-        className="w-full h-14 rounded-2xl bg-gradient-to-r from-accent to-accent/85 text-black text-lg font-black inline-flex items-center justify-center gap-2 disabled:opacity-50"
-      >
-        <Icon name="ShoppingCart" size={20} />
-        Заказать {packs} уп.
-      </button>
-    </div>
   );
 };
 
