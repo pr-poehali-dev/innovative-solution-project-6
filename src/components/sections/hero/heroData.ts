@@ -40,7 +40,7 @@ export const manipulatorLinks = [
 
 export const navLinks = [
   ...(SHOP_PUBLIC ? [{ href: "/stroymaterialy", label: "Стройматериалы", icon: "Package" }] : []),
-  { href: "#manipulator", label: "Манипулятор", icon: "Truck" },
   { href: "/asfaltirovanie", label: "Асфальтирование", icon: "Construction" },
+  { href: "#manipulator", label: "Манипулятор", icon: "Truck" },
   { href: "/blog", label: "Блог", icon: "BookOpen" },
 ];
