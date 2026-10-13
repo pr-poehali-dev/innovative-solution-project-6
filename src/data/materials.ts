@@ -184,8 +184,12 @@ export const FALLBACK_MATERIALS: Material[] = [
 ];
 
 function withFallback(items: Material[]): Material[] {
+  const fb = new Map(FALLBACK_MATERIALS.map((f) => [f.id, f]));
   const ids = new Set(items.map((i) => i.id));
-  return [...items, ...FALLBACK_MATERIALS.filter((f) => !ids.has(f.id))];
+  return [
+    ...items.map((i) => fb.get(i.id) || i),
+    ...FALLBACK_MATERIALS.filter((f) => !ids.has(f.id)),
+  ];
 }
 
 function readCachedMaterials(): Material[] | null {
