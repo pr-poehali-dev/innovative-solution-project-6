@@ -1,0 +1,1 @@
+UPDATE t_p98221464_innovative_solution_.materials SET image_url = '/img/gazoblok-600-250-300.jpg' WHERE id = 25;
