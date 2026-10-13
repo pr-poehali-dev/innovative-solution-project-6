@@ -10,16 +10,14 @@ import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts"
 
 const SiteFooter = lazy(() => import("@/components/sections/SiteFooter"));
 
-const CDN = "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692";
-
 const SECTIONS = [
-  { to: "/stroymaterialy/kirpich", title: "Кирпич силикатный", text: "Белый и цветной, М-150, Борский завод", image: "/img/kirpich-silikatnyy-hub.webp", tag: "Хит продаж", contain: true },
-  { to: "/stroymaterialy/bloki", title: "Газосиликатные блоки", text: "D600 600×250×300, производство г. Бор", image: "/img/gazoblok-hub.webp", contain: true },
-  { to: "/stroymaterialy/bordyur", title: "Бордюр", text: "Дорожный и тротуарный, поддонами", image: `${CDN}/bucket/edb86890-67b2-46dc-9a1e-e9baa1be5684.jpg` },
-  { to: "/stroymaterialy/plity", title: "Плиты перекрытия и ФБС блоки", text: "Доставка и укладка манипулятором", image: `${CDN}/files/d4c84658-35b1-40c3-9098-94e28d8ffe4a.jpg` },
-  { to: "/stroymaterialy/keramicheskiy-oblicovochnyy", title: "Кирпич керамический облицовочный", text: "Для красивого и долговечного фасада", image: `${CDN}/files/9899c045-8af8-40c8-9c26-75cd49e01040.jpg` },
-  { to: "/stroymaterialy/keramicheskiy", title: "Кирпич керамический", text: "Рядовой полнотелый и пустотелый", image: `${CDN}/files/e65a42c0-c0c6-4ee6-859e-72753255a37d.jpg` },
-  { to: "/stroymaterialy/betonnye-kolca", title: "Бетонные кольца", text: "Для колодцев и септиков, с установкой", image: `${CDN}/files/a8e144d0-bb0c-403f-a93e-6379a2ec1e60.jpg` },
+  { to: "/stroymaterialy/kirpich", title: "Кирпич силикатный", text: "Белый и цветной, М-150, Борский завод", image: "/img/hub-silikat.jpg", tag: "Хит продаж" },
+  { to: "/stroymaterialy/bloki", title: "Газосиликатные блоки", text: "D600 600×250×300, производство г. Бор", image: "/img/hub-bloki.jpg" },
+  { to: "/stroymaterialy/bordyur", title: "Бордюр", text: "Дорожный и тротуарный, поддонами", image: "/img/hub-bordyur.jpg" },
+  { to: "/stroymaterialy/plity", title: "Плиты перекрытия и ФБС блоки", text: "Доставка и укладка манипулятором", image: "/img/hub-plity.jpg" },
+  { to: "/stroymaterialy/keramicheskiy-oblicovochnyy", title: "Кирпич керамический облицовочный", text: "Для красивого и долговечного фасада", image: "/img/hub-oblic.jpg" },
+  { to: "/stroymaterialy/keramicheskiy", title: "Кирпич керамический", text: "Рядовой полнотелый и пустотелый", image: "/img/hub-keram.jpg" },
+  { to: "/stroymaterialy/betonnye-kolca", title: "Бетонные кольца", text: "Для колодцев и септиков, с установкой", image: "/img/hub-kolca.jpg" },
 ];
 
 const MaterialsHubPage = () => {
@@ -97,7 +95,7 @@ const MaterialsHubPage = () => {
                     src={s.image}
                     alt={s.title}
                     loading="lazy"
-                    className={`w-full h-full ${"contain" in s && s.contain ? "object-contain p-3" : "object-cover"} group-hover:scale-105 transition-transform duration-500`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   {s.tag && (
                     <span className="absolute top-3 left-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-black text-xs font-black uppercase">
