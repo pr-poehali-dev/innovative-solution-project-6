@@ -1,0 +1,1 @@
+UPDATE t_p98221464_innovative_solution_.materials SET image_url = '/img/gazoblok-625-200-400-poritep.jpg' WHERE id = 28;
