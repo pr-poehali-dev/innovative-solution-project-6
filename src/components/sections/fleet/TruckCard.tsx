@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import MobileSwipeGallery from "@/components/ui/MobileSwipeGallery";
 import { Truck, pluralizeUnits } from "./data";
+import { trucks as truckPages } from "@/pages/truck/trucksData";
 
 interface TruckCardProps {
   truck: Truck;
@@ -37,7 +38,7 @@ const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
             {truck.image && (
               <div className="relative lg:hidden overflow-hidden bg-white/5">
                 <MobileSwipeGallery
-                  images={truck.images?.length ? truck.images : [truck.image]}
+                  images={truckPages[truck.slug]?.images?.length ? truckPages[truck.slug].images! : truck.images?.length ? truck.images : [truck.image]}
                   alt={truck.alt}
                   className="w-full h-64 sm:h-[420px] md:h-[520px]"
                   imgClassName="object-contain h-64 sm:h-[420px] md:h-[520px]"
