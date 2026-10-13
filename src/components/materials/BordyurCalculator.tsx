@@ -58,6 +58,7 @@ const BordyurCalculator = ({ items }: Props) => {
   const [qty, setQty] = useState(50);
   const [cityName, setCityName] = useState(DELIVERY_CITIES[0].name);
   const [pickedTruck, setPickedTruck] = useState<string | null>(null);
+  const [showAllTrucks, setShowAllTrucks] = useState(false);
 
   const baseKind = KINDS.find((k) => k.id === kindId) || KINDS[0];
   const [packByKind, setPackByKind] = useState<Record<string, number>>({});
@@ -125,9 +126,9 @@ const BordyurCalculator = ({ items }: Props) => {
   }, [kind, pieces, pallets, totalT, materialTotal, chosen, city, total]);
 
   return (
-    <section id="bordyur-calc" className="w-full px-4 sm:px-6 lg:px-10 pb-12 scroll-mt-24">
+    <section id="bordyur-calc" className="w-full px-3 sm:px-6 lg:px-10 pb-12 scroll-mt-24">
       <div className="rounded-3xl border border-accent/25 bg-card/50 overflow-hidden">
-        <div className="px-5 sm:px-8 py-6 border-b border-accent/10 bg-gradient-to-r from-accent/15 to-transparent flex items-center gap-3">
+        <div className="px-4 sm:px-8 py-5 sm:py-6 border-b border-accent/10 bg-gradient-to-r from-accent/15 to-transparent flex items-center gap-3">
           <span className="w-11 h-11 rounded-xl bg-accent/15 flex items-center justify-center shrink-0">
             <Icon name="Calculator" size={22} className="text-accent" />
           </span>
@@ -137,7 +138,7 @@ const BordyurCalculator = ({ items }: Props) => {
           </div>
         </div>
 
-        <div className="p-5 sm:p-8 grid lg:grid-cols-[1fr_340px] gap-8">
+        <div className="p-3.5 sm:p-8 grid lg:grid-cols-[1fr_340px] gap-6 sm:gap-8">
           <div className="space-y-7">
             <div>
               <p className="text-sm font-bold text-white mb-3">1. Какой бордюр</p>
@@ -154,17 +155,17 @@ const BordyurCalculator = ({ items }: Props) => {
                         setKindId(k.id);
                         setPickedTruck(null);
                       }}
-                      className={`text-left rounded-2xl border-2 p-3 sm:p-4 transition-all flex gap-3 items-center ${
+                      className={`text-left rounded-2xl border-2 p-2.5 sm:p-4 transition-all flex flex-col sm:flex-row gap-2 sm:gap-3 sm:items-center ${
                         active ? "border-accent bg-accent/10" : "border-white/10 bg-card/60 hover:border-accent/50"
                       }`}
                     >
                       {item?.imageUrl && (
-                        <img src={item.imageUrl} alt={item.name} loading="lazy" className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl object-cover shrink-0" />
+                        <img src={item.imageUrl} alt={item.name} loading="lazy" className="w-full h-24 sm:w-16 sm:h-16 rounded-xl object-cover shrink-0" />
                       )}
                       <span className="min-w-0">
                         <span className="block font-black text-white text-sm sm:text-base">{k.title}</span>
                         <span className="block text-xs text-muted-foreground">{k.size} мм</span>
-                        <span className="block text-accent font-bold text-sm mt-1">{fmt(p)} ₽/шт</span>
+                        <span className="block text-accent font-black text-base mt-1 whitespace-nowrap">{fmt(p)} ₽/шт</span>
                       </span>
                     </button>
                   );
@@ -232,16 +233,16 @@ const BordyurCalculator = ({ items }: Props) => {
                 >
                   <Icon name="Minus" size={18} />
                 </button>
-                <div className="relative flex-1">
+                <div className="relative flex-1 min-w-0">
                   <input
                     type="number"
                     inputMode="numeric"
                     min={1}
                     value={qty}
                     onChange={(e) => setSafeQty(Number(e.target.value))}
-                    className="w-full h-12 rounded-xl border border-white/15 bg-black/30 px-4 pr-20 text-lg font-black text-white focus:outline-none focus:border-accent"
+                    className="w-full h-12 rounded-xl border border-white/15 bg-black/30 px-3 sm:px-4 pr-20 sm:pr-24 text-lg font-black text-white focus:outline-none focus:border-accent"
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
+                  <span className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-xs sm:text-sm text-muted-foreground pointer-events-none">
                     {mode === "pallets" ? "поддонов" : "шт / пог. м"}
                   </span>
                 </div>
@@ -291,19 +292,20 @@ const BordyurCalculator = ({ items }: Props) => {
             <div>
               <p className="text-sm font-bold text-white mb-3">4. Какой манипулятор отвезёт</p>
               <div className="space-y-2">
-                {options.map((o) => {
+                {options.map((o, idx) => {
                   const active = o.t.name === chosen.t.name;
+                  if (!showAllTrucks && idx >= 3 && !active) return null;
                   const isBest = o.t.name === best.t.name;
                   return (
                     <button
                       key={o.t.name}
                       type="button"
                       onClick={() => setPickedTruck(o.t.name)}
-                      className={`w-full text-left rounded-2xl border-2 p-2.5 flex items-center gap-3 transition-all ${
+                      className={`w-full text-left rounded-2xl border-2 p-2 sm:p-2.5 flex items-center gap-2.5 sm:gap-3 transition-all ${
                         active ? "border-accent bg-accent/10" : "border-white/10 bg-card/60 hover:border-accent/50"
                       }`}
                     >
-                      <img src={o.t.image} alt={o.t.name} loading="lazy" className="w-20 h-14 sm:w-24 sm:h-16 rounded-xl object-cover shrink-0" />
+                      <img src={o.t.image} alt={o.t.name} loading="lazy" className="w-16 h-12 sm:w-24 sm:h-16 rounded-lg sm:rounded-xl object-cover shrink-0" />
                       <span className="flex-1 min-w-0">
                         <span className="flex flex-wrap items-center gap-2">
                           <span className="font-black text-white text-sm">{o.t.short}</span>
@@ -312,7 +314,7 @@ const BordyurCalculator = ({ items }: Props) => {
                           )}
                         </span>
                         <span className="block text-xs text-muted-foreground mt-0.5">
-                          {o.t.capacity} · стрела {o.t.boom} · до {o.perTrip} подд. за рейс
+                          {o.t.capacity} · до {o.perTrip} подд.<span className="hidden sm:inline"> за рейс · стрела {o.t.boom}</span>
                         </span>
                         <span className={`block text-xs mt-0.5 font-semibold ${o.trips === 1 ? "text-emerald-400" : "text-amber-300"}`}>
                           {o.trips === 1 ? "Увезёт за 1 рейс" : `Нужно ${o.trips} ${tripsWord(o.trips)}`}
@@ -326,6 +328,16 @@ const BordyurCalculator = ({ items }: Props) => {
                   );
                 })}
               </div>
+              {options.length > 3 && (
+                <button
+                  type="button"
+                  onClick={() => setShowAllTrucks((v) => !v)}
+                  className="mt-2 w-full h-11 rounded-xl border border-accent/40 text-sm font-bold text-white inline-flex items-center justify-center gap-2 hover:bg-accent/10"
+                >
+                  {showAllTrucks ? "Свернуть" : `Показать все машины (${options.length})`}
+                  <Icon name="ChevronDown" size={16} className={`text-accent transition-transform ${showAllTrucks ? "rotate-180" : ""}`} />
+                </button>
+              )}
             </div>
           </div>
 
