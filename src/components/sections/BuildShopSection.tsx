@@ -54,7 +54,7 @@ const Heading = () => (
 const Buttons = () => (
   <div className="flex flex-col sm:flex-row gap-3">
     <Link
-      to="/stroymaterialy/kirpich"
+      to="/stroymaterialy"
       className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-black text-black transition-transform hover:scale-[1.03]"
       style={{ background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)" }}
     >
