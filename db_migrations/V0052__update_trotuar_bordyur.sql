@@ -1,0 +1,1 @@
+UPDATE materials SET image_url = 'https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/7334c84e-debc-4de9-9133-cf95f1c7c1aa.jpg', description = 'Размер 1000×200×80 мм. Для пешеходных дорожек, отмостки и клумб. На поддоне 40 шт — 8 400 ₽ или 30 шт — 6 300 ₽. Доставка манипулятором.' WHERE id = 18;
