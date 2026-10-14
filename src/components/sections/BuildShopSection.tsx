@@ -71,23 +71,34 @@ const Buttons = () => (
   </div>
 );
 
+const PriceBadge = () => (
+  <>
+    <span className="text-[11px] sm:text-[12.5px] uppercase tracking-widest text-white/60">Кирпич</span>
+    <span className="text-lg sm:text-3xl font-black text-amber-300 leading-none sm:block sm:mt-1">
+      от 6.400 т.р<span className="text-xs sm:text-sm text-white/70 font-bold"> / уп.</span>
+    </span>
+  </>
+);
+
 const Photo = ({ className = "" }: { className?: string }) => (
-  <div className={`relative ${className}`}>
-    <img
-      src="/img/brick-favorit-hero8.jpg"
-      alt="Силикатный кирпич в магазине Фаворит"
-      loading="lazy"
-      decoding="async"
-      width="1360"
-      height="768"
-      className="absolute inset-0 w-full h-full object-cover object-[80%_center]"
-    />
-    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#4a4130] lg:via-transparent lg:via-20%" />
-    <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-1/4 rounded-2xl bg-black/70 backdrop-blur-md border border-amber-400/40 px-4 py-3">
-      <div className="text-[12.5px] uppercase tracking-widest text-white/60">Кирпич</div>
-      <div className="text-2xl sm:text-3xl font-black text-amber-300 leading-none mt-1">
-        от 6.400 т.р<span className="text-sm text-white/70 font-bold"> / уп.</span>
+  <div>
+    <div className={`relative ${className}`}>
+      <img
+        src="/img/brick-favorit-hero8.jpg"
+        alt="Силикатный кирпич в магазине Фаворит"
+        loading="lazy"
+        decoding="async"
+        width="1360"
+        height="768"
+        className="absolute inset-0 w-full h-full object-cover object-[80%_center]"
+      />
+      <div className="absolute inset-0 hidden sm:block bg-gradient-to-t from-black/40 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#4a4130] lg:via-transparent lg:via-20%" />
+      <div className="hidden sm:block absolute bottom-6 left-1/4 rounded-2xl bg-black/70 backdrop-blur-md border border-amber-400/40 px-4 py-3">
+        <PriceBadge />
       </div>
+    </div>
+    <div className="sm:hidden flex items-center justify-between gap-3 px-4 py-2.5 bg-black/40 border-t border-amber-400/30">
+      <PriceBadge />
     </div>
   </div>
 );
