@@ -148,17 +148,17 @@ const OrderNotifications = () => {
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5 mb-0.5">
             <Icon name="CheckCircle2" size={12} className="text-green-400 flex-shrink-0" />
-            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-green-400">Новый заказ</span>
+            <span className="text-[12px] sm:text-xs font-semibold uppercase tracking-wider text-green-400">Новый заказ</span>
           </div>
           <div className="text-xs sm:text-sm text-white leading-snug">
             <span className="font-bold">{n.name}</span>
             <span className="text-white/70"> из </span>
             <span className="font-semibold">{n.district}</span>
           </div>
-          <div className="text-[11px] sm:text-xs text-white/70 leading-snug mt-0.5">
+          <div className="text-[12.5px] sm:text-xs text-white/70 leading-snug mt-0.5">
             {n.verb ?? "заказал"} <span className="text-accent font-medium">{n.truck}</span>
           </div>
-          <div className="text-[10px] sm:text-[11px] text-white/40 mt-1 flex items-center gap-1">
+          <div className="text-[12px] sm:text-[12.5px] text-white/40 mt-1 flex items-center gap-1">
             <Icon name="Clock" size={10} />
             {n.time}
           </div>

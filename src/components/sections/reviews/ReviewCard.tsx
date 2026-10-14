@@ -33,7 +33,7 @@ const ReviewCard = ({ review, palette }: ReviewCardProps) => {
             <Icon name="Quote" size={20} className={palette.accentText} />
           </div>
           <div
-            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full ${palette.accentBg} border ${palette.accentBorder} ${palette.accentText} text-[10px] font-black tracking-widest text-right`}
+            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full ${palette.accentBg} border ${palette.accentBorder} ${palette.accentText} text-[12px] font-black tracking-widest text-right`}
           >
             <Icon name="CircleCheck" size={11} />
             <span className="line-clamp-1">{review.highlight}</span>
@@ -95,7 +95,7 @@ const ReviewCard = ({ review, palette }: ReviewCardProps) => {
 
         {/* Услуга + категория */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black tracking-widest uppercase bg-cyan-500/15 border border-cyan-400/50 text-cyan-300">
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[12px] font-black tracking-widest uppercase bg-cyan-500/15 border border-cyan-400/50 text-cyan-300">
             <Icon name="Truck" size={11} />
             Манипулятор
           </span>

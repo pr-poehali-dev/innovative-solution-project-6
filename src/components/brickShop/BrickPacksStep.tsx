@@ -66,7 +66,7 @@ const BrickPacksStep = ({ packs, setPacks, packQty, format }: BrickPacksStepProp
           </div>
         ))}
       </div>
-      <p className="mt-3 text-[11px] text-muted-foreground">С учётом швов раствора и запаса 5% на бой и подрезку</p>
+      <p className="mt-3 text-[12.5px] text-muted-foreground">С учётом швов раствора и запаса 5% на бой и подрезку</p>
     </div>
   </Step>
 );

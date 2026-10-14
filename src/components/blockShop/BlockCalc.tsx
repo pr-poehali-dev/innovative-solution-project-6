@@ -111,7 +111,7 @@ const BlockCalc = ({ items, onOrder }: { items: Material[]; onOrder: (item: Mate
                 <p className="text-2xl font-black text-white leading-none mb-1">{b.size!.t} мм</p>
                 <p className="text-sm font-semibold text-accent">
                   Блок {b.size!.l}×{b.size!.h}×{b.size!.t}
-                  {b.pack.density && <span className="ml-1.5 px-1.5 py-0.5 rounded bg-black/30 text-[11px] text-white">{b.pack.density}</span>}
+                  {b.pack.density && <span className="ml-1.5 px-1.5 py-0.5 rounded bg-black/30 text-[12.5px] text-white">{b.pack.density}</span>}
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">{wallHint(b.size!.t, b.size!.h)}</p>
                 <p className="text-xs text-white/70 mt-2">
@@ -154,10 +154,10 @@ const BlockCalc = ({ items, onOrder }: { items: Material[]; onOrder: (item: Mate
             <div key={s.label} className="rounded-xl bg-black/20 p-3">
               <div className="flex items-center gap-1.5 text-muted-foreground">
                 <Icon name={s.icon} size={13} />
-                <p className="text-[11px]">{s.label}</p>
+                <p className="text-[12.5px]">{s.label}</p>
               </div>
               <p className="text-lg font-black text-white">{s.value}</p>
-              {s.sub && <p className="text-[11px] text-muted-foreground leading-tight">{s.sub}</p>}
+              {s.sub && <p className="text-[12.5px] text-muted-foreground leading-tight">{s.sub}</p>}
             </div>
           ))}
         </div>

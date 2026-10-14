@@ -81,23 +81,23 @@ const BrandLogo = ({ to = "/", size = "md", compact = false }: BrandLogoProps) =
       />
       <div className="flex flex-col leading-tight min-w-0">
         <div className={`${compact ? "hidden sm:flex" : "flex"} items-center gap-2 flex-wrap`}>
-          <span className="block text-[9px] sm:text-xs font-medium tracking-[0.22em] sm:tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>
+          <span className="block text-[11px] sm:text-xs font-medium tracking-[0.22em] sm:tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>
           {status.online ? (
             <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-green-500/15 border border-green-500/40" title="Работаем сейчас — звоните">
               <span className="relative flex w-1.5 h-1.5">
                 <span className="relative rounded-full w-1.5 h-1.5 bg-green-400" />
               </span>
-              <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-green-400">Онлайн</span>
+              <span className="text-[8px] sm:text-[11px] font-bold uppercase tracking-wider text-green-400">Онлайн</span>
             </span>
           ) : (
             <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-white/10 border border-white/20" title={`Откроемся через ${status.timeLeft}. Работаем с 7:00 до 22:00`}>
               <span className="w-1.5 h-1.5 rounded-full bg-white/50" />
-              <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-white/70">Оффлайн</span>
+              <span className="text-[8px] sm:text-[11px] font-bold uppercase tracking-wider text-white/70">Оффлайн</span>
             </span>
           )}
         </div>
         {!status.online && status.timeLeft && (
-          <span className={`${compact ? "hidden sm:block" : "block"} text-[9px] sm:text-[10px] font-semibold mt-0.5`} style={{ color: "#e8a820" }}>
+          <span className={`${compact ? "hidden sm:block" : "block"} text-[11px] sm:text-[12px] font-semibold mt-0.5`} style={{ color: "#e8a820" }}>
             Откроемся через {status.timeLeft}
           </span>
         )}
@@ -105,7 +105,7 @@ const BrandLogo = ({ to = "/", size = "md", compact = false }: BrandLogoProps) =
           ООО Фаворит
         </span>
         <span
-          className={`brand-tagline-glow ${compact ? "hidden sm:block" : "block"} text-[9px] sm:text-sm font-semibold uppercase mt-0.5 sm:mt-1 leading-tight tracking-[0.02em] sm:tracking-[0.1em]`}
+          className={`brand-tagline-glow ${compact ? "hidden sm:block" : "block"} text-[11px] sm:text-sm font-semibold uppercase mt-0.5 sm:mt-1 leading-tight tracking-[0.02em] sm:tracking-[0.1em]`}
           style={{ color: "#f5d680" }}
         >
           Надёжная аренда манипуляторов

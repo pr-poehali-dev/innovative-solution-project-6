@@ -47,7 +47,7 @@ const MediaAttach = ({ media, mediaError, fileInputRef, onFilesPicked, onRetry, 
               ) : (
                 <div className="w-full h-full flex flex-col items-center justify-center text-white/80 bg-gradient-to-br from-zinc-800 to-black">
                   <Icon name="Video" size={22} className="text-accent" />
-                  <span className="text-[9px] mt-1 px-1 line-clamp-1">{m.file.name}</span>
+                  <span className="text-[11px] mt-1 px-1 line-clamp-1">{m.file.name}</span>
                 </div>
               )}
 
@@ -55,7 +55,7 @@ const MediaAttach = ({ media, mediaError, fileInputRef, onFilesPicked, onRetry, 
               {m.uploadStatus === "uploading" && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/75 text-white">
                   <Icon name="Loader2" size={20} className="animate-spin text-accent" />
-                  <span className="text-[10px] mt-1 uppercase tracking-wider font-bold">
+                  <span className="text-[12px] mt-1 uppercase tracking-wider font-bold">
                     {typeof m.uploadProgress === "number" ? `${m.uploadProgress}%` : "Загрузка"}
                   </span>
                 </div>
@@ -68,7 +68,7 @@ const MediaAttach = ({ media, mediaError, fileInputRef, onFilesPicked, onRetry, 
                   title={m.errorText || "Ошибка"}
                 >
                   <Icon name="RotateCw" size={18} />
-                  <span className="text-[9px] mt-1 uppercase tracking-wider">Повторить</span>
+                  <span className="text-[11px] mt-1 uppercase tracking-wider">Повторить</span>
                 </button>
               )}
               {m.uploadStatus === "done" && (
@@ -77,7 +77,7 @@ const MediaAttach = ({ media, mediaError, fileInputRef, onFilesPicked, onRetry, 
                     <Icon name="Check" size={12} className="text-white" />
                   </div>
                   {m.kind === "image" && m.originalSize && m.finalSize && m.finalSize < m.originalSize * 0.9 && (
-                    <div className="absolute top-1 left-7 px-1.5 py-0.5 rounded-full bg-accent/95 text-black text-[9px] font-black uppercase tracking-wider shadow">
+                    <div className="absolute top-1 left-7 px-1.5 py-0.5 rounded-full bg-accent/95 text-black text-[11px] font-black uppercase tracking-wider shadow">
                       −{Math.round((1 - m.finalSize / m.originalSize) * 100)}%
                     </div>
                   )}
@@ -92,7 +92,7 @@ const MediaAttach = ({ media, mediaError, fileInputRef, onFilesPicked, onRetry, 
               >
                 <Icon name="X" size={12} />
               </button>
-              <div className="absolute bottom-0 left-0 right-0 px-1.5 py-0.5 bg-black/60 text-white text-[9px] font-medium uppercase tracking-wider">
+              <div className="absolute bottom-0 left-0 right-0 px-1.5 py-0.5 bg-black/60 text-white text-[11px] font-medium uppercase tracking-wider">
                 {m.kind === "video" ? "Видео" : "Фото"}
               </div>
             </div>
@@ -101,9 +101,9 @@ const MediaAttach = ({ media, mediaError, fileInputRef, onFilesPicked, onRetry, 
       )}
 
       {mediaError && (
-        <p className="text-amber-400 text-[11px] leading-snug">{mediaError}</p>
+        <p className="text-amber-400 text-[12.5px] leading-snug">{mediaError}</p>
       )}
-      <p className="text-[10px] text-white/40 leading-snug text-center">
+      <p className="text-[12px] text-white/40 leading-snug text-center">
         До {MAX_FILES} файлов, по 500 МБ. Фото сжимаются автоматически — заявка отправится быстрее.
       </p>
     </div>

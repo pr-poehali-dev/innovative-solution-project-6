@@ -49,7 +49,7 @@ const BrickHeroSlider = ({ slides, className = "" }: { slides: HeroSlide[]; clas
           />
           {!s.plain && <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />}
           {!s.plain && <figcaption className="absolute bottom-0 inset-x-0 p-4 sm:p-7 pb-9 sm:pb-11">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-accent text-accent-foreground px-3 py-1 text-[11px] sm:text-xs font-black uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-accent text-accent-foreground px-3 py-1 text-[12.5px] sm:text-xs font-black uppercase tracking-wider">
               {s.badge}
             </span>
             <h3 className="mt-2 text-lg sm:text-3xl font-black text-white leading-tight drop-shadow">{s.title}</h3>

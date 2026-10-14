@@ -225,7 +225,7 @@ const AsfaltirovanieGallery = () => {
                 <Icon name={t.icon} size={14} />
                 <span>{t.label}</span>
                 <span
-                  className={`text-[10px] sm:text-xs px-1.5 py-0.5 rounded-full ${
+                  className={`text-[12px] sm:text-xs px-1.5 py-0.5 rounded-full ${
                     isActive ? "bg-white/25" : "bg-amber-100 text-amber-700"
                   }`}
                 >

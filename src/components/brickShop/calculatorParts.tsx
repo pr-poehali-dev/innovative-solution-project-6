@@ -82,7 +82,7 @@ export const NumField = ({
       />
       <span className="pr-3 text-xs text-muted-foreground">{suffix}</span>
     </div>
-    {hint && <span className="block mt-1 text-[11px] text-muted-foreground/80">{hint}</span>}
+    {hint && <span className="block mt-1 text-[12.5px] text-muted-foreground/80">{hint}</span>}
   </label>
 );
 
@@ -90,7 +90,7 @@ export const Counter = ({ label, value, onChange, hint }: { label: string; value
   <div className="rounded-xl border border-white/10 bg-black/10 p-3 flex sm:block items-center justify-between gap-3">
     <div className="min-w-0">
       <p className="text-sm sm:text-xs text-white sm:text-muted-foreground font-bold sm:font-normal">{label}</p>
-      <p className="text-[11px] sm:hidden text-muted-foreground/80">{hint}</p>
+      <p className="text-[12.5px] sm:hidden text-muted-foreground/80">{hint}</p>
     </div>
     <div className="sm:mt-1.5 flex items-center gap-1 sm:justify-between shrink-0">
       <button
@@ -111,7 +111,7 @@ export const Counter = ({ label, value, onChange, hint }: { label: string; value
         <Icon name="Plus" size={16} />
       </button>
     </div>
-    <p className="hidden sm:block mt-1 text-[10px] text-muted-foreground/80">{hint}</p>
+    <p className="hidden sm:block mt-1 text-[12px] text-muted-foreground/80">{hint}</p>
   </div>
 );
 

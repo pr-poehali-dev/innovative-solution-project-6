@@ -67,7 +67,7 @@ const OfflineSuccessToast = () => {
                   : "Теперь сайт работает без интернета — можно открывать в дороге."}
               </p>
 
-              <div className="mt-2.5 flex items-center gap-1.5 text-[10px] text-green-400/90 font-bold uppercase tracking-wider">
+              <div className="mt-2.5 flex items-center gap-1.5 text-[12px] text-green-400/90 font-bold uppercase tracking-wider">
                 <span className="relative flex w-1.5 h-1.5">
                   <span className="relative w-1.5 h-1.5 rounded-full bg-green-400" />
                 </span>

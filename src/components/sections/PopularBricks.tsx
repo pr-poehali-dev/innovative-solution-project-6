@@ -74,7 +74,7 @@ const Card = ({ it }: { it: Item }) => (
       <p className="flex items-center gap-1.5 text-white font-black text-sm leading-tight">
         <span className="truncate">{it.title}</span>
         {it.hit && (
-          <span className="shrink-0 inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-black text-[9px] font-black uppercase">
+          <span className="shrink-0 inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-black text-[11px] font-black uppercase">
             <Icon name="Flame" size={10} />
             Хит
           </span>
@@ -84,7 +84,7 @@ const Card = ({ it }: { it: Item }) => (
       <div className="mt-2 flex items-end justify-between gap-2">
         <div className="min-w-0">
           <p className="text-amber-300 font-black text-lg leading-none whitespace-nowrap">{it.price}</p>
-          <p className="text-white/55 text-[11px] mt-1">{it.per}</p>
+          <p className="text-white/55 text-[12.5px] mt-1">{it.per}</p>
         </div>
         <span className="shrink-0 inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-amber-400 text-black text-xs font-black group-hover:bg-amber-300 transition-colors">
           Купить

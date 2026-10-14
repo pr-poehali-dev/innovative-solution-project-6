@@ -319,7 +319,7 @@ ${buildHtml()}
 
   const inputCls =
     "w-full px-3 py-2 rounded-lg bg-background/60 border border-accent/20 focus:border-accent/60 focus:outline-none text-white text-sm transition-colors";
-  const labelCls = "text-[11px] font-bold uppercase tracking-wider text-accent/80 mb-1 block";
+  const labelCls = "text-[12.5px] font-bold uppercase tracking-wider text-accent/80 mb-1 block";
 
   if (typeof document === "undefined") return null;
 
@@ -340,7 +340,7 @@ ${buildHtml()}
               <Icon name="FileText" size={18} className="text-accent" />
             </div>
             <div className="min-w-0">
-              <div className="text-accent text-[10px] uppercase tracking-widest font-semibold">Документ</div>
+              <div className="text-accent text-[12px] uppercase tracking-widest font-semibold">Документ</div>
               <h2 className="text-white font-display font-bold text-base sm:text-lg truncate">
                 Договор аренды техники
               </h2>
@@ -372,7 +372,7 @@ ${buildHtml()}
                   <Icon name={calcApplied ? "CircleCheck" : "Calculator"} size={18} className={calcApplied ? "text-emerald-400" : "text-accent"} />
                 </div>
                 <div className="flex-1 min-w-[180px]">
-                  <div className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${calcApplied ? "text-emerald-400" : "text-accent"}`}>
+                  <div className={`text-[12px] font-bold uppercase tracking-widest mb-1 ${calcApplied ? "text-emerald-400" : "text-accent"}`}>
                     {calcApplied ? "Расчёт подставлен" : "Найден расчёт из калькулятора"}
                   </div>
                   <div className="text-white text-sm font-semibold leading-snug">

@@ -57,7 +57,7 @@ const PositionTrackerQueryItem = ({
               href={`https://yandex.ru/search/?text=${encodeURIComponent(q.text)}&lr=47`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 px-2 py-1 rounded text-[10px] sm:text-xs font-semibold bg-red-500/10 text-red-600 border border-red-500/30 hover:bg-red-500/20"
+              className="inline-flex items-center gap-1 px-2 py-1 rounded text-[12px] sm:text-xs font-semibold bg-red-500/10 text-red-600 border border-red-500/30 hover:bg-red-500/20"
               title="Проверить в Яндексе (регион НН)"
             >
               <Icon name="Search" size={11} />
@@ -67,7 +67,7 @@ const PositionTrackerQueryItem = ({
               href={`https://www.google.com/search?q=${encodeURIComponent(q.text)}&gl=ru`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 px-2 py-1 rounded text-[10px] sm:text-xs font-semibold bg-blue-500/10 text-blue-600 border border-blue-500/30 hover:bg-blue-500/20"
+              className="inline-flex items-center gap-1 px-2 py-1 rounded text-[12px] sm:text-xs font-semibold bg-blue-500/10 text-blue-600 border border-blue-500/30 hover:bg-blue-500/20"
               title="Проверить в Google"
             >
               <Icon name="Search" size={11} />
@@ -86,7 +86,7 @@ const PositionTrackerQueryItem = ({
         {/* Latest positions */}
         <div className="grid grid-cols-2 gap-2 mb-3">
           <div className={`rounded-lg p-2.5 border ${yandex ? positionBg(yandex.position) : "bg-muted/20"}`}>
-            <div className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 flex items-center gap-1">
+            <div className="text-[12px] sm:text-xs text-muted-foreground mb-0.5 flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-red-500"></span>
               Яндекс
             </div>
@@ -95,7 +95,7 @@ const PositionTrackerQueryItem = ({
                 {yandex ? `#${yandex.position}` : "—"}
               </div>
               {yandexChange !== null && yandexChange !== 0 && (
-                <div className={`text-[10px] sm:text-xs font-bold flex items-center gap-0.5 ${yandexChange > 0 ? "text-emerald-500" : "text-red-500"}`}>
+                <div className={`text-[12px] sm:text-xs font-bold flex items-center gap-0.5 ${yandexChange > 0 ? "text-emerald-500" : "text-red-500"}`}>
                   <Icon name={yandexChange > 0 ? "ArrowUp" : "ArrowDown"} size={10} />
                   {Math.abs(yandexChange)}
                 </div>
@@ -103,7 +103,7 @@ const PositionTrackerQueryItem = ({
             </div>
           </div>
           <div className={`rounded-lg p-2.5 border ${google ? positionBg(google.position) : "bg-muted/20"}`}>
-            <div className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 flex items-center gap-1">
+            <div className="text-[12px] sm:text-xs text-muted-foreground mb-0.5 flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-blue-500"></span>
               Google
             </div>
@@ -112,7 +112,7 @@ const PositionTrackerQueryItem = ({
                 {google ? `#${google.position}` : "—"}
               </div>
               {googleChange !== null && googleChange !== 0 && (
-                <div className={`text-[10px] sm:text-xs font-bold flex items-center gap-0.5 ${googleChange > 0 ? "text-emerald-500" : "text-red-500"}`}>
+                <div className={`text-[12px] sm:text-xs font-bold flex items-center gap-0.5 ${googleChange > 0 ? "text-emerald-500" : "text-red-500"}`}>
                   <Icon name={googleChange > 0 ? "ArrowUp" : "ArrowDown"} size={10} />
                   {Math.abs(googleChange)}
                 </div>
@@ -124,7 +124,7 @@ const PositionTrackerQueryItem = ({
         {/* Sparkline */}
         {q.measurements.length > 0 && (
           <div className="mb-3 p-2 rounded-lg bg-muted/20">
-            <div className="text-[10px] text-muted-foreground mb-1">Динамика (Яндекс)</div>
+            <div className="text-[12px] text-muted-foreground mb-1">Динамика (Яндекс)</div>
             <Sparkline data={q.measurements.filter((m) => m.engine === "yandex")} />
           </div>
         )}
@@ -184,7 +184,7 @@ const PositionTrackerQueryItem = ({
                 Сохранить
               </button>
             </div>
-            <div className="text-[10px] text-muted-foreground mt-2">
+            <div className="text-[12px] text-muted-foreground mt-2">
               Дата автоматом: <strong>{todayIso()}</strong>
             </div>
           </div>

@@ -129,7 +129,7 @@ const HowItWorksSection = ({ visibleSections }: HowItWorksSectionProps) => {
                           <Icon name={item.icon} size={22} style={{ color: item.iconColor }} />
                         </div>
                         <div
-                          className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full ${item.accentBg} border ${item.accentBorder} ${item.accentText} text-[10px] font-black tracking-widest`}
+                          className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full ${item.accentBg} border ${item.accentBorder} ${item.accentText} text-[12px] font-black tracking-widest`}
                         >
                           <Icon name="Clock" size={11} />
                           {item.badge}
@@ -152,7 +152,7 @@ const HowItWorksSection = ({ visibleSections }: HowItWorksSectionProps) => {
                       />
 
                       {/* Список */}
-                      <div className="text-[10px] font-bold tracking-widest text-white/50 mb-2">
+                      <div className="text-[12px] font-bold tracking-widest text-white/50 mb-2">
                         ЧТО ВКЛЮЧЕНО
                       </div>
                       <ul className="space-y-1.5">

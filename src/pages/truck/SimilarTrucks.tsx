@@ -27,7 +27,7 @@ const SimilarTrucks = ({ currentSlug }: Props) => {
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/30 mb-3">
             <Icon name="Layers" size={14} className="text-accent" />
-            <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-accent">
+            <span className="text-[12.5px] sm:text-xs font-bold uppercase tracking-wider text-accent">
               Другие варианты из парка
             </span>
           </div>
@@ -63,14 +63,14 @@ const SimilarTrucks = ({ currentSlug }: Props) => {
               />
               {t.tag && (
                 <div
-                  className={`absolute top-3 left-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r ${t.tag.color} text-white text-[10px] sm:text-xs font-bold uppercase tracking-wider shadow-lg`}
+                  className={`absolute top-3 left-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r ${t.tag.color} text-white text-[12px] sm:text-xs font-bold uppercase tracking-wider shadow-lg`}
                 >
                   <Icon name={t.tag.icon} size={12} />
                   {t.tag.label}
                 </div>
               )}
               <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/80 to-transparent" />
-              <div className="absolute bottom-2 left-3 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white/90">
+              <div className="absolute bottom-2 left-3 text-[12px] sm:text-xs font-bold uppercase tracking-wider text-white/90">
                 {t.badge}
               </div>
             </div>

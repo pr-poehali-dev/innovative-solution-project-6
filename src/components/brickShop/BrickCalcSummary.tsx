@@ -87,7 +87,7 @@ const BrickCalcSummary = ({
         <Row label="Площадь кладки" value={`${fmt(build.area)} м²`} strong />
         <Row label={`Кирпича на 1 м² (${build.t.label.toLowerCase()})`} value={`${build.perM2} шт`} />
         <Row label="Нужно с запасом 5%" value={`${build.qty.toLocaleString("ru-RU")} шт`} strong />
-        <p className="text-[11px] text-muted-foreground pt-1">
+        <p className="text-[12.5px] text-muted-foreground pt-1">
           Округлили до целых упаковок по {PALLET_SIZE} шт — останется {(build.orderQty - build.qty).toLocaleString("ru-RU")} шт в запас
         </p>
       </div>
@@ -151,12 +151,12 @@ const BrickCalcSummary = ({
               }`}
             >
               {bestTruck?.tons === t.tons && (
-                <span className="absolute -top-2 left-1/2 -translate-x-1/2 px-1.5 rounded-full bg-accent text-black text-[9px] font-black whitespace-nowrap">
+                <span className="absolute -top-2 left-1/2 -translate-x-1/2 px-1.5 rounded-full bg-accent text-black text-[11px] font-black whitespace-nowrap">
                   выгодно
                 </span>
               )}
               <span className="block text-sm font-black text-white">{fmt(t.tons)} т</span>
-              <span className="block text-[10px] text-muted-foreground">{perTripOf(t.tons)} уп./рейс</span>
+              <span className="block text-[12px] text-muted-foreground">{perTripOf(t.tons)} уп./рейс</span>
             </button>
           );
         })}
@@ -168,7 +168,7 @@ const BrickCalcSummary = ({
         <Row label="Доставка" value={isLocal ? "по телефону" : deliveryText} />
       </div>
       {isLocal && (
-        <p className="mt-2 text-[11px] text-accent">По городу и ближайшим районам — назовём лучшую цену при звонке</p>
+        <p className="mt-2 text-[12.5px] text-accent">По городу и ближайшим районам — назовём лучшую цену при звонке</p>
       )}
       <SlingerNotice className="mt-3" />
     </div>

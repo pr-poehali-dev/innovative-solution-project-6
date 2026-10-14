@@ -66,7 +66,7 @@ const AsphaltCalculatorResult = ({
             : "border-accent/40 bg-gradient-to-br from-accent/15 via-card/80 to-amber-500/10 backdrop-blur-sm"
         }`}
       >
-        <div className={`text-[11px] font-bold uppercase tracking-widest mb-2 ${light ? "text-orange-600" : "text-accent"}`}>
+        <div className={`text-[12.5px] font-bold uppercase tracking-widest mb-2 ${light ? "text-orange-600" : "text-accent"}`}>
           Примерная стоимость
         </div>
 
@@ -156,7 +156,7 @@ const AsphaltCalculatorResult = ({
           {PHONE}
         </a>
 
-        <p className={`text-[11px] text-center mt-3 leading-relaxed ${light ? "text-slate-600" : "text-muted-foreground"}`}>
+        <p className={`text-[12.5px] text-center mt-3 leading-relaxed ${light ? "text-slate-600" : "text-muted-foreground"}`}>
           <Icon name="Info" size={10} className={`inline mr-1 -mt-0.5 ${light ? "text-amber-600" : "text-accent"}`} />
           Расчёт примерный. Финальная цена — после бесплатного выезда замерщика.
         </p>

@@ -62,19 +62,19 @@ const PositionTrackerHeader = ({
           <div className="text-xl sm:text-2xl font-black text-emerald-500">
             {stats.topThree}
           </div>
-          <div className="text-[10px] sm:text-xs text-muted-foreground">в ТОП-3</div>
+          <div className="text-[12px] sm:text-xs text-muted-foreground">в ТОП-3</div>
         </div>
         <div className="rounded-lg p-2.5 bg-amber-500/10 border border-amber-500/30 text-center">
           <div className="text-xl sm:text-2xl font-black text-amber-500">
             {stats.topTen}
           </div>
-          <div className="text-[10px] sm:text-xs text-muted-foreground">в ТОП-10</div>
+          <div className="text-[12px] sm:text-xs text-muted-foreground">в ТОП-10</div>
         </div>
         <div className="rounded-lg p-2.5 bg-muted/30 border text-center">
           <div className="text-xl sm:text-2xl font-black text-foreground">
             {stats.withData}/{stats.total}
           </div>
-          <div className="text-[10px] sm:text-xs text-muted-foreground">с замерами</div>
+          <div className="text-[12px] sm:text-xs text-muted-foreground">с замерами</div>
         </div>
       </div>
     </div>

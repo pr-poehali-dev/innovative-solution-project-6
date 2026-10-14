@@ -88,10 +88,10 @@ const AsphaltCalculatorForm = ({
                 />
                 <span className={`font-bold text-sm ${light ? "text-slate-900" : ""}`}>{opt.title}</span>
               </div>
-              <div className={`text-[11px] ${light ? "text-slate-600" : "text-muted-foreground"}`}>
+              <div className={`text-[12.5px] ${light ? "text-slate-600" : "text-muted-foreground"}`}>
                 {opt.subtitle}
               </div>
-              <div className={`text-[11px] font-bold mt-1 ${light ? "text-orange-600" : "text-accent"}`}>
+              <div className={`text-[12.5px] font-bold mt-1 ${light ? "text-orange-600" : "text-accent"}`}>
                 от {opt.pricePerM2} ₽/м²
               </div>
             </button>
@@ -184,7 +184,7 @@ const AsphaltCalculatorForm = ({
               </button>
             ))}
           </div>
-          <p className={`text-[11px] mt-2 flex items-start gap-1.5 ${light ? "text-slate-600" : "text-muted-foreground"}`}>
+          <p className={`text-[12.5px] mt-2 flex items-start gap-1.5 ${light ? "text-slate-600" : "text-muted-foreground"}`}>
             <Icon name="Info" size={11} className={`mt-0.5 flex-shrink-0 ${light ? "text-amber-600" : "text-accent"}`} />
             <span>
               4-5 см — для дворов и пешеходных зон. 7-10 см — для парковок и проездов грузовиков.
@@ -216,9 +216,9 @@ const AsphaltCalculatorForm = ({
                 }`}
               >
                 <div className={`font-bold text-sm mb-0.5 ${light ? "text-slate-900" : ""}`}>{opt.title}</div>
-                <div className={`text-[11px] ${light ? "text-slate-600" : "text-muted-foreground"}`}>{opt.subtitle}</div>
+                <div className={`text-[12.5px] ${light ? "text-slate-600" : "text-muted-foreground"}`}>{opt.subtitle}</div>
                 {opt.addPerM2 > 0 && (
-                  <div className={`text-[11px] font-bold mt-1 ${light ? "text-orange-600" : "text-accent"}`}>
+                  <div className={`text-[12.5px] font-bold mt-1 ${light ? "text-orange-600" : "text-accent"}`}>
                     +{opt.addPerM2} ₽/м²
                   </div>
                 )}
@@ -291,7 +291,7 @@ const AsphaltCalculatorForm = ({
               </div>
               <div className="flex-1 min-w-0">
                 <div className={`font-bold text-sm ${light ? "text-slate-900" : ""}`}>{item.title}</div>
-                <div className={`text-[11px] ${light ? "text-slate-600" : "text-muted-foreground"}`}>{item.sub}</div>
+                <div className={`text-[12.5px] ${light ? "text-slate-600" : "text-muted-foreground"}`}>{item.sub}</div>
               </div>
               <span className={`text-xs font-bold whitespace-nowrap ${light ? "text-orange-600" : "text-accent"}`}>
                 {item.price}
@@ -323,7 +323,7 @@ const AsphaltCalculatorForm = ({
               <div className={`font-bold text-sm flex items-center gap-1.5 ${light ? "text-slate-900" : ""}`}>
                 <span>🔥</span> Срочный заказ
               </div>
-              <div className={`text-[11px] ${light ? "text-slate-600" : "text-muted-foreground"}`}>
+              <div className={`text-[12.5px] ${light ? "text-slate-600" : "text-muted-foreground"}`}>
                 Выезд в течение 24 часов
               </div>
             </div>

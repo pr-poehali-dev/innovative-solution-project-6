@@ -57,7 +57,7 @@ const CalculatorOptionsAndTotal = ({
       {/* Шаг 3: Часы */}
       <div className="mb-6">
         <p className="text-sm text-muted-foreground mb-3 font-medium flex items-center gap-2">
-          <span className="w-5 h-5 rounded-full bg-accent text-black text-[10px] font-black flex items-center justify-center">3</span>
+          <span className="w-5 h-5 rounded-full bg-accent text-black text-[12px] font-black flex items-center justify-center">3</span>
           Сколько часов нужна техника?
         </p>
 
@@ -83,7 +83,7 @@ const CalculatorOptionsAndTotal = ({
             background: `linear-gradient(to right, hsl(var(--accent)) 0%, hsl(var(--accent)) ${((hours - 4) / 20) * 100}%, hsl(var(--accent) / 0.2) ${((hours - 4) / 20) * 100}%, hsl(var(--accent) / 0.2) 100%)`,
           }}
         />
-        <div className="flex justify-between text-[11px] text-muted-foreground mt-2">
+        <div className="flex justify-between text-[12.5px] text-muted-foreground mt-2">
           <span>4 ч</span>
           <span>8 ч</span>
           <span>16 ч</span>
@@ -112,7 +112,7 @@ const CalculatorOptionsAndTotal = ({
         <p className="text-sm text-muted-foreground mb-3 font-medium flex items-center gap-2">
           <Icon name="MapPin" size={14} className="text-accent" />
           Куда подать технику?
-          <span className="ml-auto text-[10px] text-muted-foreground/70 font-normal hidden sm:inline">
+          <span className="ml-auto text-[12px] text-muted-foreground/70 font-normal hidden sm:inline">
             выезд по тарифу техники
           </span>
         </p>
@@ -147,7 +147,7 @@ const CalculatorOptionsAndTotal = ({
               <button
                 key={i}
                 onClick={() => setCityIdx(i)}
-                className={`px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all ${
+                className={`px-2.5 py-1 rounded-full text-[12.5px] font-semibold transition-all ${
                   cityIdx === i
                     ? "bg-accent text-black"
                     : "bg-background/40 border border-accent/20 text-muted-foreground hover:border-accent/50 hover:text-white"
@@ -158,7 +158,7 @@ const CalculatorOptionsAndTotal = ({
             ))}
             <button
               onClick={() => setCityListOpen(true)}
-              className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-background/40 border border-accent/20 text-accent hover:border-accent transition-all"
+              className="px-2.5 py-1 rounded-full text-[12.5px] font-semibold bg-background/40 border border-accent/20 text-accent hover:border-accent transition-all"
             >
               ещё {cities.length - 6}+
             </button>
@@ -209,7 +209,7 @@ const CalculatorOptionsAndTotal = ({
                           {c.name}
                         </span>
                       </span>
-                      <span className={`text-[11px] font-bold tabular-nums flex-shrink-0 ${
+                      <span className={`text-[12.5px] font-bold tabular-nums flex-shrink-0 ${
                         isOther ? "text-amber-300" : c.hours === 0 ? "text-emerald-400" : "text-accent/80"
                       }`}>
                         {isOther
@@ -228,7 +228,7 @@ const CalculatorOptionsAndTotal = ({
         {isCustomCity && (
           <div className="mt-3">
             <label className="block">
-              <span className="text-[11px] text-muted-foreground mb-1.5 block">Введите название города или адрес</span>
+              <span className="text-[12.5px] text-muted-foreground mb-1.5 block">Введите название города или адрес</span>
               <input
                 type="text"
                 value={customCity}
@@ -237,7 +237,7 @@ const CalculatorOptionsAndTotal = ({
                 className="w-full px-3 py-2.5 rounded-lg bg-background/40 border-2 border-accent/20 focus:border-accent text-sm text-white placeholder:text-muted-foreground/50 outline-none transition-colors"
               />
             </label>
-            <p className="text-[10px] text-muted-foreground mt-1.5 flex items-center gap-1">
+            <p className="text-[12px] text-muted-foreground mt-1.5 flex items-center gap-1">
               <Icon name="Info" size={10} className="text-accent" />
               Стоимость выезда уточните у менеджера
             </p>
@@ -266,7 +266,7 @@ const CalculatorOptionsAndTotal = ({
                 <Icon name="HardHat" size={12} className="text-accent" />
                 Стропальщик
               </p>
-              <p className="text-[10px] text-muted-foreground">Помощь со строповкой груза · мин. 4 часа</p>
+              <p className="text-[12px] text-muted-foreground">Помощь со строповкой груза · мин. 4 часа</p>
             </div>
             <span className="text-xs font-black text-accent">+1 900 ₽/час</span>
           </label>
@@ -338,14 +338,14 @@ const CalculatorOptionsAndTotal = ({
           >
             <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
             <span className="relative flex flex-col items-start leading-tight">
-              <span className="text-[10px] opacity-70 font-bold tracking-wider">ЗАКАЗАТЬ ЗА</span>
+              <span className="text-[12px] opacity-70 font-bold tracking-wider">ЗАКАЗАТЬ ЗА</span>
               <span className="text-base sm:text-lg">{finalTotal.toLocaleString("ru")} ₽</span>
             </span>
             <Icon name="ArrowRight" size={18} className="relative group-hover:translate-x-1 transition" />
           </button>
         </div>
 
-        <div className="flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-2 mt-5 pt-5 border-t border-accent/10 text-[11px] sm:text-xs text-muted-foreground">
+        <div className="flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-2 mt-5 pt-5 border-t border-accent/10 text-[12.5px] sm:text-xs text-muted-foreground">
           <span className="flex items-center gap-1.5">
             <Icon name="ShieldCheck" size={12} className="text-accent" /> Договор
           </span>

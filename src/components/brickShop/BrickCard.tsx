@@ -70,7 +70,7 @@ const BrickCard = ({ brick, inCart, onAdd, onOpenPhoto }: BrickCardProps) => {
         <Icon name={brick.hollow ? "CircleDashed" : "Square"} size={20} className="shrink-0" />
         <div className="leading-tight">
           <p className="text-sm font-black uppercase tracking-wide">{brick.hollow ? "Пустотелый" : "Полнотелый"}</p>
-          <p className="text-[11px] text-white/80">
+          <p className="text-[12.5px] text-white/80">
             {brick.hollow ? "С отверстиями — легче и теплее" : "Сплошной — максимальная прочность"}
           </p>
         </div>
@@ -106,14 +106,14 @@ const BrickCard = ({ brick, inCart, onAdd, onOpenPhoto }: BrickCardProps) => {
             <Icon name="Factory" size={20} />
           </span>
           <div className="leading-tight">
-            <p className="text-[10px] uppercase tracking-wider text-accent font-bold">Производитель</p>
+            <p className="text-[12px] uppercase tracking-wider text-accent font-bold">Производитель</p>
             <p className="text-base font-black text-white">{MANUFACTURER}</p>
           </div>
         </div>
         <h3 className="text-lg font-black text-white mb-2 leading-tight">{brick.name}</h3>
         <div className="flex flex-wrap gap-1.5 mb-3">
           {tags.map((t) => (
-            <span key={t} className="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-white/75">
+            <span key={t} className="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[12.5px] text-white/75">
               {t}
             </span>
           ))}
@@ -161,7 +161,7 @@ const BrickCard = ({ brick, inCart, onAdd, onOpenPhoto }: BrickCardProps) => {
               </button>
               <div className="w-12 text-center leading-none">
                 <p className="text-white font-black">{pallets}</p>
-                <p className="text-[10px] text-muted-foreground mt-0.5">упак.</p>
+                <p className="text-[12px] text-muted-foreground mt-0.5">упак.</p>
               </div>
               <button
                 type="button"

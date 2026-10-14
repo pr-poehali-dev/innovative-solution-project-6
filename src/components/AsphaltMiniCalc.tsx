@@ -72,7 +72,7 @@ const AsphaltMiniCalc = ({ light = false }: AsphaltMiniCalcProps) => {
             Калькулятор стоимости
           </div>
           <div
-            className={`text-[10px] sm:text-xs ${
+            className={`text-[12px] sm:text-xs ${
               light ? "text-slate-600" : "text-muted-foreground"
             }`}
           >
@@ -84,7 +84,7 @@ const AsphaltMiniCalc = ({ light = false }: AsphaltMiniCalcProps) => {
       {/* Work type */}
       <div>
         <div
-          className={`text-[10px] sm:text-xs mb-1.5 uppercase tracking-wider font-bold ${
+          className={`text-[12px] sm:text-xs mb-1.5 uppercase tracking-wider font-bold ${
             light ? "text-slate-700" : "text-muted-foreground"
           }`}
         >
@@ -96,7 +96,7 @@ const AsphaltMiniCalc = ({ light = false }: AsphaltMiniCalcProps) => {
               key={w.id}
               type="button"
               onClick={() => setWork(w.id)}
-              className={`px-2 py-2 rounded-lg text-[11px] sm:text-xs font-bold border-2 transition-all ${
+              className={`px-2 py-2 rounded-lg text-[12.5px] sm:text-xs font-bold border-2 transition-all ${
                 work === w.id
                   ? light
                     ? "border-amber-500 bg-gradient-to-br from-amber-100 to-orange-100 text-orange-600"
@@ -116,7 +116,7 @@ const AsphaltMiniCalc = ({ light = false }: AsphaltMiniCalcProps) => {
       <div className="grid grid-cols-2 gap-2">
         <div>
           <div
-            className={`text-[10px] sm:text-xs mb-1.5 ${
+            className={`text-[12px] sm:text-xs mb-1.5 ${
               light ? "text-slate-600" : "text-muted-foreground"
             }`}
           >
@@ -136,7 +136,7 @@ const AsphaltMiniCalc = ({ light = false }: AsphaltMiniCalcProps) => {
         </div>
         <div>
           <div
-            className={`text-[10px] sm:text-xs mb-1.5 ${
+            className={`text-[12px] sm:text-xs mb-1.5 ${
               light ? "text-slate-600" : "text-muted-foreground"
             }`}
           >
@@ -160,7 +160,7 @@ const AsphaltMiniCalc = ({ light = false }: AsphaltMiniCalcProps) => {
       {work !== "patch" && (
         <div>
           <div
-            className={`text-[10px] sm:text-xs mb-1.5 uppercase tracking-wider font-bold ${
+            className={`text-[12px] sm:text-xs mb-1.5 uppercase tracking-wider font-bold ${
               light ? "text-slate-700" : "text-muted-foreground"
             }`}
           >
@@ -199,7 +199,7 @@ const AsphaltMiniCalc = ({ light = false }: AsphaltMiniCalcProps) => {
       >
         <div className="flex items-center justify-between mb-1.5">
           <div
-            className={`text-[10px] sm:text-xs uppercase tracking-wider font-bold ${
+            className={`text-[12px] sm:text-xs uppercase tracking-wider font-bold ${
               light ? "text-slate-600" : "text-muted-foreground"
             }`}
           >
@@ -215,7 +215,7 @@ const AsphaltMiniCalc = ({ light = false }: AsphaltMiniCalcProps) => {
         <div className="flex items-end justify-between gap-2">
           <div>
             <div
-              className={`text-[10px] sm:text-xs uppercase tracking-wider font-bold ${
+              className={`text-[12px] sm:text-xs uppercase tracking-wider font-bold ${
                 light ? "text-slate-600" : "text-muted-foreground"
               }`}
             >
@@ -252,7 +252,7 @@ const AsphaltMiniCalc = ({ light = false }: AsphaltMiniCalcProps) => {
           </div>
           {showResult && (
             <div
-              className={`text-[10px] sm:text-xs text-right ${
+              className={`text-[12px] sm:text-xs text-right ${
                 light ? "text-slate-600" : "text-muted-foreground"
               }`}
             >
@@ -276,7 +276,7 @@ const AsphaltMiniCalc = ({ light = false }: AsphaltMiniCalcProps) => {
       </a>
 
       <p
-        className={`text-[10px] sm:text-[11px] text-center leading-relaxed ${
+        className={`text-[12px] sm:text-[12.5px] text-center leading-relaxed ${
           light ? "text-slate-600" : "text-muted-foreground"
         }`}
       >

@@ -117,15 +117,15 @@ const ReviewCard = () => {
         {/* Шапка */}
         <div className="px-7 pt-7 flex items-start justify-between">
           <div>
-            <div className="text-[11px] font-black tracking-wider text-teal-700">
+            <div className="text-[12.5px] font-black tracking-wider text-teal-700">
               ООО «ФАВОРИТ»
             </div>
-            <div className="text-[11px] text-slate-500 mt-1">
+            <div className="text-[12.5px] text-slate-500 mt-1">
               аренда манипуляторов · Нижний Новгород
             </div>
           </div>
           <div className="text-right">
-            <div className="text-[11px] text-slate-500">Сайт</div>
+            <div className="text-[12.5px] text-slate-500">Сайт</div>
             <div className="text-[14px] font-bold text-amber-700 mt-1">фаварит.рф</div>
           </div>
         </div>
@@ -135,7 +135,7 @@ const ReviewCard = () => {
         {/* Бейдж */}
         <div className="flex justify-center mt-6">
           <div
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-bold tracking-wider"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[12px] font-bold tracking-wider"
             style={{
               background: "rgba(45,212,191,0.2)",
               border: "1px solid rgba(13,148,136,0.5)",
@@ -194,7 +194,7 @@ const ReviewCard = () => {
               </div>
               <div>
                 <div
-                  className="text-[10px] font-bold tracking-wider uppercase"
+                  className="text-[12px] font-bold tracking-wider uppercase"
                   style={{ color: "#b45309" }}
                 >
                   Оставить отзыв
@@ -206,7 +206,7 @@ const ReviewCard = () => {
             </div>
             <Icon name="ArrowRight" size={22} style={{ color: "#b45309" }} />
           </a>
-          <p className="text-center text-[11px] text-slate-500 mt-2">
+          <p className="text-center text-[12.5px] text-slate-500 mt-2">
             Откроется поиск Яндекса по запросу «фаварит.рф»
           </p>
         </div>
@@ -229,7 +229,7 @@ const ReviewCard = () => {
                 <Icon name="Phone" size={18} />
               </div>
               <div>
-                <div className="text-[10px] font-bold tracking-wider text-teal-800 uppercase">
+                <div className="text-[12px] font-bold tracking-wider text-teal-800 uppercase">
                   Связаться с нами
                 </div>
                 <div className="text-[16px] font-black text-slate-900">
@@ -247,7 +247,7 @@ const ReviewCard = () => {
               borderColor: "rgba(13,148,136,0.4)",
             }}
           >
-            <span className="text-[11px] font-medium text-slate-600">
+            <span className="text-[12.5px] font-medium text-slate-600">
               Подробнее на сайте:
             </span>
             <span className="text-[13px] font-bold text-amber-700">фаварит.рф</span>

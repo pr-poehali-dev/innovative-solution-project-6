@@ -69,7 +69,7 @@ const MapAndRequisitesSection = ({
                     Как нас найти
                   </h2>
                   <p
-                    className="brand-tagline-glow text-[11px] sm:text-sm font-semibold tracking-widest uppercase"
+                    className="brand-tagline-glow text-[12.5px] sm:text-sm font-semibold tracking-widest uppercase"
                     style={{ color: "#f5d680", letterSpacing: "0.2em" }}
                   >
                     Аренда манипуляторов от компании Фаворит
@@ -115,7 +115,7 @@ const MapAndRequisitesSection = ({
                   <Icon name="BadgeCheck" size={22} className="text-accent" />
                 </div>
                 <div>
-                  <div className="text-accent text-[10px] sm:text-xs font-semibold uppercase tracking-widest">Официальные реквизиты</div>
+                  <div className="text-accent text-[12px] sm:text-xs font-semibold uppercase tracking-widest">Официальные реквизиты</div>
                   <div
                     className="text-lg sm:text-2xl font-black"
                     style={{
@@ -172,7 +172,7 @@ const MapAndRequisitesSection = ({
                     key={i}
                     className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-4 px-4 py-2.5 border-b border-white/5 last:border-0"
                   >
-                    <div className="text-muted-foreground text-[10px] sm:text-xs uppercase tracking-wider sm:w-44 sm:flex-shrink-0">
+                    <div className="text-muted-foreground text-[12px] sm:text-xs uppercase tracking-wider sm:w-44 sm:flex-shrink-0">
                       {item.label}
                     </div>
                     <div className="text-white font-semibold text-sm break-words min-w-0">
@@ -212,7 +212,7 @@ const MapAndRequisitesSection = ({
                   <Icon name="FileText" size={16} className="text-accent" />
                 </div>
                 <div className="flex flex-col leading-tight min-w-0 flex-1">
-                  <span className="text-accent text-[10px] font-bold uppercase tracking-wider">Заполнить · Скачать · Отправить</span>
+                  <span className="text-accent text-[12px] font-bold uppercase tracking-wider">Заполнить · Скачать · Отправить</span>
                   <span className="text-white font-bold text-sm">Договор аренды техники</span>
                 </div>
                 <div className="flex-shrink-0 inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-accent text-black font-black text-xs">
@@ -263,7 +263,7 @@ const MapAndRequisitesSection = ({
                 <Icon name="Star" size={22} className="text-accent" />
               </div>
               <div className="min-w-0">
-                <div className="text-accent text-[10px] sm:text-xs font-semibold uppercase tracking-widest">Нам важно ваше мнение</div>
+                <div className="text-accent text-[12px] sm:text-xs font-semibold uppercase tracking-widest">Нам важно ваше мнение</div>
                 <div className="text-white font-bold text-base sm:text-lg leading-tight">Поделитесь опытом работы с нами</div>
                 <p className="text-muted-foreground text-xs sm:text-sm leading-snug mt-1 hidden sm:block">
                   Оставьте отзыв на Яндекс.Картах — это помогает другим клиентам сделать правильный выбор.

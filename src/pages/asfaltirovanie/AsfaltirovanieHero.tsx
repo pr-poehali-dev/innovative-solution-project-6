@@ -45,11 +45,11 @@ const AsfaltirovanieHero = () => {
           {/* Плашка с ценой в правом верхнем углу */}
           <div className="absolute top-3 right-3 sm:top-6 sm:right-6 lg:top-10 lg:right-10">
             <div className="bg-gradient-to-br from-amber-300 via-amber-400 to-orange-500 px-3 py-2 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl shadow-2xl shadow-amber-900/50 border-2 border-white/40">
-              <div className="text-[9px] sm:text-xs text-white/90 font-black uppercase tracking-wider drop-shadow">
+              <div className="text-[11px] sm:text-xs text-white/90 font-black uppercase tracking-wider drop-shadow">
                 Цена работ
               </div>
               <div className="flex items-baseline gap-1 text-white drop-shadow-lg">
-                <span className="text-[10px] sm:text-sm font-bold">от</span>
+                <span className="text-[12px] sm:text-sm font-bold">от</span>
                 <span className="text-xl sm:text-3xl lg:text-4xl font-black tracking-tight">
                   450
                 </span>
@@ -62,7 +62,7 @@ const AsfaltirovanieHero = () => {
           <div className="absolute top-3 left-3 sm:top-6 sm:left-6 lg:top-10 lg:left-10">
             <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-4 sm:py-2 rounded-full bg-red-600/95 backdrop-blur-md border-2 border-red-400/60 shadow-2xl">
               <span className="text-sm sm:text-lg">🔥</span>
-              <span className="text-white font-black text-[9px] sm:text-sm tracking-wider whitespace-nowrap">
+              <span className="text-white font-black text-[11px] sm:text-sm tracking-wider whitespace-nowrap">
                 СКИДКА 15%
               </span>
             </div>
@@ -80,7 +80,7 @@ const AsfaltirovanieHero = () => {
                 </span>
               </h1>
 
-              <p className="text-[11px] sm:text-lg lg:text-xl text-white/90 mb-2.5 sm:mb-6 max-w-3xl drop-shadow-lg">
+              <p className="text-[12.5px] sm:text-lg lg:text-xl text-white/90 mb-2.5 sm:mb-6 max-w-3xl drop-shadow-lg">
                 Укладка асфальта под ключ от{" "}
                 <span className="text-accent font-black">450 ₽/м²</span> · Гарантия до 3 лет · Бесплатный замер
               </p>
@@ -134,7 +134,7 @@ const AsfaltirovanieHero = () => {
                 <div className="text-2xl sm:text-3xl lg:text-4xl font-display font-black bg-gradient-to-br from-amber-500 to-orange-600 bg-clip-text text-transparent">
                   {s.v}
                 </div>
-                <div className="text-[10px] sm:text-xs text-slate-600 uppercase tracking-wider font-bold mt-1">
+                <div className="text-[12px] sm:text-xs text-slate-600 uppercase tracking-wider font-bold mt-1">
                   {s.l}
                 </div>
               </div>

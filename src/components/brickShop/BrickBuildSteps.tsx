@@ -62,7 +62,7 @@ const BrickBuildSteps = ({
           </button>
         ))}
       </div>
-      <p className="mt-2 text-[11px] text-muted-foreground">Подставим типовые размеры — дальше поправьте под себя</p>
+      <p className="mt-2 text-[12.5px] text-muted-foreground">Подставим типовые размеры — дальше поправьте под себя</p>
     </Step>
 
     <Step n={3} title="Размеры">
@@ -89,7 +89,7 @@ const BrickBuildSteps = ({
         <NumField label="Высота стен" value={height} onChange={setHeight} suffix="м" />
       </div>
       {shape === "box" && (
-        <p className="mt-2 text-[11px] text-muted-foreground">
+        <p className="mt-2 text-[12.5px] text-muted-foreground">
           Наружные размеры здания. Периметр: {fmt(perimeter)} м
         </p>
       )}
@@ -115,8 +115,8 @@ const BrickBuildSteps = ({
             }`}
           >
             <p className="text-sm font-bold text-white">{w.label}</p>
-            <p className="text-[11px] text-muted-foreground">{w.mm}</p>
-            <p className="text-[11px] text-accent/90">{w.hint}</p>
+            <p className="text-[12.5px] text-muted-foreground">{w.mm}</p>
+            <p className="text-[12.5px] text-accent/90">{w.hint}</p>
           </button>
         ))}
       </div>

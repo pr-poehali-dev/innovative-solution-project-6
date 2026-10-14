@@ -159,7 +159,7 @@ const DeliveryCalculator = () => {
                             active ? "scale-105" : "group-hover:scale-105 opacity-80 group-hover:opacity-100"
                           }`}
                         />
-                        <span className="absolute top-2 left-2 px-2 py-1 rounded-lg bg-black/80 text-white text-[11px] font-black">
+                        <span className="absolute top-2 left-2 px-2 py-1 rounded-lg bg-black/80 text-white text-[12.5px] font-black">
                           {t.capacity}
                         </span>
                         {active && (
@@ -168,7 +168,7 @@ const DeliveryCalculator = () => {
                           </span>
                         )}
                         {i === bestIdx && !active && (
-                          <span className="absolute bottom-2 left-2 px-2 py-1 rounded-lg bg-accent text-black text-[10px] font-black uppercase tracking-wide">
+                          <span className="absolute bottom-2 left-2 px-2 py-1 rounded-lg bg-accent text-black text-[12px] font-black uppercase tracking-wide">
                             Рекомендуем
                           </span>
                         )}
@@ -339,7 +339,7 @@ const DeliveryCalculator = () => {
               <MaxIcon size={22} className="text-white shrink-0" />
               Отправить расчёт в MAX
             </a>
-            <p className="mt-1.5 text-[11px] text-muted-foreground text-center">
+            <p className="mt-1.5 text-[12.5px] text-muted-foreground text-center">
               Расчёт скопируется — просто вставьте его в чат
             </p>
             <a
@@ -349,7 +349,7 @@ const DeliveryCalculator = () => {
               <Icon name="Phone" size={16} />
               Позвонить: {MATERIALS_PHONE_LABEL}
             </a>
-            <p className="text-[11px] text-muted-foreground text-center mt-2.5">
+            <p className="text-[12.5px] text-muted-foreground text-center mt-2.5">
               Расчёт предварительный — точную цену назовём по телефону
             </p>
           </div>

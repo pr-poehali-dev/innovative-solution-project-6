@@ -180,7 +180,7 @@ export default function OrderModal({ open, onClose, truckName, calcSummary, subm
                 <p className="text-red-400 text-xs sm:text-sm">Ошибка отправки. Позвоните: +7 960 188-30-84</p>
               )}
 
-              <p className="text-center text-[10px] text-muted-foreground/70 leading-snug mt-1">
+              <p className="text-center text-[12px] text-muted-foreground/70 leading-snug mt-1">
                 Нажимая кнопку, вы соглашаетесь с{" "}
                 <a href="/privacy" target="_blank" rel="noopener" className="text-accent/80 hover:text-accent hover:underline">
                   политикой конфиденциальности

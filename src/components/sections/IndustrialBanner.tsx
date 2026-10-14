@@ -66,7 +66,7 @@ const IndustrialBanner = ({
             <div className="flex items-center gap-2.5 mb-3">
               <span className="w-8 sm:w-12 h-px bg-gradient-to-r from-transparent to-accent/60" />
               {icon && <Icon name={icon} size={16} className="text-accent" />}
-              <span className="text-[11px] sm:text-xs font-bold tracking-[0.3em] text-accent uppercase">
+              <span className="text-[12.5px] sm:text-xs font-bold tracking-[0.3em] text-accent uppercase">
                 {eyebrow}
               </span>
               {icon && <Icon name={icon} size={16} className="text-accent" />}
@@ -265,7 +265,7 @@ const IndustrialBanner = ({
         <div className="flex items-center gap-2.5 mb-3 sm:mb-4 opacity-90">
           <span className="w-8 sm:w-12 h-px bg-gradient-to-r from-transparent to-white/60" />
           {icon && <Icon name={icon} size={16} className="text-white/80" />}
-          <span className="text-[11px] sm:text-xs md:text-sm font-semibold tracking-[0.25em] sm:tracking-[0.35em] text-white/90 uppercase">
+          <span className="text-[12.5px] sm:text-xs md:text-sm font-semibold tracking-[0.25em] sm:tracking-[0.35em] text-white/90 uppercase">
             {eyebrow}
           </span>
           {icon && <Icon name={icon} size={16} className="text-white/80" />}

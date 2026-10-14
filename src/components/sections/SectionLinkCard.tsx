@@ -36,7 +36,7 @@ const SectionLinkCard = ({ to, eyebrow, title, description, icon, cta, imageUrl 
           </span>
 
           <div className="flex-1 min-w-0">
-            <div className="text-accent text-[10px] sm:text-xs font-semibold uppercase tracking-widest mb-1">
+            <div className="text-accent text-[12px] sm:text-xs font-semibold uppercase tracking-widest mb-1">
               {eyebrow}
             </div>
             <h2 className="text-white font-display font-black text-xl sm:text-3xl tracking-tight leading-tight mb-2">

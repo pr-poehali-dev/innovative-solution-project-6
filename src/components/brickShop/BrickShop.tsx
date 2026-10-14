@@ -146,7 +146,7 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
             <Icon name={s.icon} size={22} className="text-accent shrink-0" />
             <div className="min-w-0">
               <p className="text-white font-black leading-tight text-sm sm:text-base">{s.value}</p>
-              <p className="text-[11px] sm:text-xs text-muted-foreground leading-tight">{s.label}</p>
+              <p className="text-[12.5px] sm:text-xs text-muted-foreground leading-tight">{s.label}</p>
             </div>
           </div>
         ))}
@@ -279,12 +279,12 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
           >
             <span className="relative w-11 h-11 rounded-xl bg-black/15 flex items-center justify-center shrink-0">
               <Icon name="ShoppingCart" size={22} />
-              <span className="absolute -top-1.5 -right-1.5 min-w-5 h-5 px-1 rounded-full bg-black text-accent text-[11px] font-black flex items-center justify-center">
+              <span className="absolute -top-1.5 -right-1.5 min-w-5 h-5 px-1 rounded-full bg-black text-accent text-[12.5px] font-black flex items-center justify-center">
                 {cart.length}
               </span>
             </span>
             <span className="flex-1 text-left leading-tight">
-              <span className="block text-[11px] font-bold opacity-75">
+              <span className="block text-[12.5px] font-bold opacity-75">
                 В корзине {Math.ceil(cartQty / PALLET_SIZE)} уп. · {cartQty.toLocaleString("ru-RU")} шт
               </span>
               <span className="block text-lg font-black">{cartTotal > 0 ? priceText(cartTotal) : formatTons(cartWeight)}</span>

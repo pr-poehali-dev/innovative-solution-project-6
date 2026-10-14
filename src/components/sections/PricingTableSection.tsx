@@ -62,19 +62,19 @@ const PricingTableSection = ({ compact = false }: Props) => {
                 </caption>
                 <thead>
                   <tr className="border-b border-accent/25 bg-accent/10">
-                    <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase text-[11px] sm:text-xs tracking-widest text-accent">
+                    <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase text-[12.5px] sm:text-xs tracking-widest text-accent">
                       Техника
                     </th>
-                    <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase text-[11px] sm:text-xs tracking-widest text-accent">
+                    <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase text-[12.5px] sm:text-xs tracking-widest text-accent">
                       Грузоподъёмность
                     </th>
-                    <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase text-[11px] sm:text-xs tracking-widest text-accent">
+                    <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase text-[12.5px] sm:text-xs tracking-widest text-accent">
                       Вылет стрелы
                     </th>
-                    <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase text-[11px] sm:text-xs tracking-widest text-accent">
+                    <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase text-[12.5px] sm:text-xs tracking-widest text-accent">
                       Мин. заказ
                     </th>
-                    <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase text-[11px] sm:text-xs tracking-widest text-accent text-right">
+                    <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase text-[12.5px] sm:text-xs tracking-widest text-accent text-right">
                       Цена с НДС
                     </th>
                   </tr>

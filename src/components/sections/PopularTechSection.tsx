@@ -65,7 +65,7 @@ const PopularTechSection = () => {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/30 mb-3">
               <Icon name="TrendingUp" size={14} className="text-accent" />
-              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-accent">
+              <span className="text-[12.5px] sm:text-xs font-bold uppercase tracking-wider text-accent">
                 Чаще всего заказывают
               </span>
             </div>
@@ -104,7 +104,7 @@ const PopularTechSection = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div
-                  className={`absolute top-3 left-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r ${it.badgeColor} text-white text-[10px] sm:text-xs font-bold uppercase tracking-wider shadow-lg`}
+                  className={`absolute top-3 left-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r ${it.badgeColor} text-white text-[12px] sm:text-xs font-bold uppercase tracking-wider shadow-lg`}
                 >
                   <Icon name={it.badgeIcon} size={12} />
                   {it.badge}

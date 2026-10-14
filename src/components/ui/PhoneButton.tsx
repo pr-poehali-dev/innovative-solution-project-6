@@ -40,9 +40,9 @@ const PhoneButton = ({
   };
 
   const subSizeClasses = {
-    sm: "text-[8px] sm:text-[9px]",
-    md: "text-[9px]",
-    lg: "text-[10px] sm:text-sm",
+    sm: "text-[8px] sm:text-[11px]",
+    md: "text-[11px]",
+    lg: "text-[12px] sm:text-sm",
   };
 
   if (iconOnly) {

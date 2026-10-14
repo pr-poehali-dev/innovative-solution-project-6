@@ -62,7 +62,7 @@ const ReviewsHeader = ({
                 <Icon name={f.icon} size={14} />
                 <span>{f.label}</span>
                 <span
-                  className={`text-[10px] sm:text-xs px-1.5 py-0.5 rounded-full ${
+                  className={`text-[12px] sm:text-xs px-1.5 py-0.5 rounded-full ${
                     isActive ? "bg-white/25" : "bg-accent/20 text-accent"
                   }`}
                 >

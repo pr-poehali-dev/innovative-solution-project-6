@@ -75,7 +75,7 @@ const AsphaltSeoText = () => {
               }`}
             >
               {i === 0 && (
-                <div className="absolute -top-3 left-5 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-white text-[10px] font-black uppercase tracking-wider shadow-lg shadow-amber-500/40">
+                <div className="absolute -top-3 left-5 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-white text-[12px] font-black uppercase tracking-wider shadow-lg shadow-amber-500/40">
                   <Icon name="Sparkles" size={10} />
                   Новая услуга
                 </div>

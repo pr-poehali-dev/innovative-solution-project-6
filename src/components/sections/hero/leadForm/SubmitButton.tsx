@@ -38,7 +38,7 @@ const SubmitButton = ({ status }: Props) => {
         <p className="text-red-400 text-xs text-center">Ошибка отправки, попробуйте ещё раз или позвоните.</p>
       )}
 
-      <p className="text-[10px] text-white/50 text-center leading-snug mt-0.5">
+      <p className="text-[12px] text-white/50 text-center leading-snug mt-0.5">
         Нажимая кнопку, вы соглашаетесь с{" "}
         <a href="/privacy" target="_blank" rel="noopener" className="text-accent/80 hover:text-accent hover:underline">
           политикой конфиденциальности

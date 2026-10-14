@@ -45,10 +45,10 @@ const CalculatorHeader = ({ minPrice, maxPrice, stepsDone }: Props) => {
       <div className="flex items-center justify-center gap-1 sm:gap-3 mb-6">
         {["Задача", "Техника", "Часы и опции"].map((step, i) => (
           <div key={step} className="flex items-center gap-1 sm:gap-3">
-            <div className={`flex items-center gap-2 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold transition-all ${
+            <div className={`flex items-center gap-2 px-2.5 sm:px-3 py-1 rounded-full text-[12.5px] sm:text-xs font-bold transition-all ${
               i < stepsDone ? "bg-accent text-black" : "bg-background/40 border border-accent/20 text-muted-foreground"
             }`}>
-              <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] ${
+              <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[11px] ${
                 i < stepsDone ? "bg-black/20" : "bg-accent/20"
               }`}>{i + 1}</span>
               {step}

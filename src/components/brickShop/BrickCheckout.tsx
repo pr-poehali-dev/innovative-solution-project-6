@@ -218,7 +218,7 @@ const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear, delivery, 
                       </div>
                       <div className="flex-1 min-w-0">
                         <span
-                          className={`inline-block px-2 py-0.5 rounded-md text-[11px] font-black uppercase text-white ${
+                          className={`inline-block px-2 py-0.5 rounded-md text-[12.5px] font-black uppercase text-white ${
                             l.brick.hollow ? "bg-sky-700" : "bg-zinc-700"
                           }`}
                         >
@@ -251,7 +251,7 @@ const BrickCheckout = ({ open, onClose, lines, setQty, remove, clear, delivery, 
                         </button>
                         <div className="w-14 text-center leading-tight">
                           <p className="text-lg font-black text-white">{packs}</p>
-                          <p className="text-[10px] text-muted-foreground">упак.</p>
+                          <p className="text-[12px] text-muted-foreground">упак.</p>
                         </div>
                         <button
                           type="button"

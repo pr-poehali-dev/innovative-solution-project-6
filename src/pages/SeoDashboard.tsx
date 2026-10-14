@@ -174,7 +174,7 @@ const SeoDashboard = () => {
         <div className="mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/30 mb-3">
             <Icon name="Bookmark" size={14} className="text-accent" />
-            <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-accent">
+            <span className="text-[12.5px] sm:text-xs font-bold uppercase tracking-wider text-accent">
               Сохрани в закладки
             </span>
           </div>
@@ -230,7 +230,7 @@ const SeoDashboard = () => {
                 <Icon name="Zap" size={28} className="text-black" />
               </div>
               <div className="flex-1">
-                <div className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-black/70 mb-1">
+                <div className="text-[12px] sm:text-xs font-bold uppercase tracking-wider text-black/70 mb-1">
                   Главное действие
                 </div>
                 <h2 className="text-xl sm:text-2xl font-display font-black text-black mb-1">

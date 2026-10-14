@@ -149,7 +149,7 @@ const UseCasesSection = () => {
                       </div>
 
                       <span
-                        className="relative text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full whitespace-nowrap"
+                        className="relative text-[12.5px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full whitespace-nowrap"
                         style={{
                           color: c,
                           background: `${s}0.1)`,
@@ -184,7 +184,7 @@ const UseCasesSection = () => {
                       className="relative pt-4 mt-auto"
                       style={{ borderTop: `1px dashed ${s}0.2)` }}
                     >
-                      <div className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2.5">
+                      <div className="text-[12px] font-bold uppercase tracking-widest text-white/40 mb-2.5">
                         Типовые задачи
                       </div>
                       <ul className="space-y-2">

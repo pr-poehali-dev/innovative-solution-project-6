@@ -273,7 +273,7 @@ const BordyurCalculator = ({ items }: Props) => {
                   ["Вес", `≈ ${totalT.toFixed(1).replace(".", ",")} т`],
                 ].map(([l, v]) => (
                   <div key={l} className="rounded-xl bg-black/25 border border-white/10 px-3 py-2">
-                    <p className="text-[11px] text-muted-foreground">{l}</p>
+                    <p className="text-[12.5px] text-muted-foreground">{l}</p>
                     <p className="text-white font-black">{v}</p>
                   </div>
                 ))}
@@ -321,7 +321,7 @@ const BordyurCalculator = ({ items }: Props) => {
                         <span className="flex flex-wrap items-center gap-2">
                           <span className="font-black text-white text-sm">{o.t.short}</span>
                           {isBest && (
-                            <span className="px-2 py-0.5 rounded-full bg-accent text-black text-[10px] font-black uppercase">Оптимально</span>
+                            <span className="px-2 py-0.5 rounded-full bg-accent text-black text-[12px] font-black uppercase">Оптимально</span>
                           )}
                         </span>
                         <span className="block text-xs text-muted-foreground mt-0.5">
@@ -333,7 +333,7 @@ const BordyurCalculator = ({ items }: Props) => {
                       </span>
                       <span className="text-right shrink-0">
                         <span className="block text-white font-black text-sm">{fmt(o.cost)} ₽</span>
-                        <span className="block text-[11px] text-muted-foreground">{o.trips > 1 ? `${fmt(o.cost / o.trips)} ₽ × ${o.trips}` : "за рейс"}</span>
+                        <span className="block text-[12.5px] text-muted-foreground">{o.trips > 1 ? `${fmt(o.cost / o.trips)} ₽ × ${o.trips}` : "за рейс"}</span>
                       </span>
                     </button>
                   );
@@ -379,7 +379,7 @@ const BordyurCalculator = ({ items }: Props) => {
             <div className="mt-5 pt-5 border-t border-white/10">
               <p className="text-xs text-muted-foreground">Итого</p>
               <p className="text-3xl font-black text-accent leading-tight">{fmt(total)} ₽</p>
-              <p className="text-[11px] text-muted-foreground mt-1">Предварительный расчёт, точную цену подтвердит менеджер</p>
+              <p className="text-[12.5px] text-muted-foreground mt-1">Предварительный расчёт, точную цену подтвердит менеджер</p>
             </div>
             <div className="mt-5 grid gap-2">
               <a
@@ -393,7 +393,7 @@ const BordyurCalculator = ({ items }: Props) => {
                 <MaxIcon size={22} className="text-white shrink-0" />
                 Отправить расчёт в MAX
               </a>
-              <p className="text-[11px] text-muted-foreground text-center -mt-0.5">
+              <p className="text-[12.5px] text-muted-foreground text-center -mt-0.5">
                 Расчёт скопируется — просто вставьте его в чат
               </p>
               <a

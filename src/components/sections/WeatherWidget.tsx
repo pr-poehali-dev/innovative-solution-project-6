@@ -187,9 +187,9 @@ const WeatherWidget = () => {
                   <span className="text-2xl font-display font-black text-white leading-none">
                     {w.temp > 0 ? "+" : ""}{w.temp}°
                   </span>
-                  <span className="text-[11px] text-white/70 truncate">{current.label}</span>
+                  <span className="text-[12.5px] text-white/70 truncate">{current.label}</span>
                 </div>
-                <div className="text-[10px] text-white/55 mt-0.5 flex items-center gap-1 flex-wrap">
+                <div className="text-[12px] text-white/55 mt-0.5 flex items-center gap-1 flex-wrap">
                   <span>Нижний Новгород</span>
                   <span className="text-white/30">·</span>
                   <span className="inline-flex items-center gap-0.5">
@@ -206,11 +206,11 @@ const WeatherWidget = () => {
             </div>
             {/* Переключатель 3/7 на мобиле */}
             <div className="flex items-center justify-between px-3 py-1.5 border-b border-white/5 bg-black/20">
-              <span className="text-[9px] uppercase tracking-wider text-white/50 font-semibold">Прогноз</span>
+              <span className="text-[11px] uppercase tracking-wider text-white/50 font-semibold">Прогноз</span>
               <div className="inline-flex p-0.5 rounded-md bg-white/5 border border-white/10">
                 <button
                   onClick={() => setRange(3)}
-                  className={`px-2 py-0.5 text-[10px] font-bold rounded transition-colors ${
+                  className={`px-2 py-0.5 text-[12px] font-bold rounded transition-colors ${
                     range === 3 ? "bg-accent text-black" : "text-white/60"
                   }`}
                 >
@@ -218,7 +218,7 @@ const WeatherWidget = () => {
                 </button>
                 <button
                   onClick={() => setRange(7)}
-                  className={`px-2 py-0.5 text-[10px] font-bold rounded transition-colors ${
+                  className={`px-2 py-0.5 text-[12px] font-bold rounded transition-colors ${
                     range === 7 ? "bg-accent text-black" : "text-white/60"
                   }`}
                 >
@@ -243,13 +243,13 @@ const WeatherWidget = () => {
                       {d.weekend && (
                         <Icon name="Star" size={8} className="absolute top-1 right-1 text-accent fill-accent" />
                       )}
-                      <div className={`text-[10px] font-semibold uppercase ${d.weekend ? "text-accent" : "text-white/60"}`}>{d.day}</div>
+                      <div className={`text-[12px] font-semibold uppercase ${d.weekend ? "text-accent" : "text-white/60"}`}>{d.day}</div>
                       <span className="text-xl leading-none transition-transform active:scale-110">{ic.emoji}</span>
-                      <div className="text-[11px] text-white leading-none">
+                      <div className="text-[12.5px] text-white leading-none">
                         <span className={`font-bold ${d.weekend ? "text-accent" : ""}`}>{d.tMax > 0 ? "+" : ""}{d.tMax}°</span>
                         <span className="text-white/40"> {d.tMin > 0 ? "+" : ""}{d.tMin}°</span>
                       </div>
-                      <div className="inline-flex items-center gap-0.5 text-[9px] text-white/55 leading-none mt-0.5">
+                      <div className="inline-flex items-center gap-0.5 text-[11px] text-white/55 leading-none mt-0.5">
                         <Icon name="Wind" size={7} className="text-accent/70" />
                         {d.windMax}
                       </div>
@@ -271,9 +271,9 @@ const WeatherWidget = () => {
                       }`}
                     >
                       <span className={`absolute top-1 left-1 w-1.5 h-1.5 rounded-full ${c.dot}`} title={dayAdvice.short} />
-                      <div className={`text-[9px] font-semibold uppercase ${d.weekend ? "text-accent" : "text-white/60"}`}>{d.day}</div>
+                      <div className={`text-[11px] font-semibold uppercase ${d.weekend ? "text-accent" : "text-white/60"}`}>{d.day}</div>
                       <span className="text-base leading-none transition-transform active:scale-110">{ic.emoji}</span>
-                      <div className="text-[9px] text-white leading-none text-center">
+                      <div className="text-[11px] text-white leading-none text-center">
                         <div className={`font-bold ${d.weekend ? "text-accent" : ""}`}>{d.tMax > 0 ? "+" : ""}{d.tMax}°</div>
                         <div className="text-white/40">{d.tMin > 0 ? "+" : ""}{d.tMin}°</div>
                       </div>
@@ -284,15 +284,15 @@ const WeatherWidget = () => {
             )}
             {/* Доп. строка: восход / закат / световой день */}
             <div className="grid grid-cols-3 divide-x divide-white/10 border-t border-white/5 bg-black/30">
-              <div className="flex items-center justify-center gap-1 py-1.5 text-[10px] text-white/70">
+              <div className="flex items-center justify-center gap-1 py-1.5 text-[12px] text-white/70">
                 <Icon name="Sunrise" size={11} className="text-accent" />
                 <span className="font-bold text-white">{sunriseTime}</span>
               </div>
-              <div className="flex items-center justify-center gap-1 py-1.5 text-[10px] text-white/70">
+              <div className="flex items-center justify-center gap-1 py-1.5 text-[12px] text-white/70">
                 <Icon name="Sunset" size={11} className="text-accent" />
                 <span className="font-bold text-white">{sunsetTime}</span>
               </div>
-              <div className="flex items-center justify-center gap-1 py-1.5 text-[10px] text-white/70">
+              <div className="flex items-center justify-center gap-1 py-1.5 text-[12px] text-white/70">
                 <Icon name="Sun" size={11} className="text-accent" />
                 <span className="font-bold text-white">{daylight}</span>
               </div>
@@ -302,7 +302,7 @@ const WeatherWidget = () => {
               className={`flex items-center justify-center gap-1.5 px-3 py-2 border-t ${levelColors[advice.level].bg} ${levelColors[advice.level].text} ${levelColors[advice.level].ring}`}
             >
               <span className="text-sm weather-emoji-float">{advice.emoji}</span>
-              <span className="text-[10px] font-bold leading-tight">{advice.text}</span>
+              <span className="text-[12px] font-bold leading-tight">{advice.text}</span>
             </div>
           </div>
 
@@ -343,7 +343,7 @@ const WeatherWidget = () => {
                       <span className="font-bold text-white">{sunsetTime}</span>
                     </span>
                   </div>
-                  <div className="text-[10px] text-white/45 mt-1 inline-flex items-center gap-1">
+                  <div className="text-[12px] text-white/45 mt-1 inline-flex items-center gap-1">
                     <Icon name="Sun" size={10} className="text-accent/70" />
                     Световой день: <span className="text-white/70 font-bold">{daylight}</span>
                   </div>
@@ -398,14 +398,14 @@ const WeatherWidget = () => {
                             вых
                           </span>
                         )}
-                        <div className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wide ${d.weekend ? "text-accent" : "text-white/70"}`}>{d.day}</div>
+                        <div className={`text-[12px] sm:text-xs font-semibold uppercase tracking-wide ${d.weekend ? "text-accent" : "text-white/70"}`}>{d.day}</div>
                         <span className={`leading-none transition-transform duration-300 group-hover:scale-110 ${range === 3 ? "text-3xl" : "text-2xl"}`}>{ic.emoji}</span>
                         <div className={`text-white leading-tight text-center ${range === 3 ? "text-sm" : "text-xs"}`}>
                           <span className="font-bold text-accent">{d.tMax > 0 ? "+" : ""}{d.tMax}°</span>
                           <span className="text-white/40"> / {d.tMin > 0 ? "+" : ""}{d.tMin}°</span>
                         </div>
                         {/* Ветер с порывами */}
-                        <div className={`inline-flex items-center gap-0.5 text-[10px] ${c.text} leading-none mt-0.5 font-bold`}>
+                        <div className={`inline-flex items-center gap-0.5 text-[12px] ${c.text} leading-none mt-0.5 font-bold`}>
                           <Icon name="Wind" size={10} />
                           {d.windMax}{d.gust > d.windMax + 2 ? `–${d.gust}` : ""} м/с
                         </div>
@@ -424,7 +424,7 @@ const WeatherWidget = () => {
                   <span className="text-base weather-emoji-float">{advice.emoji}</span>
                 </div>
                 <div className="min-w-0">
-                  <div className="text-[10px] uppercase tracking-widest font-black opacity-75 leading-none mb-0.5">
+                  <div className="text-[12px] uppercase tracking-widest font-black opacity-75 leading-none mb-0.5">
                     Условия для манипулятора
                   </div>
                   <div className="text-xs sm:text-sm font-bold leading-tight truncate">
@@ -435,7 +435,7 @@ const WeatherWidget = () => {
               {advice.level === "ok" && (
                 <a
                   href="tel:+79601883084"
-                  className="flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-black text-black shadow-md active:scale-95 transition-transform"
+                  className="flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12.5px] font-black text-black shadow-md active:scale-95 transition-transform"
                   style={{
                     background: "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
                   }}

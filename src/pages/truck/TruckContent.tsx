@@ -111,7 +111,7 @@ export default function TruckContent({ truck, slug }: TruckContentProps) {
                   {c.name}
                 </span>
               </div>
-              <p className="text-[11px] text-muted-foreground mt-1 ml-6">{c.distance}</p>
+              <p className="text-[12.5px] text-muted-foreground mt-1 ml-6">{c.distance}</p>
             </Link>
           ))}
         </div>

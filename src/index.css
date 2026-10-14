@@ -398,7 +398,7 @@ body.modal-open .floating-mobile-notif {
     --secondary-foreground: 0 0% 100%;
 
     --muted: 220 10% 40%;
-    --muted-foreground: 0 0% 82%;
+    --muted-foreground: 0 0% 86%;
 
     --accent: 174 100% 55%;
     --accent-foreground: 0 0% 0%;
@@ -439,7 +439,7 @@ body.modal-open .floating-mobile-notif {
     --secondary-foreground: 0 0% 100%;
 
     --muted: 220 10% 40%;
-    --muted-foreground: 0 0% 82%;
+    --muted-foreground: 0 0% 86%;
 
     --accent: 174 100% 55%;
     --accent-foreground: 0 0% 0%;
@@ -469,6 +469,8 @@ body.modal-open .floating-mobile-notif {
 
   body {
     @apply bg-background text-foreground;
+    font-family: "Manrope", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 
   html {

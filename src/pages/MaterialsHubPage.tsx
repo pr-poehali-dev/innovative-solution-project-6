@@ -64,7 +64,7 @@ const MaterialsHubPage = () => {
             <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[520px] h-[220px] rounded-full bg-accent/20 blur-3xl" />
             <div className="relative flex items-center justify-center gap-3 mb-3">
               <span className="h-px w-10 sm:w-20 bg-gradient-to-r from-transparent to-[#d9a441]" />
-              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.35em] text-[#f5d680]" style={{ fontFamily: "'Cinzel', serif" }}>
+              <span className="text-[12.5px] sm:text-xs font-bold uppercase tracking-[0.35em] text-[#f5d680]" style={{ fontFamily: "'Cinzel', serif" }}>
                 от компании
               </span>
               <span className="h-px w-10 sm:w-20 bg-gradient-to-l from-transparent to-[#d9a441]" />

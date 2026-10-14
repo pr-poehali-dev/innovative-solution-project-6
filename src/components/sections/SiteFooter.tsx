@@ -115,11 +115,11 @@ const SiteFooter = () => {
 
         <div className="relative w-full px-4 sm:px-6 lg:px-8 py-5 sm:py-7">
           <div className="flex items-center justify-between mb-4 sm:mb-5">
-            <h2 className="text-[11px] sm:text-xs uppercase tracking-widest text-accent font-black flex items-center gap-2">
+            <h2 className="text-[12.5px] sm:text-xs uppercase tracking-widest text-accent font-black flex items-center gap-2">
               <Icon name="Compass" size={14} className="text-accent" />
               Быстрая навигация
             </h2>
-            <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/30 text-[10px] text-accent/90 font-bold uppercase tracking-wider">
+            <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/30 text-[12px] text-accent/90 font-bold uppercase tracking-wider">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               8 разделов
             </div>
@@ -174,7 +174,7 @@ const SiteFooter = () => {
                       <div className="font-black text-white text-[13px] sm:text-sm leading-tight mb-0.5 group-hover:text-accent transition-colors truncate">
                         {item.title}
                       </div>
-                      <div className="text-[10px] sm:text-[11px] text-white/65 leading-snug font-medium truncate">
+                      <div className="text-[12px] sm:text-[12.5px] text-white/65 leading-snug font-medium truncate">
                         {item.desc}
                       </div>
                     </div>
@@ -229,7 +229,7 @@ const SiteFooter = () => {
                     <Icon name="Phone" size={16} className="text-black sm:!w-[18px] sm:!h-[18px]" />
                   </div>
                   <div className="flex flex-col leading-tight">
-                    <span className="text-black/70 text-[10px] sm:text-xs font-bold uppercase tracking-wider">Позвонить</span>
+                    <span className="text-black/70 text-[12px] sm:text-xs font-bold uppercase tracking-wider">Позвонить</span>
                     <span className="text-black font-black text-base sm:text-lg tabular-nums">+7 960 188-30-84</span>
                   </div>
                 </a>
@@ -242,7 +242,7 @@ const SiteFooter = () => {
                     <Icon name="PhoneCall" size={16} className="text-accent sm:!w-[18px] sm:!h-[18px]" />
                   </div>
                   <div className="flex flex-col leading-tight">
-                    <span className="text-accent/80 text-[10px] sm:text-xs font-bold uppercase tracking-wider">Директор</span>
+                    <span className="text-accent/80 text-[12px] sm:text-xs font-bold uppercase tracking-wider">Директор</span>
                     <span className="text-white font-black text-base sm:text-lg tabular-nums">+7 960 169-09-90</span>
                   </div>
                 </a>
@@ -264,7 +264,7 @@ const SiteFooter = () => {
                     <MaxIcon size={20} className="text-white" />
                   </div>
                   <div className="flex flex-col leading-tight">
-                    <span className="text-[#c4b5fd] text-[10px] sm:text-xs font-bold uppercase tracking-wider">Мы в MAX</span>
+                    <span className="text-[#c4b5fd] text-[12px] sm:text-xs font-bold uppercase tracking-wider">Мы в MAX</span>
                     <span className="text-white font-black text-sm sm:text-base">Написать в мессенджер</span>
                   </div>
                 </a>
@@ -281,7 +281,7 @@ const SiteFooter = () => {
                     <Icon name="MessageCircle" size={16} className="text-accent sm:!w-[18px] sm:!h-[18px]" />
                   </div>
                   <div className="flex flex-col leading-tight">
-                    <span className="text-accent/80 text-[10px] sm:text-xs font-bold uppercase tracking-wider">Не можете позвонить?</span>
+                    <span className="text-accent/80 text-[12px] sm:text-xs font-bold uppercase tracking-wider">Не можете позвонить?</span>
                     <span className="text-white font-bold text-sm sm:text-base">Заказать обратный звонок</span>
                   </div>
                 </button>
@@ -332,7 +332,7 @@ const SiteFooter = () => {
 
           {/* Колонка 3 — Города (компактные чипы) */}
           <CollapsibleColumn icon="MapPin" title="Города работы">
-            <div className="mb-2 inline-flex items-center gap-1.5 text-[11px] font-bold text-accent px-2 py-0.5 rounded-full bg-accent/10 border border-accent/30">
+            <div className="mb-2 inline-flex items-center gap-1.5 text-[12.5px] font-bold text-accent px-2 py-0.5 rounded-full bg-accent/10 border border-accent/30">
               <Icon name="CheckCircle2" size={11} />
               {cities.length} городов области
             </div>
@@ -345,7 +345,7 @@ const SiteFooter = () => {
                     to={`/gorod/${c.slug}`}
                     title={`Манипулятор в ${c.nameIn}`}
                     rel={isMain ? undefined : "nofollow"}
-                    className={`inline-flex items-center px-2 py-0.5 rounded-full border text-[11px] sm:text-xs transition-all ${
+                    className={`inline-flex items-center px-2 py-0.5 rounded-full border text-[12.5px] sm:text-xs transition-all ${
                       isMain
                         ? "bg-accent/15 border-accent/50 text-accent font-bold hover:bg-accent/25"
                         : "bg-accent/[0.06] border-accent/20 text-white/80 hover:bg-accent/15 hover:border-accent/50 hover:text-accent"

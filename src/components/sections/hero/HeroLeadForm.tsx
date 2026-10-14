@@ -123,7 +123,7 @@ const HeroLeadForm = () => {
             <p className="text-base font-black text-white mb-0.5 leading-tight text-center">
               Оставьте заявку на технику
             </p>
-            <p className="text-[11px] text-white/60 mb-2 leading-snug text-center">
+            <p className="text-[12.5px] text-white/60 mb-2 leading-snug text-center">
               Перезвоним за 5 минут · рассчитаем цену · подберём технику
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col gap-1.5">

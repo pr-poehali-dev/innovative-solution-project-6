@@ -106,7 +106,7 @@ const MobileSwipeGallery = ({
           </div>
 
           {/* Счётчик */}
-          <div className="absolute top-3 left-3 px-2 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold z-10">
+          <div className="absolute top-3 left-3 px-2 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white text-[12px] font-bold z-10">
             {index + 1} / {total}
           </div>
         </>

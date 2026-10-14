@@ -110,7 +110,7 @@ const SeoTextSection = () => {
                   <div className={`w-12 h-12 rounded-xl ${c.accentBg} border ${c.accentBorder} flex items-center justify-center flex-shrink-0`}>
                     <Icon name={c.icon} size={22} className={c.accentText} />
                   </div>
-                  <div className={`inline-flex items-center px-3 py-1 rounded-full ${c.accentBg} border ${c.accentBorder} ${c.accentText} text-[10px] font-black tracking-widest`}>
+                  <div className={`inline-flex items-center px-3 py-1 rounded-full ${c.accentBg} border ${c.accentBorder} ${c.accentText} text-[12px] font-black tracking-widest`}>
                     {c.badge}
                   </div>
                 </div>
@@ -132,7 +132,7 @@ const SeoTextSection = () => {
                 <div className={`mt-4 mb-3 h-px bg-gradient-to-r ${c.accent} opacity-30`} />
 
                 {/* Список */}
-                <div className="text-[10px] font-bold tracking-widest text-muted-foreground/70 mb-2">
+                <div className="text-[12px] font-bold tracking-widest text-muted-foreground/70 mb-2">
                   {c.listTitle}
                 </div>
                 <ul className="space-y-1.5">

@@ -89,7 +89,7 @@ const CallbackModal = ({ open, onClose }: CallbackModalProps) => {
           </div>
         </div>
 
-        <p className="text-[11px] text-white/60 mb-3 leading-snug text-center">
+        <p className="text-[12.5px] text-white/60 mb-3 leading-snug text-center">
           Перезвоним за 10 минут · уточним задачу · подберём технику
         </p>
 
@@ -162,7 +162,7 @@ const CallbackModal = ({ open, onClose }: CallbackModalProps) => {
               )}
             </button>
 
-            <p className="text-[10px] text-muted-foreground/60 text-center leading-snug mt-1">
+            <p className="text-[12px] text-muted-foreground/60 text-center leading-snug mt-1">
               Нажимая кнопку, вы соглашаетесь с{" "}
               <a href="/privacy" target="_blank" rel="noopener" className="text-accent/80 hover:text-accent hover:underline">
                 политикой конфиденциальности

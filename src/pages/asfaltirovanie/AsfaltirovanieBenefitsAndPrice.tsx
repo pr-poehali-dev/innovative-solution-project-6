@@ -78,7 +78,7 @@ const AsfaltirovanieBenefitsAndPrice = () => {
                 }`}
               >
                 {item.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-white text-[10px] font-black tracking-wider shadow-lg shadow-orange-400/40">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-white text-[12px] font-black tracking-wider shadow-lg shadow-orange-400/40">
                     ★ ПОПУЛЯРНОЕ
                   </div>
                 )}

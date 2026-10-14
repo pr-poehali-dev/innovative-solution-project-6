@@ -73,7 +73,7 @@ const AsphaltBigBanner = () => {
                   <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-red-600/95 backdrop-blur-md border-2 border-white/50 shadow-2xl">
                       <span className="text-base sm:text-lg">🔥</span>
-                      <span className="text-white font-black text-[11px] sm:text-sm tracking-wider">
+                      <span className="text-white font-black text-[12.5px] sm:text-sm tracking-wider">
                         СЕЗОННАЯ СКИДКА 15%
                       </span>
                     </div>
@@ -81,7 +81,7 @@ const AsphaltBigBanner = () => {
 
                   <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 lg:bottom-8 lg:left-8">
                     <div className="bg-gradient-to-br from-amber-300 via-amber-400 to-orange-500 px-4 py-2 sm:px-5 sm:py-3 rounded-2xl shadow-2xl shadow-amber-900/40 border-2 border-white/50">
-                      <div className="text-[10px] sm:text-xs text-white/90 font-black uppercase tracking-wider drop-shadow">
+                      <div className="text-[12px] sm:text-xs text-white/90 font-black uppercase tracking-wider drop-shadow">
                         Цена работ
                       </div>
                       <div className="flex items-baseline gap-1 text-white drop-shadow-lg">
@@ -101,7 +101,7 @@ const AsphaltBigBanner = () => {
                         <Icon name="Construction" size={22} className="text-white drop-shadow" />
                       </div>
                       <div>
-                        <div className="text-[10px] sm:text-xs uppercase tracking-widest text-orange-600 font-black">
+                        <div className="text-[12px] sm:text-xs uppercase tracking-widest text-orange-600 font-black">
                           Фаварит · Спецтехника
                         </div>
                         <h3 className="text-lg sm:text-2xl font-display font-black text-slate-900">
@@ -118,7 +118,7 @@ const AsphaltBigBanner = () => {
                       {asphaltServices.map((s, i) => (
                         <span
                           key={i}
-                          className="px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-100 to-orange-100 border border-amber-300 text-[11px] sm:text-xs text-slate-700 font-semibold shadow-sm"
+                          className="px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-100 to-orange-100 border border-amber-300 text-[12.5px] sm:text-xs text-slate-700 font-semibold shadow-sm"
                         >
                           {s}
                         </span>
@@ -146,7 +146,7 @@ const AsphaltBigBanner = () => {
 
                     <div className="flex items-center justify-center gap-2 pt-1">
                       <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                      <p className="text-[10px] sm:text-[11px] text-slate-600 font-medium">
+                      <p className="text-[12px] sm:text-[12.5px] text-slate-600 font-medium">
                         Бесплатный замер · Расчёт сметы за 15 минут
                       </p>
                     </div>

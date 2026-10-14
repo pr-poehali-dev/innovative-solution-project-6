@@ -173,7 +173,7 @@ const BrickCalculator = ({ bricks, onAdd }: BrickCalculatorProps) => {
                       </span>
                       <span className="min-w-0">
                         <span className="block text-sm font-black text-white">{b.hollow ? "Пустотелый" : "Полнотелый"}</span>
-                        <span className="block text-[11px] text-muted-foreground">
+                        <span className="block text-[12.5px] text-muted-foreground">
                           {b.grade} · {b.priceNum > 0 ? `${b.priceNum.toLocaleString("ru-RU", { maximumFractionDigits: 2 })} ₽/шт` : "цена по запросу"}
                         </span>
                       </span>

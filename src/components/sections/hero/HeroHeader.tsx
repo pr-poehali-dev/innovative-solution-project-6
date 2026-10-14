@@ -179,7 +179,7 @@ const HeroHeader = () => {
                     >
                       <Icon name="Package" size={16} className="text-accent" />
                       Стройматериалы
-                      <span className="ml-auto px-2 py-0.5 rounded-full bg-accent text-black text-[9px] font-black">
+                      <span className="ml-auto px-2 py-0.5 rounded-full bg-accent text-black text-[11px] font-black">
                         NEW
                       </span>
                     </a>

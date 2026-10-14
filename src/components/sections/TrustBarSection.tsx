@@ -29,11 +29,11 @@ const TrustBarSection = () => {
             <span className="relative flex w-1.5 h-1.5">
               <span className="relative w-1.5 h-1.5 rounded-full bg-emerald-400" />
             </span>
-            <span className="text-[10px] sm:text-xs uppercase tracking-widest text-accent font-black">
+            <span className="text-[12px] sm:text-xs uppercase tracking-widest text-accent font-black">
               Нам доверяют
             </span>
           </div>
-          <div className="hidden sm:flex items-center gap-1 text-[11px] text-white/55 font-bold">
+          <div className="hidden sm:flex items-center gap-1 text-[12.5px] text-white/55 font-bold">
             <Icon name="ShieldCheck" size={14} className="text-accent" />
             ООО «Фаворит» · с 2015 года
           </div>
@@ -71,7 +71,7 @@ const TrustBarSection = () => {
                     <span className="text-base sm:text-xl font-black text-white leading-none tabular-nums">4.9</span>
                     <Icon name="Star" size={12} className="text-accent fill-accent sm:!w-[14px] sm:!h-[14px]" />
                   </div>
-                  <div className="text-[9px] sm:text-[10px] text-white/65 mt-0.5 leading-tight font-bold uppercase tracking-wider">
+                  <div className="text-[11px] sm:text-[12px] text-white/65 mt-0.5 leading-tight font-bold uppercase tracking-wider">
                     Яндекс
                   </div>
                 </div>
@@ -112,10 +112,10 @@ const TrustBarSection = () => {
                         />
                       ))}
                     </div>
-                    <div className="hidden sm:block text-[11px] text-white/85 leading-snug truncate font-medium">
+                    <div className="hidden sm:block text-[12.5px] text-white/85 leading-snug truncate font-medium">
                       «{r.text}»
                     </div>
-                    <div className="text-[9px] sm:text-[10px] text-white/55 font-bold leading-tight truncate uppercase tracking-wider sm:normal-case sm:tracking-normal sm:font-normal">
+                    <div className="text-[11px] sm:text-[12px] text-white/55 font-bold leading-tight truncate uppercase tracking-wider sm:normal-case sm:tracking-normal sm:font-normal">
                       {r.name}
                     </div>
                   </div>
@@ -148,7 +148,7 @@ const TrustBarSection = () => {
                   <div className="text-xs sm:text-sm font-black text-white leading-tight">
                     Договор и НДС
                   </div>
-                  <div className="text-[9px] sm:text-[10px] text-emerald-400/90 mt-0.5 leading-tight font-bold">
+                  <div className="text-[11px] sm:text-[12px] text-emerald-400/90 mt-0.5 leading-tight font-bold">
                     Безнал · ЭДО · УПД
                   </div>
                 </div>
@@ -201,7 +201,7 @@ const TrustBarSection = () => {
                         PWA
                       </span>
                     </div>
-                    <div className="text-[9px] sm:text-[10px] text-accent/90 mt-0.5 leading-tight font-bold">
+                    <div className="text-[11px] sm:text-[12px] text-accent/90 mt-0.5 leading-tight font-bold">
                       Работает офлайн
                     </div>
                   </div>

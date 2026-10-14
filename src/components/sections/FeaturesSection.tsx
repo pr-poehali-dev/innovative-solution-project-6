@@ -152,7 +152,7 @@ const FeaturesSection = ({ visibleSections }: FeaturesSectionProps) => {
                           {item.title}
                         </h3>
                         <span
-                          className="hidden sm:inline-block text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full whitespace-nowrap shrink-0"
+                          className="hidden sm:inline-block text-[12.5px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full whitespace-nowrap shrink-0"
                           style={{
                             color: c,
                             background: `${s}0.1)`,

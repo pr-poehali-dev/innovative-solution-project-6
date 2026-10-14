@@ -159,7 +159,7 @@ class ErrorBoundary extends Component<Props, State> {
                   <summary className="text-white/40 text-xs cursor-pointer hover:text-white/60">
                     Технические подробности
                   </summary>
-                  <pre className="mt-2 p-3 rounded-lg bg-white/5 text-white/60 text-[10px] overflow-auto max-h-32 whitespace-pre-wrap break-words">
+                  <pre className="mt-2 p-3 rounded-lg bg-white/5 text-white/60 text-[12px] overflow-auto max-h-32 whitespace-pre-wrap break-words">
                     {this.state.error.message}
                   </pre>
                 </details>

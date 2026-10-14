@@ -297,8 +297,8 @@ const CityPage = () => {
                     {t.name}
                   </span>
                 </div>
-                <p className="text-[11px] sm:text-xs text-muted-foreground ml-6 mb-1">{t.spec}</p>
-                <p className="text-[11px] sm:text-xs text-accent/80 ml-6 font-semibold">{t.price}</p>
+                <p className="text-[12.5px] sm:text-xs text-muted-foreground ml-6 mb-1">{t.spec}</p>
+                <p className="text-[12.5px] sm:text-xs text-accent/80 ml-6 font-semibold">{t.price}</p>
               </Link>
             ))}
           </div>
@@ -333,7 +333,7 @@ const CityPage = () => {
                     {c.name}
                   </span>
                 </div>
-                <p className="text-[11px] text-muted-foreground mt-1 ml-6">{c.distance}</p>
+                <p className="text-[12.5px] text-muted-foreground mt-1 ml-6">{c.distance}</p>
               </Link>
             ))}
           </div>

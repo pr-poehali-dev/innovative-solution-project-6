@@ -59,7 +59,7 @@ const TruckCardResultModal = ({ url, onClose }: Props) => (
         </a>
       </div>
 
-      <p className="mt-3 text-center text-[11px] text-slate-400">
+      <p className="mt-3 text-center text-[12.5px] text-slate-400">
         На телефоне: удерживайте картинку и выберите «Сохранить изображение»
       </p>
     </div>

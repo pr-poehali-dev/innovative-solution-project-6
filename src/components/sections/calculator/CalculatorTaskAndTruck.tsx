@@ -31,7 +31,7 @@ const CalculatorTaskAndTruck = ({
       {/* Шаг 1: Тип задачи */}
       <div className="mb-6">
         <p className="text-sm text-muted-foreground mb-3 font-medium flex items-center gap-2">
-          <span className="w-5 h-5 rounded-full bg-accent text-black text-[10px] font-black flex items-center justify-center">1</span>
+          <span className="w-5 h-5 rounded-full bg-accent text-black text-[12px] font-black flex items-center justify-center">1</span>
           Какая у вас задача?
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
@@ -46,7 +46,7 @@ const CalculatorTaskAndTruck = ({
               }`}
             >
               <Icon name={t.icon} size={18} className={taskId === t.id ? "text-accent" : "text-accent/60"} />
-              <span className="text-[11px] sm:text-xs font-semibold leading-tight text-center">{t.label}</span>
+              <span className="text-[12.5px] sm:text-xs font-semibold leading-tight text-center">{t.label}</span>
             </button>
           ))}
         </div>
@@ -68,7 +68,7 @@ const CalculatorTaskAndTruck = ({
                 }`}
               >
                 {cat}
-                <span className={`ml-1.5 text-[10px] ${activeCat === cat ? "text-black/60" : "text-muted-foreground"}`}>
+                <span className={`ml-1.5 text-[12px] ${activeCat === cat ? "text-black/60" : "text-muted-foreground"}`}>
                   {count}
                 </span>
               </button>
@@ -80,10 +80,10 @@ const CalculatorTaskAndTruck = ({
       {/* Шаг 2: Выбор техники */}
       <div className="mb-8">
         <p className="text-sm text-muted-foreground mb-3 font-medium flex items-center gap-2">
-          <span className="w-5 h-5 rounded-full bg-accent text-black text-[10px] font-black flex items-center justify-center">2</span>
+          <span className="w-5 h-5 rounded-full bg-accent text-black text-[12px] font-black flex items-center justify-center">2</span>
           Выберите технику
           {filtered.length < trucks.length && (
-            <span className="ml-auto text-[11px] text-accent/80">Подобрано: {filtered.length}</span>
+            <span className="ml-auto text-[12.5px] text-accent/80">Подобрано: {filtered.length}</span>
           )}
         </p>
 
@@ -95,9 +95,9 @@ const CalculatorTaskAndTruck = ({
         >
           <img src={truck.image} alt={truck.short} className="w-16 h-14 sm:w-20 sm:h-16 object-cover rounded-lg flex-shrink-0 bg-black/30" loading="lazy" decoding="async" width="80" height="64" />
           <div className="flex-1 min-w-0">
-            <p className="text-[10px] text-accent font-bold tracking-wider mb-0.5">ВЫБРАНО</p>
+            <p className="text-[12px] text-accent font-bold tracking-wider mb-0.5">ВЫБРАНО</p>
             <p className="font-bold text-sm text-white truncate">{truck.name}</p>
-            <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] text-muted-foreground mt-1">
+            <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-[12.5px] text-muted-foreground mt-1">
               <span className="flex items-center gap-1"><Icon name="Weight" size={10} />{truck.capacity}</span>
               {truck.boom && <span className="flex items-center gap-1"><Icon name="MoveUpRight" size={10} />{truck.boom}</span>}
               <span className="flex items-center gap-1 text-accent font-bold"><Icon name="Wallet" size={10} />{truck.price.toLocaleString("ru")} ₽/ч</span>
@@ -131,8 +131,8 @@ const CalculatorTaskAndTruck = ({
                       </div>
                     )}
                     <div className="absolute bottom-1 left-1 right-1">
-                      <p className="font-bold text-[10px] text-white leading-tight truncate">{t.short}</p>
-                      <p className="text-[10px] text-accent font-black leading-tight">{t.price.toLocaleString("ru")} ₽/ч</p>
+                      <p className="font-bold text-[12px] text-white leading-tight truncate">{t.short}</p>
+                      <p className="text-[12px] text-accent font-black leading-tight">{t.price.toLocaleString("ru")} ₽/ч</p>
                     </div>
                   </div>
                 </button>
@@ -162,7 +162,7 @@ const CalculatorTaskAndTruck = ({
                     <img src={t.image} alt={t.short} className="w-14 h-11 object-cover rounded-md flex-shrink-0 bg-black/30" loading="lazy" decoding="async" width="56" height="44" />
                     <div className="flex-1 min-w-0">
                       <p className={`text-xs font-bold truncate ${selected ? "text-white" : "text-foreground/90"}`}>{t.name}</p>
-                      <div className="flex flex-wrap gap-x-2 text-[10px] text-muted-foreground">
+                      <div className="flex flex-wrap gap-x-2 text-[12px] text-muted-foreground">
                         <span>{t.capacity}</span>
                         {t.boom && <span>· {t.boom}</span>}
                         {t.highlight && <span className="text-accent">· {t.highlight}</span>}

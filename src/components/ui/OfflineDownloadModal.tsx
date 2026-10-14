@@ -246,7 +246,7 @@ const OfflineDownloadModal = () => {
                   }}
                 />
               </div>
-              <div className="flex items-center justify-between mt-2 text-[11px] text-muted-foreground">
+              <div className="flex items-center justify-between mt-2 text-[12.5px] text-muted-foreground">
                 <span>
                   {progress.done} из {progress.total || "..."} файлов
                 </span>

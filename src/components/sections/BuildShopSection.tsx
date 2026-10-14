@@ -20,7 +20,7 @@ const PERKS = [
 
 const Heading = () => (
   <>
-    <span className="self-start inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/15 border border-amber-400/40 text-amber-300 text-[11px] sm:text-xs font-bold uppercase tracking-widest">
+    <span className="self-start inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/15 border border-amber-400/40 text-amber-300 text-[12.5px] sm:text-xs font-bold uppercase tracking-widest">
       <Icon name="Warehouse" size={14} />
       Наш магазин
     </span>
@@ -84,7 +84,7 @@ const Photo = ({ className = "" }: { className?: string }) => (
     />
     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#4a4130] lg:via-transparent lg:via-20%" />
     <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-1/4 rounded-2xl bg-black/70 backdrop-blur-md border border-amber-400/40 px-4 py-3">
-      <div className="text-[11px] uppercase tracking-widest text-white/60">Кирпич</div>
+      <div className="text-[12.5px] uppercase tracking-widest text-white/60">Кирпич</div>
       <div className="text-2xl sm:text-3xl font-black text-amber-300 leading-none mt-1">
         от 6 400 ₽<span className="text-sm text-white/70 font-bold">/уп.</span>
       </div>
@@ -101,7 +101,7 @@ const Categories = ({ className = "" }: { className?: string }) => (
         className="group relative rounded-2xl bg-white/[0.08] border border-white/15 hover:border-amber-400/60 hover:bg-amber-400/[0.07] p-4 transition-all hover:-translate-y-0.5"
       >
         {c.hit && (
-          <span className="absolute top-2 right-2 px-1.5 py-0.5 rounded-md bg-amber-400 text-black text-[9px] font-black uppercase">
+          <span className="absolute top-2 right-2 px-1.5 py-0.5 rounded-md bg-amber-400 text-black text-[11px] font-black uppercase">
             Хит
           </span>
         )}

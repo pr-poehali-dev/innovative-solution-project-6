@@ -113,7 +113,7 @@ const SeoFooterLinks = () => {
                 <h3 className="flex-1 min-w-0 font-display font-bold text-sm sm:text-base text-white truncate">
                   {group.title}
                 </h3>
-                <span className="text-[11px] text-muted-foreground shrink-0">{group.links.length}</span>
+                <span className="text-[12.5px] text-muted-foreground shrink-0">{group.links.length}</span>
                 <Icon
                   name="ChevronDown"
                   size={18}
@@ -157,7 +157,7 @@ const SeoFooterLinks = () => {
 
 
 
-        <div className="mt-6 sm:mt-8 text-center text-[11px] sm:text-xs text-muted-foreground/60 max-w-3xl mx-auto leading-relaxed">
+        <div className="mt-6 sm:mt-8 text-center text-[12.5px] sm:text-xs text-muted-foreground/60 max-w-3xl mx-auto leading-relaxed">
           ООО «Фаворит» — аренда манипулятора и услуги крана-манипулятора в Нижнем Новгороде и Нижегородской области.
           Собственный автопарк КМУ DongYang, Kanglim, HANGIL на шасси КАМАЗ, FAW, ISUZU, Renault.
           Грузоподъёмность до 20 тонн, вылет стрелы до 23 метров. Подача от 1 часа, работа без выходных.

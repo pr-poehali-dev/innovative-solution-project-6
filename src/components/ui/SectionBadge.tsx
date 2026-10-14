@@ -12,7 +12,7 @@ const SectionBadge = ({ children, className = "" }: SectionBadgeProps) => {
       <span className="relative flex w-2 h-2">
         <span className="relative rounded-full w-2 h-2 bg-white" />
       </span>
-      <span className="text-black text-[11px] sm:text-sm font-black uppercase tracking-widest">
+      <span className="text-black text-[12.5px] sm:text-sm font-black uppercase tracking-widest">
         {children}
       </span>
     </div>

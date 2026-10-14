@@ -127,7 +127,7 @@ const BlogIndex = () => {
                     width="800"
                     height="500"
                   />
-                  <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur text-accent text-[11px] font-bold uppercase tracking-widest">
+                  <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur text-accent text-[12.5px] font-bold uppercase tracking-widest">
                     {article.tag}
                   </div>
                 </div>

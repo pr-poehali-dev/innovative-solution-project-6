@@ -22,7 +22,7 @@ const AsfaltirovanieStickyCall = () => {
     >
       <div className="mx-2 mb-2 rounded-2xl border border-amber-300 bg-white/95 backdrop-blur-md shadow-2xl shadow-amber-500/30 px-3 py-2.5 flex items-center gap-2">
         <div className="flex-1 min-w-0">
-          <div className="text-[10px] uppercase tracking-wider font-bold text-amber-700">
+          <div className="text-[12px] uppercase tracking-wider font-bold text-amber-700">
             Замер бесплатно
           </div>
           <div className="text-xs text-slate-600 truncate">

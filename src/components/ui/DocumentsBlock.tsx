@@ -201,7 +201,7 @@ const DocumentsBlock = () => {
             <Icon name="FileText" size={16} className="text-accent" />
           </div>
           <div className="flex flex-col leading-tight min-w-0 flex-1">
-            <span className="text-accent text-[10px] font-bold uppercase tracking-wider">Заполнить · Скачать · Отправить</span>
+            <span className="text-accent text-[12px] font-bold uppercase tracking-wider">Заполнить · Скачать · Отправить</span>
             <span className="text-white font-bold text-sm">Договор аренды техники</span>
           </div>
           <div className="flex-shrink-0 inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-accent text-black font-black text-xs">

@@ -42,7 +42,7 @@ const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs
         <Icon name="Box" size={20} className="shrink-0" />
         <div className="leading-tight">
           <p className="text-sm font-black uppercase tracking-wide">Газосиликат</p>
-          <p className="text-[11px] text-white/80">Лёгкий, тёплый, ровный</p>
+          <p className="text-[12.5px] text-white/80">Лёгкий, тёплый, ровный</p>
         </div>
         {pack.density && (
           <span className="ml-auto px-2.5 py-1 rounded-full bg-black/40 text-accent text-xs font-black border border-accent/40">{pack.density}</span>
@@ -64,7 +64,7 @@ const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs
               <Icon name="Factory" size={20} />
             </span>
             <div className="leading-tight">
-              <p className="text-[10px] uppercase tracking-wider text-accent font-bold">Производство</p>
+              <p className="text-[12px] uppercase tracking-wider text-accent font-bold">Производство</p>
               <p className="text-base font-black text-white">г. Бор</p>
             </div>
           </div>
@@ -107,7 +107,7 @@ const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs
               </button>
               <div className="w-12 text-center leading-none">
                 <p className="text-white font-black">{packs}</p>
-                <p className="text-[10px] text-muted-foreground mt-0.5">упак.</p>
+                <p className="text-[12px] text-muted-foreground mt-0.5">упак.</p>
               </div>
               <button type="button" onClick={() => setPacks((p) => Math.min(99, p + 1))} className="w-11 h-12 flex items-center justify-center text-white hover:text-accent" aria-label="Больше">
                 <Icon name="Plus" size={16} />
@@ -254,7 +254,7 @@ const BlockShop = ({ items, loading }: BlockShopProps) => {
             </span>
             <div className="leading-tight min-w-0">
               <p className="text-sm sm:text-base font-black text-white">{s.value}</p>
-              <p className="text-[11px] sm:text-xs text-muted-foreground">{s.label}</p>
+              <p className="text-[12.5px] sm:text-xs text-muted-foreground">{s.label}</p>
             </div>
           </div>
         ))}
