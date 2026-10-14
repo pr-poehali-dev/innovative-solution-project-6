@@ -86,7 +86,7 @@ const Photo = ({ className = "" }: { className?: string }) => (
     <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-1/4 rounded-2xl bg-black/70 backdrop-blur-md border border-amber-400/40 px-4 py-3">
       <div className="text-[12.5px] uppercase tracking-widest text-white/60">Кирпич</div>
       <div className="text-2xl sm:text-3xl font-black text-amber-300 leading-none mt-1">
-        от 6 400 ₽<span className="text-sm text-white/70 font-bold">/уп.</span>
+        от 6.400 т.р<span className="text-sm text-white/70 font-bold"> / уп.</span>
       </div>
     </div>
   </div>

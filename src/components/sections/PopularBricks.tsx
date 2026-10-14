@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { fetchMaterials, type Material } from "@/data/materials";
 import { BRICK_COLORS, brickColor, isPopular, priceText, toBrick, PALLET_SIZE } from "@/components/brickShop/brickUtils";
+import { packInfo, parseNum } from "@/components/blockShop/blockUtils";
+import { money } from "@/lib/money";
 
 type Item = {
   id: number;
@@ -10,6 +12,8 @@ type Item = {
   sub: string;
   price: string;
   per: string;
+  total?: string;
+  totalPer?: string;
   image: string;
   to: string;
   hit?: boolean;
@@ -23,8 +27,10 @@ const brickItem = (m: Material): Item | null => {
     id: m.id,
     title: `${color} ${b.hollow ? "пустотелый" : "полнотелый"}`,
     sub: `Кирпич полуторный ${b.grade} · ${PALLET_SIZE} шт/уп.`,
-    price: priceText(b.palletPrice),
-    per: "за упаковку",
+    price: money(b.priceNum),
+    per: "за шт",
+    total: priceText(b.palletPrice),
+    totalPer: `за уп. ${PALLET_SIZE} шт`,
     image: m.imageUrl,
     to: "/stroymaterialy/kirpich",
     hit: isPopular(b),
@@ -42,12 +48,28 @@ const otherItem = (m: Material): Item => {
       : m.category === "bordyur"
         ? m.name.split(" ").slice(0, 2).join(" ")
         : m.name;
+  const unit = parseNum(m.price);
+  let total: string | undefined;
+  let totalPer: string | undefined;
+  if (m.category === "bloki" && unit > 0) {
+    const pack = packInfo(m);
+    total = money(unit * pack.m3);
+    totalPer = `за уп. ${pack.m3.toLocaleString("ru-RU")} м³`;
+  } else {
+    const mm = (m.description || "").match(/поддоне\s*(\d+)\s*шт\s*[—-]\s*([\d\s\u00a0]+)\s*₽/i);
+    if (mm) {
+      total = money(Number(mm[2].replace(/[\s\u00a0]/g, "")));
+      totalPer = `за поддон ${mm[1]} шт`;
+    }
+  }
   return {
     id: m.id,
     title,
     sub: m.category === "plity" ? "Доставка и укладка манипулятором" : `${SHORT[m.category] || ""} ${size} мм`.trim(),
-    price: m.price,
+    price: unit > 0 ? money(unit) : m.price,
     per: `за ${m.unit}`,
+    total,
+    totalPer,
     image: m.imageUrl,
     to: `/stroymaterialy/${m.category}`,
   };
@@ -81,14 +103,19 @@ const Card = ({ it }: { it: Item }) => (
         )}
       </p>
       <p className="text-white/60 text-xs mt-0.5 truncate">{it.sub}</p>
-      <div className="mt-2 flex items-end justify-between gap-2">
+      <div className="mt-2 flex flex-wrap items-end gap-x-3 gap-y-1.5">
         <div className="min-w-0">
-          <p className="text-amber-300 font-black text-lg leading-none whitespace-nowrap">{it.price}</p>
-          <p className="text-white/55 text-[12.5px] mt-1">{it.per}</p>
+          <p className="text-amber-300 font-black text-base leading-none whitespace-nowrap">{it.price}</p>
+          <p className="text-white/55 text-[12px] mt-1 whitespace-nowrap">{it.per}</p>
         </div>
-        <span className="shrink-0 inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-amber-400 text-black text-xs font-black group-hover:bg-amber-300 transition-colors">
-          Купить
-          <Icon name="ArrowRight" size={13} />
+        {it.total && (
+          <div className="min-w-0 pl-3 border-l border-white/15">
+            <p className="text-white font-black text-base leading-none whitespace-nowrap">{it.total}</p>
+            <p className="text-white/55 text-[12px] mt-1 whitespace-nowrap">{it.totalPer}</p>
+          </div>
+        )}
+        <span className="ml-auto shrink-0 hidden sm:inline-flex items-center justify-center w-8 h-8 rounded-lg bg-amber-400 text-black group-hover:bg-amber-300 transition-colors" aria-label="Купить">
+          <Icon name="ArrowRight" size={16} />
         </span>
       </div>
     </div>
