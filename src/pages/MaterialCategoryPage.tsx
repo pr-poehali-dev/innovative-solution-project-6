@@ -148,45 +148,17 @@ const MaterialCategoryPage = () => {
       {page.cat === "kirpich" || page.cat === "bloki" ? (
       <main className="shop-light pt-24 sm:pt-28 pb-16">
         <section className="w-full px-4 sm:px-6 lg:px-10 pt-4">
-          <div className="relative mb-8 rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/10 via-card/40 to-transparent px-5 py-7 sm:px-10 sm:py-10 overflow-hidden text-center flex flex-col">
-            <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[520px] h-[220px] rounded-full bg-accent/20 blur-3xl" />
-            <div className="relative flex items-center justify-center gap-2.5 mb-4">
-              <span className="h-px w-8 sm:w-16 bg-gradient-to-r from-transparent to-[#d9a441]" />
-              <span className="w-1.5 h-1.5 rotate-45 bg-[#d9a441]" />
-              <span
-                className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.4em] text-[#f5d680]/90"
-                style={{ fontFamily: "'Cinzel', serif" }}
-              >
-                от компании
-              </span>
-              <span className="w-1.5 h-1.5 rotate-45 bg-[#d9a441]" />
-              <span className="h-px w-8 sm:w-16 bg-gradient-to-l from-transparent to-[#d9a441]" />
-            </div>
-            <h1 className="relative leading-none">
-              <span className="block text-[13px] sm:text-base font-semibold uppercase tracking-[0.25em] text-white/75">
-                {page.cat === "bloki" ? "Газосиликатные блоки" : "Магазин кирпича"}
-              </span>
-              <span
-                className="block mt-3 text-5xl sm:text-7xl font-bold bg-gradient-to-b from-[#fff3c4] via-[#f5d680] to-[#c8902e] bg-clip-text text-transparent drop-shadow-[0_4px_18px_rgba(232,168,32,0.35)]"
-                style={{ fontFamily: "'Cinzel', serif", letterSpacing: "0.03em" }}
-              >
-                Фаворит
-              </span>
-            </h1>
-            <div className="relative mx-auto mt-4 flex items-center gap-2 w-40 sm:w-56">
-              <span className="h-px flex-1 bg-gradient-to-r from-transparent to-[#d9a441]/70" />
-              <Icon name="Crown" size={14} className="text-[#d9a441]" />
-              <span className="h-px flex-1 bg-gradient-to-l from-transparent to-[#d9a441]/70" />
-            </div>
+          <div className="relative mb-8 rounded-3xl border border-accent/30 overflow-hidden">
+            <h1 className="sr-only">{page.cat === "bloki" ? "Газосиликатные блоки «Фаворит»" : "Магазин кирпича «Фаворит»"}</h1>
             <p className="sr-only">
               {page.cat === "bloki"
                 ? "Газосиликатный блок производства г. Бор с доставкой манипулятором по Нижнему Новгороду и области"
                 : "Силикатный кирпич М-150 с доставкой манипулятором по Нижнему Новгороду и области"}
             </p>
             {page.heroSlides?.length ? (
-              <BrickHeroSlider slides={page.heroSlides} className="order-first sm:order-none -mt-7 mb-6 sm:mb-0 sm:mt-7 -mx-5 sm:-mx-10 sm:-mb-10 aspect-[16/9] lg:aspect-[21/9] border-b sm:border-b-0 sm:border-t border-accent/30" />
+              <BrickHeroSlider slides={page.heroSlides} className="aspect-[16/9] lg:aspect-[21/9]" />
             ) : page.heroImage && (
-              <figure className="relative order-first sm:order-none mb-6 sm:mb-0 sm:mt-7 rounded-2xl overflow-hidden border border-accent/30 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
+              <figure className="relative">
                 <img
                   src={page.heroImage}
                   alt={page.heroAlt || "Кирпич Фаворит"}
