@@ -22,11 +22,19 @@ type Kind = {
   packs: number[];
   pieceKg: number;
   fallbackPrice: number;
+  packPrices?: Record<number, number>;
+  packImages?: Record<number, string>;
 };
 
 const KINDS: Kind[] = [
   { id: "road", match: "дорожн", title: "Дорожный", size: "1000×300×150", perPallet: 12, packs: [12], pieceKg: 120, fallbackPrice: 500 },
-  { id: "walk", match: "тротуар", title: "Тротуарный", size: "1000×200×80", perPallet: 40, packs: [30, 40], pieceKg: 40, fallbackPrice: 210 },
+  { id: "walk", match: "тротуар", title: "Тротуарный", size: "1000×200×80", perPallet: 40, packs: [30, 40], pieceKg: 40, fallbackPrice: 220,
+    packPrices: { 30: 215, 40: 220 },
+    packImages: {
+      30: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/5fdb172d-aebc-42df-81fa-bc54dd5bf58d.jpg",
+      40: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/7334c84e-debc-4de9-9133-cf95f1c7c1aa.jpg",
+    },
+  },
 ];
 
 const PALLET_KG = 25;
@@ -67,9 +75,10 @@ const BordyurCalculator = ({ items }: Props) => {
   const city = DELIVERY_CITIES.find((c) => c.name === cityName) || DELIVERY_CITIES[0];
 
   const unitPrice = useMemo(() => {
+    if (kind.packPrices?.[kind.perPallet]) return kind.packPrices[kind.perPallet];
     const item = items.find((m) => m.name.toLowerCase().includes(kind.match));
     return priceOf(item?.price) || kind.fallbackPrice;
-  }, [items, kind.match, kind.fallbackPrice]);
+  }, [items, kind]);
 
   const pallets = mode === "pallets" ? Math.max(1, qty) : Math.max(1, Math.ceil(qty / kind.perPallet));
   const pieces = mode === "pallets" ? pallets * kind.perPallet : Math.max(1, qty);
@@ -114,7 +123,7 @@ const BordyurCalculator = ({ items }: Props) => {
   const calcText = useMemo(() => {
     const lines = [
       "Здравствуйте! Расчёт бордюра с сайта:",
-      `Бордюр ${kind.title.toLowerCase()} ${kind.size} — ${pieces} шт (${pallets} подд. по ${kind.perPallet} шт)`,
+      `Бордюр ${kind.title.toLowerCase()} ${kind.size} — ${pieces} шт по ${fmt(unitPrice)} ₽ (${pallets} подд. по ${kind.perPallet} шт)`,
       `Вес: ~${totalT.toFixed(1)} т`,
       `Материал: ${fmt(materialTotal)} ₽`,
       `Машина: ${chosen.t.short} (${chosen.t.capacity}), рейсов: ${chosen.trips}`,
@@ -123,7 +132,7 @@ const BordyurCalculator = ({ items }: Props) => {
       SLINGER_TEXT,
     ];
     return lines.join("\n");
-  }, [kind, pieces, pallets, totalT, materialTotal, chosen, city, total]);
+  }, [kind, pieces, pallets, totalT, materialTotal, chosen, city, total, unitPrice]);
 
   return (
     <section id="bordyur-calc" className="w-full px-3 sm:px-6 lg:px-10 pb-12 scroll-mt-24">
@@ -146,7 +155,9 @@ const BordyurCalculator = ({ items }: Props) => {
                 {KINDS.map((k) => {
                   const active = k.id === kindId;
                   const item = items.find((m) => m.name.toLowerCase().includes(k.match));
-                  const p = priceOf(item?.price) || k.fallbackPrice;
+                  const pack = packByKind[k.id] || k.perPallet;
+                  const p = k.packPrices?.[pack] || priceOf(item?.price) || k.fallbackPrice;
+                  const img = k.packImages?.[pack] || item?.imageUrl;
                   return (
                     <button
                       key={k.id}
@@ -159,8 +170,8 @@ const BordyurCalculator = ({ items }: Props) => {
                         active ? "border-accent bg-accent/10" : "border-white/10 bg-card/60 hover:border-accent/50"
                       }`}
                     >
-                      {item?.imageUrl && (
-                        <img src={item.imageUrl} alt={item.name} loading="lazy" className="w-full h-24 sm:w-16 sm:h-16 rounded-xl object-cover shrink-0" />
+                      {img && (
+                        <img src={img} alt={item?.name || k.title} loading="lazy" className="w-full h-24 sm:w-16 sm:h-16 rounded-xl object-cover shrink-0" />
                       )}
                       <span className="min-w-0">
                         <span className="block font-black text-white text-sm sm:text-base">{k.title}</span>
@@ -189,7 +200,7 @@ const BordyurCalculator = ({ items }: Props) => {
                           : "border-white/15 bg-card/60 text-white/80 hover:border-accent/60"
                       }`}
                     >
-                      {n} шт на поддоне
+                      {n} шт на поддоне{baseKind.packPrices?.[n] ? ` · ${baseKind.packPrices[n]} ₽/шт` : ""}
                     </button>
                   ))}
                 </div>
