@@ -102,6 +102,27 @@ const CATALOG_CACHE_KEY = "favorit_materials_cache_v1";
 
 export const FALLBACK_MATERIALS: Material[] = [
   {
+    id: 7,
+    name: "Бордюр дорожный 1000×300×150",
+    category: "bordyur",
+    price: "500 ₽",
+    unit: "шт",
+    description: "Размер 1000×300×150 мм. На поддоне 12 шт — 6 000 ₽. Доставка манипулятором с точной разгрузкой.",
+    imageUrl: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/edb86890-67b2-46dc-9a1e-e9baa1be5684.jpg",
+    inStock: true,
+  },
+  {
+    id: 18,
+    name: "Бордюр тротуарный 1000×200×80",
+    category: "bordyur",
+    price: "210 ₽",
+    unit: "шт",
+    description:
+      "Размер 1000×200×80 мм. Для пешеходных дорожек, отмостки и клумб. На поддоне 40 шт — 8 400 ₽ или 30 шт — 6 300 ₽. Доставка манипулятором.",
+    imageUrl: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/7334c84e-debc-4de9-9133-cf95f1c7c1aa.jpg",
+    inStock: true,
+  },
+  {
     id: 19,
     name: "Кирпич силикатный полнотелый полуторный М-150",
     category: "kirpich",
