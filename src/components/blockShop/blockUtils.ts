@@ -1,4 +1,5 @@
 import type { Material } from "@/data/materials";
+import { money } from "@/lib/money";
 
 export const PACK_M3 = 1.8;
 
@@ -23,6 +24,6 @@ export const blockSize = (item: Material) => {
   return s ? { l: Number(s[1]), h: Number(s[2]), t: Number(s[3]) } : null;
 };
 
-export const rub = (v: number) => `${Math.round(v).toLocaleString("ru-RU")} ₽`;
+export const rub = (v: number) => money(v);
 export const m3 = (v: number) => `${v.toLocaleString("ru-RU", { maximumFractionDigits: 3 })} м³`;
 export const num = (v: number, d = 1) => v.toLocaleString("ru-RU", { maximumFractionDigits: d });

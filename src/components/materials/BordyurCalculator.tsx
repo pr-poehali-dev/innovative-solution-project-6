@@ -1,3 +1,4 @@
+import { money } from "@/lib/money";
 import { useMemo, useState } from "react";
 import Icon from "@/components/ui/icon";
 import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
@@ -123,12 +124,12 @@ const BordyurCalculator = ({ items }: Props) => {
   const calcText = useMemo(() => {
     const lines = [
       "Здравствуйте! Расчёт бордюра с сайта:",
-      `Бордюр ${kind.title.toLowerCase()} ${kind.size} — ${pieces} шт по ${fmt(unitPrice)} ₽ (${pallets} подд. по ${kind.perPallet} шт)`,
+      `Бордюр ${kind.title.toLowerCase()} ${kind.size} — ${pieces} шт по ${money(unitPrice)} (${pallets} подд. по ${kind.perPallet} шт)`,
       `Вес: ~${totalT.toFixed(1)} т`,
-      `Материал: ${fmt(materialTotal)} ₽`,
+      `Материал: ${money(materialTotal)}`,
       `Машина: ${chosen.t.short} (${chosen.t.capacity}), рейсов: ${chosen.trips}`,
-      `Адрес: ${city.name} (${city.km} км), доставка: ${fmt(chosen.cost)} ₽`,
-      `Итого: ${fmt(total)} ₽`,
+      `Адрес: ${city.name} (${city.km} км), доставка: ${money(chosen.cost)}`,
+      `Итого: ${money(total)}`,
       SLINGER_TEXT,
     ];
     return lines.join("\n");
@@ -332,8 +333,8 @@ const BordyurCalculator = ({ items }: Props) => {
                         </span>
                       </span>
                       <span className="text-right shrink-0">
-                        <span className="block text-white font-black text-sm">{fmt(o.cost)} ₽</span>
-                        <span className="block text-[12.5px] text-muted-foreground">{o.trips > 1 ? `${fmt(o.cost / o.trips)} ₽ × ${o.trips}` : "за рейс"}</span>
+                        <span className="block text-white font-black text-sm">{money(o.cost)}</span>
+                        <span className="block text-[12.5px] text-muted-foreground">{o.trips > 1 ? `${money(o.cost / o.trips)} × ${o.trips}` : "за рейс"}</span>
                       </span>
                     </button>
                   );
@@ -359,7 +360,7 @@ const BordyurCalculator = ({ items }: Props) => {
                 <span className="text-muted-foreground">
                   {kind.title} × {pieces} шт
                 </span>
-                <span className="text-white font-bold whitespace-nowrap">{fmt(materialTotal)} ₽</span>
+                <span className="text-white font-bold whitespace-nowrap">{money(materialTotal)}</span>
               </div>
               <div className="flex justify-between gap-3">
                 <span className="text-muted-foreground">Поддонов / вес</span>
@@ -372,13 +373,13 @@ const BordyurCalculator = ({ items }: Props) => {
                   Доставка {chosen.t.short}
                   {chosen.trips > 1 ? `, ${chosen.trips} ${tripsWord(chosen.trips)}` : ""}
                 </span>
-                <span className="text-white font-bold whitespace-nowrap">{fmt(chosen.cost)} ₽</span>
+                <span className="text-white font-bold whitespace-nowrap">{money(chosen.cost)}</span>
               </div>
               <SlingerNotice />
             </div>
             <div className="mt-5 pt-5 border-t border-white/10">
               <p className="text-xs text-muted-foreground">Итого</p>
-              <p className="text-3xl font-black text-accent leading-tight">{fmt(total)} ₽</p>
+              <p className="text-3xl font-black text-accent leading-tight">{money(total)}</p>
               <p className="text-[12.5px] text-muted-foreground mt-1">Предварительный расчёт, точную цену подтвердит менеджер</p>
             </div>
             <div className="mt-5 grid gap-2">

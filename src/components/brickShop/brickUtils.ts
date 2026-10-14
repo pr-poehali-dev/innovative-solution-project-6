@@ -1,3 +1,4 @@
+import { money } from "@/lib/money";
 import type { Material } from "@/data/materials";
 
 export const PALLET_SIZE = 336;
@@ -94,8 +95,7 @@ export const WALL_THICKNESS = [
   { id: "2", label: "В 2 кирпича", mm: "510 мм", hint: "Несущие стены", perM2: { single: 204, oneHalf: 156 } },
 ] as const;
 
-export const formatRub = (v: number) =>
-  `${Math.round(v).toLocaleString("ru-RU").replace(/[\s\u00a0\u202f]/g, ".")} т.р`;
+export const formatRub = (v: number) => money(v);
 
 export const priceText = (v: number) => (v > 0 ? formatRub(v) : "По запросу");
 

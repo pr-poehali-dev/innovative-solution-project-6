@@ -88,15 +88,15 @@ const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs
         </div>
 
         <div className="mt-auto">
-          <div className="flex items-end justify-between mb-3">
+          <div className="flex items-end justify-between gap-3 mb-3">
             <div>
-              <p className="text-2xl font-black text-accent leading-none">{price > 0 ? rub(price) : "По запросу"}</p>
+              <p className="text-2xl font-black text-accent leading-none whitespace-nowrap">{price > 0 ? rub(price) : "По запросу"}</p>
               <p className="text-xs text-muted-foreground mt-1">за {item.unit || "м³"}</p>
             </div>
             {price > 0 && (
               <div className="text-right">
-                <p className="text-sm font-bold text-white">{rub(packPrice)}</p>
-                <p className="text-xs text-muted-foreground">за упаковку {m3(pack.m3)}</p>
+                <p className="text-xl font-black text-white leading-none whitespace-nowrap">{rub(packPrice)}</p>
+                <p className="text-xs text-muted-foreground mt-1">за упаковку {m3(pack.m3)}</p>
               </div>
             )}
           </div>

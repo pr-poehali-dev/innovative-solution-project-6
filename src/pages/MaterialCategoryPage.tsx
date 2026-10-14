@@ -1,6 +1,7 @@
 import { lazy, useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import { money } from "@/lib/money";
 import SectionBadge from "@/components/ui/SectionBadge";
 import PhoneButton from "@/components/ui/PhoneButton";
 import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
@@ -341,9 +342,21 @@ const MaterialCategoryPage = () => {
                         <p className="text-sm text-muted-foreground mb-4 line-clamp-3">{m.description}</p>
                       )}
                       <div className="mt-auto flex items-end justify-between gap-3 pt-3 border-t border-accent/10">
-                        <div>
-                          <p className="text-xl font-black text-accent leading-none">{m.price}</p>
-                          {m.unit && <p className="text-xs text-muted-foreground mt-1">за {m.unit}</p>}
+                        <div className="flex items-end gap-4">
+                          <div>
+                            <p className="text-xl font-black text-accent leading-none whitespace-nowrap">{m.price}</p>
+                            {m.unit && <p className="text-xs text-muted-foreground mt-1">за {m.unit}</p>}
+                          </div>
+                          {(() => {
+                            const mm = (m.description || "").match(/поддоне\s*(\d+)\s*шт\s*[—-]\s*([\d\s\u00a0]+)\s*₽/i);
+                            if (!mm) return null;
+                            return (
+                              <div>
+                                <p className="text-xl font-black text-white leading-none whitespace-nowrap">{money(Number(mm[2].replace(/[\s\u00a0]/g, "")))}</p>
+                                <p className="text-xs text-muted-foreground mt-1">за поддон {mm[1]} шт</p>
+                              </div>
+                            );
+                          })()}
                         </div>
                         <a
                           href={`tel:${MATERIALS_PHONE}`}
