@@ -95,7 +95,7 @@ export const WALL_THICKNESS = [
 ] as const;
 
 export const formatRub = (v: number) =>
-  `${Math.round(v).toLocaleString("ru-RU")} ₽`;
+  `${Math.round(v).toLocaleString("ru-RU").replace(/[\s\u00a0\u202f]/g, ".")} т.р`;
 
 export const priceText = (v: number) => (v > 0 ? formatRub(v) : "По запросу");
 

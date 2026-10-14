@@ -134,17 +134,17 @@ const BrickCard = ({ brick, inCart, onAdd, onOpenPhoto }: BrickCardProps) => {
         </div>
 
         <div className="mt-auto">
-          <div className="flex items-end justify-between mb-3">
+          <div className="flex items-end justify-between gap-3 mb-3">
             <div>
-              <p className={`${brick.priceNum > 0 ? "text-2xl" : "text-lg"} font-black text-accent leading-none`}>
-                {brick.priceNum > 0 ? brick.price : "Цена по запросу"}
+              <p className={`${brick.priceNum > 0 ? "text-2xl" : "text-lg"} font-black text-accent leading-none whitespace-nowrap`}>
+                {brick.priceNum > 0 ? priceText(brick.palletPrice) : "Цена по запросу"}
               </p>
-              <p className="text-xs text-muted-foreground mt-1">{brick.priceNum > 0 ? `за ${brick.unit || "шт"}` : "назовём за 5 минут"}</p>
+              <p className="text-xs text-muted-foreground mt-1">{brick.priceNum > 0 ? `за упаковку ${PALLET_SIZE} шт` : "назовём за 5 минут"}</p>
             </div>
             {brick.priceNum > 0 && (
               <div className="text-right">
-                <p className="text-sm font-bold text-white">{priceText(brick.palletPrice)}</p>
-                <p className="text-xs text-muted-foreground">за упаковку {PALLET_SIZE} шт</p>
+                <p className="text-sm font-bold text-white whitespace-nowrap">{brick.priceNum.toLocaleString("ru-RU", { maximumFractionDigits: 2 })} ₽</p>
+                <p className="text-xs text-muted-foreground">за {brick.unit || "шт"}</p>
               </div>
             )}
           </div>
