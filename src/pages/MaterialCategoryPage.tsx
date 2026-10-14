@@ -2,7 +2,6 @@ import { lazy, useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { money } from "@/lib/money";
-import SectionBadge from "@/components/ui/SectionBadge";
 import PhoneButton from "@/components/ui/PhoneButton";
 import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
 import BrandLogo from "@/components/ui/BrandLogo";
@@ -199,7 +198,7 @@ const MaterialCategoryPage = () => {
       </main>
       ) : (
       <main className="pt-24 sm:pt-28 pb-16">
-        <div className="w-full px-4 sm:px-6 lg:px-10 py-4">
+        <div className="sr-only">
           <Breadcrumbs
             items={[
               { label: "Главная", to: "/" },
@@ -209,54 +208,23 @@ const MaterialCategoryPage = () => {
           />
         </div>
 
-        <section className="w-full px-4 sm:px-6 lg:px-10 pb-8">
-          <SectionBadge>Каталог</SectionBadge>
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tighter mt-4 mb-4">
-            <span className="bg-gradient-to-r from-white via-white to-accent/40 bg-clip-text text-transparent">
-              {page.h1}
-            </span>
-          </h1>
-          <p className="text-muted-foreground max-w-3xl text-sm sm:text-base mb-6">{page.intro}</p>
-
+        <section className={`w-full px-4 sm:px-6 lg:px-10 ${page.heroImage ? "pt-4 pb-8" : ""}`}>
+          <h1 className="sr-only">{page.h1}</h1>
+          <p className="sr-only">{page.intro}</p>
           {page.heroImage && (
-            <figure className="mb-6 rounded-2xl overflow-hidden border border-accent/25 bg-card/40">
+            <figure className="relative rounded-3xl overflow-hidden border border-accent/30">
               <img
                 src={page.heroImage}
                 alt={page.heroAlt || page.h1}
-                className="w-full h-auto object-cover"
+                className="w-full h-auto max-h-[460px] object-cover"
               />
               {page.heroCaption && (
-                <figcaption className="px-4 py-3 text-xs sm:text-sm text-muted-foreground border-t border-accent/10">
+                <figcaption className="absolute bottom-0 inset-x-0 px-4 py-3 bg-gradient-to-t from-black/80 to-transparent text-xs sm:text-sm text-white/90">
                   {page.heroCaption}
                 </figcaption>
               )}
             </figure>
           )}
-
-          <div className="flex flex-col sm:flex-row gap-3">
-            <PhoneButton size="md" className="rounded-xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
-            <button
-              type="button"
-              onClick={() =>
-                page.cat === "bordyur"
-                  ? document.getElementById("bordyur-calc")?.scrollIntoView({ behavior: "smooth" })
-                  : setCallbackOpen(true)
-              }
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent/70 transition-all text-sm font-bold text-white"
-            >
-              <Icon name="Calculator" size={15} className="text-accent" />
-              Рассчитать стоимость
-            </button>
-            {page.cat === "kirpich" && (
-              <a
-                href="#shop"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-black text-sm font-black hover:shadow-lg hover:shadow-accent/30 transition-all"
-              >
-                <Icon name="ShoppingCart" size={15} />
-                Выбрать кирпич
-              </a>
-            )}
-          </div>
         </section>
 
         <section className="w-full px-4 sm:px-6 lg:px-10 pb-10">
