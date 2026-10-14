@@ -15,6 +15,10 @@ interface BrandLogoProps {
   to?: string;
   size?: "sm" | "md";
   compact?: boolean;
+  title?: string;
+  tagline?: string;
+  kicker?: string;
+  mobileTagline?: boolean;
 }
 
 const OPEN_HOUR = 7;
@@ -48,7 +52,7 @@ const getStatus = () => {
   return { online: false, timeLeft };
 };
 
-const BrandLogo = ({ to = "/", size = "md", compact = false }: BrandLogoProps) => {
+const BrandLogo = ({ to = "/", size = "md", compact = false, title = "ООО Фаворит", tagline = "Надёжная аренда манипуляторов", kicker = "Компания", mobileTagline = false }: BrandLogoProps) => {
   const imgSize = compact
     ? "w-8 h-8 sm:w-12 sm:h-12"
     : size === "sm"
@@ -81,7 +85,7 @@ const BrandLogo = ({ to = "/", size = "md", compact = false }: BrandLogoProps) =
       />
       <div className="flex flex-col leading-tight min-w-0">
         <div className={`${compact ? "hidden sm:flex" : "flex"} items-center gap-2 flex-wrap`}>
-          <span className="block text-[11px] sm:text-xs font-medium tracking-[0.22em] sm:tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>Компания</span>
+          <span className="block text-[11px] sm:text-xs font-medium tracking-[0.22em] sm:tracking-[0.25em] uppercase" style={{ color: "#c8a020" }}>{kicker}</span>
           {status.online ? (
             <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-green-500/15 border border-green-500/40" title="Работаем сейчас — звоните">
               <span className="relative flex w-1.5 h-1.5">
@@ -102,13 +106,13 @@ const BrandLogo = ({ to = "/", size = "md", compact = false }: BrandLogoProps) =
           </span>
         )}
         <span className={`brand-gold-title font-black drop-shadow-lg whitespace-nowrap ${titleSize} !tracking-[0.02em] sm:!tracking-[0.08em]`} style={goldText}>
-          ООО Фаворит
+          {title}
         </span>
         <span
-          className={`brand-tagline-glow ${compact ? "hidden sm:block" : "block"} text-[11px] sm:text-sm font-semibold uppercase mt-0.5 sm:mt-1 leading-tight tracking-[0.02em] sm:tracking-[0.1em]`}
+          className={`brand-tagline-glow ${compact && !mobileTagline ? "hidden sm:block" : "block"} text-[11px] sm:text-sm font-semibold uppercase mt-0.5 sm:mt-1 leading-tight tracking-[0.02em] sm:tracking-[0.1em]`}
           style={{ color: "#f5d680" }}
         >
-          Надёжная аренда манипуляторов
+          {tagline}
         </span>
       </div>
     </div>

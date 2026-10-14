@@ -126,9 +126,9 @@ const MaterialCategoryPage = () => {
       <CallbackModal open={callbackOpen} onClose={() => setCallbackOpen(false)} />
 
       <header className="fixed top-0 w-full bg-background/80 backdrop-blur-2xl border-b border-accent/20 z-50">
-        <div className="w-full px-4 sm:px-6 lg:px-10 py-4 flex justify-between items-center">
-          <BrandLogo size="sm" compact />
-          <div className="flex items-center gap-2 sm:gap-3">
+        <div className="w-full px-4 sm:px-6 lg:px-10 py-3 sm:py-4 flex justify-between items-center gap-3">
+          <BrandLogo size="sm" compact mobileTagline kicker="От компании" title="Фаворит" tagline="Стройматериалы" />
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <button
               type="button"
               onClick={() => setCallbackOpen(true)}
@@ -138,7 +138,8 @@ const MaterialCategoryPage = () => {
               Перезвоните мне
             </button>
             <MaxButton place="header_material_category" compact />
-            <PhoneButton size="sm" className="rounded-xl" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
+            <PhoneButton size="sm" className="rounded-xl hidden sm:inline-flex" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
+            <PhoneButton iconOnly className="sm:hidden" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
           </div>
         </div>
       </header>
