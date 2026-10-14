@@ -104,14 +104,16 @@ const BlockCalc = ({ items, onOrder }: { items: Material[]; onOrder: (item: Mate
                 key={b.it.id}
                 type="button"
                 onClick={() => setSelId(b.it.id)}
-                className={`relative rounded-xl border p-3 text-left transition-all ${active ? "border-accent bg-accent/15" : "border-white/15 hover:border-accent/50"}`}
+                className={`relative min-w-0 overflow-hidden rounded-xl border p-3 text-left transition-all ${active ? "border-accent bg-accent/15" : "border-white/15 hover:border-accent/50"}`}
               >
                 {active && <Icon name="CircleCheck" size={18} className="absolute top-2.5 right-2.5 text-accent" />}
-                <p className="text-xs text-muted-foreground">Стена</p>
-                <p className="text-2xl font-black text-white leading-none mb-1">{b.size!.t} мм</p>
-                <p className="text-sm font-semibold text-accent">
-                  Блок {b.size!.l}×{b.size!.h}×{b.size!.t}
-                  {b.pack.density && <span className="ml-1.5 px-1.5 py-0.5 rounded bg-black/30 text-[12.5px] text-white">{b.pack.density}</span>}
+                <div className="flex items-center gap-1.5 pr-6">
+                  <p className="text-xs text-muted-foreground">Стена</p>
+                  {b.pack.density && <span className="px-1.5 py-0.5 rounded bg-black/30 text-[11px] font-bold text-white leading-none">{b.pack.density}</span>}
+                </div>
+                <p className="text-2xl font-black text-white leading-none mt-1 mb-1">{b.size!.t} мм</p>
+                <p className="text-[13px] font-semibold text-accent leading-tight">
+                  Блок <span className="whitespace-nowrap">{b.size!.l}×{b.size!.h}×{b.size!.t}</span>
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">{wallHint(b.size!.t, b.size!.h)}</p>
                 <p className="text-xs text-white/70 mt-2">
