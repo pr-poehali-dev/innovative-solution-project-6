@@ -183,16 +183,6 @@ const MaterialCategoryPage = () => {
                 ? "Газосиликатный блок производства г. Бор с доставкой манипулятором по Нижнему Новгороду и области"
                 : "Силикатный кирпич М-150 с доставкой манипулятором по Нижнему Новгороду и области"}
             </p>
-            <div className="relative mt-5 flex justify-center" aria-hidden="true">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#d9a441]/40 bg-black/20 px-4 py-2 text-sm sm:text-base whitespace-nowrap font-semibold text-white/90">
-                <Icon name="Truck" size={16} className="text-[#f5d680]" />
-                Доставка манипуляторами
-              </span>
-            </div>
-            <div className="relative mt-6 flex flex-wrap items-center gap-2 justify-center">
-              <PhoneButton size="md" className="rounded-xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
-              <MaxButton place="brick_shop_hero" className="justify-center !px-4 !py-2.5 !gap-2 !text-sm !font-bold" />
-            </div>
             {page.heroSlides?.length ? (
               <BrickHeroSlider slides={page.heroSlides} className="order-first sm:order-none -mt-7 mb-6 sm:mb-0 sm:mt-7 -mx-5 sm:-mx-10 sm:-mb-10 aspect-[16/9] lg:aspect-[21/9] border-b sm:border-b-0 sm:border-t border-accent/30" />
             ) : page.heroImage && (
