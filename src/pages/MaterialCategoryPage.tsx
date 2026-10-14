@@ -183,20 +183,12 @@ const MaterialCategoryPage = () => {
                 ? "Газосиликатный блок производства г. Бор с доставкой манипулятором по Нижнему Новгороду и области"
                 : "Силикатный кирпич М-150 с доставкой манипулятором по Нижнему Новгороду и области"}
             </p>
-            <ul className="relative mt-5 flex flex-wrap justify-center gap-1.5 sm:gap-2" aria-hidden="true">
-              {(page.cat === "bloki"
-                ? [["Factory", "Завод г. Бор"], ["Truck", "Манипулятор"], ["MapPin", "НН и область"]]
-                : [["BadgeCheck", "М-150"], ["Truck", "Манипулятор"], ["MapPin", "НН и область"]]
-              ).map(([icon, text]) => (
-                <li
-                  key={text}
-                  className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[#d9a441]/35 bg-black/20 px-2.5 sm:px-3 py-1.5 text-[12px] sm:text-sm whitespace-nowrap font-semibold text-white/90"
-                >
-                  <Icon name={icon} size={14} className="text-[#f5d680]" />
-                  {text}
-                </li>
-              ))}
-            </ul>
+            <div className="relative mt-5 flex justify-center" aria-hidden="true">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#d9a441]/40 bg-black/20 px-4 py-2 text-sm sm:text-base whitespace-nowrap font-semibold text-white/90">
+                <Icon name="Truck" size={16} className="text-[#f5d680]" />
+                Доставка манипуляторами
+              </span>
+            </div>
             <div className="relative mt-6 flex flex-wrap items-center gap-2 justify-center">
               <PhoneButton size="md" className="rounded-xl justify-center" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
               <MaxButton place="brick_shop_hero" className="justify-center !px-4 !py-2.5 !gap-2 !text-sm !font-bold" />
