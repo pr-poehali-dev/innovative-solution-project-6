@@ -39,23 +39,27 @@ const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs
         </span>
       </button>
 
-      <div className="flex items-center gap-2.5 px-4 py-2.5 text-white bg-zinc-800">
-        <Icon name="Box" size={20} className="shrink-0" />
-        <div className="leading-tight">
-          <p className="text-sm font-black uppercase tracking-wide">Газосиликат</p>
-          <p className="text-[12.5px] text-white/80">Лёгкий, тёплый, ровный</p>
+      <div className="px-4 py-2.5 text-white bg-zinc-800">
+        <div className="flex items-center gap-2.5">
+          <Icon name="Box" size={18} className="shrink-0" />
+          <div className="leading-tight min-w-0">
+            <p className="text-[13px] font-black uppercase tracking-wide">Газосиликат</p>
+            <p className="text-[12px] text-white/75 truncate">Лёгкий, тёплый, ровный</p>
+          </div>
         </div>
-        {pack.density && (
-          <span className="ml-auto px-2.5 py-1 rounded-full bg-black/40 text-accent text-xs font-black border border-accent/40">{pack.density}</span>
-        )}
-        <span
-          className={`${pack.density ? "" : "ml-auto "}inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${
-            item.inStock ? "bg-emerald-600 text-white" : "bg-black/40 text-white"
-          }`}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-white" />
-          {item.inStock ? "В наличии" : "Под заказ"}
-        </span>
+        <div className="mt-2 flex flex-wrap items-center gap-1.5">
+          {pack.density && (
+            <span className="px-2 py-0.5 rounded-full bg-black/40 text-accent text-[11px] font-black border border-accent/40">{pack.density}</span>
+          )}
+          <span
+            className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold whitespace-nowrap ${
+              item.inStock ? "bg-emerald-600 text-white" : "bg-black/40 text-white"
+            }`}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-white" />
+            {item.inStock ? "В наличии" : "Под заказ"}
+          </span>
+        </div>
       </div>
 
       <div className="p-5 flex flex-col flex-1">

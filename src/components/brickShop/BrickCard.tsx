@@ -63,34 +63,36 @@ const BrickCard = ({ brick, inCart, onAdd, onOpenPhoto }: BrickCardProps) => {
       </div>
 
       <div
-        className={`flex items-center gap-2.5 px-4 py-2.5 text-white ${
+        className={`flex flex-wrap items-center px-4 py-2.5 text-white ${
           brick.hollow ? "bg-sky-700" : "bg-zinc-800"
         }`}
       >
-        <Icon name={brick.hollow ? "CircleDashed" : "Square"} size={20} className="shrink-0" />
-        <div className="leading-tight">
-          <p className="text-sm font-black uppercase tracking-wide">{brick.hollow ? "Пустотелый" : "Полнотелый"}</p>
-          <p className="text-[12.5px] text-white/80">
-            {brick.hollow ? "С отверстиями — легче и теплее" : "Сплошной — максимальная прочность"}
-          </p>
+        <div className="flex items-center gap-2.5 w-full">
+          <Icon name={brick.hollow ? "CircleDashed" : "Square"} size={18} className="shrink-0" />
+          <div className="leading-tight min-w-0">
+            <p className="text-[13px] font-black uppercase tracking-wide">{brick.hollow ? "Пустотелый" : "Полнотелый"}</p>
+            <p className="text-[12px] text-white/75 truncate">
+              {brick.hollow ? "С отверстиями — легче и теплее" : "Сплошной — максимальная прочность"}
+            </p>
+          </div>
         </div>
-        <div className="ml-auto flex flex-wrap justify-end gap-1.5">
+        <div className="w-full mt-2 flex flex-wrap items-center gap-1.5">
           {isPopular(brick) && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-black text-xs font-black uppercase">
-              <Icon name="Flame" size={12} />
-              Хит продаж
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-black text-[11px] font-black uppercase whitespace-nowrap">
+              <Icon name="Flame" size={11} />
+              Хит
             </span>
           )}
           {brick.grade && (
-            <span className="px-2.5 py-1 rounded-full bg-black/40 text-accent text-xs font-black border border-accent/40">
+            <span className="px-2 py-0.5 rounded-full bg-black/40 text-accent text-[11px] font-black border border-accent/40">
               {brick.grade}
             </span>
           )}
           {brick.facing && (
-            <span className="px-2.5 py-1 rounded-full bg-accent text-black text-xs font-black">Для фасада</span>
+            <span className="px-2 py-0.5 rounded-full bg-accent text-black text-[11px] font-black whitespace-nowrap">Для фасада</span>
           )}
           <span
-            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${
+            className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold whitespace-nowrap ${
               brick.inStock ? "bg-emerald-600 text-white" : "bg-black/40 text-white"
             }`}
           >
