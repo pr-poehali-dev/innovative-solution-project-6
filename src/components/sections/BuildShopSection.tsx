@@ -72,12 +72,12 @@ const Buttons = () => (
 );
 
 const PriceBadge = () => (
-  <>
-    <span className="text-[11px] sm:text-[12.5px] uppercase tracking-widest text-white/60">Кирпич</span>
-    <span className="text-lg sm:text-3xl font-black text-amber-300 leading-none sm:block sm:mt-1">
-      от 6.400 т.р<span className="text-xs sm:text-sm text-white/70 font-bold"> / уп.</span>
-    </span>
-  </>
+  <div className="absolute bottom-2.5 left-2.5 sm:bottom-5 sm:left-5 rounded-xl bg-black/65 backdrop-blur-md border border-amber-400/40 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5">
+    <div className="text-[9.5px] sm:text-[11px] uppercase tracking-widest text-white/60 leading-none">Кирпич</div>
+    <div className="text-sm sm:text-2xl font-black text-amber-300 leading-none mt-1">
+      от 6.400 т.р<span className="text-[10px] sm:text-sm text-white/70 font-bold"> / уп.</span>
+    </div>
+  </div>
 );
 
 const Photo = ({ className = "" }: { className?: string }) => (
@@ -92,12 +92,7 @@ const Photo = ({ className = "" }: { className?: string }) => (
         height="768"
         className="absolute inset-0 w-full h-full object-cover object-[80%_center]"
       />
-      <div className="absolute inset-0 hidden sm:block bg-gradient-to-t from-black/40 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#4a4130] lg:via-transparent lg:via-20%" />
-      <div className="hidden sm:block absolute bottom-6 left-1/4 rounded-2xl bg-black/70 backdrop-blur-md border border-amber-400/40 px-4 py-3">
-        <PriceBadge />
-      </div>
-    </div>
-    <div className="sm:hidden flex items-center justify-between gap-3 px-4 py-2.5 bg-black/40 border-t border-amber-400/30">
+      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#4a4130] lg:via-transparent lg:via-20%" />
       <PriceBadge />
     </div>
   </div>
