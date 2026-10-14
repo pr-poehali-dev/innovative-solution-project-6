@@ -1,6 +1,7 @@
 import { lazy, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import MaterialsNav from "@/components/materials/MaterialsNav";
 import PhoneButton from "@/components/ui/PhoneButton";
 import BrandLogo from "@/components/ui/BrandLogo";
 import CallbackModal from "@/components/ui/CallbackModal";
@@ -56,9 +57,10 @@ const MaterialsHubPage = () => {
             <PhoneButton size="sm" className="rounded-xl" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
           </div>
         </div>
+        <MaterialsNav />
       </header>
 
-      <main className="shop-light pt-24 sm:pt-28 pb-16">
+      <main className="shop-light pt-40 sm:pt-44 pb-16">
         <section className="w-full px-4 sm:px-6 lg:px-10 pt-4">
           <div className="relative mb-8 rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/10 via-card/40 to-transparent px-5 py-8 sm:px-10 sm:py-12 overflow-hidden text-center">
             <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[520px] h-[220px] rounded-full bg-accent/20 blur-3xl" />
