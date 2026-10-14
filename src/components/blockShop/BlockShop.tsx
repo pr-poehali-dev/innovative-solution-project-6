@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import Icon from "@/components/ui/icon";
+import StatTiles from "@/components/ui/StatTiles";
 import PhoneButton from "@/components/ui/PhoneButton";
 import MaxButton from "@/components/ui/MaxButton";
 import { SUBMIT_URL } from "@/components/sections/hero/heroData";
@@ -241,24 +242,15 @@ const BlockShop = ({ items, loading }: BlockShopProps) => {
 
   return (
     <>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
-        {[
+      <StatTiles
+        className="mb-8"
+        items={[
           { icon: "Factory", value: "г. Бор", label: "производство" },
           { icon: "Package", value: "40–50 шт", label: "в упаковке" },
           { icon: "Thermometer", value: "Тёплые стены", label: "без мостиков холода" },
           { icon: "Truck", value: "Манипулятор", label: "разгрузка на объекте" },
-        ].map((s) => (
-          <div key={s.label} className="rounded-2xl border border-accent/20 bg-card/40 p-3 sm:p-4 flex items-center gap-2.5 sm:gap-3">
-            <span className="w-10 h-10 rounded-xl bg-accent/15 text-accent flex items-center justify-center shrink-0">
-              <Icon name={s.icon} size={20} />
-            </span>
-            <div className="leading-tight min-w-0">
-              <p className="text-sm sm:text-base font-black text-white">{s.value}</p>
-              <p className="text-[12.5px] sm:text-xs text-muted-foreground">{s.label}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+        ]}
+      />
 
       {loading ? (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">

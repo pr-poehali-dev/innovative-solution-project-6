@@ -145,8 +145,8 @@ const MaterialCategoryPage = () => {
       </header>
 
       {page.cat === "kirpich" || page.cat === "bloki" ? (
-      <main className="shop-light pt-24 sm:pt-28 pb-16">
-        <section className="w-full px-4 sm:px-6 lg:px-10 pt-4">
+      <main className="shop-light pt-20 sm:pt-28 pb-16">
+        <section className="w-full px-4 sm:px-6 lg:px-10 pt-2 sm:pt-4">
           <div className="relative mb-8 rounded-3xl border border-accent/30 overflow-hidden">
             <h1 className="sr-only">{page.cat === "bloki" ? "Газосиликатные блоки «Фаворит»" : "Магазин кирпича «Фаворит»"}</h1>
             <p className="sr-only">
@@ -197,7 +197,7 @@ const MaterialCategoryPage = () => {
         </section>
       </main>
       ) : (
-      <main className="pt-24 sm:pt-28 pb-16">
+      <main className="pt-20 sm:pt-28 pb-16">
         <div className="sr-only">
           <Breadcrumbs
             items={[
@@ -208,7 +208,7 @@ const MaterialCategoryPage = () => {
           />
         </div>
 
-        <section className={`w-full px-4 sm:px-6 lg:px-10 ${page.heroImage ? "pt-4 pb-8" : ""}`}>
+        <section className={`w-full px-4 sm:px-6 lg:px-10 ${page.heroImage ? "pt-2 sm:pt-4 pb-8" : ""}`}>
           <h1 className="sr-only">{page.h1}</h1>
           <p className="sr-only">{page.intro}</p>
           {page.heroImage && (

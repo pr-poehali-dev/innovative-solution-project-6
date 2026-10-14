@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import Icon from "@/components/ui/icon";
+import StatTiles from "@/components/ui/StatTiles";
 import type { Material } from "@/data/materials";
 import BrickCard from "./BrickCard";
 import BrickPhotoViewer from "./BrickPhotoViewer";
@@ -135,22 +136,15 @@ const BrickShop = ({ items, loading }: BrickShopProps) => {
 
   return (
     <div id="shop" className="scroll-mt-24">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-6 sm:mb-8">
-        {[
+      <StatTiles
+        className="mb-6 sm:mb-8"
+        items={[
           { icon: "Tag", value: minPrice ? `от ${minPrice.toLocaleString("ru-RU", { maximumFractionDigits: 2 })} ₽` : "По запросу", label: minPrice ? "за штуку" : "цена за 5 минут" },
           { icon: "Package", value: `${PALLET_SIZE} шт`, label: "в упаковке" },
           { icon: "Truck", value: "от 1 поддона", label: "доставка манипулятором" },
           { icon: "ShieldCheck", value: "ГОСТ 379-2015", label: "сертифицировано" },
-        ].map((s) => (
-          <div key={s.label} className="rounded-2xl border border-accent/20 bg-card/40 p-3 sm:p-4 flex items-center gap-2.5 sm:gap-3">
-            <Icon name={s.icon} size={22} className="text-accent shrink-0" />
-            <div className="min-w-0">
-              <p className="text-white font-black leading-tight text-sm sm:text-base">{s.value}</p>
-              <p className="text-[12.5px] sm:text-xs text-muted-foreground leading-tight">{s.label}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+        ]}
+      />
 
       <div className="rounded-2xl border border-accent/20 bg-card/30 p-4 mb-6 space-y-3">
         {colors.length > 1 && (
