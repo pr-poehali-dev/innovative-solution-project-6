@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { fetchMaterials } from "@/data/materials";
+import { toBrick } from "@/components/brickShop/brickUtils";
+import { money } from "@/lib/money";
 import Icon from "@/components/ui/icon";
 import PopularBricks from "@/components/sections/PopularBricks";
 
@@ -71,14 +75,32 @@ const Buttons = () => (
   </div>
 );
 
-const PriceBadge = () => (
-  <div className="absolute bottom-2.5 left-2.5 sm:bottom-5 sm:left-5 rounded-xl bg-black/65 backdrop-blur-md border border-amber-400/40 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5">
-    <div className="text-[9.5px] sm:text-[11px] uppercase tracking-widest text-white/60 leading-none">Кирпич</div>
-    <div className="text-sm sm:text-2xl font-black text-amber-300 leading-none mt-1">
-      от 6.400 т.р<span className="text-[10px] sm:text-sm text-white/70 font-bold"> / уп.</span>
+const PriceBadge = () => {
+  const [price, setPrice] = useState(0);
+
+  useEffect(() => {
+    fetchMaterials()
+      .then((list) => {
+        const prices = list
+          .filter((m) => m.category === "kirpich" && m.inStock && /336 шт/.test(m.description || ""))
+          .map((m) => toBrick(m).palletPrice)
+          .filter((v) => v > 0);
+        setPrice(prices.length ? Math.min(...prices) : 0);
+      })
+      .catch(() => setPrice(0));
+  }, []);
+
+  if (!price) return null;
+
+  return (
+    <div className="absolute top-2.5 left-2.5 sm:top-5 sm:left-5 z-10 rounded-xl bg-black/65 backdrop-blur-md border border-amber-400/40 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 pointer-events-none">
+      <div className="text-[9.5px] sm:text-[11px] uppercase tracking-widest text-white/60 leading-none">Кирпич</div>
+      <div className="text-sm sm:text-2xl font-black text-amber-300 leading-none mt-1">
+        от {money(price)}<span className="text-[10px] sm:text-sm text-white/70 font-bold"> / уп.</span>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Photo = ({ className = "" }: { className?: string }) => (
   <div>
