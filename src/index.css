@@ -751,3 +751,11 @@ body.modal-open .floating-mobile-notif {
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation-duration: 120s !important; }
 }
+
+@media (max-width: 639px) {
+  .text-xs { font-size: 0.875rem; line-height: 1.3rem; }
+  .text-sm { font-size: 1rem; line-height: 1.55rem; }
+  .text-base { font-size: 1.0625rem; line-height: 1.7rem; }
+  .text-\[11px\], .text-\[12px\] { font-size: 13px; }
+  .text-\[12\.5px\], .text-\[13px\] { font-size: 14px; }
+}
