@@ -1,7 +1,6 @@
 import { lazy, useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
-import MaterialsNav from "@/components/materials/MaterialsNav";
 import SectionBadge from "@/components/ui/SectionBadge";
 import PhoneButton from "@/components/ui/PhoneButton";
 import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
@@ -13,6 +12,7 @@ import LazySection from "@/components/LazySection";
 import BrickShop from "@/components/brickShop/BrickShop";
 import BrickHeroSlider from "@/components/brickShop/BrickHeroSlider";
 import BlockShop from "@/components/blockShop/BlockShop";
+import OtherSections from "@/components/materials/OtherSections";
 import BordyurCalculator from "@/components/materials/BordyurCalculator";
 import NotFound from "@/pages/NotFound";
 import { fetchMaterials, MATERIAL_CATEGORIES, type Material } from "@/data/materials";
@@ -141,11 +141,10 @@ const MaterialCategoryPage = () => {
             <PhoneButton size="sm" className="rounded-xl" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
           </div>
         </div>
-        <MaterialsNav />
       </header>
 
       {page.cat === "kirpich" || page.cat === "bloki" ? (
-      <main className="shop-light pt-40 sm:pt-44 pb-16">
+      <main className="shop-light pt-24 sm:pt-28 pb-16">
         <section className="w-full px-4 sm:px-6 lg:px-10 pt-4">
           <div className="relative mb-8 rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/10 via-card/40 to-transparent px-5 py-7 sm:px-10 sm:py-10 overflow-hidden text-center flex flex-col">
             <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[520px] h-[220px] rounded-full bg-accent/20 blur-3xl" />
@@ -194,8 +193,9 @@ const MaterialCategoryPage = () => {
               </figure>
             )}
           </div>
-          {page.cat === "bloki" ? <BlockShop items={visible} loading={loading} /> : <>
+          {page.cat === "bloki" ? <><BlockShop items={visible} loading={loading} /><OtherSections current={page.slug} /></> : <>
           <BrickShop items={visible} loading={loading} />
+          <OtherSections current={page.slug} />
           <div className="mt-10 rounded-3xl border border-accent/30 bg-card/60 px-6 pt-6 sm:px-8 sm:pt-8 flex flex-col md:flex-row md:items-center gap-5 overflow-hidden">
             <div className="flex-1 pb-2 md:pb-8 text-center md:text-left">
               <div className="inline-block mb-3 px-4 py-2 rounded-2xl bg-white text-zinc-900 text-sm font-bold shadow-lg">
@@ -219,7 +219,7 @@ const MaterialCategoryPage = () => {
         </section>
       </main>
       ) : (
-      <main className="pt-40 sm:pt-44 pb-16">
+      <main className="pt-24 sm:pt-28 pb-16">
         <div className="w-full px-4 sm:px-6 lg:px-10 py-4">
           <Breadcrumbs
             items={[
@@ -365,6 +365,10 @@ const MaterialCategoryPage = () => {
             <BordyurCalculator items={visible} />
           </div>
         )}
+
+        <section className="w-full px-4 sm:px-6 lg:px-10">
+          <OtherSections current={page.slug} />
+        </section>
 
         <section className="w-full px-4 sm:px-6 lg:px-10 py-12">
           <h2 className="text-2xl sm:text-3xl font-black text-white mb-3">
