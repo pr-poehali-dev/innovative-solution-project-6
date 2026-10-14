@@ -170,6 +170,14 @@ const MaterialCategoryPage = () => {
                 )}
               </figure>
             )}
+            {page.cat === "bloki" && (
+              <div className="absolute top-2.5 left-2.5 sm:top-5 sm:left-5 z-10 rounded-xl bg-black/65 backdrop-blur-md border border-amber-400/40 px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 pointer-events-none">
+                <div className="text-[9.5px] sm:text-[11px] uppercase tracking-widest text-white/60 leading-none">Газоблок</div>
+                <div className="text-sm sm:text-2xl font-black text-amber-300 leading-none mt-1">
+                  от 5.100 т.р<span className="text-[10px] sm:text-sm text-white/70 font-bold"> / м³</span>
+                </div>
+              </div>
+            )}
           </div>
           {page.cat === "bloki" ? <><BlockShop items={visible} loading={loading} /><OtherSections current={page.slug} /></> : <>
           <BrickShop items={visible} loading={loading} />
