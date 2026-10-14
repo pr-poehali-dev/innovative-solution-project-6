@@ -31,7 +31,7 @@ const KINDS: Kind[] = [
   { id: "walk", match: "тротуар", title: "Тротуарный", size: "1000×200×80", perPallet: 40, packs: [30, 40], pieceKg: 40, fallbackPrice: 220,
     packPrices: { 30: 215, 40: 220 },
     packImages: {
-      30: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/5fdb172d-aebc-42df-81fa-bc54dd5bf58d.jpg",
+      30: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/2c08b118-fad8-4fbd-88e7-7a3bf9e753b2.jpg",
       40: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/7334c84e-debc-4de9-9133-cf95f1c7c1aa.jpg",
     },
   },

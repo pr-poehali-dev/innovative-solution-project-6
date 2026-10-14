@@ -98,7 +98,7 @@ export const HEADER_MENU_CATEGORIES = [
   .map((slug) => MATERIAL_CATEGORIES.find((c) => c.slug === slug)!)
   .filter(Boolean);
 
-const CATALOG_CACHE_KEY = "favorit_materials_cache_v1";
+const CATALOG_CACHE_KEY = "favorit_materials_cache_v2";
 
 export const FALLBACK_MATERIALS: Material[] = [
   {
@@ -113,13 +113,22 @@ export const FALLBACK_MATERIALS: Material[] = [
   },
   {
     id: 18,
-    name: "Бордюр тротуарный 1000×200×80",
+    name: "Бордюр тротуарный 1000×200×80 (40 шт на поддоне)",
     category: "bordyur",
-    price: "от 215 ₽",
+    price: "220 ₽",
     unit: "шт",
-    description:
-      "Размер 1000×200×80 мм. Для пешеходных дорожек, отмостки и клумб. На поддоне 40 шт по 220 ₽ — 8 800 ₽ или 30 шт по 215 ₽ — 6 450 ₽. Доставка манипулятором.",
+    description: "Размер 1000×200×80 мм. Для пешеходных дорожек, отмостки и клумб. На поддоне 40 шт — 8 800 ₽. Доставка манипулятором.",
     imageUrl: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/7334c84e-debc-4de9-9133-cf95f1c7c1aa.jpg",
+    inStock: true,
+  },
+  {
+    id: 29,
+    name: "Бордюр тротуарный 1000×200×80 (30 шт на поддоне)",
+    category: "bordyur",
+    price: "215 ₽",
+    unit: "шт",
+    description: "Размер 1000×200×80 мм. Для пешеходных дорожек, отмостки и клумб. На поддоне 30 шт — 6 450 ₽. Доставка манипулятором.",
+    imageUrl: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/2c08b118-fad8-4fbd-88e7-7a3bf9e753b2.jpg",
     inStock: true,
   },
   {
