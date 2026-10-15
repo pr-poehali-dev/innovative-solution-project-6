@@ -196,8 +196,6 @@ export const MATERIAL_SEO_PAGES: MaterialSeoPage[] = [
     ],
     advantages: [
       { icon: "Grid3x3", title: "Дорожный и тротуарный", text: "Два типоразмера в наличии" },
-      { icon: "Truck", title: "Отгрузка поддонами", text: "12 или 30 штук на поддоне" },
-      { icon: "Crane", title: "Разгрузка вдоль линии", text: "Кран ставит камень у места укладки" },
       { icon: "Wrench", title: "Монтаж под ключ", text: "Можем установить бордюр своей бригадой" },
     ],
     faq: [

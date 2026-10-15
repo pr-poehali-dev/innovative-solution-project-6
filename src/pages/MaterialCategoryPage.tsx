@@ -86,6 +86,20 @@ const MaterialCategoryPage = () => {
     })),
   };
 
+  const advantagesBlock = (
+  <section className="w-full px-4 sm:px-6 lg:px-10 pb-10">
+    <div className={`grid sm:grid-cols-2 gap-4 ${page.advantages.length > 2 ? "lg:grid-cols-4" : ""}`}>
+      {page.advantages.map((a) => (
+        <div key={a.title} className="rounded-2xl border border-accent/15 bg-card/40 p-5">
+          <Icon name={a.icon} size={22} className="text-accent mb-3" />
+          <p className="text-white font-bold mb-1 text-sm">{a.title}</p>
+          <p className="text-xs text-muted-foreground">{a.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+  );
+
   const priceOf = (m: Material) => parseFloat((m.price || "0").replace(/[^\d.,]/g, "").replace(",", ".")) || 0;
   const priced = visible.filter((m) => priceOf(m) > 0);
   const productSchema = priced.length
@@ -235,17 +249,7 @@ const MaterialCategoryPage = () => {
           )}
         </section>
 
-        <section className="w-full px-4 sm:px-6 lg:px-10 pb-10">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {page.advantages.map((a) => (
-              <div key={a.title} className="rounded-2xl border border-accent/15 bg-card/40 p-5">
-                <Icon name={a.icon} size={22} className="text-accent mb-3" />
-                <p className="text-white font-bold mb-1 text-sm">{a.title}</p>
-                <p className="text-xs text-muted-foreground">{a.text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+        {page.cat !== "bordyur" && advantagesBlock}
 
         {page.cat === "kirpich" ? (
           <section className="w-full px-4 sm:px-6 lg:px-10">
@@ -326,6 +330,8 @@ const MaterialCategoryPage = () => {
             )}
           </section>
         )}
+
+        {page.cat === "bordyur" && <div className="pt-10">{advantagesBlock}</div>}
 
         {page.cat === "bordyur" && (
           <div className="pt-10">
