@@ -4,7 +4,7 @@ import Icon from "@/components/ui/icon";
 import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts";
 import { trucks } from "@/components/sections/calculator/data";
 import { DELIVERY_CITIES } from "@/components/brickShop/deliveryCities";
-import { tripCost, roundTo } from "@/lib/deliveryPricing";
+import { tripCost, roundTo, WORK_HOURS } from "@/lib/deliveryPricing";
 import type { Material } from "@/data/materials";
 import { MAX_LINK } from "@/data/contacts";
 import MaxIcon from "@/components/ui/MaxIcon";
@@ -41,6 +41,23 @@ const KINDS: Kind[] = [
 const PALLET_KG = 25;
 
 const manipulators = trucks.filter((t) => t.category === "Манипулятор");
+
+const KM_RATES: Record<string, number> = {
+  "ISUZU 5т + КМУ": 85,
+  "Hino 500 + КМУ Kanglim KS1256G-II": 90,
+  "КАМАЗ 65115 + КМУ HANGIL": 95,
+  "FAW + КМУ DongYang": 120,
+  "Hyundai Gold + КМУ HIAB 190TM": 125,
+  "RENAULT LANDER + КМУ": 110,
+  "КАМАЗ 43118 + КМУ Kanglim": 135,
+  "FAW J6 + КМУ DONGYANG 1966": 115,
+};
+
+const bordyurTripCost = (km: number, tons: number, name: string, hourly: number) => {
+  const rate = KM_RATES[name];
+  if (!rate) return tripCost(km, tons, hourly);
+  return Math.round(km * 2 * rate + hourly * WORK_HOURS);
+};
 
 const tonsOf = (capacity: string) => {
   const m = capacity.match(/[\d.,]+/);
@@ -95,7 +112,7 @@ const BordyurCalculator = ({ items }: Props) => {
           const cap = tonsOf(t.capacity);
           const perTrip = Math.max(1, Math.floor(cap / palletT));
           const trips = Math.ceil(pallets / perTrip);
-          const cost = roundTo(tripCost(city.km, cap, t.price)) * trips;
+          const cost = roundTo(bordyurTripCost(city.km, cap, t.name, t.price)) * trips;
           return { t, cap, perTrip, trips, cost };
         })
         .sort((a, b) => a.trips - b.trips || a.cost - b.cost),
