@@ -29,6 +29,7 @@ export const trucks: Record<string, Truck> = {
       "/img/faw-dongyang-1600.webp",
       "/img/faw-dongyang-lyulka-1600.webp",
       "/img/faw-gazoblok-1600.webp",
+      "/img/faw-pilomaterial-1600.webp",
       "/img/faw-stanok-5t-1600.webp",
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/4318b2a2-0422-4c73-b7d5-59f8c69483b6.webp",
       "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/df8d23ad-2b19-4a5c-bfef-8403f404cab9.webp",
