@@ -289,7 +289,7 @@ export const useTruckCardDownload = () => {
       ctx.fillText("ВОДИТЕЛЬ", col2X + 14, cy + 10);
       ctx.fillStyle = "#0f172a";
       ctx.font = "700 16px Arial, sans-serif";
-      ctx.fillText("+7 960 188-30-84", col2X + 14, cy + 26);
+      ctx.fillText("Александр · +7 960 188-30-84", col2X + 14, cy + 26);
 
       cy += cardH + 10;
 
