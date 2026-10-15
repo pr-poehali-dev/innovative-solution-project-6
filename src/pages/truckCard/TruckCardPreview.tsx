@@ -67,7 +67,7 @@ const TruckCardPreview = () => {
         </div>
         <div style={{ textAlign: "right" }}>
           <div style={{ fontSize: 11, color: "#64748b" }}>Сайт</div>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "#b45309" }}>фаварит.рф</div>
+          <a href="https://фаварит.рф" target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, fontWeight: 700, color: "#b45309", textDecoration: "none" }}>фаварит.рф</a>
         </div>
       </div>
 
@@ -107,14 +107,14 @@ const TruckCardPreview = () => {
       <div style={{ paddingTop: 16, borderTop: "1px solid rgba(13,148,136,0.3)", marginBottom: 10 }}>
         <div style={{ padding: 12, borderRadius: 10, background: "rgba(45,212,191,0.25)", border: "1px solid rgba(13,148,136,0.5)" }}>
           <div style={{ fontSize: 9, color: "#0f766e", textTransform: "uppercase", letterSpacing: 1, fontWeight: 700 }}>Водитель</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: "#0f172a", marginTop: 6 }}>Александр · +7 960 188-30-84</div>
+          <a href="tel:+79601883084" style={{ display: "block", fontSize: 16, fontWeight: 700, color: "#0f172a", marginTop: 6, textDecoration: "none" }}>+7 960 188-30-84 · Александр</a>
         </div>
       </div>
 
-      <div style={{ padding: "10px 14px", borderRadius: 10, background: "rgba(45,212,191,0.18)", border: "1px solid rgba(13,148,136,0.4)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <a href="https://фаварит.рф" target="_blank" rel="noopener noreferrer" style={{ padding: "10px 14px", borderRadius: 10, background: "rgba(45,212,191,0.18)", border: "1px solid rgba(13,148,136,0.4)", display: "flex", justifyContent: "space-between", alignItems: "center", textDecoration: "none" }}>
         <span style={{ fontSize: 11, color: "#475569" }}>Подробнее на сайте:</span>
         <span style={{ fontSize: 13, fontWeight: 700, color: "#b45309" }}>фаварит.рф</span>
-      </div>
+      </a>
     </div>
   );
 };
