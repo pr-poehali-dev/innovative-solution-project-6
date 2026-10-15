@@ -24,3 +24,20 @@ export const tripCost = (km: number, tons: number, hourly: number) => {
 };
 
 export const roundTo = (n: number, step = 100) => Math.round(n / step) * step;
+
+export const KM_RATES: Record<string, number> = {
+  "ISUZU 5т + КМУ": 85,
+  "Hino 500 + КМУ Kanglim KS1256G-II": 90,
+  "КАМАЗ 65115 + КМУ HANGIL": 95,
+  "FAW + КМУ DongYang": 120,
+  "Hyundai Gold + КМУ HIAB 190TM": 125,
+  "RENAULT LANDER + КМУ": 110,
+  "КАМАЗ 43118 + КМУ Kanglim": 135,
+  "FAW J6 + КМУ DONGYANG 1966": 115,
+};
+
+export const materialTripCost = (km: number, tons: number, hourly: number, name: string) => {
+  const rate = KM_RATES[name];
+  if (!rate) return tripCost(km, tons, hourly);
+  return Math.round(km * 2 * rate + hourly * WORK_HOURS);
+};

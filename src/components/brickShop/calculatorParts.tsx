@@ -17,7 +17,7 @@ export const MANIPULATORS = trucks
   .filter((t) => t.category === "Манипулятор")
   .map((t) => {
     const m = t.capacity.match(/[\d.,]+/);
-    return { name: t.short || t.name, tons: m ? parseFloat(m[0].replace(",", ".")) : 5, price: t.price };
+    return { name: t.short || t.name, full: t.name, tons: m ? parseFloat(m[0].replace(",", ".")) : 5, price: t.price };
   })
   .filter((t, i, arr) => arr.findIndex((x) => x.tons === t.tons) === i)
   .sort((a, b) => a.tons - b.tons);
