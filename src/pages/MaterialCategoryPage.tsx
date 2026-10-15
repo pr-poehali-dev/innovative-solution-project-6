@@ -224,7 +224,7 @@ const MaterialCategoryPage = () => {
               <img
                 src={page.heroImage}
                 alt={page.heroAlt || page.h1}
-                className="w-full h-auto max-h-[460px] object-cover"
+                className="w-full h-auto"
               />
               {page.heroCaption && (
                 <figcaption className="absolute bottom-0 inset-x-0 px-4 py-3 bg-gradient-to-t from-black/80 to-transparent text-xs sm:text-sm text-white/90">
