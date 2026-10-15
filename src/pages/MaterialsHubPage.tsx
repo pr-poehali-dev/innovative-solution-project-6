@@ -14,6 +14,7 @@ const SECTIONS = [
   { to: "/stroymaterialy/kirpich", title: "Кирпич силикатный", text: "Белый и цветной, М-150, Борский завод", image: "/img/hub-silikat.jpg", tag: "Хит продаж" },
   { to: "/stroymaterialy/bloki", title: "Газосиликатные блоки", text: "D500–D600, 4 размера, с доставкой", image: "/img/hub-bloki.jpg" },
   { to: "/stroymaterialy/bordyur", title: "Бордюр", text: "Дорожный и тротуарный, поддонами", image: "/img/hub-bordyur.jpg" },
+  { to: "/stroymaterialy/pilomaterialy", title: "Пиломатериалы", text: "Доска, брус, рейка с доставкой", image: "/img/hub-pilomaterialy.jpg" },
   { to: "/stroymaterialy/plity", title: "Плиты перекрытия и ФБС блоки", text: "Доставка и укладка манипулятором", image: "/img/hub-plity.jpg?v=2" },
   { to: "/stroymaterialy/keramicheskiy-oblicovochnyy", title: "Кирпич керамический облицовочный", text: "Для красивого и долговечного фасада", image: "/img/hub-oblic.jpg?v=2" },
   { to: "/stroymaterialy/keramicheskiy", title: "Кирпич керамический", text: "Рядовой полнотелый и пустотелый", image: "/img/hub-keram.jpg?v=2" },
