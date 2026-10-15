@@ -5,7 +5,7 @@ const SECTIONS = [
   { to: "/stroymaterialy/kirpich", title: "Кирпич силикатный", text: "Белый и цветной, М-150", image: "/img/hub-silikat.jpg" },
   { to: "/stroymaterialy/bloki", title: "Газосиликатные блоки", text: "D500–D600, 4 размера", image: "/img/hub-bloki.jpg" },
   { to: "/stroymaterialy/bordyur", title: "Бордюр", text: "Дорожный и тротуарный", image: "/img/hub-bordyur.jpg" },
-  { to: "/stroymaterialy/pilomaterialy", title: "Пиломатериалы", text: "Доска, брус, вагонка", image: "/img/hub-pilomaterialy.jpg?v=2" },
+  { to: "/stroymaterialy/pilomaterialy", title: "Пиломатериалы", text: "Доска, брус, вагонка", image: "/img/hub-pilomaterialy.jpg?v=3" },
   { to: "/stroymaterialy/plity", title: "Плиты перекрытия и ФБС", text: "С укладкой манипулятором", image: "/img/hub-plity.jpg?v=2" },
   { to: "/stroymaterialy/keramicheskiy-oblicovochnyy", title: "Облицовочный кирпич", text: "Для красивого фасада", image: "/img/hub-oblic.jpg?v=2" },
   { to: "/stroymaterialy/keramicheskiy", title: "Керамический кирпич", text: "Полнотелый и пустотелый", image: "/img/hub-keram.jpg?v=2" },

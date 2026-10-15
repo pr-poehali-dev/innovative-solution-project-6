@@ -244,6 +244,8 @@ export const MATERIAL_SEO_PAGES: MaterialSeoPage[] = [
   {
     slug: "pilomaterialy",
     cat: "pilomaterialy",
+    heroImage: "/img/pilomaterialy-hero.jpg",
+    heroAlt: "Доставка пиломатериалов манипулятором FAW DongYang в Нижнем Новгороде",
     h1: "Пиломатериалы с доставкой в Нижнем Новгороде — доска, брус",
     title: "Пиломатериалы с доставкой в Нижнем Новгороде",
     description:
