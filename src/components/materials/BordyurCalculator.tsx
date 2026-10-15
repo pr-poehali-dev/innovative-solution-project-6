@@ -65,6 +65,7 @@ const BordyurCalculator = ({ items }: Props) => {
   const [kindId, setKindId] = useState<Kind["id"]>("road");
   const [mode, setMode] = useState<"pcs" | "pallets">("pcs");
   const [qty, setQty] = useState(50);
+  const [draft, setDraft] = useState<string | null>(null);
   const [cityName, setCityName] = useState(DELIVERY_CITIES[0].name);
   const [pickedTruck, setPickedTruck] = useState<string | null>(null);
   const [showAllTrucks, setShowAllTrucks] = useState(false);
@@ -118,7 +119,7 @@ const BordyurCalculator = ({ items }: Props) => {
     else toast("Откроется чат MAX — напишите нам, и мы всё посчитаем");
   };
 
-  const step = mode === "pallets" ? 1 : kind.perPallet;
+  const step = 1;
   const setSafeQty = (v: number) => setQty(Math.max(1, Math.min(100000, Math.round(v) || 1)));
 
   const calcText = useMemo(() => {
@@ -224,6 +225,7 @@ const BordyurCalculator = ({ items }: Props) => {
                       type="button"
                       onClick={() => {
                         if (m === mode) return;
+                        setDraft(null);
                         setQty(m === "pallets" ? pallets : pallets * kind.perPallet);
                         setMode(m);
                       }}
@@ -239,7 +241,10 @@ const BordyurCalculator = ({ items }: Props) => {
               <div className="flex items-center gap-3">
                 <button
                   type="button"
-                  onClick={() => setSafeQty(qty - step)}
+                  onClick={() => {
+                    setDraft(null);
+                    setSafeQty(qty - step);
+                  }}
                   className="w-12 h-12 rounded-xl border border-white/15 bg-card/60 hover:border-accent/60 flex items-center justify-center text-white"
                   aria-label="Меньше"
                 >
@@ -247,11 +252,16 @@ const BordyurCalculator = ({ items }: Props) => {
                 </button>
                 <div className="relative flex-1 min-w-0">
                   <input
-                    type="number"
+                    type="text"
                     inputMode="numeric"
-                    min={1}
-                    value={qty}
-                    onChange={(e) => setSafeQty(Number(e.target.value))}
+                    value={draft ?? qty}
+                    onChange={(e) => {
+                      const v = e.target.value.replace(/\D/g, "");
+                      setDraft(v);
+                      if (v) setSafeQty(Number(v));
+                    }}
+                    onBlur={() => setDraft(null)}
+                    onFocus={(e) => e.target.select()}
                     className="w-full h-12 rounded-xl border border-white/15 bg-black/30 px-3 sm:px-4 pr-20 sm:pr-24 text-lg font-black text-white focus:outline-none focus:border-accent"
                   />
                   <span className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-xs sm:text-sm text-muted-foreground pointer-events-none">
@@ -260,7 +270,10 @@ const BordyurCalculator = ({ items }: Props) => {
                 </div>
                 <button
                   type="button"
-                  onClick={() => setSafeQty(qty + step)}
+                  onClick={() => {
+                    setDraft(null);
+                    setSafeQty(qty + step);
+                  }}
                   className="w-12 h-12 rounded-xl border border-white/15 bg-card/60 hover:border-accent/60 flex items-center justify-center text-white"
                   aria-label="Больше"
                 >
