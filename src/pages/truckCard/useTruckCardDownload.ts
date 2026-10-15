@@ -129,7 +129,7 @@ export const useTruckCardDownload = () => {
       ctx.fillText("ООО «ФАВОРИТ»", hTextX, cy + 3);
       ctx.fillStyle = "#64748b";
       ctx.font = "400 11px Arial, sans-serif";
-      ctx.fillText("аренда манипуляторов · Нижний Новгород", hTextX, cy + 21);
+      ctx.fillText("продажа и доставка строительных материалов · Нижний Новгород и область", hTextX, cy + 21);
 
       ctx.fillStyle = "#64748b";
       ctx.textAlign = "right";
@@ -272,28 +272,9 @@ export const useTruckCardDownload = () => {
       ctx.stroke();
       cy += 14;
 
-      const colW = (innerW - 10) / 2;
       const cardH = 56;
-
-      // Директор
-      ctx.fillStyle = "rgba(252,211,77,0.25)";
-      drawRoundedRect(ctx, padding, cy, colW, cardH, 10);
-      ctx.fill();
-      ctx.strokeStyle = "rgba(180,83,9,0.5)";
-      ctx.lineWidth = 1;
-      drawRoundedRect(ctx, padding, cy, colW, cardH, 10);
-      ctx.stroke();
-      ctx.fillStyle = "#92400e";
-      ctx.font = "700 9px Arial, sans-serif";
-      ctx.textAlign = "left";
-      ctx.textBaseline = "top";
-      ctx.fillText("ДИРЕКТОР", padding + 14, cy + 10);
-      ctx.fillStyle = "#b45309";
-      ctx.font = "700 16px Arial, sans-serif";
-      ctx.fillText("+7 960 169-09-90", padding + 14, cy + 26);
-
-      // Водитель
-      const col2X = padding + colW + 10;
+      const col2X = padding;
+      const colW = innerW;
       ctx.fillStyle = "rgba(45,212,191,0.25)";
       drawRoundedRect(ctx, col2X, cy, colW, cardH, 10);
       ctx.fill();
@@ -303,6 +284,8 @@ export const useTruckCardDownload = () => {
       ctx.stroke();
       ctx.fillStyle = "#0f766e";
       ctx.font = "700 9px Arial, sans-serif";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "top";
       ctx.fillText("ВОДИТЕЛЬ", col2X + 14, cy + 10);
       ctx.fillStyle = "#0f172a";
       ctx.font = "700 16px Arial, sans-serif";

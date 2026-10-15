@@ -62,7 +62,7 @@ const TruckCardPreview = () => {
           />
           <div>
             <div style={{ fontSize: 13, fontWeight: 900, letterSpacing: 2, color: "#0d9488", marginBottom: 3 }}>ООО «ФАВОРИТ»</div>
-            <div style={{ fontSize: 11, color: "#64748b" }}>аренда манипуляторов · Нижний Новгород</div>
+            <div style={{ fontSize: 11, color: "#64748b" }}>продажа и доставка строительных материалов · Нижний Новгород и область</div>
           </div>
         </div>
         <div style={{ textAlign: "right" }}>
@@ -104,12 +104,7 @@ const TruckCardPreview = () => {
 
       <div style={{ marginBottom: 20 }}>{renderTable(driverRows)}</div>
 
-      {/* Контакты директора и водителя */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, paddingTop: 16, borderTop: "1px solid rgba(13,148,136,0.3)", marginBottom: 10 }}>
-        <div style={{ padding: 12, borderRadius: 10, background: "rgba(252,211,77,0.25)", border: "1px solid rgba(180,83,9,0.5)" }}>
-          <div style={{ fontSize: 9, color: "#92400e", textTransform: "uppercase", letterSpacing: 1, fontWeight: 700 }}>Директор</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: "#b45309", marginTop: 6 }}>+7 960 169-09-90</div>
-        </div>
+      <div style={{ paddingTop: 16, borderTop: "1px solid rgba(13,148,136,0.3)", marginBottom: 10 }}>
         <div style={{ padding: 12, borderRadius: 10, background: "rgba(45,212,191,0.25)", border: "1px solid rgba(13,148,136,0.5)" }}>
           <div style={{ fontSize: 9, color: "#0f766e", textTransform: "uppercase", letterSpacing: 1, fontWeight: 700 }}>Водитель</div>
           <div style={{ fontSize: 16, fontWeight: 700, color: "#0f172a", marginTop: 6 }}>+7 960 188-30-84</div>
