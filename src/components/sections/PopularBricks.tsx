@@ -70,7 +70,7 @@ const otherItem = (m: Material): Item => {
     per: `за ${m.unit}`,
     total,
     totalPer,
-    image: m.imageUrl,
+    image: m.category === "bordyur" ? "/img/bordyur-home.webp" : m.imageUrl,
     to: `/stroymaterialy/${m.category}`,
   };
 };
