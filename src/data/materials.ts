@@ -71,13 +71,13 @@ export const MATERIAL_CATEGORIES = [
   { slug: "kirpich", label: "Кирпич силикатный", icon: "Blocks", href: "/stroymaterialy/kirpich" },
   { slug: "bloki", label: "Газосиликатные блоки", icon: "Box" },
   { slug: "bordyur", label: "Бордюр", icon: "Grid3x3" },
+  { slug: "pilomaterialy", label: "Пиломатериалы", icon: "TreePine" },
   { slug: "asfalt-beton", label: "Асфальтирование", icon: "Truck", href: "/asfaltirovanie" },
   { slug: "plity", label: "Плиты перекрытия и ФБС", icon: "Layers", hidden: true },
   { slug: "keramicheskiy-oblicovochnyy", label: "Кирпич керамический облицовочный", icon: "Sparkles", hidden: true },
   { slug: "keramicheskiy", label: "Кирпич керамический", icon: "Blocks", hidden: true },
   { slug: "betonnye-kolca", label: "Бетонные кольца", icon: "Circle", hidden: true },
   { slug: "cement", label: "Цемент и сухие смеси", icon: "Package", hidden: true },
-  { slug: "pilomaterialy", label: "Пиломатериалы", icon: "TreePine", hidden: true },
   { slug: "bytovki", label: "Бытовки и контейнеры", icon: "Container", hidden: true },
 ] as const;
 
@@ -90,6 +90,7 @@ export const HEADER_MENU_CATEGORIES = [
   "kirpich",
   "bloki",
   "bordyur",
+  "pilomaterialy",
   "plity",
   "keramicheskiy-oblicovochnyy",
   "keramicheskiy",

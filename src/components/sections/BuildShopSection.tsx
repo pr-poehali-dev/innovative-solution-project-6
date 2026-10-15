@@ -10,6 +10,7 @@ const CATEGORIES = [
   { to: "/stroymaterialy/kirpich", icon: "Blocks", title: "Кирпич силикатный", text: "Белый и цветной, М-150", hit: true },
   { to: "/stroymaterialy/bloki", icon: "Box", title: "Газосиликатные блоки", text: "D500–D600, тёплые стены" },
   { to: "/stroymaterialy/bordyur", icon: "LayoutGrid", title: "Бордюр", text: "Дорожный и тротуарный" },
+  { to: "/stroymaterialy/pilomaterialy", icon: "TreePine", title: "Пиломатериалы", text: "Доска, брус, вагонка" },
   { to: "/stroymaterialy/plity", icon: "Layers", title: "Плиты перекрытия и ФБС блоки", text: "Доставка и укладка" },
   { to: "/stroymaterialy/keramicheskiy-oblicovochnyy", icon: "Sparkles", title: "Кирпич керамический облицовочный", text: "Для красивого фасада" },
   { to: "/stroymaterialy/keramicheskiy", icon: "Blocks", title: "Кирпич керамический", text: "Рядовой полнотелый и пустотелый" },
