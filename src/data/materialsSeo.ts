@@ -169,6 +169,8 @@ export const MATERIAL_SEO_PAGES: MaterialSeoPage[] = [
   {
     slug: "bordyur",
     cat: "bordyur",
+    heroImage: "/img/bordyur-hero.jpg",
+    heroAlt: "Бордюрный камень Фаворит с доставкой манипулятором",
     h1: "Бордюрный камень купить с доставкой в Нижнем Новгороде",
     title: "Бордюр с доставкой и разгрузкой в Нижнем Новгороде",
     description:
