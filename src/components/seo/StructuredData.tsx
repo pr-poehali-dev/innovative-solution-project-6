@@ -128,13 +128,6 @@ const StructuredData = () => {
       { "@type": "City", "name": "Нижний Новгород" },
       { "@type": "AdministrativeArea", "name": "Нижегородская область" }
     ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": ratingValue,
-      "reviewCount": String(reviews.length),
-      "bestRating": "5",
-      "worstRating": "1"
-    },
     "offers": {
       "@type": "AggregateOffer",
       "url": "https://фаварит.рф",

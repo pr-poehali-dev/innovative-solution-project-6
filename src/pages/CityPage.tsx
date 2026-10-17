@@ -82,13 +82,6 @@ const CityPage = () => {
         addressRegion: "Нижегородская область",
         addressCountry: "RU",
       },
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "5",
-        reviewCount: "12",
-        bestRating: "5",
-        worstRating: "1",
-      },
     },
     offers: {
       "@type": "Offer",
