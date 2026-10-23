@@ -132,7 +132,7 @@ const MaterialsHubPage = () => {
               </div>
             </div>
             <img
-              src="/img/house-toon.webp"
+              src="/img/house-toon.webp?v=2"
               alt="Дом из материалов Фаворит"
               loading="lazy"
               className="hidden lg:block w-[340px] xl:w-[420px] h-auto self-end -mr-8 drop-shadow-[0_10px_25px_rgba(0,0,0,0.45)]"
