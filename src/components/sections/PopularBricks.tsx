@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { fetchMaterials, type Material } from "@/data/materials";
@@ -124,6 +124,9 @@ const Card = ({ it }: { it: Item }) => (
 
 const PopularBricks = ({ className = "" }: { className?: string }) => {
   const [items, setItems] = useState<Item[]>([]);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const pos = useRef(0);
+  const pauseUntil = useRef(0);
 
   useEffect(() => {
     fetchMaterials()
@@ -143,7 +146,50 @@ const PopularBricks = ({ className = "" }: { className?: string }) => {
       .catch(() => setItems([]));
   }, []);
 
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el || !items.length) return;
+    let raf = 0;
+    let last = performance.now();
+    pos.current = el.scrollLeft;
+    const tick = (now: number) => {
+      const dt = Math.min(now - last, 50);
+      last = now;
+      const half = el.scrollWidth / 2;
+      if (now >= pauseUntil.current && half > 0) {
+        pos.current += dt * 0.04;
+        if (pos.current >= half) pos.current -= half;
+        el.scrollLeft = pos.current;
+      } else {
+        pos.current = el.scrollLeft;
+        if (half > 0 && pos.current >= half) {
+          pos.current -= half;
+          el.scrollLeft = pos.current;
+        }
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [items.length]);
+
+  const pause = (ms = 4000) => {
+    pauseUntil.current = performance.now() + ms;
+  };
+
+  const step = (dir: 1 | -1) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    pause(5000);
+    const half = el.scrollWidth / 2;
+    const card = (el.querySelector("[data-card]") as HTMLElement)?.offsetWidth || 300;
+    if (dir < 0 && el.scrollLeft < card) el.scrollLeft += half;
+    el.scrollBy({ left: dir * card, behavior: "smooth" });
+  };
+
   if (!items.length) return null;
+
+  const arrow = "absolute top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-amber-400 text-black shadow-lg shadow-black/40 flex items-center justify-center active:scale-95 hover:bg-amber-300 transition";
 
   return (
     <div className={`relative ${className}`}>
@@ -151,17 +197,30 @@ const PopularBricks = ({ className = "" }: { className?: string }) => {
         <Icon name="Flame" size={18} className="text-orange-400" />
         <p className="text-white font-black text-base sm:text-lg">Хиты продаж</p>
       </div>
-      <div className="marquee-mask overflow-hidden -mx-4 sm:-mx-6 lg:mx-0">
+      <div className="relative -mx-4 sm:-mx-6 lg:mx-0">
         <div
-          className="marquee-track flex w-max"
-          style={{ animationDuration: `${items.length * 5}s` }}
+          ref={scrollRef}
+          className="marquee-mask overflow-x-auto scrollbar-none"
+          onTouchStart={() => pause(6000)}
+          onTouchMove={() => pause(6000)}
+          onMouseEnter={() => pause(600000)}
+          onMouseLeave={() => pause(1500)}
+          onWheel={() => pause(4000)}
         >
-          {[...items, ...items].map((it, i) => (
-            <div key={`${it.id}-${i}`} className="pr-3" aria-hidden={i >= items.length}>
-              <Card it={it} />
-            </div>
-          ))}
+          <div className="flex w-max">
+            {[...items, ...items].map((it, i) => (
+              <div key={`${it.id}-${i}`} data-card className="pr-3" aria-hidden={i >= items.length}>
+                <Card it={it} />
+              </div>
+            ))}
+          </div>
         </div>
+        <button type="button" aria-label="Назад" onClick={() => step(-1)} className={`${arrow} left-1 sm:left-2 lg:-left-4`}>
+          <Icon name="ChevronLeft" size={22} />
+        </button>
+        <button type="button" aria-label="Вперёд" onClick={() => step(1)} className={`${arrow} right-1 sm:right-2 lg:-right-4`}>
+          <Icon name="ChevronRight" size={22} />
+        </button>
       </div>
     </div>
   );
