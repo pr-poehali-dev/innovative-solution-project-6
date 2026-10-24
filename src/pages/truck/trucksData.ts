@@ -24,9 +24,9 @@ export const trucks: Record<string, Truck> = {
     price: "3 700 ₽/час с НДС",
     priceNum: 3700,
     count: 2,
-    image: "/img/faw-dongyang-white-1600.webp?v=3",
+    image: "/img/faw-dongyang-white-1600.webp?v=4",
     images: [
-      "/img/faw-dongyang-white-1600.webp?v=3",
+      "/img/faw-dongyang-white-1600.webp?v=4",
       "/img/faw-dongyang-1600.webp",
       "/img/faw-dongyang-lyulka-dom.webp?v=4",
       "/img/faw-dongyang-lyulka-1600.webp",
@@ -72,8 +72,8 @@ export const trucks: Record<string, Truck> = {
     priceNum: 4300,
     count: 1,
     tag: { label: "Кузов 8,2 м", icon: "MoveHorizontal", color: "from-yellow-500 to-amber-600" },
-    image: "/img/faw-soosan-1600.webp",
-    images: ["/img/faw-soosan-1600.webp"],
+    image: "/img/faw-soosan-1600.webp?v=2",
+    images: ["/img/faw-soosan-1600.webp?v=2"],
     alt: "Аренда FAW J6P с КМУ SOOSAN SCS746L в Нижнем Новгороде",
     description:
       "Компания «Фаворит» предлагает в аренду манипулятор FAW J6P с КМУ SOOSAN SCS746L в Нижнем Новгороде и области. Грузоподъёмность машины до 20 тонн, КМУ — до 8 тонн. Длинный бортовой кузов 8,2 × 2,45 м позволяет перевозить длинномерные и объёмные грузы, а крано-манипуляторная установка SOOSAN с грузовым моментом 18,5 т·м уверенно справляется с погрузкой, разгрузкой и монтажом.\n\n" +
