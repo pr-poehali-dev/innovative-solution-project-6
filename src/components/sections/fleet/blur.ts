@@ -1,5 +1,6 @@
 // Крошечные размытые превью фото — показываются мгновенно, пока грузится оригинал
 export const BLUR: Record<string, string> = {
+  "/img/faw-dongyang-white-1600.webp?v=2": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAAAQBACdASoYAA0APxFwsFAsJiSisAgBgCIJYwAD5jHb4GjeyG8ovIyNwAD+4eExFdR5tLTLeRYsdMGFV6kuz2KEGvK+/vtrZgo62/Caz7lfgR1YU5/d0Wj5nu6tfxD0NUho65KX95Vo1UZDZBSWJDSDh4RoWrEf1AfuKwmnfGFgAA==",
   "/img/faw-dongyang-white-1600.webp": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAADQAwCdASoYAA0APxFysFAsJqSisAgBgCIJYwAD5knaCvGeISSYJXAA/uHhMRXcmbS1Ovtjejrdd6MfBnidP6i1ANSchr7kNaXQoyL3yOl+5r/kXoYi5IPLdpX12X4GMGXr9+3f8k8PLs54gU5elNPKH2b0RM0J+YRjKD/H/NIAAA==",
   "/img/faw-soosan-1600.webp": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAABwBACdASoYABAAPxFysFAsJqSisAgBgCIJZwALACKEFibNrZRBFI4tmmVsAAD+7XvcRo5R9qQwehqjqKG3WebKnC6d6v1NBy+LH2Fat2yi+qO92tAGYsSIcWb7Oz7zC5q09bvzJdFXcz3sTV7l96iLsV69Z7kUMAZbJCzpQgMbTy1RJQqUqAAA",
   "/fleet-opt/106c30cf-02d3-4b99-ac02-47e7404652e2.webp": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAABQBACdASoYABAAPvVmqk4qpaOiMAgBUB6JYwC7AYvMzey7/VgwXDfaJ/14AP60I80HRo5xjuHmebgQk1Ldzem9Uk2qrAfuOFbCqjX0PIQ+SNWMD2vCE1eW+r7TjKyXi3ZO8vBtO8/mDixqoa+EhcGvf7AYH6kdiv7D7g1ccDOxG+3Lu5OlP4+e6dlniSpyqV8xeh3TQnidc/dgMuLmuV+AAAA=",
