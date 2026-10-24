@@ -46,7 +46,7 @@ export const trucks: Truck[] = [
     ],
   },
   {
-    badge: "КМУ SOOSAN · 18,5 т·м",
+    badge: "КМУ SOOSAN",
     title: "FAW J6P + КМУ SOOSAN SCS746L",
     slug: "faw-soosan-scs746l",
     price: "4 300 ₽/час с НДС · 3 500 ₽/час без НДС",
