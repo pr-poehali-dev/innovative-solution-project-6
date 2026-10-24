@@ -151,6 +151,7 @@ export const trucks: Record<string, Truck> = {
       "/img/wm/kamaz-kanglim-bur.webp",
       "/img/wm/kamaz-kanglim-stroyka.webp",
       "/img/wm/kamaz-kanglim-noch.webp",
+      "/img/wm/kamaz-kanglim-rezervuar.webp",
     ],
     alt: "Аренда КАМАЗ 43118 вездеход с КМУ Kanglim в Нижнем Новгороде",
     description: "Компания «Фаворит» предлагает в аренду полноприводный манипулятор-вездеход КАМАЗ 43118 с КМУ Kanglim в Нижнем Новгороде и области. Максимальный вылет стрелы 23 метра — самый большой в нашем парке. Идеальный выбор для работ на бездорожье, труднодоступных объектах и при монтаже на большой высоте.",
