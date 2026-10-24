@@ -13,7 +13,7 @@ import {
   Scaling, Search, Send, Share2, Shield, ShieldCheck, ShoppingCart,
   Sparkles, Star, Tag, TreePine, TrendingUp, Truck, User, UserCheck,
   Users, Wallet, Warehouse, Weight, Wrench, X, XCircle, Zap,
-  Minus, Plus, LayoutGrid, Thermometer, ArrowUpDown, Layers, SearchX, Trash2, Blocks, Square, CircleDashed, BrickWall, RectangleHorizontal, Circle, Box, Grid3x3, Container, Ruler,
+  Minus, Plus, LayoutGrid, Thermometer, ArrowUpDown, Layers, SearchX, Trash2, Blocks, Square, CircleDashed, BrickWall, RectangleHorizontal, Circle, Box, Grid3x3, Container, Ruler, Play,
   type LucideProps,
 } from 'lucide-react';
 
@@ -31,7 +31,7 @@ const ICONS: Record<string, React.FC<LucideProps>> = {
   Scaling, Search, Send, Share2, Shield, ShieldCheck, ShoppingCart,
   Sparkles, Star, Tag, TreePine, TrendingUp, Truck, User, UserCheck,
   Users, Wallet, Warehouse, Weight, Wrench, X, XCircle, Zap,
-  Minus, Plus, LayoutGrid, Thermometer, ArrowUpDown, Layers, SearchX, Trash2, Blocks, Square, CircleDashed, BrickWall, RectangleHorizontal, Circle, Box, Grid3x3, Container, Ruler,
+  Minus, Plus, LayoutGrid, Thermometer, ArrowUpDown, Layers, SearchX, Trash2, Blocks, Square, CircleDashed, BrickWall, RectangleHorizontal, Circle, Box, Grid3x3, Container, Ruler, Play,
 };
 
 interface IconProps extends LucideProps {
