@@ -23,10 +23,9 @@ export const trucks: Truck[] = [
     slug: "faw-kmu-dongyoung",
     price: "3 700 ₽/час с НДС",
     count: 2,
-    image: "/img/faw-dongyang-white-1600.webp?v=5",
+    image: "/img/wm/faw-dongyang-1600.webp",
     alt: "FAW КМУ DongYang",
     images: [
-      "/img/faw-dongyang-white-1600.webp?v=5",
       "/img/wm/faw-dongyang-1600.webp",
       "/img/wm/faw-dongyang-lyulka-dom.webp",
       "/img/wm/faw-gazoblok-1600.webp",

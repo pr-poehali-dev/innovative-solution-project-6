@@ -24,9 +24,8 @@ export const trucks: Record<string, Truck> = {
     price: "3 700 ₽/час с НДС",
     priceNum: 3700,
     count: 2,
-    image: "/img/faw-dongyang-white-1600.webp?v=5",
+    image: "/img/wm/faw-dongyang-1600.webp",
     images: [
-      "/img/faw-dongyang-white-1600.webp?v=5",
       "/img/wm/faw-dongyang-1600.webp",
       "/img/wm/faw-dongyang-lyulka-dom.webp",
       "/img/wm/faw-dongyang-lyulka-1600.webp",
