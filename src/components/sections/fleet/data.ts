@@ -54,6 +54,7 @@ export const trucks: Truck[] = [
     tag: { label: "Кузов 8,2 м", icon: "MoveHorizontal", color: "from-yellow-500 to-amber-600" },
     image: "/img/faw-soosan-1600.webp?v=3",
     alt: "FAW J6P КМУ SOOSAN SCS746L",
+    images: ["/img/faw-soosan-1600.webp?v=3", "/img/wm/faw-soosan-side.webp"],
     specs: [
       { label: "Грузоподъёмность машины", value: "до 20 т" },
       { label: "Грузоподъёмность КМУ", value: "до 8 т" },
