@@ -148,7 +148,6 @@ export const trucks: Record<string, Truck> = {
     image: "/img/wm/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.webp",
     images: [
       "/img/wm/861dfbdb-0341-4b64-ac9b-f77e5a4fa99d.webp",
-      "/img/wm/29063acd-8133-4add-bce0-29f1a08d5004.webp",
       "/img/wm/kamaz-kanglim-bur.webp",
       "/img/wm/kamaz-kanglim-stroyka.webp",
       "/img/wm/kamaz-kanglim-noch.webp",
