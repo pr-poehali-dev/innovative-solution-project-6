@@ -48,7 +48,7 @@ export const trucks: Truck[] = [
     badge: "КМУ SOOSAN · 18,5 т·м",
     title: "FAW J6P + КМУ SOOSAN SCS746L",
     slug: "faw-soosan-scs746l",
-    price: "4 300 ₽/час с НДС · 3 500 ₽/час наличными",
+    price: "4 300 ₽/час с НДС · 3 500 ₽/час без НДС",
     count: 1,
     tag: { label: "Кузов 8,2 м", icon: "MoveHorizontal", color: "from-yellow-500 to-amber-600" },
     image: "/img/faw-soosan-1600.webp",
