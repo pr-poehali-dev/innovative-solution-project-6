@@ -74,7 +74,7 @@ export const trucks: Truck[] = [
     price: "3 500 ₽/час с НДС",
     count: 3,
     tag: { label: "Хит заказов", icon: "Flame", color: "from-orange-500 to-red-600" },
-    image: "/img/wm/b646729f-a106-46bf-b7e4-abf0fe1c4983.webp",
+    image: "/img/wm/kamaz-hangil-white.webp",
     alt: "КАМАЗ 65115 КМУ HANGIL",
     specs: [
       { label: "Грузоподъёмность платформы", value: "до 12 т" },
