@@ -23,10 +23,10 @@ export const trucks: Truck[] = [
     slug: "faw-kmu-dongyoung",
     price: "3 700 ₽/час с НДС",
     count: 2,
-    image: "/img/faw-dongyang-white-1600.webp?v=4",
+    image: "/img/faw-dongyang-white-1600.webp?v=5",
     alt: "FAW КМУ DongYang",
     images: [
-      "/img/faw-dongyang-white-1600.webp?v=4",
+      "/img/faw-dongyang-white-1600.webp?v=5",
       "/img/faw-dongyang-1600.webp",
       "/img/faw-dongyang-lyulka-dom.webp?v=4",
       "/img/faw-gazoblok-1600.webp",
@@ -52,7 +52,7 @@ export const trucks: Truck[] = [
     price: "4 300 ₽/час с НДС · 3 500 ₽/час без НДС",
     count: 1,
     tag: { label: "Кузов 8,2 м", icon: "MoveHorizontal", color: "from-yellow-500 to-amber-600" },
-    image: "/img/faw-soosan-1600.webp?v=2",
+    image: "/img/faw-soosan-1600.webp?v=3",
     alt: "FAW J6P КМУ SOOSAN SCS746L",
     specs: [
       { label: "Грузоподъёмность машины", value: "до 20 т" },
