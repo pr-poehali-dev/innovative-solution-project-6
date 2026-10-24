@@ -73,6 +73,14 @@ export const priceRows: PriceRow[] = [
     minOrder: "4 часа",
   },
   {
+    slug: "faw-soosan-scs746l",
+    title: "FAW J6P + КМУ SOOSAN SCS746L",
+    capacity: "кузов 8,2 м / 18,5 т·м",
+    boom: "—",
+    price: "4 000 ₽/час",
+    minOrder: "4 часа",
+  },
+  {
     slug: "renault-lander-kmu",
     title: "RENAULT LANDER + КМУ",
     capacity: "15 т / стрела 8 т",

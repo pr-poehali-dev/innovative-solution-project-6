@@ -41,6 +41,7 @@ const linkGroups: LinkGroup[] = [
       { label: "КАМАЗ 65115 + HANGIL", to: "/tehnika/kamaz-65115-hangil" },
       { label: "КАМАЗ 43118 вездеход", to: "/tehnika/kamaz-43118-kanglim" },
       { label: "FAW J6 + DONGYANG с буром", to: "/tehnika/faw-j6-dongyang-1966" },
+      { label: "FAW + SOOSAN SCS746L", to: "/tehnika/faw-soosan-scs746l" },
       { label: "Renault Lander с КМУ", to: "/tehnika/renault-lander-kmu" },
       { label: "Hyundai Gold + HIAB 8 т", to: "/tehnika/hyundai-gold-kmu-8t" },
       { label: "Hino 500 + Kanglim 7 т", to: "/tehnika/hino-500-kmu-7t" },
