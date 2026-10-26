@@ -83,7 +83,7 @@ const BrickBuildSteps = ({
           </button>
         ))}
       </div>
-      <div className={`grid gap-3 ${shape === "box" ? "grid-cols-3" : "grid-cols-2"}`}>
+      <div className={`grid items-stretch gap-2 sm:gap-3 ${shape === "box" ? "grid-cols-3" : "grid-cols-2"}`}>
         <NumField label={shape === "box" ? "Длина" : "Длина стены"} value={length} onChange={setLength} suffix="м" />
         {shape === "box" && <NumField label="Ширина" value={width} onChange={setWidth} suffix="м" />}
         <NumField label="Высота стен" value={height} onChange={setHeight} suffix="м" />

@@ -69,18 +69,18 @@ export const NumField = ({
   suffix: string;
   hint?: string;
 }) => (
-  <label className="block">
-    <span className="text-xs text-muted-foreground">{label}</span>
-    <div className="mt-1 flex items-center rounded-xl border border-accent/25 bg-black/15 focus-within:border-accent">
+  <label className="flex flex-col h-full min-w-0">
+    <span className="block truncate whitespace-nowrap text-[11px] sm:text-xs leading-4 mb-1 text-muted-foreground">{label}</span>
+    <div className="mt-auto flex items-center rounded-xl border border-accent/25 bg-black/15 focus-within:border-accent">
       <input
         type="number"
         inputMode="decimal"
         min={0}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full min-w-0 bg-transparent px-3 py-2.5 text-white font-bold outline-none"
+        className="w-full min-w-0 bg-transparent px-2 sm:px-3 py-2.5 text-white font-bold outline-none"
       />
-      <span className="pr-3 text-xs text-muted-foreground">{suffix}</span>
+      <span className="pr-2 sm:pr-3 text-xs text-muted-foreground">{suffix}</span>
     </div>
     {hint && <span className="block mt-1 text-[12.5px] text-muted-foreground/80">{hint}</span>}
   </label>
