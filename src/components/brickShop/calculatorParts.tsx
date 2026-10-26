@@ -70,7 +70,7 @@ export const NumField = ({
   hint?: string;
 }) => (
   <label className="flex flex-col h-full min-w-0">
-    <span className="block truncate whitespace-nowrap text-[11px] sm:text-xs leading-4 mb-1 text-muted-foreground">{label}</span>
+    <span className="block whitespace-nowrap text-[10px] sm:text-xs leading-4 mb-1 text-muted-foreground">{label}</span>
     <div className="mt-auto flex items-center rounded-xl border border-accent/25 bg-black/15 focus-within:border-accent">
       <input
         type="number"
