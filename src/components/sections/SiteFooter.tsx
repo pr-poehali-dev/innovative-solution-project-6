@@ -153,9 +153,9 @@ const SiteFooter = () => {
                     </span>
                   )}
 
-                  <div className="relative flex items-center gap-2.5 sm:flex-col sm:items-start sm:gap-2.5">
+                  <div className="relative flex flex-col items-start gap-2 sm:gap-2.5">
                     <div
-                      className="flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center shadow-lg"
+                      className="flex-shrink-0 w-9 h-9 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center shadow-lg"
                       style={{
                         background:
                           "linear-gradient(135deg, #f5d060 0%, #e8a820 50%, #c8850a 100%)",
@@ -170,18 +170,18 @@ const SiteFooter = () => {
                         strokeWidth={2.5}
                       />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-black text-white text-[13px] sm:text-sm leading-tight mb-0.5 group-hover:text-accent transition-colors truncate">
+                    <div className="w-full min-w-0">
+                      <div className="font-black text-white text-[13px] sm:text-sm leading-tight mb-0.5 group-hover:text-accent transition-colors whitespace-nowrap">
                         {item.title}
                       </div>
-                      <div className="text-[12px] sm:text-[12.5px] text-white/65 leading-snug font-medium truncate">
+                      <div className="text-[11.5px] sm:text-[12.5px] text-white/65 leading-snug font-medium whitespace-nowrap">
                         {item.desc}
                       </div>
                     </div>
                     <Icon
                       name="ChevronRight"
                       size={14}
-                      className="text-accent/40 group-hover:text-accent group-hover:translate-x-0.5 transition-all sm:hidden flex-shrink-0"
+                      className="hidden"
                     />
                   </div>
                 </>
