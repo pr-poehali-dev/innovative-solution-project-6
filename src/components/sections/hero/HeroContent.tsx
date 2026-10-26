@@ -17,7 +17,7 @@ const HeroContent = ({ visibleSections, showForm = true, below = false }: HeroCo
           <span className="text-accent">в Нижнем Новгороде</span>
         </h1>
         <p className="text-sm sm:text-lg text-white/85 leading-snug sm:leading-relaxed mb-3 sm:mb-7 max-w-full sm:max-w-xl font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-          Оставьте заявку или позвоните — подберём манипулятор с платформой нужных габаритов и грузоподъёмностью под вашу задачу по Нижнему Новгороду и области.
+          Звоните <a href="tel:+79601883084" className="font-bold text-accent whitespace-nowrap hover:underline">+7 960 188-30-84</a> или оставьте заявку — подберём манипулятор с платформой нужных габаритов и грузоподъёмностью под вашу задачу по Нижнему Новгороду и области.
         </p>
 
         {/* Ключевое преимущество — подача и режим работы */}
