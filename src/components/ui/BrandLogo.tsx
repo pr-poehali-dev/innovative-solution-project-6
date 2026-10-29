@@ -100,11 +100,6 @@ const BrandLogo = ({ to = "/", size = "md", compact = false, title = "ООО Ф�
             </span>
           )}
         </div>
-        {!status.online && status.timeLeft && (
-          <span className={`${compact ? "hidden sm:block" : "block"} text-[11px] sm:text-[12px] font-semibold mt-0.5`} style={{ color: "#e8a820" }}>
-            Откроемся через {status.timeLeft}
-          </span>
-        )}
         <span className={`brand-gold-title font-black drop-shadow-lg whitespace-nowrap ${titleSize} !tracking-[0.02em] sm:!tracking-[0.08em]`} style={goldText}>
           {title}
         </span>
