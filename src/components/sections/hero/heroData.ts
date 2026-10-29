@@ -12,12 +12,6 @@ export const slides: { id: string; alt: string; fullSrc?: string; mobileSrc?: st
     fullSrc: "/img/hero-1.webp",
     mobileSrc: "/img/hero-1-m.webp",
   },
-  {
-    id: "uslugi-manipulyatora-gerb",
-    alt: "Услуги крана-манипулятора 24/7 — «Фаворит»",
-    fullSrc: "/photos/uslugi-manipulyatora-gerb.jpg?v=3",
-    position: "50% 28%",
-  },
   { id: "861dfbdb-0341-4b64-ac9b-f77e5a4fa99d", alt: "КАМАЗ 43118 вездеход КМУ Kanglim" },
   { id: "b646729f-a106-46bf-b7e4-abf0fe1c4983", alt: "КАМАЗ 65115 КМУ HANGIL" },
   {
