@@ -7,6 +7,11 @@ type Category = "manipulator" | "heights" | "transport";
 
 const photos: { url: string; caption: string; category: Category }[] = [
   {
+    url: "/photos/uslugi-manipulyatora-gerb.jpg?v=3",
+    caption: "Услуги крана-манипулятора 24/7 — «Фаворит»",
+    category: "manipulator",
+  },
+  {
     url: "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm/96f657e8-7741-4d2b-b428-ca560b0047fb.webp",
     caption: "Монтаж металлоконструкций ангара",
     category: "manipulator",
