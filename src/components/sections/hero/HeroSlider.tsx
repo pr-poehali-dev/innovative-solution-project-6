@@ -75,14 +75,12 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
                   key={i}
                   className={`absolute inset-0 w-full h-full transition-all duration-700 ${isActive ? "opacity-100 scale-100" : "opacity-0 scale-105"}`}
                 >
-                  {slide.contain && (
-                    <img src={fullSrc} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-50" loading="lazy" decoding="async" />
-                  )}
                   <img
                     src={slide.mobileSrc || fullSrc}
                     sizes="(max-width: 1024px) 100vw, 0px"
                     alt={slide.alt}
-                    className={`relative w-full h-full object-center ${slide.contain ? "object-contain" : "object-cover"}`}
+                    className="w-full h-full object-cover object-center"
+                    style={slide.position ? { objectPosition: slide.position } : undefined}
                     width="800"
                     height="600"
                     loading={i === 0 ? "eager" : "lazy"}
@@ -131,14 +129,12 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
             key={i}
             className={`hidden lg:block absolute inset-x-0 bottom-0 top-[124px] transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}
           >
-            {slide.contain && (
-              <img src={fullSrc} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-50" loading="lazy" decoding="async" />
-            )}
             <img
               src={fullSrc}
               sizes="100vw"
               alt={slide.alt}
-              className={`relative w-full h-full object-center ${slide.contain ? "object-contain pt-3 pb-36" : "object-cover"}`}
+              className="w-full h-full object-cover object-center"
+              style={slide.position ? { objectPosition: slide.position } : undefined}
               width="1600"
               height="900"
               loading={i === 0 ? "eager" : "lazy"}

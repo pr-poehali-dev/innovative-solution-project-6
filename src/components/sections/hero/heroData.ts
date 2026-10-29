@@ -5,7 +5,7 @@ export const WEBP_BASE = "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-96
 export const BUCKET_BASE = "https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/wm";
 
 // fullSrc — прямой URL к оригинальному файлу (используется когда WebP-конвертация ещё не готова)
-export const slides: { id: string; alt: string; fullSrc?: string; mobileSrc?: string; contain?: boolean }[] = [
+export const slides: { id: string; alt: string; fullSrc?: string; mobileSrc?: string; position?: string }[] = [
   {
     id: "df8d23ad-2b19-4a5c-bfef-8403f404cab9",
     alt: "FAW КМУ DongYang",
@@ -16,7 +16,7 @@ export const slides: { id: string; alt: string; fullSrc?: string; mobileSrc?: st
     id: "uslugi-manipulyatora-gerb",
     alt: "Услуги крана-манипулятора 24/7 — «Фаворит»",
     fullSrc: "/photos/uslugi-manipulyatora-gerb.jpg?v=3",
-    contain: true,
+    position: "50% 28%",
   },
   { id: "861dfbdb-0341-4b64-ac9b-f77e5a4fa99d", alt: "КАМАЗ 43118 вездеход КМУ Kanglim" },
   { id: "b646729f-a106-46bf-b7e4-abf0fe1c4983", alt: "КАМАЗ 65115 КМУ HANGIL" },
