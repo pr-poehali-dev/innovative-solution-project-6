@@ -20,7 +20,6 @@ const softLazy = <T,>(load: () => Promise<T>) =>
 
 const ScrollToTop = softLazy(() => import("@/components/ScrollToTop"));
 const FloatingCallButton = softLazy(() => import("@/components/ui/FloatingCallButton"));
-const AutoReindex = softLazy(() => import("@/components/AutoReindex"));
 const OfflineDownloadModal = softLazy(() => import("@/components/ui/OfflineDownloadModal"));
 const OfflineSuccessToast = softLazy(() => import("@/components/ui/OfflineSuccessToast"));
 const EngagementTracker = softLazy(() => import("@/components/EngagementTracker"));
@@ -60,7 +59,6 @@ const App = () => (
         <Toaster />
         <Sonner />
         <FloatingCallButton />
-        <AutoReindex />
         <OfflineDownloadModal />
         <OfflineSuccessToast />
         <EngagementTracker />
