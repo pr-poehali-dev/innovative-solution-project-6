@@ -76,7 +76,7 @@ def add_diagonal_watermark(image_bytes: bytes, text: str = 'фаварит.рф'
 GERB_URL = 'https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp'
 
 
-def add_gerb_watermark(image_bytes: bytes, gerb_bytes: bytes, opacity: float = 0.6, scale: float = 0.4) -> bytes:
+def add_gerb_watermark(image_bytes: bytes, gerb_bytes: bytes, opacity: float = 0.6, scale: float = 0.4, cx: float = 0.5, cy: float = 0.46) -> bytes:
     """Накладывает полупрозрачный герб по центру картинки."""
     from PIL import ImageFilter
     g = Image.open(io.BytesIO(gerb_bytes)).convert('RGB')
@@ -99,7 +99,7 @@ def add_gerb_watermark(image_bytes: bytes, gerb_bytes: bytes, opacity: float = 0
     shadow.putalpha(a.filter(ImageFilter.GaussianBlur(6)).point(lambda v: int(v * 0.35)))
     gm.putalpha(a.point(lambda v: int(v * opacity)))
     layer = Image.new('RGBA', img.size, (0, 0, 0, 0))
-    pos = ((W - w) // 2, int(H * 0.46) - h // 2)
+    pos = (int(W * cx) - w // 2, int(H * cy) - h // 2)
     layer.alpha_composite(shadow, pos)
     layer.alpha_composite(gm, pos)
     out = io.BytesIO()
@@ -172,8 +172,16 @@ def handler(event: dict, context) -> dict:
             name_no_ext = base.rsplit('.', 1)[0]
 
             if mode == 'gerb':
-                wm_bytes = add_gerb_watermark(data, gerb_bytes)
-                new_key = f'wm/gerb-{name_no_ext}.jpg'
+                wm_bytes = add_gerb_watermark(
+                    data,
+                    gerb_bytes,
+                    opacity=float(body.get('gerbOpacity') or 0.6),
+                    scale=float(body.get('gerbScale') or 0.4),
+                    cx=float(body.get('gerbX') or 0.5),
+                    cy=float(body.get('gerbY') or 0.46),
+                )
+                suffix = body.get('suffix') or ''
+                new_key = f'wm/gerb-{name_no_ext}{suffix}.jpg'
                 content_type = 'image/jpeg'
             else:
                 wm_bytes = add_diagonal_watermark(data, text=text, opacity_pct=opacity)
