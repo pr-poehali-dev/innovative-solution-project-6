@@ -73,6 +73,45 @@ def add_diagonal_watermark(image_bytes: bytes, text: str = 'фаварит.рф'
     return out.getvalue()
 
 
+GERB_URL = 'https://cdn.poehali.dev/projects/9addb698-8864-4aa0-966e-52239521a692/bucket/webp/ab248d6b-acc2-452d-a331-85642e74a1ee.webp'
+
+
+def add_gerb_watermark(image_bytes: bytes, gerb_bytes: bytes, opacity: float = 0.6, scale: float = 0.4) -> bytes:
+    """Накладывает полупрозрачный герб по центру картинки."""
+    from PIL import ImageFilter
+    g = Image.open(io.BytesIO(gerb_bytes)).convert('RGB')
+    r, gc, b = g.split()
+    lum = ImageChops_max(r, gc, b)
+    alpha = lum.point(lambda v: max(0, min(255, int((v - 40) * 255 / 80))))
+    gerb = g.convert('RGBA')
+    gerb.putalpha(alpha)
+    bbox = gerb.getbbox()
+    if bbox:
+        gerb = gerb.crop(bbox)
+
+    img = Image.open(io.BytesIO(image_bytes)).convert('RGBA')
+    W, H = img.size
+    w = int(W * scale)
+    h = int(gerb.height * w / gerb.width)
+    gm = gerb.resize((w, h), Image.LANCZOS)
+    a = gm.split()[3]
+    shadow = Image.new('RGBA', gm.size, (0, 0, 0, 0))
+    shadow.putalpha(a.filter(ImageFilter.GaussianBlur(6)).point(lambda v: int(v * 0.35)))
+    gm.putalpha(a.point(lambda v: int(v * opacity)))
+    layer = Image.new('RGBA', img.size, (0, 0, 0, 0))
+    pos = ((W - w) // 2, int(H * 0.46) - h // 2)
+    layer.alpha_composite(shadow, pos)
+    layer.alpha_composite(gm, pos)
+    out = io.BytesIO()
+    Image.alpha_composite(img, layer).convert('RGB').save(out, format='JPEG', quality=92)
+    return out.getvalue()
+
+
+def ImageChops_max(r, g, b):
+    from PIL import ImageChops
+    return ImageChops.lighter(ImageChops.lighter(r, g), b)
+
+
 def handler(event: dict, context) -> dict:
     """
     Накладывает водяной знак фаварит.рф на список картинок и заливает в S3.
@@ -115,6 +154,13 @@ def handler(event: dict, context) -> dict:
         aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'],
     )
 
+    mode = body.get('mode') or 'text'
+    gerb_bytes = None
+    if mode == 'gerb':
+        req = urllib.request.Request(GERB_URL, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            gerb_bytes = resp.read()
+
     results = []
     for url in urls:
         try:
@@ -122,17 +168,23 @@ def handler(event: dict, context) -> dict:
             with urllib.request.urlopen(req, timeout=20) as resp:
                 data = resp.read()
 
-            wm_bytes = add_diagonal_watermark(data, text=text, opacity_pct=opacity)
-
             base = url.rstrip('/').split('/')[-1]
             name_no_ext = base.rsplit('.', 1)[0]
-            new_key = f'wm/{name_no_ext}.webp'
+
+            if mode == 'gerb':
+                wm_bytes = add_gerb_watermark(data, gerb_bytes)
+                new_key = f'wm/gerb-{name_no_ext}.jpg'
+                content_type = 'image/jpeg'
+            else:
+                wm_bytes = add_diagonal_watermark(data, text=text, opacity_pct=opacity)
+                new_key = f'wm/{name_no_ext}.webp'
+                content_type = 'image/webp'
 
             s3.put_object(
                 Bucket='files',
                 Key=new_key,
                 Body=wm_bytes,
-                ContentType='image/webp',
+                ContentType=content_type,
             )
 
             cdn_url = f"https://cdn.poehali.dev/projects/{os.environ['AWS_ACCESS_KEY_ID']}/bucket/{new_key}"
