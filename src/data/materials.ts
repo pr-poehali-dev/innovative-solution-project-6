@@ -281,20 +281,46 @@ async function loadMaterialsFromServer(): Promise<Material[]> {
   }
 }
 
-export async function fetchMaterials(): Promise<Material[]> {
+const CATALOG_CACHE_TS_KEY = "favorit_materials_cache_ts";
+const CATALOG_TTL_MS = 30 * 60 * 1000;
+let inflight: Promise<Material[]> | null = null;
+
+function freshCache(): Material[] | null {
   try {
-    const items = await loadMaterialsFromServer();
-    if (items.length) {
-      try {
-        localStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(items));
-      } catch {
-        /* ignore */
-      }
-    }
-    return items;
+    const ts = Number(localStorage.getItem(CATALOG_CACHE_TS_KEY) || "0");
+    if (Date.now() - ts > CATALOG_TTL_MS) return null;
+    return readCachedMaterials();
   } catch {
-    return withFallback(readCachedMaterials() || []);
+    return null;
   }
+}
+
+export async function fetchMaterials(force = false): Promise<Material[]> {
+  if (!force) {
+    const cached = freshCache();
+    if (cached) return cached;
+    if (inflight) return inflight;
+  }
+  const p = (async () => {
+    try {
+      const items = await loadMaterialsFromServer();
+      if (items.length) {
+        try {
+          localStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(items));
+          localStorage.setItem(CATALOG_CACHE_TS_KEY, String(Date.now()));
+        } catch {
+          /* ignore */
+        }
+      }
+      return items;
+    } catch {
+      return withFallback(readCachedMaterials() || []);
+    } finally {
+      inflight = null;
+    }
+  })();
+  inflight = p;
+  return p;
 }
 
 export async function addMaterial(adminKey: string, item: Partial<Material>) {

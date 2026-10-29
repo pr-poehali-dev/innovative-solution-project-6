@@ -30,7 +30,7 @@ const AdminMaterials = () => {
   const [msg, setMsg] = useState("");
   const [uploading, setUploading] = useState(false);
 
-  const load = () => fetchMaterials().then(setItems).catch(() => setItems([]));
+  const load = () => fetchMaterials(true).then(setItems).catch(() => setItems([]));
 
   useEffect(() => {
     load();
