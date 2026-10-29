@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import Icon from "@/components/ui/icon";
 
 interface MobileSwipeGalleryProps {
   images: string[];
@@ -36,8 +37,19 @@ const MobileSwipeGallery = ({
     }
   };
 
-  const onTouchEnd = () => {
+  const onTouchEnd = (e: React.TouchEvent) => {
     if (startX.current === null) return;
+    if (onOpen && Math.abs(deltaX.current) < 10) {
+      e.preventDefault();
+      startX.current = null;
+      deltaX.current = 0;
+      if (trackRef.current) {
+        trackRef.current.style.transition = "transform 0.3s ease-out";
+        trackRef.current.style.transform = `translateX(${-index * 100}%)`;
+      }
+      onOpen(index);
+      return;
+    }
     const threshold = 50;
     let newIndex = index;
     if (deltaX.current < -threshold && index < total - 1) newIndex = index + 1;
@@ -90,6 +102,17 @@ const MobileSwipeGallery = ({
           );
         })}
       </div>
+
+      {onOpen && (
+        <button
+          type="button"
+          onClick={() => onOpen(index)}
+          className="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center"
+          aria-label="Открыть фото на весь экран"
+        >
+          <Icon name="Expand" fallback="ZoomIn" size={18} className="text-white" />
+        </button>
+      )}
 
       {total > 1 && (
         <>

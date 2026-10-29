@@ -107,7 +107,7 @@ const PhotoViewer = ({ images, startIndex = 0, title, alt = "", open, onClose }:
           onTouchEnd={onTouchEnd}
         >
           {images.map((src, i) => (
-            <div key={src + i} className="flex-shrink-0 w-full h-full flex items-center justify-center px-2 py-16 sm:px-20">
+            <div key={src + i} className="flex-shrink-0 w-full h-full flex items-center justify-center px-0 py-14 sm:px-20 sm:py-16">
               {Math.abs(i - index) <= 1 && (
                 <img
                   src={src}
