@@ -29,7 +29,6 @@ export const trucks: Record<string, Truck> = {
     images: [
       "/img/wm/faw-dongyang-1600.webp",
       "/photos/faw-dongyang-stroyka.webp",
-      "/photos/uslugi-manipulyatora-gerb.jpg?v=3",
       "/img/wm/faw-dongyang-lyulka-dom.webp",
       "/img/wm/faw-dongyang-lyulka-1600.webp",
       "/img/wm/faw-gazoblok-1600.webp",
