@@ -35,7 +35,7 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
   return (
     <>
       {/* Мобильный и планшетный слайдер — на всю ширину экрана */}
-      <div className="relative lg:hidden w-full pt-16 sm:pt-20 bg-background">
+      <div className="relative lg:hidden w-full pt-[90px] sm:pt-[124px] bg-background">
         {/* Декор — размытые золотые круги (только на планшете, на мобилке съедает FPS) */}
         <div className="hidden sm:block absolute top-24 -left-10 w-40 h-40 sm:w-56 sm:h-56 rounded-full bg-accent/20 blur-3xl pointer-events-none" />
         <div className="hidden sm:block absolute bottom-0 -right-10 w-44 h-44 sm:w-64 sm:h-64 rounded-full bg-accent/10 blur-3xl pointer-events-none" />
@@ -129,7 +129,7 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
         return (
           <div
             key={i}
-            className={`hidden lg:block absolute inset-0 w-full h-full transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}
+            className={`hidden lg:block absolute inset-x-0 bottom-0 top-[124px] transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}
           >
             {slide.contain && (
               <img src={fullSrc} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-60" loading="lazy" decoding="async" />
@@ -151,7 +151,7 @@ const HeroSlider = ({ current, setCurrent }: HeroSliderProps) => {
 
       {/* Затемнение — только для десктопа */}
       <div className="hidden lg:block absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/50 to-transparent z-10 pointer-events-none" />
-      <div className="hidden lg:block absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/70 to-transparent z-10 pointer-events-none" />
+      
 
       <button
         onClick={() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length)}
