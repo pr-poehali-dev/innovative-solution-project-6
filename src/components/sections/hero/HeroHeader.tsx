@@ -166,8 +166,8 @@ const HeroHeader = () => {
             className="xl:hidden fixed inset-0 z-40 bg-black/60"
             onClick={() => setMenuOpen(false)}
           />
-          <div className="xl:hidden fixed left-0 right-0 bottom-0 top-[64px] z-50 border-t border-accent/10 bg-[#0e1420] flex flex-col">
-            <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-3 py-4 flex flex-col gap-1">
+          <div className="xl:hidden fixed left-0 right-0 top-[64px] z-50 border-t border-accent/10 bg-[#0e1420] flex flex-col" style={{ height: "calc(100dvh - 64px)" }}>
+            <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-3 py-4 pb-8 flex flex-col gap-1 [&>*]:shrink-0" style={{ WebkitOverflowScrolling: "touch", touchAction: "pan-y" }}>
             {navLinks.map(link => {
               if (link.href === "/stroymaterialy") {
                 return (
