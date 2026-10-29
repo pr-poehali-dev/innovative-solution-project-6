@@ -19,8 +19,14 @@ export const slides: { id: string; alt: string; fullSrc?: string; mobileSrc?: st
     position: "15% 50%",
     mobileSrc: "/img/faw-soosan-1600.webp?v=3",
   },
-  { id: "861dfbdb-0341-4b64-ac9b-f77e5a4fa99d", alt: "КАМАЗ 43118 вездеход КМУ Kanglim" },
   { id: "b646729f-a106-46bf-b7e4-abf0fe1c4983", alt: "КАМАЗ 65115 КМУ HANGIL" },
+  {
+    id: "kamaz-hangil-white",
+    alt: "КАМАЗ 65115 + КМУ HANGIL",
+    fullSrc: "/img/wm/kamaz-hangil-white.webp",
+    position: "50% 40%",
+  },
+  { id: "861dfbdb-0341-4b64-ac9b-f77e5a4fa99d", alt: "КАМАЗ 43118 вездеход КМУ Kanglim" },
   {
     id: "106c30cf-02d3-4b99-ac02-47e7404652e2",
     alt: "Hyundai Gold с КМУ HIAB 190TM 8 тонн / 22 м",
