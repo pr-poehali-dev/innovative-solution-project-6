@@ -15,9 +15,7 @@ export const slides: { id: string; alt: string; fullSrc?: string; mobileSrc?: st
   {
     id: "faw-soosan",
     alt: "FAW J6P + КМУ SOOSAN SCS746L",
-    fullSrc: "/img/wm/faw-soosan-side.webp",
-    position: "15% 50%",
-    mobileSrc: "/img/faw-soosan-1600.webp?v=3",
+    fullSrc: "/img/faw-soosan-1600.webp?v=3",
   },
   { id: "b646729f-a106-46bf-b7e4-abf0fe1c4983", alt: "КАМАЗ 65115 КМУ HANGIL" },
   {
