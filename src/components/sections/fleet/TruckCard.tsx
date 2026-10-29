@@ -3,16 +3,19 @@ import Icon from "@/components/ui/icon";
 import MobileSwipeGallery from "@/components/ui/MobileSwipeGallery";
 import { Truck, pluralizeUnits } from "./data";
 import { trucks as truckPages } from "@/pages/truck/trucksData";
+import type { FleetLightboxData } from "./FleetLightbox";
 
 interface TruckCardProps {
   truck: Truck;
   idx: number;
   total: number;
-  onOpenLightbox: (data: { src: string; alt: string; title: string }) => void;
+  onOpenLightbox: (data: FleetLightboxData) => void;
 }
 
 const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
   const tag = truck.tag;
+  const photos = truckPages[truck.slug]?.images?.length ? truckPages[truck.slug].images! : truck.images?.length ? truck.images : [truck.image];
+  const openAt = (index: number) => onOpenLightbox({ src: photos[index] ?? truck.image, alt: truck.alt, title: truck.title, images: photos, index });
   return (
     <div className={`group relative ${idx < total - 1 ? "mb-6 sm:mb-8" : "mb-8 sm:mb-12"}`}>
       {/* Пульсирующая изумрудная подсветка */}
@@ -38,7 +41,8 @@ const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
             {truck.image && (
               <div className="relative lg:hidden overflow-hidden bg-white/5">
                 <MobileSwipeGallery
-                  images={truckPages[truck.slug]?.images?.length ? truckPages[truck.slug].images! : truck.images?.length ? truck.images : [truck.image]}
+                  images={photos}
+                  onOpen={openAt}
                   alt={truck.alt}
                   className="w-full h-64 sm:h-[420px] md:h-[520px]"
                   imgClassName="object-contain h-64 sm:h-[420px] md:h-[520px]"
@@ -160,8 +164,7 @@ const TruckCard = ({ truck, idx, total, onOpenLightbox }: TruckCardProps) => {
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  console.log("[Fleet] Open lightbox:", truck.title);
-                  onOpenLightbox({ src: truck.image, alt: truck.alt, title: truck.title });
+                  openAt(0);
                 }}
                 className="parallax-card relative hidden lg:block w-full h-full min-h-[420px] overflow-hidden bg-gradient-to-br from-zinc-900 via-black to-zinc-900 group/img cursor-zoom-in select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 style={{ zIndex: 5 }}

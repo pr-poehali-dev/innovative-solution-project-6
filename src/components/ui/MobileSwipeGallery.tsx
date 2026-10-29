@@ -5,6 +5,7 @@ interface MobileSwipeGalleryProps {
   alt: string;
   className?: string;
   imgClassName?: string;
+  onOpen?: (index: number) => void;
 }
 
 const MobileSwipeGallery = ({
@@ -12,6 +13,7 @@ const MobileSwipeGallery = ({
   alt,
   className = "",
   imgClassName = "",
+  onOpen,
 }: MobileSwipeGalleryProps) => {
   const [index, setIndex] = useState(0);
   const startX = useRef<number | null>(null);
@@ -50,7 +52,7 @@ const MobileSwipeGallery = ({
   };
 
   return (
-    <div className={`relative overflow-hidden bg-white/5 ${className}`}>
+    <div className={`relative overflow-hidden bg-white/5 ${onOpen ? "cursor-zoom-in" : ""} ${className}`}>
       <div
         ref={trackRef}
         className="flex w-full h-full"
@@ -62,6 +64,7 @@ const MobileSwipeGallery = ({
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
+        onClick={onOpen ? () => onOpen(index) : undefined}
       >
         {images.map((src, i) => {
           // Рендерим картинки только в окне ±1 от текущего слайда —

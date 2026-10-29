@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { trucks } from "./fleet/data";
 import TruckCard from "./fleet/TruckCard";
 import OrderInfoBlock from "./fleet/OrderInfoBlock";
-import FleetLightbox from "./fleet/FleetLightbox";
+import FleetLightbox, { type FleetLightboxData } from "./fleet/FleetLightbox";
 
 const FleetSection = () => {
-  const [lightbox, setLightbox] = useState<{ src: string; alt: string; title: string } | null>(null);
+  const [lightbox, setLightbox] = useState<FleetLightboxData | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;

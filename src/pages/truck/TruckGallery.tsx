@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 import type { Truck } from "./trucksData";
+import PhotoViewer from "@/components/ui/PhotoViewer";
 
 interface TruckGalleryProps {
   truck: Truck;
@@ -16,6 +17,8 @@ export default function TruckGallery({ truck }: TruckGalleryProps) {
   ];
   const [active, setActive] = useState(0);
   const current = gallery[active] ?? gallery[0];
+  const [viewerOpen, setViewerOpen] = useState(false);
+  const photoIndex = photos.indexOf(current.src);
 
   return (
     <div className="flex flex-col gap-3">
@@ -41,7 +44,19 @@ export default function TruckGallery({ truck }: TruckGalleryProps) {
             height="900"
             fetchPriority="high"
             decoding="async"
+            onClick={() => setViewerOpen(true)}
+            style={{ cursor: "zoom-in" }}
           />
+        )}
+        {current.type === "image" && (
+          <button
+            type="button"
+            onClick={() => setViewerOpen(true)}
+            className="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-black/60 border border-white/20 flex items-center justify-center"
+            aria-label="Открыть фото на весь экран"
+          >
+            <Icon name="Expand" fallback="ZoomIn" size={18} className="text-white" />
+          </button>
         )}
         <div className="absolute top-4 left-4 bg-accent text-black text-xs font-bold px-3 py-1 rounded-full">
           {truck.badge}
@@ -80,6 +95,14 @@ export default function TruckGallery({ truck }: TruckGalleryProps) {
           ))}
         </div>
       )}
+      <PhotoViewer
+        open={viewerOpen}
+        images={photos}
+        startIndex={photoIndex >= 0 ? photoIndex : 0}
+        title={truck.title}
+        alt={truck.alt}
+        onClose={() => setViewerOpen(false)}
+      />
     </div>
   );
 }
