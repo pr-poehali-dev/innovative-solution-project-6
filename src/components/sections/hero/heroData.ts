@@ -12,6 +12,13 @@ export const slides: { id: string; alt: string; fullSrc?: string; mobileSrc?: st
     fullSrc: "/img/hero-1.webp",
     mobileSrc: "/img/hero-1-m.webp",
   },
+  {
+    id: "faw-soosan",
+    alt: "FAW J6P + КМУ SOOSAN SCS746L",
+    fullSrc: "/img/wm/faw-soosan-side.webp",
+    position: "15% 50%",
+    mobileSrc: "/img/faw-soosan-1600.webp?v=3",
+  },
   { id: "861dfbdb-0341-4b64-ac9b-f77e5a4fa99d", alt: "КАМАЗ 43118 вездеход КМУ Kanglim" },
   { id: "b646729f-a106-46bf-b7e4-abf0fe1c4983", alt: "КАМАЗ 65115 КМУ HANGIL" },
   {
