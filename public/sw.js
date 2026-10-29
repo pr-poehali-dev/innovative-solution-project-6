@@ -1,5 +1,5 @@
 /* Service Worker — Фаворит PWA v5 (свежий HTML из сети, кеш — для офлайна) */
-const CACHE_VERSION = "v5";
+const CACHE_VERSION = "v6";
 const STATIC_CACHE = `favorit-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `favorit-runtime-${CACHE_VERSION}`;
 const IMAGE_CACHE = `favorit-images-${CACHE_VERSION}`;
@@ -118,6 +118,9 @@ self.addEventListener("fetch", (event) => {
   }
 
   // НАВИГАЦИЯ — Cache First (мгновенно), потом обновляем из сети в фоне
+  const isFileUrl = isOwnOrigin && /\.(jpe?g|png|webp|gif|svg|avif|mp4|webm|pdf|txt|xml|json|ico)$/i.test(url.pathname);
+  if (isFileUrl && req.mode === "navigate") return;
+
   const isNavigation =
     req.mode === "navigate" ||
     (req.headers.get("accept") || "").includes("text/html");
