@@ -152,7 +152,7 @@ const MaterialCategoryPage = () => {
               Перезвоните мне
             </button>
             <MaxButton place="header_material_category" compact />
-            <PhoneButton size="sm" className="rounded-xl hidden sm:inline-flex" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
+            <PhoneButton size="md" className="rounded-xl hidden sm:inline-flex !text-base lg:!text-lg !font-black !py-3" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
             <PhoneButton iconOnly className="sm:hidden" phone={MATERIALS_PHONE} label={MATERIALS_PHONE_LABEL} />
           </div>
         </div>
