@@ -5,49 +5,33 @@ import { MATERIALS_PHONE, MATERIALS_PHONE_LABEL } from "@/lib/materialsContacts"
 const POINTS = [
   { icon: "Clock", title: "Всегда готов к выезду", text: "Привезём в удобный день, часто — в день заказа" },
   { icon: "UserCheck", title: "Профессиональные водители", text: "Опытные операторы КМУ, аккуратно работают с грузом" },
-  { icon: "Package", title: "Разгрузка поддонами", text: "Ставим блоки прямо на участок, без грузчиков" },
+  { icon: "Package", title: "Разгрузка поддонами", text: "Ставим блоки краном на участок. Для разгрузки нужны стропальщики" },
   { icon: "ShieldCheck", title: "Груз в сохранности", text: "Крепим и везём бережно — без сколов и боя" },
 ];
 
 const DeliveryPromo = () => (
   <section className="mt-10 rounded-3xl border border-accent/30 bg-card/60 overflow-hidden">
     <div className="grid lg:grid-cols-[2fr_3fr]">
-      <div className="grid grid-cols-2 lg:grid-cols-1 gap-1 bg-black/20">
+      <div className="grid grid-cols-1 gap-1 bg-black/20">
         {[
           {
             src: "/img/faw-poritep-delivery.webp",
             alt: "Манипулятор FAW «Фаворит» с газобетонными блоками «Поритеп»",
             pos: "object-[60%_center]",
-            tag: (
-              <>
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                Готов к выезду
-              </>
-            ),
           },
           {
             src: "/img/poritep-unloaded-site.webp",
             alt: "Блоки «Поритеп» разгружены манипулятором на объекте",
             pos: "object-[40%_center]",
-            tag: (
-              <>
-                <Icon name="CheckCircle2" size={13} className="text-emerald-400" />
-                Разгружено на объекте
-              </>
-            ),
           },
         ].map((p) => (
-          <div key={p.src} className="relative h-[150px] sm:h-[220px] lg:h-auto lg:min-h-[180px] overflow-hidden group">
+          <div key={p.src} className="relative h-[210px] sm:h-[260px] lg:h-auto lg:min-h-[180px] overflow-hidden group">
             <img
               src={p.src}
               alt={p.alt}
               loading="lazy"
               className={`absolute inset-0 w-full h-full object-cover ${p.pos} transition-transform duration-700 group-hover:scale-105`}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            <span className="absolute left-3 bottom-3 inline-flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-black/60 text-white text-[11px] sm:text-xs font-bold backdrop-blur">
-              {p.tag}
-            </span>
           </div>
         ))}
       </div>
