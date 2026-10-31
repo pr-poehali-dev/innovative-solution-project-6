@@ -1,0 +1,1 @@
+UPDATE t_p98221464_innovative_solution_.materials SET image_url = regexp_replace(image_url, '\?v=\d+$', '') || '?v=5' WHERE id IN (25, 26, 27, 28, 30, 31, 32);
