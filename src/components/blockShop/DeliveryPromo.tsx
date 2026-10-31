@@ -11,8 +11,8 @@ const POINTS = [
 
 const DeliveryPromo = () => (
   <section className="mt-10 rounded-3xl border border-accent/30 bg-card/60 overflow-hidden">
-    <div className="grid lg:grid-cols-2">
-      <div className="relative min-h-[240px] sm:min-h-[320px]">
+    <div className="grid lg:grid-cols-[2fr_3fr]">
+      <div className="relative h-[200px] sm:h-[260px] lg:h-auto lg:min-h-[260px]">
         <img
           src="/img/faw-poritep-delivery.webp"
           alt="Манипулятор FAW «Фаворит» с газобетонными блоками «Поритеп»"
@@ -21,10 +21,6 @@ const DeliveryPromo = () => (
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-black/30" />
         <div className="absolute left-4 bottom-4 flex flex-wrap gap-2">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent text-black text-xs font-black">
-            <Icon name="Truck" size={14} />
-            Наш манипулятор
-          </span>
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 text-white text-xs font-bold backdrop-blur">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             Готов к выезду
