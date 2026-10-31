@@ -9,7 +9,7 @@ import { reachGoal } from "@/lib/metrika";
 import type { Material } from "@/data/materials";
 import BrickPhotoViewer from "@/components/brickShop/BrickPhotoViewer";
 import BlockCalc from "./BlockCalc";
-import { m3, packInfo, parseNum, rub } from "./blockUtils";
+import { blockSize, m3, packInfo, parseNum, rub } from "./blockUtils";
 
 
 
@@ -43,7 +43,9 @@ const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs
         <div className="flex items-center gap-2.5">
           <Icon name="Box" size={18} className="shrink-0" />
           <div className="leading-tight min-w-0">
-            <p className="text-[13px] font-black uppercase tracking-wide">Газосиликат</p>
+            <p className="text-[13px] font-black uppercase tracking-wide">
+              {/перегород/i.test(item.name) || (blockSize(item)?.t ?? 999) < 200 ? "Перегородочный блок" : "Стеновой блок"}
+            </p>
             <p className="text-[12px] text-white/75 truncate">Лёгкий, тёплый, ровный</p>
           </div>
         </div>
