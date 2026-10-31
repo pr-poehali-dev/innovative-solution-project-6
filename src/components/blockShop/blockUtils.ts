@@ -24,6 +24,9 @@ export const blockSize = (item: Material) => {
   if (!s) return null;
   const a = Number(s[2]);
   const b = Number(s[3]);
+  if (/толщина\s*×\s*высота/i.test(item.description || "")) {
+    return { l: Number(s[1]), h: b, t: a };
+  }
   return { l: Number(s[1]), h: Math.min(a, b), t: Math.max(a, b) };
 };
 
