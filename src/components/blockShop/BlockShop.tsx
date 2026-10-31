@@ -134,6 +134,10 @@ const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs
               {packs} уп. = {m3(packs * pack.m3)}{pack.pcs > 0 && ` (${packs * pack.pcs} шт)`} · {rub(packs * packPrice)}
             </p>
           )}
+          <p className="mt-2 flex items-start gap-1.5 text-[11px] leading-snug text-muted-foreground/80 text-left">
+            <Icon name="Info" size={12} className="shrink-0 mt-px text-accent/70" />
+            <span>Цены без учёта доставки и не являются публичной офертой. Итог с доставкой и срок назовём в расчёте.</span>
+          </p>
         </div>
       </div>
     </article>
