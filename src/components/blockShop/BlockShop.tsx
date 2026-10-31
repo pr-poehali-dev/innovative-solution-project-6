@@ -9,6 +9,7 @@ import { reachGoal } from "@/lib/metrika";
 import type { Material } from "@/data/materials";
 import BrickPhotoViewer from "@/components/brickShop/BrickPhotoViewer";
 import BlockCalc from "./BlockCalc";
+import DeliveryPromo from "./DeliveryPromo";
 import { blockSize, m3, packInfo, parseNum, rub } from "./blockUtils";
 
 
@@ -292,6 +293,8 @@ const BlockShop = ({ items, loading }: BlockShopProps) => {
           <BlockCalc items={items} onOrder={(item, packs) => setOrder({ item, packs })} />
         </div>
       )}
+
+      <DeliveryPromo />
 
       {photo !== null && withPhoto[photo] && (
         <BrickPhotoViewer
