@@ -1,0 +1,4 @@
+UPDATE t_p98221464_innovative_solution_.materials SET sort_order = sort_order + 1 WHERE id IN (25, 26, 27);
+INSERT INTO t_p98221464_innovative_solution_.materials (id, name, category, price, unit, description, image_url, in_stock, sort_order)
+VALUES (49, 'Перегородочный блок Поритеп D500 625×150×200', 'bloki', '6 000 ₽', 'м³', 'Производство «Поритеп». Размер 625×150×200 мм (длина × толщина × высота). Плотность D500. В упаковке (на поддоне) 1,875 м³ — 100 шт. Класс прочности B3,5, морозостойкость F100. Теплопроводность λ₀ 0,12 Вт/(м·°C). В 1 м³ — 53,3 блока, на 1 м² стены — 8 блоков. Монтажный вес блока 9,4 кг. Прочные перегородки с хорошей звукоизоляцией. Доставка манипулятором с разгрузкой.', '/img/peregorodka-625-150-200-poritep.jpg', true, 20);
+SELECT setval(pg_get_serial_sequence('t_p98221464_innovative_solution_.materials', 'id'), (SELECT MAX(id) FROM t_p98221464_innovative_solution_.materials));
