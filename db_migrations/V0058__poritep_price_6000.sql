@@ -1,0 +1,1 @@
+UPDATE t_p98221464_innovative_solution_.materials SET price = '6 000 ₽' WHERE id IN (28, 30, 31);
