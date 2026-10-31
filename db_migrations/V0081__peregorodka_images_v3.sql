@@ -1,0 +1,1 @@
+UPDATE t_p98221464_innovative_solution_.materials SET image_url = regexp_replace(image_url, '\?v=\d+$', '') || '?v=3' WHERE image_url LIKE '/img/peregorodka-%';
