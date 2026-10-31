@@ -24,7 +24,8 @@ const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs
   const pack = packInfo(item);
   const packPrice = price * pack.m3;
   const size = (item.description || "").match(/(\d{3})\s?[×x]\s?(\d{2,3})\s?[×x]\s?(\d{2,3})/);
-  const bor = /бор/i.test(item.description || "");
+  const desc = item.description || "";
+  const factory = /поритеп/i.test(desc) ? "Богородск, завод «Поритеп»" : /бор/i.test(desc) ? "г. Бор" : "";
 
   return (
     <article className="group rounded-2xl overflow-hidden border border-accent/15 bg-card/40 hover:border-accent/50 hover:shadow-[0_10px_40px_rgba(232,168,32,0.12)] transition-all flex flex-col">
@@ -65,14 +66,14 @@ const BlockCard = ({ item, onOrder, onPhoto }: { item: Material; onOrder: (packs
       </div>
 
       <div className="p-5 flex flex-col flex-1">
-        {bor && (
+        {factory && (
           <div className="flex items-center gap-2.5 mb-3 -mt-1 px-3 py-2.5 rounded-xl bg-gradient-to-r from-accent/25 to-accent/5 border border-accent/50">
             <span className="w-9 h-9 shrink-0 rounded-lg bg-accent text-black flex items-center justify-center">
               <Icon name="Factory" size={20} />
             </span>
             <div className="leading-tight">
               <p className="text-[12px] uppercase tracking-wider text-accent font-bold">Производство</p>
-              <p className="text-base font-black text-white">г. Бор</p>
+              <p className="text-base font-black text-white">{factory}</p>
             </div>
           </div>
         )}
@@ -255,7 +256,7 @@ const BlockShop = ({ items, loading }: BlockShopProps) => {
       <StatTiles
         className="mb-8"
         items={[
-          { icon: "Factory", value: "г. Бор", label: "производство" },
+          { icon: "Factory", value: "Бор и Богородск", label: "производство" },
           { icon: "Package", value: "40–50 шт", label: "в упаковке" },
           { icon: "Thermometer", value: "Тёплые стены", label: "без мостиков холода" },
           { icon: "Truck", value: "Манипулятор", label: "разгрузка на объекте" },
