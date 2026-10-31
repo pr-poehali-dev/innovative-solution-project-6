@@ -1,0 +1,1 @@
+UPDATE t_p98221464_innovative_solution_.materials SET image_url = '/img/peregorodka-625-50-250-poritep.jpg?v=2' WHERE id = 42;
