@@ -21,7 +21,10 @@ export const packInfo = (item: Material) => {
 
 export const blockSize = (item: Material) => {
   const s = (item.name + " " + (item.description || "")).match(/(\d{3})\s?[×x]\s?(\d{2,3})\s?[×x]\s?(\d{2,3})/);
-  return s ? { l: Number(s[1]), h: Number(s[2]), t: Number(s[3]) } : null;
+  if (!s) return null;
+  const a = Number(s[2]);
+  const b = Number(s[3]);
+  return { l: Number(s[1]), h: Math.min(a, b), t: Math.max(a, b) };
 };
 
 export const rub = (v: number) => money(v);
