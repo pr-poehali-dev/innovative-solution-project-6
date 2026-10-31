@@ -77,6 +77,20 @@ const renderBlock = (block: ArticleBlock, idx: number) => {
           ))}
         </ol>
       );
+    case "img":
+      return (
+        <figure key={idx} className="my-6">
+          <img
+            src={block.src}
+            alt={block.alt || block.text || ""}
+            loading="lazy"
+            className="w-full rounded-2xl border border-white/10 object-cover"
+          />
+          {block.text && (
+            <figcaption className="mt-2 text-sm text-white/60 text-center">{block.text}</figcaption>
+          )}
+        </figure>
+      );
     case "p":
     default:
       return (
