@@ -242,6 +242,17 @@ export const FALLBACK_MATERIALS: Material[] = [
     imageUrl: "/img/gazoblok-625-200-400-poritep.jpg?v=3",
     inStock: true,
   },
+  {
+    id: 30,
+    name: "Газобетонный блок D400 625×375×250",
+    category: "bloki",
+    price: "6 000 ₽",
+    unit: "м³",
+    description:
+      "Производство «Поритеп». Размер 625×375×250 мм. Плотность D400. Стеновой. В упаковке (на поддоне) 1,875 м³ — 32 шт. Размер упаковки 1200×1000 мм. Очень тёплый блок для стен без утепления: ровная геометрия под кладку на клей. Доставка манипулятором с разгрузкой.",
+    imageUrl: "/img/gazoblok-625-375-250-poritep.jpg",
+    inStock: true,
+  },
 ];
 
 function withFallback(items: Material[]): Material[] {
