@@ -1,0 +1,4 @@
+UPDATE t_p98221464_innovative_solution_.materials SET sort_order = 5 WHERE id = 28;
+INSERT INTO t_p98221464_innovative_solution_.materials (id, name, category, price, unit, description, image_url, in_stock, sort_order)
+VALUES (34, 'Стеновой блок Поритеп D500 625×200×250', 'bloki', '6 000 ₽', 'м³', 'Производство «Поритеп». Размер 625×200×250 мм (длина × толщина × высота). Плотность D500. В упаковке (на поддоне) 2,0 м³ — 64 шт. Класс прочности B2,5 / B3,5, морозостойкость F100, огнестойкость REI360. Теплопроводность λ₀ 0,12 Вт/(м·°C), паропроницаемость 0,2 мг/(м·ч·Па), усадка 0,24 мм/м. В 1 м³ — 32 блока, на 1 м² стены — 6,4 блока. Монтажный вес блока 19,5 кг. Стены под кладку на клей. Доставка манипулятором с разгрузкой.', '/img/gazoblok-625-200-250-poritep.jpg', true, 4);
+SELECT setval(pg_get_serial_sequence('t_p98221464_innovative_solution_.materials', 'id'), (SELECT MAX(id) FROM t_p98221464_innovative_solution_.materials));
